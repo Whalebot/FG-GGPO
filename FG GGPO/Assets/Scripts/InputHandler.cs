@@ -437,15 +437,16 @@ public class InputHandler : MonoBehaviour
     public void OnR1(InputAction.CallbackContext context)
     {
         if (debug) print("R1");
+
         R1input?.Invoke();
         heldButtons[4] = !context.canceled;
-        R1Hold = true;
+        R1Hold = true; updatedButtons = true;
     }
     public void OnL1(InputAction.CallbackContext context)
     {
         if (debug) print("L1");
         heldButtons[5] = !context.canceled;
-        L1input?.Invoke();
+        L1input?.Invoke(); updatedButtons = true;
     }
     public void OnStart()
     {
