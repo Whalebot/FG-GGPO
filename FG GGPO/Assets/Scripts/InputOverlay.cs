@@ -96,7 +96,7 @@ public class InputOverlay : MonoBehaviour
     void ButtonInput()
     {
         inputHandler.updatedButtons = false;
-        if (!inputHandler.heldButtons[0] && !inputHandler.heldButtons[1] && !inputHandler.heldButtons[2] && !inputHandler.heldButtons[3])
+        if (!inputHandler.heldButtons[0] && !inputHandler.heldButtons[1] && !inputHandler.heldButtons[2] && !inputHandler.heldButtons[3] && !inputHandler.heldButtons[4] && !inputHandler.heldButtons[5])
         {
             Instantiate(arrowBlank, panel2.transform).transform.SetSiblingIndex(0);
         }
