@@ -93,11 +93,25 @@ public class PlayerInputHandler : MonoBehaviour
             switch (input.inputQueue[0])
             {
                 case 1:
-                    attack.Attack(attack.moveset.A5);
+                    if (mov.ground)
+                    {
+                        if (status.blockState == Status.BlockState.Crouching)
+                            attack.Attack(attack.moveset.jA);
+                        else
+                            attack.Attack(attack.moveset.A5);
+                    }
+                    else attack.Attack(attack.moveset.jA);
                     Delete();
                     break;
                 case 2:
-                    attack.Attack(attack.moveset.B5);
+                    if (mov.ground)
+                    {
+                        if (status.blockState == Status.BlockState.Crouching)
+                            attack.Attack(attack.moveset.cB);
+                        else
+                            attack.Attack(attack.moveset.B5);
+                    }
+                    else attack.Attack(attack.moveset.jB);
                     Delete();
                     break;
                 case 3:
