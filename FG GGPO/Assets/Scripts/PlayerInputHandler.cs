@@ -96,7 +96,7 @@ public class PlayerInputHandler : MonoBehaviour
                     if (mov.ground)
                     {
                         if (status.blockState == Status.BlockState.Crouching)
-                            attack.Attack(attack.moveset.jA);
+                            attack.Attack(attack.moveset.cA);
                         else
                             attack.Attack(attack.moveset.A5);
                     }

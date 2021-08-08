@@ -45,11 +45,7 @@ public class Movement : MonoBehaviour
 
     [HeaderAttribute("Sprint attributes")]
     public bool sprinting;
-    public bool forcedWalk;
     public float sprintSpeed = 12;
-    public float sprintRotation = 3;
-    public int sprintCostTimer = 2;
-    float sprintCounter;
 
     public delegate void MovementEvent();
     public MovementEvent jumpEvent;
@@ -59,6 +55,7 @@ public class Movement : MonoBehaviour
 
     [HideInInspector] public float zeroFloat;
     [HideInInspector] public Vector3 direction;
+    [HideInInspector] public Vector3 storedDirection;
 
     [FoldoutGroup("Assign components")] Status status;
     [FoldoutGroup("Assign components")] public Collider hurtbox;
@@ -298,13 +295,15 @@ public class Movement : MonoBehaviour
 
         //else
         //{
-        Vector3 temp = direction.normalized;
+      
+        if (ground)
+            storedDirection = direction.normalized;
         //    //rb.velocity = new Vector3(temp.x * actualVelocity, rb.velocity.y, temp.z * actualVelocity);
         //    if (check2)
         //        rb.velocity = Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit2.normal) * actualVelocity;
         //    else
         //rb.velocity = direction.normalized * actualVelocity;
-        rb.velocity = new Vector3((direction.normalized * actualVelocity).x, rb.velocity.y, (direction.normalized * actualVelocity).z);
+        rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
         //}
     }
 
