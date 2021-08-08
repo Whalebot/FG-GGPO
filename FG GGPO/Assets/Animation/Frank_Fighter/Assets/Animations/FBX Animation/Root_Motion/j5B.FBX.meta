@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dee14a8d17aa6bc4496379336707d9c2
+guid: 493bb85bcd9fd184ba998545b9d5e424
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
@@ -860,7 +860,7 @@ ModelImporter:
     second: FX_Punch_R_Mesh
   - first:
       74: 7400000
-    second: J5C
+    second: j5B
   - first:
       95: 9500000
     second: //RootNode
@@ -942,31 +942,32 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 6.053358 mm\n\t'calf_l' : position error = 2.909675 mm\n\t'foot_l'
-      : position error = 1.070940 mm\n\t'calf_r' : position error = 1.134553 mm\n\t'lowerarm_l'
-      : position error = 1.821436 mm\n\t'hand_l' : position error = 1.290472 mm\n\t'middle_02_l'
-      : position error = 1.562747 mm\n\t'middle_03_l' : position error = 1.134392
-      mm\n\t'ring_02_l' : position error = 1.745708 mm\n\t'ring_03_l' : position
-      error = 1.155053 mm\n\t'pinky_02_l' : position error = 1.066775 mm\n\t'lowerarm_r'
-      : position error = 1.718789 mm\n\t'hand_r' : position error = 1.138144 mm\n\t'middle_02_r'
-      : position error = 1.560949 mm\n\t'middle_03_r' : position error = 1.131940
-      mm\n\t'ring_02_r' : position error = 1.744200 mm\n\t'ring_03_r' : position
-      error = 1.156514 mm\n\t'pinky_02_r' : position error = 1.064611 mm\n"
+      : position error = 5.644148 mm\n\t'calf_l' : position error = 2.931176 mm\n\t'thigh_r'
+      : position error = 2.927292 mm\n\t'calf_r' : position error = 1.024798 mm\n\t'upperarm_l'
+      : position error = 1.547776 mm\n\t'lowerarm_l' : position error = 1.983495
+      mm\n\t'hand_l' : position error = 1.290448 mm\n\t'middle_02_l' : position error
+      = 1.562820 mm\n\t'middle_03_l' : position error = 1.134403 mm\n\t'ring_02_l'
+      : position error = 1.745769 mm\n\t'ring_03_l' : position error = 1.155042 mm\n\t'pinky_02_l'
+      : position error = 1.066800 mm\n\t'upperarm_r' : position error = 1.150088
+      mm\n\t'lowerarm_r' : position error = 2.008747 mm\n\t'hand_r' : position error
+      = 8.672897 mm\n\t'middle_02_r' : position error = 1.561117 mm\n\t'middle_03_r'
+      : position error = 1.131984 mm\n\t'ring_02_r' : position error = 1.744275 mm\n\t'ring_03_r'
+      : position error = 1.156559 mm\n\t'pinky_02_r' : position error = 1.064649
+      mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'thigh_l' has translation animation that
       will be discarded.\n\t'calf_l' has translation animation that will be discarded.\n\t'foot_l'
-      has translation animation that will be discarded.\n\t'ball_l' has translation
-      animation that will be discarded.\n\t'thigh_r' has translation animation that
-      will be discarded.\n\t'calf_r' has translation animation that will be discarded.\n\t'foot_r'
-      has translation animation that will be discarded.\n\t'ball_r' has translation
-      animation that will be discarded.\n\t'spine_01' has translation animation that
-      will be discarded.\n\t'spine_02' has translation animation that will be discarded.\n\t'spine_03'
-      has translation animation that will be discarded.\n\t'upperarm_l' has translation
-      animation that will be discarded.\n\t'lowerarm_l' has translation animation
-      that will be discarded.\n\t'hand_l' has translation animation that will be
-      discarded.\n\t'upperarm_r' has translation animation that will be discarded.\n\t'lowerarm_r'
+      has translation animation that will be discarded.\n\t'thigh_r' has translation
+      animation that will be discarded.\n\t'calf_r' has translation animation that
+      will be discarded.\n\t'foot_r' has translation animation that will be discarded.\n\t'ball_r'
+      has translation animation that will be discarded.\n\t'spine_01' has translation
+      animation that will be discarded.\n\t'spine_02' has translation animation that
+      will be discarded.\n\t'spine_03' has translation animation that will be discarded.\n\t'upperarm_l'
+      has translation animation that will be discarded.\n\t'lowerarm_l' has translation
+      animation that will be discarded.\n\t'hand_l' has translation animation that
+      will be discarded.\n\t'upperarm_r' has translation animation that will be discarded.\n\t'lowerarm_r'
       has translation animation that will be discarded.\n\t'hand_r' has translation
       animation that will be discarded.\n\t'head' has translation animation that
       will be discarded.\n"
@@ -983,11 +984,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: J5C
+      name: j5B
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 105
+      firstFrame: 27
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1007,21 +1008,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.29508194
+      - time: 0.2172131
         functionName: Active
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.35655737
+      - time: 0.36065575
         functionName: Recovery
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49180326
+      - time: 0.50409836
         functionName: Idle
         data: 
         objectReferenceParameter: {instanceID: 0}

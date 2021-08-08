@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dee14a8d17aa6bc4496379336707d9c2
+guid: c2e7b421a390f3f4f855de57aa86b4e3
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
@@ -860,7 +860,7 @@ ModelImporter:
     second: FX_Punch_R_Mesh
   - first:
       74: 7400000
-    second: J5C
+    second: j5A
   - first:
       95: 9500000
     second: //RootNode
@@ -942,16 +942,17 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 6.053358 mm\n\t'calf_l' : position error = 2.909675 mm\n\t'foot_l'
-      : position error = 1.070940 mm\n\t'calf_r' : position error = 1.134553 mm\n\t'lowerarm_l'
-      : position error = 1.821436 mm\n\t'hand_l' : position error = 1.290472 mm\n\t'middle_02_l'
-      : position error = 1.562747 mm\n\t'middle_03_l' : position error = 1.134392
-      mm\n\t'ring_02_l' : position error = 1.745708 mm\n\t'ring_03_l' : position
-      error = 1.155053 mm\n\t'pinky_02_l' : position error = 1.066775 mm\n\t'lowerarm_r'
-      : position error = 1.718789 mm\n\t'hand_r' : position error = 1.138144 mm\n\t'middle_02_r'
-      : position error = 1.560949 mm\n\t'middle_03_r' : position error = 1.131940
-      mm\n\t'ring_02_r' : position error = 1.744200 mm\n\t'ring_03_r' : position
-      error = 1.156514 mm\n\t'pinky_02_r' : position error = 1.064611 mm\n"
+      : position error = 3.105013 mm\n\t'calf_l' : position error = 1.471804 mm\n\t'thigh_r'
+      : position error = 2.664133 mm\n\t'calf_r' : position error = 1.495945 mm\n\t'upperarm_l'
+      : position error = 1.565315 mm\n\t'lowerarm_l' : position error = 1.156506
+      mm\n\t'hand_l' : position error = 1.898356 mm\n\t'middle_02_l' : position error
+      = 1.562835 mm\n\t'middle_03_l' : position error = 1.134421 mm\n\t'ring_02_l'
+      : position error = 1.745757 mm\n\t'ring_03_l' : position error = 1.155043 mm\n\t'pinky_02_l'
+      : position error = 1.066812 mm\n\t'lowerarm_r' : position error = 2.168562
+      mm\n\t'hand_r' : position error = 2.041624 mm\n\t'middle_02_r' : position error
+      = 1.561019 mm\n\t'middle_03_r' : position error = 1.131998 mm\n\t'ring_02_r'
+      : position error = 1.744274 mm\n\t'ring_03_r' : position error = 1.156568 mm\n\t'pinky_02_r'
+      : position error = 1.064676 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -983,11 +984,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: J5C
+      name: j5A
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 105
+      firstFrame: 20
+      lastFrame: 33
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1007,21 +1008,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.29508194
+      - time: 0.37295082
         functionName: Active
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.35655737
+      - time: 0.65983605
         functionName: Recovery
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49180326
+      - time: 0.8237705
         functionName: Idle
         data: 
         objectReferenceParameter: {instanceID: 0}
