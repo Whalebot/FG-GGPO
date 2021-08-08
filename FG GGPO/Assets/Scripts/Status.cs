@@ -169,6 +169,7 @@ public class Status : MonoBehaviour
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
                 currentState = State.Knockdown;
+                blockState = BlockState.Jumping;
                 knockdownEvent?.Invoke(); break;
             default: break;
         }
