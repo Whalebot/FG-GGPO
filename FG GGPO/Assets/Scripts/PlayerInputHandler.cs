@@ -58,8 +58,10 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (mov.ground)
         {
-
             mov.crouching = input.netButtons[5];
+            if (mov.crouching) status.blockState = Status.BlockState.Crouching;
+            else status.blockState = Status.BlockState.Standing;
+        
         }
 
 
@@ -91,8 +93,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     void BackDash()
     {
-        if (status.currentState == Status.State.Neutral)
-            attack.AttackProperties(attack.moveset.backDash);
+//.inputQueue.Add()
+      
     }
 
     void NeutralInput()
@@ -163,7 +165,8 @@ public class PlayerInputHandler : MonoBehaviour
 
                     break;
                 case 10:
-
+                    attack.AttackProperties(attack.moveset.backDash);
+                    Delete();
                     break;
                 default: break;
             }

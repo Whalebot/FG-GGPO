@@ -63,8 +63,7 @@ public class Status : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (mov.crouching) blockState = BlockState.Crouching;
-        else blockState = BlockState.Standing;
+
         StateMachine();
     }
 

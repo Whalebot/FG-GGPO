@@ -154,12 +154,12 @@ public class Movement : MonoBehaviour
 
             if (Mathf.Abs(deltaAngle) < 90)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationDamp);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.fixedDeltaTime * rotationDamp);
 
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * sharpRotationDamp);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.fixedDeltaTime * sharpRotationDamp);
             }
 
             return;
@@ -246,7 +246,6 @@ public class Movement : MonoBehaviour
         jumpEvent?.Invoke();
         Vector3 temp = direction.normalized;
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
-        // rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
     }
 
     public void JumpFX()

@@ -350,7 +350,11 @@ public class InputHandler : MonoBehaviour
             if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
             {
                 if (currentInput == 2)
+                {
                     dashInput?.Invoke();
+                    StartCoroutine("InputBuffer",10);
+                }
+                   
                 return true;
             }
         }
