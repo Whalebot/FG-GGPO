@@ -32,6 +32,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GameHandler.Instance.rollbackTick += RollbackTick;
         mov = GetComponent<Movement>();
+        input.dashInput += BackDash;
     }
 
     Vector3 RelativeToCamera(Vector2 v)
@@ -55,9 +56,9 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
-        if (mov.ground )
+        if (mov.ground)
         {
-        
+
             mov.crouching = input.netButtons[5];
         }
 
@@ -82,10 +83,24 @@ public class PlayerInputHandler : MonoBehaviour
         //    rollbackInput.RemoveAt(0);
     }
 
+    void SprintStart()
+    {
+        if (input.dash) mov.sprinting = true;
+        if (input.directionals[input.directionals.Count - 1] == 5) mov.sprinting = false;
+    }
+
+    void BackDash()
+    {
+        if (status.currentState == Status.State.Neutral)
+            attack.AttackProperties(attack.moveset.backDash);
+    }
 
     void NeutralInput()
     {
-        // if (mov.ground)
+        if (input.dash) mov.sprinting = true;
+
+        if (input.directionals[input.directionals.Count - 1] == 5) mov.sprinting = false;
+
         if (InputAvailable())
         {
             switch (input.inputQueue[0])

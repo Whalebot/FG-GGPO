@@ -100,7 +100,9 @@ MonoBehaviour:
   network: 0
   id: 0
   lastInput: 5
+  motionInputWindow: 10
   controlScheme: 0
+  dash: 0
   inputQueue: 
   bufferWindow: 10
   R1Hold: 0
@@ -134,6 +136,7 @@ MonoBehaviour:
   strafe: 1
   strafeTarget: {fileID: 0}
   crouching: 0
+  holdBack: 0
   forwardOnly: 1
   walkSpeed: 6
   backWalkSpeed: 3
@@ -256,6 +259,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0, y: 0}
   isDead: 0
   blocking: 0
+  knockdownRecovery: 0
   groundState: 0
   blockState: 0
   currentState: 0

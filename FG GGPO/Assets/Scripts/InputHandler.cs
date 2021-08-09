@@ -12,11 +12,14 @@ public class InputHandler : MonoBehaviour
     public bool network;
     public int id;
     public int lastInput = 5;
+
+    public int motionInputWindow;
+
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
 
     public Controls controls = null;
-
+    public bool dash;
     public List<int> inputQueue;
     public float bufferWindow;
 
@@ -49,6 +52,8 @@ public class InputHandler : MonoBehaviour
     public InputEvent touchPadInput;
     public InputEvent leftInput;
     public InputEvent rightInput;
+
+    public InputEvent dashInput;
 
     [HideInInspector] public bool R1Hold;
     [HideInInspector] public bool R2Hold;
@@ -254,11 +259,14 @@ public class InputHandler : MonoBehaviour
         //   if (!deviceIsAssigned) return;
         if (network)
         {
-            // inputDirection = TranslateInput(lastInput);
+            //IF PLAYER 2, REVERSE INPUTS
             if (id == 1)
                 inputDirection = TranslateInput(netDirectionals);
-            else inputDirection = InvertVector(TranslateInput(netDirectionals));
+            else
+                inputDirection = InvertVector(TranslateInput(netDirectionals));
 
+
+            //SEND INPUTS TO INPUT DISPLAY
             if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
             {
                 if (inputDirection.x > 0.5F) directionals.Add(6);
@@ -278,7 +286,9 @@ public class InputHandler : MonoBehaviour
                 else directionals.Add(2);
             }
 
+            CheckMotionInputs();
 
+            //CHECK IF INPUTS HAVE BEEN DUPLICATED
             if (directionals.Count <= 2) { updatedDirectionals = true; return; }
             if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
@@ -311,7 +321,41 @@ public class InputHandler : MonoBehaviour
 
             updatedDirectionals = true;
         }
+    }
 
+    void CheckMotionInputs()
+    {
+        dash = CheckDashInput();
+        print(dash);
+    }
+
+    public bool CheckDashInput()
+    {
+        bool result = false;
+        int currentInput = directionals[directionals.Count - 1];
+        bool foundNeutralInput = false;
+        if (currentInput == 5) return false;
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) { break; }
+
+            if (directionals[directionals.Count - i] != 5 && directionals[directionals.Count - i] != currentInput)
+            {
+                return false;
+            }
+            if (directionals[directionals.Count - i] == 5)
+            {
+                foundNeutralInput = true;
+            }
+            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+            {
+                if (currentInput == 2)
+                    dashInput?.Invoke();
+                return true;
+            }
+        }
+
+        return result;
     }
 
     private void OnLeft(InputAction.CallbackContext context)

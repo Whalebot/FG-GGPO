@@ -54,8 +54,8 @@ public class Movement : MonoBehaviour
     public MovementEvent strafeBreak;
 
     [HideInInspector] public float zeroFloat;
-public Vector3 direction;
- public Vector3 storedDirection;
+    public Vector3 direction;
+    public Vector3 storedDirection;
 
     [FoldoutGroup("Assign components")] Status status;
     [FoldoutGroup("Assign components")] public Collider hurtbox;
@@ -106,10 +106,10 @@ public Vector3 direction;
         }
         if (status.currentState == Status.State.Neutral)
         {
-   
+
             MovementProperties();
             Rotation();
-            PlayerMovement(); 
+            PlayerMovement();
             if (!GameHandler.Instance.disableBlock)
                 status.blocking = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
         }
@@ -206,6 +206,10 @@ public Vector3 direction;
                 {
                     currentVel = backWalkSpeed;
                 }
+                else if (sprinting)
+                {
+                    currentVel = sprintSpeed;
+                }
                 else
                 {
                     currentVel = walkSpeed;
@@ -216,17 +220,19 @@ public Vector3 direction;
         else actualVelocity = Speed();
     }
 
-    float Speed() {
+    float Speed()
+    {
         float f = 0;
 
         if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
         {
             f = backWalkSpeed;
         }
-        else
+        else if(sprinting)
         {
-            f = walkSpeed;
+            f = sprintSpeed;
         }
+        else f = walkSpeed;
 
         return f;
     }
@@ -240,7 +246,7 @@ public Vector3 direction;
         jumpEvent?.Invoke();
         Vector3 temp = direction.normalized;
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
-       // rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+        // rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
     }
 
     public void JumpFX()

@@ -10,27 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5A
+  m_Name: BackDash
   m_EditorClassIdentifier: 
   type: 0
   attackHeight: 1
-  gatlingMoves:
-  - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
-  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  gatlingMoves: []
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  animationID: 0
-  startupFrames: 10
+  animationID: 50
+  startupFrames: 20
   activeFrames: 5
   recoveryFrames: 5
-  gatlingFrames: 11
+  gatlingFrames: 21
   damage: 10
   hitStun: 20
-  blockStun: 8
-  hitPushback: {x: 0, y: 0, z: 2}
-  airHitPushback: {x: 0, y: 0, z: 2}
-  blockPushback: {x: 0, y: 0, z: 2}
+  blockStun: 20
+  hitPushback: {x: 0, y: 0, z: 10}
+  airHitPushback: {x: 0, y: 5, z: 10}
+  blockPushback: {x: 0, y: 0, z: 5}
   groundHitProperty: 0
   airHitProperty: 0
   shakeMagnitude: 0
@@ -50,5 +48,5 @@ MonoBehaviour:
   iFrames: 0
   overrideVelocity: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: 1}
+  Momentum: {x: 0, y: 0, z: -15}
   momentumArray: []

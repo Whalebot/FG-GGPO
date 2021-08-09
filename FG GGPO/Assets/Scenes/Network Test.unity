@@ -222,7 +222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191741958}
-  m_LocalRotation: {x: 0.07168609, y: -0.22999619, z: 0.016990459, w: 0.970399}
+  m_LocalRotation: {x: 0.071687326, y: -0.22992478, z: 0.016985184, w: 0.97041595}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1404,7 +1404,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219073678}
-  m_LocalRotation: {x: 0.07168609, y: -0.22999619, z: 0.016990459, w: 0.970399}
+  m_LocalRotation: {x: 0.071687326, y: -0.22992478, z: 0.016985184, w: 0.97041595}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1523,8 +1523,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1434135376}
   - component: {fileID: 1434135379}
-  - component: {fileID: 1434135378}
   - component: {fileID: 1434135377}
+  - component: {fileID: 1434135378}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1584,8 +1584,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 0.5
+  m_VerticalDamping: 0.5
   m_ScreenX: 0.6
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0

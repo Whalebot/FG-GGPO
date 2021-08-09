@@ -109,6 +109,10 @@ public class CharacterAnimator : MonoBehaviour
         BlockAnimation();
     }
 
+    void BackDash() {
+        anim.SetTrigger("BackDash");
+    }
+
     void BlockAnimation()
     {
         anim.SetBool("Blocking", status.BlockStun > 0);

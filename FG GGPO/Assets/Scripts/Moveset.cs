@@ -19,5 +19,7 @@ public class Moveset : ScriptableObject
 
     public Combo[] combos;
     public Combo extra;
+
+    public Move backDash;
 }
 
