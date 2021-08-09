@@ -55,11 +55,9 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
-        if (mov.ground)
+        if (mov.ground )
         {
-            if (input.netButtons[5])
-                status.blockState = Status.BlockState.Crouching;
-            else status.blockState = Status.BlockState.Standing;
+        
             mov.crouching = input.netButtons[5];
         }
 

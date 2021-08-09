@@ -19,15 +19,16 @@ MonoBehaviour:
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 1
-  icon: {fileID: 0}
-  animation: {fileID: 7400000, guid: c049306da858d294192a776692a3d47e, type: 3}
   startupFrames: 10
-  activeFrames: 5
+  activeFrames: 1
   recoveryFrames: 5
   gatlingFrames: 30
   damage: 10
   hitStun: 20
-  knockback: 5
+  blockStun: 20
+  hitPushback: {x: 0, y: 0, z: 10}
+  airHitPushback: {x: 0, y: 0, z: 10}
+  blockPushback: {x: 0, y: 0, z: 10}
   groundHitProperty: 0
   airHitProperty: 0
   shakeMagnitude: 0

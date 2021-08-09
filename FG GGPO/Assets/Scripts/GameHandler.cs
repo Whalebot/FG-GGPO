@@ -12,6 +12,7 @@ public class GameHandler : MonoBehaviour
     public static GameHandler Instance;
     public static bool isPaused;
     public bool showHitboxes;
+    public bool disableBlock;
     public int playersInGame;
     public Transform p1Transform;
     public Transform p2Transform;

@@ -129,7 +129,7 @@ public class CharacterAnimator : MonoBehaviour
     void StatusAnimation()
     {
         //anim.SetBool("Dead", status.isDead);
-        //anim.SetBool("Hitstun", status.inHitStun);
+        anim.SetBool("Hitstun", status.inHitStun);
         //anim.SetBool("InAnimation", status.currentState == Status.State.InAnimation || status.currentState == Status.State.Blockstun);
 
         //anim.SetFloat("AttackSpeed", status.rawStats.attackSpeed);

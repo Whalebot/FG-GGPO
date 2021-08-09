@@ -55,18 +55,15 @@ public class Hitbox : MonoBehaviour
                         move = container.move;
                         status = container.status;
 
-
                         enemyList.Add(enemyStatus);
                         Hurtbox hurtbox = other.GetComponent<Hurtbox>();
                         if (hurtbox != null)
                         {
-
                             DoDamage(enemyStatus, hurtbox.damageMultiplier, hurtbox.poiseMultiplier);
                         }
                         else
                             DoDamage(enemyStatus, 1, 1);
                     }
-
                 }
         }
     }
@@ -85,7 +82,7 @@ public class Hitbox : MonoBehaviour
         totalDamage = (int)(dmgMod * (baseDamage * container.move.damage));
         int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
-        aVector = baseKnockback * knockbackDirection * move.knockback;
+
 
 
         GameObject GO;
@@ -93,6 +90,8 @@ public class Hitbox : MonoBehaviour
         {
             if (move.attackHeight == Move.AttackHeight.Low && other.blockState == Status.BlockState.Standing || move.attackHeight == Move.AttackHeight.Overhead && other.blockState == Status.BlockState.Crouching)
             {
+                aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
+
                 GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
                 if (move.groundHitProperty == Move.HitProperty.Knockdown)
                     other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
@@ -100,16 +99,38 @@ public class Hitbox : MonoBehaviour
                     other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
                 return;
             }
+            aVector = baseKnockback * knockbackDirection * move.blockPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.blockPushback.x + baseKnockback * Vector3.up * move.blockPushback.y;
+
             GO = Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            other.TakeBlock(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+            other.TakeBlock(damageDealt, aVector, (int)(move.blockStun), knockbackDirection, move.slowMotionDuration);
         }
         else
         {
+
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
-            if (move.groundHitProperty == Move.HitProperty.Knockdown)
-                other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
-            else
-                other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+            if (other.groundState == Status.GroundState.Grounded)
+            {
+                aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
+                if (move.groundHitProperty == Move.HitProperty.Launch)
+                {
+                    other.groundState = Status.GroundState.Airborne;
+                }
+
+                if (move.groundHitProperty == Move.HitProperty.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                else
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+            }
+            else if (other.groundState == Status.GroundState.Airborne || other.groundState == Status.GroundState.Knockdown)
+            {
+                aVector = baseKnockback * knockbackDirection * move.airHitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.airHitPushback.x + baseKnockback * Vector3.up * move.airHitPushback.y;
+
+                if (move.groundHitProperty == Move.HitProperty.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                else
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+            }
+
         }
     }
 }

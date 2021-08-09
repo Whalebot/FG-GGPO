@@ -222,7 +222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191741958}
-  m_LocalRotation: {x: 0.07168479, y: -0.23007049, z: 0.016995952, w: 0.9703814}
+  m_LocalRotation: {x: 0.07168609, y: -0.22999619, z: 0.016990459, w: 0.970399}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 917007643}
   - component: {fileID: 917007642}
   - component: {fileID: 917007644}
+  - component: {fileID: 917007645}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -939,6 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showHitboxes: 1
+  disableBlock: 1
   playersInGame: 0
   p1Transform: {fileID: 559300880}
   p2Transform: {fileID: 377725758}
@@ -963,6 +965,19 @@ MonoBehaviour:
   p1Input: {fileID: 559300883}
   p2Input: {fileID: 377725757}
   controllersConnected: 0
+--- !u!114 &917007645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917007639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93a14abe9932ac4c8350db8cc00a9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
 --- !u!1 &920296600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,6 +1152,10 @@ PrefabInstance:
       propertyPath: strafeTarget
       value: 
       objectReference: {fileID: 559300880}
+    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: holdBack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: network
       value: 1
@@ -1385,7 +1404,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219073678}
-  m_LocalRotation: {x: 0.07168479, y: -0.23007049, z: 0.016995952, w: 0.9703814}
+  m_LocalRotation: {x: 0.07168609, y: -0.22999619, z: 0.016990459, w: 0.970399}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2025,14 +2044,6 @@ PrefabInstance:
       propertyPath: strafeTarget
       value: 
       objectReference: {fileID: 377725758}
-    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
-      propertyPath: backWalkSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
-      propertyPath: walkSpeed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: network
       value: 1

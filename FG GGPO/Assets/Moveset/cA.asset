@@ -17,20 +17,21 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
-  attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+  attackPrefab: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 10
-  icon: {fileID: 0}
-  animation: {fileID: 7400000, guid: 927efecf808e43a41b806c382e990a4d, type: 3}
   startupFrames: 10
   activeFrames: 5
   recoveryFrames: 5
   gatlingFrames: 11
   damage: 10
-  hitStun: 20
-  knockback: 2
-  groundHitProperty: 0
+  hitStun: 50
+  blockStun: 20
+  hitPushback: {x: 0, y: 10, z: 2}
+  airHitPushback: {x: 0, y: 10, z: 2}
+  blockPushback: {x: 0, y: 0, z: 5}
+  groundHitProperty: 2
   airHitProperty: 0
   shakeMagnitude: 0
   shakeDuration: 0

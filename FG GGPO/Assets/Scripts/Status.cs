@@ -36,7 +36,12 @@ public class Status : MonoBehaviour
     public TransitionEvent wakeupEvent;
 
     CharacterSFX characterSFX;
-    public enum BlockState { Standing, Crouching, Jumping }
+    Movement mov;
+    public int knockdownRecovery;
+
+    public enum GroundState { Grounded, Airborne, Knockdown }
+    public GroundState groundState;
+    public enum BlockState { None, Standing, Crouching, Jumping }
     public BlockState blockState;
     public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown }
     [SerializeField] public State currentState;
@@ -46,6 +51,7 @@ public class Status : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mov = GetComponent<Movement>();
         characterSFX = GetComponentInChildren<CharacterSFX>();
         currentState = State.Neutral;
         ApplyCharacter();
@@ -57,16 +63,22 @@ public class Status : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        if (mov.crouching) blockState = BlockState.Crouching;
+        else blockState = BlockState.Standing;
         StateMachine();
     }
 
+    void SetBlockState()
+    {
+        blocking = mov.holdBack; 
+
+    }
 
     void ResolveBlockstun()
     {
         if (blockstunValue > 0)
         {
-            inBlockStun = true;
+
             blockstunValue--;
         }
         else if (blockstunValue <= 0 && inBlockStun)
@@ -82,14 +94,38 @@ public class Status : MonoBehaviour
         if (hitstunValue > 0 && !hasArmor)
         {
             hitstunValue--;
-            inHitStun = true;
+
         }
         else if (hitstunValue <= 0 && inHitStun)
         {
-            GoToState(State.Neutral);
-            hitstunValue = 0;
-            inHitStun = false;
+            if (groundState == GroundState.Knockdown)
+                AirRecovery();
+
+            else if (groundState == GroundState.Airborne)
+                AirRecovery();
+            else GroundRecovery();
+
+
+
         }
+    }
+
+    void AirRecovery()
+    {
+        wakeupEvent?.Invoke();
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        groundState = GroundState.Grounded;
+        GoToState(State.Neutral);
+        hitstunValue = 0;
+        inHitStun = false;
+    }
+
+    void GroundRecovery() {
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        groundState = GroundState.Grounded;
+        GoToState(State.Neutral);
+        hitstunValue = 0;
+        inHitStun = false;
     }
 
     void ResolveKnockdown()
@@ -100,7 +136,7 @@ public class Status : MonoBehaviour
         }
         else if (knockdownValue <= 0)
         {
-            wakeupEvent?.Invoke();
+
             GoToState(State.Neutral);
             knockdownValue = 50;
         }
@@ -129,14 +165,21 @@ public class Status : MonoBehaviour
     {
         switch (currentState)
         {
-            case State.Neutral: break;
+            case State.Neutral:
+                SetBlockState();
+                break;
             case State.Hitstun:
+                blocking = false;
+                blockState = BlockState.None;
                 ResolveHitstun();
                 break;
             case State.Blockstun:
+                SetBlockState();
                 ResolveBlockstun();
                 break;
             case State.Knockdown:
+                blocking = false;
+                blockState = BlockState.None;
                 ResolveKnockdown();
                 break;
             default: break;
@@ -162,14 +205,18 @@ public class Status : MonoBehaviour
                 break;
             case State.Hitstun:
                 currentState = State.Hitstun;
+                inHitStun = true;
+        
+
                 hitstunEvent?.Invoke();
                 break;
             case State.Blockstun:
                 currentState = State.Blockstun;
+                inBlockStun = true;
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
                 currentState = State.Knockdown;
-                blockState = BlockState.Jumping;
+
                 knockdownEvent?.Invoke(); break;
             default: break;
         }
@@ -228,6 +275,11 @@ public class Status : MonoBehaviour
     public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+        if (groundState != GroundState.Grounded)
+        {
+            groundState = GroundState.Airborne;
+        }
+
         TakePushback(kb);
         HitStun = stunVal;
         hurtEvent?.Invoke();
@@ -235,7 +287,10 @@ public class Status : MonoBehaviour
     }
     public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
     {
-        GoToState(State.Knockdown);
+        GoToState(State.Hitstun);
+        groundState = GroundState.Knockdown;
+        HitStun = stunVal;
+        knockdownEvent?.Invoke();
         hurtEvent?.Invoke();
         Health -= damage;
     }

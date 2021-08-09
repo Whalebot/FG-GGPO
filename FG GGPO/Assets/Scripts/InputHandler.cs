@@ -158,13 +158,13 @@ public class InputHandler : MonoBehaviour
             controls.Default.Down.performed += context => OnDown(context);
 
             controls.Default.R1.performed += context => OnR1(context);
-            controls.Default.R1.canceled += _ => OnR1Release();
+            controls.Default.R1.canceled += context => OnR1(context);
 
             controls.Default.R2.performed += _ => OnR2Press();
             controls.Default.R2.canceled += _ => OnR2Release();
 
             controls.Default.L1.performed += context => OnL1(context);
-            controls.Default.L1.canceled += _ => OnL1Release();
+            controls.Default.L1.canceled += context => OnL1(context);
 
             controls.Default.L2.performed += _ => OnL2Press();
             controls.Default.L2.canceled += _ => OnL2Release();

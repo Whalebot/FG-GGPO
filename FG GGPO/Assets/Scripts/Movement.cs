@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     public Transform strafeTarget;
 
     public bool crouching;
-
+    public bool holdBack;
     [HeaderAttribute("Movement attributes")]
     [TabGroup("Movement")] public bool forwardOnly = true;
     [TabGroup("Movement")] public float walkSpeed = 3;
@@ -54,8 +54,8 @@ public class Movement : MonoBehaviour
     public MovementEvent strafeBreak;
 
     [HideInInspector] public float zeroFloat;
-    [HideInInspector] public Vector3 direction;
-    [HideInInspector] public Vector3 storedDirection;
+public Vector3 direction;
+ public Vector3 storedDirection;
 
     [FoldoutGroup("Assign components")] Status status;
     [FoldoutGroup("Assign components")] public Collider hurtbox;
@@ -106,9 +106,12 @@ public class Movement : MonoBehaviour
         }
         if (status.currentState == Status.State.Neutral)
         {
+   
             MovementProperties();
             Rotation();
-            PlayerMovement();
+            PlayerMovement(); 
+            if (!GameHandler.Instance.disableBlock)
+                status.blocking = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
         }
 
         if (rb.velocity.y < 0) rb.velocity += Physics.gravity * fallMultiplier;
@@ -187,26 +190,45 @@ public class Movement : MonoBehaviour
 
     public virtual void MovementProperties()
     {
+        if (!GameHandler.Instance.disableBlock)
+            holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
 
-        status.blocking = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
+        if (ground)
+        {
+            if (!isMoving || crouching)
+            {
+                currentVel = 0;
+                actualVelocity = currentVel;
+            }
+            else if (isMoving)
+            {
+                if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+                {
+                    currentVel = backWalkSpeed;
+                }
+                else
+                {
+                    currentVel = walkSpeed;
+                }
+                actualVelocity = currentVel;
+            }
+        }
+        else actualVelocity = Speed();
+    }
 
-        if (!isMoving || crouching)
+    float Speed() {
+        float f = 0;
+
+        if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
         {
-            currentVel = 0;
-            actualVelocity = Mathf.SmoothDamp(actualVelocity, currentVel, ref zeroFloat, smoothDeacceleration);
+            f = backWalkSpeed;
         }
-        else if (isMoving)
+        else
         {
-            if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
-            {
-                currentVel = backWalkSpeed;
-            }
-            else
-            {
-                currentVel = walkSpeed;
-            }
-            actualVelocity = Mathf.SmoothDamp(actualVelocity, currentVel, ref zeroFloat, smoothAcceleration);
+            f = walkSpeed;
         }
+
+        return f;
     }
 
     public void Jump()
@@ -214,18 +236,20 @@ public class Movement : MonoBehaviour
         jumpCounter = minimumJumpTime;
         col.material = airMat;
         ground = false;
+        status.groundState = Status.GroundState.Airborne;
         jumpEvent?.Invoke();
-        rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+        Vector3 temp = direction.normalized;
+        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
+       // rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
     }
 
     public void JumpFX()
     {
-
         col.material = airMat;
         ground = false;
 
         Vector3 temp = direction.normalized;
-        rb.velocity = new Vector3(temp.x * actualVelocity, rb.velocity.y, temp.z * actualVelocity);
+        rb.velocity = new Vector3(temp.x * Speed(), rb.velocity.y, temp.z * Speed());
 
         rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
     }
@@ -295,16 +319,11 @@ public class Movement : MonoBehaviour
 
         //else
         //{
-      
+
         if (ground)
             storedDirection = direction.normalized;
-        //    //rb.velocity = new Vector3(temp.x * actualVelocity, rb.velocity.y, temp.z * actualVelocity);
-        //    if (check2)
-        //        rb.velocity = Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit2.normal) * actualVelocity;
-        //    else
-        //rb.velocity = direction.normalized * actualVelocity;
+
         rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
-        //}
     }
 
     public Vector3 RemoveAxis(Vector3 vec, Vector3 removedAxis)

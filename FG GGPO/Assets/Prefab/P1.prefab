@@ -135,8 +135,8 @@ MonoBehaviour:
   strafeTarget: {fileID: 0}
   crouching: 0
   forwardOnly: 1
-  walkSpeed: 5
-  backWalkSpeed: 2
+  walkSpeed: 6
+  backWalkSpeed: 3
   run: 0
   currentVel: 0
   actualVelocity: 0
@@ -159,12 +159,10 @@ MonoBehaviour:
   minimumJumpTime: 2
   airRotation: 4
   sprinting: 0
-  forcedWalk: 0
   sprintSpeed: 12
-  sprintRotation: 3
-  sprintCostTimer: 2
   zeroFloat: 0
   direction: {x: 0, y: 0, z: 0}
+  storedDirection: {x: 0, y: 0, z: 0}
   hurtbox: {fileID: 3654780269054702759}
   col: {fileID: 3654780269054702759}
   groundMat: {fileID: 0}
@@ -220,6 +218,7 @@ MonoBehaviour:
   containerScript: {fileID: 1070645526}
   moveset: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
   activeMove: {fileID: 0}
+  canGatling: 0
   hitboxContainer: {fileID: 1070645525}
   attackID: 0
   canAttack: 0
@@ -257,6 +256,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0, y: 0}
   isDead: 0
   blocking: 0
+  groundState: 0
   blockState: 0
   currentState: 0
   maxHealth: 100

@@ -17,9 +17,7 @@ public class Move : ScriptableObject
     public GameObject blockFX;
 
     public int animationID;
-    public Sprite icon;
 
-    public AnimationClip animation;
     public int startupFrames;
     public int activeFrames;
     public int recoveryFrames;
@@ -28,8 +26,12 @@ public class Move : ScriptableObject
     [Header("Hit properties")]
     public int damage;
     public float hitStun;
-    public float knockback;
-    public enum HitProperty{None, Knockdown, Launch }
+    public float blockStun;
+    public Vector3 hitPushback;
+    public Vector3 airHitPushback;
+    public Vector3 blockPushback;
+
+    public enum HitProperty { None, Knockdown, Launch }
     public HitProperty groundHitProperty;
     public HitProperty airHitProperty;
 
