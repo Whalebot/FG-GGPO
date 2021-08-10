@@ -92,6 +92,7 @@ public class Hitbox : MonoBehaviour
             {
                 aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
 
+                CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
                 GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
                 if (move.groundHitProperty == Move.HitProperty.Knockdown)
                     other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
@@ -101,12 +102,14 @@ public class Hitbox : MonoBehaviour
             }
             aVector = baseKnockback * knockbackDirection * move.blockPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.blockPushback.x + baseKnockback * Vector3.up * move.blockPushback.y;
 
+
             GO = Instantiate(move.blockFX, colPos.position, colPos.rotation);
             other.TakeBlock(damageDealt, aVector, (int)(move.blockStun), knockbackDirection, move.slowMotionDuration);
         }
         else
         {
 
+            CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
             if (other.groundState == Status.GroundState.Grounded)
             {

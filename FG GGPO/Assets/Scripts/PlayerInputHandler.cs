@@ -101,7 +101,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (input.dash) mov.sprinting = true;
 
-        if (input.directionals[input.directionals.Count - 1] == 5) mov.sprinting = false;
+        if (input.directionals[input.directionals.Count - 1] < 7 ) mov.sprinting = false;
 
         if (InputAvailable())
         {

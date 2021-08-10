@@ -31,17 +31,15 @@ MonoBehaviour:
   blockPushback: {x: 0, y: 0, z: 5}
   groundHitProperty: 1
   airHitProperty: 0
-  shakeMagnitude: 0
-  shakeDuration: 0
+  shakeMagnitude: 10
+  shakeDuration: 1
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
   holdAttack: 0
-  autoAim: 0
   tracking: 0
-  armor: 0
   homing: 0
   fullCancelable: 0
   noClip: 0
