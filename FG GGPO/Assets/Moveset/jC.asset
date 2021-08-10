@@ -24,10 +24,10 @@ MonoBehaviour:
   recoveryFrames: 5
   gatlingFrames: 21
   damage: 10
-  hitStun: 20
+  hitStun: 50
   blockStun: 20
   hitPushback: {x: 0, y: 0, z: 0}
-  airHitPushback: {x: 0, y: 0, z: 0}
+  airHitPushback: {x: 0, y: -10, z: 0}
   blockPushback: {x: 0, y: 0, z: 0}
   groundHitProperty: 0
   airHitProperty: 0
@@ -39,9 +39,7 @@ MonoBehaviour:
   verticalRotation: 1
   particleID: 0
   holdAttack: 0
-  autoAim: 0
   tracking: 0
-  armor: 0
   homing: 0
   fullCancelable: 0
   noClip: 0
