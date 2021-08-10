@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Hitbox : MonoBehaviour
@@ -18,10 +17,7 @@ public class Hitbox : MonoBehaviour
     [SerializeField] List<Status> enemyList;
     MeshRenderer mr;
     Transform colPos;
-    private void Start()
-    {
 
-    }
 
     private void Awake()
     {

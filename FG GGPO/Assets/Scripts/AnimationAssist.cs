@@ -83,9 +83,9 @@ public class AnimationAssist : MonoBehaviour
 
     void Momentum(AnimationEvent evt)
     {
-       // if (evt.animatorClipInfo.weight > animationEventWeight)
+        if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-         //   attack.AnimMomemtun();
+            attack.AnimMomemtun();
         }
     }
 }
