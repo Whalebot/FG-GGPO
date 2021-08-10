@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5B
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   attackHeight: 1
   gatlingMoves: []
-  attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+  attackPrefab: {fileID: 6130433937859647811, guid: 25a33728d54d31c4c885f79e5d009eaa, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  animationID: 1
+  animationID: 100
   animationClip: {fileID: 0}
-  startupFrames: 20
-  activeFrames: 2
-  recoveryFrames: 10
+  startupFrames: 45
+  activeFrames: 0
+  recoveryFrames: 30
   gatlingFrames: 5
   damage: 10
-  hitStun: 60
+  hitStun: 20
   blockStun: 20
   hitPushback: {x: 0, y: 0, z: 10}
   airHitPushback: {x: 0, y: 0, z: 10}
@@ -48,6 +48,6 @@ MonoBehaviour:
   iFrames: 0
   overrideVelocity: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: 2}
+  Momentum: {x: 0, y: 0, z: 0}
   momentumArray:
-  - {x: 0, y: 0, z: 10}
+  - {x: 0, y: 0, z: 0}

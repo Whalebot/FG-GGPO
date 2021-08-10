@@ -34,8 +34,8 @@ public class AttackScript : MonoBehaviour
     public bool landCancel;
     bool newAttack;
     [HideInInspector] public int combo;
-     public bool fullCancel;
-     public bool iFrames;
+    public bool fullCancel;
+    public bool iFrames;
     int lastAttackID;
     int momentumCount;
     public bool block;
@@ -86,6 +86,19 @@ public class AttackScript : MonoBehaviour
     public void ActiveFrames()
     {
         status.GoToState(Status.State.Active);
+        if (activeMove.type == Move.MoveType.Special)
+        {
+            if (activeHitbox == null)
+            {
+                activeHitbox = Instantiate(activeMove.attackPrefab, transform.position + activeMove.attackPrefab.transform.position, transform.rotation);
+
+                Hitbox hitbox = activeHitbox.GetComponentInChildren<Hitbox>();
+
+                hitbox.status = status;
+                hitbox.move = activeMove;
+            }
+        }
+        else
         if (activeHitbox == null)
         {
             activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
@@ -107,7 +120,7 @@ public class AttackScript : MonoBehaviour
             if (activeMove.resetVelocityDuringRecovery)
                 status.rb.velocity = Vector3.zero;
 
-        if (activeHitbox != null)
+        if (activeHitbox != null && activeMove.type != Move.MoveType.Special)
         {
             if (Application.isEditor)
                 DestroyImmediate(activeHitbox);

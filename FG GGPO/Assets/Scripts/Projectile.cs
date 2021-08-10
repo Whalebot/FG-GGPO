@@ -14,7 +14,12 @@ public class Projectile : Hitbox
 
     private void FixedUpdate()
     {
-       // t
+        rb.velocity = transform.forward * velocity;
     }
 
+    public override void DoDamage(Status other, float dmgMod, float poiseMod)
+    {
+        base.DoDamage(other, dmgMod, poiseMod);
+        Destroy(gameObject);
+    }
 }

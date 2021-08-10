@@ -8,8 +8,8 @@ public class Hitbox : MonoBehaviour
     public float baseKnockback = 1;
     public int totalDamage;
     public AttackContainer container;
-    Move move;
-    Status status;
+    public Move move;
+    public Status status;
     public GameObject projectile;
     Vector3 knockbackDirection;
     Vector3 aVector;
@@ -42,25 +42,30 @@ public class Hitbox : MonoBehaviour
         if (!other.transform.IsChildOf(body))
         {
             Status enemyStatus = other.GetComponentInParent<Status>();
+
             if (enemyStatus != null)
+            {
+                if (status == enemyStatus) return;
+
                 if (!enemyList.Contains(enemyStatus))
                 {
                     colPos = other.gameObject.transform;
-                    if (enemyStatus != null)
+
+                    if (move == null)
                     {
                         move = container.move;
                         status = container.status;
-
-                        enemyList.Add(enemyStatus);
-                        Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-                        if (hurtbox != null)
-                        {
-                            DoDamage(enemyStatus, hurtbox.damageMultiplier, hurtbox.poiseMultiplier);
-                        }
-                        else
-                            DoDamage(enemyStatus, 1, 1);
                     }
+                    enemyList.Add(enemyStatus);
+                    Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+                    if (hurtbox != null)
+                    {
+                        DoDamage(enemyStatus, hurtbox.damageMultiplier, hurtbox.poiseMultiplier);
+                    }
+                    else
+                        DoDamage(enemyStatus, 1, 1);
                 }
+            }
         }
     }
     void OnDisable()
@@ -72,10 +77,11 @@ public class Hitbox : MonoBehaviour
         enemyList.Clear();
 
     }
-    void DoDamage(Status other, float dmgMod, float poiseMod)
+    public virtual void DoDamage(Status other, float dmgMod, float poiseMod)
     {
-        container.attack.canGatling = true;
-        totalDamage = (int)(dmgMod * (baseDamage * container.move.damage));
+        if (container != null)
+            container.attack.canGatling = true;
+        totalDamage = (int)(dmgMod * (baseDamage * move.damage));
         int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
 
