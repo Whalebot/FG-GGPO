@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationAssist : MonoBehaviour
 {
     Movement mov;
-    AttackScript attack;
+   [SerializeField] AttackScript attack;
 
     public float animationEventWeight = 0.5F;
     // Start is called before the first frame update

@@ -7,7 +7,7 @@ public class CharacterAnimator : MonoBehaviour
     private Status status;
     private Animator anim;
     private Movement movement;
-    private AttackScript attack;
+    [SerializeField] private AttackScript attack;
     private float runSpeed;
     //  private Character character;
 
@@ -22,11 +22,41 @@ public class CharacterAnimator : MonoBehaviour
     float tempDirection = 0F;
     public List<AnimationData> animationData;
 
-    
+    public Move move;
 
     private void Awake()
     {
         animationData = new List<AnimationData>();
+    }
+
+    private void OnValidate()
+    {
+        EditorAnimation();
+    }
+    public void EditorAnimation() {
+        anim = GetComponent<Animator>();
+        if (move != null) {
+            anim.Play("Base Layer.Attacking." + move.name, 0, (float) frame / (anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
+            anim.Update(Time.fixedDeltaTime);
+        }
+
+
+        if (move != null)
+        {
+            if (frame >= move.startupFrames + move.activeFrames + move.recoveryFrames)
+            {
+                attack.RecoveryFrames();
+            }
+            else if (frame >= move.startupFrames + move.activeFrames)
+            {
+                attack.ActiveFrames();
+            }
+            else if (frame >= move.startupFrames)
+            {
+                attack.StartupFrames();
+            }
+        }
+
     }
 
     // Start is called before the first frame update
@@ -66,14 +96,14 @@ public class CharacterAnimator : MonoBehaviour
                 attack.attackString = true; 
             }
             if (frame >= attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames) {
-                print("recovery");
+                //print("recovery");
             }
             else if (frame >= attack.activeMove.startupFrames) {
-                print("active");
+                //print("active");
             }
             else if (frame >= attack.activeMove.startupFrames)
             {
-                print("start");
+                //print("start");
             }
         }
 
@@ -141,7 +171,6 @@ public class CharacterAnimator : MonoBehaviour
 
     void Knockdown()
     {
-        print("kd");
         anim.SetBool("Knockdown", true);
         anim.SetTrigger("Hit");
 

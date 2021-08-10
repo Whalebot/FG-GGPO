@@ -34,8 +34,7 @@ public class Movement : MonoBehaviour
     [HeaderAttribute("Jump attributes")]
     [FoldoutGroup("Jump")] public bool ground;
     [FoldoutGroup("Jump")] public float rayLength;
-    [FoldoutGroup("Jump")] public float stepAngle;
-    RaycastHit hit, hit2;
+    RaycastHit hit;
     [FoldoutGroup("Jump")] public float offset;
     [FoldoutGroup("Jump")] public LayerMask groundMask;
     [FoldoutGroup("Jump")] public float jumpHeight;
@@ -50,7 +49,7 @@ public class Movement : MonoBehaviour
 
     public delegate void MovementEvent();
     public MovementEvent jumpEvent;
-    public MovementEvent LandEvent;
+    public MovementEvent landEvent;
     public MovementEvent strafeSet;
     public MovementEvent strafeBreak;
 
@@ -64,7 +63,6 @@ public class Movement : MonoBehaviour
     [FoldoutGroup("Assign components")] public PhysicMaterial groundMat;
     [FoldoutGroup("Assign components")] public PhysicMaterial airMat;
     bool check;
-    bool check2;
 
     // Start is called before the first frame update
     void Start()
@@ -194,7 +192,8 @@ public class Movement : MonoBehaviour
 
     public virtual void MovementProperties()
     {
-        if (!GameHandler.Instance.disableBlock) { 
+        if (!GameHandler.Instance.disableBlock)
+        {
             holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
             sprinting = false;
         }
@@ -272,7 +271,6 @@ public class Movement : MonoBehaviour
     public bool GroundDetection()
     {
         check = Physics.Raycast(transform.position + Vector3.up * 0.1F, Vector3.down, out hit, rayLength, groundMask);
-        check2 = Physics.Raycast(transform.position + Vector3.up * 0.1F + transform.forward * offset, Vector3.down, out hit2, rayLength, groundMask);
 
         if (jumpCounter > 0)
         {
@@ -281,36 +279,19 @@ public class Movement : MonoBehaviour
 
             return false;
         }
+        //ground = check;
 
-        if (check)
+
+        if (!ground && transform.position.y < 0.1F)
         {
-
-            Debug.DrawRay(transform.position + Vector3.up * 0.1F, Vector3.down * rayLength, Color.yellow);
-            Debug.DrawRay(hit.point, hit.normal * 2f, Color.blue);
-            float angle = Vector3.Angle(hit2.normal, Vector3.up);
-            //Debug.Log("angle " + angle);
-
-            if (angle > stepAngle) check = false;
+            landEvent?.Invoke();
+            ground = true;
         }
-        if (check2)
+        else if (transform.position.y > 0.1F)
         {
-            Debug.DrawRay(transform.position + Vector3.up * 0.1F + transform.forward * offset, Vector3.down * rayLength, Color.yellow);
-            Debug.DrawRay(hit2.point, hit2.normal * 2f, Color.blue);
-
-            float angle2 = Vector3.Angle(hit2.normal, Vector3.up);
-            //Debug.Log("angle 2 " + angle2);
-
-            if (angle2 > stepAngle) check2 = false;
+            ground = false;
         }
 
-
-
-        if (!ground && check || !ground && check2)
-        {
-            LandEvent?.Invoke();
-
-        }
-        ground = check || check2;
 
         if (ground) col.material = groundMat;
         else col.material = airMat;

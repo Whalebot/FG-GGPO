@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    private Status status;
+    [SerializeField] private Status status;
     public HitboxContainer containerScript;
     public Moveset moveset;
 
@@ -15,6 +15,7 @@ public class AttackScript : MonoBehaviour
     public bool canGatling;
     CharacterSFX sfx;
     public Transform hitboxContainer;
+    public GameObject activeHitbox;
 
     public delegate void AttackEvent();
     public AttackEvent startupEvent;
@@ -29,7 +30,7 @@ public class AttackScript : MonoBehaviour
     [HideInInspector] public bool attacking;
     public bool attackString;
     public bool holdAttack;
-    [HideInInspector] public bool landCancel;
+    public bool landCancel;
     bool newAttack;
     [HideInInspector] public int combo;
     [HideInInspector] public bool fullCancel;
@@ -47,7 +48,7 @@ public class AttackScript : MonoBehaviour
         movement = GetComponent<Movement>();
         sfx = GetComponentInChildren<CharacterSFX>();
         movement.jumpEvent += Idle;
-
+        movement.landEvent += Land;
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
@@ -58,9 +59,45 @@ public class AttackScript : MonoBehaviour
 
     }
 
+
+
     public void ExecuteFrame()
     {
+        if (activeMove == null) return;
+        if (status.currentState == Status.State.Startup) StartupFrames();
+        if (status.currentState == Status.State.Active) ActiveFrames();
+        if (status.currentState == Status.State.Recovery) Recovery();
+    }
 
+    public void StartupFrames()
+    {
+        if (activeHitbox != null)
+        {
+            if (Application.isEditor)
+                DestroyImmediate(activeHitbox);
+            else { 
+                Destroy(activeHitbox); 
+            }
+        }
+    }
+
+    public void ActiveFrames()
+    {
+        if (activeHitbox == null)
+            activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
+    }
+
+    public void RecoveryFrames()
+    {
+        if (activeHitbox != null)
+        {
+            if (Application.isEditor)
+                DestroyImmediate(activeHitbox);
+            else
+            {
+                Destroy(activeHitbox);
+            }
+        }
     }
 
     public void AttackProperties(Move move)
@@ -70,6 +107,8 @@ public class AttackScript : MonoBehaviour
         attackID = move.animationID;
         attackString = false;
         canGatling = false;
+
+        if (activeHitbox != null) Destroy(activeHitbox);
 
         GameObject tempGO;
         if (!move.verticalRotation)
@@ -98,7 +137,7 @@ public class AttackScript : MonoBehaviour
         holdAttack = activeMove.holdAttack;
 
         iFrames = activeMove.iFrames;
-
+        landCancel = activeMove.landCancel;
 
         ResetFrames();
 
@@ -154,6 +193,7 @@ public class AttackScript : MonoBehaviour
 
     public void Active()
     {
+        if (status.currentState != Status.State.Startup) return;
         startupRotation = false;
         activeEvent?.Invoke();
 
@@ -172,16 +212,26 @@ public class AttackScript : MonoBehaviour
         containerScript.ActivateParticle(activeMove.particleID);
     }
 
+    void Land()
+    {
+
+        if (landCancel)
+        {
+            newAttack = false;
+            Idle();
+        }
+    }
+
     public void ParticleEnd()
     {
-        //if (weaponParticles != null) weaponParticles.DeactivateParticles();
         containerScript.DeactivateParticles();
     }
 
     public void Recovery()
     {
-        status.GoToState(Status.State.Recovery);
+        if (!newAttack) return;
 
+        status.GoToState(Status.State.Recovery);
         if (activeMove != null)
             if (activeMove.resetVelocityDuringRecovery)
                 status.rb.velocity = Vector3.zero;
@@ -229,8 +279,10 @@ public class AttackScript : MonoBehaviour
 
             combo = 0;
             status.GoToState(Status.State.Neutral);
+            containerScript.DeactivateHitboxes();
             containerScript.DeactivateParticles();
             attacking = false;
+            landCancel = false;
             recoveryEvent?.Invoke();
 
         }

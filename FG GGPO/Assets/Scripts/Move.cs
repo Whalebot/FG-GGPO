@@ -17,6 +17,7 @@ public class Move : ScriptableObject
     public GameObject blockFX;
 
     public int animationID;
+    public AnimationClip animationClip;
 
     public int startupFrames;
     public int activeFrames;
@@ -46,6 +47,7 @@ public class Move : ScriptableObject
     [Header("Move properties")]
     [FoldoutGroup("Move properties")] public bool verticalRotation = true;
     [FoldoutGroup("Move properties")] public int particleID;
+    [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool holdAttack;
     [FoldoutGroup("Move properties")] public bool tracking;
     [FoldoutGroup("Move properties")] public bool homing;
