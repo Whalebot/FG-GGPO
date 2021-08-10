@@ -33,13 +33,13 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        noises = new CinemachineBasicMultiChannelPerlin[cameras.Length];
-        for (int i = 0; i < noises.Length; i++)
-        {
-            noises[i] = cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        }
+        //noises = new CinemachineBasicMultiChannelPerlin[cameras.Length];
+        //for (int i = 0; i < noises.Length; i++)
+        //{
+        //    noises[i] = cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        //}
 
-        ShakeCamera(0, 0.1F);
+        //ShakeCamera(0, 0.1F);
     }
 
     private void FixedUpdate()
@@ -99,8 +99,8 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeCamera(float intensity, float time)
     {
-        startIntensity = intensity;
-        shakeTimer = time;
-        startTimer = time;
+        //startIntensity = intensity;
+        //shakeTimer = time;
+        //startTimer = time;
     }
 }
