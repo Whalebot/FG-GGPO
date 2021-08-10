@@ -15,14 +15,15 @@ MonoBehaviour:
   type: 0
   attackHeight: 3
   gatlingMoves: []
-  attackPrefab: {fileID: 334434759881567290, guid: 8a33dadeca75e8540a7ec5b42ff5ad73, type: 3}
+  attackPrefab: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 22
+  animationClip: {fileID: 0}
   startupFrames: 20
   activeFrames: 5
   recoveryFrames: 5
-  gatlingFrames: 21
+  gatlingFrames: 1
   damage: 10
   hitStun: 50
   blockStun: 20
@@ -38,6 +39,7 @@ MonoBehaviour:
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
+  landCancel: 0
   holdAttack: 0
   tracking: 0
   homing: 0
