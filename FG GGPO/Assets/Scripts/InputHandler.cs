@@ -326,7 +326,6 @@ public class InputHandler : MonoBehaviour
     void CheckMotionInputs()
     {
         dash = CheckDashInput();
-        print(dash);
     }
 
     public bool CheckDashInput()

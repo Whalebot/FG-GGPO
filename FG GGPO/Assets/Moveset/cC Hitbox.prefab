@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &334434758725128727
 Transform:
   m_ObjectHideFlags: 0
@@ -145,7 +145,6 @@ MonoBehaviour:
   projectile: {fileID: 0}
   body: {fileID: 0}
   enemyList: []
-  isPlayer: 0
 --- !u!1 &334434759881567290
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +194,7 @@ MonoBehaviour:
   hitboxes:
   - {fileID: 334434758725128724}
   status: {fileID: 0}
+  attack: {fileID: 0}
   move: {fileID: 0}
   target: {fileID: 0}
   visuals:

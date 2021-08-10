@@ -240,7 +240,6 @@ public struct FgGame : IGame
                 }
             }
 
-            Debug.Log(buttons[0]);
             _ships[i].buttons = buttons;
             if (i == 0) { InputManager.Instance.p1Input.ResolveButtons(buttons); }
             else { InputManager.Instance.p2Input.ResolveButtons(buttons); }

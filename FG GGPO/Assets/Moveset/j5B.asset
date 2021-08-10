@@ -19,10 +19,11 @@ MonoBehaviour:
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 21
-  startupFrames: 20
+  animationClip: {fileID: 0}
+  startupFrames: 11
   activeFrames: 5
-  recoveryFrames: 5
-  gatlingFrames: 21
+  recoveryFrames: 20
+  gatlingFrames: 5
   damage: 10
   hitStun: 50
   blockStun: 20

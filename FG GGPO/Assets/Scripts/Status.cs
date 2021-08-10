@@ -185,7 +185,6 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
-        print(transitionState);
         switch (transitionState)
         {
             case State.Neutral:
