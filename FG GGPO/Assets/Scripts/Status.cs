@@ -12,9 +12,6 @@ public class Status : MonoBehaviour
     [HideInInspector] public bool inHitStun;
     public int knockdownValue;
 
-    public bool hasArmor;
-    [HideInInspector] public bool animationArmor;
-
     public bool autoDeath;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Vector2 knockbackDirection;
@@ -90,7 +87,7 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
-        if (hitstunValue > 0 && !hasArmor)
+        if (hitstunValue > 0)
         {
             hitstunValue--;
 
@@ -308,11 +305,10 @@ public class Status : MonoBehaviour
         Vector3 tempVector = (Quaternion.Euler(0, temp, 0) * new Vector3(direction.x, 0, direction.z)).normalized;
         knockbackDirection = new Vector2(tempVector.x, tempVector.z);
 
-        if (!hasArmor && !animationArmor)
-        {
+     
             rb.velocity = Vector3.zero;
             rb.AddForce(direction, ForceMode.VelocityChange);
-        }
+
     }
 
     public void Death()

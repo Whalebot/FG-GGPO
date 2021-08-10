@@ -47,9 +47,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool verticalRotation = true;
     [FoldoutGroup("Move properties")] public int particleID;
     [FoldoutGroup("Move properties")] public bool holdAttack;
-    [FoldoutGroup("Move properties")] public bool autoAim;
     [FoldoutGroup("Move properties")] public bool tracking;
-    [FoldoutGroup("Move properties")] public bool armor;
     [FoldoutGroup("Move properties")] public bool homing;
     [FoldoutGroup("Move properties")] public bool fullCancelable;
     [FoldoutGroup("Move properties")] public bool noClip;

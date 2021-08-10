@@ -91,13 +91,8 @@ public class CharacterAnimator : MonoBehaviour
 
     public void SaveAnimationData()
     {
-
-
-        // AnimationData data = new AnimationData(anim.GetCurrentAnimatorStateInfo(0).fullPathHash, (int) (anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f) ));
         AnimationData data = new AnimationData(anim.GetCurrentAnimatorStateInfo(0).fullPathHash, (int)(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
-
         data.attacking = anim.GetBool("Attacking");
-        // AnimationData data = new AnimationData(Animator.StringToHash("Attacking.5A"), (int)(anim.GetAnimatorTransitionInfo(0).normalizedTime / (1f / 60f)));
         animationData.Add(data);
     }
 
@@ -132,12 +127,8 @@ public class CharacterAnimator : MonoBehaviour
 
     void StatusAnimation()
     {
-        //anim.SetBool("Dead", status.isDead);
+        anim.SetBool("Dead", status.isDead);
         anim.SetBool("Hitstun", status.inHitStun);
-        //anim.SetBool("InAnimation", status.currentState == Status.State.InAnimation || status.currentState == Status.State.Blockstun);
-
-        //anim.SetFloat("AttackSpeed", status.rawStats.attackSpeed);
-        //anim.SetFloat("MovementSpeed", status.rawStats.movementSpeedModifier);
     }
 
     void HitStun()
@@ -164,11 +155,11 @@ public class CharacterAnimator : MonoBehaviour
         if (movement == null) return;
         RunSpeed();
         tempDirection = Mathf.Sign(movement.deltaAngle);
-        // anim.SetFloat("Direction", tempDirection);
+
 
         anim.SetBool("Walking", movement.isMoving);
         anim.SetBool("Crouch", movement.crouching);
-        anim.SetBool("Strafe", movement.strafe && !movement.sprinting);
+        anim.SetBool("Run", movement.sprinting);
         x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, maxSpeed);
         y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, maxSpeed);
 

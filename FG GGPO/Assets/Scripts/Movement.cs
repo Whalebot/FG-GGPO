@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     [HeaderAttribute("Movement attributes")]
     [TabGroup("Movement")] public bool forwardOnly = true;
     [TabGroup("Movement")] public float walkSpeed = 3;
+    [TabGroup("Movement")] public float sideWalkSpeed = 3;
     [TabGroup("Movement")] public float backWalkSpeed = 2;
 
     [HideInInspector] public bool run;
@@ -104,6 +105,9 @@ public class Movement : MonoBehaviour
             isMoving = false;
             return;
         }
+
+        if (ground)
+            storedDirection = direction.normalized;
         if (status.currentState == Status.State.Neutral)
         {
 
@@ -190,8 +194,10 @@ public class Movement : MonoBehaviour
 
     public virtual void MovementProperties()
     {
-        if (!GameHandler.Instance.disableBlock)
+        if (!GameHandler.Instance.disableBlock) { 
             holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
+            sprinting = false;
+        }
 
         if (ground)
         {
@@ -205,6 +211,10 @@ public class Movement : MonoBehaviour
                 if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
                     currentVel = backWalkSpeed;
+                }
+                else if (45 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+                {
+                    currentVel = sideWalkSpeed;
                 }
                 else if (sprinting)
                 {
@@ -228,7 +238,7 @@ public class Movement : MonoBehaviour
         {
             f = backWalkSpeed;
         }
-        else if(sprinting)
+        else if (sprinting)
         {
             f = sprintSpeed;
         }
@@ -325,8 +335,7 @@ public class Movement : MonoBehaviour
         //else
         //{
 
-        if (ground)
-            storedDirection = direction.normalized;
+
 
         rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
     }

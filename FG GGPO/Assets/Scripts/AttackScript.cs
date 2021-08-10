@@ -30,7 +30,6 @@ public class AttackScript : MonoBehaviour
     public bool attackString;
     public bool holdAttack;
     [HideInInspector] public bool landCancel;
-    [HideInInspector] public bool autoAim;
     bool newAttack;
     [HideInInspector] public int combo;
     [HideInInspector] public bool fullCancel;
@@ -92,11 +91,9 @@ public class AttackScript : MonoBehaviour
         if (movement.strafeTarget != null) attackContainer.target = movement.strafeTarget;
         Startup();
         status.GoToState(Status.State.Startup);
-        autoAim = move.autoAim;
 
         AttackMomentum();
 
-        status.animationArmor = activeMove.armor;
         fullCancel = activeMove.fullCancelable;
         holdAttack = activeMove.holdAttack;
 
@@ -158,8 +155,6 @@ public class AttackScript : MonoBehaviour
     public void Active()
     {
         startupRotation = false;
-        autoAim = false;
-
         activeEvent?.Invoke();
 
         status.GoToState(Status.State.Active);
@@ -186,7 +181,6 @@ public class AttackScript : MonoBehaviour
     public void Recovery()
     {
         status.GoToState(Status.State.Recovery);
-        status.animationArmor = false;
 
         if (activeMove != null)
             if (activeMove.resetVelocityDuringRecovery)
@@ -216,14 +210,11 @@ public class AttackScript : MonoBehaviour
 
     void HitstunEvent()
     {
-        autoAim = false;
-        status.animationArmor = false;
         fullCancel = false;
         holdAttack = false;
         newAttack = false;
 
         combo = 0;
-        // status.GoToState(Status.State.Hitstun);
 
         containerScript.InterruptAttack();
         containerScript.DeactivateParticles();
@@ -233,7 +224,6 @@ public class AttackScript : MonoBehaviour
     {
         if (!newAttack)
         {
-            autoAim = false;
             attackString = false;
             fullCancel = false;
 
