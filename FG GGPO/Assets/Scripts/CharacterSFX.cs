@@ -32,7 +32,7 @@ public class CharacterSFX : MonoBehaviour
         status.hitstunEvent += HurtSFX;
         status.deathEvent += Death;
         if (mov != null)
-            mov.LandEvent += Land;
+            mov.landEvent += Land;
     }
 
     void Land()

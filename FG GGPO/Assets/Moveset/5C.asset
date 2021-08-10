@@ -19,12 +19,13 @@ MonoBehaviour:
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 2
-  startupFrames: 20
-  activeFrames: 5
-  recoveryFrames: 5
-  gatlingFrames: 21
+  animationClip: {fileID: 0}
+  startupFrames: 13
+  activeFrames: 2
+  recoveryFrames: 10
+  gatlingFrames: 5
   damage: 10
-  hitStun: 20
+  hitStun: 60
   blockStun: 20
   hitPushback: {x: 0, y: 0, z: 10}
   airHitPushback: {x: 0, y: 5, z: 10}
@@ -38,10 +39,9 @@ MonoBehaviour:
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
+  landCancel: 0
   holdAttack: 0
-  autoAim: 0
   tracking: 0
-  armor: 0
   homing: 0
   fullCancelable: 0
   noClip: 0

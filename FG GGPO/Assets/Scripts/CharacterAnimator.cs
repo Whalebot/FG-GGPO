@@ -7,7 +7,7 @@ public class CharacterAnimator : MonoBehaviour
     private Status status;
     private Animator anim;
     private Movement movement;
-    private AttackScript attack;
+    [SerializeField] private AttackScript attack;
     private float runSpeed;
     //  private Character character;
 
@@ -22,12 +22,13 @@ public class CharacterAnimator : MonoBehaviour
     float tempDirection = 0F;
     public List<AnimationData> animationData;
 
-    
+    public Move move;
 
     private void Awake()
     {
         animationData = new List<AnimationData>();
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,25 +60,66 @@ public class CharacterAnimator : MonoBehaviour
     private void FixedUpdate()
     {
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
-        if (attack.activeMove != null)
+        if (attack.attacking)
         {
-            if (frame >= attack.activeMove.gatlingFrames && attack.canGatling)
+            if (attack.canGatling && attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.gatlingFrames)
             {
-                attack.attackString = true; 
+                attack.attackString = true;
             }
-            if (frame >= attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames) {
-                print("recovery");
-            }
-            else if (frame >= attack.activeMove.startupFrames) {
-                print("active");
-            }
-            else if (frame >= attack.activeMove.startupFrames)
+
+            if (attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
             {
-                print("start");
+                attack.Idle();
+            }
+            else if (attack.gameFrames < attack.activeMove.startupFrames)
+            {
+                attack.StartupFrames();
+            }
+            else if (attack.gameFrames <= attack.activeMove.startupFrames + attack.activeMove.activeFrames)
+            {
+                attack.ActiveFrames();
+            }
+            else if (attack.gameFrames <= attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
+            {
+                attack.RecoveryFrames();
+            }
+        }
+        SaveAnimationData();
+    }
+
+
+    private void OnValidate()
+    {
+        EditorAnimation();
+    }
+    public void EditorAnimation()
+    {
+
+        anim = GetComponent<Animator>();
+        frame = Mathf.Clamp(frame, 0, (int)(anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
+        if (move != null)
+        {
+            anim.Play("Base Layer.Attacking." + move.name, 0, (float)frame / (anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
+            anim.Update(Time.fixedDeltaTime);
+        }
+
+
+        if (move != null)
+        {
+            if (frame >= move.startupFrames + move.activeFrames + move.recoveryFrames)
+            {
+                attack.RecoveryFrames();
+            }
+            else if (frame >= move.startupFrames + move.activeFrames)
+            {
+                attack.ActiveFrames();
+            }
+            else if (frame < move.startupFrames)
+            {
+                attack.StartupFrames();
             }
         }
 
-        SaveAnimationData();
     }
 
     void RollbackAnimation(int i)
@@ -104,7 +146,8 @@ public class CharacterAnimator : MonoBehaviour
         BlockAnimation();
     }
 
-    void BackDash() {
+    void BackDash()
+    {
         anim.SetTrigger("BackDash");
     }
 
@@ -141,12 +184,12 @@ public class CharacterAnimator : MonoBehaviour
 
     void Knockdown()
     {
-        print("kd");
         anim.SetBool("Knockdown", true);
         anim.SetTrigger("Hit");
 
     }
-    void WakeUp() {
+    void WakeUp()
+    {
         anim.SetBool("Knockdown", false);
     }
 

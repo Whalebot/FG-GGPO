@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    private Status status;
+    [SerializeField] private Status status;
     public HitboxContainer containerScript;
     public Moveset moveset;
 
@@ -15,6 +15,7 @@ public class AttackScript : MonoBehaviour
     public bool canGatling;
     CharacterSFX sfx;
     public Transform hitboxContainer;
+    public GameObject activeHitbox;
 
     public delegate void AttackEvent();
     public AttackEvent startupEvent;
@@ -25,16 +26,16 @@ public class AttackScript : MonoBehaviour
 
     [HeaderAttribute("Attack attributes")]
     public int attackID;
+    public int gameFrames;
     [HideInInspector] public bool canAttack;
     [HideInInspector] public bool attacking;
     public bool attackString;
     public bool holdAttack;
-    [HideInInspector] public bool landCancel;
+    public bool landCancel;
     bool newAttack;
     [HideInInspector] public int combo;
-    [HideInInspector] public bool fullCancel;
-    [HideInInspector] public bool iFrames;
-    public bool startupRotation;
+     public bool fullCancel;
+     public bool iFrames;
     int lastAttackID;
     int momentumCount;
     public bool block;
@@ -47,7 +48,7 @@ public class AttackScript : MonoBehaviour
         movement = GetComponent<Movement>();
         sfx = GetComponentInChildren<CharacterSFX>();
         movement.jumpEvent += Idle;
-
+        movement.landEvent += Land;
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
@@ -55,12 +56,66 @@ public class AttackScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        if (attacking) gameFrames++;
     }
+
+
 
     public void ExecuteFrame()
     {
+        if (activeMove == null) return;
+        if (status.currentState == Status.State.Startup) StartupFrames();
+        if (status.currentState == Status.State.Active) ActiveFrames();
+        if (status.currentState == Status.State.Recovery) Recovery();
+    }
 
+    public void StartupFrames()
+    {
+        status.GoToState(Status.State.Startup);
+        if (activeHitbox != null)
+        {
+            if (Application.isEditor)
+                DestroyImmediate(activeHitbox);
+            else
+            {
+                Destroy(activeHitbox);
+            }
+        }
+    }
+
+    public void ActiveFrames()
+    {
+        status.GoToState(Status.State.Active);
+        if (activeHitbox == null)
+        {
+            activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
+
+            AttackContainer attackContainer = activeHitbox.GetComponentInChildren<AttackContainer>();
+
+            attackContainer.status = status;
+            attackContainer.attack = this;
+            attackContainer.move = activeMove;
+        }
+
+    }
+
+    public void RecoveryFrames()
+    {
+        newAttack = false;
+        status.GoToState(Status.State.Recovery);
+        if (activeMove != null)
+            if (activeMove.resetVelocityDuringRecovery)
+                status.rb.velocity = Vector3.zero;
+
+        if (activeHitbox != null)
+        {
+            if (Application.isEditor)
+                DestroyImmediate(activeHitbox);
+            else
+            {
+                Destroy(activeHitbox);
+            }
+        }
     }
 
     public void AttackProperties(Move move)
@@ -70,25 +125,14 @@ public class AttackScript : MonoBehaviour
         attackID = move.animationID;
         attackString = false;
         canGatling = false;
+        gameFrames = 0;
 
-        GameObject tempGO;
-        if (!move.verticalRotation)
-        {
-            tempGO = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
-        }
-        else { tempGO = Instantiate(activeMove.attackPrefab, transform.position, hitboxContainer.rotation, hitboxContainer); }
+        if (activeHitbox != null) Destroy(activeHitbox);
 
         Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
         transform.rotation = desiredRotation;
 
-        AttackContainer attackContainer = tempGO.GetComponentInChildren<AttackContainer>();
-
-        attackContainer.status = status;
-        attackContainer.attack = this;
-        attackContainer.move = move;
-
-        if (movement.strafeTarget != null) attackContainer.target = movement.strafeTarget;
         Startup();
         status.GoToState(Status.State.Startup);
 
@@ -98,7 +142,7 @@ public class AttackScript : MonoBehaviour
         holdAttack = activeMove.holdAttack;
 
         iFrames = activeMove.iFrames;
-
+        landCancel = activeMove.landCancel;
 
         ResetFrames();
 
@@ -138,23 +182,11 @@ public class AttackScript : MonoBehaviour
     void Startup()
     {
         status.GoToState(Status.State.Startup);
-        startupRotation = true;
-    }
-
-    public void StartRotation()
-    {
-        startupRotation = true;
-    }
-
-
-    public void StopRotation()
-    {
-        startupRotation = false;
     }
 
     public void Active()
     {
-        startupRotation = false;
+        if (status.currentState != Status.State.Startup) return;
         activeEvent?.Invoke();
 
         status.GoToState(Status.State.Active);
@@ -172,16 +204,26 @@ public class AttackScript : MonoBehaviour
         containerScript.ActivateParticle(activeMove.particleID);
     }
 
+    void Land()
+    {
+
+        if (landCancel)
+        {
+            newAttack = false;
+            Idle();
+        }
+    }
+
     public void ParticleEnd()
     {
-        //if (weaponParticles != null) weaponParticles.DeactivateParticles();
         containerScript.DeactivateParticles();
     }
 
     public void Recovery()
     {
-        status.GoToState(Status.State.Recovery);
+        if (!newAttack) return;
 
+        status.GoToState(Status.State.Recovery);
         if (activeMove != null)
             if (activeMove.resetVelocityDuringRecovery)
                 status.rb.velocity = Vector3.zero;
@@ -227,10 +269,14 @@ public class AttackScript : MonoBehaviour
             attackString = false;
             fullCancel = false;
 
+            activeMove = null;
+
             combo = 0;
             status.GoToState(Status.State.Neutral);
+            containerScript.DeactivateHitboxes();
             containerScript.DeactivateParticles();
             attacking = false;
+            landCancel = false;
             recoveryEvent?.Invoke();
 
         }

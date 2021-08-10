@@ -61,7 +61,7 @@ public class PlayerInputHandler : MonoBehaviour
             mov.crouching = input.netButtons[5];
             if (mov.crouching) status.blockState = Status.BlockState.Crouching;
             else status.blockState = Status.BlockState.Standing;
-        
+
         }
 
 
@@ -71,6 +71,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
         {
+            print("Bob");
             InAnimationInput();
         }
         if (Physics.autoSimulation)
@@ -93,15 +94,15 @@ public class PlayerInputHandler : MonoBehaviour
 
     void BackDash()
     {
-//.inputQueue.Add()
-      
+        //.inputQueue.Add()
+
     }
 
     void NeutralInput()
     {
         if (input.dash) mov.sprinting = true;
 
-        if (input.directionals[input.directionals.Count - 1] < 7 ) mov.sprinting = false;
+        if (input.directionals[input.directionals.Count - 1] < 7) mov.sprinting = false;
 
         if (InputAvailable())
         {
@@ -181,7 +182,8 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (InputAvailable() && attack.canGatling)
         {
-            if (attack.attackString) { NeutralInput(); }
+            if (attack.attackString)
+            { NeutralInput(); }
         }
     }
 

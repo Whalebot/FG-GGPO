@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationAssist : MonoBehaviour
 {
     Movement mov;
-    AttackScript attack;
+   [SerializeField] AttackScript attack;
 
     public float animationEventWeight = 0.5F;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class AnimationAssist : MonoBehaviour
     {
         if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.Recovery();
+        //    attack.Recovery();
         }
     }
 
@@ -30,7 +30,7 @@ public class AnimationAssist : MonoBehaviour
     {
       if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.Idle();
+          //  attack.Idle();
         }
     }
 
@@ -42,28 +42,12 @@ public class AnimationAssist : MonoBehaviour
         }
     }
 
-    void StartRotation(AnimationEvent evt)
-    {
-        if (evt.animatorClipInfo.weight > animationEventWeight)
-        {
-            attack.StartRotation();
-        }
-    }
-
-
-    void StopRotation(AnimationEvent evt)
-    {
-        if (evt.animatorClipInfo.weight > animationEventWeight)
-        {
-            attack.StopRotation();
-        }
-    }
 
     void AttackLink(AnimationEvent evt)
     {
         if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.AttackLink();
+       //     attack.AttackLink();
         }
     }
 
@@ -71,7 +55,7 @@ public class AnimationAssist : MonoBehaviour
     {
        if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.Active();
+          //  attack.Active();
         }
     }
 
@@ -101,7 +85,7 @@ public class AnimationAssist : MonoBehaviour
     {
        // if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.AnimMomemtun();
+         //   attack.AnimMomemtun();
         }
     }
 }
