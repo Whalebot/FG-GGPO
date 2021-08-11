@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: cA
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 2
   attackHeight: 1
   gatlingMoves:
   - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
@@ -24,7 +25,7 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   startupFrames: 10
   activeFrames: 2
-  recoveryFrames: 20
+  recoveryFrames: 35
   gatlingFrames: 1
   canGatling: 1
   hitSpecialCancelable: 0

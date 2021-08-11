@@ -25,6 +25,7 @@ public class Status : MonoBehaviour
     public StatusEvent deathEvent;
     public StatusEvent blockEvent;
     public StatusEvent frameDataEvent;
+    public StatusEvent hitEvent;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -38,10 +39,12 @@ public class Status : MonoBehaviour
     CharacterSFX characterSFX;
     Movement mov;
     public int knockdownRecovery;
-
+    public GameObject standingCollider;
+    public GameObject crouchingCollider;
+    public GameObject jumpingCollider;
     public enum GroundState { Grounded, Airborne, Knockdown }
     public GroundState groundState;
-    public enum BlockState { None, Standing, Crouching, Jumping }
+    public enum BlockState { None, Standing, Crouching, Airborne }
     public BlockState blockState;
     public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown }
     [SerializeField] public State currentState;
@@ -53,12 +56,19 @@ public class Status : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mov = GetComponent<Movement>();
         characterSFX = GetComponentInChildren<CharacterSFX>();
-        currentState = State.Neutral;
+        GoToState(State.Neutral);
         ApplyCharacter();
     }
 
     private void Start()
     {
+    }
+
+    void ActivateCollider()
+    {
+        standingCollider.SetActive(blockState == BlockState.None || blockState == BlockState.Standing);
+        crouchingCollider.SetActive(blockState == BlockState.Crouching);
+        jumpingCollider.SetActive(blockState == BlockState.Airborne);
     }
 
     void FixedUpdate()
@@ -67,10 +77,18 @@ public class Status : MonoBehaviour
         StateMachine();
     }
 
-    void SetBlockState()
+    public void SetBlockState(BlockState state)
     {
-        blocking = mov.holdBack; 
-
+        blockState = state;
+        switch (state)
+        {
+            case BlockState.None: break;
+            case BlockState.Crouching: break;
+            case BlockState.Standing: break;
+            case BlockState.Airborne: break;
+            default: break;
+        }
+        ActivateCollider();
     }
 
     void ResolveBlockstun()
@@ -113,13 +131,14 @@ public class Status : MonoBehaviour
     {
         wakeupEvent?.Invoke();
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
-        groundState = GroundState.Grounded;
+        groundState = GroundState.Airborne;
         GoToState(State.Neutral);
         hitstunValue = 0;
         inHitStun = false;
     }
 
-    void GroundRecovery() {
+    void GroundRecovery()
+    {
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
         groundState = GroundState.Grounded;
         GoToState(State.Neutral);
@@ -165,22 +184,24 @@ public class Status : MonoBehaviour
         switch (currentState)
         {
             case State.Neutral:
-                SetBlockState();
+                blocking = mov.holdBack;
                 break;
             case State.Hitstun:
                 blocking = false;
-                blockState = BlockState.None;
+                SetBlockState(BlockState.None);
                 ResolveHitstun();
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
-                SetBlockState();
+                // SetBlockState();
+                blocking = mov.holdBack;
                 ResolveBlockstun();
+ 
                 minusFrames = -BlockStun;
                 break;
             case State.Knockdown:
                 blocking = false;
-                blockState = BlockState.None;
+                SetBlockState(BlockState.None);
                 ResolveKnockdown();
                 minusFrames = -HitStun;
                 break;
@@ -197,12 +218,15 @@ public class Status : MonoBehaviour
                 currentState = State.Neutral;
                 neutralEvent?.Invoke(); break;
             case State.Startup:
+                blocking = false;
                 currentState = State.Startup;
                 break;
             case State.Active:
+                blocking = false;
                 currentState = State.Active;
                 break;
             case State.Recovery:
+                blocking = false;
                 currentState = State.Recovery;
                 break;
             case State.Hitstun:
@@ -210,7 +234,7 @@ public class Status : MonoBehaviour
                 inHitStun = true;
 
                 minusFrames = -HitStun;
-                frameDataEvent?.Invoke();
+                hitEvent?.Invoke();
                 hitstunEvent?.Invoke();
                 break;
             case State.Blockstun:
@@ -218,7 +242,7 @@ public class Status : MonoBehaviour
                 inBlockStun = true;
 
                 minusFrames = -BlockStun;
-                frameDataEvent?.Invoke();
+                hitEvent?.Invoke();
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
                 currentState = State.Knockdown;
@@ -227,6 +251,7 @@ public class Status : MonoBehaviour
                 knockdownEvent?.Invoke(); break;
             default: break;
         }
+
     }
 
     public void ApplyCharacter()
@@ -279,7 +304,8 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void UpdateMinusFrames(int frames) {
+    public void UpdateMinusFrames(int frames)
+    {
         minusFrames = frames;
         frameDataEvent?.Invoke();
     }
@@ -321,9 +347,9 @@ public class Status : MonoBehaviour
         Vector3 tempVector = (Quaternion.Euler(0, temp, 0) * new Vector3(direction.x, 0, direction.z)).normalized;
         knockbackDirection = new Vector2(tempVector.x, tempVector.z);
 
-     
-            rb.velocity = Vector3.zero;
-            rb.AddForce(direction, ForceMode.VelocityChange);
+
+        rb.velocity = Vector3.zero;
+        rb.AddForce(direction, ForceMode.VelocityChange);
 
     }
 

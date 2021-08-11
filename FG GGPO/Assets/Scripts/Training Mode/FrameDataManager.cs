@@ -24,8 +24,21 @@ public class FrameDataManager : MonoBehaviour
             overlay2.attack = p2.GetComponent<AttackScript>();
         }
 
+        overlay1.attack.startupEvent += UpdateHit;
+        overlay2.attack.startupEvent += UpdateHit;
+        p1.hitEvent += UpdateHit;
+        p2.hitEvent += UpdateHit;
         p1.frameDataEvent += UpdateFrameData;
         p2.frameDataEvent += UpdateFrameData;
+    }
+
+    void UpdateHit()
+    {
+        frame = p1.minusFrames - p2.minusFrames;
+        overlay1.UpdateStartup();
+        overlay2.UpdateStartup();
+        overlay1.UpdateAdvantage(frame);
+        overlay2.UpdateAdvantage(-frame);
     }
 
     // Update is called once per frame

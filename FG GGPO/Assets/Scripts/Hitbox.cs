@@ -96,8 +96,11 @@ public class Hitbox : MonoBehaviour
 
         }
         attack.canGatling = move.canGatling;
+        {
+            status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
+            //status.hit
+        }
 
-        status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
         totalDamage = (int)(dmgMod * (baseDamage * move.damage));
         int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
@@ -111,7 +114,7 @@ public class Hitbox : MonoBehaviour
             {
                 aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
 
-                CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
+                //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
                 GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
                 if (move.groundHitProperty == Move.HitProperty.Knockdown)
                     other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
@@ -128,7 +131,7 @@ public class Hitbox : MonoBehaviour
         else
         {
 
-            CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
+            //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
             if (other.groundState == Status.GroundState.Grounded)
             {

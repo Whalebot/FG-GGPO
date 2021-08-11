@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5B
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 1
   gatlingMoves: []
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
@@ -22,17 +23,17 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   startupFrames: 20
   activeFrames: 2
-  recoveryFrames: 10
+  recoveryFrames: 20
   gatlingFrames: 5
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   damage: 10
   hitStun: 60
-  blockStun: 20
-  hitPushback: {x: 0, y: 0, z: 10}
-  airHitPushback: {x: 0, y: 0, z: 10}
-  blockPushback: {x: 0, y: 0, z: 10}
+  blockStun: 30
+  hitPushback: {x: 0, y: 0, z: 8}
+  airHitPushback: {x: 0, y: 0, z: 8}
+  blockPushback: {x: 0, y: 0, z: 5}
   groundHitProperty: 0
   airHitProperty: 0
   shakeMagnitude: 0

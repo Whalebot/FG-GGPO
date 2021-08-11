@@ -138,11 +138,14 @@ public class AttackScript : MonoBehaviour
                 Destroy(activeHitbox);
             }
         }
+        else activeHitbox = null;
     }
 
     public void AttackProperties(Move move)
     {
         momentumCount = 0;
+        status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames);
+        status.SetBlockState(move.collissionState);
         activeMove = move;
         attackID = move.animationID;
         attackString = false;

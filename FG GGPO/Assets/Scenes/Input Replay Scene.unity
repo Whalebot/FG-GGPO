@@ -460,6 +460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Networking module
       objectReference: {fileID: 0}
+    - target: {fileID: 4794558487452401751, guid: 431b030a766a0ff4eb2d62f720d5c52f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6658492053159708816, guid: 431b030a766a0ff4eb2d62f720d5c52f, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -547,7 +551,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191741958}
-  m_LocalRotation: {x: 0.07168506, y: -0.23005319, z: 0.016994668, w: 0.9703855}
+  m_LocalRotation: {x: 0.07168585, y: -0.23000908, z: 0.01699141, w: 0.9703959}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1589,7 +1593,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219073678}
-  m_LocalRotation: {x: 0.07168506, y: -0.23005319, z: 0.016994668, w: 0.9703855}
+  m_LocalRotation: {x: 0.07168585, y: -0.23000908, z: 0.01699141, w: 0.9703959}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3107,7 +3111,7 @@ PrefabInstance:
       objectReference: {fileID: 377725758}
     - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: network
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: id
