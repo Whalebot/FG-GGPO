@@ -62,7 +62,7 @@ public class AttackScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (attacking) gameFrames++;
+        if (attacking) { gameFrames++; print(iFrames + " bobobo"); }
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
     }
 
@@ -280,9 +280,8 @@ public class AttackScript : MonoBehaviour
         fullCancel = false;
         holdAttack = false;
         newAttack = false;
-
+        attacking = false;
         combo = 0;
-
         containerScript.InterruptAttack();
         containerScript.DeactivateParticles();
     }

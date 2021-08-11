@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Fireball
+  m_Name: j5C
   m_EditorClassIdentifier: 
-  type: 1
-  attackHeight: 1
+  type: 0
+  attackHeight: 3
   gatlingMoves: []
-  attackPrefab: {fileID: 6130433937859647811, guid: 25a33728d54d31c4c885f79e5d009eaa, type: 3}
+  attackPrefab: {fileID: 334434759881567290, guid: 8a33dadeca75e8540a7ec5b42ff5ad73, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  animationID: 100
+  animationID: 22
   animationClip: {fileID: 0}
-  startupFrames: 12
-  activeFrames: 1
-  recoveryFrames: 30
+  startupFrames: 15
+  activeFrames: 5
+  recoveryFrames: 20
   gatlingFrames: 5
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   damage: 10
-  hitStun: 20
-  blockStun: 10
-  hitPushback: {x: 0, y: 0, z: 5}
-  airHitPushback: {x: 0, y: 5, z: 10}
-  blockPushback: {x: 0, y: 0, z: 5}
+  hitStun: 50
+  blockStun: 20
+  hitPushback: {x: 0, y: 0, z: 0}
+  airHitPushback: {x: 0, y: -10, z: 0}
+  blockPushback: {x: 0, y: 0, z: 0}
   groundHitProperty: 0
   airHitProperty: 0
   shakeMagnitude: 0
@@ -42,15 +42,14 @@ MonoBehaviour:
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
-  landCancel: 0
+  landCancel: 1
   holdAttack: 0
   tracking: 0
   homing: 0
   fullCancelable: 0
   noClip: 0
   iFrames: 0
-  overrideVelocity: 1
-  resetVelocityDuringRecovery: 1
+  overrideVelocity: 0
+  resetVelocityDuringRecovery: 0
   Momentum: {x: 0, y: 0, z: 0}
-  momentumArray:
-  - {x: 0, y: 0, z: 0}
+  momentumArray: []

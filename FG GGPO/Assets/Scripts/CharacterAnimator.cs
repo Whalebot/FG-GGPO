@@ -71,7 +71,7 @@ public class CharacterAnimator : MonoBehaviour
             {
                 attack.Idle();
             }
-            else if (attack.gameFrames < attack.activeMove.startupFrames)
+            else if (attack.gameFrames < attack.activeMove.startupFrames -1)
             {
                 attack.StartupFrames();
             }

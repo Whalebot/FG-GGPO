@@ -22,6 +22,7 @@ public class Hitbox : MonoBehaviour
 
     private void Awake()
     {
+    
         mr = GetComponent<MeshRenderer>();
         move = container.move;
         status = container.status;
@@ -38,6 +39,15 @@ public class Hitbox : MonoBehaviour
         }
         enemyList = new List<Status>();
     }
+    private void Start()
+    {
+        if (container != null)
+        {
+            attack = container.attack;
+
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.IsChildOf(body))
@@ -85,7 +95,6 @@ public class Hitbox : MonoBehaviour
             attack = container.attack;
 
         }
-
         attack.canGatling = move.canGatling;
 
         status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
