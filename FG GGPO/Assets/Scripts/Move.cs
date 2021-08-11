@@ -8,6 +8,7 @@ public class Move : ScriptableObject
 {
     public enum MoveType { Normal, Special }
     public MoveType type;
+    public Status.BlockState collissionState;
     public enum AttackHeight { Low, Mid, High, Overhead }
     public AttackHeight attackHeight;
 

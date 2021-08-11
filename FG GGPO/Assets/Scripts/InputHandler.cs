@@ -9,6 +9,7 @@ using Sirenix.OdinInspector;
 public class InputHandler : MonoBehaviour
 {
     public bool deviceIsAssigned;
+    public bool isDummy;
     public bool network;
     public int id;
     public int lastInput = 5;
@@ -199,7 +200,7 @@ public class InputHandler : MonoBehaviour
     {
         // if (!deviceIsAssigned) return;
         //inputDirection = controls.Default.LAnalog.ReadValue<Vector2>();
-   
+
     }
 
     public Vector2 TranslateInput(int input)
@@ -254,7 +255,17 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate()
     {
         //   if (!deviceIsAssigned) return;
-        //if (network)
+        //if (!network)
+        //{
+        //    for (int i = 0; i < heldDirectionals.Length; i++)
+        //    {
+        //        netDirectionals[i] = heldDirectionals[i];
+        //    }
+
+        //    ResolveButtons(heldButtons);
+        //}
+
+
         {
             //IF PLAYER 2, REVERSE INPUTS
             if (id == 1)
@@ -470,7 +481,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("Triangle");
         ChangeControlScheme(context);
-       // updatedButtons = true;
+        // updatedButtons = true;
         heldButtons[1] = !context.canceled;
         northInput?.Invoke();
     }
@@ -478,7 +489,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("X");
         ChangeControlScheme(context);
-     //   updatedButtons = true;
+        //   updatedButtons = true;
         heldButtons[2] = !context.canceled;
         southInput?.Invoke();
     }
@@ -486,7 +497,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("O");
         ChangeControlScheme(context);
-      //  updatedButtons = true;
+        //  updatedButtons = true;
         heldButtons[3] = !context.canceled;
         eastInput?.Invoke();
     }
@@ -496,14 +507,14 @@ public class InputHandler : MonoBehaviour
 
         R1input?.Invoke();
         heldButtons[4] = !context.canceled;
-        R1Hold = true; 
+        R1Hold = true;
         //updatedButtons = true;
     }
     public void OnL1(InputAction.CallbackContext context)
     {
         if (debug) print("L1");
         heldButtons[5] = !context.canceled;
-        L1input?.Invoke(); 
+        L1input?.Invoke();
         //updatedButtons = true;
     }
     public void OnStart()
@@ -567,10 +578,6 @@ public class InputHandler : MonoBehaviour
         L2Hold = false;
     }
 
-    void OnL1Release()
-    {
-        L1Hold = false;
-    }
 
     void OnR3()
     {

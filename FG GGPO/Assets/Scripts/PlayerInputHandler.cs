@@ -56,17 +56,21 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
-        if (mov.ground)
-        {
-            mov.crouching = input.netButtons[5];
-            if (mov.crouching) status.blockState = Status.BlockState.Crouching;
-            else status.blockState = Status.BlockState.Standing;
-
-        }
+      
 
 
         if (status.currentState == Status.State.Neutral)
         {
+            if (mov.ground && !input.isDummy)
+            {
+                mov.crouching = input.netButtons[5];
+
+                if (mov.crouching) status.SetBlockState(Status.BlockState.Crouching);
+                else if (mov.holdBack) status.SetBlockState(Status.BlockState.Standing);
+                else status.SetBlockState(Status.BlockState.None);
+            }
+            else status.SetBlockState(Status.BlockState.Airborne);
+
             NeutralInput();
         }
         else if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
@@ -111,7 +115,7 @@ public class PlayerInputHandler : MonoBehaviour
                 case 1:
                     if (mov.ground)
                     {
-                        if (status.blockState == Status.BlockState.Crouching)
+                        if (input.netButtons[5])
                             attack.Attack(attack.moveset.cA);
                         else
                             attack.Attack(attack.moveset.A5);
@@ -122,7 +126,7 @@ public class PlayerInputHandler : MonoBehaviour
                 case 2:
                     if (mov.ground)
                     {
-                        if (status.blockState == Status.BlockState.Crouching)
+                        if (input.netButtons[5])
                             attack.Attack(attack.moveset.cB);
                         else
                             attack.Attack(attack.moveset.B5);
@@ -141,7 +145,7 @@ public class PlayerInputHandler : MonoBehaviour
                 case 4:
                     if (mov.ground)
                     {
-                        if (status.blockState == Status.BlockState.Crouching)
+                        if (input.netButtons[5])
                             attack.Attack(attack.moveset.cC);
                         else
                             attack.Attack(attack.moveset.C5);
@@ -152,7 +156,7 @@ public class PlayerInputHandler : MonoBehaviour
                 case 5:
                     if (mov.ground)
                     {
-                        if (status.blockState == Status.BlockState.Crouching)
+                        if (input.netButtons[5])
                             attack.Attack(attack.moveset.cD);
                         else
                             attack.Attack(attack.moveset.D5);
@@ -162,16 +166,16 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
 
                 case 6:
-
+                    Delete();
                     break;
                 case 7:
-
+                    Delete();
                     break;
                 case 8:
-
+                    Delete();
                     break;
                 case 9:
-
+                    Delete();
                     break;
                 case 10:
                     attack.AttackProperties(attack.moveset.backDash);

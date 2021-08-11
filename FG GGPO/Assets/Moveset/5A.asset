@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5A
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 1
   gatlingMoves:
   - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
@@ -31,7 +32,7 @@ MonoBehaviour:
   blockSpecialCancelable: 0
   damage: 10
   hitStun: 30
-  blockStun: 11
+  blockStun: 15
   hitPushback: {x: 0, y: 0, z: 2}
   airHitPushback: {x: 0, y: 0, z: 2}
   blockPushback: {x: 0, y: 0, z: 2}

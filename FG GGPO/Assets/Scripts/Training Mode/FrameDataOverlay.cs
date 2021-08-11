@@ -28,14 +28,12 @@ public class FrameDataOverlay : MonoBehaviour
         
     }
 
-    void UpdateStartup() {
+    public void UpdateStartup() {
         if(attack.activeMove != null)
-        startupText.text = attack.gameFrames + " (" + attack.activeMove.startupFrames +  " -" + (attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + ")");
+        startupText.text = attack.gameFrames + " (" + attack.activeMove.startupFrames +  "-" + (attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + ")");
     }
     public void UpdateAdvantage(int frames)
     {
-        print(attack.iFrames + " call 2");
-        UpdateStartup();
         UpdateStates();
         if (frames > 0) frameAdvantageText.text = "+" + frames;
         else

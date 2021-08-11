@@ -112,8 +112,6 @@ public class Movement : MonoBehaviour
             MovementProperties();
             Rotation();
             PlayerMovement();
-            if (!GameHandler.Instance.disableBlock)
-                status.blocking = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
         }
 
         if (rb.velocity.y < 0) rb.velocity += Physics.gravity * fallMultiplier;
@@ -252,6 +250,12 @@ public class Movement : MonoBehaviour
         col.material = airMat;
         ground = false;
         status.groundState = Status.GroundState.Airborne;
+
+        if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
+        {
+            status.minusFrames = 0;
+            status.frameDataEvent?.Invoke();
+        }
         jumpEvent?.Invoke();
         Vector3 temp = direction.normalized;
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
@@ -284,7 +288,14 @@ public class Movement : MonoBehaviour
 
         if (!ground && transform.position.y < 0.1F)
         {
+            if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
+            {
+                status.minusFrames = 0;
+                status.frameDataEvent?.Invoke();
+            }
             landEvent?.Invoke();
+
+            status.groundState = Status.GroundState.Grounded;
             ground = true;
         }
         else if (transform.position.y > 0.1F)
