@@ -24,6 +24,10 @@ public class Move : ScriptableObject
     public int recoveryFrames;
     public int gatlingFrames;
 
+    public bool canGatling;
+    public bool hitSpecialCancelable;
+    public bool blockSpecialCancelable;
+
     [Header("Hit properties")]
     public int damage;
     public float hitStun;

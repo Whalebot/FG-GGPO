@@ -16,6 +16,7 @@ public class FgPlayerView : MonoBehaviour {
         buttons = new bool[6];
         transform.position = shipGs.position;
 
+
         //Send Input
         for (int i = 0; i < shipGs.dir.Length; i++) {
             inputs[i] = shipGs.dir[i];
@@ -24,7 +25,6 @@ public class FgPlayerView : MonoBehaviour {
         {
             buttons[i] = shipGs.buttons[i];
         }
-
 
         string status = "";
         int progress = -1;

@@ -67,7 +67,7 @@ public class CharacterAnimator : MonoBehaviour
                 attack.attackString = true;
             }
 
-            if (attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
+            if (attack.gameFrames > attack.activeMove.startupFrames -1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
             {
                 attack.Idle();
             }
@@ -75,11 +75,11 @@ public class CharacterAnimator : MonoBehaviour
             {
                 attack.StartupFrames();
             }
-            else if (attack.gameFrames <= attack.activeMove.startupFrames + attack.activeMove.activeFrames)
+            else if (attack.gameFrames <= attack.activeMove.startupFrames -1 + attack.activeMove.activeFrames)
             {
                 attack.ActiveFrames();
             }
-            else if (attack.gameFrames <= attack.activeMove.startupFrames + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
+            else if (attack.gameFrames <= attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
             {
                 attack.RecoveryFrames();
             }

@@ -103,6 +103,7 @@ public class AttackScript : MonoBehaviour
 
                 hitbox.status = status;
                 hitbox.move = activeMove;
+                hitbox.attack = this;
             }
         }
         else

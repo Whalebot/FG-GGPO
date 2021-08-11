@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.Controls;
 using Sirenix.OdinInspector;
+using System.IO;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,14 +15,19 @@ public class InputManager : MonoBehaviour
     public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
+    public bool replay;
+    public InputLog log;
+    public InputLog replayLog;
+    public int replayID;
 
     private void Awake()
     {
-        Instance = this;    
+        Instance = this;
     }
 
     void Start()
     {
+        GameHandler.Instance.advanceGameState += UpdateLog;
         controllersConnected = Gamepad.all.Count;
 
         foreach (var item in Gamepad.all)
@@ -69,9 +75,73 @@ public class InputManager : MonoBehaviour
                         break;
                 }
             };
+
+        if (replay) LoadLog();
     }
 
-    public InputHandler OnlineInput() {
+    private void FixedUpdate()
+    {
+        if (replay) ReplayLog();
+    }
+
+    [Button]
+    public void SaveLog()
+    {
+        string jsonData = JsonUtility.ToJson(log, true);
+        File.WriteAllText(Application.persistentDataPath + "/inputLog.json", jsonData);
+    }
+
+    [Button]
+    public void LoadLog()
+    {
+        replayLog = JsonUtility.FromJson<InputLog>(File.ReadAllText(Application.persistentDataPath + "/inputLog.json"));
+    }
+
+    public void ReplayLog()
+    {
+
+        if (replayLog.inputs.Count > GameHandler.Instance.gameFrameCount)
+        {
+            if (replayID == 0)
+            {
+                p1Input.ResolveButtons(replayLog.inputs[GameHandler.Instance.gameFrameCount].buttons);
+                for (int i = 0; i < p1Input.netDirectionals.Length; i++)
+                {
+                    p1Input.netDirectionals[i] = replayLog.inputs[GameHandler.Instance.gameFrameCount].directionals[i];
+                }
+            }
+            else
+            {
+                p2Input.ResolveButtons(replayLog.inputs[GameHandler.Instance.gameFrameCount].buttons);
+                for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+                {
+                    p2Input.netDirectionals[i] = replayLog.inputs[GameHandler.Instance.gameFrameCount].directionals[i];
+                }
+            }
+        }
+    }
+
+    public void UpdateLog()
+    {
+        Input temp = new Input();
+        temp.frame = GameHandler.Instance.gameFrameCount;
+
+
+        for (int i = 0; i < p1Input.netButtons.Length; i++)
+        {
+            temp.buttons[i] = p1Input.netButtons[i];
+        }
+        for (int i = 0; i < p1Input.netDirectionals.Length; i++)
+        {
+            temp.directionals[i] = p1Input.netDirectionals[i];
+        }
+
+        log.inputs.Add(temp);
+
+    }
+
+    public InputHandler OnlineInput()
+    {
         if (isServer) return p1Input;
         else return p2Input;
     }
@@ -81,7 +151,8 @@ public class InputManager : MonoBehaviour
         else return p2Input;
     }
 
-    void AssignInputsToDevices() {
+    void AssignInputsToDevices()
+    {
 
     }
 

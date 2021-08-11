@@ -21,9 +21,12 @@ MonoBehaviour:
   animationID: 100
   animationClip: {fileID: 0}
   startupFrames: 12
-  activeFrames: 0
+  activeFrames: 1
   recoveryFrames: 30
   gatlingFrames: 5
+  canGatling: 1
+  hitSpecialCancelable: 0
+  blockSpecialCancelable: 0
   damage: 10
   hitStun: 20
   blockStun: 10
