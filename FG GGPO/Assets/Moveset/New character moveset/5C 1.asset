@@ -22,14 +22,14 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   startupFrames: 30
   activeFrames: 5
-  recoveryFrames: 5
+  recoveryFrames: 20
   gatlingFrames: 1
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   damage: 10
   hitStun: 40
-  blockStun: 20
+  blockStun: 40
   hitPushback: {x: 0, y: 0, z: 10}
   airHitPushback: {x: 0, y: -10, z: 10}
   blockPushback: {x: 0, y: 0, z: 5}
