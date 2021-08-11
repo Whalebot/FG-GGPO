@@ -193,7 +193,7 @@ public class Movement : MonoBehaviour
         if (!GameHandler.Instance.disableBlock)
         {
             holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
-            sprinting = false;
+            //sprinting = false;
         }
 
         if (ground)

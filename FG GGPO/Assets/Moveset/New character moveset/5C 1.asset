@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5C 1
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 3
   gatlingMoves: []
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
@@ -30,9 +31,9 @@ MonoBehaviour:
   damage: 10
   hitStun: 40
   blockStun: 40
-  hitPushback: {x: 0, y: 0, z: 10}
-  airHitPushback: {x: 0, y: -10, z: 10}
-  blockPushback: {x: 0, y: 0, z: 5}
+  hitPushback: {x: 0, y: 0, z: 2}
+  airHitPushback: {x: 0, y: -10, z: 0}
+  blockPushback: {x: 0, y: 0, z: -5}
   groundHitProperty: 0
   airHitProperty: 0
   shakeMagnitude: 0
