@@ -24,6 +24,9 @@ MonoBehaviour:
   activeFrames: 5
   recoveryFrames: 5
   gatlingFrames: 1
+  canGatling: 1
+  hitSpecialCancelable: 0
+  blockSpecialCancelable: 0
   damage: 10
   hitStun: 50
   blockStun: 20
@@ -39,7 +42,7 @@ MonoBehaviour:
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
-  landCancel: 0
+  landCancel: 1
   holdAttack: 0
   tracking: 0
   homing: 0

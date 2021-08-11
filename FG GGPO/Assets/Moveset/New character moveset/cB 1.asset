@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cB 1
   m_EditorClassIdentifier: 
   type: 0
-  attackHeight: 3
+  attackHeight: 1
   gatlingMoves:
   - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
@@ -22,17 +22,20 @@ MonoBehaviour:
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 11
   animationClip: {fileID: 0}
-  startupFrames: 12
-  activeFrames: 5
-  recoveryFrames: 5
+  startupFrames: 16
+  activeFrames: 10
+  recoveryFrames: 20
   gatlingFrames: 1
+  canGatling: 1
+  hitSpecialCancelable: 0
+  blockSpecialCancelable: 0
   damage: 10
   hitStun: 50
   blockStun: 20
-  hitPushback: {x: 0, y: 0, z: 2}
-  airHitPushback: {x: 0, y: 5, z: 2}
-  blockPushback: {x: 0, y: 0, z: 2}
-  groundHitProperty: 0
+  hitPushback: {x: 0, y: 10, z: 2}
+  airHitPushback: {x: 0, y: 10, z: 2}
+  blockPushback: {x: 0, y: 0, z: 5}
+  groundHitProperty: 2
   airHitProperty: 0
   shakeMagnitude: 0
   shakeDuration: 0
@@ -49,7 +52,7 @@ MonoBehaviour:
   noClip: 0
   iFrames: 0
   overrideVelocity: 1
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   Momentum: {x: 0, y: 0, z: 2}
   momentumArray:
-  - {x: 0, y: 0, z: 20}
+  - {x: 0, y: 10, z: 5}
