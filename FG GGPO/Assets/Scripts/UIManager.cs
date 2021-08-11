@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Slider p2Health;
     public TextMeshProUGUI p1HealthText;
     public TextMeshProUGUI p2HealthText;
+
     // Start is called before the first frame update
     void Start()
     {
