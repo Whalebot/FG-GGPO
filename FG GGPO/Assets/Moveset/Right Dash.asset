@@ -18,11 +18,11 @@ MonoBehaviour:
   attackPrefab: {fileID: 0}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  animationID: 50
+  animationID: 51
   animationClip: {fileID: 0}
   startupFrames: 5
   activeFrames: 5
-  recoveryFrames: 5
+  recoveryFrames: 10
   gatlingFrames: 21
   damage: 10
   hitStun: 20
@@ -48,5 +48,5 @@ MonoBehaviour:
   iFrames: 0
   overrideVelocity: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: -15}
+  Momentum: {x: 15, y: 0, z: 0}
   momentumArray: []
