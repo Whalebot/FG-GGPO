@@ -41,7 +41,11 @@ public class Hitbox : MonoBehaviour
     }
     private void Start()
     {
-        print(attack.gameFrames + " hitbox");
+        if (container != null)
+        {
+            attack = container.attack;
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,7 +95,6 @@ public class Hitbox : MonoBehaviour
             attack = container.attack;
 
         }
-        print(attack.gameFrames + " hit");
         attack.canGatling = move.canGatling;
 
         status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
