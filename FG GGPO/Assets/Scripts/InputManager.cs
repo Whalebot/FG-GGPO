@@ -41,13 +41,14 @@ public class InputManager : MonoBehaviour
 
         //}
 
-        p1Input.SetupControls(Gamepad.all[0]);
-        //if (Gamepad.all.Count > 1)
-        //{
 
-        //    p2Input.SetupControls(Gamepad.all[1]);
-        //    p1Input.SetupControls(Gamepad.all[0]);
-        //}
+        if (Gamepad.all.Count > 1)
+        {
+
+            p2Input.SetupControls(Gamepad.all[1]);
+            p1Input.SetupControls(Gamepad.all[0]);
+        }
+        else p1Input.SetupControls(Gamepad.all[0]);
 
         InputSystem.onDeviceChange += (device, change) =>
             {

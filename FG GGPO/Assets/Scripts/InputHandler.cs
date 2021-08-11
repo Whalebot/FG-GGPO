@@ -255,15 +255,15 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate()
     {
         //   if (!deviceIsAssigned) return;
-        //if (!network)
-        //{
-        //    for (int i = 0; i < heldDirectionals.Length; i++)
-        //    {
-        //        netDirectionals[i] = heldDirectionals[i];
-        //    }
+        if (!network)
+        {
+            for (int i = 0; i < heldDirectionals.Length; i++)
+            {
+                netDirectionals[i] = heldDirectionals[i];
+            }
 
-        //    ResolveButtons(heldButtons);
-        //}
+            ResolveButtons(heldButtons);
+        }
 
 
         {
