@@ -24,6 +24,7 @@ public class GameHandler : MonoBehaviour
     public int rollbackFrames;
 
     public delegate void GameEvent();
+    public GameEvent advanceGameState;
     public GameEvent rollbackTick;
 
     public delegate void RollBackEvent(int i);
@@ -36,12 +37,12 @@ public class GameHandler : MonoBehaviour
         Instance = this;
         gameStates = new List<GameState>();
         isPaused = true;
-        GameManager.Instance.OnInit += StartGame;
+
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnInit -= StartGame;
+
     }
 
     void StartGame() {
@@ -59,9 +60,18 @@ public class GameHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance != null)
+            isPaused = !GameManager.Instance.IsRunning;
+        else isPaused = false;
+
+
         UpdateGameState();
-        if (playersInGame > 1)
+        if (!isPaused) {
+            advanceGameState?.Invoke();
             gameFrameCount++;
+        }
+   
+
         counter++;
 
         //if (counter >= 20)

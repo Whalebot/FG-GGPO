@@ -8,6 +8,7 @@ public class Hitbox : MonoBehaviour
     public float baseKnockback = 1;
     public int totalDamage;
     public AttackContainer container;
+    public AttackScript attack;
     public Move move;
     public Status status;
     public GameObject projectile;
@@ -80,7 +81,14 @@ public class Hitbox : MonoBehaviour
     public virtual void DoDamage(Status other, float dmgMod, float poiseMod)
     {
         if (container != null)
-            container.attack.canGatling = true;
+        {
+            attack = container.attack;
+
+        }
+
+        attack.canGatling = move.canGatling;
+
+        status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
         totalDamage = (int)(dmgMod * (baseDamage * move.damage));
         int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;

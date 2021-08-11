@@ -199,10 +199,7 @@ public class InputHandler : MonoBehaviour
     {
         // if (!deviceIsAssigned) return;
         //inputDirection = controls.Default.LAnalog.ReadValue<Vector2>();
-        if (!network)
-        {
-            inputDirection = controls.Default.DPad.ReadValue<Vector2>();
-        }
+   
     }
 
     public Vector2 TranslateInput(int input)
@@ -257,7 +254,7 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate()
     {
         //   if (!deviceIsAssigned) return;
-        if (network)
+        //if (network)
         {
             //IF PLAYER 2, REVERSE INPUTS
             if (id == 1)
@@ -294,33 +291,33 @@ public class InputHandler : MonoBehaviour
 
             updatedDirectionals = true;
         }
-        else
-        {
-            if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(6);
-                else if (inputDirection.x < -0.5F) directionals.Add(4);
-                else directionals.Add(5);
-            }
-            else if (inputDirection.y > 0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(9);
-                else if (inputDirection.x < -0.5F) directionals.Add(7);
-                else directionals.Add(8);
-            }
-            else if (inputDirection.y < -0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(3);
-                else if (inputDirection.x < -0.5F) directionals.Add(1);
-                else directionals.Add(2);
-            }
+        //else
+        //{
+        //    if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
+        //    {
+        //        if (inputDirection.x > 0.5F) directionals.Add(6);
+        //        else if (inputDirection.x < -0.5F) directionals.Add(4);
+        //        else directionals.Add(5);
+        //    }
+        //    else if (inputDirection.y > 0.5F)
+        //    {
+        //        if (inputDirection.x > 0.5F) directionals.Add(9);
+        //        else if (inputDirection.x < -0.5F) directionals.Add(7);
+        //        else directionals.Add(8);
+        //    }
+        //    else if (inputDirection.y < -0.5F)
+        //    {
+        //        if (inputDirection.x > 0.5F) directionals.Add(3);
+        //        else if (inputDirection.x < -0.5F) directionals.Add(1);
+        //        else directionals.Add(2);
+        //    }
 
 
-            if (directionals.Count <= 2) { updatedDirectionals = true; return; }
-            if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
+        //    if (directionals.Count <= 2) { updatedDirectionals = true; return; }
+        //    if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
-            updatedDirectionals = true;
-        }
+        //    updatedDirectionals = true;
+        //}
     }
 
     void CheckMotionInputs()
@@ -351,9 +348,9 @@ public class InputHandler : MonoBehaviour
                 if (currentInput == 2)
                 {
                     dashInput?.Invoke();
-                    StartCoroutine("InputBuffer",10);
+                    StartCoroutine("InputBuffer", 10);
                 }
-               else if (currentInput == 6)
+                else if (currentInput == 6)
                 {
                     dashInput?.Invoke();
                     StartCoroutine("InputBuffer", 11);
@@ -456,6 +453,7 @@ public class InputHandler : MonoBehaviour
                 print("netbutton " + netButtons[i] + " & temp " + temp[i]);
                 StartCoroutine("InputBuffer", i + 1);
             }
+            if (netButtons[i] != temp[i]) updatedButtons = true;
             netButtons[i] = temp[i];
         }
     }
@@ -464,7 +462,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("Square");
         ChangeControlScheme(context);
-        updatedButtons = true;
+        //updatedButtons = true;
         heldButtons[0] = !context.canceled;
         westInput?.Invoke();
     }
@@ -472,7 +470,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("Triangle");
         ChangeControlScheme(context);
-        updatedButtons = true;
+       // updatedButtons = true;
         heldButtons[1] = !context.canceled;
         northInput?.Invoke();
     }
@@ -480,7 +478,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("X");
         ChangeControlScheme(context);
-        updatedButtons = true;
+     //   updatedButtons = true;
         heldButtons[2] = !context.canceled;
         southInput?.Invoke();
     }
@@ -488,7 +486,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("O");
         ChangeControlScheme(context);
-        updatedButtons = true;
+      //  updatedButtons = true;
         heldButtons[3] = !context.canceled;
         eastInput?.Invoke();
     }
@@ -498,13 +496,15 @@ public class InputHandler : MonoBehaviour
 
         R1input?.Invoke();
         heldButtons[4] = !context.canceled;
-        R1Hold = true; updatedButtons = true;
+        R1Hold = true; 
+        //updatedButtons = true;
     }
     public void OnL1(InputAction.CallbackContext context)
     {
         if (debug) print("L1");
         heldButtons[5] = !context.canceled;
-        L1input?.Invoke(); updatedButtons = true;
+        L1input?.Invoke(); 
+        //updatedButtons = true;
     }
     public void OnStart()
     {

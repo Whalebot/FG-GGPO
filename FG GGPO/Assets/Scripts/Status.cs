@@ -17,12 +17,14 @@ public class Status : MonoBehaviour
     [HideInInspector] public Vector2 knockbackDirection;
     [HideInInspector] public bool isDead;
     public bool blocking;
+    public int minusFrames;
 
     public delegate void StatusEvent();
     public StatusEvent healthEvent;
     public StatusEvent hurtEvent;
     public StatusEvent deathEvent;
     public StatusEvent blockEvent;
+    public StatusEvent frameDataEvent;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -31,6 +33,7 @@ public class Status : MonoBehaviour
     public TransitionEvent hitstunEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
+
 
     CharacterSFX characterSFX;
     Movement mov;
@@ -168,15 +171,18 @@ public class Status : MonoBehaviour
                 blocking = false;
                 blockState = BlockState.None;
                 ResolveHitstun();
+                minusFrames = -HitStun;
                 break;
             case State.Blockstun:
                 SetBlockState();
                 ResolveBlockstun();
+                minusFrames = -BlockStun;
                 break;
             case State.Knockdown:
                 blocking = false;
                 blockState = BlockState.None;
                 ResolveKnockdown();
+                minusFrames = -HitStun;
                 break;
             default: break;
         }
@@ -202,17 +208,22 @@ public class Status : MonoBehaviour
             case State.Hitstun:
                 currentState = State.Hitstun;
                 inHitStun = true;
-        
 
+                minusFrames = -HitStun;
+                frameDataEvent?.Invoke();
                 hitstunEvent?.Invoke();
                 break;
             case State.Blockstun:
                 currentState = State.Blockstun;
                 inBlockStun = true;
+
+                minusFrames = -BlockStun;
+                frameDataEvent?.Invoke();
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
                 currentState = State.Knockdown;
-
+                minusFrames = -HitStun;
+                frameDataEvent?.Invoke();
                 knockdownEvent?.Invoke(); break;
             default: break;
         }
@@ -266,6 +277,11 @@ public class Status : MonoBehaviour
             blockstunValue = value;
             GoToState(State.Blockstun);
         }
+    }
+
+    public void UpdateMinusFrames(int frames) {
+        minusFrames = frames;
+        frameDataEvent?.Invoke();
     }
 
     public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)

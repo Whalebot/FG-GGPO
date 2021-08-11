@@ -34,8 +34,8 @@ public static class VWConstants
 [Serializable]
 public class Ship
 {
-    public Vector2 position;
-    public Vector2 velocity;
+    public Vector3 position;
+    public Vector3 velocity;
     public int health;
 
     public bool[] dir = new bool[4];
@@ -45,8 +45,10 @@ public class Ship
     {
         bw.Write(position.x);
         bw.Write(position.y);
+        bw.Write(position.z);
         bw.Write(velocity.x);
         bw.Write(velocity.y);
+        bw.Write(velocity.z);
 
         bw.Write(health);
 
@@ -56,8 +58,10 @@ public class Ship
     {
         position.x = br.ReadSingle();
         position.y = br.ReadSingle();
+        position.z = br.ReadSingle();
         velocity.x = br.ReadSingle();
         velocity.y = br.ReadSingle();
+        velocity.z = br.ReadSingle();
         health = br.ReadInt32();
     }
 
@@ -232,18 +236,31 @@ public struct FgGame : IGame
                 _ships[i].dir[j] = dir[j];
                 if (i == 0)
                 {
-                    InputManager.Instance.p1Input.netDirectionals[j] = dir[j];
+                    if (InputManager.Instance.p1Input.network)
+                        InputManager.Instance.p1Input.netDirectionals[j] = dir[j];
                 }
                 else
                 {
-                    InputManager.Instance.p2Input.netDirectionals[j] = dir[j];
+                    if (InputManager.Instance.p2Input.network)
+                        InputManager.Instance.p2Input.netDirectionals[j] = dir[j];
                 }
             }
 
             _ships[i].buttons = buttons;
+            SavePositions(i);
+
             if (i == 0) { InputManager.Instance.p1Input.ResolveButtons(buttons); }
             else { InputManager.Instance.p2Input.ResolveButtons(buttons); }
         }
+    }
+
+    void SavePositions(int index)
+    {
+        var ship = _ships[index];
+        GameState state = GameHandler.Instance.gameStates[GameHandler.Instance.gameStates.Count - 1];
+        if (index == 1)
+            ship.position = GameHandler.Instance.p1Transform.position;
+        else ship.position = GameHandler.Instance.p2Transform.position;
     }
 
     public long ReadInputs(int id)
@@ -260,7 +277,8 @@ public struct FgGame : IGame
                 input |= INPUT_L;
             if (InputManager.Instance.p1Input.heldDirectionals[3])
                 input |= INPUT_R;
-            if (InputManager.Instance.p1Input.heldButtons[0]) { 
+            if (InputManager.Instance.p1Input.heldButtons[0])
+            {
                 input |= INPUT_1;
             }
             if (InputManager.Instance.p1Input.heldButtons[1])

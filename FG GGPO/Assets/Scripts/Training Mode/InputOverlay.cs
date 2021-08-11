@@ -96,7 +96,7 @@ public class InputOverlay : MonoBehaviour
     void ButtonInput()
     {
         inputHandler.updatedButtons = false;
-        if (!inputHandler.heldButtons[0] && !inputHandler.heldButtons[1] && !inputHandler.heldButtons[2] && !inputHandler.heldButtons[3] && !inputHandler.heldButtons[4] && !inputHandler.heldButtons[5])
+        if (!inputHandler.netButtons[0] && !inputHandler.netButtons[1] && !inputHandler.netButtons[2] && !inputHandler.netButtons[3] && !inputHandler.netButtons[4] && !inputHandler.netButtons[5])
         {
             Instantiate(arrowBlank, panel2.transform).transform.SetSiblingIndex(0);
         }
@@ -104,14 +104,14 @@ public class InputOverlay : MonoBehaviour
         {
             GameObject temp = Instantiate(buttons, panel2.transform);
             temp.transform.SetSiblingIndex(0);
-            if (inputHandler.heldButtons[0]) temp.transform.GetChild(0).gameObject.SetActive(true);
-            if (inputHandler.heldButtons[1]) temp.transform.GetChild(1).gameObject.SetActive(true);
-            if (inputHandler.heldButtons[2]) temp.transform.GetChild(2).gameObject.SetActive(true);
-            if (inputHandler.heldButtons[3]) temp.transform.GetChild(3).gameObject.SetActive(true);
-            if (inputHandler.heldButtons[4]) temp.transform.GetChild(6).gameObject.SetActive(true);
-            if (inputHandler.heldButtons[5]) temp.transform.GetChild(4).gameObject.SetActive(true);
-            //if (inputHandler.heldButtons[6]) temp.transform.GetChild(7).gameObject.SetActive(true);
-            //if (inputHandler.heldButtons[7]) temp.transform.GetChild(5).gameObject.SetActive(true);
+            if (inputHandler.netButtons[0]) temp.transform.GetChild(0).gameObject.SetActive(true);
+            if (inputHandler.netButtons[1]) temp.transform.GetChild(1).gameObject.SetActive(true);
+            if (inputHandler.netButtons[2]) temp.transform.GetChild(2).gameObject.SetActive(true);
+            if (inputHandler.netButtons[3]) temp.transform.GetChild(3).gameObject.SetActive(true);
+            if (inputHandler.netButtons[4]) temp.transform.GetChild(6).gameObject.SetActive(true);
+            if (inputHandler.netButtons[5]) temp.transform.GetChild(4).gameObject.SetActive(true);
+            //if (inputHandler.netButtons[6]) temp.transform.GetChild(7).gameObject.SetActive(true);
+            //if (inputHandler.netButtons[7]) temp.transform.GetChild(5).gameObject.SetActive(true);
         }
 
 
