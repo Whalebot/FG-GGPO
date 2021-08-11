@@ -280,9 +280,8 @@ public class AttackScript : MonoBehaviour
         fullCancel = false;
         holdAttack = false;
         newAttack = false;
-
+        attacking = false;
         combo = 0;
-
         containerScript.InterruptAttack();
         containerScript.DeactivateParticles();
     }
