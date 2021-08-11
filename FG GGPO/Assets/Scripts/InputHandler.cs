@@ -111,7 +111,7 @@ public class InputHandler : MonoBehaviour
         controls.Default.Down.canceled += context => OnDown(context);
 
         controls.Default.R1.performed += context => OnR1(context);
-        controls.Default.R1.canceled += _ => OnR1Release();
+        controls.Default.R1.canceled += context => OnR1(context);
 
         controls.Default.R2.performed += context => OnR1(context);
         controls.Default.R2.canceled += context => OnR1(context);
@@ -353,7 +353,18 @@ public class InputHandler : MonoBehaviour
                     dashInput?.Invoke();
                     StartCoroutine("InputBuffer",10);
                 }
-                   
+               else if (currentInput == 6)
+                {
+                    dashInput?.Invoke();
+                    StartCoroutine("InputBuffer", 11);
+                }
+                if (currentInput == 4)
+                {
+                    dashInput?.Invoke();
+                    StartCoroutine("InputBuffer", 12);
+                }
+
+
                 return true;
             }
         }

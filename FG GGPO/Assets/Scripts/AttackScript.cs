@@ -39,6 +39,7 @@ public class AttackScript : MonoBehaviour
     int lastAttackID;
     int momentumCount;
     public bool block;
+    List<Move> usedMoves;
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +55,15 @@ public class AttackScript : MonoBehaviour
         status.deathEvent += HitstunEvent;
     }
 
+    private void Awake()
+    {
+        usedMoves = new List<Move>();
+    }
+
     private void FixedUpdate()
     {
         if (attacking) gameFrames++;
+        if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
     }
 
 
@@ -101,6 +108,7 @@ public class AttackScript : MonoBehaviour
         else
         if (activeHitbox == null)
         {
+            if (activeMove.attackPrefab == null) return;
             activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
 
             AttackContainer attackContainer = activeHitbox.GetComponentInChildren<AttackContainer>();
@@ -167,6 +175,9 @@ public class AttackScript : MonoBehaviour
 
     public void Attack(Move move)
     {
+        if (usedMoves.Contains(move)) return;
+        usedMoves.Add(move);
+
         AttackProperties(move);
     }
 

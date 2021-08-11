@@ -17,9 +17,12 @@ public class Moveset : ScriptableObject
     public Move jB;
     public Move jC;
 
-    public Combo[] combos;
-    public Combo extra;
+    public Move D5;
+    public Move cD;
+    public Move jD;
 
     public Move backDash;
+    public Move rightDash;
+    public Move leftDash;
 }
 

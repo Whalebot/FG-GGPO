@@ -150,7 +150,15 @@ public class PlayerInputHandler : MonoBehaviour
                     Delete();
                     break;
                 case 5:
-
+                    if (mov.ground)
+                    {
+                        if (status.blockState == Status.BlockState.Crouching)
+                            attack.Attack(attack.moveset.cD);
+                        else
+                            attack.Attack(attack.moveset.D5);
+                    }
+                    else attack.Attack(attack.moveset.jD);
+                    Delete();
                     break;
 
                 case 6:
@@ -167,6 +175,14 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
                 case 10:
                     attack.AttackProperties(attack.moveset.backDash);
+                    Delete();
+                    break;
+                case 11:
+                    attack.AttackProperties(attack.moveset.rightDash);
+                    Delete();
+                    break;
+                case 12:
+                    attack.AttackProperties(attack.moveset.leftDash);
                     Delete();
                     break;
                 default: break;

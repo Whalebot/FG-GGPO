@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Fireball
+  m_Name: Air Fireball
   m_EditorClassIdentifier: 
   type: 1
   attackHeight: 1
@@ -39,15 +39,15 @@ MonoBehaviour:
   blockSlowMotion: 0.01
   verticalRotation: 1
   particleID: 0
-  landCancel: 0
+  landCancel: 1
   holdAttack: 0
   tracking: 0
   homing: 0
   fullCancelable: 0
   noClip: 0
   iFrames: 0
-  overrideVelocity: 1
-  resetVelocityDuringRecovery: 1
+  overrideVelocity: 0
+  resetVelocityDuringRecovery: 0
   Momentum: {x: 0, y: 0, z: 0}
   momentumArray:
   - {x: 0, y: 0, z: 0}
