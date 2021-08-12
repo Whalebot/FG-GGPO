@@ -22,7 +22,7 @@ public class Hitbox : MonoBehaviour
 
     private void Awake()
     {
-    
+
         mr = GetComponent<MeshRenderer>();
         move = container.move;
         status = container.status;
@@ -61,7 +61,7 @@ public class Hitbox : MonoBehaviour
                 if (!enemyList.Contains(enemyStatus))
                 {
                     colPos = other.gameObject.transform;
-
+                    if (enemyStatus.invincible) return;
                     if (move == null)
                     {
                         move = container.move;

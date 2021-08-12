@@ -38,7 +38,8 @@ public class Status : MonoBehaviour
 
     CharacterSFX characterSFX;
     Movement mov;
-    public int knockdownRecovery;
+    public int wakeupRecovery;
+    int wakeupValue;
     public GameObject standingCollider;
     public GameObject crouchingCollider;
     public GameObject jumpingCollider;
@@ -46,7 +47,8 @@ public class Status : MonoBehaviour
     public GroundState groundState;
     public enum BlockState { None, Standing, Crouching, Airborne }
     public BlockState blockState;
-    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown }
+    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup }
+    public bool invincible;
     [SerializeField] public State currentState;
     public int maxHealth;
     public int health;
@@ -70,6 +72,19 @@ public class Status : MonoBehaviour
         crouchingCollider.SetActive(blockState == BlockState.Crouching);
         jumpingCollider.SetActive(blockState == BlockState.Airborne);
     }
+
+    public void EnableHurtboxes() {
+        standingCollider.layer = LayerMask.NameToLayer("Collision");
+        crouchingCollider.layer = LayerMask.NameToLayer("Collision");
+        jumpingCollider.layer = LayerMask.NameToLayer("Collision");
+    }
+    public void DisableHurtboxes()
+    {
+        standingCollider.layer = LayerMask.NameToLayer("Disabled");
+        crouchingCollider.layer = LayerMask.NameToLayer("Disabled");
+        jumpingCollider.layer = LayerMask.NameToLayer("Disabled");
+    }
+
 
     void FixedUpdate()
     {
@@ -121,24 +136,24 @@ public class Status : MonoBehaviour
             else if (groundState == GroundState.Airborne)
                 AirRecovery();
             else GroundRecovery();
-
-
-
         }
     }
+
+
 
     void AirRecovery()
     {
         wakeupEvent?.Invoke();
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
         groundState = GroundState.Airborne;
-        GoToState(State.Neutral);
+        GoToState(State.Wakeup);
         hitstunValue = 0;
         inHitStun = false;
     }
 
     void GroundRecovery()
     {
+        
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
         groundState = GroundState.Grounded;
         GoToState(State.Neutral);
@@ -205,6 +220,11 @@ public class Status : MonoBehaviour
                 ResolveKnockdown();
                 minusFrames = -HitStun;
                 break;
+            case State.Wakeup:
+                wakeupValue--;
+                invincible = true;
+                if (wakeupValue <= 0) GoToState(State.Neutral);
+                break;
             default: break;
         }
     }
@@ -212,43 +232,46 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
+        currentState =  transitionState;
         switch (transitionState)
         {
             case State.Neutral:
-                currentState = State.Neutral;
+                invincible = false;
+                EnableHurtboxes();
                 neutralEvent?.Invoke(); break;
             case State.Startup:
                 blocking = false;
-                currentState = State.Startup;
                 break;
             case State.Active:
                 blocking = false;
-                currentState = State.Active;
                 break;
             case State.Recovery:
                 blocking = false;
-                currentState = State.Recovery;
+                invincible = false;
+                EnableHurtboxes();
                 break;
             case State.Hitstun:
-                currentState = State.Hitstun;
                 inHitStun = true;
-
+                EnableHurtboxes();
                 minusFrames = -HitStun;
                 hitEvent?.Invoke();
                 hitstunEvent?.Invoke();
                 break;
             case State.Blockstun:
-                currentState = State.Blockstun;
+                EnableHurtboxes();
                 inBlockStun = true;
-
                 minusFrames = -BlockStun;
                 hitEvent?.Invoke();
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
-                currentState = State.Knockdown;
+                EnableHurtboxes();
                 minusFrames = -HitStun;
                 frameDataEvent?.Invoke();
                 knockdownEvent?.Invoke(); break;
+            case State.Wakeup:
+                wakeupValue = wakeupRecovery;
+
+        break;
             default: break;
         }
 

@@ -56,7 +56,7 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
-      
+
 
 
         if (status.currentState == Status.State.Neutral)
@@ -90,12 +90,6 @@ public class PlayerInputHandler : MonoBehaviour
         //    rollbackInput.RemoveAt(0);
     }
 
-    void SprintStart()
-    {
-        if (input.dash) mov.sprinting = true;
-        if (input.directionals[input.directionals.Count - 1] == 5) mov.sprinting = false;
-    }
-
     void BackDash()
     {
         //.inputQueue.Add()
@@ -106,7 +100,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (input.dash) mov.sprinting = true;
 
-        if (input.directionals[input.directionals.Count - 1] < 7) mov.sprinting = false;
+        if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
 
         if (InputAvailable())
         {
@@ -135,12 +129,10 @@ public class PlayerInputHandler : MonoBehaviour
                     Delete();
                     break;
                 case 3:
-                    if (mov.ground)
-                    {
-                        if (!GameHandler.isPaused)
-                            mov.Jump();
-                        Delete();
-                    }
+
+                    mov.Jump();
+                    Delete();
+
                     break;
                 case 4:
                     if (mov.ground)

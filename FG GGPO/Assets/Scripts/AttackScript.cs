@@ -30,14 +30,10 @@ public class AttackScript : MonoBehaviour
     [HideInInspector] public bool canAttack;
     [HideInInspector] public bool attacking;
     public bool attackString;
-    public bool holdAttack;
     public bool landCancel;
     bool newAttack;
     [HideInInspector] public int combo;
-    public bool fullCancel;
-    public bool iFrames;
     int lastAttackID;
-    int momentumCount;
     public bool block;
     List<Move> usedMoves;
 
@@ -62,11 +58,52 @@ public class AttackScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (attacking) { gameFrames++; print(iFrames + " bobobo"); }
+        if (attacking)
+        {
+            gameFrames++;
+
+            for (int i = 0; i < activeMove.m.Length; i++)
+            {
+                if (!activeMove.m[i].impulse) {
+                    if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
+                    {
+                        if (activeMove.m[i].resetVelocityDuringRecovery)
+                            status.rb.velocity = Vector3.zero;
+                    }
+                    else if (gameFrames > activeMove.m[i].startFrame)
+                    {
+                        //if (activeMove.m.resetVelocityDuringRecovery)
+                        //    status.rb.velocity = Vector3.zero;
+                        //Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
+                        //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
+                        //transform.rotation = desiredRotation;
+                        status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
+                    }
+                }
+            else
+                if (gameFrames == activeMove.m[i].startFrame)
+                {
+                    Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
+                    Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
+                    transform.rotation = desiredRotation;
+                    status.rb.velocity = Vector3.zero;
+                    status.rb.AddForce(transform.right * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z, ForceMode.VelocityChange);
+                }
+            }
+
+        }
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
+
+
     }
 
-
+    Vector3 CalculateRight()
+    {
+        Vector3 v1 = transform.right;
+        //float distance = Vector3.Distance(movement.strafeTarget.position, transform.position);
+        //v1 = transform.right + transform.forward * (0.6F/distance);
+        return v1.normalized;
+    }
 
     public void ExecuteFrame()
     {
@@ -143,7 +180,6 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-        momentumCount = 0;
         status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames);
         status.SetBlockState(move.collissionState);
         activeMove = move;
@@ -151,6 +187,14 @@ public class AttackScript : MonoBehaviour
         attackString = false;
         canGatling = false;
         gameFrames = 0;
+
+        if (move.invincible) {
+            status.invincible = true;
+        }
+
+        if (move.noClip) {
+            status.DisableHurtboxes();
+        }
 
         if (activeHitbox != null) Destroy(activeHitbox);
 
@@ -162,11 +206,6 @@ public class AttackScript : MonoBehaviour
         status.GoToState(Status.State.Startup);
 
         AttackMomentum();
-
-        fullCancel = activeMove.fullCancelable;
-        holdAttack = activeMove.holdAttack;
-
-        iFrames = activeMove.iFrames;
         landCancel = activeMove.landCancel;
 
         ResetFrames();
@@ -188,23 +227,10 @@ public class AttackScript : MonoBehaviour
 
     public void AttackMomentum()
     {
-        if (activeMove.overrideVelocity)
-            status.rb.velocity = Vector3.zero;
-        status.rb.AddForce(transform.right * activeMove.Momentum.x + transform.up * activeMove.Momentum.y + transform.forward * activeMove.Momentum.z, ForceMode.VelocityChange);
     }
 
     public void AnimMomemtun()
     {
-        if (lastAttackID == attackID) { }
-
-        if (activeMove.overrideVelocity)
-            status.rb.velocity = Vector3.zero;
-        if (activeMove.momentumArray.Length > momentumCount)
-        {
-            status.rb.AddForce(transform.right * activeMove.momentumArray[momentumCount].x + transform.up * activeMove.momentumArray[momentumCount].y + transform.forward * activeMove.momentumArray[momentumCount].z, ForceMode.VelocityChange);
-        }
-        momentumCount++;
-
     }
 
     void Startup()
@@ -252,9 +278,9 @@ public class AttackScript : MonoBehaviour
         if (!newAttack) return;
 
         status.GoToState(Status.State.Recovery);
-        if (activeMove != null)
-            if (activeMove.resetVelocityDuringRecovery)
-                status.rb.velocity = Vector3.zero;
+        //if (activeMove != null)
+        //    if (activeMove.resetVelocityDuringRecovery)
+        //        status.rb.velocity = Vector3.zero;
 
         containerScript.DeactivateHitboxes();
         newAttack = false;
@@ -280,8 +306,6 @@ public class AttackScript : MonoBehaviour
 
     void HitstunEvent()
     {
-        fullCancel = false;
-        holdAttack = false;
         newAttack = false;
         attacking = false;
         combo = 0;
@@ -294,8 +318,6 @@ public class AttackScript : MonoBehaviour
         if (!newAttack)
         {
             attackString = false;
-            fullCancel = false;
-
             activeMove = null;
 
             combo = 0;

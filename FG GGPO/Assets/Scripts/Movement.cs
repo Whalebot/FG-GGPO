@@ -32,6 +32,8 @@ public class Movement : MonoBehaviour
     [TabGroup("Rotation")] public float deltaAngle;
 
     [HeaderAttribute("Jump attributes")]
+    [FoldoutGroup("Jump")] public int multiJumps;
+    [FoldoutGroup("Jump")] public int performedJumps;
     [FoldoutGroup("Jump")] public bool ground;
     [FoldoutGroup("Jump")] public float rayLength;
     RaycastHit hit;
@@ -205,11 +207,12 @@ public class Movement : MonoBehaviour
             }
             else if (isMoving)
             {
-                if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+                print(Vector3.Angle(strafeTarget.position - transform.position, direction));
+                if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
                     currentVel = backWalkSpeed;
                 }
-                else if (45 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+                else if (50 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
                     currentVel = sideWalkSpeed;
                 }
@@ -224,14 +227,14 @@ public class Movement : MonoBehaviour
                 actualVelocity = currentVel;
             }
         }
-        else actualVelocity = Speed();
+        //else actualVelocity = Speed();
     }
 
     float Speed()
     {
         float f = 0;
 
-        if (90 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+        if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
         {
             f = backWalkSpeed;
         }
@@ -246,6 +249,9 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
+        if (!ground && performedJumps > multiJumps) return;
+        performedJumps++;
+        storedDirection = direction.normalized;
         jumpCounter = minimumJumpTime;
         col.material = airMat;
         ground = false;
@@ -258,6 +264,7 @@ public class Movement : MonoBehaviour
         }
         jumpEvent?.Invoke();
         Vector3 temp = direction.normalized;
+        actualVelocity = Speed();
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
     }
 
@@ -294,7 +301,7 @@ public class Movement : MonoBehaviour
                 status.frameDataEvent?.Invoke();
             }
             landEvent?.Invoke();
-
+            performedJumps = 0;
             status.groundState = Status.GroundState.Grounded;
             ground = true;
         }
@@ -312,23 +319,6 @@ public class Movement : MonoBehaviour
 
     public void PlayerMovement()
     {
-        //if (!ground)
-        //{
-        //    Vector3 temp = rb.velocity;
-        //    temp.y = 0;
-        //    rb.velocity = transform.forward * temp.magnitude + rb.velocity.y * Vector3.up;
-
-
-        //    // rb.AddForce(new Vector3(transform.forward.x * actualVelocity * Time.deltaTime, 0, transform.forward.z * actualVelocity * Time.deltaTime), ForceMode.VelocityChange);
-        //}
-        //else if (forwardOnly || sprinting)
-        //    rb.velocity = new Vector3(transform.forward.x * actualVelocity, rb.velocity.y, transform.forward.z * actualVelocity);
-
-        //else
-        //{
-
-
-
         rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
     }
 

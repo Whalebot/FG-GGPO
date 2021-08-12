@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BackDash
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 1
   gatlingMoves: []
   attackPrefab: {fileID: 0}
@@ -22,8 +23,11 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   startupFrames: 5
   activeFrames: 5
-  recoveryFrames: 20
+  recoveryFrames: 15
   gatlingFrames: 21
+  canGatling: 0
+  hitSpecialCancelable: 0
+  blockSpecialCancelable: 0
   damage: 10
   hitStun: 20
   blockStun: 20
@@ -50,3 +54,9 @@ MonoBehaviour:
   resetVelocityDuringRecovery: 1
   Momentum: {x: 0, y: 0, z: -15}
   momentumArray: []
+  m:
+  - startFrame: 0
+    impulse: 0
+    duration: 10
+    momentum: {x: 0, y: 0, z: -15}
+    resetVelocityDuringRecovery: 0

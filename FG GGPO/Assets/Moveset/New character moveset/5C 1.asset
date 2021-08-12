@@ -44,14 +44,13 @@ MonoBehaviour:
   verticalRotation: 1
   particleID: 0
   landCancel: 0
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  invincible: 0
   overrideVelocity: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: 2}
-  momentumArray:
-  - {x: 0, y: 0, z: 10}
+  m:
+  - startFrame: 0
+    impulse: 0
+    duration: 20
+    momentum: {x: 0, y: 0, z: 15}
+    resetVelocityDuringRecovery: 1

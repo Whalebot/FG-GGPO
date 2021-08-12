@@ -53,17 +53,21 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool verticalRotation = true;
     [FoldoutGroup("Move properties")] public int particleID;
     [FoldoutGroup("Move properties")] public bool landCancel;
-    [FoldoutGroup("Move properties")] public bool holdAttack;
-    [FoldoutGroup("Move properties")] public bool tracking;
-    [FoldoutGroup("Move properties")] public bool homing;
-    [FoldoutGroup("Move properties")] public bool fullCancelable;
     [FoldoutGroup("Move properties")] public bool noClip;
-    [FoldoutGroup("Move properties")] public bool iFrames;
+    [FoldoutGroup("Move properties")] public bool invincible;
 
     [Header("Momentum")]
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
     [FoldoutGroup("Momentum")] public bool resetVelocityDuringRecovery = true;
-    [FoldoutGroup("Momentum")] public Vector3 Momentum;
-    [FoldoutGroup("Momentum")] public Vector3[] momentumArray;
+    public Momentum[] m;
 
+}
+
+[System.Serializable]
+public class Momentum {
+    public int startFrame;
+    public bool impulse = true;
+    public int duration;
+    public Vector3 momentum;
+    public bool resetVelocityDuringRecovery = true;
 }

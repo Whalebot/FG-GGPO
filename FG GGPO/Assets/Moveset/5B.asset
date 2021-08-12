@@ -55,3 +55,9 @@ MonoBehaviour:
   Momentum: {x: 0, y: 0, z: 2}
   momentumArray:
   - {x: 0, y: 0, z: 10}
+  m:
+  - startFrame: 5
+    impulse: 1
+    duration: 15
+    momentum: {x: 0, y: 0, z: 10}
+    resetVelocityDuringRecovery: 1

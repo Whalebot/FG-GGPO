@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5B 1
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 1
   gatlingMoves: []
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
@@ -43,14 +44,13 @@ MonoBehaviour:
   verticalRotation: 1
   particleID: 0
   landCancel: 0
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  invincible: 0
   overrideVelocity: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: 2}
-  momentumArray:
-  - {x: 0, y: 0, z: 10}
+  m:
+  - startFrame: 0
+    impulse: 1
+    duration: 0
+    momentum: {x: 0, y: 0, z: 10}
+    resetVelocityDuringRecovery: 1
