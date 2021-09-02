@@ -23,7 +23,7 @@ public class CharacterAnimator : MonoBehaviour
     public List<AnimationData> animationData;
 
     public Move move;
-
+    public bool isPaused;
     private void Awake()
     {
         animationData = new List<AnimationData>();
@@ -59,6 +59,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
+        anim.enabled = !isPaused;
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
         if (attack.attacking)
         {

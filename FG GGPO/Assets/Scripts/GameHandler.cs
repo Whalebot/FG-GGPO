@@ -32,12 +32,25 @@ public class GameHandler : MonoBehaviour
     
     public int gameFrameCount;
     public int counter;
+
+    public float hitStop;
+
+    [FoldoutGroup("Feedback")] public float slowMotionValue;
+    [FoldoutGroup("Feedback")] public float slowMotionDuration;
+    [FoldoutGroup("Feedback")] public float slowMotionSmoothing;
+    float startTimeStep;
+
     private void Awake()
     {
         Instance = this;
         gameStates = new List<GameState>();
         isPaused = true;
 
+    }
+
+    private void Start()
+    {
+        startTimeStep = Time.fixedDeltaTime;
     }
 
     private void OnDestroy()
@@ -58,12 +71,19 @@ public class GameHandler : MonoBehaviour
         gameStates.Add(state);
     }
 
+
+
     private void FixedUpdate()
     {
         if (GameManager.Instance != null)
             isPaused = !GameManager.Instance.IsRunning;
         else isPaused = false;
 
+        //if (hitStop > 0) {
+        //    Time.timeScale = 0;
+        //    return;
+        //}
+        //else Time.timeScale = 1;
 
         UpdateGameState();
         if (!isPaused) {
@@ -82,9 +102,19 @@ public class GameHandler : MonoBehaviour
         //}
     }
 
+    public void HitStop() {
+        StartCoroutine("SetHitstop");
+        //Slowmotion(0);
+    }
+    IEnumerator SetHitstop()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(hitStop);
+        Time.timeScale = 1;
+    }
+
     private void Update()
     {
-
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame) {
             ResimulateGameState();
         }
@@ -111,4 +141,33 @@ public class GameHandler : MonoBehaviour
         }
         Physics.autoSimulation = true;
     }
+
+    public void Slowmotion(float dur)
+    {
+        StartCoroutine("SetSlowmotion", hitStop);
+    }
+
+    IEnumerator SetSlowmotion(float dur)
+    {
+        Time.timeScale = slowMotionValue;
+        Time.fixedDeltaTime = startTimeStep * Time.timeScale;
+        yield return new WaitForSecondsRealtime(dur);
+        StartCoroutine("RevertSlowmotion");
+    }
+    IEnumerator RevertSlowmotion()
+    {
+        while (Time.timeScale < 1 && !isPaused)
+        {
+            Time.timeScale = Time.timeScale + slowMotionSmoothing;
+
+            Time.fixedDeltaTime = startTimeStep * Time.timeScale;
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = startTimeStep;
+
+    }
+
 }

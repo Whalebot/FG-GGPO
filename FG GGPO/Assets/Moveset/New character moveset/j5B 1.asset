@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: j5B 1
   m_EditorClassIdentifier: 
   type: 0
+  collissionState: 0
   attackHeight: 3
-  gatlingMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: 9affecf759728bb42b45693ef4083744, type: 2}
+  - {fileID: 11400000, guid: 425bc180ed3a2ce4fba04a98935cd125, type: 2}
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 21
   animationClip: {fileID: 0}
   startupFrames: 10
-  activeFrames: 5
+  activeFrames: 2
   recoveryFrames: 5
   gatlingFrames: 1
   canGatling: 1
@@ -40,16 +43,15 @@ MonoBehaviour:
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 1
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  noClipStart: 0
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
   overrideVelocity: 0
+  runMomentum: 0
   resetVelocityDuringRecovery: 0
-  Momentum: {x: 0, y: 0, z: 0}
-  momentumArray: []
+  m: []

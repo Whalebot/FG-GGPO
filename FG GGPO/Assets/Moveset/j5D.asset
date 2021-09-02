@@ -41,17 +41,15 @@ MonoBehaviour:
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 1
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
-  noClip: 0
-  iFrames: 0
+  noClip: 1
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
   overrideVelocity: 0
+  runMomentum: 1
   resetVelocityDuringRecovery: 0
-  Momentum: {x: 0, y: 0, z: 0}
-  momentumArray:
-  - {x: 0, y: 0, z: 0}
+  m: []

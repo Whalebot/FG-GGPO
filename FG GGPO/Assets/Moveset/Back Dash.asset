@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: BackDash
+  m_Name: Back Dash
   m_EditorClassIdentifier: 
   type: 0
   collissionState: 0
@@ -41,19 +41,17 @@ MonoBehaviour:
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 0
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  noClipStart: 0
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
   overrideVelocity: 1
+  runMomentum: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: -15}
-  momentumArray: []
   m:
   - startFrame: 0
     impulse: 0

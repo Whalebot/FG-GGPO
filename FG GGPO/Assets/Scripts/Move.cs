@@ -12,7 +12,7 @@ public class Move : ScriptableObject
     public enum AttackHeight { Low, Mid, High, Overhead }
     public AttackHeight attackHeight;
 
-    public Move[] gatlingMoves;
+    public List<Move> gatlingMoves;
     public GameObject attackPrefab;
     public GameObject hitFX;
     public GameObject blockFX;
@@ -50,22 +50,31 @@ public class Move : ScriptableObject
     [Header("Block Stop")]
     [FoldoutGroup("Feedback")] public float blockSlowMotion = 0.01F;
     [Header("Move properties")]
-    [FoldoutGroup("Move properties")] public bool verticalRotation = true;
     [FoldoutGroup("Move properties")] public int particleID;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool noClip;
+    [ShowIf("noClip")]
+    [FoldoutGroup("Move properties")] public int noClipStart = 1;
+    [ShowIf("noClip")]
+    [FoldoutGroup("Move properties")] public int noClipDuration;
+
     [FoldoutGroup("Move properties")] public bool invincible;
+    [ShowIf("invincible")]
+    [FoldoutGroup("Move properties")] public int invincibleStart = 1;
+    [ShowIf("invincible")]
+    [FoldoutGroup("Move properties")] public int invincibleDuration;
 
     [Header("Momentum")]
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
+    [FoldoutGroup("Momentum")] public bool runMomentum = true;
     [FoldoutGroup("Momentum")] public bool resetVelocityDuringRecovery = true;
-    public Momentum[] m;
+    [FoldoutGroup("Momentum")] public Momentum[] m;
 
 }
 
 [System.Serializable]
 public class Momentum {
-    public int startFrame;
+    public int startFrame = 1;
     public bool impulse = true;
     public int duration;
     public Vector3 momentum;

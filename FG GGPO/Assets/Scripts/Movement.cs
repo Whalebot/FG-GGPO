@@ -31,23 +31,23 @@ public class Movement : MonoBehaviour
     [TabGroup("Rotation")] public float sharpRotationDamp = 16;
     [TabGroup("Rotation")] public float deltaAngle;
 
-    [HeaderAttribute("Jump attributes")]
-    [FoldoutGroup("Jump")] public int multiJumps;
-    [FoldoutGroup("Jump")] public int performedJumps;
-    [FoldoutGroup("Jump")] public bool ground;
-    [FoldoutGroup("Jump")] public float rayLength;
-    RaycastHit hit;
-    [FoldoutGroup("Jump")] public float offset;
-    [FoldoutGroup("Jump")] public LayerMask groundMask;
-    [FoldoutGroup("Jump")] public float jumpHeight;
-    [FoldoutGroup("Jump")] public float fallMultiplier;
-    [FoldoutGroup("Jump")] public int minimumJumpTime = 2;
-    [FoldoutGroup("Jump")] int jumpCounter;
-    [FoldoutGroup("Jump")] public float airRotation = 4;
 
+    [TabGroup("Jump")] [HeaderAttribute("Jump attributes")] public int multiJumps;
+    [TabGroup("Jump")] public int performedJumps;
+    [TabGroup("Jump")] public bool ground;
+    [TabGroup("Jump")] public float rayLength;
+    RaycastHit hit;
+    [TabGroup("Jump")] public float offset;
+    [TabGroup("Jump")] public LayerMask groundMask;
+    [TabGroup("Jump")] public float jumpHeight;
+    [TabGroup("Jump")] public float fallMultiplier;
+    [TabGroup("Jump")] public int minimumJumpTime = 2;
+    [TabGroup("Jump")] int jumpCounter;
+
+    [TabGroup("Movement")]
     [HeaderAttribute("Sprint attributes")]
     public bool sprinting;
-    public float sprintSpeed = 12;
+    [TabGroup("Movement")] public float sprintSpeed = 12;
 
     public delegate void MovementEvent();
     public MovementEvent jumpEvent;
@@ -147,7 +147,7 @@ public class Movement : MonoBehaviour
 
     public virtual void Rotation()
     {
-        if (strafe)
+        if (strafe && ground)
         {
             if (strafeTarget == null) return;
             Vector3 desiredDirection = strafeTarget.position - transform.position;
@@ -165,26 +165,6 @@ public class Movement : MonoBehaviour
             }
 
             return;
-        }
-
-        if (direction != Vector3.zero)
-        {
-            //Desired rotation, updated every (fixed) frame
-            Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0, direction.z), Vector3.up), 0);
-            deltaAngle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
-            if (ground)
-            {
-                if (Mathf.Abs(deltaAngle) < 90)
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationDamp);
-
-                }
-                else
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * sharpRotationDamp);
-                }
-            }
-            else transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * airRotation);
         }
     }
 

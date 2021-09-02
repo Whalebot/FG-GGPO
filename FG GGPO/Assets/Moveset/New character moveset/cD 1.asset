@@ -15,9 +15,7 @@ MonoBehaviour:
   type: 0
   collissionState: 0
   attackHeight: 1
-  gatlingMoves:
-  - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
-  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  gatlingMoves: []
   attackPrefab: {fileID: 334434759881567290, guid: 8512f23f0988fa5408ac98607d54a783, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -43,16 +41,20 @@ MonoBehaviour:
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 0
   noClip: 1
+  noClipStart: 1
+  noClipDuration: 10
   invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
   overrideVelocity: 1
+  runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
-  - startFrame: 0
-    impulse: 0
+  - startFrame: 1
+    impulse: 1
     duration: 20
     momentum: {x: 0, y: 10, z: 20}
     resetVelocityDuringRecovery: 0

@@ -41,11 +41,15 @@ MonoBehaviour:
   slowMotionDuration: 0.01
   startupParticle: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 0
-  noClip: 0
-  invincible: 1
+  noClip: 1
+  noClipStart: 1
+  noClipDuration: 10
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
   overrideVelocity: 1
+  runMomentum: 1
   resetVelocityDuringRecovery: 1
   m: []

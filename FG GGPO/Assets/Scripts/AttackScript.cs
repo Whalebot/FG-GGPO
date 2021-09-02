@@ -58,13 +58,45 @@ public class AttackScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ExecuteFrame();
+        if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
+
+
+    }
+
+    public void ExecuteFrame()
+    {
         if (attacking)
         {
             gameFrames++;
 
+            //Execute properties
+            //Invul
+            if (activeMove.invincible)
+            {
+                if (gameFrames == activeMove.invincibleStart)
+                    status.invincible = true;
+                else if (gameFrames >= activeMove.invincibleStart + activeMove.invincibleDuration)
+                {
+                    status.invincible = true;
+                }
+            }
+            //Noclip
+            if (activeMove.noClip)
+            {
+                if (gameFrames == activeMove.noClipStart)
+                    status.DisableHurtboxes();
+                else if (gameFrames >= activeMove.noClipStart + activeMove.noClipDuration)
+                {
+                    status.EnableHurtboxes();
+                }
+            }
+
+            //Execute momentum
             for (int i = 0; i < activeMove.m.Length; i++)
             {
-                if (!activeMove.m[i].impulse) {
+                if (!activeMove.m[i].impulse)
+                {
                     if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
                     {
                         if (activeMove.m[i].resetVelocityDuringRecovery)
@@ -80,7 +112,7 @@ public class AttackScript : MonoBehaviour
                         status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
                     }
                 }
-            else
+                else
                 if (gameFrames == activeMove.m[i].startFrame)
                 {
                     Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
@@ -92,9 +124,6 @@ public class AttackScript : MonoBehaviour
             }
 
         }
-        if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
-
-
     }
 
     Vector3 CalculateRight()
@@ -105,13 +134,13 @@ public class AttackScript : MonoBehaviour
         return v1.normalized;
     }
 
-    public void ExecuteFrame()
-    {
-        if (activeMove == null) return;
-        if (status.currentState == Status.State.Startup) StartupFrames();
-        if (status.currentState == Status.State.Active) ActiveFrames();
-        if (status.currentState == Status.State.Recovery) Recovery();
-    }
+    //public void ExecuteFrame()
+    //{
+    //    if (activeMove == null) return;
+    //    if (status.currentState == Status.State.Startup) StartupFrames();
+    //    if (status.currentState == Status.State.Active) ActiveFrames();
+    //    if (status.currentState == Status.State.Recovery) Recovery();
+    //}
 
     public void StartupFrames()
     {
@@ -188,19 +217,15 @@ public class AttackScript : MonoBehaviour
         canGatling = false;
         gameFrames = 0;
 
-        if (move.invincible) {
-            status.invincible = true;
-        }
-
-        if (move.noClip) {
-            status.DisableHurtboxes();
-        }
 
         if (activeHitbox != null) Destroy(activeHitbox);
 
         Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
         transform.rotation = desiredRotation;
+
+        if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
+        else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;
 
         Startup();
         status.GoToState(Status.State.Startup);
@@ -214,16 +239,28 @@ public class AttackScript : MonoBehaviour
         attacking = true;
         newAttack = true;
         movement.isMoving = false;
+
+        ExecuteFrame();
     }
 
     public void Attack(Move move)
     {
+        if (attackString)
+        {
+            if (!activeMove.gatlingMoves.Contains(move)) return;
+        }
         if (usedMoves.Contains(move)) return;
         usedMoves.Add(move);
 
         AttackProperties(move);
     }
 
+    public bool CanCancel(Move move)
+    {
+
+        if (!activeMove.gatlingMoves.Contains(move)) return false;
+        else return true;
+    }
 
     public void AttackMomentum()
     {

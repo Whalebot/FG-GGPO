@@ -105,8 +105,6 @@ public class Hitbox : MonoBehaviour
         int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
 
-
-
         GameObject GO;
         if (other.blocking)
         {

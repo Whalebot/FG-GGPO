@@ -40,9 +40,8 @@ public class Status : MonoBehaviour
     Movement mov;
     public int wakeupRecovery;
     int wakeupValue;
-    public GameObject standingCollider;
-    public GameObject crouchingCollider;
-    public GameObject jumpingCollider;
+
+
     public enum GroundState { Grounded, Airborne, Knockdown }
     public GroundState groundState;
     public enum BlockState { None, Standing, Crouching, Airborne }
@@ -52,7 +51,11 @@ public class Status : MonoBehaviour
     [SerializeField] public State currentState;
     public int maxHealth;
     public int health;
+    public int comboCounter;
 
+    [FoldoutGroup("Components")] public GameObject standingCollider;
+    [FoldoutGroup("Components")] public GameObject crouchingCollider;
+    [FoldoutGroup("Components")] public GameObject jumpingCollider;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -73,7 +76,8 @@ public class Status : MonoBehaviour
         jumpingCollider.SetActive(blockState == BlockState.Airborne);
     }
 
-    public void EnableHurtboxes() {
+    public void EnableHurtboxes()
+    {
         standingCollider.layer = LayerMask.NameToLayer("Collision");
         crouchingCollider.layer = LayerMask.NameToLayer("Collision");
         jumpingCollider.layer = LayerMask.NameToLayer("Collision");
@@ -148,16 +152,18 @@ public class Status : MonoBehaviour
         groundState = GroundState.Airborne;
         GoToState(State.Wakeup);
         hitstunValue = 0;
+        comboCounter = 0;
         inHitStun = false;
     }
 
     void GroundRecovery()
     {
-        
+
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
         groundState = GroundState.Grounded;
         GoToState(State.Neutral);
         hitstunValue = 0;
+        comboCounter = 0;
         inHitStun = false;
     }
 
@@ -211,7 +217,7 @@ public class Status : MonoBehaviour
                 // SetBlockState();
                 blocking = mov.holdBack;
                 ResolveBlockstun();
- 
+
                 minusFrames = -BlockStun;
                 break;
             case State.Knockdown:
@@ -232,7 +238,7 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
-        currentState =  transitionState;
+        currentState = transitionState;
         switch (transitionState)
         {
             case State.Neutral:
@@ -271,7 +277,7 @@ public class Status : MonoBehaviour
             case State.Wakeup:
                 wakeupValue = wakeupRecovery;
 
-        break;
+                break;
             default: break;
         }
 
@@ -311,9 +317,12 @@ public class Status : MonoBehaviour
         set
         {
             if (value <= 0) return;
-
-            hitstunValue = value;
+            if (comboCounter > 0)
+                hitstunValue = (int)(value * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+            else hitstunValue = value;
+            comboCounter++;
             GoToState(State.Hitstun);
+ 
         }
     }
 
@@ -345,6 +354,7 @@ public class Status : MonoBehaviour
         HitStun = stunVal;
         hurtEvent?.Invoke();
         Health -= damage;
+        GameHandler.Instance.HitStop();
     }
     public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
     {

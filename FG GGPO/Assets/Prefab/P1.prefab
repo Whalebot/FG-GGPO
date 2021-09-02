@@ -431,7 +431,7 @@ MonoBehaviour:
   minimumJumpTime: 2
   airRotation: 4
   sprinting: 0
-  sprintSpeed: 12
+  sprintSpeed: 10
   zeroFloat: 0
   direction: {x: 0, y: 0, z: 0}
   storedDirection: {x: 0, y: 0, z: 0}
@@ -526,15 +526,16 @@ MonoBehaviour:
   blocking: 0
   minusFrames: 0
   wakeupRecovery: 20
-  standingCollider: {fileID: 3243212134572139080}
-  crouchingCollider: {fileID: 366033417185341652}
-  jumpingCollider: {fileID: 7025442713406750524}
   groundState: 0
   blockState: 0
   invincible: 0
   currentState: 0
   maxHealth: 100
   health: 100
+  comboCounter: 0
+  standingCollider: {fileID: 3243212134572139080}
+  crouchingCollider: {fileID: 366033417185341652}
+  jumpingCollider: {fileID: 7025442713406750524}
 --- !u!54 &3654780268560206793
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &3654780269054702757
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +564,6 @@ GameObject:
   - component: {fileID: 3654780269054702681}
   - component: {fileID: 3654780269054702680}
   - component: {fileID: 3654780269054702759}
-  - component: {fileID: 3654780269054702682}
   m_Layer: 12
   m_Name: Ground Collider
   m_TagString: Untagged
@@ -600,7 +600,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3654780269054702757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -648,25 +648,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &3654780269054702682
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3654780269054702757}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 1
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6125078543635060942
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +719,7 @@ MonoBehaviour:
   deaccelerateSpeed: 0
   animationData: []
   move: {fileID: 0}
+  isPaused: 0
 --- !u!114 &4987170126913989222
 MonoBehaviour:
   m_ObjectHideFlags: 0
