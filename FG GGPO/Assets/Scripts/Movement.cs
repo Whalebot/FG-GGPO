@@ -235,7 +235,7 @@ public class Movement : MonoBehaviour
         jumpCounter = minimumJumpTime;
         col.material = airMat;
         ground = false;
-        status.groundState = Status.GroundState.Airborne;
+        status.groundState = GroundState.Airborne;
 
         if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
         {
@@ -282,7 +282,7 @@ public class Movement : MonoBehaviour
             }
             landEvent?.Invoke();
             performedJumps = 0;
-            status.groundState = Status.GroundState.Grounded;
+            status.groundState = GroundState.Grounded;
             ground = true;
         }
         else if (transform.position.y > 0.1F)

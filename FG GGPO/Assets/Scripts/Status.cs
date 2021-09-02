@@ -35,6 +35,9 @@ public class Status : MonoBehaviour
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
 
+    public int hitstopCounter;
+    public Vector3 pushbackVector;
+    public bool newMove;
 
     CharacterSFX characterSFX;
     Movement mov;
@@ -42,9 +45,9 @@ public class Status : MonoBehaviour
     int wakeupValue;
 
 
-    public enum GroundState { Grounded, Airborne, Knockdown }
+
     public GroundState groundState;
-    public enum BlockState { None, Standing, Crouching, Airborne }
+
     public BlockState blockState;
     public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup }
     public bool invincible;
@@ -92,7 +95,16 @@ public class Status : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        if (newMove)
+        {
+            hitstopCounter--;
+            if (hitstopCounter <= 0)
+            {
+                newMove = false;
+                hitstopCounter = 5;
+                ApplyPushback();
+            }
+        }
         StateMachine();
     }
 
@@ -322,7 +334,7 @@ public class Status : MonoBehaviour
             else hitstunValue = value;
             comboCounter++;
             GoToState(State.Hitstun);
- 
+
         }
     }
 
@@ -382,8 +394,14 @@ public class Status : MonoBehaviour
 
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(direction, ForceMode.VelocityChange);
+        pushbackVector = direction;
+        newMove = true;
+        hitstopCounter = 5;
+    }
 
+    public void ApplyPushback()
+    {
+        rb.AddForce(pushbackVector, ForceMode.VelocityChange);
     }
 
     public void Death()

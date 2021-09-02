@@ -108,50 +108,50 @@ public class Hitbox : MonoBehaviour
         GameObject GO;
         if (other.blocking)
         {
-            if (move.attackHeight == Move.AttackHeight.Low && other.blockState == Status.BlockState.Standing || move.attackHeight == Move.AttackHeight.Overhead && other.blockState == Status.BlockState.Crouching)
+            if (move.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || move.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
             {
                 aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
 
                 //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
                 GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
-                if (move.groundHitProperty == Move.HitProperty.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                if (move.groundHitProperty.hitState == HitState.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
                 else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
                 return;
             }
             aVector = baseKnockback * knockbackDirection * move.blockPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.blockPushback.x + baseKnockback * Vector3.up * move.blockPushback.y;
 
 
             GO = Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            other.TakeBlock(damageDealt, aVector, (int)(move.blockStun), knockbackDirection, move.slowMotionDuration);
+            other.TakeBlock(damageDealt, aVector, (int)(move.blockStun), knockbackDirection, 0);
         }
         else
         {
 
             //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
-            if (other.groundState == Status.GroundState.Grounded)
+            if (other.groundState == GroundState.Grounded)
             {
                 aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
-                if (move.groundHitProperty == Move.HitProperty.Launch)
+                if (move.groundHitProperty.hitState == HitState.Launch)
                 {
-                    other.groundState = Status.GroundState.Airborne;
+                    other.groundState = GroundState.Airborne;
                 }
 
-                if (move.groundHitProperty == Move.HitProperty.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                if (move.groundHitProperty.hitState == HitState.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
                 else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection,0);
             }
-            else if (other.groundState == Status.GroundState.Airborne || other.groundState == Status.GroundState.Knockdown)
+            else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
                 aVector = baseKnockback * knockbackDirection * move.airHitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.airHitPushback.x + baseKnockback * Vector3.up * move.airHitPushback.y;
 
-                if (move.groundHitProperty == Move.HitProperty.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                if (move.groundHitProperty.hitState == HitState.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection,0);
                 else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, move.slowMotionDuration);
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
             }
 
         }

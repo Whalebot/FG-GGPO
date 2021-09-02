@@ -65,11 +65,11 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 mov.crouching = input.netButtons[5];
 
-                if (mov.crouching) status.SetBlockState(Status.BlockState.Crouching);
-                else if (mov.holdBack) status.SetBlockState(Status.BlockState.Standing);
-                else status.SetBlockState(Status.BlockState.None);
+                if (mov.crouching) status.SetBlockState(BlockState.Crouching);
+                else if (mov.holdBack) status.SetBlockState(BlockState.Standing);
+                else status.SetBlockState(BlockState.None);
             }
-            else status.SetBlockState(Status.BlockState.Airborne);
+            else status.SetBlockState(BlockState.Airborne);
 
             NeutralInput();
         }

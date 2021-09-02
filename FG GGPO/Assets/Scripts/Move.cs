@@ -8,8 +8,8 @@ public class Move : ScriptableObject
 {
     public enum MoveType { Normal, Special }
     public MoveType type;
-    public Status.BlockState collissionState;
-    public enum AttackHeight { Low, Mid, High, Overhead }
+    public BlockState collissionState;
+
     public AttackHeight attackHeight;
 
     public List<Move> gatlingMoves;
@@ -37,16 +37,14 @@ public class Move : ScriptableObject
     public Vector3 airHitPushback;
     public Vector3 blockPushback;
 
-    public enum HitProperty { None, Knockdown, Launch }
-    public HitProperty groundHitProperty;
-    public HitProperty airHitProperty;
 
-    [Header("Screen shake")]
-    [FoldoutGroup("Feedback")] public float shakeMagnitude;
-    [FoldoutGroup("Feedback")] public float shakeDuration;
-    [Header("Hit Stop")]
-    [FoldoutGroup("Feedback")] public float slowMotionDuration = 0.01F;
-    [FoldoutGroup("Feedback")] public bool startupParticle;
+    public HitProperty groundHitProperty;
+    public HitProperty groundCounterhitProperty;
+    public HitProperty airHitProperty;
+    public HitProperty airCounterhitProperty;
+
+
+
     [Header("Block Stop")]
     [FoldoutGroup("Feedback")] public float blockSlowMotion = 0.01F;
     [Header("Move properties")]
@@ -79,4 +77,15 @@ public class Momentum {
     public int duration;
     public Vector3 momentum;
     public bool resetVelocityDuringRecovery = true;
+}
+
+[System.Serializable]
+public class HitProperty
+{
+
+    
+    public int damage;
+    public int stun;
+    public Vector3 pushback;
+    public HitState hitState;
 }
