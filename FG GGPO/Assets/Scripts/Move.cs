@@ -39,8 +39,10 @@ public class Move : ScriptableObject
 
 
     public HitProperty groundHitProperty;
+    public HitProperty groundBlockProperty;
     public HitProperty groundCounterhitProperty;
     public HitProperty airHitProperty;
+    public HitProperty airBlockProperty;
     public HitProperty airCounterhitProperty;
 
 

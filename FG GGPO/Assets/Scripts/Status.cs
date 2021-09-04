@@ -47,9 +47,9 @@ public class Status : MonoBehaviour
 
 
     public GroundState groundState;
-
     public BlockState blockState;
     public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup }
+    public bool counterhitState;
     public bool invincible;
     [SerializeField] public State currentState;
     public int maxHealth;
@@ -334,7 +334,7 @@ public class Status : MonoBehaviour
             else hitstunValue = value;
             comboCounter++;
             GoToState(State.Hitstun);
-
+            counterhitState = false;
         }
     }
 
@@ -365,6 +365,7 @@ public class Status : MonoBehaviour
         TakePushback(kb);
         HitStun = stunVal;
         hurtEvent?.Invoke();
+
         Health -= damage;
         GameHandler.Instance.HitStop();
     }
@@ -372,10 +373,15 @@ public class Status : MonoBehaviour
     {
         GoToState(State.Hitstun);
         groundState = GroundState.Knockdown;
-        HitStun = stunVal;
+
         knockdownEvent?.Invoke();
         hurtEvent?.Invoke();
-        Health -= damage;
+
+        if (comboCounter > 0)
+            Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        else
+            Health -= damage;
+        HitStun = stunVal;
     }
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)

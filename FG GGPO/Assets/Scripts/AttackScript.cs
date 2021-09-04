@@ -145,6 +145,7 @@ public class AttackScript : MonoBehaviour
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
+        status.counterhitState = true;
         if (activeHitbox != null)
         {
             if (Application.isEditor)
@@ -159,6 +160,7 @@ public class AttackScript : MonoBehaviour
     public void ActiveFrames()
     {
         status.GoToState(Status.State.Active);
+        status.counterhitState = true;
         if (activeMove.type == Move.MoveType.Special)
         {
             if (activeHitbox == null)

@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
     RaycastHit hit;
     [TabGroup("Jump")] public float offset;
     [TabGroup("Jump")] public LayerMask groundMask;
+    [TabGroup("Jump")] public LayerMask playerMask;
     [TabGroup("Jump")] public float jumpHeight;
     [TabGroup("Jump")] public float fallMultiplier;
     [TabGroup("Jump")] public int minimumJumpTime = 2;
@@ -187,7 +188,6 @@ public class Movement : MonoBehaviour
             }
             else if (isMoving)
             {
-                print(Vector3.Angle(strafeTarget.position - transform.position, direction));
                 if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
                     currentVel = backWalkSpeed;
@@ -262,6 +262,8 @@ public class Movement : MonoBehaviour
     public bool GroundDetection()
     {
         check = Physics.Raycast(transform.position + Vector3.up * 0.1F, Vector3.down, out hit, rayLength, groundMask);
+        //  if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+
 
         if (jumpCounter > 0)
         {
@@ -271,7 +273,13 @@ public class Movement : MonoBehaviour
             return false;
         }
         //ground = check;
-
+        if (check && !ground)
+        {
+  
+            status.DisableHurtboxes(); 
+            rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
+            return false;
+        }
 
         if (!ground && transform.position.y < 0.1F)
         {
@@ -284,6 +292,7 @@ public class Movement : MonoBehaviour
             performedJumps = 0;
             status.groundState = GroundState.Grounded;
             ground = true;
+            status.EnableHurtboxes();
         }
         else if (transform.position.y > 0.1F)
         {

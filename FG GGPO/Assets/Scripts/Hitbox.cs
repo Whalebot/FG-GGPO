@@ -131,6 +131,9 @@ public class Hitbox : MonoBehaviour
 
             //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
+
+            if (other.counterhitState) { }
+
             if (other.groundState == GroundState.Grounded)
             {
                 aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
