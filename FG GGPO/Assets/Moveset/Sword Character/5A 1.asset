@@ -31,22 +31,46 @@ MonoBehaviour:
   startupFrames: 10
   activeFrames: 5
   recoveryFrames: 12
-  gatlingFrames: 1
+  gatlingFrames: 10
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
-  damage: 10
+  damage: 450
   hitStun: 27
   blockStun: 16
   hitPushback: {x: 0, y: 0, z: 2}
   airHitPushback: {x: 0, y: 0, z: 2}
   blockPushback: {x: 0, y: 0, z: 2}
-  groundHitProperty: 0
-  airHitProperty: 0
-  shakeMagnitude: 0
-  shakeDuration: 0
-  slowMotionDuration: 0.01
-  startupParticle: 0
+  groundHitProperty:
+    damage: 10
+    stun: 27
+    pushback: {x: 0, y: 0, z: 2}
+    hitState: 0
+  groundBlockProperty:
+    damage: 0
+    stun: 27
+    pushback: {x: 0, y: 0, z: 2}
+    hitState: 0
+  groundCounterhitProperty:
+    damage: 15
+    stun: 40
+    pushback: {x: 0, y: 0, z: 2}
+    hitState: 0
+  airHitProperty:
+    damage: 10
+    stun: 27
+    pushback: {x: 0, y: 2, z: 2}
+    hitState: 0
+  airBlockProperty:
+    damage: 10
+    stun: 27
+    pushback: {x: 0, y: 2, z: 2}
+    hitState: 0
+  airCounterhitProperty:
+    damage: 15
+    stun: 40
+    pushback: {x: 0, y: 2, z: 2}
+    hitState: 0
   blockSlowMotion: 0.01
   particleID: 0
   landCancel: 0

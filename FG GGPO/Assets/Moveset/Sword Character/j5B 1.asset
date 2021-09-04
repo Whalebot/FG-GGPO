@@ -30,7 +30,7 @@ MonoBehaviour:
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
-  damage: 10
+  damage: 740
   hitStun: 50
   blockStun: 20
   hitPushback: {x: 0, y: 0, z: 0}
@@ -41,12 +41,22 @@ MonoBehaviour:
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
     hitState: 0
+  groundBlockProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
   groundCounterhitProperty:
     damage: 0
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
     hitState: 0
   airHitProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  airBlockProperty:
     damage: 0
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
