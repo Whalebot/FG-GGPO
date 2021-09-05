@@ -106,7 +106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a281cbc4a8247b4d88ecf56988acd8c, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2478751063810506719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3019384793260998202}
@@ -255,7 +255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a281cbc4a8247b4d88ecf56988acd8c, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -400,7 +400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   isMoving: 0
-  strafe: 1
   strafeTarget: {fileID: 0}
   crouching: 0
   holdBack: 0
@@ -408,32 +407,31 @@ MonoBehaviour:
   walkSpeed: 6
   sideWalkSpeed: 6
   backWalkSpeed: 3
-  run: 0
+  sprinting: 0
+  sprintSpeed: 8
+  runMomentumDuration: 20
+  runMomentumCounter: 0
+  runDirection: {x: 0, y: 0, z: 0}
   currentVel: 0
   actualVelocity: 0
-  smoothAcceleration: 0
-  smoothDeacceleration: 0
-  walkThreshold: 0.5
   smoothRotation: 1
   rotationDamp: 8
   sharpRotationDamp: 16
   deltaAngle: 0
-  multiJumps: 2
+  multiJumps: 1
+  jumpVelocity: 5
   performedJumps: 0
   ground: 1
   rayLength: 0.2
   offset: -0.1
   groundMask:
     serializedVersion: 2
-    m_Bits: 6144
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpHeight: 8
+    m_Bits: 2048
+  jumpHeight:
+  - 9
+  - 9
   fallMultiplier: 0.05
   minimumJumpTime: 2
-  sprinting: 0
-  sprintSpeed: 10
   zeroFloat: 0
   direction: {x: 0, y: 0, z: 0}
   storedDirection: {x: 0, y: 0, z: 0}
@@ -801,7 +799,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a281cbc4a8247b4d88ecf56988acd8c, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

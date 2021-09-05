@@ -195,7 +195,74 @@ public class PlayerInputHandler : MonoBehaviour
         if (InputAvailable() && attack.canGatling)
         {
             if (attack.attackString)
-            { NeutralInput(); }
+            {
+                if (attack.CanUseMove(ReturnMove(input.inputQueue[0])))
+                {
+                    NeutralInput();
+                }
+            }
+        }
+    }
+
+    public Move ReturnMove(int inputID)
+    {
+        switch (inputID)
+        {
+            case 1:
+                if (mov.ground)
+                {
+                    if (input.netButtons[5])
+                        return attack.moveset.cA;
+                    else
+                        return attack.moveset.A5;
+                }
+                else return attack.moveset.jA;
+            case 2:
+                if (mov.ground)
+                {
+                    if (input.netButtons[5])
+                        return attack.moveset.cB;
+                    else
+                        return attack.moveset.B5;
+                }
+                else return attack.moveset.jB;
+            case 3:
+                //mov.Jump();
+                return null;
+            case 4:
+                if (mov.ground)
+                {
+                    if (input.netButtons[5])
+                        return attack.moveset.cC;
+                    else
+                        return attack.moveset.C5;
+                }
+                else return attack.moveset.jC;
+
+            case 5:
+                if (mov.ground)
+                {
+                    if (input.netButtons[5])
+                        return attack.moveset.cD;
+                    else
+                        return attack.moveset.D5;
+                }
+                else return attack.moveset.jD;
+            case 6:
+                return null;
+            case 7:
+                return null;
+            case 8:
+                return null;
+            case 9:
+                return null;
+            case 10:
+                return attack.moveset.backDash;
+            case 11:
+                return attack.moveset.rightDash;
+            case 12:
+                return attack.moveset.leftDash;
+            default: return null;
         }
     }
 

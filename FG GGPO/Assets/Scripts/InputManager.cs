@@ -11,8 +11,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
 
-    public InputHandler p1Input;
-    public InputHandler p2Input;
+    [HideInInspector] public InputHandler p1Input;
+    [HideInInspector] public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
     public bool replay;
@@ -28,6 +28,10 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         GameHandler.Instance.advanceGameState += UpdateLog;
+        p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
+        p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
+        p1Input.id = 1;
+        p2Input.id = 2;
         controllersConnected = Gamepad.all.Count;
 
         foreach (var item in Gamepad.all)

@@ -17,8 +17,8 @@ public class GameHandler : MonoBehaviour
     public Transform p1Transform;
     public Transform p2Transform;
 
-    public Status p1Status;
-    public Status p2Status;
+    [HideInInspector] public Status p1Status;
+    [HideInInspector] public Status p2Status;
 
     public List<GameState> gameStates;
     public int rollbackFrames;
@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour
 
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
-    
+
     public int gameFrameCount;
     public int counter;
 
@@ -45,6 +45,8 @@ public class GameHandler : MonoBehaviour
         Instance = this;
         gameStates = new List<GameState>();
         isPaused = true;
+        p1Status = p1Transform.GetComponent<Status>();
+        p2Status = p2Transform.GetComponent<Status>();
 
     }
 
@@ -58,13 +60,20 @@ public class GameHandler : MonoBehaviour
 
     }
 
-    void StartGame() {
+    public Transform ReturnPlayer(Transform source)
+    {
+        if (source == p1Transform) return p2Transform;
+        else return p1Transform;
+    }
+
+    void StartGame()
+    {
         isPaused = false;
     }
 
     void UpdateGameState()
     {
-      
+
         GameState state = new GameState(p1Transform.position, p2Transform.position, p2Transform.rotation, p2Transform.rotation);
         state.p1Health = p1Status.health;
         state.p2Health = p2Status.health;
@@ -86,11 +95,12 @@ public class GameHandler : MonoBehaviour
         //else Time.timeScale = 1;
 
         UpdateGameState();
-        if (!isPaused) {
+        if (!isPaused)
+        {
             advanceGameState?.Invoke();
             gameFrameCount++;
         }
-   
+
 
         counter++;
 
@@ -102,7 +112,8 @@ public class GameHandler : MonoBehaviour
         //}
     }
 
-    public void HitStop() {
+    public void HitStop()
+    {
         StartCoroutine("SetHitstop");
         //Slowmotion(0);
     }
@@ -115,7 +126,8 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame) {
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        {
             ResimulateGameState();
         }
     }

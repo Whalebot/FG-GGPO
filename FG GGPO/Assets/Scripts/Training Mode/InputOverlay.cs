@@ -5,6 +5,7 @@ using TMPro;
 
 public class InputOverlay : MonoBehaviour
 {
+    public int playerID;
     public InputHandler inputHandler;
     public Transform marker;
     public GameObject panel;
@@ -31,6 +32,9 @@ public class InputOverlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (playerID == 1)
+            inputHandler = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
+        else inputHandler = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
 
     }
 

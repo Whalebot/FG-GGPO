@@ -9,8 +9,8 @@ public class ComboSystem : MonoBehaviour
     public float proration;
     public int p1ComboCounter;
     public int p2ComboCounter;
-    public Status p1;
-    public Status p2;
+    Status p1;
+    Status p2;
     public int comboDisplayDuration;
     public TextMeshProUGUI p1ComboText;
     public TextMeshProUGUI p2ComboText;
@@ -23,6 +23,9 @@ public class ComboSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        p1 = GameHandler.Instance.p1Status;
+        p2 = GameHandler.Instance.p2Status;
+
         p1.hitEvent += UpdateP1ComboCounter;
         p2.hitEvent += UpdateP2ComboCounter;
     }

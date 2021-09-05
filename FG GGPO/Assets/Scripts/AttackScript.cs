@@ -109,7 +109,8 @@ public class AttackScript : MonoBehaviour
                         //Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
                         //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
                         //transform.rotation = desiredRotation;
-                        status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
+                        if (activeMove.overrideVelocity)
+                            status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
                     }
                 }
                 else
@@ -118,8 +119,12 @@ public class AttackScript : MonoBehaviour
                     Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
                     Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
                     transform.rotation = desiredRotation;
-                    status.rb.velocity = Vector3.zero;
+                    if (activeMove.overrideVelocity)
+                    {
+                        status.rb.velocity = Vector3.zero;
+                    }
                     status.rb.AddForce(transform.right * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z, ForceMode.VelocityChange);
+                
                 }
             }
 
@@ -245,13 +250,22 @@ public class AttackScript : MonoBehaviour
         ExecuteFrame();
     }
 
-    public void Attack(Move move)
+    public bool CanUseMove(Move move)
     {
+
         if (attackString)
         {
-            if (!activeMove.gatlingMoves.Contains(move)) return;
+            if (move == null) return true;
+            if (!activeMove.gatlingMoves.Contains(move)) return false;
         }
-        if (usedMoves.Contains(move)) return;
+        if (usedMoves.Contains(move)) return false;
+
+        return true;
+    }
+
+    public void Attack(Move move)
+    {
+        if (!CanUseMove(move)) return;
         usedMoves.Add(move);
 
         AttackProperties(move);
@@ -323,11 +337,6 @@ public class AttackScript : MonoBehaviour
 
         containerScript.DeactivateHitboxes();
         newAttack = false;
-    }
-
-    public void AttackLink()
-    {
-        attackString = true;
     }
 
     public void ResetFrames()

@@ -65,6 +65,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             if (attack.canGatling && attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.gatlingFrames)
             {
+                print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
                 attack.attackString = true;
             }
 
@@ -242,7 +243,6 @@ public class CharacterAnimator : MonoBehaviour
     {
         if (!movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0, deaccelerateSpeed);
         else if (movement.sprinting) runSpeed = Mathf.Lerp(runSpeed, 1, deaccelerateSpeed);
-        else if (movement.run) runSpeed = Mathf.Lerp(runSpeed, 0.6F, deaccelerateSpeed);
         else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
 
 

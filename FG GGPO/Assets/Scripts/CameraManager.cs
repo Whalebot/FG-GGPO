@@ -16,12 +16,11 @@ public class CameraManager : MonoBehaviour
     public float toggleTimer;
     public float toggleCounter;
 
-    public Transform defaultTarget;
-
-    public InputHandler input1;
-    public InputHandler input2;
-    public Transform p1;
-    public Transform p2;
+    InputHandler input1;
+    InputHandler input2;
+    Transform p1;
+    Transform p2;
+    
 
     public GameObject cam1;
     public GameObject cam2;
@@ -29,7 +28,7 @@ public class CameraManager : MonoBehaviour
     public CameraController cc1;
     public CameraController cc2;
 
-    [SerializeField]float dist1;
+    [SerializeField] float dist1;
     [SerializeField] float dist2;
     public float deadZone;
     public Camera mainCamera;
@@ -42,21 +41,40 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        //noises = new CinemachineBasicMultiChannelPerlin[cameras.Length];
-        //for (int i = 0; i < noises.Length; i++)
-        //{
-        //    noises[i] = cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        //}
-
-        //ShakeCamera(0, 0.1F);
+        input1 = InputManager.Instance.p1Input;
+        input2 = InputManager.Instance.p2Input;
+        p1 = GameHandler.Instance.p1Transform;
+        p2 = GameHandler.Instance.p2Transform;
+        cc1.target = p1;
+        cc1.lookTarget = p2;
+        cc2.target = p2;
+        cc2.lookTarget = p1;
     }
 
     private void FixedUpdate()
     {
+
+
+        //Vector3 cv1 = new Vector3(p1.position.x, 0, cc1.transform.position.z);
+        //Vector3 cv2 = new Vector3(p2.position.x, 0, cc2.transform.position.z);
+
+        //float ccdist1 = Vector3.Distance(mainCamera.transform.position, cv1);
+        //float ccdist2 = Vector3.Distance(mainCamera.transform.position, cv2);
+
+        //if (ccdist2 <= ccdist1)
+        //{
+        //    print("Push camera");
+        //    Vector3 vect = mainCamera.transform.position - cv2;
+        //    vect = vect.normalized;
+        //    vect *= (ccdist1 - ccdist2);
+        //    cc2.transform.position += vect;
+        //}
+
         Vector3 v1 = new Vector3(p1.position.x, 0, p1.position.z);
         Vector3 v2 = new Vector3(p2.position.x, 0, p2.position.z);
+
         dist1 = Vector3.Distance(mainCamera.transform.position, v1);
-        dist2 = Vector3.Distance(mainCamera.transform.position, p2.position);
+        dist2 = Vector3.Distance(mainCamera.transform.position, v2);
 
         toggleCounter++;
         if (toggleCounter < toggleTimer) return;
@@ -64,22 +82,17 @@ public class CameraManager : MonoBehaviour
         {
             FlipCamera();
             toggleCounter = 0;
-            //toggle = false;
             input1.id = 1;
             input2.id = 2;
-            //cam1.SetActive(true);
-            //cam2.SetActive(false);
+
 
         }
         else if (dist1 + deadZone > dist2 && !toggle)
         {
             FlipCamera();
             toggleCounter = 0;
-            //toggle = true;
             input1.id = 2;
             input2.id = 1;
-            //cam1.SetActive(false);
-            //cam2.SetActive(true);
         }
     }
     [Button]
@@ -95,10 +108,6 @@ public class CameraManager : MonoBehaviour
             cc1.lookTarget = p2;
             cc2.target = p2;
             cc2.lookTarget = p1;
-            //input1.id = 1;
-            //input2.id = 2;
-            //cam1.SetActive(true);
-            //cam2.SetActive(false);
         }
         else
         {
@@ -107,10 +116,6 @@ public class CameraManager : MonoBehaviour
             cc1.lookTarget = p1;
             cc2.target = p1;
             cc2.lookTarget = p2;
-            //input1.id = 2;
-            //input2.id = 1;
-            //cam1.SetActive(false);
-            //cam2.SetActive(true);
         }
     }
 
@@ -138,3 +143,4 @@ public class CameraManager : MonoBehaviour
         //startTimer = time;
     }
 }
+

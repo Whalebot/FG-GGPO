@@ -43,7 +43,6 @@ public class CharacterSFX : MonoBehaviour
     void JumpFX()
     {
         if (jump != null) Instantiate(jump, transform.position, Quaternion.identity);
-        mov.JumpFX();
     }
 
     void Death()

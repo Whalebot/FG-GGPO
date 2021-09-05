@@ -5,7 +5,6 @@ public class Movement : MonoBehaviour
 {
     [HideInInspector] public Rigidbody rb;
     public bool isMoving = false;
-    public bool strafe;
     public Transform strafeTarget;
 
     public bool crouching;
@@ -15,15 +14,17 @@ public class Movement : MonoBehaviour
     [TabGroup("Movement")] public float walkSpeed = 3;
     [TabGroup("Movement")] public float sideWalkSpeed = 3;
     [TabGroup("Movement")] public float backWalkSpeed = 2;
+    [TabGroup("Movement")]
+    [HeaderAttribute("Sprint attributes")]
+    public bool sprinting;
+    [TabGroup("Movement")] public float sprintSpeed = 8;
+    [TabGroup("Movement")] public int runMomentumDuration;
+    [TabGroup("Movement")] public int runMomentumCounter;
+    [TabGroup("Movement")] public Vector3 runDirection;
 
-    [HideInInspector] public bool run;
 
     [TabGroup("Movement")] public float currentVel;
     public float actualVelocity;
-    [TabGroup("Movement")] public float smoothAcceleration = 0.5f;
-    [TabGroup("Movement")] public float smoothDeacceleration = 0.5f;
-    [TabGroup("Movement")] public float walkThreshold;
-
     [TabGroup("Rotation")]
     [HeaderAttribute("Rotation attributes")]
     [TabGroup("Rotation")] public bool smoothRotation = true;
@@ -33,28 +34,23 @@ public class Movement : MonoBehaviour
 
 
     [TabGroup("Jump")] [HeaderAttribute("Jump attributes")] public int multiJumps;
+    [TabGroup("Jump")] public float jumpVelocity;
     [TabGroup("Jump")] public int performedJumps;
     [TabGroup("Jump")] public bool ground;
     [TabGroup("Jump")] public float rayLength;
     RaycastHit hit;
     [TabGroup("Jump")] public float offset;
     [TabGroup("Jump")] public LayerMask groundMask;
-    [TabGroup("Jump")] public LayerMask playerMask;
-    [TabGroup("Jump")] public float jumpHeight;
+    [TabGroup("Jump")] public float[] jumpHeight;
     [TabGroup("Jump")] public float fallMultiplier;
     [TabGroup("Jump")] public int minimumJumpTime = 2;
     [TabGroup("Jump")] int jumpCounter;
 
-    [TabGroup("Movement")]
-    [HeaderAttribute("Sprint attributes")]
-    public bool sprinting;
-    [TabGroup("Movement")] public float sprintSpeed = 12;
+
 
     public delegate void MovementEvent();
     public MovementEvent jumpEvent;
     public MovementEvent landEvent;
-    public MovementEvent strafeSet;
-    public MovementEvent strafeBreak;
 
     [HideInInspector] public float zeroFloat;
     public Vector3 direction;
@@ -70,24 +66,10 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        strafeTarget = GameHandler.Instance.ReturnPlayer(transform);
         status = GetComponent<Status>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-    }
-
-
-    public void SetStrafeTarget(Transform t)
-    {
-        strafeTarget = t;
-        strafe = true;
-        strafeSet?.Invoke();
-    }
-
-    public void ResetStrafe()
-    {
-        strafeBreak?.Invoke();
-        strafeTarget = null;
-        strafe = false;
     }
 
     void DisableMovement()
@@ -107,7 +89,15 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        if (ground)
+        ExecuteFrame();
+    }
+
+    public void ExecuteFrame()
+    {
+
+
+
+        if (ground && runMomentumCounter == 0 || ground && sprinting)
             storedDirection = direction.normalized;
         if (status.currentState == Status.State.Neutral)
         {
@@ -148,7 +138,7 @@ public class Movement : MonoBehaviour
 
     public virtual void Rotation()
     {
-        if (strafe && ground)
+        if (ground)
         {
             if (strafeTarget == null) return;
             Vector3 desiredDirection = strafeTarget.position - transform.position;
@@ -176,7 +166,6 @@ public class Movement : MonoBehaviour
         if (!GameHandler.Instance.disableBlock)
         {
             holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
-            //sprinting = false;
         }
 
         if (ground)
@@ -198,6 +187,8 @@ public class Movement : MonoBehaviour
                 }
                 else if (sprinting)
                 {
+                    runMomentumCounter = runMomentumDuration;
+                    runDirection = direction.normalized;
                     currentVel = sprintSpeed;
                 }
                 else
@@ -207,30 +198,20 @@ public class Movement : MonoBehaviour
                 actualVelocity = currentVel;
             }
         }
-        //else actualVelocity = Speed();
+        else actualVelocity = Speed();
     }
 
     float Speed()
     {
-        float f = 0;
-
-        if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
-        {
-            f = backWalkSpeed;
-        }
-        else if (sprinting)
-        {
-            f = sprintSpeed;
-        }
-        else f = walkSpeed;
+        float f = jumpVelocity;
 
         return f;
     }
 
     public void Jump()
     {
-        if (!ground && performedJumps > multiJumps) return;
-        performedJumps++;
+        if (performedJumps > multiJumps) return;
+
         storedDirection = direction.normalized;
         jumpCounter = minimumJumpTime;
         col.material = airMat;
@@ -245,25 +226,13 @@ public class Movement : MonoBehaviour
         jumpEvent?.Invoke();
         Vector3 temp = direction.normalized;
         actualVelocity = Speed();
-        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight, temp.z * Speed());
-    }
-
-    public void JumpFX()
-    {
-        col.material = airMat;
-        ground = false;
-
-        Vector3 temp = direction.normalized;
-        rb.velocity = new Vector3(temp.x * Speed(), rb.velocity.y, temp.z * Speed());
-
-        rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
+        performedJumps++;
     }
 
     public bool GroundDetection()
     {
         check = Physics.Raycast(transform.position + Vector3.up * 0.1F, Vector3.down, out hit, rayLength, groundMask);
-        //  if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
-
 
         if (jumpCounter > 0)
         {
@@ -272,12 +241,13 @@ public class Movement : MonoBehaviour
 
             return false;
         }
-        //ground = check;
+
         if (check && !ground)
         {
-  
-            status.DisableHurtboxes(); 
-            rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
+
+            status.DisableHurtboxes();
+            print("Land on opponent");
+            //rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
             return false;
         }
 
@@ -292,6 +262,7 @@ public class Movement : MonoBehaviour
             performedJumps = 0;
             status.groundState = GroundState.Grounded;
             ground = true;
+            runMomentumCounter = 0;
             status.EnableHurtboxes();
         }
         else if (transform.position.y > 0.1F)
@@ -308,8 +279,30 @@ public class Movement : MonoBehaviour
 
     public void PlayerMovement()
     {
-        rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+        if (ground)
+        {
+            if (runMomentumCounter > 0 && !sprinting)
+            {
+
+
+                {                //Run momentum + normal momentum
+                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
+                    runMomentumCounter--;
+                }
+
+            }
+            else
+                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+        }
+        else
+        {
+            if (runMomentumCounter > 0)
+                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
+            else
+                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+        }
     }
+
 
     public Vector3 RemoveAxis(Vector3 vec, Vector3 removedAxis)
     {

@@ -36,7 +36,7 @@ public class Move : ScriptableObject
     public Vector3 hitPushback;
     public Vector3 airHitPushback;
     public Vector3 blockPushback;
-
+    public int hitstop = 10;
 
     public HitProperty groundHitProperty;
     public HitProperty groundBlockProperty;

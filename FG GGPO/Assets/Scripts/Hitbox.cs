@@ -100,6 +100,12 @@ public class Hitbox : MonoBehaviour
             status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
             //status.hit
         }
+        other.newMove = true;
+        other.hitstopCounter = move.gatlingFrames+ move.hitstop;
+
+        status.Hitstop();
+        status.newMove = true;
+        status.hitstopCounter = move.gatlingFrames;
 
         totalDamage = (int)(dmgMod * (baseDamage * move.damage));
         int damageDealt = totalDamage;

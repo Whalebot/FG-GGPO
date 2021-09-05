@@ -98,10 +98,10 @@ public class Status : MonoBehaviour
         if (newMove)
         {
             hitstopCounter--;
+            if(hitstopCounter > 1)rb.velocity = Vector3.zero;
             if (hitstopCounter <= 0)
             {
                 newMove = false;
-                hitstopCounter = 5;
                 ApplyPushback();
             }
         }
@@ -366,7 +366,10 @@ public class Status : MonoBehaviour
         HitStun = stunVal;
         hurtEvent?.Invoke();
 
-        Health -= damage;
+        if (comboCounter > 0)
+            Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        else
+            Health -= damage;
         GameHandler.Instance.HitStop();
     }
     public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
@@ -382,6 +385,7 @@ public class Status : MonoBehaviour
         else
             Health -= damage;
         HitStun = stunVal;
+
     }
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
@@ -401,8 +405,12 @@ public class Status : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         pushbackVector = direction;
-        newMove = true;
-        hitstopCounter = 5;
+
+    }
+
+    public void Hitstop() {
+        pushbackVector = rb.velocity;
+        rb.velocity = Vector3.zero;
     }
 
     public void ApplyPushback()

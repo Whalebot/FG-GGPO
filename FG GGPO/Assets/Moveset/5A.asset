@@ -18,6 +18,11 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: bb95c6ec3168ad240bf311a6b9738008, type: 2}
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  - {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
+  - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
+  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
+  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -31,11 +36,12 @@ MonoBehaviour:
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   damage: 450
-  hitStun: 30
+  hitStun: 21
   blockStun: 15
   hitPushback: {x: 0, y: 0, z: 2}
   airHitPushback: {x: 0, y: 0, z: 2}
   blockPushback: {x: 0, y: 0, z: 2}
+  hitstop: 10
   groundHitProperty:
     damage: 0
     stun: 0
