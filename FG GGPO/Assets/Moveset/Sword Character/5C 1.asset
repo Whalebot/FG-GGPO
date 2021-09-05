@@ -39,6 +39,7 @@ MonoBehaviour:
   hitPushback: {x: 0, y: 0, z: 2}
   airHitPushback: {x: 0, y: -10, z: 0}
   blockPushback: {x: 0, y: 0, z: -5}
+  hitstop: 10
   groundHitProperty:
     damage: 0
     stun: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
     damage: 0
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
+    hitState: 1
   groundCounterhitProperty:
     damage: 0
     stun: 0
