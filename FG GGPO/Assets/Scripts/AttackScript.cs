@@ -95,6 +95,7 @@ public class AttackScript : MonoBehaviour
             //Execute momentum
             for (int i = 0; i < activeMove.m.Length; i++)
             {
+                //Non-impulse, set velocity every frame
                 if (!activeMove.m[i].impulse)
                 {
                     if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
@@ -113,6 +114,7 @@ public class AttackScript : MonoBehaviour
                             status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
                     }
                 }
+                //Impulse, add velocity at beginning only
                 else
                 if (gameFrames == activeMove.m[i].startFrame)
                 {
@@ -179,10 +181,21 @@ public class AttackScript : MonoBehaviour
             activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
 
             AttackContainer attackContainer = activeHitbox.GetComponentInChildren<AttackContainer>();
+            if (attackContainer != null)
+            {
+                attackContainer.status = status;
+                attackContainer.attack = this;
+                attackContainer.move = activeMove;
+            }
+            else
+            {
 
-            attackContainer.status = status;
-            attackContainer.attack = this;
-            attackContainer.move = activeMove;
+                Hitbox hitbox = activeHitbox.GetComponentInChildren<Hitbox>();
+
+                hitbox.status = status;
+                hitbox.attack = this;
+                hitbox.move = activeMove;
+            }
         }
 
     }
@@ -224,8 +237,10 @@ public class AttackScript : MonoBehaviour
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
         transform.rotation = desiredRotation;
 
+        //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;
+        movement.ResetRun();
 
         Startup();
         status.GoToState(Status.State.Startup);

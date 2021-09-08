@@ -27,7 +27,7 @@ MonoBehaviour:
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 11
   animationClip: {fileID: 0}
-  startupFrames: 10
+  startupFrames: 14
   activeFrames: 2
   recoveryFrames: 20
   gatlingFrames: 2
@@ -60,7 +60,7 @@ MonoBehaviour:
     damage: 0
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
+    hitState: 1
   airBlockProperty:
     damage: 0
     stun: 0

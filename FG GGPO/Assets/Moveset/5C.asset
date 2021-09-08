@@ -31,8 +31,8 @@ MonoBehaviour:
   damage: 1000
   hitStun: 60
   blockStun: 25
-  hitPushback: {x: 0, y: 0, z: 10}
-  airHitPushback: {x: 0, y: 5, z: 10}
+  hitPushback: {x: 0, y: 0, z: 5}
+  airHitPushback: {x: 0, y: 5, z: 5}
   blockPushback: {x: 0, y: 0, z: 5}
   hitstop: 10
   groundHitProperty:
@@ -78,8 +78,8 @@ MonoBehaviour:
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
-  - startFrame: 0
-    impulse: 0
-    duration: 0
+  - startFrame: 5
+    impulse: 1
+    duration: 5
     momentum: {x: 0, y: 0, z: 5}
     resetVelocityDuringRecovery: 1

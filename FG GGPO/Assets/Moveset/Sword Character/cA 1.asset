@@ -29,7 +29,7 @@ MonoBehaviour:
   startupFrames: 16
   activeFrames: 5
   recoveryFrames: 25
-  gatlingFrames: 5
+  gatlingFrames: 10
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   hitPushback: {x: 0, y: 10, z: 2}
   airHitPushback: {x: 0, y: 10, z: 2}
   blockPushback: {x: 0, y: 0, z: 5}
-  hitstop: 10
+  hitstop: 5
   groundHitProperty:
     damage: 0
     stun: 0

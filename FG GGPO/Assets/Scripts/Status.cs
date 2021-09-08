@@ -98,7 +98,8 @@ public class Status : MonoBehaviour
         if (newMove)
         {
             hitstopCounter--;
-            if(hitstopCounter > 1)rb.velocity = Vector3.zero;
+            if (hitstopCounter > 1) rb.velocity = Vector3.zero;
+            else
             if (hitstopCounter <= 0)
             {
                 newMove = false;
@@ -147,7 +148,7 @@ public class Status : MonoBehaviour
         else if (hitstunValue <= 0 && inHitStun)
         {
             if (groundState == GroundState.Knockdown)
-                AirRecovery();
+                KnockdownRecovery();
 
             else if (groundState == GroundState.Airborne)
                 AirRecovery();
@@ -158,6 +159,17 @@ public class Status : MonoBehaviour
 
 
     void AirRecovery()
+    {
+        wakeupEvent?.Invoke();
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        groundState = GroundState.Airborne;
+        GoToState(State.Wakeup);
+        hitstunValue = 0;
+        comboCounter = 0;
+        inHitStun = false;
+    }
+
+    void KnockdownRecovery()
     {
         wakeupEvent?.Invoke();
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
@@ -246,7 +258,22 @@ public class Status : MonoBehaviour
             default: break;
         }
     }
+    public void GoToGroundState(GroundState s)
+    {
+        switch (s)
+        {
 
+            default:
+                if (HitStun > 0 && s == GroundState.Grounded)
+                {
+                    groundState = GroundState.Knockdown;
+                    break;
+                }
+                groundState = s;
+                break;
+        }
+
+    }
 
     public void GoToState(State transitionState)
     {
@@ -376,7 +403,7 @@ public class Status : MonoBehaviour
     {
         GoToState(State.Hitstun);
         groundState = GroundState.Knockdown;
-
+        TakePushback(kb);
         knockdownEvent?.Invoke();
         hurtEvent?.Invoke();
 
@@ -408,13 +435,15 @@ public class Status : MonoBehaviour
 
     }
 
-    public void Hitstop() {
+    public void Hitstop()
+    {
         pushbackVector = rb.velocity;
         rb.velocity = Vector3.zero;
     }
 
     public void ApplyPushback()
     {
+        print("shit");
         rb.AddForce(pushbackVector, ForceMode.VelocityChange);
     }
 

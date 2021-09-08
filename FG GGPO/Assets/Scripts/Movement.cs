@@ -95,15 +95,19 @@ public class Movement : MonoBehaviour
     public Vector3 CalculateRight(float f)
     {
 
-        float distance = Vector3.Distance(strafeTarget.position, transform.position);
-        transform.LookAt(strafeTarget);
+   
+        Vector3 targetNoY = strafeTarget.position; 
+        targetNoY.y = 0;
+        float distance = Vector3.Distance(targetNoY, transform.position);
+
+        transform.LookAt(targetNoY);
         float angle = Vector3.SignedAngle(transform.right, Vector3.forward, Vector3.up);
 
         angle += Mathf.Sign(f) * distance;
 
 
-        pos.x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + strafeTarget.position.x;
-        pos.z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + strafeTarget.position.z;
+        pos.x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + targetNoY.x;
+        pos.z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + targetNoY.z;
         Debug.DrawLine(transform.position, pos, Color.red);
 
         return (pos - transform.position).normalized * Mathf.Abs(f);
@@ -182,7 +186,10 @@ public class Movement : MonoBehaviour
         }
     }
 
-
+    public void ResetRun()
+    {
+        runMomentumCounter = 0;
+    }
 
     public virtual void MovementProperties()
     {
@@ -283,7 +290,7 @@ public class Movement : MonoBehaviour
             }
             landEvent?.Invoke();
             performedJumps = 0;
-            status.groundState = GroundState.Grounded;
+            status.GoToGroundState(GroundState.Grounded);
             ground = true;
             runMomentumCounter = 0;
             status.EnableHurtboxes();
@@ -312,7 +319,7 @@ public class Movement : MonoBehaviour
             }
             else
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
-                //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
+            //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
         }
         else
         {

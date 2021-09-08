@@ -24,8 +24,11 @@ public class Hitbox : MonoBehaviour
     {
 
         mr = GetComponent<MeshRenderer>();
-        move = container.move;
-        status = container.status;
+        if (container != null)
+        {
+            move = container.move;
+            status = container.status;
+        }
 
         if (body == null) body = transform.parent;
 
@@ -53,7 +56,6 @@ public class Hitbox : MonoBehaviour
         if (!other.transform.IsChildOf(body))
         {
             Status enemyStatus = other.GetComponentInParent<Status>();
-
             if (enemyStatus != null)
             {
                 if (status == enemyStatus) return;
@@ -100,9 +102,10 @@ public class Hitbox : MonoBehaviour
             status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
             //status.hit
         }
+        //Enemy hitstop
         other.newMove = true;
-        other.hitstopCounter = move.gatlingFrames+ move.hitstop;
-
+        other.hitstopCounter = move.gatlingFrames + move.hitstop;
+        //Own hitstop
         status.Hitstop();
         status.newMove = true;
         status.hitstopCounter = move.gatlingFrames;
@@ -112,6 +115,8 @@ public class Hitbox : MonoBehaviour
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
 
         GameObject GO;
+
+        //Check for block
         if (other.blocking)
         {
             if (move.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || move.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
@@ -134,8 +139,6 @@ public class Hitbox : MonoBehaviour
         }
         else
         {
-
-            //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
             GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
 
             if (other.counterhitState) { }
@@ -151,18 +154,20 @@ public class Hitbox : MonoBehaviour
                 if (move.groundHitProperty.hitState == HitState.Knockdown)
                     other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
                 else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection,0);
+                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
             }
+            //Check for airborne or knockdown state
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
                 aVector = baseKnockback * knockbackDirection * move.airHitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.airHitPushback.x + baseKnockback * Vector3.up * move.airHitPushback.y;
 
-                if (move.groundHitProperty.hitState == HitState.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection,0);
+                if (move.airHitProperty.hitState == HitState.Knockdown)
+                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
                 else
                     other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
             }
 
         }
+
     }
 }

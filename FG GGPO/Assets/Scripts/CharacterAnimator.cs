@@ -65,26 +65,30 @@ public class CharacterAnimator : MonoBehaviour
         {
             if (attack.canGatling && attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.gatlingFrames)
             {
-                print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
+                //print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
                 attack.attackString = true;
             }
 
-            if (attack.gameFrames > attack.activeMove.startupFrames -1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
+            if (attack.gameFrames > attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
             {
                 attack.Idle();
             }
-            else if (attack.gameFrames < attack.activeMove.startupFrames -1)
+       
+       
+            else if (attack.gameFrames < attack.activeMove.startupFrames)
             {
                 attack.StartupFrames();
             }
-            else if (attack.gameFrames <= attack.activeMove.startupFrames -1 + attack.activeMove.activeFrames)
+            else if (attack.gameFrames <= attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames)
             {
                 attack.ActiveFrames();
             }
+
             else if (attack.gameFrames <= attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
             {
                 attack.RecoveryFrames();
             }
+
         }
         SaveAnimationData();
     }
@@ -110,15 +114,30 @@ public class CharacterAnimator : MonoBehaviour
         {
             if (frame >= move.startupFrames + move.activeFrames + move.recoveryFrames)
             {
-                attack.RecoveryFrames();
+                if (Application.isEditor && attack.activeHitbox != null)
+                    DestroyImmediate(attack.activeHitbox);
             }
             else if (frame >= move.startupFrames + move.activeFrames)
             {
-                attack.ActiveFrames();
+
+                if (move.attackPrefab == null) return;
+                if (attack.activeHitbox == null)
+                {
+                    attack.activeHitbox = Instantiate(move.attackPrefab, transform.position, transform.rotation, attack.hitboxContainer);
+
+                    AttackContainer attackContainer = attack.activeHitbox.GetComponentInChildren<AttackContainer>();
+                    if (attackContainer != null)
+                    {
+                        attackContainer.status = status;
+                        attackContainer.attack = attack;
+                        attackContainer.move = move;
+                    }
+                }
             }
             else if (frame < move.startupFrames)
             {
-                attack.StartupFrames();
+                if (Application.isEditor && attack.activeHitbox != null)
+                    DestroyImmediate(attack.activeHitbox);
             }
         }
 

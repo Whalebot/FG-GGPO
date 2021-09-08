@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
 
         foreach (var item in Gamepad.all)
         {
-            print(item.name);
+           // print(item.name);
         }
 
         //for (int i = 0; i < controllersConnected; i++)

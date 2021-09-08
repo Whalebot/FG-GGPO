@@ -6,6 +6,7 @@ public class Projectile : Hitbox
 {
     public float velocity;
     Rigidbody rb;
+    bool hit;
 
     private void Awake()
     {
@@ -19,7 +20,10 @@ public class Projectile : Hitbox
 
     public override void DoDamage(Status other, float dmgMod, float poiseMod)
     {
-        base.DoDamage(other, dmgMod, poiseMod);
+        if (!hit)
+            base.DoDamage(other, dmgMod, poiseMod);
+        hit = true;
+   
         Destroy(gameObject);
     }
 }

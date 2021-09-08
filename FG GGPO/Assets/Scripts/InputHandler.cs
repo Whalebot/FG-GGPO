@@ -482,7 +482,7 @@ public class InputHandler : MonoBehaviour
         {
             if (temp[i] && !netButtons[i])
             {
-                print("netbutton " + netButtons[i] + " & temp " + temp[i]);
+            //    print("netbutton " + netButtons[i] + " & temp " + temp[i]);
                 StartCoroutine("InputBuffer", i + 1);
             }
             if (netButtons[i] != temp[i]) updatedButtons = true;
@@ -545,6 +545,9 @@ public class InputHandler : MonoBehaviour
     public void OnSelect()
     {
         selectInput?.Invoke();
+        if (StageManager.Instance != null) {
+            StageManager.Instance.RestartScene();
+        }
     }
     void OnR1Release()
     {

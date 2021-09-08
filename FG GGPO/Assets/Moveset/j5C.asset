@@ -17,7 +17,7 @@ MonoBehaviour:
   attackHeight: 3
   gatlingMoves:
   - {fileID: 11400000, guid: 5dd66898f3116a44bbcac26622c0d29a, type: 2}
-  attackPrefab: {fileID: 334434759881567290, guid: 8a33dadeca75e8540a7ec5b42ff5ad73, type: 3}
+  attackPrefab: {fileID: 334434759881567290, guid: 8a756fccf7ee3ea4ba2a257fa42d4897, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 22
@@ -35,12 +35,12 @@ MonoBehaviour:
   hitPushback: {x: 0, y: 0, z: 0}
   airHitPushback: {x: 0, y: -10, z: 5}
   blockPushback: {x: 0, y: 0, z: 0}
-  hitstop: 10
+  hitstop: 5
   groundHitProperty:
     damage: 0
     stun: 0
     pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
+    hitState: 1
   groundBlockProperty:
     damage: 0
     stun: 0

@@ -85,7 +85,7 @@ public class AnimationAssist : MonoBehaviour
     {
         if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.AnimMomemtun();
+           // attack.AnimMomemtun();
         }
     }
 }

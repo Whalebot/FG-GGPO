@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+  attackPrefab: {fileID: 334434759881567290, guid: 0818ad92fc04047489ab4c3d8ee7e9d4, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   animationID: 0
@@ -84,4 +84,9 @@ MonoBehaviour:
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
-  m: []
+  m:
+  - startFrame: 10
+    impulse: 0
+    duration: 4
+    momentum: {x: 0, y: 0, z: 5}
+    resetVelocityDuringRecovery: 1

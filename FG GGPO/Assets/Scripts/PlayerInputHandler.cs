@@ -44,7 +44,9 @@ public class PlayerInputHandler : MonoBehaviour
             Vector3 ab = ((rightVector * v.x) + (forwardVector * v.y));
             return ab;
         }
-        forwardVector = (mov.strafeTarget.position - transform.position).normalized;
+        forwardVector = (mov.strafeTarget.position - transform.position);
+        forwardVector.y = 0;
+        forwardVector = forwardVector.normalized;
         rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
         Vector3 temp = ((rightVector * v.x) + (forwardVector * v.y));
         return temp;
@@ -111,7 +113,6 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
         {
-            print("Bob");
             InAnimationInput();
         }
         if (Physics.autoSimulation)
