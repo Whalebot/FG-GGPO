@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour
     public int lastInput = 5;
 
     public int motionInputWindow;
+    public int directionOffset;
 
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
@@ -221,28 +222,37 @@ public class InputHandler : MonoBehaviour
     public Vector2 TranslateInput(bool[] input)
     {
 
-        if (input[0] && input[3])
+        if (input[0] && input[2])
         {
             input[0] = false;
-            input[3] = false;
-        }
-
-        if (input[1] && input[2])
-        {
-            input[1] = false;
             input[2] = false;
         }
 
+        if (input[1] && input[3])
+        {
+            input[1] = false;
+            input[3] = false;
+        }
+
         Vector3 v = Vector2.zero;
-        if (input[0] && !input[1] && input[2] && !input[3]) { v = new Vector2(-1, -1).normalized; }
+        //Neutral
+        if (!input[0] && !input[1] && !input[2] && !input[3]) { v = new Vector2(0, 0).normalized; }
+        //F
+        else if (input[0] && !input[1] && !input[2] && !input[3]) { v = new Vector2(0, 1).normalized; }
+        //B
         else if (!input[0] && !input[1] && input[2] && !input[3]) { v = new Vector2(0, -1).normalized; }
-        else if (!input[0] && !input[1] && input[2] && input[3]) { v = new Vector2(1, -1).normalized; }
-        else if (input[0] && !input[1] && !input[2] && !input[3]) { v = new Vector2(-1, 0).normalized; }
-        else if (!input[0] && !input[1] && !input[2] && !input[3]) { v = new Vector2(0, 0).normalized; }
-        else if (!input[0] && !input[1] && !input[2] && input[3]) { v = new Vector2(1, 0).normalized; }
-        else if (input[0] && input[1] && !input[2] && !input[3]) { v = new Vector2(-1, 1).normalized; }
-        else if (!input[0] && input[1] && !input[2] && !input[3]) { v = new Vector2(0, 1).normalized; }
-        else if (!input[0] && input[1] && !input[2] && input[3]) { v = new Vector2(1, 1).normalized; }
+        //R
+        else if (!input[0] && input[1] && !input[2] && !input[3]) { v = new Vector2(1, 0).normalized; }
+        //L
+        else if (!input[0] && !input[1] && !input[2] && input[3]) { v = new Vector2(-1, 0).normalized; }
+        //FR
+        else if (input[0] && input[1] && !input[2] && !input[3]) { v = new Vector2(1, 1).normalized; }
+        //FL
+        else if (input[0] && !input[1] && !input[2] && input[3]) { v = new Vector2(-1, 1).normalized; }
+        //BR
+        else if (!input[0] && input[1] && input[2] && !input[3]) { v = new Vector2(1, -1).normalized; }
+        //BL
+        else if (!input[0] && !input[1] && input[2] && input[3]) { v = new Vector2(-1, -1).normalized; }
         return v;
     }
 
@@ -251,7 +261,11 @@ public class InputHandler : MonoBehaviour
         Vector2 v2 = new Vector2(-v1.x, -v1.y);
         return v2;
     }
-
+    public Vector2 InvertX(Vector2 v1)
+    {
+        Vector2 v2 = new Vector2(-v1.x, v1.y);
+        return v2;
+    }
     private void FixedUpdate()
     {
         //   if (!deviceIsAssigned) return;
@@ -259,7 +273,11 @@ public class InputHandler : MonoBehaviour
         {
             for (int i = 0; i < heldDirectionals.Length; i++)
             {
-                netDirectionals[i] = heldDirectionals[i];
+                //Look forward
+                netDirectionals[i] = heldDirectionals[(i + directionOffset) % 4];
+                //Look back
+
+
             }
 
             ResolveButtons(heldButtons);
@@ -268,10 +286,13 @@ public class InputHandler : MonoBehaviour
 
         {
             //IF PLAYER 2, REVERSE INPUTS
-            if (id == 1)
+            if (id == 1 || InputManager.Instance.absoluteDirections || InputManager.Instance.updateDirections)
                 inputDirection = TranslateInput(netDirectionals);
             else
+            {
                 inputDirection = InvertVector(TranslateInput(netDirectionals));
+            }
+
 
 
             //SEND INPUTS TO INPUT DISPLAY
@@ -383,7 +404,7 @@ public class InputHandler : MonoBehaviour
     private void OnLeft(InputAction.CallbackContext context)
     {
         if (debug) print("Left");
-        heldDirectionals[0] = !context.canceled;
+        heldDirectionals[3] = !context.canceled;
 
         leftInput?.Invoke();
     }
@@ -391,7 +412,7 @@ public class InputHandler : MonoBehaviour
     private void OnUp(InputAction.CallbackContext context)
     {
         if (debug) print("Up");
-        heldDirectionals[1] = !context.canceled;
+        heldDirectionals[0] = !context.canceled;
     }
     private void OnDown(InputAction.CallbackContext context)
     {
@@ -401,7 +422,7 @@ public class InputHandler : MonoBehaviour
     private void OnRight(InputAction.CallbackContext context)
     {
         if (debug) print("Right");
-        heldDirectionals[3] = !context.canceled;
+        heldDirectionals[1] = !context.canceled;
     }
     void ChangeControlScheme(InputAction.CallbackContext context)
     {

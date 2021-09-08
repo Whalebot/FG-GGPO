@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
     [FoldoutGroup("Assign components")] public PhysicMaterial groundMat;
     [FoldoutGroup("Assign components")] public PhysicMaterial airMat;
     bool check;
-
+    Vector3 pos;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +83,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //CalculateRight(1);
         if (GameHandler.isPaused)
         {
             isMoving = false;
@@ -90,6 +91,28 @@ public class Movement : MonoBehaviour
         }
 
         ExecuteFrame();
+    }
+    public Vector3 CalculateRight(float f)
+    {
+
+        float distance = Vector3.Distance(strafeTarget.position, transform.position);
+        transform.LookAt(strafeTarget);
+        float angle = Vector3.SignedAngle(transform.right, Vector3.forward, Vector3.up);
+
+        angle += Mathf.Sign(f) * distance;
+
+
+        pos.x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + strafeTarget.position.x;
+        pos.z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + strafeTarget.position.z;
+        Debug.DrawLine(transform.position, pos, Color.red);
+
+        return (pos - transform.position).normalized * Mathf.Abs(f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(pos, 1);
     }
 
     public void ExecuteFrame()
@@ -283,16 +306,13 @@ public class Movement : MonoBehaviour
         {
             if (runMomentumCounter > 0 && !sprinting)
             {
-
-
-                {                //Run momentum + normal momentum
-                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
-                    runMomentumCounter--;
-                }
-
+                //Run momentum + normal momentum
+                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
+                runMomentumCounter--;
             }
             else
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+                //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
         }
         else
         {

@@ -34,29 +34,52 @@ MonoBehaviour:
   hitPushback: {x: 0, y: 0, z: 10}
   airHitPushback: {x: 0, y: 5, z: 10}
   blockPushback: {x: 0, y: 0, z: 5}
-  groundHitProperty: 0
-  airHitProperty: 0
-  shakeMagnitude: 0
-  shakeDuration: 0
-  slowMotionDuration: 0.01
-  startupParticle: 0
+  hitstop: 10
+  groundHitProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  groundBlockProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  groundCounterhitProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  airHitProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  airBlockProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
+  airCounterhitProperty:
+    damage: 0
+    stun: 0
+    pushback: {x: 0, y: 0, z: 0}
+    hitState: 0
   blockSlowMotion: 0.01
-  verticalRotation: 1
   particleID: 0
   landCancel: 0
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
   overrideVelocity: 1
+  runMomentum: 0
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 15, y: 0, z: 0}
-  momentumArray: []
   m:
   - startFrame: 0
     impulse: 0
-    duration: 10
-    momentum: {x: 15, y: 0, z: 6}
-    resetVelocityDuringRecovery: 0
+    duration: 20
+    momentum: {x: 8, y: 0, z: 0}
+    resetVelocityDuringRecovery: 1

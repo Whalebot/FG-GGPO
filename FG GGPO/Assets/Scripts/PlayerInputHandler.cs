@@ -37,6 +37,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     Vector3 RelativeToCamera(Vector2 v)
     {
+        if (InputManager.Instance.absoluteDirections)
+        {
+            forwardVector = (CameraManager.Instance.mainCamera.transform.forward);
+            rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
+            Vector3 ab = ((rightVector * v.x) + (forwardVector * v.y));
+            return ab;
+        }
         forwardVector = (mov.strafeTarget.position - transform.position).normalized;
         rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
         Vector3 temp = ((rightVector * v.x) + (forwardVector * v.y));
@@ -49,6 +56,35 @@ public class PlayerInputHandler : MonoBehaviour
         relativeDirection = RelativeToCamera(input.inputDirection);
     }
 
+    void UpdateDirection()
+    {
+        input.directionOffset = 0;
+        if (!InputManager.Instance.updateDirections) return;
+        //Vector3 dist = (GameHandler.Instance.p2Transform.position - GameHandler.Instance.p1Transform.position);
+        //dist = dist / 2;
+        //Vector3 center = GameHandler.Instance.p1Transform.position + dist;
+
+
+        float angle = Vector3.SignedAngle(CameraManager.Instance.mainCamera.transform.forward, (GameHandler.Instance.ReturnPlayer(transform).position - transform.position).normalized, Vector3.up);
+        print(angle);
+        if (angle > 135 || angle < -135)
+        {
+            input.directionOffset = 2;
+        }
+        else if (angle > 45)
+        {
+            input.directionOffset = 1;
+        }
+        else if (angle < -45)
+        {
+            input.directionOffset = 3;
+        }
+        else
+        {
+            input.directionOffset = 0;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (GameHandler.isPaused)
@@ -57,7 +93,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-
+        UpdateDirection();
 
         if (status.currentState == Status.State.Neutral)
         {

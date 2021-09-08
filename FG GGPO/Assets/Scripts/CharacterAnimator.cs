@@ -244,9 +244,6 @@ public class CharacterAnimator : MonoBehaviour
         if (!movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0, deaccelerateSpeed);
         else if (movement.sprinting) runSpeed = Mathf.Lerp(runSpeed, 1, deaccelerateSpeed);
         else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
-
-
-        anim.SetFloat("RunSpeed", Mathf.Abs(runSpeed));
     }
 
     void Jump()

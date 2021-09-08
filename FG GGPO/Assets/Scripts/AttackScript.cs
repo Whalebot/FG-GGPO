@@ -110,7 +110,7 @@ public class AttackScript : MonoBehaviour
                         //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
                         //transform.rotation = desiredRotation;
                         if (activeMove.overrideVelocity)
-                            status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
+                            status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
                     }
                 }
                 else
@@ -124,20 +124,13 @@ public class AttackScript : MonoBehaviour
                         status.rb.velocity = Vector3.zero;
                     }
                     status.rb.AddForce(transform.right * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z, ForceMode.VelocityChange);
-                
+
                 }
             }
 
         }
     }
 
-    Vector3 CalculateRight()
-    {
-        Vector3 v1 = transform.right;
-        //float distance = Vector3.Distance(movement.strafeTarget.position, transform.position);
-        //v1 = transform.right + transform.forward * (0.6F/distance);
-        return v1.normalized;
-    }
 
     //public void ExecuteFrame()
     //{
