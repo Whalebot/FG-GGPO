@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
+  m_Name: cD 1
+  m_EditorClassIdentifier: 
+  type: 0
+  collissionState: 0
+  sfx: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  animationID: 13
+  animationClip: {fileID: 0}
+  firstStartupFrame: 5
+  lastActiveFrame: 9
+  totalMoveDuration: 69
+  recoveryFrames: 60
+  canGatling: 0
+  hitSpecialCancelable: 0
+  blockSpecialCancelable: 0
+  attacks:
+  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+    startupFrame: 5
+    activeFrames: 5
+    gatlingFrames: 5
+    attackHeight: 1
+    groundHitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 10
+      proration: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 0
+      hitstop: 10
+      proration: 0
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+    groundCounterhitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 0
+    airHitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 0
+    airBlockProperty:
+      damage: 0
+      stun: 11
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+    airCounterhitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 0
+  particleID: 0
+  landCancel: 0
+  noClip: 1
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  forceCounterhit: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 0
+  m:
+  - startFrame: 5
+    impulse: 1
+    duration: 2
+    momentum: {x: 0, y: 10, z: 3}
+    resetVelocityDuringRecovery: 0
