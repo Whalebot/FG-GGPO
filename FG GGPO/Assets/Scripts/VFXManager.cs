@@ -9,6 +9,7 @@ public class VFXManager : MonoBehaviour
         get; private set;
     }
     public GameObject recoveryFX;
+    public GameObject wakeupFX;
 
     private void Awake()
     {

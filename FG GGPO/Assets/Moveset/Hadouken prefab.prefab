@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6130433937859647869}
   - component: {fileID: 6130433937859647865}
   - component: {fileID: 6130433937859647868}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: Hadouken prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   baseDamage: 1
   baseKnockback: 1
   totalDamage: 0
+  hitboxID: 0
   container: {fileID: 0}
   attack: {fileID: 0}
   move: {fileID: 0}

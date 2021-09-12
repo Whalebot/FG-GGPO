@@ -7,6 +7,7 @@ public class CharacterAnimator : MonoBehaviour
     private Status status;
     private Animator anim;
     private Movement movement;
+    public bool hitstop;
     [SerializeField] private AttackScript attack;
     private float runSpeed;
     //  private Character character;
@@ -41,6 +42,7 @@ public class CharacterAnimator : MonoBehaviour
         GameHandler.Instance.rollbackEvent += RollbackAnimation;
 
         status.hitstunEvent += HitStun;
+        //status.hitstunEvent += HitStop;
         status.knockdownEvent += Knockdown;
         status.wakeupEvent += WakeUp;
         status.blockEvent += Block;
@@ -56,41 +58,34 @@ public class CharacterAnimator : MonoBehaviour
         }
 
     }
+    public void HitStop()
+    {  StartCoroutine(HitstopStart());
+
+    }
+
+    IEnumerator HitstopStart()
+    {
+        hitstop = false;
+        yield return new WaitForFixedUpdate();
+       // yield return new WaitForFixedUpdate();
+        hitstop = true;
+    }
+
+
 
     private void FixedUpdate()
     {
-        anim.enabled = !isPaused;
+
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
-        if (attack.attacking)
-        {
-            if (attack.canGatling && attack.gameFrames > attack.activeMove.startupFrames + attack.activeMove.gatlingFrames)
-            {
-                //print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
-                attack.attackString = true;
-            }
-
-            if (attack.gameFrames > attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
-            {
-                attack.Idle();
-            }
-       
-       
-            else if (attack.gameFrames < attack.activeMove.startupFrames)
-            {
-                attack.StartupFrames();
-            }
-            else if (attack.gameFrames <= attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames)
-            {
-                attack.ActiveFrames();
-            }
-
-            else if (attack.gameFrames <= attack.activeMove.startupFrames - 1 + attack.activeMove.activeFrames + attack.activeMove.recoveryFrames)
-            {
-                attack.RecoveryFrames();
-            }
-
-        }
+   
         SaveAnimationData();
+        if (status.hitstopCounter > 0 && !hitstop) { HitStop(); }
+        else if (status.hitstopCounter <= 0)
+        {
+            StopCoroutine(HitstopStart());
+            hitstop = false;
+        }
+        anim.enabled = !hitstop;
     }
 
 
@@ -101,45 +96,45 @@ public class CharacterAnimator : MonoBehaviour
     public void EditorAnimation()
     {
 
-        anim = GetComponent<Animator>();
-        frame = Mathf.Clamp(frame, 0, (int)(anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
-        if (move != null)
-        {
-            anim.Play("Base Layer.Attacking." + move.name, 0, (float)frame / (anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
-            anim.Update(Time.fixedDeltaTime);
-        }
+        //anim = GetComponent<Animator>();
+        //frame = Mathf.Clamp(frame, 0, (int)(anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
+        //if (move != null)
+        //{
+        //    anim.Play("Base Layer.Attacking." + move.name, 0, (float)frame / (anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
+        //    anim.Update(Time.fixedDeltaTime);
+        //}
 
 
-        if (move != null)
-        {
-            if (frame >= move.startupFrames + move.activeFrames + move.recoveryFrames)
-            {
-                if (Application.isEditor && attack.activeHitbox != null)
-                    DestroyImmediate(attack.activeHitbox);
-            }
-            else if (frame >= move.startupFrames + move.activeFrames)
-            {
+        //if (move != null)
+        //{
+        //    if (frame >= move.startupFrames + move.activeFrames + move.recoveryFrames)
+        //    {
+        //        if (Application.isEditor && attack.activeHitbox != null)
+        //            DestroyImmediate(attack.activeHitbox);
+        //    }
+        //    else if (frame >= move.startupFrames + move.activeFrames)
+        //    {
 
-                if (move.attackPrefab == null) return;
-                if (attack.activeHitbox == null)
-                {
-                    attack.activeHitbox = Instantiate(move.attackPrefab, transform.position, transform.rotation, attack.hitboxContainer);
+        //        if (move.attackPrefab == null) return;
+        //        if (attack.activeHitbox == null)
+        //        {
+        //            attack.activeHitbox = Instantiate(move.attackPrefab, transform.position, transform.rotation, attack.hitboxContainer);
 
-                    AttackContainer attackContainer = attack.activeHitbox.GetComponentInChildren<AttackContainer>();
-                    if (attackContainer != null)
-                    {
-                        attackContainer.status = status;
-                        attackContainer.attack = attack;
-                        attackContainer.move = move;
-                    }
-                }
-            }
-            else if (frame < move.startupFrames)
-            {
-                if (Application.isEditor && attack.activeHitbox != null)
-                    DestroyImmediate(attack.activeHitbox);
-            }
-        }
+        //            AttackContainer attackContainer = attack.activeHitbox.GetComponentInChildren<AttackContainer>();
+        //            if (attackContainer != null)
+        //            {
+        //                attackContainer.status = status;
+        //                attackContainer.attack = attack;
+        //                attackContainer.move = move;
+        //            }
+        //        }
+        //    }
+        //    else if (frame < move.startupFrames)
+        //    {
+        //        if (Application.isEditor && attack.activeHitbox != null)
+        //            DestroyImmediate(attack.activeHitbox);
+        //    }
+        //}
 
     }
 

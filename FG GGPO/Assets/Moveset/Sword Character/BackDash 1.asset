@@ -14,46 +14,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   collissionState: 0
-  attackHeight: 1
+  sfx: []
   gatlingMoves: []
   attackPrefab: {fileID: 0}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
   animationID: 50
   animationClip: {fileID: 0}
-  startupFrames: 5
-  activeFrames: 5
+  firstStartupFrame: 1
+  lastActiveFrame: 1
+  totalMoveDuration: 16
   recoveryFrames: 15
-  gatlingFrames: 1
   canGatling: 0
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
-  damage: 10
-  hitStun: 40
-  blockStun: 20
-  hitPushback: {x: 0, y: 0, z: 10}
-  airHitPushback: {x: 0, y: 5, z: 10}
-  blockPushback: {x: 0, y: 0, z: 5}
-  groundHitProperty: 0
-  airHitProperty: 0
-  shakeMagnitude: 0
-  shakeDuration: 0
-  slowMotionDuration: 0.01
-  startupParticle: 0
-  blockSlowMotion: 0.01
-  verticalRotation: 1
+  attacks:
+  - hitbox: {fileID: 0}
+    startupFrame: 1
+    activeFrames: 1
+    gatlingFrames: 1
+    attackHeight: 1
+    groundHitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    groundCounterhitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airHitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airBlockProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airCounterhitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
   particleID: 0
   landCancel: 0
-  holdAttack: 0
-  tracking: 0
-  homing: 0
-  fullCancelable: 0
   noClip: 0
-  iFrames: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  forceCounterhit: 0
   overrideVelocity: 1
+  runMomentum: 1
   resetVelocityDuringRecovery: 1
-  Momentum: {x: 0, y: 0, z: -20}
-  momentumArray: []
   m:
   - startFrame: 0
     impulse: 0

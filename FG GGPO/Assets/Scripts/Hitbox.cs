@@ -7,6 +7,7 @@ public class Hitbox : MonoBehaviour
     public float baseDamage = 1;
     public float baseKnockback = 1;
     public int totalDamage;
+    public int hitboxID;
     public AttackContainer container;
     public AttackScript attack;
     public Move move;
@@ -18,11 +19,11 @@ public class Hitbox : MonoBehaviour
     [SerializeField] List<Status> enemyList;
     MeshRenderer mr;
     Transform colPos;
-
+    bool hitOnce;
 
     private void Awake()
     {
-
+        print(" Hitbox active");
         mr = GetComponent<MeshRenderer>();
         if (container != null)
         {
@@ -41,6 +42,7 @@ public class Hitbox : MonoBehaviour
             mr.enabled = false;
         }
         enemyList = new List<Status>();
+
     }
     private void Start()
     {
@@ -49,13 +51,15 @@ public class Hitbox : MonoBehaviour
             attack = container.attack;
 
         }
+        print(attack.gameFrames + " Hitbox active");
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.IsChildOf(body))
-        {
+       // if (!other.transform.IsChildOf(body))
+        {if (hitOnce) return;
             Status enemyStatus = other.GetComponentInParent<Status>();
+        
             if (enemyStatus != null)
             {
                 if (status == enemyStatus) return;
@@ -73,10 +77,10 @@ public class Hitbox : MonoBehaviour
                     Hurtbox hurtbox = other.GetComponent<Hurtbox>();
                     if (hurtbox != null)
                     {
-                        DoDamage(enemyStatus, hurtbox.damageMultiplier, hurtbox.poiseMultiplier);
+                        DoDamage(enemyStatus, hurtbox.damageMultiplier);
                     }
                     else
-                        DoDamage(enemyStatus, 1, 1);
+                        DoDamage(enemyStatus, 1);
                 }
             }
         }
@@ -90,84 +94,100 @@ public class Hitbox : MonoBehaviour
         enemyList.Clear();
 
     }
-    public virtual void DoDamage(Status other, float dmgMod, float poiseMod)
+    public virtual void DoDamage(Status other, float dmgMod)
     {
+        hitOnce = true;
         if (container != null)
         {
             attack = container.attack;
 
         }
         attack.canGatling = move.canGatling;
-        {
-            status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames - attack.gameFrames);
-            //status.hit
-        }
-        //Enemy hitstop
-        other.newMove = true;
-        other.hitstopCounter = move.gatlingFrames + move.hitstop;
-        //Own hitstop
-        status.Hitstop();
-        status.newMove = true;
-        status.hitstopCounter = move.gatlingFrames;
-
-        totalDamage = (int)(dmgMod * (baseDamage * move.damage));
-        int damageDealt = totalDamage;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
 
-        GameObject GO;
+        CheckAttack(other, move.attacks[hitboxID]);
+    }
 
+    void CheckAttack(Status other, Attack attack) {
         //Check for block
         if (other.blocking)
         {
-            if (move.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || move.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
+            //Check if blocked wrong height
+            if (attack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || attack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
             {
-                aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
 
-                //CameraManager.Instance.ShakeCamera(move.shakeMagnitude, move.shakeDuration);
-                GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
-                if (move.groundHitProperty.hitState == HitState.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
-                else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
+                ExecuteHit(attack.groundHitProperty, other);
                 return;
             }
-            aVector = baseKnockback * knockbackDirection * move.blockPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.blockPushback.x + baseKnockback * Vector3.up * move.blockPushback.y;
-
-
-            GO = Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            other.TakeBlock(damageDealt, aVector, (int)(move.blockStun), knockbackDirection, 0);
+            if (other.groundState == GroundState.Grounded)
+            {
+                ExecuteBlock(attack.groundBlockProperty, other);
+            }
+            //Check for airborne
+            else if (other.groundState == GroundState.Airborne)
+                ExecuteBlock(attack.airBlockProperty, other);
         }
         else
         {
-            GO = Instantiate(move.hitFX, colPos.position, colPos.rotation);
-
             if (other.counterhitState) { }
 
             if (other.groundState == GroundState.Grounded)
             {
-                aVector = baseKnockback * knockbackDirection * move.hitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.hitPushback.x + baseKnockback * Vector3.up * move.hitPushback.y;
-                if (move.groundHitProperty.hitState == HitState.Launch)
-                {
-                    other.groundState = GroundState.Airborne;
-                }
-
-                if (move.groundHitProperty.hitState == HitState.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
-                else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
+                ExecuteHit(attack.groundHitProperty, other);
             }
             //Check for airborne or knockdown state
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
-                aVector = baseKnockback * knockbackDirection * move.airHitPushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * move.airHitPushback.x + baseKnockback * Vector3.up * move.airHitPushback.y;
-
-                if (move.airHitProperty.hitState == HitState.Knockdown)
-                    other.TakeKnockdown(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
-                else
-                    other.TakeHit(damageDealt, aVector, (int)(move.hitStun), knockbackDirection, 0);
+                print("Air");
+                ExecuteHit(attack.airHitProperty, other);
             }
-
         }
+    }
 
+    void ExecuteBlock(HitProperty hit, Status other)
+    {
+        status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+        other.newMove = true;
+        other.hitstopCounter = hit.hitstop;
+        //Own hitstop
+        status.Hitstop();
+        status.newMove = true;
+        status.hitstopCounter = hit.hitstop;
+        //Block FX
+        if(move.blockFX != null)
+         Instantiate(move.blockFX, colPos.position, colPos.rotation);
+        if (move.blockSFX != null)
+            Instantiate(move.blockSFX, colPos.position, colPos.rotation);
+        //Calculate direction
+        aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
+        other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
+    }
+
+    void ExecuteHit(HitProperty hit, Status other)
+    {
+        status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+        other.newMove = true;
+        other.hitstopCounter = hit.hitstop;
+        //Own hitstop
+        status.Hitstop();
+        status.newMove = true;
+        status.hitstopCounter = hit.hitstop;
+
+        //Hit FX
+        if (move.hitFX != null)
+            Instantiate(move.hitFX, colPos.position, colPos.rotation);
+        if (move.hitSFX != null)
+            Instantiate(move.hitSFX, colPos.position, colPos.rotation);
+        //Calculate direction
+        aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
+        if (hit.hitState == HitState.Knockdown)
+            other.TakeKnockdown(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
+        else
+            other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
+
+        if (hit.hitState == HitState.Launch)
+        {
+            other.groundState = GroundState.Airborne;
+        }
     }
 }

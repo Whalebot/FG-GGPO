@@ -95,9 +95,9 @@ public class Movement : MonoBehaviour
     public Vector3 CalculateRight(float f)
     {
 
-   
-        Vector3 targetNoY = strafeTarget.position; 
-        targetNoY.y = 0;
+
+        Vector3 targetNoY = strafeTarget.position;
+        targetNoY.y = transform.position.y;
         float distance = Vector3.Distance(targetNoY, transform.position);
 
         transform.LookAt(targetNoY);
@@ -165,7 +165,7 @@ public class Movement : MonoBehaviour
 
     public virtual void Rotation()
     {
-        if (ground)
+        if (ground && isMoving)
         {
             if (strafeTarget == null) return;
             Vector3 desiredDirection = strafeTarget.position - transform.position;
@@ -272,13 +272,13 @@ public class Movement : MonoBehaviour
             return false;
         }
 
-        if (check && !ground)
+        if (!ground )
         {
+            if (check && rb.velocity.y < 0) rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
 
             status.DisableHurtboxes();
-            print("Land on opponent");
-            //rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
-            return false;
+            //
+            //return false;
         }
 
         if (!ground && transform.position.y < 0.1F)
