@@ -12,7 +12,6 @@ public class Move : ScriptableObject
     public BlockState collissionState;
     [FoldoutGroup("SFX")] public SFX[] sfx;
     public List<Move> gatlingMoves;
-    public GameObject attackPrefab;
     public GameObject hitFX;
     public GameObject blockFX;
     public GameObject hitSFX;

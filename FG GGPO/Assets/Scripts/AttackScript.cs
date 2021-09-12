@@ -187,7 +187,7 @@ public class AttackScript : MonoBehaviour
                             if (activeMove.attacks[i].hitbox != null) { 
                                 Destroy(hitboxes[i]);
 
-                                print("Manual destroy hitbox");
+                           //     print("Manual destroy hitbox");
                             }
                         }
                     }
@@ -218,7 +218,7 @@ public class AttackScript : MonoBehaviour
                 Destroy(hitboxes[i]);
             }
         }
-        print("Auto destroy hitbox");
+      //  print("Auto destroy hitbox");
         hitboxes.Clear();
     }
 
