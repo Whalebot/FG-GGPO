@@ -26,48 +26,58 @@ MonoBehaviour:
   startupFrames: 10
   activeFrames: 2
   recoveryFrames: 5
-  gatlingFrames: 1
+  gatlingFrames: 5
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
-  damage: 740
-  hitStun: 50
-  blockStun: 20
-  hitPushback: {x: 0, y: 0, z: 0}
-  airHitPushback: {x: 0, y: 7, z: 0}
-  blockPushback: {x: 0, y: 0, z: 0}
-  hitstop: 10
-  groundHitProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  groundBlockProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  groundCounterhitProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  airHitProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  airBlockProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  airCounterhitProperty:
-    damage: 0
-    stun: 0
-    pushback: {x: 0, y: 0, z: 0}
-    hitState: 0
-  blockSlowMotion: 0.01
+  attacks:
+  - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+    startupFrame: 10
+    activeFrames: 2
+    gatlingFrames: 5
+    attackHeight: 3
+    groundHitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    groundCounterhitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airHitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airBlockProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+    airCounterhitProperty:
+      damage: 0
+      stun: 0
+      hitstop: 0
+      proration: 0
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
   particleID: 0
   landCancel: 1
   noClip: 0
@@ -76,6 +86,7 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
+  forceCounterhit: 0
   overrideVelocity: 0
   runMomentum: 0
   resetVelocityDuringRecovery: 0

@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
+    public bool absoluteDirections;
+    public bool updateDirections;
     public bool replay;
     public InputLog log;
     public InputLog replayLog;
@@ -36,7 +38,7 @@ public class InputManager : MonoBehaviour
 
         foreach (var item in Gamepad.all)
         {
-            print(item.name);
+           // print(item.name);
         }
 
         //for (int i = 0; i < controllersConnected; i++)

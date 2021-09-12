@@ -15,7 +15,7 @@ public class AttackScript : MonoBehaviour
     public bool canGatling;
     CharacterSFX sfx;
     public Transform hitboxContainer;
-    public GameObject activeHitbox;
+    public List<GameObject> hitboxes;
 
     public delegate void AttackEvent();
     public AttackEvent startupEvent;
@@ -68,7 +68,9 @@ public class AttackScript : MonoBehaviour
     {
         if (attacking)
         {
-            gameFrames++;
+            if (status.hitstopCounter <= 0)
+                gameFrames++;
+
 
             //Execute properties
             //Invul
@@ -91,10 +93,15 @@ public class AttackScript : MonoBehaviour
                     status.EnableHurtboxes();
                 }
             }
-
+            for (int i = 0; i < activeMove.sfx.Length; i++)
+            {
+                if (gameFrames == activeMove.sfx[i].startup)
+                    Instantiate(activeMove.sfx[i].prefab);
+            }
             //Execute momentum
             for (int i = 0; i < activeMove.m.Length; i++)
             {
+                //Non-impulse, set velocity every frame
                 if (!activeMove.m[i].impulse)
                 {
                     if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
@@ -106,13 +113,11 @@ public class AttackScript : MonoBehaviour
                     {
                         //if (activeMove.m.resetVelocityDuringRecovery)
                         //    status.rb.velocity = Vector3.zero;
-                        //Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
-                        //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
-                        //transform.rotation = desiredRotation;
                         if (activeMove.overrideVelocity)
-                            status.rb.velocity = (CalculateRight() * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z);
+                            status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
                     }
                 }
+                //Impulse, add velocity at beginning only
                 else
                 if (gameFrames == activeMove.m[i].startFrame)
                 {
@@ -123,75 +128,141 @@ public class AttackScript : MonoBehaviour
                     {
                         status.rb.velocity = Vector3.zero;
                     }
-                    status.rb.AddForce(transform.right * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z, ForceMode.VelocityChange);
-                
+                    status.rb.velocity = transform.right * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+
                 }
             }
 
+            int firstStartupFrame = activeMove.attacks[0].startupFrame;
+
+            int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
+            int totalMoveDuration = lastActiveFrame + activeMove.recoveryFrames;
+
+            if (canGatling && gameFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+            {
+                //print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
+                attackString = true;
+            }
+
+
+
+            if (gameFrames > totalMoveDuration)
+            {
+                Idle();
+            }
+            else if (gameFrames < firstStartupFrame)
+            {
+                //print(attack.gameFrames + " Startup");
+                StartupFrames();
+            }
+            else if (gameFrames <= lastActiveFrame)
+            {
+                for (int i = 0; i < activeMove.attacks.Length; i++)
+                {
+                    if (gameFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && gameFrames >= activeMove.attacks[i].startupFrame)
+                    {
+                        if (hitboxes.Count < i + 1)
+                        {
+                            if (activeMove.attacks[i].hitbox != null)
+                            {
+                                if (activeMove.type == MoveType.Special) hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, transform.position + activeMove.attacks[i].hitbox.transform.position, transform.rotation));
+                                else
+                                {
+                                    hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
+                                    hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
+                                }
+                                Hitbox hitbox = hitboxes[i].GetComponentInChildren<Hitbox>();
+                                hitbox.hitboxID = i;
+                                hitbox.attack = this;
+                                hitbox.status = status;
+                                hitbox.move = activeMove;
+                                if (activeMove.type == MoveType.Special) hitboxes[i] = null;
+                            }
+                        }
+                    }
+                    else if (gameFrames > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
+                    {
+                        if (hitboxes.Count == i + 1)
+                        {
+                            if (activeMove.attacks[i].hitbox != null) { 
+                                Destroy(hitboxes[i]);
+
+                           //     print("Manual destroy hitbox");
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (gameFrames <= totalMoveDuration)
+            {
+                RecoveryFrames();
+            }
         }
     }
 
-    Vector3 CalculateRight()
-    {
-        Vector3 v1 = transform.right;
-        //float distance = Vector3.Distance(movement.strafeTarget.position, transform.position);
-        //v1 = transform.right + transform.forward * (0.6F/distance);
-        return v1.normalized;
-    }
-
-    //public void ExecuteFrame()
-    //{
-    //    if (activeMove == null) return;
-    //    if (status.currentState == Status.State.Startup) StartupFrames();
-    //    if (status.currentState == Status.State.Active) ActiveFrames();
-    //    if (status.currentState == Status.State.Recovery) Recovery();
-    //}
 
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
         status.counterhitState = true;
-        if (activeHitbox != null)
+        //ClearHitboxes();
+    }
+    void ClearHitboxes()
+    {
+        for (int i = 0; i < hitboxes.Count; i++)
         {
-            if (Application.isEditor)
-                DestroyImmediate(activeHitbox);
-            else
+            if (hitboxes[i] != null)
             {
-                Destroy(activeHitbox);
+
+                Destroy(hitboxes[i]);
             }
         }
+      //  print("Auto destroy hitbox");
+        hitboxes.Clear();
     }
 
     public void ActiveFrames()
     {
-        status.GoToState(Status.State.Active);
-        status.counterhitState = true;
-        if (activeMove.type == Move.MoveType.Special)
-        {
-            if (activeHitbox == null)
-            {
-                activeHitbox = Instantiate(activeMove.attackPrefab, transform.position + activeMove.attackPrefab.transform.position, transform.rotation);
+        //status.GoToState(Status.State.Active);
+        //status.counterhitState = true;
+        //if (activeMove.type == MoveType.Special)
+        //{
+        //    if (activeHitbox == null)
+        //    {
+        //        activeHitbox = Instantiate(activeMove.attackPrefab, transform.position + activeMove.attackPrefab.transform.position, transform.rotation);
 
-                Hitbox hitbox = activeHitbox.GetComponentInChildren<Hitbox>();
+        //        Hitbox hitbox = activeHitbox.GetComponentInChildren<Hitbox>();
 
-                hitbox.status = status;
-                hitbox.move = activeMove;
-                hitbox.attack = this;
-            }
-        }
-        else
-        if (activeHitbox == null)
-        {
-            if (activeMove.attackPrefab == null) return;
-            activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
+        //        hitbox.status = status;
+        //        hitbox.move = activeMove;
+        //        hitbox.attack = this;
+        //    }
+        //}
+        //else
+        //if (activeHitbox == null)
+        //{
 
-            AttackContainer attackContainer = activeHitbox.GetComponentInChildren<AttackContainer>();
+        //    if (activeMove.attackPrefab == null) return;
+        //    activeHitbox = Instantiate(activeMove.attackPrefab, transform.position, transform.rotation, hitboxContainer);
+        //    activeHitbox.transform.localPosition = activeMove.attackPrefab.transform.localPosition;
+        //    AttackContainer attackContainer = activeHitbox.GetComponentInChildren<AttackContainer>();
+        //    if (attackContainer != null)
+        //    {
+        //        attackContainer.status = status;
+        //        attackContainer.attack = this;
+        //        attackContainer.move = activeMove;
+        //    }
+        //    else
+        //    {
 
-            attackContainer.status = status;
-            attackContainer.attack = this;
-            attackContainer.move = activeMove;
-        }
+        //        Hitbox hitbox = activeHitbox.GetComponentInChildren<Hitbox>();
 
+        //        hitbox.status = status;
+        //        hitbox.attack = this;
+        //        hitbox.move = activeMove;
+        //    }
+        //}
     }
 
     public void RecoveryFrames()
@@ -202,21 +273,12 @@ public class AttackScript : MonoBehaviour
             if (activeMove.resetVelocityDuringRecovery)
                 status.rb.velocity = Vector3.zero;
 
-        if (activeHitbox != null && activeMove.type != Move.MoveType.Special)
-        {
-            if (Application.isEditor)
-                DestroyImmediate(activeHitbox);
-            else
-            {
-                Destroy(activeHitbox);
-            }
-        }
-        else activeHitbox = null;
+        ClearHitboxes();
     }
 
     public void AttackProperties(Move move)
     {
-        status.minusFrames = -(move.startupFrames + move.activeFrames + move.recoveryFrames);
+        status.minusFrames = -(move.totalMoveDuration);
         status.SetBlockState(move.collissionState);
         activeMove = move;
         attackID = move.animationID;
@@ -225,19 +287,21 @@ public class AttackScript : MonoBehaviour
         gameFrames = 0;
 
 
-        if (activeHitbox != null) Destroy(activeHitbox);
+        ClearHitboxes();
+
 
         Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
         transform.rotation = desiredRotation;
 
+        //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;
+        movement.ResetRun();
 
         Startup();
         status.GoToState(Status.State.Startup);
 
-        AttackMomentum();
         landCancel = activeMove.landCancel;
 
         ResetFrames();
@@ -278,13 +342,6 @@ public class AttackScript : MonoBehaviour
         else return true;
     }
 
-    public void AttackMomentum()
-    {
-    }
-
-    public void AnimMomemtun()
-    {
-    }
 
     void Startup()
     {
@@ -370,8 +427,7 @@ public class AttackScript : MonoBehaviour
 
             combo = 0;
             status.GoToState(Status.State.Neutral);
-            containerScript.DeactivateHitboxes();
-            containerScript.DeactivateParticles();
+            ClearHitboxes();
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();

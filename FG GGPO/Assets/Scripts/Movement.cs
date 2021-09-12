@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
     [FoldoutGroup("Assign components")] public PhysicMaterial groundMat;
     [FoldoutGroup("Assign components")] public PhysicMaterial airMat;
     bool check;
-
+    Vector3 pos;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +83,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //CalculateRight(1);
         if (GameHandler.isPaused)
         {
             isMoving = false;
@@ -90,6 +91,32 @@ public class Movement : MonoBehaviour
         }
 
         ExecuteFrame();
+    }
+    public Vector3 CalculateRight(float f)
+    {
+
+
+        Vector3 targetNoY = strafeTarget.position;
+        targetNoY.y = transform.position.y;
+        float distance = Vector3.Distance(targetNoY, transform.position);
+
+        transform.LookAt(targetNoY);
+        float angle = Vector3.SignedAngle(transform.right, Vector3.forward, Vector3.up);
+
+        angle += Mathf.Sign(f) * distance;
+
+
+        pos.x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + targetNoY.x;
+        pos.z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + targetNoY.z;
+        Debug.DrawLine(transform.position, pos, Color.red);
+
+        return (pos - transform.position).normalized * Mathf.Abs(f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(pos, 1);
     }
 
     public void ExecuteFrame()
@@ -138,7 +165,7 @@ public class Movement : MonoBehaviour
 
     public virtual void Rotation()
     {
-        if (ground)
+        if (ground && isMoving)
         {
             if (strafeTarget == null) return;
             Vector3 desiredDirection = strafeTarget.position - transform.position;
@@ -159,7 +186,10 @@ public class Movement : MonoBehaviour
         }
     }
 
-
+    public void ResetRun()
+    {
+        runMomentumCounter = 0;
+    }
 
     public virtual void MovementProperties()
     {
@@ -242,13 +272,13 @@ public class Movement : MonoBehaviour
             return false;
         }
 
-        if (check && !ground)
+        if (!ground )
         {
+            if (check && rb.velocity.y < 0) rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
 
             status.DisableHurtboxes();
-            print("Land on opponent");
-            //rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
-            return false;
+            //
+            //return false;
         }
 
         if (!ground && transform.position.y < 0.1F)
@@ -260,7 +290,7 @@ public class Movement : MonoBehaviour
             }
             landEvent?.Invoke();
             performedJumps = 0;
-            status.groundState = GroundState.Grounded;
+            status.GoToGroundState(GroundState.Grounded);
             ground = true;
             runMomentumCounter = 0;
             status.EnableHurtboxes();
@@ -283,16 +313,13 @@ public class Movement : MonoBehaviour
         {
             if (runMomentumCounter > 0 && !sprinting)
             {
-
-
-                {                //Run momentum + normal momentum
-                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
-                    runMomentumCounter--;
-                }
-
+                //Run momentum + normal momentum
+                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
+                runMomentumCounter--;
             }
             else
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+            //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
         }
         else
         {

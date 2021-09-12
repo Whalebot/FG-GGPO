@@ -54,6 +54,9 @@ public class Status : MonoBehaviour
     [SerializeField] public State currentState;
     public int maxHealth;
     public int health;
+    public int maxMeter;
+    public int meter;
+
     public int comboCounter;
 
     [FoldoutGroup("Components")] public GameObject standingCollider;
@@ -64,12 +67,12 @@ public class Status : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mov = GetComponent<Movement>();
         characterSFX = GetComponentInChildren<CharacterSFX>();
-        GoToState(State.Neutral);
-        ApplyCharacter();
+
     }
 
     private void Start()
     {
+        GoToState(State.Neutral);
     }
 
     void ActivateCollider()
@@ -77,6 +80,13 @@ public class Status : MonoBehaviour
         standingCollider.SetActive(blockState == BlockState.None || blockState == BlockState.Standing);
         crouchingCollider.SetActive(blockState == BlockState.Crouching);
         jumpingCollider.SetActive(blockState == BlockState.Airborne);
+    }
+
+    public void AirHurtboxes()
+    {
+        standingCollider.layer = LayerMask.NameToLayer("AirCollision");
+        crouchingCollider.layer = LayerMask.NameToLayer("AirCollision");
+        jumpingCollider.layer = LayerMask.NameToLayer("AirCollision");
     }
 
     public void EnableHurtboxes()
@@ -98,7 +108,8 @@ public class Status : MonoBehaviour
         if (newMove)
         {
             hitstopCounter--;
-            if(hitstopCounter > 1)rb.velocity = Vector3.zero;
+            if (hitstopCounter > 1) rb.velocity = Vector3.zero;
+            else
             if (hitstopCounter <= 0)
             {
                 newMove = false;
@@ -124,7 +135,7 @@ public class Status : MonoBehaviour
 
     void ResolveBlockstun()
     {
-        if (blockstunValue > 0)
+        if (blockstunValue > 0 && hitstopCounter <= 0)
         {
 
             blockstunValue--;
@@ -139,7 +150,9 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
-        if (hitstunValue > 0)
+        if (hitstunValue > 0
+            //  && hitstopCounter <= 0
+            )
         {
             hitstunValue--;
 
@@ -147,10 +160,16 @@ public class Status : MonoBehaviour
         else if (hitstunValue <= 0 && inHitStun)
         {
             if (groundState == GroundState.Knockdown)
-                AirRecovery();
+                KnockdownRecovery();
 
             else if (groundState == GroundState.Airborne)
-                AirRecovery();
+            {
+                if (!mov.ground)
+                    AirRecovery();
+                else KnockdownRecovery();
+
+            }
+
             else GroundRecovery();
         }
     }
@@ -161,7 +180,19 @@ public class Status : MonoBehaviour
     {
         wakeupEvent?.Invoke();
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+
         groundState = GroundState.Airborne;
+        GoToState(State.Wakeup);
+        hitstunValue = 0;
+        comboCounter = 0;
+        inHitStun = false;
+    }
+
+    void KnockdownRecovery()
+    {
+        wakeupEvent?.Invoke();
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        groundState = GroundState.Grounded;
         GoToState(State.Wakeup);
         hitstunValue = 0;
         comboCounter = 0;
@@ -241,12 +272,30 @@ public class Status : MonoBehaviour
             case State.Wakeup:
                 wakeupValue--;
                 invincible = true;
-                if (wakeupValue <= 0) GoToState(State.Neutral);
+                if (wakeupValue <= 0) { 
+                    GoToState(State.Neutral);
+                    Instantiate(VFXManager.Instance.wakeupFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+                }
                 break;
             default: break;
         }
     }
+    public void GoToGroundState(GroundState s)
+    {
+        switch (s)
+        {
 
+            default:
+                if (HitStun > 0 && s == GroundState.Grounded)
+                {
+                    groundState = GroundState.Knockdown;
+                    break;
+                }
+                groundState = s;
+                break;
+        }
+
+    }
 
     public void GoToState(State transitionState)
     {
@@ -295,13 +344,6 @@ public class Status : MonoBehaviour
 
     }
 
-    public void ApplyCharacter()
-    {
-        //if (character == null) return;
-        //ReplaceStats(rawStats, character.stats);
-        //ReplaceStats(baseStats, character.stats);
-    }
-
     public int Health
     {
         get
@@ -320,6 +362,19 @@ public class Status : MonoBehaviour
             {
                 Death();
             }
+        }
+    }
+
+    public int Meter
+    {
+        get
+        {
+            return meter;
+        }
+        set
+        {
+
+            meter = Mathf.Clamp(value, 0, maxMeter);
         }
     }
 
@@ -348,13 +403,7 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void UpdateMinusFrames(int frames)
-    {
-        minusFrames = frames;
-        frameDataEvent?.Invoke();
-    }
-
-    public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         if (groundState != GroundState.Grounded)
@@ -370,13 +419,31 @@ public class Status : MonoBehaviour
             Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
         else
             Health -= damage;
-        GameHandler.Instance.HitStop();
     }
-    public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
+
+    public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, HitState hitState)
+    {
+        float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+        if (groundState != GroundState.Grounded)
+        {
+            groundState = GroundState.Airborne;
+        }
+
+        TakePushback(kb);
+        HitStun = stunVal;
+        hurtEvent?.Invoke();
+
+        if (comboCounter > 0)
+            Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        else
+            Health -= damage;
+    }
+
+    public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
         GoToState(State.Hitstun);
         groundState = GroundState.Knockdown;
-
+        TakePushback(kb);
         knockdownEvent?.Invoke();
         hurtEvent?.Invoke();
 
@@ -388,8 +455,9 @@ public class Status : MonoBehaviour
 
     }
 
-    public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, float slowDur)
+    public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
+        Health -= damage;
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         TakePushback(kb);
         BlockStun = stunVal;
@@ -408,14 +476,15 @@ public class Status : MonoBehaviour
 
     }
 
-    public void Hitstop() {
+    public void Hitstop()
+    {
         pushbackVector = rb.velocity;
         rb.velocity = Vector3.zero;
     }
 
     public void ApplyPushback()
     {
-        rb.AddForce(pushbackVector, ForceMode.VelocityChange);
+        rb.velocity = pushbackVector;
     }
 
     public void Death()

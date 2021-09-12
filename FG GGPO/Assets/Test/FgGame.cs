@@ -269,13 +269,13 @@ public struct FgGame : IGame
 
         // if (id == 0)
         {
-            if (InputManager.Instance.p1Input.heldDirectionals[1])
+            if (InputManager.Instance.p1Input.heldDirectionals[0])
                 input |= INPUT_F;
             if (InputManager.Instance.p1Input.heldDirectionals[2])
                 input |= INPUT_B;
-            if (InputManager.Instance.p1Input.heldDirectionals[0])
-                input |= INPUT_L;
             if (InputManager.Instance.p1Input.heldDirectionals[3])
+                input |= INPUT_L;
+            if (InputManager.Instance.p1Input.heldDirectionals[1])
                 input |= INPUT_R;
             if (InputManager.Instance.p1Input.heldButtons[0])
             {

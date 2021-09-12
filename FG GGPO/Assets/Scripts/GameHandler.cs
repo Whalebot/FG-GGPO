@@ -52,6 +52,7 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
+        Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
     }
 
@@ -110,18 +111,6 @@ public class GameHandler : MonoBehaviour
         //    RevertGameState(gameStates.Count - rollbackFrames);
         //    ResimulateGameState();
         //}
-    }
-
-    public void HitStop()
-    {
-        StartCoroutine("SetHitstop");
-        //Slowmotion(0);
-    }
-    IEnumerator SetHitstop()
-    {
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(hitStop);
-        Time.timeScale = 1;
     }
 
     private void Update()

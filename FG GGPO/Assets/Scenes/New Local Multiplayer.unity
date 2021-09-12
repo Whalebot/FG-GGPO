@@ -316,7 +316,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191741958}
-  m_LocalRotation: {x: 0.055302367, y: -0.19459665, z: 0.010989563, w: 0.97926146}
+  m_LocalRotation: {x: 0.055301502, y: -0.19467151, z: 0.010993786, w: 0.9792466}
   m_LocalPosition: {x: 2.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1839,6 +1839,8 @@ MonoBehaviour:
   p1Input: {fileID: 559300883}
   p2Input: {fileID: 377725757}
   controllersConnected: 0
+  absoluteDirections: 0
+  updateDirections: 0
   replay: 0
   log:
     inputs: []
@@ -2384,7 +2386,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219073678}
-  m_LocalRotation: {x: 0.055302367, y: -0.19459665, z: 0.010989563, w: 0.97926146}
+  m_LocalRotation: {x: 0.055301502, y: -0.19467151, z: 0.010993786, w: 0.9792466}
   m_LocalPosition: {x: 2.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2521,10 +2523,6 @@ MonoBehaviour:
   dist2: 0
   deadZone: 0
   mainCamera: {fileID: 1219073680}
-  p1Y: 0
-  p2Y: 0
-  heightMod: 0.75
-  modSmooth: 0.75
 --- !u!224 &1274538046 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3103982117962598325, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
@@ -3339,6 +3337,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2546528752749828968, guid: e38caafb2bae65d428bc22de69565f7c, type: 3}
+      propertyPath: value
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2546528753265056355, guid: e38caafb2bae65d428bc22de69565f7c, type: 3}
       propertyPath: m_Name
       value: P1

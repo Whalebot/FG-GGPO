@@ -38,7 +38,7 @@ public class AnimationAssist : MonoBehaviour
     {
         if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            if(attack.attacking) attack.Idle();
+         
         }
     }
 
@@ -62,7 +62,7 @@ public class AnimationAssist : MonoBehaviour
     void JumpFX() { }
 
     void StartMomentum() {
-        attack.AttackMomentum();
+      //  attack.AttackMomentum();
     }
 
     void ParticleStart(AnimationEvent evt)
@@ -85,7 +85,7 @@ public class AnimationAssist : MonoBehaviour
     {
         if (evt.animatorClipInfo.weight > animationEventWeight)
         {
-            attack.AnimMomemtun();
+           // attack.AnimMomemtun();
         }
     }
 }

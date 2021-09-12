@@ -37,7 +37,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     Vector3 RelativeToCamera(Vector2 v)
     {
-        forwardVector = (mov.strafeTarget.position - transform.position).normalized;
+        if (InputManager.Instance.absoluteDirections)
+        {
+            forwardVector = (CameraManager.Instance.mainCamera.transform.forward);
+            rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
+            Vector3 ab = ((rightVector * v.x) + (forwardVector * v.y));
+            return ab;
+        }
+        forwardVector = (mov.strafeTarget.position - transform.position);
+        forwardVector.y = 0;
+        forwardVector = forwardVector.normalized;
         rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
         Vector3 temp = ((rightVector * v.x) + (forwardVector * v.y));
         return temp;
@@ -49,6 +58,35 @@ public class PlayerInputHandler : MonoBehaviour
         relativeDirection = RelativeToCamera(input.inputDirection);
     }
 
+    void UpdateDirection()
+    {
+        input.directionOffset = 0;
+        if (!InputManager.Instance.updateDirections) return;
+        //Vector3 dist = (GameHandler.Instance.p2Transform.position - GameHandler.Instance.p1Transform.position);
+        //dist = dist / 2;
+        //Vector3 center = GameHandler.Instance.p1Transform.position + dist;
+
+
+        float angle = Vector3.SignedAngle(CameraManager.Instance.mainCamera.transform.forward, (GameHandler.Instance.ReturnPlayer(transform).position - transform.position).normalized, Vector3.up);
+        print(angle);
+        if (angle > 135 || angle < -135)
+        {
+            input.directionOffset = 2;
+        }
+        else if (angle > 45)
+        {
+            input.directionOffset = 1;
+        }
+        else if (angle < -45)
+        {
+            input.directionOffset = 3;
+        }
+        else
+        {
+            input.directionOffset = 0;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (GameHandler.isPaused)
@@ -57,7 +95,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-
+        UpdateDirection();
 
         if (status.currentState == Status.State.Neutral)
         {
@@ -75,7 +113,6 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
         {
-            print("Bob");
             InAnimationInput();
         }
         if (Physics.autoSimulation)
@@ -101,7 +138,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (input.dash) mov.sprinting = true;
 
         if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
-
+        if (input.inputQueue.Count <= 0) return;
         if (InputAvailable())
         {
             switch (input.inputQueue[0])
