@@ -33,6 +33,16 @@ public class CameraManager : MonoBehaviour
     public float deadZone;
     public Camera mainCamera;
 
+
+    public float p1Y;
+    public float p2Y;
+    public float heightMod = 1f;
+    public float modSmooth = 1f;
+    float startZOffset;
+    float refVelocity;
+    CinemachineTransposer camTransposer;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -49,11 +59,20 @@ public class CameraManager : MonoBehaviour
         cc1.lookTarget = p2;
         cc2.target = p2;
         cc2.lookTarget = p1;
+        camTransposer = cameras[1].GetCinemachineComponent<CinemachineTransposer>();
+        startZOffset = cameras[1].GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
     }
 
     private void FixedUpdate()
     {
 
+        p1Y = GameHandler.Instance.p1Transform.position.y;
+        p2Y = GameHandler.Instance.p2Transform.position.y;
+
+        float modLerp = Mathf.SmoothDamp(camTransposer.m_FollowOffset.z, startZOffset - p1Y * heightMod, ref refVelocity, modSmooth);
+        
+
+        camTransposer.m_FollowOffset.z = modLerp;
 
         //Vector3 cv1 = new Vector3(p1.position.x, 0, cc1.transform.position.z);
         //Vector3 cv2 = new Vector3(p2.position.x, 0, cc2.transform.position.z);
