@@ -8,6 +8,10 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
 
     public CinemachineVirtualCamera[] cameras;
+
+    public CinemachineVirtualCamera leftCamera;
+    public CinemachineVirtualCamera rightCamera;
+    public bool isRightCamera;
     CinemachineBasicMultiChannelPerlin[] noises;
     [SerializeField] private float shakeTimer;
     private float startTimer;
@@ -20,6 +24,7 @@ public class CameraManager : MonoBehaviour
     InputHandler input2;
     Transform p1;
     Transform p2;
+    
     
 
     public GameObject cam1;
@@ -89,6 +94,9 @@ public class CameraManager : MonoBehaviour
         //    cc2.transform.position += vect;
         //}
 
+
+
+
         Vector3 v1 = new Vector3(p1.position.x, 0, p1.position.z);
         Vector3 v2 = new Vector3(p2.position.x, 0, p2.position.z);
 
@@ -96,7 +104,26 @@ public class CameraManager : MonoBehaviour
         dist2 = Vector3.Distance(mainCamera.transform.position, v2);
 
         toggleCounter++;
+
+
         if (toggleCounter < toggleTimer) return;
+
+        if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
+        {
+            isRightCamera = true;
+            leftCamera.gameObject.SetActive(false);
+            rightCamera.gameObject.SetActive(true);
+            toggleCounter = 0;
+        }
+        else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
+        {
+            isRightCamera = false;
+            leftCamera.gameObject.SetActive(true);
+            rightCamera.gameObject.SetActive(false);
+
+            toggleCounter = 0;
+        }
+
         if (dist1 < dist2 + deadZone && toggle)
         {
             FlipCamera();

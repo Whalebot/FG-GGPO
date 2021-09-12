@@ -631,6 +631,7 @@ public class InputHandler : MonoBehaviour
 
     IEnumerator InputBuffer(int inputID)
     {
+        print(inputID);
         // if (GameManager.isPaused) yield break;
         inputQueue.Add(inputID);
         for (int i = 0; i < bufferWindow; i++)
