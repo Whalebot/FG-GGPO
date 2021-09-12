@@ -23,7 +23,7 @@ public class Hitbox : MonoBehaviour
 
     private void Awake()
     {
-        print(" Hitbox active");
+       // print(" Hitbox active");
         mr = GetComponent<MeshRenderer>();
         if (container != null)
         {
@@ -51,7 +51,7 @@ public class Hitbox : MonoBehaviour
             attack = container.attack;
 
         }
-        print(attack.gameFrames + " Hitbox active");
+       // print(attack.gameFrames + " Hitbox active");
     }
 
     public void OnTriggerEnter(Collider other)
@@ -138,7 +138,6 @@ public class Hitbox : MonoBehaviour
             //Check for airborne or knockdown state
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
-                print("Air");
                 ExecuteHit(attack.airHitProperty, other);
             }
         }

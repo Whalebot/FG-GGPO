@@ -71,7 +71,11 @@ public class AttackScript : MonoBehaviour
             if (status.hitstopCounter <= 0)
                 gameFrames++;
 
-
+            if (canGatling && gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+            {
+                //print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
+                attackString = true;
+            }
             //Execute properties
             //Invul
             if (activeMove.invincible)
@@ -138,11 +142,7 @@ public class AttackScript : MonoBehaviour
             int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
             int totalMoveDuration = lastActiveFrame + activeMove.recoveryFrames;
 
-            if (canGatling && gameFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
-            {
-                //print(attack.gameFrames + " " + attack.activeMove.startupFrames + " " + attack.activeMove.gatlingFrames);
-                attackString = true;
-            }
+       
 
 
 
@@ -329,10 +329,12 @@ public class AttackScript : MonoBehaviour
 
     public void Attack(Move move)
     {
+
         if (!CanUseMove(move)) return;
         usedMoves.Add(move);
 
         AttackProperties(move);
+        print(move + " " + gameFrames);
     }
 
     public bool CanCancel(Move move)
