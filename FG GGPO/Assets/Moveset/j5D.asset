@@ -16,7 +16,6 @@ MonoBehaviour:
   collissionState: 3
   sfx: []
   gatlingMoves: []
-  attackPrefab: {fileID: 6130433937859647811, guid: dadbfd72f1b4f464cb53aba9cb6e6f2e, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
@@ -39,16 +38,16 @@ MonoBehaviour:
     groundHitProperty:
       damage: 1000
       stun: 20
-      hitstop: 0
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 0, z: 10}
       hitState: 0
     groundBlockProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
+      stun: 15
+      hitstop: 10
       proration: 0
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 10}
       hitState: 0
     groundCounterhitProperty:
       damage: 1000
@@ -60,21 +59,21 @@ MonoBehaviour:
     airHitProperty:
       damage: 1000
       stun: 20
-      hitstop: 0
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
     airBlockProperty:
       damage: 50
       stun: 10
-      hitstop: 0
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     airCounterhitProperty:
       damage: 1000
       stun: 20
-      hitstop: 0
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 0, z: 10}
       hitState: 0

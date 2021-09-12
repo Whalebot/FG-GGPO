@@ -22,7 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
-  attackPrefab: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
@@ -44,14 +43,14 @@ MonoBehaviour:
     attackHeight: 1
     groundHitProperty:
       damage: 700
-      stun: 50
+      stun: 35
       hitstop: 5
       proration: 0
       pushback: {x: 0, y: 8, z: 1}
       hitState: 2
     groundBlockProperty:
       damage: 0
-      stun: 0
+      stun: 20
       hitstop: 0
       proration: 0
       pushback: {x: 0, y: 0, z: 0}
@@ -65,7 +64,7 @@ MonoBehaviour:
       hitState: 0
     airHitProperty:
       damage: 700
-      stun: 50
+      stun: 35
       hitstop: 0
       proration: 0
       pushback: {x: 0, y: 8, z: 2}

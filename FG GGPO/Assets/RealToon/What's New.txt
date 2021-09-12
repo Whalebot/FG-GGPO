@@ -1,0 +1,70 @@
+What's New to RealToon V5.0.8p2 (Patch#2) Update (August 2021)
+=====================================
+New:
+- DOTS - Hybrid Renderer Support (URP and HDRP)(10 to 12)
+- Linear Blend Skinning [DOTS - Hybrid Renderer] (Currently URP 10 to 12)
+- URP 12 Support
+- HDRP 12 Support
+- Added "Settings" Section (Currently URP)
+- Added "Change Shader Compilation Target 2.0/4.5" (Currently URP)
+- VRoid - manually change shader guide
+
+Fix:
+- Gloss, Rim Light and Self Shadow at View Direction is not working properly when
+in GPU Instancing or SRP Batched (URP)
+
+Note:
+*To use RealToon URP on a DOTS - Hybrid Renderer project,
+change the "Shader Compilation Target" to 4.5, it is under the "Settings" section.
+RealToon HDRP is already Shader Compilation Target 4.5.
+
+
+
+What's New to RealToon V5.0.8 Update (March 2020)(Main Update)
+=====================================
+
+[New Options]
+
+- Use Vertex Color As Normal Direction (Outline) [URP and HDRP]
+*Use the vertex colors of the object as normal direction for outline.
+
+- Affect Shadow (Transparency) [URP]
+*Transparency affects shadow.
+
+- PTexture Color (PTexture) [URP]
+*Can now color the PTexture feature.
+
+- Optimize for [Light Mode:Baked] (Lightmapping) [URP]
+*Optimize the shader for [Light Mode: Baked]
+
+- On shader "Screen Space Outline" (Outline) [URP and HDRP]
+*Screen space - depth based outline on the shader.
+
+- Blending (Transparency) [URP and HDRP]
+- Rim Light Intensity (RimLight) [URP]
+
+- Refresh Settings (URP)
+*This will refresh the settings and apply it properly.
+*Useful if the settings are not applied properly or after change shader or if there is a problem on the shader.
+
+
+[New Features and Support]
+
+- DeNorSob Outline (Post - Processing Effect) [URP and HDRP]
+*Sobel, Depth and Normal based outline.
+
+- Smooth Object Normal - Helper Script (Smooth Object Normal) [URP and HDRP]
+*This helper script will help "Smooth Object Normal" feature to follow object animation or movement.
+
+- Lightmap Support [URP]
+- PlayStation Support [URP and HDRP]
+- URP 11 Support
+- HDRP 11 Support
+- Unity DOTS Ready [URP and HDRP]
+=====================================
+
+#Read the "Change - Fix Log.txt." file for previous updates.
+#This update supports Unity 5, 2017, 2018, 2019, 2020, 2021 and future unity versions.
+
+[Other Notes]
+* If you encounter some problems or need help just contact by email.
