@@ -45,9 +45,9 @@ MonoBehaviour:
     groundHitProperty:
       damage: 700
       stun: 50
-      hitstop: 8
+      hitstop: 5
       proration: 0
-      pushback: {x: 0, y: 10, z: 1}
+      pushback: {x: 0, y: 8, z: 1}
       hitState: 2
     groundBlockProperty:
       damage: 0

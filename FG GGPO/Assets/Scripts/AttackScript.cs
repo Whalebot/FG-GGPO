@@ -184,8 +184,11 @@ public class AttackScript : MonoBehaviour
                     {
                         if (hitboxes.Count == i + 1)
                         {
-                            if (activeMove.attacks[i].hitbox != null)
+                            if (activeMove.attacks[i].hitbox != null) { 
                                 Destroy(hitboxes[i]);
+
+                                print("Manual destroy hitbox");
+                            }
                         }
                     }
                 }
@@ -199,19 +202,11 @@ public class AttackScript : MonoBehaviour
     }
 
 
-    //public void ExecuteFrame()
-    //{
-    //    if (activeMove == null) return;
-    //    if (status.currentState == Status.State.Startup) StartupFrames();
-    //    if (status.currentState == Status.State.Active) ActiveFrames();
-    //    if (status.currentState == Status.State.Recovery) Recovery();
-    //}
-
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
         status.counterhitState = true;
-        ClearHitboxes();
+        //ClearHitboxes();
     }
     void ClearHitboxes()
     {
@@ -223,6 +218,7 @@ public class AttackScript : MonoBehaviour
                 Destroy(hitboxes[i]);
             }
         }
+        print("Auto destroy hitbox");
         hitboxes.Clear();
     }
 

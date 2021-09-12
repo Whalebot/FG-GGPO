@@ -26,8 +26,8 @@ MonoBehaviour:
   animationID: 21
   animationClip: {fileID: 0}
   firstStartupFrame: 11
-  lastActiveFrame: 15
-  totalMoveDuration: 35
+  lastActiveFrame: 13
+  totalMoveDuration: 33
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
     startupFrame: 11
-    activeFrames: 5
+    activeFrames: 3
     gatlingFrames: 1
     attackHeight: 3
     groundHitProperty:
@@ -62,7 +62,7 @@ MonoBehaviour:
     airHitProperty:
       damage: 750
       stun: 50
-      hitstop: 15
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 3, z: 0}
       hitState: 0

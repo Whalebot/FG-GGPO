@@ -24,16 +24,16 @@ MonoBehaviour:
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   animationID: 22
   animationClip: {fileID: 0}
-  firstStartupFrame: 20
-  lastActiveFrame: 24
-  totalMoveDuration: 44
+  firstStartupFrame: 15
+  lastActiveFrame: 19
+  totalMoveDuration: 39
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: 8a756fccf7ee3ea4ba2a257fa42d4897, type: 3}
-    startupFrame: 20
+    startupFrame: 15
     activeFrames: 5
     gatlingFrames: 10
     attackHeight: 3
