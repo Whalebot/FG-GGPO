@@ -32,8 +32,8 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   firstStartupFrame: 10
   lastActiveFrame: 11
-  totalMoveDuration: 31
-  recoveryFrames: 20
+  totalMoveDuration: 41
+  recoveryFrames: 30
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
@@ -46,8 +46,9 @@ MonoBehaviour:
     groundHitProperty:
       damage: 700
       stun: 35
-      hitstop: 5
+      hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 3}
       hitState: 2
     groundBlockProperty:
@@ -55,6 +56,7 @@ MonoBehaviour:
       stun: 20
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundCounterhitProperty:
@@ -62,6 +64,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 1}
       hitState: 0
     airHitProperty:
@@ -69,6 +72,7 @@ MonoBehaviour:
       stun: 35
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 8, z: 2}
       hitState: 0
     airBlockProperty:
@@ -76,6 +80,7 @@ MonoBehaviour:
       stun: 20
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     airCounterhitProperty:
@@ -83,6 +88,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 8, z: 2}
       hitState: 0
   particleID: 0

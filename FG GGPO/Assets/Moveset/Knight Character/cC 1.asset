@@ -18,9 +18,8 @@ MonoBehaviour:
   - startup: 23
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
   gatlingMoves:
-  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
-  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
+  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
@@ -43,8 +42,9 @@ MonoBehaviour:
     groundHitProperty:
       damage: 700
       stun: 50
-      hitstop: 0
+      hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 1
     groundBlockProperty:
@@ -52,6 +52,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundCounterhitProperty:
@@ -59,6 +60,7 @@ MonoBehaviour:
       stun: 90
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airHitProperty:
@@ -66,6 +68,7 @@ MonoBehaviour:
       stun: 90
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airBlockProperty:
@@ -73,6 +76,7 @@ MonoBehaviour:
       stun: 15
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     airCounterhitProperty:
@@ -80,6 +84,7 @@ MonoBehaviour:
       stun: 90
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
   particleID: 0

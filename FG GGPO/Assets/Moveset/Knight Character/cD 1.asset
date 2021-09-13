@@ -41,13 +41,15 @@ MonoBehaviour:
       stun: 65
       hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
-      hitState: 0
+      hitState: 1
     groundBlockProperty:
       damage: 0
       stun: 0
       hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     groundCounterhitProperty:
@@ -55,20 +57,23 @@ MonoBehaviour:
       stun: 65
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
-      hitState: 0
+      hitState: 1
     airHitProperty:
       damage: 100
       stun: 65
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
-      hitState: 0
+      hitState: 1
     airBlockProperty:
       damage: 0
       stun: 11
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airCounterhitProperty:
@@ -76,8 +81,9 @@ MonoBehaviour:
       stun: 65
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
-      hitState: 0
+      hitState: 1
   particleID: 0
   landCancel: 0
   noClip: 1
