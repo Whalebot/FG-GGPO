@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI p1HealthText;
     public TextMeshProUGUI p2HealthText;
 
+    public Slider p1Meter;
+    public Slider p2Meter;
+    public TextMeshProUGUI p1MeterText;
+    public TextMeshProUGUI p2MeterText;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +31,10 @@ public class UIManager : MonoBehaviour
         p2Health.value = state.p2Health;
         p1HealthText.text = state.p1Health + "/";
         p2HealthText.text = state.p2Health + "/";
+
+        p1Meter.value = state.p1Meter;
+        p2Meter.value = state.p2Meter;
+        p1MeterText.text = state.p1Meter + "";
+        p2MeterText.text = state.p2Meter + "";
     }
 }

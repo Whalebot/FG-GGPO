@@ -25,11 +25,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake()
     {
-        status = GetComponent<Status>();
+
+
     }
 
     private void Start()
     {
+        status = GetComponent<Status>();
         GameHandler.Instance.rollbackTick += RollbackTick;
         mov = GetComponent<Movement>();
         input.dashInput += BackDash;
@@ -95,6 +97,8 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
+        input.isPaused = status.hitstopCounter > 0;
+
         UpdateDirection();
 
         if (status.currentState == Status.State.Neutral)
@@ -136,9 +140,9 @@ public class PlayerInputHandler : MonoBehaviour
     void NeutralInput()
     {
         if (input.dash) mov.sprinting = true;
+        if (input.directionals.Count > 0)
+            if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
 
-        if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
-        if (input.inputQueue.Count <= 0) return;
         if (InputAvailable())
         {
             switch (input.inputQueue[0])
@@ -219,7 +223,8 @@ public class PlayerInputHandler : MonoBehaviour
                     Delete();
                     break;
                 default: break;
-            }
+
+            };
         }
     }
 

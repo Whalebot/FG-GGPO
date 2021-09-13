@@ -334,7 +334,6 @@ public class AttackScript : MonoBehaviour
         usedMoves.Add(move);
 
         AttackProperties(move);
-        print(move + " " + gameFrames);
     }
 
     public bool CanCancel(Move move)

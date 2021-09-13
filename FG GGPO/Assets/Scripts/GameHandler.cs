@@ -76,8 +76,11 @@ public class GameHandler : MonoBehaviour
     {
 
         GameState state = new GameState(p1Transform.position, p2Transform.position, p2Transform.rotation, p2Transform.rotation);
-        state.p1Health = p1Status.health;
-        state.p2Health = p2Status.health;
+        state.p1Health = p1Status.Health;
+        state.p2Health = p2Status.Health;
+
+        state.p1Meter = p1Status.Meter;
+        state.p2Meter= p2Status.Meter;
         gameStates.Add(state);
     }
 

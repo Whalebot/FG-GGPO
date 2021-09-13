@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
     public Controls controls = null;
     public bool dash;
     public List<int> inputQueue;
-    public float bufferWindow;
+    public int bufferWindow = 10;
 
     public InputEvent controlSchemeChange;
     public InputEvent keyboardEvent;
@@ -71,6 +71,9 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public List<int> directionals;
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
+    public List<BufferedInput> bufferedInputs;
+    public List<BufferedInput> deletedInputs;
+    public bool isPaused;
 
     public bool debug;
 
@@ -83,6 +86,8 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
+        bufferedInputs = new List<BufferedInput>();
+        deletedInputs = new List<BufferedInput>();
     }
 
     public void SetupControls(Gamepad device)
@@ -197,6 +202,24 @@ public class InputHandler : MonoBehaviour
     void Awake()
     {
     }
+    public void ResolveInputBuffer()
+    {
+        //deletedInputs.Clear();
+        //for (int i = 0; i < bufferedInputs.Count; i++)
+        //{
+        //    bufferedInputs[id].frame--;
+        //    if (bufferedInputs[id].frame <= 0)
+        //    {
+        //        deletedInputs.Add(bufferedInputs[id]);
+        //    }
+        //}
+        //foreach (var item in deletedInputs)
+        //{
+        //    bufferedInputs.Remove(item);
+        //}
+
+    }
+
     private void Update()
     {
         // if (!deviceIsAssigned) return;
@@ -279,7 +302,7 @@ public class InputHandler : MonoBehaviour
 
 
             }
-
+            ResolveInputBuffer();
             ResolveButtons(heldButtons);
         }
 
@@ -482,7 +505,7 @@ public class InputHandler : MonoBehaviour
         {
             if (temp[i] && !netButtons[i])
             {
-            //    print("netbutton " + netButtons[i] + " & temp " + temp[i]);
+                //    print("netbutton " + netButtons[i] + " & temp " + temp[i]);
                 StartCoroutine("InputBuffer", i + 1);
             }
             if (netButtons[i] != temp[i]) updatedButtons = true;
@@ -545,7 +568,8 @@ public class InputHandler : MonoBehaviour
     public void OnSelect()
     {
         selectInput?.Invoke();
-        if (StageManager.Instance != null) {
+        if (StageManager.Instance != null)
+        {
             StageManager.Instance.RestartScene();
         }
     }
@@ -631,11 +655,16 @@ public class InputHandler : MonoBehaviour
 
     IEnumerator InputBuffer(int inputID)
     {
-        print(inputID);
+        bufferedInputs.Add(new BufferedInput(inputID, bufferWindow));
         // if (GameManager.isPaused) yield break;
         inputQueue.Add(inputID);
         for (int i = 0; i < bufferWindow; i++)
         {
+            while (isPaused)
+            {
+                yield return null;
+            }
+
             yield return new WaitForFixedUpdate();
         }
         if (inputQueue.Count > 0)
@@ -644,6 +673,17 @@ public class InputHandler : MonoBehaviour
                 inputQueue.RemoveAt(0);
         }
     }
+}
+[System.Serializable]
+public class BufferedInput
+{
+    public BufferedInput(int input, int bufferWindow)
+    {
+        id = input;
+        frame = bufferWindow;
+    }
+    public int id;
+    public int frame;
 }
 
 public enum ControlScheme { PS4, XBOX, MouseAndKeyboard }

@@ -21,8 +21,8 @@ public class Move : ScriptableObject
     public AnimationClip animationClip;
     [Header("Read Only")]
     public int firstStartupFrame;
-    public int lastActiveFrame; 
-    public int totalMoveDuration; 
+    public int lastActiveFrame;
+    public int totalMoveDuration;
 
     public int recoveryFrames;
 
@@ -57,9 +57,9 @@ public class Move : ScriptableObject
     private void OnValidate()
     {
         if (attacks.Length <= 0) return;
-         firstStartupFrame = attacks[0].startupFrame;
-         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
-         totalMoveDuration = lastActiveFrame + recoveryFrames;
+        firstStartupFrame = attacks[0].startupFrame;
+        lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
+        totalMoveDuration = lastActiveFrame + recoveryFrames;
     }
 
     //[Button]
@@ -131,7 +131,8 @@ public class Move : ScriptableObject
     }
 }
 [System.Serializable]
-public class SFX{
+public class SFX
+{
     public int startup = 1;
     public GameObject prefab;
 }
@@ -168,7 +169,8 @@ public class HitProperty
     public int damage;
     public int stun;
     public int hitstop;
-    public float proration;
+    public float proration = 1;
+    public int meterGain = 2;
     public Vector3 pushback;
     public HitState hitState;
 }

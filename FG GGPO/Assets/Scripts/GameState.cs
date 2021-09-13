@@ -8,6 +8,9 @@ public class GameState
     public int p1Health;
     public int p2Health;
 
+    public int p1Meter;
+    public int p2Meter;
+
     public GameState(Vector3 v1, Vector3 v2, Quaternion q1, Quaternion q2) {
         p1Position = v1;
         p2Position = v2;

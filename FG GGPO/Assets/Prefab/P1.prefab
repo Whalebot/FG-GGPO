@@ -387,6 +387,9 @@ MonoBehaviour:
   directionals: 
   updatedDirectionals: 0
   updatedButtons: 0
+  bufferedInputs: []
+  deletedInputs: []
+  isPaused: 0
   debug: 0
 --- !u!114 &3654780268560206794
 MonoBehaviour:
@@ -538,7 +541,7 @@ MonoBehaviour:
   currentState: 0
   maxHealth: 10000
   health: 10000
-  maxMeter: 0
+  maxMeter: 100
   meter: 0
   comboCounter: 0
   standingCollider: {fileID: 3243212134572139080}
