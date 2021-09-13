@@ -58,6 +58,8 @@ public class Status : MonoBehaviour
     public int meter;
 
     public int comboCounter;
+    public int lastAttackDamage;
+    public int comboDamage;
 
     [FoldoutGroup("Components")] public GameObject standingCollider;
     [FoldoutGroup("Components")] public GameObject crouchingCollider;
@@ -272,7 +274,8 @@ public class Status : MonoBehaviour
             case State.Wakeup:
                 wakeupValue--;
                 invincible = true;
-                if (wakeupValue <= 0) { 
+                if (wakeupValue <= 0)
+                {
                     GoToState(State.Neutral);
                     Instantiate(VFXManager.Instance.wakeupFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
                 }
@@ -412,13 +415,25 @@ public class Status : MonoBehaviour
         }
 
         TakePushback(kb);
+
+
+        int val = 0;
+        if (comboCounter > 0)
+            val = (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        else
+        {
+            comboDamage = 0;
+            val = damage;
+        }
+
+        lastAttackDamage = val;
+        comboDamage += val;
+        Health -= val;
+
         HitStun = stunVal;
+
         hurtEvent?.Invoke();
 
-        if (comboCounter > 0)
-            Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
-        else
-            Health -= damage;
     }
 
     public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, HitState hitState)
@@ -443,14 +458,25 @@ public class Status : MonoBehaviour
     {
         GoToState(State.Hitstun);
         groundState = GroundState.Knockdown;
+
+
+        int val = 0;
+        if (comboCounter > 0)
+            val = (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        else
+        {
+            comboDamage = 0;
+            val = damage;
+        }
+
+        lastAttackDamage = val;
+        comboDamage += val;
+        Health -= val;
+
         TakePushback(kb);
         knockdownEvent?.Invoke();
         hurtEvent?.Invoke();
 
-        if (comboCounter > 0)
-            Health -= (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
-        else
-            Health -= damage;
         HitStun = stunVal;
 
     }
