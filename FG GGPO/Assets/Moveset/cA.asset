@@ -39,12 +39,12 @@ MonoBehaviour:
   - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
     startupFrame: 10
     activeFrames: 2
-    gatlingFrames: 1
+    gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
       damage: 700
       stun: 35
-      hitstop: 5
+      hitstop: 10
       proration: 0
       pushback: {x: 0, y: 8, z: 1}
       hitState: 2

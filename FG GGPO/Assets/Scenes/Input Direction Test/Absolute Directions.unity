@@ -1844,6 +1844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
+  wakeupFX: {fileID: 0}
 --- !u!1 &920296600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,6 +2496,9 @@ MonoBehaviour:
   cameras:
   - {fileID: 1600047959}
   - {fileID: 191741961}
+  leftCamera: {fileID: 0}
+  rightCamera: {fileID: 0}
+  isRightCamera: 0
   shakeTimer: 0
   toggle: 0
   toggleTimer: 30
@@ -2507,6 +2511,10 @@ MonoBehaviour:
   dist2: 0
   deadZone: 0
   mainCamera: {fileID: 1219073680}
+  p1Y: 0
+  p2Y: 0
+  heightMod: 1
+  modSmooth: 1
 --- !u!224 &1274538046 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3103982117962598325, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
