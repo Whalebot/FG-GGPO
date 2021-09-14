@@ -10,89 +10,87 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5A 1
+  m_Name: 5C_Knight
   m_EditorClassIdentifier: 
   type: 0
   collissionState: 0
   sfx:
-  - startup: 6
-    prefab: {fileID: 3797316729740095628, guid: 5a2c6ffb6f74d4643aa8aa89699e36f8, type: 3}
+  - startup: 16
+    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
   gatlingMoves:
-  - {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
-  - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
   - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
+  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
-  hitFX: {fileID: 1405262895153692, guid: fe194d4b4a282f0488947e2baa1fb8f6, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  hitSFX: {fileID: 3797316729740095628, guid: 79ac4eef1fdf99241afa26b223b7e98a, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 50
+  animationID: 52
   animationClip: {fileID: 0}
-  firstStartupFrame: 8
-  lastActiveFrame: 8
-  totalMoveDuration: 28
-  firstGatlingFrame: 18
-  recoveryFrames: 20
+  firstStartupFrame: 18
+  lastActiveFrame: 19
+  totalMoveDuration: 44
+  firstGatlingFrame: 23
+  recoveryFrames: 25
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
-    startupFrame: 8
-    activeFrames: 1
-    gatlingFrames: 10
+  - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+    startupFrame: 18
+    activeFrames: 2
+    gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
-      damage: 450
-      stun: 22
-      hitstop: 7
+      damage: 1000
+      stun: 35
+      hitstop: 13
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 7}
       hitState: 0
     groundBlockProperty:
       damage: 0
-      stun: 19
-      hitstop: 5
+      stun: 16
+      hitstop: 13
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 3}
       hitState: 0
     groundCounterhitProperty:
-      damage: 450
-      stun: 21
+      damage: 1000
+      stun: 30
       hitstop: 0
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     airHitProperty:
-      damage: 450
-      stun: 20
-      hitstop: 5
+      damage: 1000
+      stun: 35
+      hitstop: 10
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 5, z: 7}
       hitState: 0
     airBlockProperty:
       damage: 0
-      stun: 15
-      hitstop: 5
-      proration: 0
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
-      hitState: 0
-    airCounterhitProperty:
-      damage: 450
-      stun: 21
+      stun: 25
       hitstop: 0
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 5, z: 5}
+      hitState: 0
+    airCounterhitProperty:
+      damage: 1000
+      stun: 30
+      hitstop: 0
+      proration: 0
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
   particleID: 0
   landCancel: 0
@@ -107,8 +105,8 @@ MonoBehaviour:
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
-  - startFrame: 1
-    impulse: 0
-    duration: 10
-    momentum: {x: 0, y: 0, z: 5}
+  - startFrame: 5
+    impulse: 1
+    duration: 5
+    momentum: {x: 0, y: 0, z: 8}
     resetVelocityDuringRecovery: 1

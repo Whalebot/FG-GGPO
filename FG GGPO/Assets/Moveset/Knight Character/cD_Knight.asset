@@ -10,90 +10,83 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5C 1
+  m_Name: cD_Knight
   m_EditorClassIdentifier: 
   type: 0
   collissionState: 0
-  sfx:
-  - startup: 16
-    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
-  gatlingMoves:
-  - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
-  - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
-  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
-  - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
+  sfx: []
+  gatlingMoves: []
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 52
+  animationID: 23
   animationClip: {fileID: 0}
-  firstStartupFrame: 18
-  lastActiveFrame: 19
-  totalMoveDuration: 44
-  firstGatlingFrame: 23
-  recoveryFrames: 25
-  canGatling: 1
+  firstStartupFrame: 5
+  lastActiveFrame: 9
+  totalMoveDuration: 69
+  firstGatlingFrame: 10
+  recoveryFrames: 60
+  canGatling: 0
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
-  - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
-    startupFrame: 18
-    activeFrames: 2
+  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+    startupFrame: 5
+    activeFrames: 5
     gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
-      damage: 1000
-      stun: 35
-      hitstop: 13
+      damage: 100
+      stun: 65
+      hitstop: 10
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 7}
-      hitState: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 1
     groundBlockProperty:
       damage: 0
-      stun: 25
-      hitstop: 0
-      proration: 0
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
-      hitState: 0
-    groundCounterhitProperty:
-      damage: 1000
-      stun: 30
-      hitstop: 0
+      stun: 0
+      hitstop: 10
       proration: 0
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
-    airHitProperty:
-      damage: 1000
-      stun: 35
-      hitstop: 10
+    groundCounterhitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 0
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 7}
-      hitState: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 1
+    airHitProperty:
+      damage: 100
+      stun: 65
+      hitstop: 0
+      proration: 0
+      meterGain: 2
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 1
     airBlockProperty:
       damage: 0
-      stun: 25
+      stun: 11
       hitstop: 0
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 5}
+      pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airCounterhitProperty:
-      damage: 1000
-      stun: 30
+      damage: 100
+      stun: 65
       hitstop: 0
       proration: 0
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 5}
-      hitState: 0
+      pushback: {x: 0, y: 10, z: 5}
+      hitState: 1
   particleID: 0
   landCancel: 0
-  noClip: 0
+  noClip: 1
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
@@ -102,10 +95,10 @@ MonoBehaviour:
   forceCounterhit: 0
   overrideVelocity: 1
   runMomentum: 1
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   m:
   - startFrame: 5
     impulse: 1
-    duration: 5
-    momentum: {x: 0, y: 0, z: 8}
-    resetVelocityDuringRecovery: 1
+    duration: 2
+    momentum: {x: 0, y: 10, z: 3}
+    resetVelocityDuringRecovery: 0
