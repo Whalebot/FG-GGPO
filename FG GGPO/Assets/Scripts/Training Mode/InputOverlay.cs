@@ -43,7 +43,11 @@ public class InputOverlay : MonoBehaviour
     {
         if (GameHandler.isPaused) return;
 
-        marker.localPosition = new Vector3(50 * inputHandler.inputDirection.x, 50 * inputHandler.inputDirection.y, 0);
+        Vector2 dir;
+        dir = inputHandler.TranslateInput(inputHandler.netDirectionals);
+
+        marker.localPosition = new Vector3(50 * dir.x, 50 * dir.y, 0);
+
         if (inputHandler.updatedDirectionals || inputHandler.updatedButtons)
         {
             currentObjects++;
@@ -125,7 +129,7 @@ public class InputOverlay : MonoBehaviour
     {
         inputHandler.updatedDirectionals = false;
 
-        switch (inputHandler.directionals[inputHandler.directionals.Count - 1])
+        switch (inputHandler.overlayDirectionals[inputHandler.overlayDirectionals.Count - 1])
         {
             case 9:
                 Instantiate(arrow9, panel.transform).transform.SetSiblingIndex(0);

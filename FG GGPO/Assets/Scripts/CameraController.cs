@@ -27,4 +27,10 @@ public class CameraController : MonoBehaviour
         transform.position = target.position;
         transform.rotation = Quaternion.LookRotation(lookTarget.position - transform.position);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, 1);
+    }
 }

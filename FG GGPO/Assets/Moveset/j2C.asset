@@ -23,17 +23,17 @@ MonoBehaviour:
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   animationID: 72
   animationClip: {fileID: 0}
-  firstStartupFrame: 15
-  lastActiveFrame: 19
-  totalMoveDuration: 59
-  firstGatlingFrame: 25
+  firstStartupFrame: 22
+  lastActiveFrame: 26
+  totalMoveDuration: 66
+  firstGatlingFrame: 32
   recoveryFrames: 40
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: 8a756fccf7ee3ea4ba2a257fa42d4897, type: 3}
-    startupFrame: 15
+  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+    startupFrame: 22
     activeFrames: 5
     gatlingFrames: 10
     attackHeight: 3
@@ -94,7 +94,17 @@ MonoBehaviour:
   invincibleStart: 1
   invincibleDuration: 0
   forceCounterhit: 0
-  overrideVelocity: 0
+  overrideVelocity: 1
   runMomentum: 0
   resetVelocityDuringRecovery: 0
-  m: []
+  m:
+  - startFrame: 2
+    impulse: 0
+    duration: 15
+    momentum: {x: 0, y: 3, z: 0}
+    resetVelocityDuringRecovery: 0
+  - startFrame: 16
+    impulse: 0
+    duration: 10
+    momentum: {x: 0, y: -20.1, z: 0}
+    resetVelocityDuringRecovery: 0

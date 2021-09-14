@@ -64,10 +64,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         input.directionOffset = 0;
         if (!InputManager.Instance.updateDirections) return;
-        //Vector3 dist = (GameHandler.Instance.p2Transform.position - GameHandler.Instance.p1Transform.position);
-        //dist = dist / 2;
-        //Vector3 center = GameHandler.Instance.p1Transform.position + dist;
-
 
         float angle = Vector3.SignedAngle(CameraManager.Instance.mainCamera.transform.forward, (GameHandler.Instance.ReturnPlayer(transform).position - transform.position).normalized, Vector3.up);
         print(angle);
@@ -99,7 +95,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         input.isPaused = status.hitstopCounter > 0;
 
-        UpdateDirection();
+        //UpdateDirection();
 
         if (status.currentState == Status.State.Neutral)
         {
