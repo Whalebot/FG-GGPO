@@ -56,10 +56,11 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        input1 = InputManager.Instance.p1Input;
-        input2 = InputManager.Instance.p2Input;
+
         p1 = GameHandler.Instance.p1Transform;
         p2 = GameHandler.Instance.p2Transform;
+        input1 = InputManager.Instance.p1Input;
+        input2 = InputManager.Instance.p2Input;
         cc1.target = p1;
         cc1.lookTarget = p2;
         cc2.target = p2;

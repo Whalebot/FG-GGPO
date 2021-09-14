@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5B Machinegun
+  m_Name: 6B Machinegun
   m_EditorClassIdentifier: 
   type: 0
   collissionState: 0
@@ -25,11 +25,12 @@ MonoBehaviour:
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 1
+  animationID: 61
   animationClip: {fileID: 0}
   firstStartupFrame: 26
   lastActiveFrame: 30
   totalMoveDuration: 50
+  firstGatlingFrame: 27
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0

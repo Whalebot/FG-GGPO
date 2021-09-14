@@ -139,10 +139,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     void NeutralInput()
     {
+    
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
             if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
-
+        ProcessBuffer();
+        return;
         if (InputAvailable())
         {
             switch (input.inputQueue[0])
@@ -228,6 +230,258 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public virtual void ProcessBuffer()
+    {
+        int bufferID = -1;
+        for (int i = 0; i < input.bufferedInputs.Count; i++)
+        {
+            //Jump Button
+            if (input.bufferedInputs[i].id == 3)
+            {
+                mov.Jump();
+                bufferID = i;
+                break;
+            }
+            if (input.bufferedInputs[i].id == 10) {
+                attack.AttackProperties(attack.moveset.backDash);
+                bufferID = i;
+                break;
+            }
+            if (input.bufferedInputs[i].id == 11)
+            {
+                attack.AttackProperties(attack.moveset.rightDash);
+                bufferID = i;
+                break;
+            }
+            if (input.bufferedInputs[i].id == 12)
+            {
+                attack.AttackProperties(attack.moveset.leftDash);
+                bufferID = i;
+                break;
+            }
+
+            //A Button
+            if (input.bufferedInputs[i].id == 1)
+            {  //Ground
+                if (mov.ground)
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        //Will execute attack if returns true
+                        if (attack.Attack(attack.moveset.cA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (attack.Attack(attack.moveset.fA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (attack.Attack(attack.moveset.bA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.A5))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+                //Airborne
+                else
+                {
+                    if (mov.crouching)
+                    {
+                        if (attack.Attack(attack.moveset.jcA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.jA))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+            }
+            //B Button
+            else if (input.bufferedInputs[i].id == 2)
+            {  //Ground
+                if (mov.ground)
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        //Will execute attack if returns true
+                        if (attack.Attack(attack.moveset.cB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (attack.Attack(attack.moveset.fB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (attack.Attack(attack.moveset.bB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.B5))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+                //Airborne
+                else
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        if (attack.Attack(attack.moveset.jcB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.jB))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+            }
+            //C Button
+            else if (input.bufferedInputs[i].id == 4)
+            {  //Ground
+                if (mov.ground)
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        //Will execute attack if returns true
+                        if (attack.Attack(attack.moveset.cC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (attack.Attack(attack.moveset.fC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (attack.Attack(attack.moveset.bC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.C5))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+                //Airborne
+                else
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        if (attack.Attack(attack.moveset.jcC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.jC))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+            }
+            //D Button
+            else if (input.bufferedInputs[i].id == 5)
+            {  //Ground
+                if (mov.ground)
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        //Will execute attack if returns true
+                        if (attack.Attack(attack.moveset.cD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (attack.Attack(attack.moveset.fD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (attack.Attack(attack.moveset.bD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.D5))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+                //Airborne
+                else
+                {
+                    if (input.bufferedInputs[i].crouch)
+                    {
+                        if (attack.Attack(attack.moveset.jcD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (attack.Attack(attack.moveset.jD))
+                    {
+                        bufferID = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //Delete all inputs in buffer before buffer ID
+        DeleteInputs(bufferID);
+    }
+
     void InAnimationInput()
     {
         //mov.sprinting = false;
@@ -236,12 +490,10 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (InputAvailable() && attack.canGatling)
         {
+
             if (attack.attackString)
             {
-                if (attack.CanUseMove(ReturnMove(input.inputQueue[0])))
-                {
-                    NeutralInput();
-                }
+                ProcessBuffer();
             }
         }
     }
@@ -313,8 +565,18 @@ public class PlayerInputHandler : MonoBehaviour
         return input.inputQueue.Count > 0;
     }
 
+    public void DeleteInputs(int bufferIndex)
+    {
+        for (int i = 0; i < bufferIndex + 1; i++)
+        {
+            input.bufferedInputs.RemoveAt(0);
+        }
+    }
+
     public void Delete()
     {
+        input.bufferedInputs.Clear();
+
         input.inputQueue.RemoveAt(0);
     }
 
