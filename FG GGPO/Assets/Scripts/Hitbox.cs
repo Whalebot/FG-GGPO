@@ -148,13 +148,16 @@ public class Hitbox : MonoBehaviour
         attack.jumpCancel = move.jumpCancelOnBlock;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
+
         status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
+
         //Own hitstop
         status.Hitstop();
         status.newMove = true;
         status.hitstopCounter = hit.hitstop;
+
         //Block FX
         if(move.blockFX != null)
          Instantiate(move.blockFX, colPos.position, colPos.rotation);
@@ -174,6 +177,7 @@ public class Hitbox : MonoBehaviour
         status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
+
         //Own hitstop
         status.Hitstop();
         status.newMove = true;
@@ -189,7 +193,7 @@ public class Hitbox : MonoBehaviour
         if (hit.hitState == HitState.Knockdown)
             other.TakeKnockdown(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
         else
-            other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
+            other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
 
         if (hit.hitState == HitState.Launch)
         {

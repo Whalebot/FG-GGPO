@@ -21,10 +21,10 @@ MonoBehaviour:
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  firstStartupFrame: 5
-  lastActiveFrame: 9
-  totalMoveDuration: 69
-  firstGatlingFrame: 10
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 74
+  firstGatlingFrame: 15
   recoveryFrames: 60
   canGatling: 0
   jumpCancelOnBlock: 0
@@ -32,15 +32,15 @@ MonoBehaviour:
   particleID: 0
   landCancel: 0
   noClip: 1
-  noClipStart: 1
-  noClipDuration: 11
+  noClipStart: 5
+  noClipDuration: 9
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 11
+  invincibleDuration: 15
   forceCounterhit: 0
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
-    startupFrame: 5
+    startupFrame: 10
     activeFrames: 5
     gatlingFrames: 5
     attackHeight: 1
@@ -51,10 +51,10 @@ MonoBehaviour:
       proration: 0
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
-      hitState: 0
+      hitState: 2
     groundBlockProperty:
       damage: 0
-      stun: 0
+      stun: 20
       hitstop: 10
       proration: 0
       meterGain: 2
@@ -63,7 +63,7 @@ MonoBehaviour:
     groundCounterhitProperty:
       damage: 100
       stun: 65
-      hitstop: 0
+      hitstop: 10
       proration: 0
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
@@ -71,15 +71,15 @@ MonoBehaviour:
     airHitProperty:
       damage: 100
       stun: 65
-      hitstop: 0
+      hitstop: 10
       proration: 0
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 0
     airBlockProperty:
       damage: 0
-      stun: 11
-      hitstop: 0
+      stun: 20
+      hitstop: 10
       proration: 0
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}

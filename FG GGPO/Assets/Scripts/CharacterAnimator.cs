@@ -22,6 +22,7 @@ public class CharacterAnimator : MonoBehaviour
     private float deaccelerateSpeed;
     float tempDirection = 0F;
     public List<AnimationData> animationData;
+    public float strafeSmooth;
 
     public Move move;
     public bool isPaused;
@@ -59,7 +60,8 @@ public class CharacterAnimator : MonoBehaviour
 
     }
     public void HitStop()
-    {  StartCoroutine(HitstopStart());
+    {
+        StartCoroutine(HitstopStart());
 
     }
 
@@ -67,7 +69,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         hitstop = false;
         yield return new WaitForFixedUpdate();
-       // yield return new WaitForFixedUpdate();
+        // yield return new WaitForFixedUpdate();
         hitstop = true;
     }
 
@@ -77,7 +79,7 @@ public class CharacterAnimator : MonoBehaviour
     {
 
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
-   
+
         SaveAnimationData();
         if (status.hitstopCounter > 0 && !hitstop) { HitStop(); }
         else if (status.hitstopCounter <= 0)
@@ -86,6 +88,7 @@ public class CharacterAnimator : MonoBehaviour
             hitstop = false;
         }
         anim.enabled = !hitstop;
+        MovementAnimation();
     }
 
 
@@ -158,7 +161,7 @@ public class CharacterAnimator : MonoBehaviour
     void Update()
     {
         StatusAnimation();
-        MovementAnimation();
+
         BlockAnimation();
     }
 
@@ -192,6 +195,14 @@ public class CharacterAnimator : MonoBehaviour
 
     void HitStun()
     {
+        anim.SetBool("Ground", movement.ground && status.groundState == GroundState.Grounded);
+
+        if (status.pushbackVector.y < 0)
+            anim.SetInteger("Falling", -1);
+        else if (Mathf.Abs(status.pushbackVector.y) < 0.1F) anim.SetInteger("Falling", 0);
+        else anim.SetInteger("Falling", 1);
+
+        anim.SetBool("Knockdown", false);
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
@@ -211,7 +222,9 @@ public class CharacterAnimator : MonoBehaviour
 
     void MovementAnimation()
     {
-        if (movement == null) return;
+        if (status.hitstopCounter > 0) return;
+        
+            if (movement == null) return;
         RunSpeed();
         tempDirection = Mathf.Sign(movement.deltaAngle);
 
@@ -219,17 +232,31 @@ public class CharacterAnimator : MonoBehaviour
         anim.SetBool("Walking", movement.isMoving);
         anim.SetBool("Crouch", movement.crouching);
         anim.SetBool("Run", movement.sprinting);
-        x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, maxSpeed);
-        y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, maxSpeed);
+        x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, strafeSmooth);
+        y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, strafeSmooth);
 
-        anim.SetBool("Ground", movement.ground);
+        anim.SetBool("Ground", movement.ground && status.groundState != GroundState.Airborne);
 
         anim.SetFloat("Horizontal", x);
         anim.SetFloat("Vertical", y);
 
-        if (movement.rb.velocity.y < -0.5F)
-            anim.SetInteger("Falling", -1);
-        else anim.SetInteger("Falling", 1);
+        if (movement.ground)
+        {
+            if (movement.rb.velocity.y > 0)
+                anim.SetInteger("Falling", 1);
+            else if (movement.rb.velocity.y == 0)
+                anim.SetInteger("Falling", 0);
+            else anim.SetInteger("Falling", -1);
+        }
+        else {
+            if (movement.rb.velocity.y > 4)
+                anim.SetInteger("Falling", 1);
+            else if (movement.rb.velocity.y == 0)
+                anim.SetInteger("Falling", 0);
+            else anim.SetInteger("Falling", -1);
+        }
+
+
     }
 
 
