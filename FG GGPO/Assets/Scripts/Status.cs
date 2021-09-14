@@ -57,10 +57,12 @@ public class Status : MonoBehaviour
     public int maxMeter;
     public int meter;
 
+
     public int comboCounter;
     public int lastAttackDamage;
     public int comboDamage;
 
+    [FoldoutGroup("Components")] public GameObject defaultHurtbox;
     [FoldoutGroup("Components")] public GameObject standingCollider;
     [FoldoutGroup("Components")] public GameObject crouchingCollider;
     [FoldoutGroup("Components")] public GameObject jumpingCollider;
@@ -91,19 +93,26 @@ public class Status : MonoBehaviour
         jumpingCollider.layer = LayerMask.NameToLayer("AirCollision");
     }
 
-    public void EnableHurtboxes()
+    public void EnableCollider()
     {
         standingCollider.layer = LayerMask.NameToLayer("Collision");
         crouchingCollider.layer = LayerMask.NameToLayer("Collision");
         jumpingCollider.layer = LayerMask.NameToLayer("Collision");
     }
-    public void DisableHurtboxes()
+    public void DisableCollider()
     {
         standingCollider.layer = LayerMask.NameToLayer("Disabled");
         crouchingCollider.layer = LayerMask.NameToLayer("Disabled");
         jumpingCollider.layer = LayerMask.NameToLayer("Disabled");
     }
-
+    public void EnableHurtboxes()
+    {
+        defaultHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
+    }
+    public void DisableHurtboxes()
+    {
+        defaultHurtbox.layer = LayerMask.NameToLayer("Disabled");
+    }
 
     void FixedUpdate()
     {

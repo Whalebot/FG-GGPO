@@ -383,6 +383,8 @@ public class InputHandler : MonoBehaviour
         bool result = false;
         int currentInput = directionals[directionals.Count - 1];
         bool foundNeutralInput = false;
+        bool foundSameInput = false;
+        bool foundNeutralInput2 = false;
         if (currentInput == 5) return false;
         for (int i = 1; i < motionInputWindow; i++)
         {
@@ -392,11 +394,25 @@ public class InputHandler : MonoBehaviour
             {
                 return false;
             }
+            if (directionals[directionals.Count - 2] == currentInput)
+            {
+                return false;
+            }
+
+            if (directionals[directionals.Count - i] == 5 && foundSameInput)
+            {
+                foundNeutralInput2 = true;
+            }
+            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+            {
+                foundSameInput = true;
+            }
             if (directionals[directionals.Count - i] == 5)
             {
                 foundNeutralInput = true;
             }
-            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+
+            if (foundNeutralInput & foundNeutralInput2 && foundSameInput)
             {
                 if (currentInput == 2)
                 {
@@ -676,22 +692,12 @@ public class InputHandler : MonoBehaviour
     IEnumerator InputBuffer(int inputID)
     {
         bufferedInputs.Add(new BufferedInput(inputID, Direction(), heldButtons[5], bufferWindow));
-        // if (GameManager.isPaused) yield break;
-        inputQueue.Add(inputID);
+
         for (int i = 0; i < bufferWindow; i++)
         {
-            while (isPaused)
-            {
-                yield return null;
-            }
-
             yield return new WaitForFixedUpdate();
         }
-        if (inputQueue.Count > 0)
-        {
-            if (inputQueue[0] == inputID)
-                inputQueue.RemoveAt(0);
-        }
+
     }
 }
 [System.Serializable]
