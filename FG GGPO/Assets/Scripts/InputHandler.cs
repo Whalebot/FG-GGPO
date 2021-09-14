@@ -657,13 +657,18 @@ public class InputHandler : MonoBehaviour
 
     int Direction()
     {
+
         if (heldDirectionals[0])
         {
-            return 8;
+            if (id == 1)
+                return 8;
+            else return 2;
         }
         else if (heldDirectionals[2])
         {
-            return 2;
+            if (id == 1)
+                return 2;
+            else return 8;
         }
         else if (heldDirectionals[1] || heldDirectionals[3])
         {
