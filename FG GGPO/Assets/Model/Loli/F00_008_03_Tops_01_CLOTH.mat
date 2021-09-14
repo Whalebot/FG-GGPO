@@ -154,7 +154,7 @@ Material:
     - _GlossyReflections: 0
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 0
-    - _LightAffectRimLightColor: 0
+    - _LightAffectRimLightColor: 1
     - _LightAffectShadow: 0
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
@@ -211,11 +211,11 @@ Material:
     - _RefVal: 0
     - _ReflectionIntensity: 0
     - _ReflectionRoughtness: 0
-    - _RimLigInt: 0.6
+    - _RimLigInt: 0.11
     - _RimLightColorPower: 1.09
-    - _RimLightInLight: 1
-    - _RimLightSoftness: 0.37
-    - _RimLightUnfill: 2.3
+    - _RimLightInLight: 0
+    - _RimLightSoftness: 0.46
+    - _RimLightUnfill: 4.72
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
@@ -230,7 +230,7 @@ Material:
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.89
     - _ShadowColorTexturePower: 0
-    - _ShadowHardness: 0
+    - _ShadowHardness: 0.596
     - _ShadowTColorPower: 1
     - _ShadowTHardness: 1
     - _ShadowTIntensity: 1
@@ -268,7 +268,7 @@ Material:
     - _MainColor: {r: 0.9734455, g: 0.9734455, b: 0.9734455, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OverallShadowColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
