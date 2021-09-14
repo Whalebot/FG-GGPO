@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 5A
   m_EditorClassIdentifier: 
+  animationID: 50
   type: 0
   collissionState: 0
-  sfx:
-  - startup: 6
-    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
   gatlingMoves:
   - {fileID: 11400000}
   - {fileID: 11400000}
@@ -28,25 +26,35 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  sfx:
+  - startup: 6
+    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 50
-  animationClip: {fileID: 0}
   firstStartupFrame: 8
   lastActiveFrame: 8
   totalMoveDuration: 23
-  firstGatlingFrame: 12
+  firstGatlingFrame: 14
   recoveryFrames: 15
   canGatling: 1
-  hitSpecialCancelable: 0
-  blockSpecialCancelable: 0
+  jumpCancelOnBlock: 1
+  jumpCancelOnHit: 1
+  particleID: 0
+  landCancel: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  forceCounterhit: 0
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
     startupFrame: 8
     activeFrames: 1
-    gatlingFrames: 4
+    gatlingFrames: 6
     attackHeight: 1
     groundHitProperty:
       damage: 450
@@ -96,21 +104,11 @@ MonoBehaviour:
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
-  particleID: 0
-  landCancel: 0
-  noClip: 0
-  noClipStart: 1
-  noClipDuration: 0
-  invincible: 0
-  invincibleStart: 1
-  invincibleDuration: 0
-  forceCounterhit: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
   - startFrame: 10
-    impulse: 0
     duration: 4
     momentum: {x: 0, y: 0, z: 5}
     resetVelocityDuringRecovery: 1
