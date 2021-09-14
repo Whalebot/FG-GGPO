@@ -73,7 +73,8 @@ public class AttackScript : MonoBehaviour
 
             if (canGatling && gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
             {
-                attackString = true;
+                attackString = true; 
+                newAttack = false;
             }
 
             //Execute properties
@@ -160,6 +161,8 @@ public class AttackScript : MonoBehaviour
         {
             if (gameFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && gameFrames >= activeMove.attacks[i].startupFrame)
             {
+          
+                status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
                     if (activeMove.attacks[i].hitbox != null)
@@ -310,18 +313,6 @@ public class AttackScript : MonoBehaviour
     void Startup()
     {
         status.GoToState(Status.State.Startup);
-    }
-
-    public void Active()
-    {
-        if (status.currentState != Status.State.Startup) return;
-        activeEvent?.Invoke();
-
-        status.GoToState(Status.State.Active);
-
-        if (sfx != null)
-            sfx.AttackSFX(attackID);
-        containerScript.ActivateHitbox(0);
     }
 
     public void ParticleStart()

@@ -133,11 +133,11 @@ MonoBehaviour:
       hitState: 0
     airHitProperty:
       damage: 1000
-      stun: 40
+      stun: 60
       hitstop: 20
       proration: 0
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: -20, z: 2}
       hitState: 1
     airBlockProperty:
       damage: 0
