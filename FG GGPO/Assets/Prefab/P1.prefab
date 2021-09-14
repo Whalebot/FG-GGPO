@@ -368,7 +368,7 @@ MonoBehaviour:
   network: 0
   id: 0
   lastInput: 5
-  motionInputWindow: 10
+  motionInputWindow: 20
   directionOffset: 0
   controlScheme: 0
   dash: 0
@@ -385,6 +385,7 @@ MonoBehaviour:
   netButtons: 000000000000
   heldButtons: 000000000000
   directionals: 
+  overlayDirectionals: 
   updatedDirectionals: 0
   updatedButtons: 0
   bufferedInputs: []
@@ -409,8 +410,8 @@ MonoBehaviour:
   crouching: 0
   holdBack: 0
   forwardOnly: 1
-  walkSpeed: 6
-  sideWalkSpeed: 6
+  walkSpeed: 4
+  sideWalkSpeed: 3
   backWalkSpeed: 2
   sprinting: 0
   sprintSpeed: 8
@@ -492,21 +493,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8bac064c78f95499b5a6e88d7f0336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 0}
   containerScript: {fileID: 1070645526}
+  hitboxContainer: {fileID: 1070645525}
+  hitboxes: []
   moveset: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
   activeMove: {fileID: 0}
   canGatling: 0
-  hitboxContainer: {fileID: 1070645525}
-  hitboxes: []
   attackID: 0
   gameFrames: 0
-  canAttack: 0
   attacking: 0
   attackString: 0
   landCancel: 0
+  jumpCancel: 0
   combo: 0
-  block: 0
 --- !u!114 &3654780269085657827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +543,9 @@ MonoBehaviour:
   maxMeter: 100
   meter: 0
   comboCounter: 0
+  lastAttackDamage: 0
+  comboDamage: 0
+  defaultHurtbox: {fileID: 7907261999107621238}
   standingCollider: {fileID: 3243212134572139080}
   crouchingCollider: {fileID: 366033417185341652}
   jumpingCollider: {fileID: 7025442713406750524}
@@ -982,7 +984,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907261999107621238}
-  m_Material: {fileID: 13400000, guid: 1795c2316b21f294ea73ef7bb40c3627, type: 2}
+  m_Material: {fileID: 13400000, guid: d5b4111662dca164496d690d89151f43, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

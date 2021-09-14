@@ -69,6 +69,7 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public bool[] netButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public bool[] heldButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public List<int> directionals;
+    [FoldoutGroup("Input Overlay")] public List<int> overlayDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
     public List<BufferedInput> bufferedInputs;
@@ -309,72 +310,67 @@ public class InputHandler : MonoBehaviour
         }
 
 
+
+
+        //TRANSLATE DIRECTIONS TO INPUT INTERGERS
+        inputDirection = TranslateInput(netDirectionals);
+        if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
         {
-            //IF PLAYER 2, REVERSE INPUTS
-            if (id == 1 || InputManager.Instance.absoluteDirections || InputManager.Instance.updateDirections)
-                inputDirection = TranslateInput(netDirectionals);
-            else
-            {
-                inputDirection = InvertVector(TranslateInput(netDirectionals));
-            }
-
-
-
-            //SEND INPUTS TO INPUT DISPLAY
-            if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(6);
-                else if (inputDirection.x < -0.5F) directionals.Add(4);
-                else directionals.Add(5);
-            }
-            else if (inputDirection.y > 0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(9);
-                else if (inputDirection.x < -0.5F) directionals.Add(7);
-                else directionals.Add(8);
-            }
-            else if (inputDirection.y < -0.5F)
-            {
-                if (inputDirection.x > 0.5F) directionals.Add(3);
-                else if (inputDirection.x < -0.5F) directionals.Add(1);
-                else directionals.Add(2);
-            }
-
-            CheckMotionInputs();
-
-            //CHECK IF INPUTS HAVE BEEN DUPLICATED
-            if (directionals.Count <= 2) { updatedDirectionals = true; return; }
-            if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
-
-            updatedDirectionals = true;
+            if (inputDirection.x > 0.5F) overlayDirectionals.Add(6);
+            else if (inputDirection.x < -0.5F) overlayDirectionals.Add(4);
+            else overlayDirectionals.Add(5);
         }
-        //else
-        //{
-        //    if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
-        //    {
-        //        if (inputDirection.x > 0.5F) directionals.Add(6);
-        //        else if (inputDirection.x < -0.5F) directionals.Add(4);
-        //        else directionals.Add(5);
-        //    }
-        //    else if (inputDirection.y > 0.5F)
-        //    {
-        //        if (inputDirection.x > 0.5F) directionals.Add(9);
-        //        else if (inputDirection.x < -0.5F) directionals.Add(7);
-        //        else directionals.Add(8);
-        //    }
-        //    else if (inputDirection.y < -0.5F)
-        //    {
-        //        if (inputDirection.x > 0.5F) directionals.Add(3);
-        //        else if (inputDirection.x < -0.5F) directionals.Add(1);
-        //        else directionals.Add(2);
-        //    }
+        else if (inputDirection.y > 0.5F)
+        {
+            if (inputDirection.x > 0.5F) overlayDirectionals.Add(9);
+            else if (inputDirection.x < -0.5F) overlayDirectionals.Add(7);
+            else overlayDirectionals.Add(8);
+        }
+        else if (inputDirection.y < -0.5F)
+        {
+            if (inputDirection.x > 0.5F) overlayDirectionals.Add(3);
+            else if (inputDirection.x < -0.5F) overlayDirectionals.Add(1);
+            else overlayDirectionals.Add(2);
+        }
+
+        //IF PLAYER 2, REVERSE INPUTS
+        if (id == 1 || InputManager.Instance.absoluteDirections || InputManager.Instance.updateDirections)
+            inputDirection = TranslateInput(netDirectionals);
+        else
+        {
+            inputDirection = InvertVector(TranslateInput(netDirectionals));
+        }
 
 
-        //    if (directionals.Count <= 2) { updatedDirectionals = true; return; }
-        //    if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
-        //    updatedDirectionals = true;
-        //}
+        //TRANSLATE DIRECTIONS TO INPUT INTERGERS
+        if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
+        {
+            if (inputDirection.x > 0.5F) directionals.Add(6);
+            else if (inputDirection.x < -0.5F) directionals.Add(4);
+            else directionals.Add(5);
+        }
+        else if (inputDirection.y > 0.5F)
+        {
+            if (inputDirection.x > 0.5F) directionals.Add(9);
+            else if (inputDirection.x < -0.5F) directionals.Add(7);
+            else directionals.Add(8);
+        }
+        else if (inputDirection.y < -0.5F)
+        {
+            if (inputDirection.x > 0.5F) directionals.Add(3);
+            else if (inputDirection.x < -0.5F) directionals.Add(1);
+            else directionals.Add(2);
+        }
+
+        CheckMotionInputs();
+
+        //CHECK IF INPUTS HAVE BEEN DUPLICATED
+        if (directionals.Count <= 2) { updatedDirectionals = true; return; }
+        if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
+
+        updatedDirectionals = true;
+
     }
 
     void CheckMotionInputs()
@@ -387,6 +383,8 @@ public class InputHandler : MonoBehaviour
         bool result = false;
         int currentInput = directionals[directionals.Count - 1];
         bool foundNeutralInput = false;
+        bool foundSameInput = false;
+        bool foundNeutralInput2 = false;
         if (currentInput == 5) return false;
         for (int i = 1; i < motionInputWindow; i++)
         {
@@ -396,11 +394,25 @@ public class InputHandler : MonoBehaviour
             {
                 return false;
             }
+            if (directionals[directionals.Count - 2] == currentInput)
+            {
+                return false;
+            }
+
+            if (directionals[directionals.Count - i] == 5 && foundSameInput)
+            {
+                foundNeutralInput2 = true;
+            }
+            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+            {
+                foundSameInput = true;
+            }
             if (directionals[directionals.Count - i] == 5)
             {
                 foundNeutralInput = true;
             }
-            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+
+            if (foundNeutralInput & foundNeutralInput2 && foundSameInput)
             {
                 if (currentInput == 2)
                 {
@@ -507,7 +519,6 @@ public class InputHandler : MonoBehaviour
         {
             if (temp[i] && !netButtons[i])
             {
-                //    print("netbutton " + netButtons[i] + " & temp " + temp[i]);
                 StartCoroutine("InputBuffer", i + 1);
             }
             if (netButtons[i] != temp[i]) updatedButtons = true;
@@ -681,22 +692,12 @@ public class InputHandler : MonoBehaviour
     IEnumerator InputBuffer(int inputID)
     {
         bufferedInputs.Add(new BufferedInput(inputID, Direction(), heldButtons[5], bufferWindow));
-        // if (GameManager.isPaused) yield break;
-        inputQueue.Add(inputID);
+
         for (int i = 0; i < bufferWindow; i++)
         {
-            while (isPaused)
-            {
-                yield return null;
-            }
-
             yield return new WaitForFixedUpdate();
         }
-        if (inputQueue.Count > 0)
-        {
-            if (inputQueue[0] == inputID)
-                inputQueue.RemoveAt(0);
-        }
+
     }
 }
 [System.Serializable]

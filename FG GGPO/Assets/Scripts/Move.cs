@@ -7,31 +7,29 @@ using System.Reflection;
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
-
+    public int animationID;
     public MoveType type;
     public BlockState collissionState;
-    [FoldoutGroup("SFX")] public SFX[] sfx;
-    public List<Move> gatlingMoves;
-    public GameObject hitFX;
-    public GameObject blockFX;
-    public GameObject hitSFX;
-    public GameObject blockSFX;
 
-    public int animationID;
-    public AnimationClip animationClip;
+    public List<Move> gatlingMoves;
+    [FoldoutGroup("FX")] public SFX[] sfx;
+    [FoldoutGroup("FX")] public GameObject hitFX;
+    [FoldoutGroup("FX")] public GameObject blockFX;
+    [FoldoutGroup("FX")] public GameObject hitSFX;
+    [FoldoutGroup("FX")] public GameObject blockSFX;
+
     [Header("Read Only")]
     public int firstStartupFrame;
     public int lastActiveFrame;
     public int totalMoveDuration;
     public int firstGatlingFrame;
+    [Header("Editable")]
     public int recoveryFrames;
 
-    public bool canGatling;
-    public bool hitSpecialCancelable;
-    public bool blockSpecialCancelable;
-
-    public Attack[] attacks;
     [Header("Move properties")]
+    [FoldoutGroup("Move properties")] public bool canGatling;
+    [FoldoutGroup("Move properties")] public bool jumpCancelOnBlock;
+    [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
     [FoldoutGroup("Move properties")] public int particleID;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool noClip;
@@ -47,6 +45,8 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public int invincibleDuration;
     [FoldoutGroup("Move properties")] public bool forceCounterhit;
 
+    public Attack[] attacks;
+  
 
     [Header("Momentum")]
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
@@ -62,37 +62,6 @@ public class Move : ScriptableObject
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
         totalMoveDuration = lastActiveFrame + recoveryFrames;
     }
-
-    //[Button]
-    //void CopyGroundToAirHit() {
-    //    CopyProperty(airHitProperty, groundHitProperty);
-    //    CopyProperty(airBlockProperty, groundBlockProperty);
-    //}
-
-    //[Button]
-    //void CopyBaseAttack()
-    //{
-    ////    attacks = new Attack[1];
-    //    attacks[0].hitbox = attackPrefab;
-    //    attacks[0].startupFrame = startupFrames;
-    //    attacks[0].activeFrames = activeFrames;
-    //    attacks[0].gatlingFrames= gatlingFrames;
-    //    attacks[0].attackHeight = attackHeight;
-
-    //    CopyProperty(attacks[0].groundHitProperty, groundHitProperty);
-    //    CopyProperty(attacks[0].groundCounterhitProperty, groundBlockProperty);
-    //    CopyProperty(attacks[0].groundCounterhitProperty, groundCounterhitProperty);
-    //    CopyProperty(attacks[0].airHitProperty, airHitProperty);
-    //    CopyProperty(attacks[0].airBlockProperty, airBlockProperty);
-    //    CopyProperty(attacks[0].airCounterhitProperty, airCounterhitProperty);
-    //}
-
-    //[Button]
-    //void CopyCounterhit()
-    //{
-    //    CopyProperty(groundCounterhitProperty, groundHitProperty);
-    //    CopyProperty(airCounterhitProperty, airHitProperty);
-    //}
 
     void CopyProperty(HitProperty hit1, HitProperty hit2)
     {
@@ -158,7 +127,6 @@ public class Attack
 public class Momentum
 {
     public int startFrame = 1;
-    public bool impulse = true;
     public int duration;
     public Vector3 momentum;
     public bool resetVelocityDuringRecovery = true;

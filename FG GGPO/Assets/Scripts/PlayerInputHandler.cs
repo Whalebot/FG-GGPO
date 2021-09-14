@@ -64,10 +64,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         input.directionOffset = 0;
         if (!InputManager.Instance.updateDirections) return;
-        //Vector3 dist = (GameHandler.Instance.p2Transform.position - GameHandler.Instance.p1Transform.position);
-        //dist = dist / 2;
-        //Vector3 center = GameHandler.Instance.p1Transform.position + dist;
-
 
         float angle = Vector3.SignedAngle(CameraManager.Instance.mainCamera.transform.forward, (GameHandler.Instance.ReturnPlayer(transform).position - transform.position).normalized, Vector3.up);
         print(angle);
@@ -99,7 +95,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         input.isPaused = status.hitstopCounter > 0;
 
-        UpdateDirection();
+        //UpdateDirection();
 
         if (status.currentState == Status.State.Neutral)
         {
@@ -139,7 +135,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void NeutralInput()
     {
-    
+
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
             if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
@@ -155,11 +151,17 @@ public class PlayerInputHandler : MonoBehaviour
             //Jump Button
             if (input.bufferedInputs[i].id == 3)
             {
-                mov.Jump();
-                bufferID = i;
-                break;
+                bool canJump= status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
+                if (canJump)
+                {
+                    mov.Jump();
+                    bufferID = i;
+                    break;
+                }
+                continue;
             }
-            if (input.bufferedInputs[i].id == 10) {
+            if (input.bufferedInputs[i].id == 10)
+            {
                 attack.AttackProperties(attack.moveset.backDash);
                 bufferID = i;
                 break;
@@ -401,11 +403,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     void InAnimationInput()
     {
-        //mov.sprinting = false;
-        attack.block = false;
         status.blocking = false;
 
-        if (InputAvailable() && attack.canGatling)
+        if (attack.canGatling)
         {
 
             if (attack.attackString)

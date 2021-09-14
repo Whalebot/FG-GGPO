@@ -128,13 +128,12 @@ public class Movement : MonoBehaviour
             storedDirection = direction.normalized;
         if (status.currentState == Status.State.Neutral)
         {
-
             MovementProperties();
             Rotation();
             PlayerMovement();
         }
 
-        if (rb.velocity.y < 0) rb.velocity += Physics.gravity * fallMultiplier;
+        if (rb.velocity.y < 0 && status.groundState == GroundState.Airborne) rb.velocity += Physics.gravity * fallMultiplier;
 
         if (direction != Vector3.zero)
         {
@@ -276,9 +275,7 @@ public class Movement : MonoBehaviour
         {
             if (check && rb.velocity.y < 0) rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
 
-            status.DisableHurtboxes();
-            //
-            //return false;
+            status.DisableCollider();
         }
 
         if (!ground && transform.position.y < 0.1F)
@@ -293,7 +290,7 @@ public class Movement : MonoBehaviour
             status.GoToGroundState(GroundState.Grounded);
             ground = true;
             runMomentumCounter = 0;
-            status.EnableHurtboxes();
+            status.EnableCollider();
         }
         else if (transform.position.y > 0.1F)
         {

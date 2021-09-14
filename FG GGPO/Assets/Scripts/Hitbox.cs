@@ -145,6 +145,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteBlock(HitProperty hit, Status other)
     {
+        attack.jumpCancel = move.jumpCancelOnBlock;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
         status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
@@ -166,6 +167,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other)
     {
+        attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain/2;
 
