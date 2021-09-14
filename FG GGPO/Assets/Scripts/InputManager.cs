@@ -10,9 +10,8 @@ using System.IO;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
-
-    [HideInInspector] public InputHandler p1Input;
-    [HideInInspector] public InputHandler p2Input;
+    public InputHandler p1Input;
+    public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
     public bool absoluteDirections;
@@ -38,7 +37,7 @@ public class InputManager : MonoBehaviour
 
         foreach (var item in Gamepad.all)
         {
-           // print(item.name);
+            // print(item.name);
         }
 
         //for (int i = 0; i < controllersConnected; i++)

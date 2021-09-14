@@ -23,7 +23,7 @@ public class Move : ScriptableObject
     public int firstStartupFrame;
     public int lastActiveFrame;
     public int totalMoveDuration;
-
+    public int firstGatlingFrame;
     public int recoveryFrames;
 
     public bool canGatling;
@@ -58,6 +58,7 @@ public class Move : ScriptableObject
     {
         if (attacks.Length <= 0) return;
         firstStartupFrame = attacks[0].startupFrame;
+        firstGatlingFrame = attacks[0].startupFrame + attacks[0].gatlingFrames;
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
         totalMoveDuration = lastActiveFrame + recoveryFrames;
     }

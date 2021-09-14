@@ -204,19 +204,21 @@ public class InputHandler : MonoBehaviour
     }
     public void ResolveInputBuffer()
     {
-        //deletedInputs.Clear();
-        //for (int i = 0; i < bufferedInputs.Count; i++)
-        //{
-        //    bufferedInputs[id].frame--;
-        //    if (bufferedInputs[id].frame <= 0)
-        //    {
-        //        deletedInputs.Add(bufferedInputs[id]);
-        //    }
-        //}
-        //foreach (var item in deletedInputs)
-        //{
-        //    bufferedInputs.Remove(item);
-        //}
+        deletedInputs.Clear();
+        if (isPaused) return;
+        for (int i = 0; i < bufferedInputs.Count; i++)
+        {
+            bufferedInputs[i].frame--;
+            if (bufferedInputs[i].frame <= 0)
+            {
+                deletedInputs.Add(bufferedInputs[i]);
+            }
+        }
+        foreach (var item in deletedInputs)
+        {
+            if (bufferedInputs.Contains(item))
+                bufferedInputs.Remove(item);
+        }
 
     }
 
@@ -653,9 +655,27 @@ public class InputHandler : MonoBehaviour
         StartCoroutine("InputBuffer", 10);
     }
 
+    int Direction()
+    {
+        if (heldDirectionals[0])
+        {
+            return 8;
+        }
+        else if (heldDirectionals[2])
+        {
+            return 2;
+        }
+        else if (heldDirectionals[1] || heldDirectionals[3])
+        {
+            return 6;
+        }
+        else
+            return 5;
+    }
+
     IEnumerator InputBuffer(int inputID)
     {
-        bufferedInputs.Add(new BufferedInput(inputID, bufferWindow));
+        bufferedInputs.Add(new BufferedInput(inputID, Direction(), heldButtons[5], bufferWindow));
         // if (GameManager.isPaused) yield break;
         inputQueue.Add(inputID);
         for (int i = 0; i < bufferWindow; i++)
@@ -677,12 +697,17 @@ public class InputHandler : MonoBehaviour
 [System.Serializable]
 public class BufferedInput
 {
-    public BufferedInput(int input, int bufferWindow)
+    public BufferedInput(int input, int direction, bool c, int bufferWindow)
     {
         id = input;
         frame = bufferWindow;
+        crouch = c;
+        dir = direction;
+
     }
     public int id;
+    public int dir;
+    public bool crouch;
     public int frame;
 }
 

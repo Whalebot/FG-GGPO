@@ -316,24 +316,38 @@ public class AttackScript : MonoBehaviour
 
     public bool CanUseMove(Move move)
     {
-
+        if (move == null) return false;
         if (attackString)
         {
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
         }
-        if (usedMoves.Contains(move)) return false;
+        if (usedMoves.Contains(move)) {
+            int duplicates = 1;
+            foreach (var item in move.gatlingMoves)
+            {
+                if (item == move) duplicates++;
+            }
+            foreach (var item in usedMoves)
+            {
+                if (item == move) duplicates--;
+            }
+            return duplicates > 0; 
+        }
 
         return true;
     }
 
-    public void Attack(Move move)
+    public bool Attack(Move move)
     {
+        if (!CanUseMove(move)) return false;
+        else
+        {
+            usedMoves.Add(move);
+            AttackProperties(move);
+            return true;
+        }
 
-        if (!CanUseMove(move)) return;
-        usedMoves.Add(move);
-
-        AttackProperties(move);
     }
 
     public bool CanCancel(Move move)

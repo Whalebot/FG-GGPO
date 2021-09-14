@@ -16,7 +16,7 @@ public class Projectile : Hitbox
 
     private void Start()
     {
-        print(attack.gameFrames);
+     
     }
 
 
