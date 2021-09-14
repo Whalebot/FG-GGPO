@@ -26,15 +26,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  hitFX: {fileID: 1405262895153692, guid: fe194d4b4a282f0488947e2baa1fb8f6, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 79ac4eef1fdf99241afa26b223b7e98a, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 0
+  animationID: 50
   animationClip: {fileID: 0}
   firstStartupFrame: 8
   lastActiveFrame: 8
   totalMoveDuration: 28
+  firstGatlingFrame: 18
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0
@@ -43,11 +44,11 @@ MonoBehaviour:
   - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
     startupFrame: 8
     activeFrames: 1
-    gatlingFrames: 1
+    gatlingFrames: 10
     attackHeight: 1
     groundHitProperty:
       damage: 450
-      stun: 24
+      stun: 22
       hitstop: 7
       proration: 0
       meterGain: 2
@@ -55,7 +56,7 @@ MonoBehaviour:
       hitState: 0
     groundBlockProperty:
       damage: 0
-      stun: 15
+      stun: 19
       hitstop: 5
       proration: 0
       meterGain: 2

@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 0
   collissionState: 2
   sfx:
-  - startup: 8
+  - startup: 13
     prefab: {fileID: 3797316729740095628, guid: 253e74f0bc000394383ab7c7205759dd, type: 3}
   gatlingMoves:
   - {fileID: 0}
@@ -24,22 +24,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: c54b1e8edf0377f488628b2b33558bd6, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 10
+  animationID: 20
   animationClip: {fileID: 0}
-  firstStartupFrame: 10
-  lastActiveFrame: 11
-  totalMoveDuration: 41
+  firstStartupFrame: 15
+  lastActiveFrame: 16
+  totalMoveDuration: 46
+  firstGatlingFrame: 16
   recoveryFrames: 30
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
-    startupFrame: 10
+    startupFrame: 15
     activeFrames: 2
     gatlingFrames: 1
     attackHeight: 1

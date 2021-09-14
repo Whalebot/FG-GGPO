@@ -20,15 +20,16 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
   - {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: c54b1e8edf0377f488628b2b33558bd6, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 21
+  animationID: 81
   animationClip: {fileID: 0}
   firstStartupFrame: 11
   lastActiveFrame: 13
   totalMoveDuration: 33
+  firstGatlingFrame: 12
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0
@@ -44,6 +45,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundBlockProperty:
@@ -51,6 +53,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundCounterhitProperty:
@@ -58,6 +61,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airHitProperty:
@@ -65,6 +69,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 3, z: 3}
       hitState: 0
     airBlockProperty:
@@ -72,6 +77,7 @@ MonoBehaviour:
       stun: 20
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airCounterhitProperty:
@@ -79,6 +85,7 @@ MonoBehaviour:
       stun: 50
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
   particleID: 0

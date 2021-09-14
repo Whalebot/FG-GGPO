@@ -24,22 +24,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: c54b1e8edf0377f488628b2b33558bd6, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 1
+  animationID: 51
   animationClip: {fileID: 0}
-  firstStartupFrame: 14
-  lastActiveFrame: 16
-  totalMoveDuration: 36
+  firstStartupFrame: 12
+  lastActiveFrame: 14
+  totalMoveDuration: 34
+  firstGatlingFrame: 13
   recoveryFrames: 20
   canGatling: 1
   hitSpecialCancelable: 0
   blockSpecialCancelable: 0
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 04943563ebb6fca47894c7385c69af63, type: 3}
-    startupFrame: 14
+    startupFrame: 12
     activeFrames: 3
     gatlingFrames: 1
     attackHeight: 1
@@ -48,6 +49,7 @@ MonoBehaviour:
       stun: 27
       hitstop: 10
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 8}
       hitState: 0
     groundBlockProperty:
@@ -55,6 +57,7 @@ MonoBehaviour:
       stun: 15
       hitstop: 5
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     groundCounterhitProperty:
@@ -62,6 +65,7 @@ MonoBehaviour:
       stun: 21
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airHitProperty:
@@ -69,6 +73,7 @@ MonoBehaviour:
       stun: 20
       hitstop: 5
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airBlockProperty:
@@ -76,6 +81,7 @@ MonoBehaviour:
       stun: 15
       hitstop: 5
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airCounterhitProperty:
@@ -83,6 +89,7 @@ MonoBehaviour:
       stun: 21
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
   particleID: 0
