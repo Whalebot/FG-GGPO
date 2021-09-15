@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: F00_000_00_FaceMouth_00_FACE
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
-  m_ShaderKeywords: N_F_CO_ON N_F_EAL_ON N_F_O_ON N_F_RELGI_ON N_F_SS_ON N_F_TRANSAFFSHA
-    N_F_TRANSAFFSHA_ON N_F_TRANS_ON
+  m_ShaderKeywords: NOKEWO N_F_CO_ON N_F_EAL_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON N_F_SS_ON
+    N_F_TRANSAFFSHA N_F_TRANSAFFSHA_ON N_F_TRANS_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -127,22 +127,22 @@ Material:
     - _EnvironmentReflections: 1
     - _EnvironmentalLightingIntensity: 1
     - _FarDistanceMaxWidth: 10
-    - _GIFlatShade: 0
+    - _GIFlatShade: 1
     - _GIShadeThreshold: 0
     - _GlossColorPower: 10
-    - _GlossIntensity: 1
+    - _GlossIntensity: 0
     - _GlossMapScale: 0
     - _GlossSoftness: 0
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 0
+    - _Glossiness: 0.327
     - _GlossyReflections: 0
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 0
-    - _LightAffectRimLightColor: 0
-    - _LightAffectShadow: 0
+    - _LightAffectRimLightColor: 1
+    - _LightAffectShadow: 1
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
     - _LightIntensity: 1
@@ -169,7 +169,7 @@ Material:
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
@@ -198,11 +198,11 @@ Material:
     - _RefVal: 0
     - _ReflectionIntensity: 0
     - _ReflectionRoughtness: 0
-    - _RimLigInt: 1
-    - _RimLightColorPower: 10
+    - _RimLigInt: 0.095
+    - _RimLightColorPower: 0.08
     - _RimLightInLight: 1
-    - _RimLightSoftness: 1
-    - _RimLightUnfill: 1.5
+    - _RimLightSoftness: 0
+    - _RimLightUnfill: 2.13
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
@@ -211,13 +211,13 @@ Material:
     - _SelfLitIntensity: 0
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
-    - _SelfShadowHardness: 1
+    - _SelfShadowHardness: 0.958
     - _SelfShadowRealTimeShadowColorPower: 1
     - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
-    - _SelfShadowThreshold: 0.93
+    - _SelfShadowThreshold: 0.75
     - _ShadowColorTexturePower: 0
-    - _ShadowHardness: 0
+    - _ShadowHardness: 0.903
     - _ShadowTColorPower: 1
     - _ShadowTHardness: 1
     - _ShadowTIntensity: 1
@@ -255,7 +255,7 @@ Material:
     - _MainColor: {r: 0.9734455, g: 0.9734455, b: 0.9734455, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OverallShadowColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
