@@ -26,7 +26,7 @@ MonoBehaviour:
   firstStartupFrame: 11
   lastActiveFrame: 13
   totalMoveDuration: 33
-  firstGatlingFrame: 11
+  firstGatlingFrame: 12
   recoveryFrames: 20
   canGatling: 1
   jumpCancelOnBlock: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
     startupFrame: 11
     activeFrames: 3
-    gatlingFrames: 0
+    gatlingFrames: 1
     attackHeight: 3
     groundHitProperty:
       damage: 750
