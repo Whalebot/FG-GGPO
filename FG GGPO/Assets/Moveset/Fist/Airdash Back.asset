@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: Airdash Back
   m_EditorClassIdentifier: 
   animationID: 104
-  type: 0
-  collissionState: 0
-  gatlingMoves: []
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
+  type: 0
+  collissionState: 0
+  gatlingMoves: []
   firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 19
+  lastActiveFrame: 13
+  totalMoveDuration: 18
   firstGatlingFrame: 15
+  blockAdvantage: 12
+  hitAdvantage: 22
   recoveryFrames: 5
   canGatling: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  particleID: 0
-  landCancel: 0
+  jumpCancelOnHit: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -38,10 +38,13 @@ MonoBehaviour:
   invincibleStart: 1
   invincibleDuration: 0
   forceCounterhit: 0
+  useAirAction: 1
+  landCancel: 0
+  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
-    activeFrames: 5
+    activeFrames: 4
     gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
@@ -94,9 +97,10 @@ MonoBehaviour:
       hitState: 0
   overrideVelocity: 1
   runMomentum: 0
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   m:
   - startFrame: 0
-    duration: 20
-    momentum: {x: 8, y: 0, z: 15}
-    resetVelocityDuringRecovery: 1
+    duration: 21
+    momentum: {x: 0, y: 0, z: -6}
+    homing: 0
+    resetVelocityDuringRecovery: 0
