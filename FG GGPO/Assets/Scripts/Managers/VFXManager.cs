@@ -8,6 +8,11 @@ public class VFXManager : MonoBehaviour
     {
         get; private set;
     }
+    public GameObject defaultHitVFX;
+    public GameObject defaultBlockVFX;
+    public GameObject defaultHitSFX;
+    public GameObject defaultBlockSFX;
+
     public GameObject recoveryFX;
     public GameObject wakeupFX;
 

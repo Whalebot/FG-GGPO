@@ -978,21 +978,21 @@ Cull[_DoubleSidedOutline]//OL_RCUL
 				//RT_CA
 				float3 RTD_CA = RT_CA(color);
 
-//SSOL_U
+//SSOL_NU
 //SSOL
-#ifdef UNITY_COLORSPACE_GAMMA//SSOL
-_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL
-#endif//SSOL
-#if N_F_O_ON//SSOL
-float3 SSOLi=(float3)EdgDet(sceneUVs.xy);//SSOL
-#if N_F_O_MOTTSO_ON//SSOL
-float3 Init_FO=((RTD_CA*RTD_SON_CHE_1))*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL
-#else//SSOL
-float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL
-#endif//SSOL
-#else//SSOL
+//#ifdef UNITY_COLORSPACE_GAMMA//SSOL
+//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL
+//#endif//SSOL
+//#if N_F_O_ON//SSOL
+//float3 SSOLi=(float3)EdgDet(sceneUVs.xy);//SSOL
+//#if N_F_O_MOTTSO_ON//SSOL
+//float3 Init_FO=((RTD_CA*RTD_SON_CHE_1))*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL
+//#else//SSOL
+//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL
+//#endif//SSOL
+//#else//SSOL
 float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
-#endif//SSOL
+//#endif//SSOL
 
 				float fogFactor = input.positionWSAndFogFactor.w;
 

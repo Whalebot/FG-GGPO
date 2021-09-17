@@ -8,21 +8,27 @@ using System.Reflection;
 public class Move : ScriptableObject
 {
     public int animationID;
-    public MoveType type;
-    public BlockState collissionState;
 
-    public List<Move> gatlingMoves;
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
     [FoldoutGroup("FX")] public GameObject hitSFX;
     [FoldoutGroup("FX")] public GameObject blockSFX;
 
+    public MoveType type;
+    public BlockState collissionState;
+
+    public List<Move> gatlingMoves;
     [Header("Read Only")]
     public int firstStartupFrame;
     public int lastActiveFrame;
     public int totalMoveDuration;
     public int firstGatlingFrame;
+
+    [Header("Frame Data")]
+    public int blockAdvantage;
+    public int hitAdvantage;
+
     [Header("Editable")]
     public int recoveryFrames;
 
@@ -30,23 +36,22 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool canGatling;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnBlock;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
-    [FoldoutGroup("Move properties")] public int particleID;
-    [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool noClip;
     [ShowIf("noClip")]
     [FoldoutGroup("Move properties")] public int noClipStart = 1;
     [ShowIf("noClip")]
     [FoldoutGroup("Move properties")] public int noClipDuration;
-
     [FoldoutGroup("Move properties")] public bool invincible;
     [ShowIf("invincible")]
     [FoldoutGroup("Move properties")] public int invincibleStart = 1;
     [ShowIf("invincible")]
     [FoldoutGroup("Move properties")] public int invincibleDuration;
     [FoldoutGroup("Move properties")] public bool forceCounterhit;
-
+    [FoldoutGroup("Air properties")] public bool useAirAction;
+    [FoldoutGroup("Air properties")] public bool landCancel;
+    [FoldoutGroup("Air properties")] public int landingRecovery;
     public Attack[] attacks;
-  
+
 
     [Header("Momentum")]
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
@@ -61,6 +66,60 @@ public class Move : ScriptableObject
         firstGatlingFrame = attacks[0].startupFrame + attacks[0].gatlingFrames;
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
         totalMoveDuration = lastActiveFrame + recoveryFrames;
+        blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
+        hitAdvantage = attacks[attacks.Length - 1].groundHitProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
+        foreach (var item in attacks)
+        {
+            if (item.groundHitProperty.hitstop == 0)
+                item.groundHitProperty.hitstop = 5;
+            if (item.groundBlockProperty.hitstop == 0)
+                item.groundBlockProperty.hitstop = 5;
+            if (item.groundCounterhitProperty.hitstop == 0)
+                item.groundCounterhitProperty.hitstop = 5;
+            if (item.airHitProperty.hitstop == 0)
+                item.airHitProperty.hitstop = 5;
+            if (item.airBlockProperty.hitstop == 0)
+                item.airBlockProperty.hitstop = 5;
+            if (item.airCounterhitProperty.hitstop == 0)
+                item.airCounterhitProperty.hitstop = 5;
+
+            if (item.groundHitProperty.stun == 0)
+                item.groundHitProperty.stun = 30;
+            if (item.groundBlockProperty.stun == 0)
+                item.groundBlockProperty.stun = 20;
+            if (item.groundCounterhitProperty.stun == 0)
+                item.groundCounterhitProperty.stun = 40;
+            if (item.airHitProperty.stun == 0)
+                item.airHitProperty.stun = 30;
+            if (item.airBlockProperty.stun == 0)
+                item.airBlockProperty.stun = 20;
+            if (item.airCounterhitProperty.stun == 0)
+                item.airCounterhitProperty.stun = 40;
+
+            if (item.groundHitProperty.proration == 0)
+                item.groundHitProperty.proration = 0.95F;
+            if (item.groundBlockProperty.proration == 0)
+                item.groundBlockProperty.proration = 0.95F;
+            if (item.groundCounterhitProperty.proration == 0)
+                item.groundCounterhitProperty.proration = 0.95F;
+            if (item.airHitProperty.proration == 0)
+                item.airHitProperty.proration = 0.95F;
+            if (item.airBlockProperty.proration == 0)
+                item.airBlockProperty.proration = 0.95F;
+            if (item.airCounterhitProperty.proration == 0)
+                item.airCounterhitProperty.proration = 0.95F;
+        }
+
+    }
+
+    void CopyHitToCounterhit()
+    {
+        foreach (var item in attacks)
+        {
+            CopyProperty(item.groundCounterhitProperty, item.groundHitProperty);
+            CopyProperty(item.airCounterhitProperty, item.airHitProperty);
+        }
+
     }
 
     void CopyProperty(HitProperty hit1, HitProperty hit2)
@@ -129,6 +188,7 @@ public class Momentum
     public int startFrame = 1;
     public int duration;
     public Vector3 momentum;
+    public bool homing = false;
     public bool resetVelocityDuringRecovery = true;
 }
 
@@ -136,9 +196,9 @@ public class Momentum
 public class HitProperty
 {
     public int damage;
-    public int stun;
-    public int hitstop;
-    public float proration = 1;
+    public int stun = 20;
+    public int hitstop = 5;
+    public float proration = 0.95F;
     public int meterGain = 2;
     public Vector3 pushback;
     public HitState hitState;

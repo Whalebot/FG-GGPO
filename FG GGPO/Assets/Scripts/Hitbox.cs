@@ -23,7 +23,7 @@ public class Hitbox : MonoBehaviour
 
     private void Awake()
     {
-       // print(" Hitbox active");
+        // print(" Hitbox active");
         mr = GetComponent<MeshRenderer>();
         if (container != null)
         {
@@ -51,15 +51,16 @@ public class Hitbox : MonoBehaviour
             attack = container.attack;
 
         }
-       // print(attack.gameFrames + " Hitbox active");
+        // print(attack.gameFrames + " Hitbox active");
     }
 
     public void OnTriggerEnter(Collider other)
     {
-       // if (!other.transform.IsChildOf(body))
-        {if (hitOnce) return;
+        // if (!other.transform.IsChildOf(body))
+        {
+            if (hitOnce) return;
             Status enemyStatus = other.GetComponentInParent<Status>();
-        
+
             if (enemyStatus != null)
             {
                 if (status == enemyStatus) return;
@@ -108,7 +109,8 @@ public class Hitbox : MonoBehaviour
         CheckAttack(other, move.attacks[hitboxID]);
     }
 
-    void CheckAttack(Status other, Attack attack) {
+    void CheckAttack(Status other, Attack attack)
+    {
         //Check for block
         if (other.blocking)
         {
@@ -159,10 +161,14 @@ public class Hitbox : MonoBehaviour
         status.hitstopCounter = hit.hitstop;
 
         //Block FX
-        if(move.blockFX != null)
-         Instantiate(move.blockFX, colPos.position, colPos.rotation);
+        if (move.blockFX != null)
+            Instantiate(move.blockFX, colPos.position, colPos.rotation);
+        else Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
         if (move.blockSFX != null)
             Instantiate(move.blockSFX, colPos.position, colPos.rotation);
+        else Instantiate(VFXManager.Instance.defaultBlockSFX, colPos.position, colPos.rotation);
+
+
         //Calculate direction
         aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
         other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
@@ -172,7 +178,7 @@ public class Hitbox : MonoBehaviour
     {
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
-        other.Meter += hit.meterGain/2;
+        other.Meter += hit.meterGain / 2;
 
         status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
         other.newMove = true;
@@ -186,8 +192,12 @@ public class Hitbox : MonoBehaviour
         //Hit FX
         if (move.hitFX != null)
             Instantiate(move.hitFX, colPos.position, colPos.rotation);
+        else Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
+
         if (move.hitSFX != null)
             Instantiate(move.hitSFX, colPos.position, colPos.rotation);
+        else Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+
         //Calculate direction
         aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
         if (hit.hitState == HitState.Knockdown)

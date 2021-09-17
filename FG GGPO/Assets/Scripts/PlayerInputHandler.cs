@@ -94,6 +94,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         input.isPaused = status.hitstopCounter > 0;
+        input.extraBuffer = status.hitstopCounter ;
 
         //UpdateDirection();
         if (mov.ground && !input.isDummy)
@@ -143,15 +144,27 @@ public class PlayerInputHandler : MonoBehaviour
         ProcessBuffer();
     }
 
+    public void SpecialInputs()
+    {
+        foreach (var item in attack.moveset.specials)
+        {
+            if (item.motionInput == SpecialInput.BackForward)
+            {
+
+            }
+        }
+    }
+
     public virtual void ProcessBuffer()
     {
         int bufferID = -1;
+        bool doSpecial = false;
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
             //Jump Button
             if (input.bufferedInputs[i].id == 3)
             {
-                bool canJump= status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
+                bool canJump = status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
                 if (canJump)
                 {
                     mov.Jump();
@@ -160,25 +173,77 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 continue;
             }
+
+            foreach (var item in attack.moveset.specials)
+            {
+
+                if (item.motionInput == SpecialInput.BackForward)
+                {
+                    //
+                    if (input.bf)
+                    {
+                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                        {
+                            attack.AttackProperties(item.move);
+                            doSpecial = true;
+                            bufferID = i;
+                            break;
+                        }
+                    }
+
+                }
+                else if (item.motionInput == SpecialInput.DownDown)
+                {
+                    //if (input.CheckDownDown())
+                    //{
+                    //    if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                    //    {
+                    //        attack.AttackProperties(item.move);
+                    //        doSpecial = true;
+                    //        bufferID = i;
+                    //        break;
+                    //    }
+                    //}
+                }
+
+            }
+            if (doSpecial) break;
+
+
             if (input.bufferedInputs[i].id == 10)
             {
-                attack.AttackProperties(attack.moveset.backDash);
+                if (mov.ground) { attack.Attack(attack.moveset.backDash); }
+                else attack.Attack(attack.moveset.airdashB);
                 bufferID = i;
                 break;
             }
             if (input.bufferedInputs[i].id == 11)
             {
-                attack.AttackProperties(attack.moveset.rightDash);
-                bufferID = i;
-                break;
+                if (mov.ground)
+                {
+                    attack.Attack(attack.moveset.rightDash);
+                    bufferID = i;
+                    break;
+                }
             }
             if (input.bufferedInputs[i].id == 12)
             {
-                attack.AttackProperties(attack.moveset.leftDash);
-                bufferID = i;
-                break;
+                if (mov.ground)
+                {
+                    attack.Attack(attack.moveset.leftDash);
+                    bufferID = i;
+                    break;
+                }
             }
-
+            if (input.bufferedInputs[i].id == 13)
+            {
+                if (!mov.ground)
+                {
+                    attack.Attack(attack.moveset.airdashF);
+                    bufferID = i;
+                    break;
+                }
+            }
             //A Button
             if (input.bufferedInputs[i].id == 1)
             {  //Ground
@@ -209,7 +274,7 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-                    if (attack.Attack(attack.moveset.A5))
+                    if (attack.Attack(attack.moveset.sA))
                     {
                         bufferID = i;
                         break;
@@ -218,7 +283,7 @@ public class PlayerInputHandler : MonoBehaviour
                 //Airborne
                 else
                 {
-                    if (mov.crouching)
+                    if (input.bufferedInputs[i].crouch)
                     {
                         if (attack.Attack(attack.moveset.jcA))
                         {
@@ -263,7 +328,7 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-                    if (attack.Attack(attack.moveset.B5))
+                    if (attack.Attack(attack.moveset.sB))
                     {
                         bufferID = i;
                         break;
@@ -317,7 +382,7 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-                    if (attack.Attack(attack.moveset.C5))
+                    if (attack.Attack(attack.moveset.sC))
                     {
                         bufferID = i;
                         break;
@@ -371,7 +436,7 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-                    if (attack.Attack(attack.moveset.D5))
+                    if (attack.Attack(attack.moveset.sD))
                     {
                         bufferID = i;
                         break;
@@ -425,7 +490,7 @@ public class PlayerInputHandler : MonoBehaviour
                     if (input.netButtons[5])
                         return attack.moveset.cA;
                     else
-                        return attack.moveset.A5;
+                        return attack.moveset.sA;
                 }
                 else return attack.moveset.jA;
             case 2:
@@ -434,7 +499,7 @@ public class PlayerInputHandler : MonoBehaviour
                     if (input.netButtons[5])
                         return attack.moveset.cB;
                     else
-                        return attack.moveset.B5;
+                        return attack.moveset.sB;
                 }
                 else return attack.moveset.jB;
             case 3:
@@ -446,7 +511,7 @@ public class PlayerInputHandler : MonoBehaviour
                     if (input.netButtons[5])
                         return attack.moveset.cC;
                     else
-                        return attack.moveset.C5;
+                        return attack.moveset.sC;
                 }
                 else return attack.moveset.jC;
 
@@ -456,7 +521,7 @@ public class PlayerInputHandler : MonoBehaviour
                     if (input.netButtons[5])
                         return attack.moveset.cD;
                     else
-                        return attack.moveset.D5;
+                        return attack.moveset.sD;
                 }
                 else return attack.moveset.jD;
             case 6:

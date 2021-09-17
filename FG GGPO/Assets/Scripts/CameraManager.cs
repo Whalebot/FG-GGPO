@@ -20,6 +20,8 @@ public class CameraManager : MonoBehaviour
     public float toggleTimer;
     public float toggleCounter;
 
+    public bool canCrossUp;
+
     InputHandler input1;
     InputHandler input2;
     Transform p1;
@@ -107,24 +109,23 @@ public class CameraManager : MonoBehaviour
         toggleCounter++;
 
 
-        if (toggleCounter < toggleTimer) return;
+ 
 
-        if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
-        {
-            isRightCamera = true;
-            leftCamera.gameObject.SetActive(false);
-            rightCamera.gameObject.SetActive(true);
-            toggleCounter = 0;
-        }
-        else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
-        {
-            isRightCamera = false;
-            leftCamera.gameObject.SetActive(true);
-            rightCamera.gameObject.SetActive(false);
+        //if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
+        //{
+        //    isRightCamera = true;
+        //    leftCamera.gameObject.SetActive(false);
+        //    rightCamera.gameObject.SetActive(true);
+        //}
+        //else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
+        //{
+        //    isRightCamera = false;
+        //    leftCamera.gameObject.SetActive(true);
+        //    rightCamera.gameObject.SetActive(false);
+        //}
 
-            toggleCounter = 0;
-        }
 
+        if (toggleCounter < toggleTimer || !canCrossUp) return;
         if (dist1 < dist2 + deadZone && toggle)
         {
             FlipCamera();
