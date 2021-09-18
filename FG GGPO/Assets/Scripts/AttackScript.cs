@@ -68,11 +68,12 @@ public class AttackScript : MonoBehaviour
     {
         if (attacking)
         {
+   
             if (status.hitstopCounter <= 0)
                 gameFrames++;
-
             if (gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
             {
+             
                 attackString = true;
                 newAttack = false;
             }
@@ -244,7 +245,6 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-
         FrameDataManager.Instance.UpdateFrameData();
         status.minusFrames = -(move.totalMoveDuration);
 
@@ -300,13 +300,14 @@ public class AttackScript : MonoBehaviour
 
         if (attackString)
         {
-            if (activeMove == move)
+            if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
             {
-                if (activeMove.targetComboMoves.Count > 0)
+                if (activeMove == move || move.targetComboMoves.Contains(activeMove))
                 {
                     Attack(move.targetComboMoves[0]);
                     return false;
                 }
+
             }
             if (activeMove.targetComboMoves.Contains(move))
             {

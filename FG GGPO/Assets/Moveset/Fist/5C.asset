@@ -24,10 +24,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  firstStartupFrame: 20
-  lastActiveFrame: 21
-  totalMoveDuration: 41
-  firstGatlingFrame: 25
+  firstStartupFrame: 21
+  lastActiveFrame: 22
+  totalMoveDuration: 42
+  firstGatlingFrame: 26
   blockAdvantage: 4
   hitAdvantage: 14
   blockCancelAdvantage: 9
@@ -44,13 +44,14 @@ MonoBehaviour:
   invincibleDuration: 0
   counterhitRecovery: 0
   noHitstopOnSelf: 0
+  crossupState: 0
   targetComboMoves: []
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
-    startupFrame: 20
+    startupFrame: 21
     activeFrames: 2
     gatlingFrames: 5
     attackHeight: 1

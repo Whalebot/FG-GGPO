@@ -184,7 +184,7 @@ public class Status : MonoBehaviour
                 }
             }
         }
-        else if (hitstunValue <= 0 && inHitStun)
+        if (hitstunValue <= 0 && inHitStun)
         {
             if (groundState == GroundState.Knockdown)
                 KnockdownRecovery();

@@ -167,7 +167,7 @@ public class PlayerInputHandler : MonoBehaviour
                 bool canJump = status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
                 if (canJump)
                 {
-                    mov.Jump();
+                    mov.JumpStartup();
                     bufferID = i;
                     break;
                 }

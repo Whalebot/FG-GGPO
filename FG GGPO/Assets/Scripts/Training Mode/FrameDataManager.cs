@@ -41,7 +41,6 @@ public class FrameDataManager : MonoBehaviour
 
     void UpdateHit()
     {
-        print("p1 " + p1.minusFrames + " p2 " + p2.minusFrames);
         frame = p1.minusFrames - p2.minusFrames;
         overlay1.UpdateStartup();
         overlay2.UpdateStartup();
@@ -52,7 +51,6 @@ public class FrameDataManager : MonoBehaviour
     // Update is called once per frame
     public void UpdateFrameData()
     {
-        print(GameHandler.Instance.gameFrameCount + " p1 " + p1.minusFrames + " p2 " + p2.minusFrames);
         frame = p1.minusFrames - p2.minusFrames;
         overlay1.UpdateAdvantage(frame);
         overlay2.UpdateAdvantage(-frame);

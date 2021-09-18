@@ -109,20 +109,20 @@ public class CameraManager : MonoBehaviour
         toggleCounter++;
 
 
- 
 
-        //if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
-        //{
-        //    isRightCamera = true;
-        //    leftCamera.gameObject.SetActive(false);
-        //    rightCamera.gameObject.SetActive(true);
-        //}
-        //else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
-        //{
-        //    isRightCamera = false;
-        //    leftCamera.gameObject.SetActive(true);
-        //    rightCamera.gameObject.SetActive(false);
-        //}
+
+        if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
+        {
+            isRightCamera = true;
+            leftCamera.gameObject.SetActive(false);
+            rightCamera.gameObject.SetActive(true);
+        }
+        else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
+        {
+            isRightCamera = false;
+            leftCamera.gameObject.SetActive(true);
+            rightCamera.gameObject.SetActive(false);
+        }
 
 
         if (toggleCounter < toggleTimer || !canCrossUp) return;
@@ -146,6 +146,7 @@ public class CameraManager : MonoBehaviour
     [Button]
     public void FlipCamera()
     {
+        print("flip cam");
         float dist1 = Vector3.Distance(mainCamera.transform.position, p1.position);
         float dist2 = Vector3.Distance(mainCamera.transform.position, p2.position);
 
