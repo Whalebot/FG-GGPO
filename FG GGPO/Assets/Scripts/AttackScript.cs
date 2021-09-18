@@ -257,7 +257,7 @@ public class AttackScript : MonoBehaviour
 
 
         ClearHitboxes();
-
+        status.crossupState = move.crossupState;
 
         Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
@@ -300,8 +300,17 @@ public class AttackScript : MonoBehaviour
 
         if (attackString)
         {
+            if (activeMove == move)
+            {
+                if (activeMove.targetComboMoves.Count > 0)
+                {
+                    Attack(move.targetComboMoves[0]);
+                    return false;
+                }
+            }
             if (activeMove.targetComboMoves.Contains(move))
             {
+                print("Doing rekka");
                 return true;
             }
 

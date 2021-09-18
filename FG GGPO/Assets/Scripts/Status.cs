@@ -46,7 +46,7 @@ public class Status : MonoBehaviour
     public int wakeupRecovery;
     int wakeupValue;
 
-
+    public bool crossupState;
 
     public GroundState groundState;
     public BlockState blockState;
@@ -292,7 +292,7 @@ public class Status : MonoBehaviour
             case State.Knockdown:
                 blocking = false;
                 SetBlockState(BlockState.None);
-               // ResolveKnockdown();
+                // ResolveKnockdown();
                 ResolveHitstun();
                 minusFrames = -HitStun;
                 break;
@@ -342,6 +342,7 @@ public class Status : MonoBehaviour
                 blocking = false;
                 break;
             case State.Recovery:
+                crossupState = false;
                 blocking = false;
                 invincible = false;
                 EnableHurtboxes();
