@@ -59,6 +59,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MaskTransparency:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -114,15 +118,19 @@ Material:
     m_Floats:
     - _AlphaBaseCutout: 1
     - _AlphaToMask: 0
+    - _BleModDest: 0
+    - _BleModSour: 1
     - _BlendMode: 2
     - _BumpScale: 1
     - _Compa: 4
     - _CullMode: 2
+    - _Culling: 2
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
     - _Cutout: 0.5
     - _DebugMode: 0
+    - _DepthThreshold: 900
     - _DirectionalLightIntensity: 0
     - _DoubleSided: 2
     - _DoubleSidedOutline: 1
@@ -166,9 +174,11 @@ Material:
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
+    - _N_F_MSSOLTFO: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
     - _N_F_O: 0
+    - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RL: 0
@@ -181,6 +191,7 @@ Material:
     - _N_F_STIS: 0
     - _NoisyOutlineIntensity: 0
     - _NormalMapIntensity: 1
+    - _Opacity: 1
     - _Oper: 0
     - _OutlineColorMode: 1
     - _OutlineCullMode: 1
@@ -197,13 +208,14 @@ Material:
     - _PointSpotlightIntensity: 0
     - _RELG: 1
     - _ReceiveShadowRate: 1
-    - _ReduceShadowSpotDirectionalLight: 0.5
+    - _ReduceShadowSpotDirectionalLight: 0
     - _RefMetallic: 0
     - _RefVal: 0
     - _ReflectionIntensity: 0
     - _ReflectionRoughtness: 0
     - _RimFresnelPower: 1
     - _RimLift: 0
+    - _RimLigInt: 1
     - _RimLightColorPower: 10
     - _RimLightInLight: 1
     - _RimLightSoftness: 1
@@ -238,7 +250,11 @@ Material:
     - _SmoothObjectNormal: 0
     - _SrcBlend: 5
     - _TEXMCOLINT: 1
+    - _TRANSMODE: 0
     - _TexturePatternStyle: 0
+    - _TransAffSha: 1
+    - _TransparentThreshold: 0
+    - _UVCAND: 0
     - _UseSecondaryCutout: 0
     - _UseTLB: 0
     - _UvAnimRotation: 0
@@ -259,6 +275,7 @@ Material:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0.2469295, g: 0.26427376, b: 0.2924528, a: 1}
+    - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -266,3 +283,4 @@ Material:
     - _ShadeColor: {r: 0.8214284, g: 0.32857135, b: 0.32857135, a: 1}
     - _ShadowTColor: {r: 1, g: 1, b: 1, a: 1}
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

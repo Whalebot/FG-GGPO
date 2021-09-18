@@ -113,11 +113,6 @@ public class Movement : MonoBehaviour
         return (pos - transform.position).normalized * Mathf.Abs(f);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(pos, 1);
-    }
 
     public void ExecuteFrame()
     {
@@ -240,8 +235,8 @@ public class Movement : MonoBehaviour
     public void Jump()
     {
         if (performedJumps > multiJumps) return;
-
-        storedDirection = direction.normalized;
+        jumpEvent?.Invoke();
+        storedDirection = direction.normalized * jumpVelocity;
         jumpCounter = minimumJumpTime;
         col.material = airMat;
         ground = false;
@@ -252,7 +247,7 @@ public class Movement : MonoBehaviour
             status.minusFrames = 0;
             status.frameDataEvent?.Invoke();
         }
-        jumpEvent?.Invoke();
+
         Vector3 temp = direction.normalized;
         actualVelocity = Speed();
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
@@ -271,7 +266,7 @@ public class Movement : MonoBehaviour
             return false;
         }
 
-        if (!ground )
+        if (!ground)
         {
             if (check && rb.velocity.y < 0) rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
 
@@ -323,7 +318,8 @@ public class Movement : MonoBehaviour
             if (runMomentumCounter > 0)
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
             else
-                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+                rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
+            print(rb.velocity);
         }
     }
 

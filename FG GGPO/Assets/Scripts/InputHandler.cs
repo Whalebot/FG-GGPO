@@ -22,8 +22,11 @@ public class InputHandler : MonoBehaviour
 
     public Controls controls = null;
     public bool dash;
+    public bool bf;
+    public bool dd;
     public List<int> inputQueue;
     public int bufferWindow = 10;
+    [HideInInspector] public int extraBuffer = 0;
 
     public InputEvent controlSchemeChange;
     public InputEvent keyboardEvent;
@@ -69,6 +72,7 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public bool[] netButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public bool[] heldButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public List<int> directionals;
+    [FoldoutGroup("Input Overlay")] public List<bool> buttons;
     [FoldoutGroup("Input Overlay")] public List<int> overlayDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
@@ -87,6 +91,7 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
+        buttons = new List<bool>();
         bufferedInputs = new List<BufferedInput>();
         deletedInputs = new List<BufferedInput>();
     }
@@ -305,8 +310,9 @@ public class InputHandler : MonoBehaviour
 
 
             }
-            ResolveInputBuffer();
             ResolveButtons(heldButtons);
+            ResolveInputBuffer();
+
         }
 
 
@@ -363,19 +369,146 @@ public class InputHandler : MonoBehaviour
             else directionals.Add(2);
         }
 
-        CheckMotionInputs();
 
+
+        CheckMotionInputs();
         //CHECK IF INPUTS HAVE BEEN DUPLICATED
         if (directionals.Count <= 2) { updatedDirectionals = true; return; }
+
+
         if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
         updatedDirectionals = true;
 
     }
 
+    public void ResolveButtons(bool[] temp)
+    {
+        for (int i = 0; i < temp.Length; i++)
+        {
+            if (temp[i] && !netButtons[i])
+            {
+                StartCoroutine("InputBuffer", i + 1);
+            }
+            if (netButtons[i] != temp[i]) updatedButtons = true;
+            netButtons[i] = temp[i];
+
+        }
+        buttons.Add(netButtons[5]);
+    }
+
     void CheckMotionInputs()
     {
         dash = CheckDashInput();
+        if (CheckBackForward()) { print("TJU"); }
+        bf = CheckBackForward();
+        dd = CheckDownDown();
+    }
+
+
+    public bool CheckDownDown()
+    {
+        bool result = false;
+        bool foundNeutral = false;
+        bool foundDown = false;
+        bool foundNeutral2 = false;
+  
+        if (buttons.Count < 5) return false;
+     
+        //if (buttons[buttons.Count - 1])
+        //{
+        //    print(buttons.Count + " " + buttons[buttons.Count - 1]);
+        //    print(buttons.Count - 1 + " PREV " + buttons[buttons.Count - 2]);
+        //}
+        //else print(buttons.Count +  " " + buttons[buttons.Count - 1]);
+
+        if (buttons.Count <= 0) return false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (buttons.Count <= i) return false;
+
+            //if (!buttons[buttons.Count - 1][5])
+            //{
+            //    return false;
+            //}
+            ////if (!buttons[buttons.Count - i][5] && foundDown)
+            ////{
+            ////    foundNeutral2 = true;
+            ////}
+            //if (buttons[buttons.Count - i][5] && foundNeutral)
+            //{
+            //    foundDown = true;
+            //}
+
+            //if (buttons[buttons.Count - i][5] == false)
+            //{
+            //    print("Bo: " + i);
+            //    foundNeutral = true;
+            //}
+
+            //if (buttons[buttons.Count - i][5])
+            //{
+            //    //  print("Bib: " + i);
+
+            //}
+            if (foundNeutral)
+            {
+                return true;
+            }
+        }
+
+        return result;
+    }
+    public bool CheckBackForward()
+    {
+        bool result = false;
+        if (directionals.Count <= 0) return false;
+        int currentInput = directionals[directionals.Count - 1];
+        bool foundNeutralInput = false;
+        bool foundOppositeInput = false;
+        bool foundNeutralInput2 = false;
+        if (currentInput == 5) return false;
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+            if (directionals[directionals.Count - 1] == 5)
+            {
+                return false;
+            }
+            if (directionals[directionals.Count - i] != ReverseDirection(currentInput) && foundOppositeInput)
+            {
+                foundNeutralInput2 = true;
+            }
+            if (directionals[directionals.Count - i] == ReverseDirection(currentInput) && foundNeutralInput)
+            {
+                foundOppositeInput = true;
+            }
+            if (directionals[directionals.Count - i] == 5)
+            {
+                foundNeutralInput = true;
+            }
+
+            if (foundNeutralInput & foundNeutralInput2 && foundOppositeInput)
+            {
+                return true;
+            }
+        }
+
+        return result;
+    }
+
+    int ReverseDirection(int i)
+    {
+        switch (i)
+        {
+            case 2: return 8;
+            case 8: return 2;
+            case 4: return 6;
+            case 6: return 4;
+            default: return 5;
+        }
+
     }
 
     public bool CheckDashInput()
@@ -429,7 +562,11 @@ public class InputHandler : MonoBehaviour
                     dashInput?.Invoke();
                     StartCoroutine("InputBuffer", 12);
                 }
-
+                if (currentInput == 8)
+                {
+                    dashInput?.Invoke();
+                    StartCoroutine("InputBuffer", 13);
+                }
 
                 return true;
             }
@@ -513,19 +650,6 @@ public class InputHandler : MonoBehaviour
 
     }
 
-    public void ResolveButtons(bool[] temp)
-    {
-        for (int i = 0; i < temp.Length; i++)
-        {
-            if (temp[i] && !netButtons[i])
-            {
-                StartCoroutine("InputBuffer", i + 1);
-            }
-            if (netButtons[i] != temp[i]) updatedButtons = true;
-            netButtons[i] = temp[i];
-        }
-    }
-
     public void OnWest(InputAction.CallbackContext context)
     {
         if (debug) print("Square");
@@ -589,7 +713,7 @@ public class InputHandler : MonoBehaviour
     void OnR1Release()
     {
         R1release?.Invoke();
-        StartCoroutine("InputBuffer", 5);
+
         R1Hold = false;
     }
     void OnSouthRelease()
@@ -691,7 +815,7 @@ public class InputHandler : MonoBehaviour
 
     IEnumerator InputBuffer(int inputID)
     {
-        bufferedInputs.Add(new BufferedInput(inputID, Direction(), heldButtons[5], bufferWindow));
+        bufferedInputs.Add(new BufferedInput(inputID, Direction(), netButtons[5], bufferWindow + extraBuffer));
 
         for (int i = 0; i < bufferWindow; i++)
         {

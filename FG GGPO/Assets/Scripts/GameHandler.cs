@@ -98,6 +98,8 @@ public class GameHandler : MonoBehaviour
         //}
         //else Time.timeScale = 1;
 
+        CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne;
+
         UpdateGameState();
         if (!isPaused)
         {

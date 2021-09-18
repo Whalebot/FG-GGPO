@@ -24,7 +24,7 @@ public class AttackScript : MonoBehaviour
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
     public Moveset moveset;
-    [HeaderAttribute("Attack attributes")] 
+    [HeaderAttribute("Attack attributes")]
     public Move activeMove;
     public bool canGatling;
     public int attackID;
@@ -73,7 +73,7 @@ public class AttackScript : MonoBehaviour
 
             if (canGatling && gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
             {
-                attackString = true; 
+                attackString = true;
                 newAttack = false;
             }
 
@@ -93,14 +93,25 @@ public class AttackScript : MonoBehaviour
                 if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
                 {
                     if (activeMove.m[i].resetVelocityDuringRecovery)
+                    {
                         status.rb.velocity = Vector3.zero;
+                        movement.storedDirection = Vector3.zero;
+
+                    }
                 }
                 else if (gameFrames > activeMove.m[i].startFrame)
                 {
+                    movement.storedDirection = movement.rb.velocity;
                     //if (activeMove.m.resetVelocityDuringRecovery)
                     //    status.rb.velocity = Vector3.zero;
                     if (activeMove.overrideVelocity)
-                        status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                    {
+                        if (activeMove.m[i].homing)
+                            status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                        else status.rb.velocity = activeMove.m[i].momentum.x * transform.right + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                    }
+
+
                 }
             }
 
@@ -161,7 +172,7 @@ public class AttackScript : MonoBehaviour
         {
             if (gameFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && gameFrames >= activeMove.attacks[i].startupFrame)
             {
-          
+
                 status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
@@ -199,14 +210,15 @@ public class AttackScript : MonoBehaviour
     {
         newAttack = false;
         status.GoToState(Status.State.Recovery);
-        if (activeMove != null)
-            if (activeMove.resetVelocityDuringRecovery)
-                status.rb.velocity = Vector3.zero;
+        //if (activeMove != null)
+        //    if (activeMove.resetVelocityDuringRecovery)
+        //        status.rb.velocity = Vector3.zero;
 
         ClearHitboxes();
     }
 
-    void ProcessInvul() {
+    void ProcessInvul()
+    {
         //Execute properties
         //Invul
         if (activeMove.invincible)
@@ -251,6 +263,10 @@ public class AttackScript : MonoBehaviour
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;
+
+        //Air properties
+        if (move.useAirAction) movement.performedJumps++;
+
         movement.ResetRun();
 
         Startup();
@@ -261,18 +277,22 @@ public class AttackScript : MonoBehaviour
         attacking = true;
         newAttack = true;
         movement.isMoving = false;
-      //  ProcessInvul();
+        //  ProcessInvul();
         ExecuteFrame();
     }
 
     public bool CanUseMove(Move move)
     {
         if (move == null) return false;
-        if (attackString)
+
+        if (move.useAirAction) { return movement.performedJumps <= movement.multiJumps; }
+
+            if (attackString)
         {
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
         }
+        
         if (usedMoves.Contains(move))
         {
             int duplicates = 1;
@@ -315,13 +335,6 @@ public class AttackScript : MonoBehaviour
         status.GoToState(Status.State.Startup);
     }
 
-    public void ParticleStart()
-    {
-        //if (weaponParticles != null)
-        //    weaponParticles.ActivateParticle(activeMove.particleID);
-
-        containerScript.ActivateParticle(activeMove.particleID);
-    }
 
     void Land()
     {
@@ -378,6 +391,7 @@ public class AttackScript : MonoBehaviour
     {
         if (!newAttack)
         {
+
             attackString = false;
             activeMove = null;
             combo = 0;
