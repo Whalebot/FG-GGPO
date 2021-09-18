@@ -16,7 +16,7 @@ MonoBehaviour:
   sfx: []
   hitFX: {fileID: 0}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  hitSFX: {fileID: 0}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   type: 0
   collissionState: 0
@@ -31,7 +31,9 @@ MonoBehaviour:
   totalMoveDuration: 32
   firstGatlingFrame: 17
   blockAdvantage: 5
-  hitAdvantage: 5
+  hitAdvantage: 12
+  blockCancelAdvantage: 10
+  hitCancelAdvantage: 27
   recoveryFrames: 20
   canGatling: 1
   jumpCancelOnBlock: 0
@@ -42,7 +44,9 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  targetComboMoves: []
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -54,7 +58,7 @@ MonoBehaviour:
     attackHeight: 1
     groundHitProperty:
       damage: 1000
-      stun: 25
+      stun: 32
       hitstop: 10
       proration: 0.95
       meterGain: 0

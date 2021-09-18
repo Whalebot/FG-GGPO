@@ -288,10 +288,18 @@ public class AttackScript : MonoBehaviour
     {
         if (move == null) return false;
 
+        if (move.useAirAction)
+        {
+            if (movement.performedJumps <= movement.multiJumps)
+            {
+                movement.performedJumps++;
+                return true;
+            }
+            else return false;
+        }
 
         if (attackString)
         {
-            if (move.useAirAction) { return movement.performedJumps <= movement.multiJumps; }
             if (activeMove.targetComboMoves.Contains(move))
             {
                 return true;

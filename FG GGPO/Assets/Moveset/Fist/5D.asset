@@ -24,9 +24,11 @@ MonoBehaviour:
   firstStartupFrame: 12
   lastActiveFrame: 12
   totalMoveDuration: 40
-  firstGatlingFrame: 17
+  firstGatlingFrame: 22
   blockAdvantage: -8
   hitAdvantage: 2
+  blockCancelAdvantage: 0
+  hitCancelAdvantage: 0
   recoveryFrames: 28
   canGatling: 0
   jumpCancelOnBlock: 0
@@ -39,6 +41,9 @@ MonoBehaviour:
   invincibleDuration: 0
   counterhitRecovery: 0
   noHitstopOnSelf: 1
+  targetComboMoves:
+  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
+  - {fileID: 11400000}
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -46,7 +51,7 @@ MonoBehaviour:
   - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
     startupFrame: 12
     activeFrames: 1
-    gatlingFrames: 5
+    gatlingFrames: 10
     attackHeight: 1
     groundHitProperty:
       damage: 1000

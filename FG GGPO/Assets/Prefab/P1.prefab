@@ -372,8 +372,11 @@ MonoBehaviour:
   directionOffset: 0
   controlScheme: 0
   dash: 0
+  bf: 0
+  dd: 0
   inputQueue: 
   bufferWindow: 10
+  extraBuffer: 0
   R1Hold: 0
   R2Hold: 0
   L1Hold: 0
@@ -385,6 +388,7 @@ MonoBehaviour:
   netButtons: 000000000000
   heldButtons: 000000000000
   directionals: 
+  buttons: 
   overlayDirectionals: 
   updatedDirectionals: 0
   updatedButtons: 0
@@ -425,6 +429,7 @@ MonoBehaviour:
   sharpRotationDamp: 16
   deltaAngle: 0
   multiJumps: 1
+  airActions: 0
   jumpVelocity: 3
   performedJumps: 0
   ground: 1
@@ -532,6 +537,7 @@ MonoBehaviour:
   hitstopCounter: 0
   pushbackVector: {x: 0, y: 0, z: 0}
   newMove: 0
+  groundPushbackDuration: 10
   wakeupRecovery: 20
   groundState: 0
   blockState: 0
@@ -733,7 +739,6 @@ GameObject:
   - component: {fileID: 8428258729492785552}
   - component: {fileID: 5542712886153031611}
   - component: {fileID: 1181258991743362198}
-  - component: {fileID: 4987170126913989222}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -796,20 +801,6 @@ MonoBehaviour:
   strafeSmooth: 0.5
   move: {fileID: 0}
   isPaused: 0
---- !u!114 &4987170126913989222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6125078543635060942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdda11080812ee0409f93d88e16e59b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack: {fileID: 0}
-  animationEventWeight: 0.5
 --- !u!1 &7025442713406750524
 GameObject:
   m_ObjectHideFlags: 0

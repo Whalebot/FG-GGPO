@@ -184,7 +184,7 @@ public class PlayerInputHandler : MonoBehaviour
                     {
                         if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
                         {
-                            attack.AttackProperties(item.move);
+                            attack.Attack(item.move);
                             doSpecial = true;
                             bufferID = i;
                             break;

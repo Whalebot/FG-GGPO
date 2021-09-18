@@ -226,14 +226,7 @@ public class Hitbox : MonoBehaviour
 
         //Calculate direction
         aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
-        if (hit.hitState == HitState.Knockdown)
-            other.TakeKnockdown(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
-        else
-            other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
 
-        if (hit.hitState == HitState.Launch)
-        {
-            other.groundState = GroundState.Airborne;
-        }
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
     }
 }

@@ -34,6 +34,7 @@ public class Movement : MonoBehaviour
 
 
     [TabGroup("Jump")] [HeaderAttribute("Jump attributes")] public int multiJumps;
+    public int airActions;
     [TabGroup("Jump")] public float jumpVelocity;
     [TabGroup("Jump")] public int performedJumps;
     [TabGroup("Jump")] public bool ground;
