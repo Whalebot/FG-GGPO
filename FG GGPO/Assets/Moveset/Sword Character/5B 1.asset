@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 5B 1
   m_EditorClassIdentifier: 
+  animationID: 1
   type: 0
   collissionState: 0
-  attackHeight: 1
   gatlingMoves:
   - {fileID: 11400000, guid: adac1a3787b20314dac4ba352eed8d42, type: 2}
   - {fileID: 11400000, guid: adac1a3787b20314dac4ba352eed8d42, type: 2}
@@ -23,18 +23,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd8f0081c85cf9948830d5ef7ebaa81d, type: 2}
   - {fileID: 11400000, guid: 5ed4139a3b2271a4390a021d2f77dd12, type: 2}
   - {fileID: 11400000, guid: 7f1193f8708a7dc4898a173e9eaadd6a, type: 2}
-  attackPrefab: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
+  sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  animationID: 1
-  animationClip: {fileID: 0}
-  startupFrames: 12
-  activeFrames: 1
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
+  firstStartupFrame: 12
+  lastActiveFrame: 12
+  totalMoveDuration: 32
+  firstGatlingFrame: 13
   recoveryFrames: 20
-  gatlingFrames: 1
   canGatling: 1
-  hitSpecialCancelable: 0
-  blockSpecialCancelable: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  particleID: 0
+  landCancel: 0
+  noClip: 0
+  noClipStart: 0
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
+  forceCounterhit: 0
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
     startupFrame: 12
@@ -46,6 +56,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundBlockProperty:
@@ -53,6 +64,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundCounterhitProperty:
@@ -60,6 +72,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airHitProperty:
@@ -67,6 +80,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airBlockProperty:
@@ -74,6 +88,7 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airCounterhitProperty:
@@ -81,23 +96,14 @@ MonoBehaviour:
       stun: 0
       hitstop: 0
       proration: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
-  particleID: 0
-  landCancel: 0
-  noClip: 0
-  noClipStart: 0
-  noClipDuration: 0
-  invincible: 0
-  invincibleStart: 0
-  invincibleDuration: 0
-  forceCounterhit: 0
   overrideVelocity: 0
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
   - startFrame: 1
-    impulse: 1
-    duration: 1
+    duration: 10
     momentum: {x: 0, y: 0, z: 10}
     resetVelocityDuringRecovery: 1

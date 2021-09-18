@@ -228,7 +228,7 @@ Shader "Universal Render Pipeline/RealToon/Version 5/Default/Default"
 
 Name"Outline"
 Tags{"LightMode" = "SRPDefaultUnlit"}
-//OL_NRE
+//OL_RE
 
 Cull[_DoubleSidedOutline]//OL_RCUL
 			Blend[_BleModSour][_BleModDest]
