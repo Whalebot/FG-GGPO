@@ -94,7 +94,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         input.isPaused = status.hitstopCounter > 0;
-        input.extraBuffer = status.hitstopCounter ;
+        input.extraBuffer = status.hitstopCounter;
 
         //UpdateDirection();
         if (mov.ground && !input.isDummy)
@@ -470,13 +470,9 @@ public class PlayerInputHandler : MonoBehaviour
     {
         status.blocking = false;
 
-        if (attack.canGatling)
+        if (attack.attackString)
         {
-
-            if (attack.attackString)
-            {
-                ProcessBuffer();
-            }
+            ProcessBuffer();
         }
     }
 

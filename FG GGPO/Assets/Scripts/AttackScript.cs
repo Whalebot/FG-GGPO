@@ -71,7 +71,7 @@ public class AttackScript : MonoBehaviour
             if (status.hitstopCounter <= 0)
                 gameFrames++;
 
-            if (canGatling && gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+            if (gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
             {
                 attackString = true;
                 newAttack = false;
@@ -244,7 +244,10 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
+
+        FrameDataManager.Instance.UpdateFrameData();
         status.minusFrames = -(move.totalMoveDuration);
+
         status.SetBlockState(move.collissionState);
         activeMove = move;
         attackID = move.animationID;
@@ -285,14 +288,20 @@ public class AttackScript : MonoBehaviour
     {
         if (move == null) return false;
 
-        if (move.useAirAction) { return movement.performedJumps <= movement.multiJumps; }
 
-            if (attackString)
+        if (attackString)
         {
+            if (move.useAirAction) { return movement.performedJumps <= movement.multiJumps; }
+            if (activeMove.targetComboMoves.Contains(move))
+            {
+                return true;
+            }
+
+            if (!canGatling) return false;
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
         }
-        
+
         if (usedMoves.Contains(move))
         {
             int duplicates = 1;

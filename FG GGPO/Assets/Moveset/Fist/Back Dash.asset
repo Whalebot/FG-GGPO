@@ -37,7 +37,8 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -100,7 +101,7 @@ MonoBehaviour:
   resetVelocityDuringRecovery: 1
   m:
   - startFrame: 0
-    duration: 15
+    duration: 12
     momentum: {x: 0, y: 0, z: -8}
     homing: 0
     resetVelocityDuringRecovery: 1

@@ -31,7 +31,9 @@ public class FrameDataOverlay : MonoBehaviour
     public void UpdateStartup() {
         if(attack.activeMove != null)
         startupText.text = attack.gameFrames + " (" + attack.activeMove.firstStartupFrame +  "-" + attack.activeMove.lastActiveFrame + ")";
+        else { }
     }
+
     public void UpdateAdvantage(int frames)
     {
         UpdateStates();

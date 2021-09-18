@@ -28,6 +28,8 @@ public class Move : ScriptableObject
     [Header("Frame Data")]
     public int blockAdvantage;
     public int hitAdvantage;
+    public int blockCancelAdvantage;
+    public int hitCancelAdvantage;
 
     [Header("Editable")]
     public int recoveryFrames;
@@ -46,7 +48,10 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public int invincibleStart = 1;
     [ShowIf("invincible")]
     [FoldoutGroup("Move properties")] public int invincibleDuration;
-    [FoldoutGroup("Move properties")] public bool forceCounterhit;
+    [FoldoutGroup("Move properties")] public bool counterhitRecovery;
+    [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
+    [FoldoutGroup("Move properties")] public List<Move> targetComboMoves;
+
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
     [FoldoutGroup("Air properties")] public int landingRecovery;
@@ -66,8 +71,19 @@ public class Move : ScriptableObject
         firstGatlingFrame = attacks[0].startupFrame + attacks[0].gatlingFrames;
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
         totalMoveDuration = lastActiveFrame + recoveryFrames;
-        blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
-        hitAdvantage = attacks[attacks.Length - 1].groundHitProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
+        if (noHitstopOnSelf)
+        {
+            blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame) + attacks[attacks.Length - 1].groundBlockProperty.hitstop;
+            hitAdvantage = attacks[attacks.Length - 1].groundHitProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame) + attacks[attacks.Length - 1].groundHitProperty.hitstop;
+        }
+        else
+        {
+            blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
+            hitAdvantage = attacks[attacks.Length - 1].groundHitProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame);
+
+            blockCancelAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame) + attacks[attacks.Length - 1].gatlingFrames;
+            hitCancelAdvantage = attacks[attacks.Length - 1].groundHitProperty.stun - attacks[attacks.Length - 1].gatlingFrames;
+        }
         foreach (var item in attacks)
         {
             if (item.groundHitProperty.hitstop == 0)

@@ -12,33 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e03075a984e8a42bb1c73c1a4b9448, type: 3}
   m_Name: Moveset_Greatsword
   m_EditorClassIdentifier: 
-  A5: {fileID: 11400000, guid: 4d9bbcfa29ef1cb4395644e6681dc0a2, type: 2}
-  B5: {fileID: 11400000, guid: b1d3f27b20e9c2740b62798e024c8b69, type: 2}
-  C5: {fileID: 11400000, guid: c7302170560d4684988c48fe178f830d, type: 2}
+  sA: {fileID: 11400000, guid: 38b05df55f07afa45aec5de8b8d007da, type: 2}
   cA: {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
-  cB: {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
-  cC: {fileID: 11400000, guid: ac91a24f168891b45bcfe82eb5f94724, type: 2}
   fA: {fileID: 0}
-  fB: {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
-  fC: {fileID: 0}
-  fD: {fileID: 0}
   bA: {fileID: 0}
-  bB: {fileID: 0}
-  bC: {fileID: 0}
-  bD: {fileID: 0}
   jA: {fileID: 11400000, guid: 3b36b1c8826d72943a26ce7e57994380, type: 2}
-  jB: {fileID: 11400000, guid: e3a6f32079e25fc4caab6d84e01e4e2d, type: 2}
-  jC: {fileID: 11400000, guid: 7dc509ba7a8ee9e4eb30a3ad807e2c59, type: 2}
   jcA: {fileID: 0}
+  sB: {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
+  cB: {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
+  fB: {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
+  bB: {fileID: 0}
+  jB: {fileID: 11400000, guid: e3a6f32079e25fc4caab6d84e01e4e2d, type: 2}
   jcB: {fileID: 0}
+  sC: {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  cC: {fileID: 11400000, guid: ac91a24f168891b45bcfe82eb5f94724, type: 2}
+  fC: {fileID: 0}
+  bC: {fileID: 0}
+  jC: {fileID: 11400000, guid: 7dc509ba7a8ee9e4eb30a3ad807e2c59, type: 2}
   jcC: {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
-  jcD: {fileID: 0}
-  D5: {fileID: 11400000, guid: c7302170560d4684988c48fe178f830d, type: 2}
+  sD: {fileID: 11400000, guid: c7302170560d4684988c48fe178f830d, type: 2}
   cD: {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
+  bD: {fileID: 0}
+  fD: {fileID: 0}
   jD: {fileID: 11400000, guid: 67346054a33cf6a4598ce4b8a6dc0a77, type: 2}
+  jcD: {fileID: 0}
   backDash: {fileID: 11400000, guid: d74900871afeebf45a0a0577da662e03, type: 2}
   rightDash: {fileID: 11400000, guid: 7b905247ba81d224780fe7c5d98ca345, type: 2}
   leftDash: {fileID: 11400000, guid: 81ba47e24c69ab04abec34b77eb24b10, type: 2}
+  airdashF: {fileID: 0}
+  airdashB: {fileID: 0}
   specials:
   - motionInput: 0
     buttonInput: 0

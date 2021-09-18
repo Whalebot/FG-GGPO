@@ -13,31 +13,35 @@ MonoBehaviour:
   m_Name: Right_Dash__Greatsword
   m_EditorClassIdentifier: 
   animationID: 101
-  type: 0
-  collissionState: 0
-  gatlingMoves: []
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
+  type: 0
+  collissionState: 0
+  gatlingMoves: []
   firstStartupFrame: 30
   lastActiveFrame: 34
   totalMoveDuration: 59
   firstGatlingFrame: 35
+  blockAdvantage: -9
+  hitAdvantage: 1
   recoveryFrames: 25
   canGatling: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
-  particleID: 0
-  landCancel: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 30
@@ -46,49 +50,49 @@ MonoBehaviour:
     attackHeight: 1
     groundHitProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 30
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundBlockProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 20
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     groundCounterhitProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 40
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airHitProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 30
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airBlockProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 20
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
     airCounterhitProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 40
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
@@ -99,4 +103,5 @@ MonoBehaviour:
   - startFrame: 1
     duration: 40
     momentum: {x: 8, y: 0, z: 0}
+    homing: 1
     resetVelocityDuringRecovery: 1

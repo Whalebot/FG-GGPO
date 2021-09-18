@@ -351,11 +351,12 @@ public class Status : MonoBehaviour
             case State.Knockdown:
 
                 knockdownValue = HitStun + 50;
-                knockdownEvent?.Invoke();
                 EnableHurtboxes();
                 inHitStun = true;
                 minusFrames = -HitStun;
-                frameDataEvent?.Invoke();
+                hitEvent?.Invoke();
+                knockdownEvent?.Invoke();
+                //frameDataEvent?.Invoke();
 
                 break;
             case State.Wakeup:
@@ -489,10 +490,8 @@ public class Status : MonoBehaviour
 
     public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
-        GoToState(State.Knockdown);
         groundState = GroundState.Knockdown;
-        HitStun = stunVal;
-
+        TakePushback(kb);
 
         int val = 0;
         if (comboCounter > 0)
@@ -507,11 +506,9 @@ public class Status : MonoBehaviour
         comboDamage += val;
         Health -= val;
 
-        TakePushback(kb);
+        HitStun = stunVal;
+        GoToState(State.Knockdown);
         hurtEvent?.Invoke();
-
-
-
     }
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)

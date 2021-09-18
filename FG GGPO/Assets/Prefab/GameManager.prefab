@@ -291,6 +291,8 @@ MonoBehaviour:
   playersInGame: 0
   p1Transform: {fileID: 0}
   p2Transform: {fileID: 0}
+  maxRoundTime: 80
+  roundTime: 0
   p1Status: {fileID: 0}
   p2Status: {fileID: 0}
   gameStates: []
@@ -343,6 +345,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8174696485712288842}
     m_Modifications:
+    - target: {fileID: 5573244297467201051, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: ignoreY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244297467201051, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: averageHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5573244297993740032, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_Name
       value: Camera Setup
@@ -409,19 +419,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298357222978, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05530212
+      value: 0.08741734
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298357222978, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19461739
+      value: 0.15027319
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298357222978, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.010990732
+      value: -0.013340842
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298357222978, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97925735
+      value: 0.9846818
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244299024636423, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: ignoreY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244299024636423, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: averageHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244299024636423, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: frontCamera
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5573244299070812385, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -453,12 +475,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8174696485712288842}
     m_Modifications:
-    - target: {fileID: 406018136634335269, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
-      propertyPath: m_text
-      value: '0
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 1568675043617778844, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -562,12 +578,6 @@ PrefabInstance:
     - target: {fileID: 1941529086414128614, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_Name
       value: Canvas Setup
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145055114593670212, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
-      propertyPath: m_text
-      value: '0
-
-'
       objectReference: {fileID: 0}
     - target: {fileID: 2178329573010053680, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -908,12 +918,6 @@ PrefabInstance:
     - target: {fileID: 6157746141905259311, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6190520166860130480, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
-      propertyPath: m_text
-      value: '0
-
-'
       objectReference: {fileID: 0}
     - target: {fileID: 7003711141605623251, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMin.y

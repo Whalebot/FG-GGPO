@@ -242,7 +242,7 @@ public class Movement : MonoBehaviour
         ground = false;
         status.groundState = GroundState.Airborne;
 
-        if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
+       // if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
         {
             status.minusFrames = 0;
             status.frameDataEvent?.Invoke();
@@ -319,7 +319,7 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
             else
                 rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
-            print(rb.velocity);
+         //   print(rb.velocity);
         }
     }
 

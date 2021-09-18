@@ -551,7 +551,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191741958}
-  m_LocalRotation: {x: 0.07168585, y: -0.23000908, z: 0.01699141, w: 0.9703959}
+  m_LocalRotation: {x: 0.071685664, y: -0.23001969, z: 0.016992196, w: 0.9703934}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -670,6 +670,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 559300880}
   lookTarget: {fileID: 377725758}
+  lerpValue: 0
+  ignoreY: 0
+  averageHeight: 0
+  frontCamera: 0
 --- !u!114 &377725757 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
@@ -1095,12 +1099,18 @@ MonoBehaviour:
   playersInGame: 0
   p1Transform: {fileID: 559300880}
   p2Transform: {fileID: 377725758}
+  maxRoundTime: 0
+  roundTime: 0
   p1Status: {fileID: 1609797179}
   p2Status: {fileID: 1093383691}
   gameStates: []
   rollbackFrames: 5
   gameFrameCount: 0
   counter: 0
+  hitStop: 0
+  slowMotionValue: 0
+  slowMotionDuration: 0
+  slowMotionSmoothing: 0
 --- !u!114 &917007644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,6 +1126,8 @@ MonoBehaviour:
   p1Input: {fileID: 559300883}
   p2Input: {fileID: 377725757}
   controllersConnected: 0
+  absoluteDirections: 0
+  updateDirections: 0
   replay: 1
   log:
     inputs: []
@@ -1134,7 +1146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93a14abe9932ac4c8350db8cc00a9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultHitVFX: {fileID: 0}
+  defaultBlockVFX: {fileID: 0}
+  defaultHitSFX: {fileID: 0}
+  defaultBlockSFX: {fileID: 0}
   recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
+  wakeupFX: {fileID: 0}
 --- !u!1 &920296600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,10 +1268,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f632178a406cfb14f9d26682d8bea5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
   p1Health: {fileID: 1840551384}
   p2Health: {fileID: 691141019}
   p1HealthText: {fileID: 210676791}
   p2HealthText: {fileID: 2093057617}
+  p1Meter: {fileID: 0}
+  p2Meter: {fileID: 0}
+  p1MeterText: {fileID: 0}
+  p2MeterText: {fileID: 0}
 --- !u!114 &947458107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3654780269085657820, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
@@ -1593,7 +1615,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219073678}
-  m_LocalRotation: {x: 0.07168585, y: -0.23000908, z: 0.01699141, w: 0.9703959}
+  m_LocalRotation: {x: 0.071685664, y: -0.23001969, z: 0.016992196, w: 0.9703934}
   m_LocalPosition: {x: 3.5, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1717,16 +1739,26 @@ MonoBehaviour:
   cameras:
   - {fileID: 1600047959}
   - {fileID: 191741961}
+  leftCamera: {fileID: 0}
+  rightCamera: {fileID: 0}
+  isRightCamera: 0
   shakeTimer: 0
   toggle: 0
-  targetGroup: {fileID: 0}
-  groupCamera: {fileID: 0}
-  defaultTarget: {fileID: 0}
-  input1: {fileID: 559300883}
-  input2: {fileID: 377725757}
-  p1: {fileID: 559300880}
-  p2: {fileID: 377725758}
+  toggleTimer: 0
+  toggleCounter: 0
+  canCrossUp: 0
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  cc1: {fileID: 0}
+  cc2: {fileID: 0}
+  dist1: 0
+  dist2: 0
+  deadZone: 0
   mainCamera: {fileID: 1219073680}
+  p1Y: 0
+  p2Y: 0
+  heightMod: 1
+  modSmooth: 1
 --- !u!224 &1274538046 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3103982117962598325, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
@@ -2056,6 +2088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 920296604}
     m_Modifications:
+    - target: {fileID: 2069985322587828921, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.4000244
+      objectReference: {fileID: 0}
     - target: {fileID: 3103982117962598325, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2160,6 +2196,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8343223788221589153, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662360815676739597, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662360815676739597, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8693891279755626842, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
       propertyPath: m_Value
       value: 100
@@ -2223,6 +2271,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 377725758}
   lookTarget: {fileID: 559300880}
+  lerpValue: 0
+  ignoreY: 0
+  averageHeight: 0
+  frontCamera: 0
 --- !u!1 &1820714822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,6 +3191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 920296604}
     m_Modifications:
+    - target: {fileID: 2069985322587828921, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.4000244
+      objectReference: {fileID: 0}
     - target: {fileID: 3103982117962598325, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3241,6 +3297,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5729993896884991616, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
       propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343223788221589153, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662360815676739597, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662360815676739597, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8693891279755626842, guid: 20bbb6fd634988a498b7dec9a80558ea, type: 3}

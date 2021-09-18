@@ -117,8 +117,10 @@ public class Hitbox : MonoBehaviour
             //Check if blocked wrong height
             if (attack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || attack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
             {
-
-                ExecuteHit(attack.groundHitProperty, other);
+                if (other.counterhitState)
+                    ExecuteHit(attack.groundCounterhitProperty, other);
+                else
+                    ExecuteHit(attack.groundHitProperty, other);
                 return;
             }
             if (other.groundState == GroundState.Grounded)
@@ -131,16 +133,20 @@ public class Hitbox : MonoBehaviour
         }
         else
         {
-            if (other.counterhitState) { }
-
             if (other.groundState == GroundState.Grounded)
             {
-                ExecuteHit(attack.groundHitProperty, other);
+                if (other.counterhitState)
+                    ExecuteHit(attack.groundCounterhitProperty, other);
+                else
+                    ExecuteHit(attack.groundHitProperty, other);
             }
             //Check for airborne or knockdown state
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
-                ExecuteHit(attack.airHitProperty, other);
+                if (other.counterhitState)
+                    ExecuteHit(attack.airCounterhitProperty, other);
+                else
+                    ExecuteHit(attack.airHitProperty, other);
             }
         }
     }
@@ -151,14 +157,23 @@ public class Hitbox : MonoBehaviour
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
-        status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+        //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
 
-        //Own hitstop
-        status.Hitstop();
-        status.newMove = true;
-        status.hitstopCounter = hit.hitstop;
+        if (move.noHitstopOnSelf)
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames);
+        }
+        else
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+
+            //Own hitstop
+            status.Hitstop();
+            status.newMove = true;
+            status.hitstopCounter = hit.hitstop;
+        }
 
         //Block FX
         if (move.blockFX != null)
@@ -180,14 +195,25 @@ public class Hitbox : MonoBehaviour
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
-        status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+        //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
 
-        //Own hitstop
-        status.Hitstop();
-        status.newMove = true;
-        status.hitstopCounter = hit.hitstop;
+        if (move.noHitstopOnSelf)
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames);
+        }
+        else
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+
+            //Own hitstop
+            status.Hitstop();
+            status.newMove = true;
+            status.hitstopCounter = hit.hitstop;
+        }
+
+
 
         //Hit FX
         if (move.hitFX != null)

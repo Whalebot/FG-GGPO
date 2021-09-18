@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public TextMeshProUGUI timerText;
+
     public Slider p1Health;
     public Slider p2Health;
     public TextMeshProUGUI p1HealthText;
@@ -27,6 +29,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         GameState state = GameHandler.Instance.gameStates[GameHandler.Instance.gameStates.Count - 1];
+        timerText.text = "" +  GameHandler.Instance.roundTime;
+
         p1Health.value = state.p1Health;
         p2Health.value = state.p2Health;
         p1HealthText.text = state.p1Health + "/";

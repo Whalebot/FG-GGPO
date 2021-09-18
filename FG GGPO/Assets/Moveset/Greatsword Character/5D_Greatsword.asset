@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: 5D_Greatsword
   m_EditorClassIdentifier: 
   animationID: 52
+  sfx:
+  - startup: 6
+    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
+  hitFX: {fileID: 0}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   type: 0
   collissionState: 0
   gatlingMoves:
@@ -24,30 +31,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  sfx:
-  - startup: 6
-    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   firstStartupFrame: 18
   lastActiveFrame: 64
   totalMoveDuration: 79
   firstGatlingFrame: 24
+  blockAdvantage: 0
+  hitAdvantage: 25
   recoveryFrames: 15
   canGatling: 1
   jumpCancelOnBlock: 1
   jumpCancelOnHit: 1
-  particleID: 0
-  landCancel: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 34aa0d01ebd0ebf49bfc91e3ae89a129, type: 3}
     startupFrame: 18
@@ -58,7 +62,7 @@ MonoBehaviour:
       damage: 1000
       stun: 60
       hitstop: 20
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 10, z: 2}
       hitState: 2
@@ -66,15 +70,15 @@ MonoBehaviour:
       damage: 0
       stun: 15
       hitstop: 5
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     groundCounterhitProperty:
       damage: 450
       stun: 25
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -82,7 +86,7 @@ MonoBehaviour:
       damage: 1000
       stun: 60
       hitstop: 20
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 10, z: 2}
       hitState: 2
@@ -90,15 +94,15 @@ MonoBehaviour:
       damage: 0
       stun: 15
       hitstop: 5
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airCounterhitProperty:
       damage: 450
       stun: 25
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -111,7 +115,7 @@ MonoBehaviour:
       damage: 1000
       stun: 40
       hitstop: 20
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 1
@@ -119,15 +123,15 @@ MonoBehaviour:
       damage: 0
       stun: 15
       hitstop: 20
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     groundCounterhitProperty:
       damage: 450
       stun: 25
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -135,7 +139,7 @@ MonoBehaviour:
       damage: 1000
       stun: 60
       hitstop: 20
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: -20, z: 2}
       hitState: 1
@@ -143,15 +147,15 @@ MonoBehaviour:
       damage: 0
       stun: 15
       hitstop: 5
-      proration: 0
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     airCounterhitProperty:
       damage: 450
       stun: 25
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -162,12 +166,15 @@ MonoBehaviour:
   - startFrame: 5
     duration: 10
     momentum: {x: 0, y: 0, z: 0}
+    homing: 0
     resetVelocityDuringRecovery: 0
   - startFrame: 10
     duration: 4
     momentum: {x: 0, y: 0, z: 5}
+    homing: 0
     resetVelocityDuringRecovery: 0
   - startFrame: 15
     duration: 6
     momentum: {x: 0, y: 8, z: 2}
+    homing: 0
     resetVelocityDuringRecovery: 0

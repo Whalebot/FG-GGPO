@@ -17,6 +17,9 @@ public class GameHandler : MonoBehaviour
     public Transform p1Transform;
     public Transform p2Transform;
 
+    public int maxRoundTime;
+    public int roundTime;
+
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
 
@@ -80,7 +83,7 @@ public class GameHandler : MonoBehaviour
         state.p2Health = p2Status.Health;
 
         state.p1Meter = p1Status.Meter;
-        state.p2Meter= p2Status.Meter;
+        state.p2Meter = p2Status.Meter;
         gameStates.Add(state);
     }
 
@@ -110,6 +113,7 @@ public class GameHandler : MonoBehaviour
 
         counter++;
 
+        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
         //if (counter >= 20)
         //{
         //    counter = 0;
