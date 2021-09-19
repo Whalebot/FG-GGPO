@@ -34,7 +34,10 @@ public class Movement : MonoBehaviour
 
 
     [TabGroup("Jump")] [HeaderAttribute("Jump attributes")] public int multiJumps;
+    public int airActions;
     [TabGroup("Jump")] public float jumpVelocity;
+    [TabGroup("Jump")] public int jumpStartFrames;
+    public int jumpStartCounter;
     [TabGroup("Jump")] public int performedJumps;
     [TabGroup("Jump")] public bool ground;
     [TabGroup("Jump")] public float rayLength;
@@ -57,8 +60,6 @@ public class Movement : MonoBehaviour
     public Vector3 storedDirection;
 
     [FoldoutGroup("Assign components")] Status status;
-    [FoldoutGroup("Assign components")] public Collider hurtbox;
-    [FoldoutGroup("Assign components")] public Collider col;
     [FoldoutGroup("Assign components")] public PhysicMaterial groundMat;
     [FoldoutGroup("Assign components")] public PhysicMaterial airMat;
     bool check;
@@ -77,7 +78,6 @@ public class Movement : MonoBehaviour
         rb.velocity = Vector3.zero;
         direction = Vector3.zero;
         rb.isKinematic = true;
-        hurtbox.gameObject.SetActive(false);
         return;
     }
 
@@ -121,6 +121,9 @@ public class Movement : MonoBehaviour
 
         if (ground && runMomentumCounter == 0 || ground && sprinting)
             storedDirection = direction.normalized;
+
+        ProcessJump();
+
         if (status.currentState == Status.State.Neutral)
         {
             MovementProperties();
@@ -232,25 +235,39 @@ public class Movement : MonoBehaviour
         return f;
     }
 
-    public void Jump()
+    void ProcessJump()
+    {
+        if (jumpStartCounter > 0)
+        {
+            jumpStartCounter--;
+            if (jumpStartCounter <= 0)
+            {
+                Jump();
+            }
+        }
+    }
+    public void JumpStartup()
     {
         if (performedJumps > multiJumps) return;
-        jumpEvent?.Invoke();
+        status.GoToState(Status.State.Startup);
+        status.minusFrames = -jumpStartFrames;
+        status.frameDataEvent?.Invoke();
+        jumpStartCounter = jumpStartFrames;
+
         storedDirection = direction.normalized * jumpVelocity;
-        jumpCounter = minimumJumpTime;
-        col.material = airMat;
+ 
+    }
+
+    public void Jump()
+    {
+        jumpEvent?.Invoke();
         ground = false;
-        status.groundState = GroundState.Airborne;
-
-       // if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
-        {
-            status.minusFrames = 0;
-            status.frameDataEvent?.Invoke();
-        }
-
-        Vector3 temp = direction.normalized;
+        status.GoToGroundState(GroundState.Airborne);
+        jumpCounter = minimumJumpTime;
+        Vector3 temp = storedDirection.normalized;
         actualVelocity = Speed();
-        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
+        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps], temp.z * Speed()) + runDirection * walkSpeed; 
+
         performedJumps++;
     }
 
@@ -291,11 +308,6 @@ public class Movement : MonoBehaviour
         {
             ground = false;
         }
-
-
-        if (ground) col.material = groundMat;
-        else col.material = airMat;
-
         return ground;
     }
 
@@ -319,7 +331,7 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
             else
                 rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
-         //   print(rb.velocity);
+            //   print(rb.velocity);
         }
     }
 

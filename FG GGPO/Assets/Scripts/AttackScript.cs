@@ -68,11 +68,12 @@ public class AttackScript : MonoBehaviour
     {
         if (attacking)
         {
+   
             if (status.hitstopCounter <= 0)
                 gameFrames++;
-
             if (gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
             {
+             
                 attackString = true;
                 newAttack = false;
             }
@@ -244,7 +245,6 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-
         FrameDataManager.Instance.UpdateFrameData();
         status.minusFrames = -(move.totalMoveDuration);
 
@@ -257,7 +257,7 @@ public class AttackScript : MonoBehaviour
 
 
         ClearHitboxes();
-
+        status.crossupState = move.crossupState;
 
         Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
         Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
@@ -288,12 +288,30 @@ public class AttackScript : MonoBehaviour
     {
         if (move == null) return false;
 
+        if (move.useAirAction)
+        {
+            if (movement.performedJumps <= movement.multiJumps)
+            {
+                movement.performedJumps++;
+                return true;
+            }
+            else return false;
+        }
 
         if (attackString)
         {
-            if (move.useAirAction) { return movement.performedJumps <= movement.multiJumps; }
+            if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
+            {
+                if (activeMove == move || move.targetComboMoves.Contains(activeMove))
+                {
+                    Attack(move.targetComboMoves[0]);
+                    return false;
+                }
+
+            }
             if (activeMove.targetComboMoves.Contains(move))
             {
+                print("Doing rekka");
                 return true;
             }
 

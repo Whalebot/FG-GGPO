@@ -38,13 +38,15 @@ public class Status : MonoBehaviour
     public int hitstopCounter;
     public Vector3 pushbackVector;
     public bool newMove;
+    public int groundPushbackDuration;
+    public int pushbackCounter;
 
     CharacterSFX characterSFX;
     Movement mov;
     public int wakeupRecovery;
     int wakeupValue;
 
-
+    public bool crossupState;
 
     public GroundState groundState;
     public BlockState blockState;
@@ -173,8 +175,16 @@ public class Status : MonoBehaviour
         {
             hitstunValue--;
 
+            if (groundState != GroundState.Airborne)
+            {
+                pushbackCounter--;
+                if (pushbackCounter <= 0)
+                {
+                    rb.velocity = Vector3.zero;
+                }
+            }
         }
-        else if (hitstunValue <= 0 && inHitStun)
+        if (hitstunValue <= 0 && inHitStun)
         {
             if (groundState == GroundState.Knockdown)
                 KnockdownRecovery();
@@ -282,7 +292,8 @@ public class Status : MonoBehaviour
             case State.Knockdown:
                 blocking = false;
                 SetBlockState(BlockState.None);
-                ResolveKnockdown();
+                // ResolveKnockdown();
+                ResolveHitstun();
                 minusFrames = -HitStun;
                 break;
             case State.Wakeup:
@@ -331,6 +342,7 @@ public class Status : MonoBehaviour
                 blocking = false;
                 break;
             case State.Recovery:
+                crossupState = false;
                 blocking = false;
                 invincible = false;
                 EnableHurtboxes();
@@ -427,45 +439,28 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir)
-    {
-        float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
-        if (groundState != GroundState.Grounded)
-        {
-            groundState = GroundState.Airborne;
-        }
-
-        TakePushback(kb);
-
-
-        int val = 0;
-        if (comboCounter > 0)
-            val = (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
-        else
-        {
-            comboDamage = 0;
-            val = damage;
-        }
-
-        lastAttackDamage = val;
-        comboDamage += val;
-        Health -= val;
-
-        HitStun = stunVal;
-        GoToState(State.Hitstun);
-        hurtEvent?.Invoke();
-
-    }
-
     public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, HitState hitState)
     {
-
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
-        if (groundState != GroundState.Grounded)
+
+
+
+        if (hitState == HitState.Launch)
         {
-            groundState = GroundState.Airborne;
+            GoToGroundState(GroundState.Airborne);
         }
-        if (hitState == HitState.Launch) { GoToGroundState(GroundState.Airborne); }
+        else if (hitState == HitState.Knockdown)
+        {
+            GoToGroundState(GroundState.Knockdown);
+        }
+        else
+        {
+            if (groundState != GroundState.Grounded)
+            {
+                GoToGroundState(GroundState.Airborne);
+            }
+            else GoToGroundState(GroundState.Grounded);
+        }
 
         TakePushback(kb);
 
@@ -484,32 +479,13 @@ public class Status : MonoBehaviour
         Health -= val;
 
         HitStun = stunVal;
-        GoToState(State.Hitstun);
-        hurtEvent?.Invoke();
-    }
-
-    public void TakeKnockdown(int damage, Vector3 kb, int stunVal, Vector3 dir)
-    {
-        groundState = GroundState.Knockdown;
-        TakePushback(kb);
-
-        int val = 0;
-        if (comboCounter > 0)
-            val = (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+        if (groundState == GroundState.Knockdown)
+            GoToState(State.Knockdown);
         else
-        {
-            comboDamage = 0;
-            val = damage;
-        }
-
-        lastAttackDamage = val;
-        comboDamage += val;
-        Health -= val;
-
-        HitStun = stunVal;
-        GoToState(State.Knockdown);
+            GoToState(State.Hitstun);
         hurtEvent?.Invoke();
     }
+
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
@@ -541,6 +517,7 @@ public class Status : MonoBehaviour
     public void ApplyPushback()
     {
         rb.velocity = pushbackVector;
+        pushbackCounter = groundPushbackDuration;
     }
 
     public void Death()

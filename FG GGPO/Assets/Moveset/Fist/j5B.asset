@@ -29,6 +29,8 @@ MonoBehaviour:
   firstGatlingFrame: 12
   blockAdvantage: -2
   hitAdvantage: 18
+  blockCancelAdvantage: -1
+  hitCancelAdvantage: 39
   recoveryFrames: 20
   canGatling: 1
   jumpCancelOnBlock: 0
@@ -41,6 +43,7 @@ MonoBehaviour:
   invincibleDuration: 0
   counterhitRecovery: 0
   noHitstopOnSelf: 0
+  targetComboMoves: []
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0
@@ -53,7 +56,7 @@ MonoBehaviour:
     groundHitProperty:
       damage: 750
       stun: 40
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
@@ -106,7 +109,7 @@ MonoBehaviour:
     groundHitProperty:
       damage: 750
       stun: 40
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}

@@ -50,6 +50,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public int invincibleDuration;
     [FoldoutGroup("Move properties")] public bool counterhitRecovery;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
+    [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public List<Move> targetComboMoves;
 
     [FoldoutGroup("Air properties")] public bool useAirAction;
@@ -206,6 +207,7 @@ public class Momentum
     public Vector3 momentum;
     public bool homing = false;
     public bool resetVelocityDuringRecovery = true;
+
 }
 
 [System.Serializable]
