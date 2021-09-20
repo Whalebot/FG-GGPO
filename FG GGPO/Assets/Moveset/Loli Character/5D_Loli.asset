@@ -10,28 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5D_Knight
+  m_Name: 5D_Loli
   m_EditorClassIdentifier: 
-  type: 1
-  collissionState: 0
+  animationID: 53
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
-  gatlingMoves: []
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 53
-  animationClip: {fileID: 0}
+  counterhitSFX: {fileID: 0}
+  type: 1
+  collissionState: 0
+  gatlingMoves: []
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45
   firstGatlingFrame: 20
+  blockAdvantage: -15
+  hitAdvantage: -10
+  blockCancelAdvantage: -10
+  hitCancelAdvantage: 15
   recoveryFrames: 30
   canGatling: 0
-  hitSpecialCancelable: 0
-  blockSpecialCancelable: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 10
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  targetComboMoves: []
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
     startupFrame: 15
@@ -42,7 +60,7 @@ MonoBehaviour:
       damage: 1000
       stun: 20
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
@@ -50,15 +68,15 @@ MonoBehaviour:
       damage: 0
       stun: 15
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     groundCounterhitProperty:
       damage: 1000
       stun: 20
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
@@ -66,7 +84,7 @@ MonoBehaviour:
       damage: 1000
       stun: 20
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
@@ -74,7 +92,7 @@ MonoBehaviour:
       damage: 0
       stun: 10
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
@@ -82,25 +100,16 @@ MonoBehaviour:
       damage: 1000
       stun: 20
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
-  particleID: 0
-  landCancel: 0
-  noClip: 0
-  noClipStart: 1
-  noClipDuration: 10
-  invincible: 0
-  invincibleStart: 0
-  invincibleDuration: 0
-  forceCounterhit: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
-  - startFrame: 3
-    impulse: 1
-    duration: 5
-    momentum: {x: 0, y: 0, z: 6}
+  - startFrame: 15
+    duration: 25
+    momentum: {x: 0, y: 0, z: -5}
+    homing: 0
     resetVelocityDuringRecovery: 1
