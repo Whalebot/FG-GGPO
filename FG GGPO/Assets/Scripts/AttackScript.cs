@@ -137,7 +137,7 @@ public class AttackScript : MonoBehaviour
                     }
                     else if (attackFrames > activeMove.m[i].startFrame)
                     {
-                        movement.storedDirection = movement.rb.velocity;
+                       // movement.storedDirection = movement.rb.velocity;
                         if (activeMove.m[i].resetVelocityDuringRecovery)
                             status.rb.velocity = Vector3.zero;
                         if (activeMove.overrideVelocity)
@@ -480,7 +480,7 @@ public class AttackScript : MonoBehaviour
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();
-
+            movement.LookAtOpponent();
         }
     }
 
@@ -497,7 +497,7 @@ public class AttackScript : MonoBehaviour
             landCancel = false;
             recoveryEvent?.Invoke();
             ClearHitboxes();
-            //movement.LookAtOpponent();
+            movement.LookAtOpponent();
         }
     }
 }

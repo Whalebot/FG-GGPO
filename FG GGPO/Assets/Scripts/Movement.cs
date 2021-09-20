@@ -190,6 +190,7 @@ public class Movement : MonoBehaviour
     public void ResetRun()
     {
         runMomentumCounter = 0;
+        sprinting = false;
     }
 
     public virtual void MovementProperties()
@@ -207,7 +208,8 @@ public class Movement : MonoBehaviour
                 actualVelocity = currentVel;
             }
             else if (isMoving)
-            { if (sprinting)
+            {
+                if (sprinting)
                 {
                     runMomentumCounter = runMomentumDuration;
                     runDirection = direction.normalized;
@@ -221,7 +223,7 @@ public class Movement : MonoBehaviour
                 {
                     currentVel = sideWalkSpeed;
                 }
-               
+
                 else
                 {
                     currentVel = walkSpeed;
@@ -271,6 +273,7 @@ public class Movement : MonoBehaviour
         }
         print(GameHandler.Instance.gameFrameCount + " Jump");
 
+        sprinting = false;
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
@@ -283,8 +286,7 @@ public class Movement : MonoBehaviour
     }
 
     public void LookAtOpponent()
-    {
-        print("Glook");
+    {  
         Vector3 targetNoY = strafeTarget.position;
         targetNoY.y = transform.position.y;
         transform.LookAt(targetNoY);
@@ -308,8 +310,10 @@ public class Movement : MonoBehaviour
             if (check && rb.velocity.y < 0)
             {
                 rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
-                status.DisableCollider();
+
             }
+            if (rb.velocity.y < 0)
+                status.DisableCollider();
         }
 
         if (!ground && transform.position.y < 0.1F)
@@ -319,8 +323,6 @@ public class Movement : MonoBehaviour
                 status.minusFrames = 0;
                 status.frameDataEvent?.Invoke();
             }
-
-
 
             runDirection = Vector3.zero;
             landEvent?.Invoke();

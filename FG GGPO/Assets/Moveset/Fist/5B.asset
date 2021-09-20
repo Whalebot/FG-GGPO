@@ -16,8 +16,10 @@ MonoBehaviour:
   sfx: []
   hitFX: {fileID: 0}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
   type: 0
   collissionState: 0
   gatlingMoves:
@@ -74,13 +76,13 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
     groundCounterhitProperty:
-      damage: 0
-      stun: 40
-      hitstop: 5
+      damage: 1000
+      stun: 67
+      hitstop: 10
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 0}
-      hitState: 0
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 2
     airHitProperty:
       damage: 1000
       stun: 100
@@ -98,12 +100,12 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: -4}
       hitState: 0
     airCounterhitProperty:
-      damage: 0
-      stun: 40
-      hitstop: 5
+      damage: 1000
+      stun: 100
+      hitstop: 30
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: -4}
       hitState: 0
   overrideVelocity: 1
   runMomentum: 1

@@ -6,19 +6,24 @@ using Sirenix.OdinInspector;
 
 public class Status : MonoBehaviour
 {
-    [HideInInspector] public int hitstunValue;
-    [HideInInspector] public int blockstunValue;
-    [HideInInspector] public bool inBlockStun;
-    [HideInInspector] public bool inHitStun;
-    public int knockdownValue;
 
-    public bool autoDeath;
+
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Vector2 knockbackDirection;
     [HideInInspector] public bool isDead;
+    public bool forcedCounterhit;
+    public bool autoBlock;
     public bool blocking;
-    public int minusFrames;
 
+    [FoldoutGroup("Frames")] public int hitstunValue;
+    [FoldoutGroup("Frames")] public int blockstunValue;
+    [FoldoutGroup("Frames")] public bool inBlockStun;
+    [FoldoutGroup("Frames")] public bool inHitStun;
+    [FoldoutGroup("Frames")] public int minusFrames;
+
+    [FoldoutGroup("Frames")] public int hitstopCounter;
+    [FoldoutGroup("Frames")] public Vector3 pushbackVector;
+    [FoldoutGroup("Frames")] public int knockdownValue;
     public delegate void StatusEvent();
     public StatusEvent healthEvent;
     public StatusEvent hurtEvent;
@@ -32,28 +37,28 @@ public class Status : MonoBehaviour
     public TransitionEvent animationEvent;
     public TransitionEvent blockstunEvent;
     public TransitionEvent hitstunEvent;
+    public TransitionEvent counterhitEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
 
-    public int hitstopCounter;
-    public Vector3 pushbackVector;
-    public bool newMove;
-    public int groundPushbackDuration;
-    public int pushbackCounter;
+    [HideInInspector] public bool newMove;
+    [FoldoutGroup("Variables")] public int groundPushbackDuration;
+    [HideInInspector] public int pushbackCounter;
 
     CharacterSFX characterSFX;
     Movement mov;
-    public int wakeupRecovery;
+    [FoldoutGroup("Variables")] public int wakeupRecovery;
     int wakeupValue;
 
-    public bool crossupState;
 
-    public GroundState groundState;
-    public BlockState blockState;
+    [FoldoutGroup("State")] public State currentState;
+    [FoldoutGroup("State")] public GroundState groundState;
+    [FoldoutGroup("State")] public BlockState blockState;
     public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup }
-    public bool counterhitState;
-    public bool invincible;
-    [SerializeField] public State currentState;
+    [FoldoutGroup("State")] public bool counterhitState;
+    [FoldoutGroup("State")] public bool crossupState;
+    [FoldoutGroup("State")] public bool invincible;
+
     public int maxHealth;
     public int health;
     public int maxMeter;
@@ -274,7 +279,10 @@ public class Status : MonoBehaviour
         switch (currentState)
         {
             case State.Neutral:
-                blocking = mov.holdBack;
+                if (forcedCounterhit) counterhitState = true;
+                if (autoBlock) blocking = true;
+                else
+                    blocking = mov.holdBack;
                 break;
             case State.Hitstun:
                 blocking = false;
@@ -283,8 +291,9 @@ public class Status : MonoBehaviour
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
-                // SetBlockState();
-                blocking = mov.holdBack;
+                if (autoBlock) blocking = true;
+                else
+                    blocking = mov.holdBack;
                 ResolveBlockstun();
 
                 minusFrames = -BlockStun;

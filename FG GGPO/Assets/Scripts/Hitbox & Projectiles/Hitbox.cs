@@ -97,7 +97,7 @@ public class Hitbox : MonoBehaviour
             if (attack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || attack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
             {
                 if (other.counterhitState)
-                    ExecuteHit(attack.groundCounterhitProperty, other);
+                    ExecuteCounterHit(attack.groundCounterhitProperty, other);
                 else
                     ExecuteHit(attack.groundHitProperty, other);
                 return;
@@ -115,7 +115,7 @@ public class Hitbox : MonoBehaviour
             if (other.groundState == GroundState.Grounded)
             {
                 if (other.counterhitState)
-                    ExecuteHit(attack.groundCounterhitProperty, other);
+                    ExecuteCounterHit(attack.groundCounterhitProperty, other);
                 else
                     ExecuteHit(attack.groundHitProperty, other);
             }
@@ -123,7 +123,7 @@ public class Hitbox : MonoBehaviour
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
                 if (other.counterhitState)
-                    ExecuteHit(attack.airCounterhitProperty, other);
+                    ExecuteCounterHit(attack.airCounterhitProperty, other);
                 else
                     ExecuteHit(attack.airHitProperty, other);
             }
@@ -197,15 +197,61 @@ public class Hitbox : MonoBehaviour
         //Hit FX
         if (move.hitFX != null)
             Instantiate(move.hitFX, colPos.position, colPos.rotation);
-        else Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
 
         if (move.hitSFX != null)
             Instantiate(move.hitSFX, colPos.position, colPos.rotation);
-        else Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
 
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
         other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
+    }
+
+    void ExecuteCounterHit(HitProperty hit, Status other)
+    {
+        attack.jumpCancel = move.jumpCancelOnHit;
+        status.Meter += hit.meterGain;
+        other.Meter += hit.meterGain / 2;
+
+        //Enemy Hitstop
+        other.newMove = true;
+        other.hitstopCounter = hit.hitstop;
+
+        if (move.noHitstopOnSelf)
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
+        }
+        else
+        {
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
+
+            //Own hitstop
+            status.Hitstop();
+            status.newMove = true;
+            status.hitstopCounter = hit.hitstop;
+        }
+
+
+
+        //Hit FX
+        if (move.counterhitFX != null)
+            Instantiate(move.counterhitFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.counterHitVFX, colPos.position, colPos.rotation);
+
+        if (move.counterhitSFX != null)
+            Instantiate(move.counterhitSFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.counterHitSFX, colPos.position, colPos.rotation);
+
+        //Calculate direction
+        aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
+
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
+        status.counterhitEvent?.Invoke();
     }
 }
