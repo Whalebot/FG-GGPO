@@ -18,16 +18,18 @@ MonoBehaviour:
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
-  type: 0
-  collissionState: 0
+  type: 2
+  collissionState: 3
   gatlingMoves: []
   firstStartupFrame: 10
-  lastActiveFrame: 13
-  totalMoveDuration: 18
+  lastActiveFrame: 10
+  totalMoveDuration: 11
   firstGatlingFrame: 15
-  blockAdvantage: 12
-  hitAdvantage: 22
-  recoveryFrames: 5
+  blockAdvantage: 19
+  hitAdvantage: 29
+  blockCancelAdvantage: 24
+  hitCancelAdvantage: 25
+  recoveryFrames: 1
   canGatling: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
@@ -37,14 +39,17 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  targetComboMoves: []
   useAirAction: 1
   landCancel: 0
   landingRecovery: 0
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
-    activeFrames: 4
+    activeFrames: 1
     gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
@@ -101,6 +106,6 @@ MonoBehaviour:
   m:
   - startFrame: 0
     duration: 21
-    momentum: {x: 0, y: 0, z: 8}
+    momentum: {x: 0, y: 0.1, z: 7}
     homing: 0
     resetVelocityDuringRecovery: 0

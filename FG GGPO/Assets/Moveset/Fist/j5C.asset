@@ -21,14 +21,16 @@ MonoBehaviour:
   type: 0
   collissionState: 3
   gatlingMoves:
-  - {fileID: 11400000, guid: 5dd66898f3116a44bbcac26622c0d29a, type: 2}
+  - {fileID: 11400000, guid: c0c6e8e47388a544d9ea79e07b57a3bc, type: 2}
   - {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
   firstStartupFrame: 12
   lastActiveFrame: 16
   totalMoveDuration: 36
   firstGatlingFrame: 22
   blockAdvantage: -4
-  hitAdvantage: 36
+  hitAdvantage: 6
+  blockCancelAdvantage: 6
+  hitCancelAdvantage: 20
   recoveryFrames: 20
   canGatling: 1
   jumpCancelOnBlock: 0
@@ -41,6 +43,8 @@ MonoBehaviour:
   invincibleDuration: 0
   counterhitRecovery: 0
   noHitstopOnSelf: 0
+  crossupState: 0
+  targetComboMoves: []
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0
@@ -52,7 +56,7 @@ MonoBehaviour:
     attackHeight: 3
     groundHitProperty:
       damage: 1000
-      stun: 60
+      stun: 30
       hitstop: 12
       proration: 0.95
       meterGain: 2
@@ -68,7 +72,7 @@ MonoBehaviour:
       hitState: 0
     groundCounterhitProperty:
       damage: 1000
-      stun: 40
+      stun: 30
       hitstop: 5
       proration: 0.95
       meterGain: 2
@@ -76,7 +80,7 @@ MonoBehaviour:
       hitState: 0
     airHitProperty:
       damage: 1000
-      stun: 40
+      stun: 30
       hitstop: 12
       proration: 0.95
       meterGain: 2
@@ -92,7 +96,7 @@ MonoBehaviour:
       hitState: 0
     airCounterhitProperty:
       damage: 1000
-      stun: 40
+      stun: 30
       hitstop: 5
       proration: 0.95
       meterGain: 2

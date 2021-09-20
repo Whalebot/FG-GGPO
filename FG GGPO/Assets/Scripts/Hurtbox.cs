@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Hurtbox : MonoBehaviour
 {
-    public bool destroyOnDeath;
-    public float damageMultiplier;
-    public float poiseMultiplier;
+    public MeshRenderer mr;
+    public float damageMultiplier = 1;
     Status status;
     private void Start()
     {
         status = GetComponentInParent<Status>();
         //if(destroyOnDeath)
-        status.deathEvent += AutoDestroy;
 
     }
 
     private void OnDisable()
     {
-        status.deathEvent -= AutoDestroy;
     }
 
-    public void AutoDestroy() {
+    private void OnValidate()
+    {
+        mr = GetComponent<MeshRenderer>();
+        mr.enabled = GameHandler.staticHurtboxes;
+    }
+
+    public void AutoDestroy()
+    {
         Destroy(gameObject);
     }
 }

@@ -23,13 +23,13 @@ MonoBehaviour:
   gatlingMoves: []
   firstStartupFrame: 12
   lastActiveFrame: 12
-  totalMoveDuration: 40
+  totalMoveDuration: 37
   firstGatlingFrame: 22
-  blockAdvantage: -8
-  hitAdvantage: 2
+  blockAdvantage: -5
+  hitAdvantage: 5
   blockCancelAdvantage: 0
   hitCancelAdvantage: 0
-  recoveryFrames: 28
+  recoveryFrames: 25
   canGatling: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
@@ -42,12 +42,13 @@ MonoBehaviour:
   counterhitRecovery: 0
   noHitstopOnSelf: 1
   crossupState: 0
-  targetComboMoves: []
+  targetComboMoves:
+  - {fileID: 11400000, guid: cf37c1294ce2e50479fee9013add491c, type: 2}
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   attacks:
-  - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
+  - hitbox: {fileID: 6130433937859647811, guid: 1cdf2a8c8aa3479499a75b3dfdcfa6ef, type: 3}
     startupFrame: 12
     activeFrames: 1
     gatlingFrames: 10

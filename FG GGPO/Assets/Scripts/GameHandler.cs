@@ -12,6 +12,8 @@ public class GameHandler : MonoBehaviour
     public static GameHandler Instance;
     public static bool isPaused;
     public bool showHitboxes;
+    public bool showHurtboxes;
+    public static bool staticHurtboxes;
     public bool disableBlock;
     public int playersInGame;
     public Transform p1Transform;
@@ -28,6 +30,7 @@ public class GameHandler : MonoBehaviour
 
     public delegate void GameEvent();
     public GameEvent advanceGameState;
+    public GameEvent revertGameState;
     public GameEvent rollbackTick;
 
     public delegate void RollBackEvent(int i);
@@ -75,6 +78,25 @@ public class GameHandler : MonoBehaviour
         isPaused = false;
     }
 
+    [Button]
+    public void AdvanceGameState() {
+        advanceGameState?.Invoke();
+        UpdateGameState();
+        gameFrameCount++;
+        counter++;
+        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
+    }
+    [Button]
+    public void RevertGameState()
+    {
+        revertGameState?.Invoke();
+        //UpdateGameState();
+        gameFrameCount--;
+        counter--;
+        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
+    }
+
+
     void UpdateGameState()
     {
 
@@ -95,35 +117,24 @@ public class GameHandler : MonoBehaviour
             isPaused = !GameManager.Instance.IsRunning;
         else isPaused = false;
 
-        //if (hitStop > 0) {
-        //    Time.timeScale = 0;
-        //    return;
-        //}
-        //else Time.timeScale = 1;
-
         CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
 
-        UpdateGameState();
+   
         if (!isPaused)
         {
-            advanceGameState?.Invoke();
-            gameFrameCount++;
+            AdvanceGameState();
+           
         }
+    }
 
-
-        counter++;
-
-        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
-        //if (counter >= 20)
-        //{
-        //    counter = 0;
-        //    RevertGameState(gameStates.Count - rollbackFrames);
-        //    ResimulateGameState();
-        //}
+    private void OnValidate()
+    {
+        staticHurtboxes = showHurtboxes;
     }
 
     private void Update()
     {
+        staticHurtboxes = showHurtboxes;
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
         {
             ResimulateGameState();

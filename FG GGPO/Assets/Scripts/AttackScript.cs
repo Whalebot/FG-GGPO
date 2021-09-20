@@ -9,13 +9,8 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
 
-
-
     Movement movement;
     CharacterSFX sfx;
-
-
-
 
     public delegate void AttackEvent();
     public AttackEvent startupEvent;
@@ -28,7 +23,13 @@ public class AttackScript : MonoBehaviour
     public Move activeMove;
     public bool canGatling;
     public int attackID;
-    public int gameFrames;
+    public int attackFrames;
+    public int movementFrames;
+
+    public int jumpMinusFrames;
+    public int jumpFrameCounter;
+    public Move movementOption;
+
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
@@ -44,11 +45,12 @@ public class AttackScript : MonoBehaviour
         status = GetComponent<Status>();
         movement = GetComponent<Movement>();
         sfx = GetComponentInChildren<CharacterSFX>();
-        movement.jumpEvent += Idle;
+        movement.jumpStartEvent += JumpCancel;
         movement.landEvent += Land;
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
+        // GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     private void Awake()
@@ -59,90 +61,121 @@ public class AttackScript : MonoBehaviour
     private void FixedUpdate()
     {
         ExecuteFrame();
-        if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
-
 
     }
 
     public void ExecuteFrame()
     {
-        if (attacking)
+        if (status.hitstopCounter <= 0)
         {
-   
-            if (status.hitstopCounter <= 0)
-                gameFrames++;
-            if (gameFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+            if (jumpFrameCounter > 0)
             {
-             
-                attackString = true;
-                newAttack = false;
+                jumpFrameCounter--;
+                if (jumpFrameCounter <= 0)
+                    status.GoToState(Status.State.Neutral);
             }
 
-            //Execute properties
-            ProcessInvul();
-
-
-            for (int i = 0; i < activeMove.sfx.Length; i++)
-            {
-                if (gameFrames == activeMove.sfx[i].startup)
-                    Instantiate(activeMove.sfx[i].prefab);
-            }
-            //Execute momentum
-            for (int i = 0; i < activeMove.m.Length; i++)
+            if (movementOption != null)
             {
 
-                if (gameFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
+
+                for (int i = 0; i < movementOption.m.Length; i++)
                 {
-                    if (activeMove.m[i].resetVelocityDuringRecovery)
+                    if (GameHandler.Instance.gameFrameCount > movementFrames + movementOption.m[i].startFrame + movementOption.m[i].duration)
                     {
-                        status.rb.velocity = Vector3.zero;
-                        movement.storedDirection = Vector3.zero;
-
+                        if (movementOption.m[i].resetVelocityDuringRecovery)
+                        {
+                            status.rb.velocity = Vector3.zero;
+                        }
+                    }
+                    else if (GameHandler.Instance.gameFrameCount > movementFrames + movementOption.m[i].startFrame)
+                    {
+                        // movement.storedDirection = movement.rb.velocity;
+                        if (movementOption.m[i].resetVelocityDuringRecovery)
+                            status.rb.velocity = Vector3.zero;
+                        if (movementOption.overrideVelocity)
+                        {
+                            if (movementOption.m[i].homing)
+                                status.rb.velocity = movement.CalculateRight(movementOption.m[i].momentum.x) + transform.up * movementOption.m[i].momentum.y + transform.forward * movementOption.m[i].momentum.z;
+                            else status.rb.velocity = movementOption.m[i].momentum.x * transform.right + transform.up * movementOption.m[i].momentum.y + transform.forward * movementOption.m[i].momentum.z;
+                        }
                     }
                 }
-                else if (gameFrames > activeMove.m[i].startFrame)
+            }
+
+            if (attacking)
+            {
+                attackFrames++;
+                if (attackFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
                 {
-                    movement.storedDirection = movement.rb.velocity;
-                    //if (activeMove.m.resetVelocityDuringRecovery)
-                    //    status.rb.velocity = Vector3.zero;
-                    if (activeMove.overrideVelocity)
+
+                    attackString = true;
+                    newAttack = false;
+                }
+
+                //Execute properties
+                ProcessInvul();
+
+
+                for (int i = 0; i < activeMove.sfx.Length; i++)
+                {
+                    if (attackFrames == activeMove.sfx[i].startup)
+                        Instantiate(activeMove.sfx[i].prefab);
+                }
+                //Execute momentum
+                for (int i = 0; i < activeMove.m.Length; i++)
+                {
+
+                    if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
                     {
-                        if (activeMove.m[i].homing)
-                            status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
-                        else status.rb.velocity = activeMove.m[i].momentum.x * transform.right + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                        if (activeMove.m[i].resetVelocityDuringRecovery)
+                        {
+                            status.rb.velocity = Vector3.zero;
+                            //movement.storedDirection = Vector3.zero;
+
+                        }
                     }
+                    else if (attackFrames > activeMove.m[i].startFrame)
+                    {
+                        movement.storedDirection = movement.rb.velocity;
+                        if (activeMove.m[i].resetVelocityDuringRecovery)
+                            status.rb.velocity = Vector3.zero;
+                        if (activeMove.overrideVelocity)
+                        {
+                            if (activeMove.m[i].homing)
+                                status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                            else status.rb.velocity = activeMove.m[i].momentum.x * transform.right + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+                        }
+                    }
+                }
 
 
+                int firstStartupFrame = activeMove.attacks[0].startupFrame;
+                int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
+                int totalMoveDuration = lastActiveFrame + activeMove.recoveryFrames;
+
+                if (attackFrames > totalMoveDuration)
+                {
+                    print(attackFrames);
+                    Idle();
+                }
+                else if (attackFrames < firstStartupFrame)
+                {
+                    //print(attack.attackFrames + " Startup");
+                    StartupFrames();
+                }
+                else if (attackFrames <= lastActiveFrame)
+                {
+                    ActiveFrames();
+                }
+
+                else if (attackFrames <= totalMoveDuration)
+                {
+                    RecoveryFrames();
                 }
             }
 
-            int firstStartupFrame = activeMove.attacks[0].startupFrame;
-
-            int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
-            int totalMoveDuration = lastActiveFrame + activeMove.recoveryFrames;
-
-
-
-
-
-            if (gameFrames > totalMoveDuration)
-            {
-                Idle();
-            }
-            else if (gameFrames < firstStartupFrame)
-            {
-                //print(attack.gameFrames + " Startup");
-                StartupFrames();
-            }
-            else if (gameFrames <= lastActiveFrame)
-            {
-                ActiveFrames();
-            }
-
-            else if (gameFrames <= totalMoveDuration)
-            {
-                RecoveryFrames();
-            }
+            if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
         }
     }
 
@@ -159,7 +192,6 @@ public class AttackScript : MonoBehaviour
         {
             if (hitboxes[i] != null)
             {
-
                 Destroy(hitboxes[i]);
             }
         }
@@ -171,7 +203,7 @@ public class AttackScript : MonoBehaviour
     {
         for (int i = 0; i < activeMove.attacks.Length; i++)
         {
-            if (gameFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && gameFrames >= activeMove.attacks[i].startupFrame)
+            if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
             {
 
                 status.GoToState(Status.State.Active);
@@ -179,7 +211,12 @@ public class AttackScript : MonoBehaviour
                 {
                     if (activeMove.attacks[i].hitbox != null)
                     {
-                        if (activeMove.type == MoveType.Special) hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, transform.position + activeMove.attacks[i].hitbox.transform.position, transform.rotation));
+                        if (activeMove.type == MoveType.Special)
+                        {
+                            hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
+                            hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
+                            hitboxes[i].transform.SetParent(null);
+                        }
                         else
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
@@ -194,7 +231,7 @@ public class AttackScript : MonoBehaviour
                     }
                 }
             }
-            else if (gameFrames > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
+            else if (attackFrames > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
             {
                 if (hitboxes.Count == i + 1)
                 {
@@ -224,9 +261,9 @@ public class AttackScript : MonoBehaviour
         //Invul
         if (activeMove.invincible)
         {
-            if (gameFrames == activeMove.invincibleStart)
+            if (attackFrames == activeMove.invincibleStart)
                 status.DisableHurtboxes();
-            else if (gameFrames >= activeMove.invincibleStart + activeMove.invincibleDuration)
+            else if (attackFrames >= activeMove.invincibleStart + activeMove.invincibleDuration)
             {
                 status.EnableHurtboxes();
             }
@@ -234,9 +271,9 @@ public class AttackScript : MonoBehaviour
         //Noclip
         if (activeMove.noClip)
         {
-            if (gameFrames == activeMove.noClipStart)
+            if (attackFrames == activeMove.noClipStart)
                 status.DisableCollider();
-            else if (gameFrames >= activeMove.noClipStart + activeMove.noClipDuration)
+            else if (attackFrames >= activeMove.noClipStart + activeMove.noClipDuration)
             {
                 status.EnableCollider();
             }
@@ -247,21 +284,29 @@ public class AttackScript : MonoBehaviour
     {
         FrameDataManager.Instance.UpdateFrameData();
         status.minusFrames = -(move.totalMoveDuration);
-
+        status.EnableCollider();
         status.SetBlockState(move.collissionState);
+        if (move.type == MoveType.Movement)
+            movementOption = move;
+
         activeMove = move;
         attackID = move.animationID;
         attackString = false;
         canGatling = false;
-        gameFrames = 0;
+        jumpCancel = false;
+        if (move.type == MoveType.Movement)
+            movementFrames = GameHandler.Instance.gameFrameCount;
 
+        attackFrames = 0;
+
+        print(GameHandler.Instance.gameFrameCount + " Attack start");
 
         ClearHitboxes();
         status.crossupState = move.crossupState;
 
-        Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
-        Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
-        transform.rotation = desiredRotation;
+        //Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
+        //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
+        //transform.rotation = desiredRotation;
 
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
@@ -273,7 +318,7 @@ public class AttackScript : MonoBehaviour
         movement.ResetRun();
 
         Startup();
-        landCancel = activeMove.landCancel;
+        landCancel = move.landCancel;
         ResetFrames();
 
         startupEvent?.Invoke();
@@ -287,6 +332,7 @@ public class AttackScript : MonoBehaviour
     public bool CanUseMove(Move move)
     {
         if (move == null) return false;
+        if (jumpFrameCounter > 0) return false;
 
         if (move.useAirAction)
         {
@@ -339,6 +385,7 @@ public class AttackScript : MonoBehaviour
 
     public bool Attack(Move move)
     {
+        //print(GameHandler.Instance.gameFrameCount +" " +  move + " Attack start");
         if (!CanUseMove(move)) return false;
         else
         {
@@ -370,6 +417,7 @@ public class AttackScript : MonoBehaviour
         {
             newAttack = false;
             Idle();
+            status.frameDataEvent?.Invoke();
         }
     }
 
@@ -408,26 +456,48 @@ public class AttackScript : MonoBehaviour
     {
         newAttack = false;
         attacking = false;
+        attackString = false;
         combo = 0;
         ClearHitboxes();
         containerScript.InterruptAttack();
         containerScript.DeactivateParticles();
     }
 
-    public void Idle()
+    public void JumpCancel()
     {
-        if (!newAttack)
+        // if (!newAttack)
         {
-
+            print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
+            status.GoToState(Status.State.Recovery);
             attackString = false;
+            movementOption = null;
             activeMove = null;
             combo = 0;
-            status.GoToState(Status.State.Neutral);
+            jumpFrameCounter = jumpMinusFrames;
+            status.minusFrames = -jumpMinusFrames;
+            status.frameDataEvent?.Invoke();
             ClearHitboxes();
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();
 
+        }
+    }
+
+    public void Idle()
+    {
+        if (!newAttack)
+        {
+            attackString = false;
+            activeMove = null;
+            combo = 0;
+            print(GameHandler.Instance.gameFrameCount + " Idle");
+            status.GoToState(Status.State.Neutral);
+            attacking = false;
+            landCancel = false;
+            recoveryEvent?.Invoke();
+            ClearHitboxes();
+            //movement.LookAtOpponent();
         }
     }
 }

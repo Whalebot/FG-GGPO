@@ -129,6 +129,7 @@ public class Move : ScriptableObject
 
     }
 
+    [Button]
     void CopyHitToCounterhit()
     {
         foreach (var item in attacks)
@@ -138,6 +139,7 @@ public class Move : ScriptableObject
         }
 
     }
+
 
     void CopyProperty(HitProperty hit1, HitProperty hit2)
     {

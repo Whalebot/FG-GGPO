@@ -17,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     private Vector3 forwardVector;
     private Vector3 rightVector;
     [HideInInspector] public Vector3 relativeDirection;
-
+    public bool frontTurned;
     Ray ray;
     RaycastHit hit;
     public bool rollbacking;
@@ -34,7 +34,6 @@ public class PlayerInputHandler : MonoBehaviour
         status = GetComponent<Status>();
         GameHandler.Instance.rollbackTick += RollbackTick;
         mov = GetComponent<Movement>();
-        input.dashInput += BackDash;
     }
 
     Vector3 RelativeToCamera(Vector2 v)
@@ -87,6 +86,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ExecuteFrame();
+    }
+
+    public void ExecuteFrame()
+    {
         if (GameHandler.isPaused)
         {
             mov.direction = Vector3.zero;
@@ -96,17 +100,25 @@ public class PlayerInputHandler : MonoBehaviour
         input.isPaused = status.hitstopCounter > 0;
         input.extraBuffer = status.hitstopCounter;
 
+
+        float angle = Vector3.SignedAngle(transform.forward, (transform.position - GameHandler.Instance.ReturnPlayer(transform).position).normalized, Vector3.up);
+        //print(angle);
+
+        frontTurned = Mathf.Abs(angle) > 90;
+
         //UpdateDirection();
-        if (mov.ground && !input.isDummy)
+        if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
-            mov.crouching = input.netButtons[5];
+            if (mov.ground && !input.isDummy)
+            {
+                mov.crouching = input.netButtons[5];
 
-            if (mov.crouching) status.SetBlockState(BlockState.Crouching);
-            else if (mov.holdBack) status.SetBlockState(BlockState.Standing);
-            else status.SetBlockState(BlockState.None);
+                if (mov.crouching) status.SetBlockState(BlockState.Crouching);
+                else if (mov.holdBack) status.SetBlockState(BlockState.Standing);
+                else status.SetBlockState(BlockState.None);
+            }
+            else status.SetBlockState(BlockState.Airborne);
         }
-        else status.SetBlockState(BlockState.Airborne);
-
 
         if (status.currentState == Status.State.Neutral)
         {
@@ -119,6 +131,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Physics.autoSimulation)
             mov.direction = relativeDirection;
     }
+
     public void RollbackTick()
     {
         mov.isMoving = true;
@@ -128,18 +141,13 @@ public class PlayerInputHandler : MonoBehaviour
         //    rollbackInput.RemoveAt(0);
     }
 
-    void BackDash()
-    {
-        //.inputQueue.Add()
-
-    }
-
     void NeutralInput()
     {
 
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
-            if (input.directionals[input.directionals.Count - 1] < 7 && mov.ground) mov.sprinting = false;
+            //if (input.directionals[input.directionals.Count - 1] == 2 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
+        if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
 
         ProcessBuffer();
     }
@@ -167,8 +175,10 @@ public class PlayerInputHandler : MonoBehaviour
                 bool canJump = status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
                 if (canJump)
                 {
+                    //print(GameHandler.Instance.gameFrameCount + " Jump input");
                     mov.JumpStartup();
                     bufferID = i;
+
                     break;
                 }
                 continue;
@@ -212,14 +222,19 @@ public class PlayerInputHandler : MonoBehaviour
 
             if (input.bufferedInputs[i].id == 10)
             {
-                if (mov.ground) { attack.Attack(attack.moveset.backDash); }
-                else attack.Attack(attack.moveset.airdashB);
+                if (status.groundState == GroundState.Grounded) { attack.Attack(attack.moveset.backDash); }
+                else
+                {
+                    if (frontTurned)
+                        attack.Attack(attack.moveset.airdashB);
+                    else attack.Attack(attack.moveset.airdashF);
+                }
                 bufferID = i;
                 break;
             }
             if (input.bufferedInputs[i].id == 11)
             {
-                if (mov.ground)
+                if (status.groundState == GroundState.Grounded)
                 {
                     attack.Attack(attack.moveset.rightDash);
                     bufferID = i;
@@ -228,7 +243,7 @@ public class PlayerInputHandler : MonoBehaviour
             }
             if (input.bufferedInputs[i].id == 12)
             {
-                if (mov.ground)
+                if (status.groundState == GroundState.Grounded)
                 {
                     attack.Attack(attack.moveset.leftDash);
                     bufferID = i;
@@ -237,9 +252,12 @@ public class PlayerInputHandler : MonoBehaviour
             }
             if (input.bufferedInputs[i].id == 13)
             {
-                if (!mov.ground)
+                if (status.groundState != GroundState.Grounded)
                 {
-                    attack.Attack(attack.moveset.airdashF);
+                    if (frontTurned)
+                        attack.Attack(attack.moveset.airdashF);
+                    else
+                        attack.Attack(attack.moveset.airdashB);
                     bufferID = i;
                     break;
                 }
@@ -300,8 +318,11 @@ public class PlayerInputHandler : MonoBehaviour
             }
             //B Button
             else if (input.bufferedInputs[i].id == 2)
-            {  //Ground
-                if (mov.ground)
+
+            {
+                print(GameHandler.Instance.gameFrameCount + " B start " + status.currentState + " " + status.groundState);
+                //Ground
+                if (status.groundState == GroundState.Grounded)
                 {
                     if (input.bufferedInputs[i].crouch)
                     {
@@ -355,7 +376,7 @@ public class PlayerInputHandler : MonoBehaviour
             //C Button
             else if (input.bufferedInputs[i].id == 4)
             {  //Ground
-                if (mov.ground)
+                if (status.groundState == GroundState.Grounded)
                 {
                     if (input.bufferedInputs[i].crouch)
                     {
@@ -409,7 +430,7 @@ public class PlayerInputHandler : MonoBehaviour
             //D Button
             else if (input.bufferedInputs[i].id == 5)
             {  //Ground
-                if (mov.ground)
+                if (status.groundState == GroundState.Grounded)
                 {
                     if (input.bufferedInputs[i].crouch)
                     {

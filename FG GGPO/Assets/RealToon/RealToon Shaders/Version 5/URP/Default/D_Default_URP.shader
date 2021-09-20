@@ -244,7 +244,7 @@ Cull[_DoubleSidedOutline]//OL_RCUL
 
             #pragma prefer_hlslcc gles
             #pragma only_renderers d3d9 d3d11 vulkan glcore gles3 gles metal xboxone ps4 xboxseries playstation wiiu switch
-#pragma target 2.0 //targetol
+#pragma target 4.5 //targetol
 
 			#pragma multi_compile _ _ADDITIONAL_LIGHTS
             #pragma multi_compile_fog
@@ -474,7 +474,7 @@ Cull[_DoubleSidedOutline]//OL_RCUL
 
             #pragma prefer_hlslcc gles
             #pragma only_renderers d3d9 d3d11 vulkan glcore gles3 gles metal xboxone ps4 xboxseries playstation wiiu switch
-#pragma target 2.0 //targetfl
+#pragma target 4.5 //targetfl
 
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
@@ -1015,7 +1015,7 @@ float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
             HLSLPROGRAM
             #pragma prefer_hlslcc gles
             #pragma only_renderers d3d9 d3d11 vulkan glcore gles3 gles metal xboxone ps4 xboxseries playstation wiiu switch 
-#pragma target 2.0 //targetsc
+#pragma target 4.5 //targetsc
 
             #pragma multi_compile_instancing
 
@@ -1150,7 +1150,7 @@ float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
 
             #pragma prefer_hlslcc gles
             #pragma only_renderers d3d9 d3d11 vulkan glcore gles3 gles metal xboxone ps4 xboxseries playstation wiiu switch 
-#pragma target 2.0 //targetdo
+#pragma target 4.5 //targetdo
 
             #pragma vertex DepthOnlyVertex
             #pragma fragment DepthOnlyFragment
@@ -1203,7 +1203,7 @@ float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
 			HLSLPROGRAM
 			#pragma prefer_hlslcc gles
 			#pragma only_renderers d3d9 d3d11 vulkan glcore gles3 gles metal xboxone ps4 xboxseries playstation wiiu switch 
-#pragma target 2.0 //targetm
+#pragma target 4.5 //targetm
 
 			#pragma vertex UniversalVertexMeta
 			#pragma fragment UniversalFragmentMeta
