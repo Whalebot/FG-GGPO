@@ -31,14 +31,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
+  - {fileID: 11400000, guid: 8a3e7fcb9c58dad4bbaf52fd35cdebb3, type: 2}
   firstStartupFrame: 18
   lastActiveFrame: 44
   totalMoveDuration: 84
   firstGatlingFrame: 23
   blockAdvantage: -25
-  hitAdvantage: -6
+  hitAdvantage: 4
   blockCancelAdvantage: -20
-  hitCancelAdvantage: 30
+  hitCancelAdvantage: 40
   recoveryFrames: 40
   canGatling: 1
   jumpCancelOnBlock: 0
@@ -329,7 +330,7 @@ MonoBehaviour:
     attackHeight: 1
     groundHitProperty:
       damage: 200
-      stun: 35
+      stun: 45
       hitstop: 5
       proration: 0.95
       meterGain: 2

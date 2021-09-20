@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5D_Loli
+  m_Name: 4D_Loli
   m_EditorClassIdentifier: 
-  animationID: 53
+  animationID: 33
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
@@ -46,8 +46,7 @@ MonoBehaviour:
   counterhitRecovery: 0
   noHitstopOnSelf: 1
   crossupState: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 26017b3ab3f43954bbff6030f63c1a7b, type: 2}
+  targetComboMoves: []
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -64,7 +63,7 @@ MonoBehaviour:
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
-      hitState: 0
+      hitState: 1
     groundBlockProperty:
       damage: 0
       stun: 15
@@ -76,7 +75,7 @@ MonoBehaviour:
     groundCounterhitProperty:
       damage: 1000
       stun: 20
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
