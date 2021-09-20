@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
     public int lastInput = 5;
 
     public int motionInputWindow;
-    public int directionOffset;
+    [HideInInspector] public int directionOffset;
 
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
@@ -65,7 +65,6 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool L1Hold;
     [HideInInspector] public bool L2Hold;
 
-    public Vector2 dpad;
     public Vector2 inputDirection;
     [FoldoutGroup("Network Input")] public bool[] netDirectionals = new bool[4];
     [FoldoutGroup("Input Overlay")] public bool[] heldDirectionals = new bool[4];
@@ -77,7 +76,7 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
     public List<BufferedInput> bufferedInputs;
-    public List<BufferedInput> deletedInputs;
+    [HideInInspector] public List<BufferedInput> deletedInputs;
     public bool isPaused;
 
     public bool debug;
@@ -412,9 +411,9 @@ public class InputHandler : MonoBehaviour
         bool foundNeutral = false;
         bool foundDown = false;
         bool foundNeutral2 = false;
-  
+
         if (buttons.Count < 5) return false;
-     
+
         //if (buttons[buttons.Count - 1])
         //{
         //    print(buttons.Count + " " + buttons[buttons.Count - 1]);
@@ -514,33 +513,33 @@ public class InputHandler : MonoBehaviour
     public bool CheckDashInput()
     {
         bool result = false;
-        int currentInput = directionals[directionals.Count - 1];
+        int currentInput = overlayDirectionals[directionals.Count - 1];
         bool foundNeutralInput = false;
         bool foundSameInput = false;
         bool foundNeutralInput2 = false;
         if (currentInput == 5) return false;
         for (int i = 1; i < motionInputWindow; i++)
         {
-            if (directionals.Count < i) { break; }
+            if (overlayDirectionals.Count < i) { break; }
 
-            if (directionals[directionals.Count - i] != 5 && directionals[directionals.Count - i] != currentInput)
+            if (overlayDirectionals[directionals.Count - i] != 5 && overlayDirectionals[directionals.Count - i] != currentInput)
             {
                 return false;
             }
-            if (directionals[directionals.Count - 2] == currentInput)
+            if (overlayDirectionals[directionals.Count - 2] == currentInput)
             {
                 return false;
             }
 
-            if (directionals[directionals.Count - i] == 5 && foundSameInput)
+            if (overlayDirectionals[directionals.Count - i] == 5 && foundSameInput)
             {
                 foundNeutralInput2 = true;
             }
-            if (directionals[directionals.Count - i] == currentInput && foundNeutralInput)
+            if (overlayDirectionals[directionals.Count - i] == currentInput && foundNeutralInput)
             {
                 foundSameInput = true;
             }
-            if (directionals[directionals.Count - i] == 5)
+            if (overlayDirectionals[directionals.Count - i] == 5)
             {
                 foundNeutralInput = true;
             }
@@ -550,22 +549,32 @@ public class InputHandler : MonoBehaviour
                 if (currentInput == 2)
                 {
                     dashInput?.Invoke();
-                    StartCoroutine("InputBuffer", 10);
+                    if (id == 1)
+                        StartCoroutine("InputBuffer", 10);
+                    else
+                        StartCoroutine("InputBuffer", 13);
                 }
                 else if (currentInput == 6)
                 {
                     dashInput?.Invoke();
+                    if(id == 1)
                     StartCoroutine("InputBuffer", 11);
+                    else StartCoroutine("InputBuffer", 12);
                 }
                 if (currentInput == 4)
                 {
                     dashInput?.Invoke();
-                    StartCoroutine("InputBuffer", 12);
+                    if (id == 1)
+                        StartCoroutine("InputBuffer", 12);
+                    else StartCoroutine("InputBuffer", 11);
                 }
                 if (currentInput == 8)
                 {
                     dashInput?.Invoke();
-                    StartCoroutine("InputBuffer", 13);
+                    if (id == 1)
+                        StartCoroutine("InputBuffer", 13);
+                    else
+                        StartCoroutine("InputBuffer", 10);
                 }
 
                 return true;

@@ -12,8 +12,10 @@ public class Move : ScriptableObject
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
+    [FoldoutGroup("FX")] public GameObject counterhitFX;
     [FoldoutGroup("FX")] public GameObject hitSFX;
     [FoldoutGroup("FX")] public GameObject blockSFX;
+    [FoldoutGroup("FX")] public GameObject counterhitSFX;
 
     public MoveType type;
     public BlockState collissionState;

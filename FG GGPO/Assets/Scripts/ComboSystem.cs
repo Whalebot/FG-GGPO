@@ -22,6 +22,9 @@ public class ComboSystem : MonoBehaviour
     public TextMeshProUGUI p1MaxComboText;
     public TextMeshProUGUI p2MaxComboText;
 
+    public GameObject p1CounterhitText;
+    public GameObject p2CounterhitText;
+
     int p1Max;
     int p2Max;
 
@@ -39,6 +42,8 @@ public class ComboSystem : MonoBehaviour
 
         p1.hitEvent += UpdateP1ComboCounter;
         p2.hitEvent += UpdateP2ComboCounter;
+        p1.counterhitEvent += P1Counterhit;
+        p2.counterhitEvent += P2Counterhit;
     }
 
     // Update is called once per frame
@@ -52,10 +57,20 @@ public class ComboSystem : MonoBehaviour
     {
         p1Counter--;
         p2Counter--;
-        if (p1Counter <= 0) { p1ComboText.gameObject.SetActive(false); }
-        if (p2Counter <= 0) { p2ComboText.gameObject.SetActive(false); }
+        if (p1Counter <= 0) { p1ComboText.gameObject.SetActive(false); p1CounterhitText.SetActive(false); }
+        if (p2Counter <= 0) { p2ComboText.gameObject.SetActive(false); p2CounterhitText.SetActive(false); }
     }
 
+    public void P1Counterhit() {
+
+        p2CounterhitText.SetActive(true);
+    }
+
+    public void P2Counterhit()
+    {
+        p1CounterhitText.SetActive(true);
+
+    }
     public void UpdateP1ComboCounter()
     {
         p1Counter = comboDisplayDuration;

@@ -16,6 +16,8 @@ public class Status : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Vector2 knockbackDirection;
     [HideInInspector] public bool isDead;
+    public bool forcedCounterhit;
+    public bool autoBlock;
     public bool blocking;
     public int minusFrames;
 
@@ -32,6 +34,7 @@ public class Status : MonoBehaviour
     public TransitionEvent animationEvent;
     public TransitionEvent blockstunEvent;
     public TransitionEvent hitstunEvent;
+    public TransitionEvent counterhitEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
 
@@ -274,7 +277,10 @@ public class Status : MonoBehaviour
         switch (currentState)
         {
             case State.Neutral:
-                blocking = mov.holdBack;
+                if (forcedCounterhit) counterhitState = true;
+                if (autoBlock) blocking = true;
+                else
+                    blocking = mov.holdBack;
                 break;
             case State.Hitstun:
                 blocking = false;
@@ -283,8 +289,9 @@ public class Status : MonoBehaviour
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
-                // SetBlockState();
-                blocking = mov.holdBack;
+                if (autoBlock) blocking = true;
+                else
+                    blocking = mov.holdBack;
                 ResolveBlockstun();
 
                 minusFrames = -BlockStun;
