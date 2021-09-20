@@ -36,9 +36,13 @@ public class CameraController : MonoBehaviour
             yVector.y = (lookTarget.position.y + target.position.y) / 2;
 
             transform.position = Vector3.Lerp(transform.position, yVector, lerpValue);
+
+            Vector3 v1 = lookTarget.position;
+            v1.y  = (lookTarget.position.y + target.position.y) / 2; 
+
             transform.rotation =
               //   Quaternion.LookRotation(lookTarget.position - transform.position);
-            Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookTarget.position - transform.position), rotationLerp);
+            Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(v1 - yVector), rotationLerp);
         }
         else
         {

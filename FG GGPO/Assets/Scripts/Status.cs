@@ -159,7 +159,7 @@ public class Status : MonoBehaviour
 
             blockstunValue--;
         }
-        else if (blockstunValue <= 0 && inBlockStun)
+        if (blockstunValue <= 0 && inBlockStun)
         {
             GoToState(State.Neutral);
             blockstunValue = 0;

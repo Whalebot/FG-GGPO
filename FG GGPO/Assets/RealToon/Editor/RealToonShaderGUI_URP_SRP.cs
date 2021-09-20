@@ -57,8 +57,8 @@ static string OLType = "Traditional";
 static bool remoout = false;
 static string remooutstat = "Add Outline";
 
-static bool twofourfive_target = false;
-static string twofourfive_target_string = "Change shader compilation target to 4.5";
+static bool twofourfive_target = true;
+static string twofourfive_target_string = "Change shader compilation target to 2.0";
 
     #endregion
 

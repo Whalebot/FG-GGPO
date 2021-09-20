@@ -5,18 +5,15 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     public float baseDamage = 1;
-    public float baseKnockback = 1;
-    public int totalDamage;
-    public int hitboxID;
-    public AttackContainer container;
-    public AttackScript attack;
-    public Move move;
-    public Status status;
-    public GameObject projectile;
+    [HideInInspector] public int totalDamage;
+    [HideInInspector] public int hitboxID;
+    [HideInInspector] public AttackScript attack;
+    [HideInInspector] public Move move;
+    [HideInInspector] public Status status;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
-    [SerializeField] List<Status> enemyList;
+   [SerializeField] List<Status> enemyList;
     MeshRenderer mr;
     Transform colPos;
     bool hitOnce;
@@ -25,14 +22,9 @@ public class Hitbox : MonoBehaviour
     {
         // print(" Hitbox active");
         mr = GetComponent<MeshRenderer>();
-        if (container != null)
-        {
-            move = container.move;
-            status = container.status;
-        }
 
         if (body == null) body = transform.parent;
-
+        if (body == null) body = transform;
         if (GameHandler.Instance.showHitboxes)
         {
             mr.enabled = true;
@@ -46,12 +38,7 @@ public class Hitbox : MonoBehaviour
     }
     private void Start()
     {
-        if (container != null)
-        {
-            attack = container.attack;
 
-        }
-        // print(attack.gameFrames + " Hitbox active");
     }
 
     public void OnTriggerEnter(Collider other)
@@ -69,19 +56,15 @@ public class Hitbox : MonoBehaviour
                 {
                     colPos = other.gameObject.transform;
                     if (enemyStatus.invincible) return;
-                    if (move == null)
-                    {
-                        move = container.move;
-                        status = container.status;
-                    }
+
                     enemyList.Add(enemyStatus);
-                    Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-                    if (hurtbox != null)
-                    {
-                        DoDamage(enemyStatus, hurtbox.damageMultiplier);
-                    }
-                    else
-                        DoDamage(enemyStatus, 1);
+                    //Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+                    //if (hurtbox != null)
+                    //{
+                    //    DoDamage(enemyStatus, hurtbox.damageMultiplier);
+                    //}
+                    //else
+                    DoDamage(enemyStatus, 1);
                 }
             }
         }
@@ -98,14 +81,10 @@ public class Hitbox : MonoBehaviour
     public virtual void DoDamage(Status other, float dmgMod)
     {
         hitOnce = true;
-        if (container != null)
-        {
-            attack = container.attack;
 
-        }
         attack.canGatling = move.canGatling;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
-
+        // knockbackDirection = (status.transform.forward).normalized;
         CheckAttack(other, move.attacks[hitboxID]);
     }
 
@@ -163,11 +142,11 @@ public class Hitbox : MonoBehaviour
 
         if (move.noHitstopOnSelf)
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames);
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
         }
         else
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
 
             //Own hitstop
             status.Hitstop();
@@ -185,7 +164,7 @@ public class Hitbox : MonoBehaviour
 
 
         //Calculate direction
-        aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
+        aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
         other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
     }
 
@@ -201,11 +180,11 @@ public class Hitbox : MonoBehaviour
 
         if (move.noHitstopOnSelf)
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames);
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
         }
         else
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.gameFrames + hit.hitstop);
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
 
             //Own hitstop
             status.Hitstop();
@@ -225,7 +204,7 @@ public class Hitbox : MonoBehaviour
         else Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
 
         //Calculate direction
-        aVector = baseKnockback * knockbackDirection * hit.pushback.z + baseKnockback * Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + baseKnockback * Vector3.up * hit.pushback.y;
+        aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
         other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
     }

@@ -53,6 +53,7 @@ public class Movement : MonoBehaviour
 
     public delegate void MovementEvent();
     public MovementEvent jumpEvent;
+    public MovementEvent jumpStartEvent;
     public MovementEvent landEvent;
 
     [HideInInspector] public float zeroFloat;
@@ -120,7 +121,10 @@ public class Movement : MonoBehaviour
 
 
         if (ground && runMomentumCounter == 0 || ground && sprinting)
-            storedDirection = direction.normalized;
+        {
+            if (jumpStartCounter <= 0)
+                storedDirection = direction.normalized;
+        }
 
         ProcessJump();
 
@@ -203,8 +207,13 @@ public class Movement : MonoBehaviour
                 actualVelocity = currentVel;
             }
             else if (isMoving)
-            {
-                if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
+            { if (sprinting)
+                {
+                    runMomentumCounter = runMomentumDuration;
+                    runDirection = direction.normalized;
+                    currentVel = sprintSpeed;
+                }
+                else if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
                     currentVel = backWalkSpeed;
                 }
@@ -212,12 +221,7 @@ public class Movement : MonoBehaviour
                 {
                     currentVel = sideWalkSpeed;
                 }
-                else if (sprinting)
-                {
-                    runMomentumCounter = runMomentumDuration;
-                    runDirection = direction.normalized;
-                    currentVel = sprintSpeed;
-                }
+               
                 else
                 {
                     currentVel = walkSpeed;
@@ -237,7 +241,7 @@ public class Movement : MonoBehaviour
 
     void ProcessJump()
     {
-        if (jumpStartCounter > 0)
+        if (jumpStartCounter > 0 && status.hitstopCounter <= 0)
         {
             jumpStartCounter--;
             if (jumpStartCounter <= 0)
@@ -252,30 +256,46 @@ public class Movement : MonoBehaviour
         status.GoToState(Status.State.Startup);
         status.minusFrames = -jumpStartFrames;
         status.frameDataEvent?.Invoke();
+        jumpStartEvent?.Invoke();
         jumpStartCounter = jumpStartFrames;
 
         storedDirection = direction.normalized * jumpVelocity;
- 
+        performedJumps++;
     }
 
     public void Jump()
     {
-        jumpEvent?.Invoke();
+        if (ground)
+        {
+            LookAtOpponent();
+        }
+        print(GameHandler.Instance.gameFrameCount + " Jump");
+
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
-        Vector3 temp = storedDirection.normalized;
-        actualVelocity = Speed();
-        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps], temp.z * Speed()) + runDirection * walkSpeed; 
+        jumpEvent?.Invoke();
 
-        performedJumps++;
+        Vector3 temp = storedDirection.normalized;
+
+        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps - 1], temp.z * Speed()) + runDirection * walkSpeed;
+
+    }
+
+    public void LookAtOpponent()
+    {
+        print("Glook");
+        Vector3 targetNoY = strafeTarget.position;
+        targetNoY.y = transform.position.y;
+        transform.LookAt(targetNoY);
+
     }
 
     public bool GroundDetection()
     {
         check = Physics.Raycast(transform.position + Vector3.up * 0.1F, Vector3.down, out hit, rayLength, groundMask);
 
-        if (jumpCounter > 0)
+        if (jumpCounter > 0 && status.hitstopCounter <= 0)
         {
 
             jumpCounter--;
@@ -285,9 +305,11 @@ public class Movement : MonoBehaviour
 
         if (!ground)
         {
-            if (check && rb.velocity.y < 0) rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
-
-            status.DisableCollider();
+            if (check && rb.velocity.y < 0)
+            {
+                rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
+                status.DisableCollider();
+            }
         }
 
         if (!ground && transform.position.y < 0.1F)
@@ -297,6 +319,10 @@ public class Movement : MonoBehaviour
                 status.minusFrames = 0;
                 status.frameDataEvent?.Invoke();
             }
+
+
+
+            runDirection = Vector3.zero;
             landEvent?.Invoke();
             performedJumps = 0;
             status.GoToGroundState(GroundState.Grounded);
@@ -315,7 +341,7 @@ public class Movement : MonoBehaviour
     {
         if (ground)
         {
-            if (runMomentumCounter > 0 && !sprinting)
+            if (runMomentumCounter > 0 && !sprinting && jumpStartCounter <= 0)
             {
                 //Run momentum + normal momentum
                 rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);

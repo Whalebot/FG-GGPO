@@ -27,6 +27,8 @@ MonoBehaviour:
   firstGatlingFrame: 15
   blockAdvantage: 11
   hitAdvantage: 21
+  blockCancelAdvantage: 16
+  hitCancelAdvantage: 25
   recoveryFrames: 5
   canGatling: 0
   jumpCancelOnBlock: 0
@@ -37,7 +39,10 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  targetComboMoves: []
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

@@ -22,7 +22,7 @@ MonoBehaviour:
   collissionState: 3
   gatlingMoves:
   - {fileID: 11400000, guid: 7dc509ba7a8ee9e4eb30a3ad807e2c59, type: 2}
-  - {fileID: 11400000, guid: 5dd66898f3116a44bbcac26622c0d29a, type: 2}
+  - {fileID: 11400000, guid: c0c6e8e47388a544d9ea79e07b57a3bc, type: 2}
   firstStartupFrame: 11
   lastActiveFrame: 18
   totalMoveDuration: 38
@@ -43,12 +43,13 @@ MonoBehaviour:
   invincibleDuration: 0
   counterhitRecovery: 0
   noHitstopOnSelf: 0
+  crossupState: 0
   targetComboMoves: []
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: c0985d2869f3cdb4dbe913a3c3ec87b0, type: 3}
     startupFrame: 11
     activeFrames: 3
     gatlingFrames: 1
@@ -101,7 +102,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
-  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: c0985d2869f3cdb4dbe913a3c3ec87b0, type: 3}
     startupFrame: 16
     activeFrames: 3
     gatlingFrames: 1
