@@ -814,9 +814,13 @@ public class InputHandler : MonoBehaviour
                 return 2;
             else return 8;
         }
-        else if (heldDirectionals[1] || heldDirectionals[3])
+        else if (heldDirectionals[1])
         {
             return 6;
+        }
+        else if (heldDirectionals[3])
+        {
+            return 4;
         }
         else
             return 5;
