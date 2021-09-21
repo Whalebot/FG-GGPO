@@ -24,7 +24,9 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   type: 1
   collissionState: 0
-  gatlingMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
+  - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45
