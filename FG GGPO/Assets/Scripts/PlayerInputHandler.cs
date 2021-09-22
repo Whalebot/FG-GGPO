@@ -204,16 +204,16 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 else if (item.motionInput == SpecialInput.DownDown)
                 {
-                    //if (input.CheckDownDown())
-                    //{
-                    //    if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
-                    //    {
-                    //        attack.AttackProperties(item.move);
-                    //        doSpecial = true;
-                    //        bufferID = i;
-                    //        break;
-                    //    }
-                    //}
+                    if (input.CheckDownDown())
+                    {
+                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                        {
+                            attack.AttackProperties(item.move);
+                            doSpecial = true;
+                            bufferID = i;
+                            break;
+                        }
+                    }
                 }
 
             }
@@ -524,6 +524,7 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     if (attack.Attack(attack.moveset.sD))
                     {
+                        print("5d");
                         bufferID = i;
                         break;
                     }

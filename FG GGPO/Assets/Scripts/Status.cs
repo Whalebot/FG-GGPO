@@ -68,6 +68,7 @@ public class Status : MonoBehaviour
     public int comboCounter;
     public int lastAttackDamage;
     public int comboDamage;
+    public float proration;
 
     [FoldoutGroup("Components")] public GameObject defaultHurtbox;
     [FoldoutGroup("Components")] public GameObject standingCollider;
@@ -430,7 +431,7 @@ public class Status : MonoBehaviour
         {
             if (value <= 0) return;
             if (comboCounter > 0)
-                hitstunValue = (int)(value * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+                hitstunValue = (int)(value * proration);
             else hitstunValue = value;
             comboCounter++;
             //GoToState(State.Hitstun);
@@ -448,7 +449,7 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, Vector3 dir, HitState hitState)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
 
@@ -476,18 +477,22 @@ public class Status : MonoBehaviour
 
         int val = 0;
         if (comboCounter > 0)
-            val = (int)(damage * (Mathf.Pow(ComboSystem.Instance.proration, comboCounter)));
+            val = (int)(damage * proration);
         else
         {
             comboDamage = 0;
             val = damage;
+            proration = 1;
         }
+
+      
 
         lastAttackDamage = val;
         comboDamage += val;
         Health -= val;
 
         HitStun = stunVal;
+        proration *= p;
         if (groundState == GroundState.Knockdown)
             GoToState(State.Knockdown);
         else
