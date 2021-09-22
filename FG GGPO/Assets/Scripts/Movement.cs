@@ -74,14 +74,6 @@ public class Movement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    void DisableMovement()
-    {
-        rb.velocity = Vector3.zero;
-        direction = Vector3.zero;
-        rb.isKinematic = true;
-        return;
-    }
-
     private void FixedUpdate()
     {
         //CalculateRight(1);

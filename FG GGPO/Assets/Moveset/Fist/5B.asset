@@ -37,22 +37,7 @@ MonoBehaviour:
   blockCancelAdvantage: 8
   hitCancelAdvantage: 22
   recoveryFrames: 20
-  canGatling: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  noClip: 0
-  noClipStart: 1
-  noClipDuration: 0
-  invincible: 0
-  invincibleStart: 1
-  invincibleDuration: 0
-  counterhitRecovery: 0
-  noHitstopOnSelf: 0
-  crossupState: 0
   targetComboMoves: []
-  useAirAction: 0
-  landCancel: 0
-  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
     startupFrame: 12
@@ -65,7 +50,7 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     groundBlockProperty:
       damage: 0
@@ -77,11 +62,11 @@ MonoBehaviour:
       hitState: 0
     groundCounterhitProperty:
       damage: 1000
-      stun: 67
+      stun: 27
       hitstop: 10
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 2
     airHitProperty:
       damage: 1000
@@ -89,7 +74,7 @@ MonoBehaviour:
       hitstop: 30
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: -4}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
     airBlockProperty:
       damage: 0
@@ -105,8 +90,25 @@ MonoBehaviour:
       hitstop: 30
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: -4}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+  canGatling: 1
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1

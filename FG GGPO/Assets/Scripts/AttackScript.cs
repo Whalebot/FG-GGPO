@@ -34,6 +34,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
+    [FoldoutGroup("Move properties")] public bool specialCancel;
     bool newAttack;
     [HideInInspector] public int combo;
     List<Move> usedMoves;
@@ -211,7 +212,7 @@ public class AttackScript : MonoBehaviour
                 {
                     if (activeMove.attacks[i].hitbox != null)
                     {
-                        if (activeMove.type == MoveType.Special)
+                        if (activeMove.isProjectile)
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
@@ -341,8 +342,14 @@ public class AttackScript : MonoBehaviour
             }
             else return false;
         }
+    
+
         if (attacking && attackString)
         {
+            if (move.type == MoveType.Special && specialCancel)
+            {
+                return true;
+            }
             //if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
             //{
             //    if (activeMove == move || move.targetComboMoves.Contains(activeMove))
@@ -520,7 +527,8 @@ public class AttackScript : MonoBehaviour
             landCancel = false;
             recoveryEvent?.Invoke();
             ClearHitboxes();
-            movement.LookAtOpponent();
+            if (status.groundState == GroundState.Grounded)
+                movement.LookAtOpponent();
         }
     }
 }

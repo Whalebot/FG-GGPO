@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class ComboSystem : MonoBehaviour
 {
@@ -12,15 +14,22 @@ public class ComboSystem : MonoBehaviour
     Status p1;
     Status p2;
     public int comboDisplayDuration;
-    public TextMeshProUGUI p1ComboText;
-    public TextMeshProUGUI p2ComboText;
 
-    public TextMeshProUGUI p1DamageText;
-    public TextMeshProUGUI p2DamageText;
-    public TextMeshProUGUI p1ComboDamageText;
-    public TextMeshProUGUI p2ComboDamageText;
-    public TextMeshProUGUI p1MaxComboText;
-    public TextMeshProUGUI p2MaxComboText;
+    [TabGroup("Damage Display")]public TextMeshProUGUI p1ComboText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p2ComboText;
+
+    [TabGroup("Damage Display")] public TextMeshProUGUI p1DamageText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p2DamageText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p1ComboDamageText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p2ComboDamageText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p1MaxComboText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p2MaxComboText;
+
+    [TabGroup("Proration Display")] public TextMeshProUGUI p1ProrationText;
+    [TabGroup("Proration Display")] public TextMeshProUGUI p2ProrationText;
+    [TabGroup("Proration Display")] public Slider p1ProrationSlider;
+    [TabGroup("Proration Display")] public Slider p2ProrationSlider;
+
 
     public GameObject p1CounterhitText;
     public GameObject p2CounterhitText;
@@ -59,6 +68,9 @@ public class ComboSystem : MonoBehaviour
         p2Counter--;
         if (p1Counter <= 0) { p1ComboText.gameObject.SetActive(false); p1CounterhitText.SetActive(false); }
         if (p2Counter <= 0) { p2ComboText.gameObject.SetActive(false); p2CounterhitText.SetActive(false); }
+
+        p1ProrationSlider.value = (float)p1.HitStun / 30F;
+        p2ProrationSlider.value = (float)p2.HitStun/ 30F;
     }
 
     public void P1Counterhit() {
@@ -83,6 +95,9 @@ public class ComboSystem : MonoBehaviour
         if (p1.comboDamage > p1Max)
             p1Max = p1.comboDamage;
         p2MaxComboText.text = "" + p1Max;
+        p1ProrationText.text = "" + p1.proration;
+     
+
     }
     public void UpdateP2ComboCounter()
     {
@@ -96,6 +111,7 @@ public class ComboSystem : MonoBehaviour
         if (p2.comboDamage > p2Max)
             p2Max = p2.comboDamage;
         p1MaxComboText.text = "" + p2Max;
+        p2ProrationText.text = "" + p2.proration;
 
     }
 }
