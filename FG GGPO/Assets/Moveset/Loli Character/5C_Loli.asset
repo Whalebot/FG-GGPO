@@ -25,7 +25,7 @@ MonoBehaviour:
   type: 0
   collissionState: 0
   gatlingMoves:
-  - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
   - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
@@ -383,5 +383,5 @@ MonoBehaviour:
   - startFrame: 4
     duration: 60
     momentum: {x: 0, y: 0, z: 5}
-    homing: 0
+    homing: 1
     resetVelocityDuringRecovery: 1
