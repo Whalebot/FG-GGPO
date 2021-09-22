@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5D_Loli
+  m_Name: 6D_Loli 1
   m_EditorClassIdentifier: 
-  animationID: 53
+  animationID: 63
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
@@ -24,15 +24,13 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   type: 1
   collissionState: 0
-  gatlingMoves:
-  - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
-  - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
+  gatlingMoves: []
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45
   firstGatlingFrame: 20
   blockAdvantage: -5
-  hitAdvantage: 0
+  hitAdvantage: 20
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
   recoveryFrames: 30
@@ -49,7 +47,7 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   targetComboMoves:
-  - {fileID: 11400000, guid: 85b7cc9cc886a7a4ab33e59fea879028, type: 2}
+  - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -61,7 +59,7 @@ MonoBehaviour:
     attackHeight: 1
     groundHitProperty:
       damage: 1000
-      stun: 20
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
