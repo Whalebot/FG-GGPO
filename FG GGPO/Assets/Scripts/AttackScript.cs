@@ -229,7 +229,7 @@ public class AttackScript : MonoBehaviour
                         hitbox.attack = this;
                         hitbox.status = status;
                         hitbox.move = activeMove;
-                        if (activeMove.type == MoveType.Special) hitboxes[i] = null;
+                        if (activeMove.isProjectile) hitboxes[i] = null;
                     }
                 }
             }
