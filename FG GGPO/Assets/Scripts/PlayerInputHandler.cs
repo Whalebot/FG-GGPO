@@ -204,16 +204,16 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 else if (item.motionInput == SpecialInput.DownDown)
                 {
-                    //if (input.CheckDownDown())
-                    //{
-                    //    if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
-                    //    {
-                    //        attack.AttackProperties(item.move);
-                    //        doSpecial = true;
-                    //        bufferID = i;
-                    //        break;
-                    //    }
-                    //}
+                    if (input.CheckDownDown())
+                    {
+                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                        {
+                            attack.AttackProperties(item.move);
+                            doSpecial = true;
+                            bufferID = i;
+                            break;
+                        }
+                    }
                 }
 
             }
@@ -276,6 +276,22 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
+                    if (input.bufferedInputs[i].dir == 6)
+                    {
+                        if (attack.Attack(attack.moveset.RA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    else if (input.bufferedInputs[i].dir == 4)
+                    {
+                        if (attack.Attack(attack.moveset.LA))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
                     if (input.bufferedInputs[i].dir == 8)
                     {
                         if (attack.Attack(attack.moveset.fA))
@@ -328,6 +344,22 @@ public class PlayerInputHandler : MonoBehaviour
                     {
                         //Will execute attack if returns true
                         if (attack.Attack(attack.moveset.cB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 6)
+                    {
+                        if (attack.Attack(attack.moveset.RB))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    else if (input.bufferedInputs[i].dir == 4)
+                    {
+                        if (attack.Attack(attack.moveset.LB))
                         {
                             bufferID = i;
                             break;
@@ -387,6 +419,23 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
+                    print(input.bufferedInputs[i].dir);
+                    if (input.bufferedInputs[i].dir == 6)
+                    {
+                        if (attack.Attack(attack.moveset.RC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    else if (input.bufferedInputs[i].dir == 4)
+                    {
+                        if (attack.Attack(attack.moveset.LC))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
                     if (input.bufferedInputs[i].dir == 8)
                     {
                         if (attack.Attack(attack.moveset.fC))
@@ -441,6 +490,22 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
+                    if (input.bufferedInputs[i].dir == 6)
+                    {
+                        if (attack.Attack(attack.moveset.RD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
+                    else if (input.bufferedInputs[i].dir == 4)
+                    {
+                        if (attack.Attack(attack.moveset.LD))
+                        {
+                            bufferID = i;
+                            break;
+                        }
+                    }
                     if (input.bufferedInputs[i].dir == 8)
                     {
                         if (attack.Attack(attack.moveset.fD))
@@ -459,6 +524,7 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     if (attack.Attack(attack.moveset.sD))
                     {
+                        print("5d");
                         bufferID = i;
                         break;
                     }

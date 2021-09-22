@@ -34,6 +34,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
+    [FoldoutGroup("Move properties")] public bool specialCancel;
     bool newAttack;
     [HideInInspector] public int combo;
     List<Move> usedMoves;
@@ -137,7 +138,7 @@ public class AttackScript : MonoBehaviour
                     }
                     else if (attackFrames > activeMove.m[i].startFrame)
                     {
-                       // movement.storedDirection = movement.rb.velocity;
+                        movement.storedDirection = movement.rb.velocity;
                         if (activeMove.m[i].resetVelocityDuringRecovery)
                             status.rb.velocity = Vector3.zero;
                         if (activeMove.overrideVelocity)
@@ -211,7 +212,7 @@ public class AttackScript : MonoBehaviour
                 {
                     if (activeMove.attacks[i].hitbox != null)
                     {
-                        if (activeMove.type == MoveType.Special)
+                        if (activeMove.isProjectile)
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
@@ -282,6 +283,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
+        usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         status.minusFrames = -(move.totalMoveDuration);
         status.EnableCollider();
@@ -304,10 +306,7 @@ public class AttackScript : MonoBehaviour
         ClearHitboxes();
         status.crossupState = move.crossupState;
 
-        //Vector3 desiredDirection = movement.strafeTarget.position - transform.position;
-        //Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(desiredDirection.x, 0, desiredDirection.z), Vector3.up), 0);
-        //transform.rotation = desiredRotation;
-
+        if (movement.ground) movement.LookAtOpponent();
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;
@@ -343,23 +342,26 @@ public class AttackScript : MonoBehaviour
             }
             else return false;
         }
+    
 
-        if (attackString)
+        if (attacking && attackString)
         {
-            if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
+            if (move.type == MoveType.Special && specialCancel)
             {
-                if (activeMove == move || move.targetComboMoves.Contains(activeMove))
-                {
-                    Attack(move.targetComboMoves[0]);
-                    return false;
-                }
-
-            }
-            if (activeMove.targetComboMoves.Contains(move))
-            {
-                print("Doing rekka");
                 return true;
             }
+            //if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
+            //{
+            //    if (activeMove == move || move.targetComboMoves.Contains(activeMove))
+            //    {
+            //        Attack(move.targetComboMoves[0]);
+            //        return false;
+            //    }
+            //}
+            //if (activeMove.targetComboMoves.Contains(move))
+            //{
+            //    return true;
+            //}
 
             if (!canGatling) return false;
             if (move == null) return true;
@@ -383,26 +385,54 @@ public class AttackScript : MonoBehaviour
         return true;
     }
 
+    public bool TargetCombo(Move move)
+    {
+        if (move == null) return false;
+        if (jumpFrameCounter > 0) return false;
+
+        if (move.useAirAction)
+        {
+            if (movement.performedJumps > movement.multiJumps)
+            {
+                return false;
+            }
+        }
+        if (attacking && attackString)
+        {
+
+            if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
+            {
+                if (activeMove == move || move.targetComboMoves.Contains(activeMove))
+                {
+                    Attack(move.targetComboMoves[0]);
+                    return true;
+                }
+            }
+            if (activeMove.targetComboMoves.Contains(move))
+            {
+                AttackProperties(move);
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
     public bool Attack(Move move)
     {
+
+        if (TargetCombo(move)) return true;
         //print(GameHandler.Instance.gameFrameCount +" " +  move + " Attack start");
         if (!CanUseMove(move)) return false;
         else
         {
-            usedMoves.Add(move);
+
             AttackProperties(move);
             return true;
         }
 
     }
-
-    public bool CanCancel(Move move)
-    {
-
-        if (!activeMove.gatlingMoves.Contains(move)) return false;
-        else return true;
-    }
-
 
     void Startup()
     {
@@ -497,7 +527,8 @@ public class AttackScript : MonoBehaviour
             landCancel = false;
             recoveryEvent?.Invoke();
             ClearHitboxes();
-            movement.LookAtOpponent();
+            if (status.groundState == GroundState.Grounded)
+                movement.LookAtOpponent();
         }
     }
 }

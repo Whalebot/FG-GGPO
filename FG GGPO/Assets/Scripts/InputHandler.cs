@@ -414,44 +414,25 @@ public class InputHandler : MonoBehaviour
 
         if (buttons.Count < 5) return false;
 
-        //if (buttons[buttons.Count - 1])
-        //{
-        //    print(buttons.Count + " " + buttons[buttons.Count - 1]);
-        //    print(buttons.Count - 1 + " PREV " + buttons[buttons.Count - 2]);
-        //}
-        //else print(buttons.Count +  " " + buttons[buttons.Count - 1]);
-
         if (buttons.Count <= 0) return false;
 
         for (int i = 1; i < motionInputWindow; i++)
         {
             if (buttons.Count <= i) return false;
 
-            //if (!buttons[buttons.Count - 1][5])
-            //{
-            //    return false;
-            //}
-            ////if (!buttons[buttons.Count - i][5] && foundDown)
-            ////{
-            ////    foundNeutral2 = true;
-            ////}
-            //if (buttons[buttons.Count - i][5] && foundNeutral)
-            //{
-            //    foundDown = true;
-            //}
-
-            //if (buttons[buttons.Count - i][5] == false)
-            //{
-            //    print("Bo: " + i);
-            //    foundNeutral = true;
-            //}
-
-            //if (buttons[buttons.Count - i][5])
-            //{
-            //    //  print("Bib: " + i);
-
-            //}
-            if (foundNeutral)
+            if (!buttons[buttons.Count - i] && foundDown)
+            {
+                foundNeutral2 = true;
+            }
+            if (buttons[buttons.Count - i] && foundNeutral)
+            {
+                foundDown = true;
+            }
+            if (buttons[buttons.Count - i] == false)
+            {
+                foundNeutral = true;
+            }
+            if (foundNeutral2 && buttons[buttons.Count - 1])
             {
                 return true;
             }
@@ -557,8 +538,8 @@ public class InputHandler : MonoBehaviour
                 else if (currentInput == 6)
                 {
                     dashInput?.Invoke();
-                    if(id == 1)
-                    StartCoroutine("InputBuffer", 11);
+                    if (id == 1)
+                        StartCoroutine("InputBuffer", 11);
                     else StartCoroutine("InputBuffer", 12);
                 }
                 if (currentInput == 4)
@@ -814,9 +795,13 @@ public class InputHandler : MonoBehaviour
                 return 2;
             else return 8;
         }
-        else if (heldDirectionals[1] || heldDirectionals[3])
+        else if (heldDirectionals[1])
         {
             return 6;
+        }
+        else if (heldDirectionals[3])
+        {
+            return 4;
         }
         else
             return 5;

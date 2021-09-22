@@ -38,6 +38,9 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] float dist1;
     [SerializeField] float dist2;
+    [SerializeField] Vector3 v3;
+
+
     public float deadZone;
     public Camera mainCamera;
 
@@ -88,6 +91,9 @@ public class CameraManager : MonoBehaviour
 
         dist1 = Vector3.Distance(mainCamera.transform.position, v1);
         dist2 = Vector3.Distance(mainCamera.transform.position, v2);
+        //if (dist2 < dist1) {
+        //    cc2.transform.position = cc2.transform.position + mainCamera.transform.forward;
+        //}
 
         toggleCounter++;
 

@@ -132,6 +132,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteBlock(HitProperty hit, Status other)
     {
+        attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
@@ -170,6 +171,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other)
     {
+        attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
@@ -208,7 +210,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop,hit.proration, knockbackDirection, hit.hitState);
     }
 
     void ExecuteCounterHit(HitProperty hit, Status other)
@@ -251,7 +253,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, hit.hitState);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState);
         status.counterhitEvent?.Invoke();
     }
 }

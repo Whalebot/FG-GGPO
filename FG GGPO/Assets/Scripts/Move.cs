@@ -19,6 +19,8 @@ public class Move : ScriptableObject
 
     public MoveType type;
     public BlockState collissionState;
+    public GroundState groundState;
+    public bool isProjectile;
 
     public List<Move> gatlingMoves;
     [Header("Read Only")]
@@ -35,11 +37,14 @@ public class Move : ScriptableObject
 
     [Header("Editable")]
     public int recoveryFrames;
-
+    public List<Move> targetComboMoves;
+    public Attack[] attacks;
     [Header("Move properties")]
     [FoldoutGroup("Move properties")] public bool canGatling;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnBlock;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
+    [FoldoutGroup("Move properties")] public bool specialCancelOnBlock = true;
+    [FoldoutGroup("Move properties")] public bool specialCancelOnHit = true;
     [FoldoutGroup("Move properties")] public bool noClip;
     [ShowIf("noClip")]
     [FoldoutGroup("Move properties")] public int noClipStart = 1;
@@ -53,12 +58,11 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool counterhitRecovery;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
-    [FoldoutGroup("Move properties")] public List<Move> targetComboMoves;
 
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
     [FoldoutGroup("Air properties")] public int landingRecovery;
-    public Attack[] attacks;
+
 
 
     [Header("Momentum")]
