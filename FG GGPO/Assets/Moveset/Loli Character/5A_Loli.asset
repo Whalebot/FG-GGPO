@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5A_Loli
   m_EditorClassIdentifier: 
   animationID: 50
+  hitID: 0
   sfx:
   - startup: 6
     prefab: {fileID: 3797316729740095628, guid: 5a2c6ffb6f74d4643aa8aa89699e36f8, type: 3}
@@ -24,6 +25,9 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   type: 0
   collissionState: 0
+  groundState: 0
+  isProjectile: 0
+  throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000, guid: 07a850d9de9dc1a43a4495036fca67e0, type: 2}
   - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
@@ -43,22 +47,7 @@ MonoBehaviour:
   blockCancelAdvantage: -4
   hitCancelAdvantage: 20
   recoveryFrames: 25
-  canGatling: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  noClip: 0
-  noClipStart: 1
-  noClipDuration: 0
-  invincible: 0
-  invincibleStart: 1
-  invincibleDuration: 0
-  counterhitRecovery: 0
-  noHitstopOnSelf: 0
-  crossupState: 0
   targetComboMoves: []
-  useAirAction: 0
-  landCancel: 0
-  landingRecovery: 0
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 04943563ebb6fca47894c7385c69af63, type: 3}
     startupFrame: 10
@@ -69,10 +58,11 @@ MonoBehaviour:
       damage: 450
       stun: 22
       hitstop: 7
-      proration: 0.95
+      proration: 0.8
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
     groundBlockProperty:
       damage: 0
       stun: 19
@@ -81,6 +71,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
     groundCounterhitProperty:
       damage: 450
       stun: 21
@@ -89,6 +80,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
     airHitProperty:
       damage: 450
       stun: 20
@@ -97,6 +89,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
     airBlockProperty:
       damage: 0
       stun: 15
@@ -105,6 +98,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
     airCounterhitProperty:
       damage: 450
       stun: 21
@@ -113,6 +107,23 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      hitID: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1

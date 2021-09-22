@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5B_Loli
   m_EditorClassIdentifier: 
   animationID: 51
+  hitID: 0
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 253e74f0bc000394383ab7c7205759dd, type: 3}
@@ -24,6 +25,9 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   type: 0
   collissionState: 0
+  groundState: 0
+  isProjectile: 0
+  throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000, guid: f3687893955997941b4f4bfa8582d4b8, type: 2}
   - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
@@ -38,13 +42,75 @@ MonoBehaviour:
   totalMoveDuration: 39
   firstGatlingFrame: 15
   blockAdvantage: -9
-  hitAdvantage: 0
+  hitAdvantage: 6
   blockCancelAdvantage: -6
-  hitCancelAdvantage: 24
+  hitCancelAdvantage: 30
   recoveryFrames: 25
-  canGatling: 1
+  targetComboMoves: []
+  attacks:
+  - hitbox: {fileID: 334434759881567290, guid: c0985d2869f3cdb4dbe913a3c3ec87b0, type: 3}
+    startupFrame: 12
+    activeFrames: 3
+    gatlingFrames: 3
+    attackHeight: 1
+    groundHitProperty:
+      damage: 450
+      stun: 33
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 8}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 18
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 450
+      stun: 21
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 450
+      stun: 20
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 0
+      stun: 15
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 450
+      stun: 21
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+      hitID: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -54,64 +120,9 @@ MonoBehaviour:
   counterhitRecovery: 0
   noHitstopOnSelf: 0
   crossupState: 0
-  targetComboMoves: []
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
-  attacks:
-  - hitbox: {fileID: 334434759881567290, guid: c0985d2869f3cdb4dbe913a3c3ec87b0, type: 3}
-    startupFrame: 12
-    activeFrames: 3
-    gatlingFrames: 3
-    attackHeight: 1
-    groundHitProperty:
-      damage: 450
-      stun: 27
-      hitstop: 10
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 8}
-      hitState: 0
-    groundBlockProperty:
-      damage: 0
-      stun: 18
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
-      hitState: 0
-    groundCounterhitProperty:
-      damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
-      hitState: 0
-    airHitProperty:
-      damage: 450
-      stun: 20
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
-      hitState: 0
-    airBlockProperty:
-      damage: 0
-      stun: 15
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
-      hitState: 0
-    airCounterhitProperty:
-      damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
-      hitState: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1

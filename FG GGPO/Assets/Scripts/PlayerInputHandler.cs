@@ -97,8 +97,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-        input.isPaused = status.hitstopCounter > 0;
-        input.extraBuffer = status.hitstopCounter;
+      
 
 
         float angle = Vector3.SignedAngle(transform.forward, (transform.position - GameHandler.Instance.ReturnPlayer(transform).position).normalized, Vector3.up);
@@ -130,6 +129,9 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (Physics.autoSimulation)
             mov.direction = relativeDirection;
+
+        input.isPaused = status.hitstopCounter > 0;
+        input.extraBuffer = status.hitstopCounter;
     }
 
     public void RollbackTick()

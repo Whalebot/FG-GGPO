@@ -58,12 +58,6 @@ public class Hitbox : MonoBehaviour
                     if (enemyStatus.invincible) return;
 
                     enemyList.Add(enemyStatus);
-                    //Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-                    //if (hurtbox != null)
-                    //{
-                    //    DoDamage(enemyStatus, hurtbox.damageMultiplier);
-                    //}
-                    //else
                     DoDamage(enemyStatus, 1);
                 }
             }
@@ -80,52 +74,50 @@ public class Hitbox : MonoBehaviour
     }
     public virtual void DoDamage(Status other, float dmgMod)
     {
-        hitOnce = true;
 
-        attack.canGatling = move.canGatling;
-        knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
-        // knockbackDirection = (status.transform.forward).normalized;
         CheckAttack(other, move.attacks[hitboxID]);
     }
 
-    void CheckAttack(Status other, Attack attack)
+    public virtual void CheckAttack(Status other, Attack tempAttack)
     {
+        hitOnce = true;
+        knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
         //Check for block
         if (other.blocking)
         {
             //Check if blocked wrong height
-            if (attack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || attack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
+            if (tempAttack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || tempAttack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
             {
                 if (other.counterhitState)
-                    ExecuteCounterHit(attack.groundCounterhitProperty, other);
+                    ExecuteCounterHit(tempAttack.groundCounterhitProperty, other);
                 else
-                    ExecuteHit(attack.groundHitProperty, other);
+                    ExecuteHit(tempAttack.groundHitProperty, other);
                 return;
             }
             if (other.groundState == GroundState.Grounded)
             {
-                ExecuteBlock(attack.groundBlockProperty, other);
+                ExecuteBlock(tempAttack.groundBlockProperty, other);
             }
             //Check for airborne
             else if (other.groundState == GroundState.Airborne)
-                ExecuteBlock(attack.airBlockProperty, other);
+                ExecuteBlock(tempAttack.airBlockProperty, other);
         }
         else
         {
             if (other.groundState == GroundState.Grounded)
             {
                 if (other.counterhitState)
-                    ExecuteCounterHit(attack.groundCounterhitProperty, other);
+                    ExecuteCounterHit(tempAttack.groundCounterhitProperty, other);
                 else
-                    ExecuteHit(attack.groundHitProperty, other);
+                    ExecuteHit(tempAttack.groundHitProperty, other);
             }
             //Check for airborne or knockdown state
             else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
             {
                 if (other.counterhitState)
-                    ExecuteCounterHit(attack.airCounterhitProperty, other);
+                    ExecuteCounterHit(tempAttack.airCounterhitProperty, other);
                 else
-                    ExecuteHit(attack.airHitProperty, other);
+                    ExecuteHit(tempAttack.airHitProperty, other);
             }
         }
     }
@@ -169,6 +161,8 @@ public class Hitbox : MonoBehaviour
         other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
     }
 
+
+
     void ExecuteHit(HitProperty hit, Status other)
     {
         attack.specialCancel = move.specialCancelOnHit;
@@ -210,7 +204,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop,hit.proration, knockbackDirection, hit.hitState);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop,hit.proration, knockbackDirection, hit.hitState, hit.hitID);
     }
 
     void ExecuteCounterHit(HitProperty hit, Status other)
@@ -253,7 +247,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID);
         status.counterhitEvent?.Invoke();
     }
 }

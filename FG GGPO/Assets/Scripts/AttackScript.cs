@@ -78,8 +78,6 @@ public class AttackScript : MonoBehaviour
 
             if (movementOption != null)
             {
-
-
                 for (int i = 0; i < movementOption.m.Length; i++)
                 {
                     if (GameHandler.Instance.gameFrameCount > movementFrames + movementOption.m[i].startFrame + movementOption.m[i].duration)
@@ -99,6 +97,7 @@ public class AttackScript : MonoBehaviour
                             if (movementOption.m[i].homing)
                                 status.rb.velocity = movement.CalculateRight(movementOption.m[i].momentum.x) + transform.up * movementOption.m[i].momentum.y + transform.forward * movementOption.m[i].momentum.z;
                             else status.rb.velocity = movementOption.m[i].momentum.x * transform.right + transform.up * movementOption.m[i].momentum.y + transform.forward * movementOption.m[i].momentum.z;
+                            if (movementOption.m[i].momentum.y > 1) status.GoToGroundState(GroundState.Airborne);
                         }
                     }
                 }
@@ -146,6 +145,8 @@ public class AttackScript : MonoBehaviour
                             if (activeMove.m[i].homing)
                                 status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
                             else status.rb.velocity = activeMove.m[i].momentum.x * transform.right + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
+
+                            if (activeMove.m[i].momentum.y > 1) status.GoToGroundState(GroundState.Airborne);
                         }
                     }
                 }
@@ -294,8 +295,9 @@ public class AttackScript : MonoBehaviour
         activeMove = move;
         attackID = move.animationID;
         attackString = false;
-        canGatling = false;
         jumpCancel = false;
+        specialCancel = false;
+
         if (move.type == MoveType.Movement)
             movementFrames = GameHandler.Instance.gameFrameCount;
 
@@ -348,6 +350,7 @@ public class AttackScript : MonoBehaviour
         {
             if (move.type == MoveType.Special && specialCancel)
             {
+                print("Special cancel");
                 return true;
             }
             //if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
@@ -363,7 +366,7 @@ public class AttackScript : MonoBehaviour
             //    return true;
             //}
 
-            if (!canGatling) return false;
+            if (activeMove.gatlingMoves.Count <= 0) return false;
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
         }
@@ -410,6 +413,7 @@ public class AttackScript : MonoBehaviour
             }
             if (activeMove.targetComboMoves.Contains(move))
             {
+                print("Rekka cancel");
                 AttackProperties(move);
                 return true;
             }
@@ -523,6 +527,7 @@ public class AttackScript : MonoBehaviour
             combo = 0;
             print(GameHandler.Instance.gameFrameCount + " Idle");
             status.GoToState(Status.State.Neutral);
+            specialCancel = false;
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();

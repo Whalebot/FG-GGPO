@@ -8,7 +8,7 @@ using System.Reflection;
 public class Move : ScriptableObject
 {
     public int animationID;
-
+    public int hitID;
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
@@ -21,6 +21,7 @@ public class Move : ScriptableObject
     public BlockState collissionState;
     public GroundState groundState;
     public bool isProjectile;
+    public Move throwFollowup;
 
     public List<Move> gatlingMoves;
     [Header("Read Only")]
@@ -40,7 +41,6 @@ public class Move : ScriptableObject
     public List<Move> targetComboMoves;
     public Attack[] attacks;
     [Header("Move properties")]
-    [FoldoutGroup("Move properties")] public bool canGatling;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnBlock;
     [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
     [FoldoutGroup("Move properties")] public bool specialCancelOnBlock = true;
@@ -228,4 +228,5 @@ public class HitProperty
     public int meterGain = 2;
     public Vector3 pushback;
     public HitState hitState;
+    public int hitID = 0;
 }

@@ -41,6 +41,8 @@ public class Status : MonoBehaviour
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
 
+    public delegate void AnimationEvent(int animationID);
+    public AnimationEvent takeAnimationEvent;
     [HideInInspector] public bool newMove;
     [FoldoutGroup("Variables")] public int groundPushbackDuration;
     [HideInInspector] public int pushbackCounter;
@@ -54,7 +56,7 @@ public class Status : MonoBehaviour
     [FoldoutGroup("State")] public State currentState;
     [FoldoutGroup("State")] public GroundState groundState;
     [FoldoutGroup("State")] public BlockState blockState;
-    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup }
+    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup, LockedAnimation }
     [FoldoutGroup("State")] public bool counterhitState;
     [FoldoutGroup("State")] public bool crossupState;
     [FoldoutGroup("State")] public bool invincible;
@@ -324,13 +326,13 @@ public class Status : MonoBehaviour
         {
 
             default:
-                //if (HitStun > 0 && s == GroundState.Grounded)
-                //{
-                //    //    groundState = GroundState.Knockdown;
-                //    break;
-                //}
-                //if(s == GroundState.Grounded && GroundState == ) 
-                groundState = s;
+                if (HitStun > 0 && s == GroundState.Grounded && groundState == GroundState.Airborne)
+                {
+                    groundState = GroundState.Knockdown;
+                    break;
+                }
+                else groundState = s;
+                
                 break;
         }
 
@@ -384,6 +386,9 @@ public class Status : MonoBehaviour
             case State.Wakeup:
                 wakeupValue = wakeupRecovery;
 
+                break;
+            case State.LockedAnimation:
+                DisableHurtboxes();
                 break;
             default: break;
         }
@@ -449,12 +454,9 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
-
-
-
         if (hitState == HitState.Launch)
         {
             GoToGroundState(GroundState.Airborne);
@@ -474,7 +476,6 @@ public class Status : MonoBehaviour
 
         TakePushback(kb);
 
-
         int val = 0;
         if (comboCounter > 0)
             val = (int)(damage * proration);
@@ -484,8 +485,6 @@ public class Status : MonoBehaviour
             val = damage;
             proration = 1;
         }
-
-      
 
         lastAttackDamage = val;
         comboDamage += val;
@@ -497,6 +496,7 @@ public class Status : MonoBehaviour
             GoToState(State.Knockdown);
         else
             GoToState(State.Hitstun);
+        takeAnimationEvent?.Invoke(animationID);
         hurtEvent?.Invoke();
     }
 
@@ -520,6 +520,12 @@ public class Status : MonoBehaviour
         rb.velocity = Vector3.zero;
         pushbackVector = direction;
 
+    }
+
+    public void TakeThrow(int animationID)
+    {
+        takeAnimationEvent?.Invoke(animationID);
+        GoToState(State.LockedAnimation);
     }
 
     public void Hitstop()

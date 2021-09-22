@@ -14,19 +14,23 @@ public class InputHandler : MonoBehaviour
     public int id;
     public int lastInput = 5;
 
-    public int motionInputWindow;
+
     [HideInInspector] public int directionOffset;
 
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
 
-    public Controls controls = null;
-    public bool dash;
-    public bool bf;
-    public bool dd;
+
     public List<int> inputQueue;
     public int bufferWindow = 10;
-    [HideInInspector] public int extraBuffer = 0;
+    public int dashInputWindow = 20;
+    public int motionInputWindow = 40;
+    public Controls controls = null;
+
+    [FoldoutGroup("Debug")] public bool dash;
+    [FoldoutGroup("Debug")] public bool bf;
+    [FoldoutGroup("Debug")] public bool dd;
+    [FoldoutGroup("Debug")] public int extraBuffer = 0;
 
     public InputEvent controlSchemeChange;
     public InputEvent keyboardEvent;
@@ -78,7 +82,6 @@ public class InputHandler : MonoBehaviour
     public List<BufferedInput> bufferedInputs;
     [HideInInspector] public List<BufferedInput> deletedInputs;
     public bool isPaused;
-
     public bool debug;
 
     // private void OnEnable() => controls.Default.Enable();
@@ -345,9 +348,6 @@ public class InputHandler : MonoBehaviour
         {
             inputDirection = InvertVector(TranslateInput(netDirectionals));
         }
-
-
-
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
         if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
         {
@@ -368,13 +368,9 @@ public class InputHandler : MonoBehaviour
             else directionals.Add(2);
         }
 
-
-
         CheckMotionInputs();
         //CHECK IF INPUTS HAVE BEEN DUPLICATED
         if (directionals.Count <= 2) { updatedDirectionals = true; return; }
-
-
         if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
         updatedDirectionals = true;
@@ -398,10 +394,18 @@ public class InputHandler : MonoBehaviour
 
     void CheckMotionInputs()
     {
-        dash = CheckDashInput();
-        if (CheckBackForward()) { print("TJU"); }
-        bf = CheckBackForward();
-        dd = CheckDownDown();
+        if (CheckDashInput())
+            dash = true;
+        else if (extraBuffer <= 0)
+            dash = false;
+        if (CheckBackForward())
+            bf = true;
+        else if (extraBuffer <= 0)
+            bf = false;
+        if (CheckDownDown())
+            dd = true;
+        else if (extraBuffer <= 0)
+            dd = false;
     }
 
 
@@ -499,7 +503,7 @@ public class InputHandler : MonoBehaviour
         bool foundSameInput = false;
         bool foundNeutralInput2 = false;
         if (currentInput == 5) return false;
-        for (int i = 1; i < motionInputWindow; i++)
+        for (int i = 1; i < dashInputWindow; i++)
         {
             if (overlayDirectionals.Count < i) { break; }
 
