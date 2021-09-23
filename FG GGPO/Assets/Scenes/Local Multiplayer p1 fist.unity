@@ -670,6 +670,10 @@ PrefabInstance:
       propertyPath: lookTarget
       value: 
       objectReference: {fileID: 1331236876}
+    - target: {fileID: 5573244298304392757, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: rotationLerp
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5573244298762326568, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 2
@@ -686,6 +690,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 377725758}
+    - target: {fileID: 5573244298762326569, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: rotationLerp
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5573244299178867511, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -748,6 +756,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573244299268616773, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244299268616774, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: m_DefaultBlend.m_Time
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5573244299317955388, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
@@ -1102,6 +1114,14 @@ PrefabInstance:
       propertyPath: counterHitSFX
       value: 
       objectReference: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
+    - target: {fileID: 7381197601974919024, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: frame
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381197601974919024, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581994408117214547, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
@@ -1130,6 +1150,14 @@ PrefabInstance:
       propertyPath: p2Transform
       value: 
       objectReference: {fileID: 377725758}
+    - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: showHurtboxes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: showHitboxes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2262,6 +2290,10 @@ PrefabInstance:
       propertyPath: jumpMinusFrames
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4447310910236293882, guid: 3f5e5a965793917468f13824079a9318, type: 3}
+      propertyPath: mainMoveset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
     - target: {fileID: 4447310910784814061, guid: 3f5e5a965793917468f13824079a9318, type: 3}
       propertyPath: inputQueue.Array.size
       value: 0

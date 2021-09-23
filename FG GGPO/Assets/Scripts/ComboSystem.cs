@@ -8,14 +8,14 @@ using Sirenix.OdinInspector;
 public class ComboSystem : MonoBehaviour
 {
     public static ComboSystem Instance { get; private set; }
-    public float proration;
+    public float comboDamageBaseProration;
     public int p1ComboCounter;
     public int p2ComboCounter;
     Status p1;
     Status p2;
     public int comboDisplayDuration;
 
-    [TabGroup("Damage Display")]public TextMeshProUGUI p1ComboText;
+    [TabGroup("Damage Display")] public TextMeshProUGUI p1ComboText;
     [TabGroup("Damage Display")] public TextMeshProUGUI p2ComboText;
 
     [TabGroup("Damage Display")] public TextMeshProUGUI p1DamageText;
@@ -69,11 +69,12 @@ public class ComboSystem : MonoBehaviour
         if (p1Counter <= 0) { p1ComboText.gameObject.SetActive(false); p1CounterhitText.SetActive(false); }
         if (p2Counter <= 0) { p2ComboText.gameObject.SetActive(false); p2CounterhitText.SetActive(false); }
 
-        p1ProrationSlider.value = (float)p1.HitStun / 30F;
-        p2ProrationSlider.value = (float)p2.HitStun/ 30F;
+        p1ProrationSlider.value = (float)p1.HitStun / 60F;
+        p2ProrationSlider.value = (float)p2.HitStun / 60F;
     }
 
-    public void P1Counterhit() {
+    public void P1Counterhit()
+    {
 
         p2CounterhitText.SetActive(true);
     }
@@ -90,13 +91,13 @@ public class ComboSystem : MonoBehaviour
         p1ComboText.text = p1.comboCounter + " HITS";
 
         p2ComboDamageText.text = "" + p1.comboDamage;
-        p2DamageText.text =  "" + p1.lastAttackDamage;
+        p2DamageText.text = "" + p1.lastAttackDamage;
 
         if (p1.comboDamage > p1Max)
             p1Max = p1.comboDamage;
         p2MaxComboText.text = "" + p1Max;
         p1ProrationText.text = "" + p1.proration;
-     
+
 
     }
     public void UpdateP2ComboCounter()
@@ -104,7 +105,7 @@ public class ComboSystem : MonoBehaviour
         p2Counter = comboDisplayDuration;
         p2ComboText.gameObject.SetActive(true);
         p2ComboText.text = p2.comboCounter + " HITS";
- 
+
         p1ComboDamageText.text = "" + p2.comboDamage;
         p1DamageText.text = "" + p2.lastAttackDamage;
 

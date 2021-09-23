@@ -25,6 +25,7 @@ public class InputHandler : MonoBehaviour
     public int bufferWindow = 10;
     public int dashInputWindow = 20;
     public int motionInputWindow = 40;
+    public int motionInputCounter;
     public Controls controls = null;
 
     [FoldoutGroup("Debug")] public bool dash;
@@ -90,7 +91,9 @@ public class InputHandler : MonoBehaviour
         if (deviceIsAssigned)
             controls.Default.Disable();
     }
-
+    void Awake()
+    {
+    }
     void Start()
     {
         buttons = new List<bool>();
@@ -207,9 +210,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-    }
+
     public void ResolveInputBuffer()
     {
         deletedInputs.Clear();
@@ -227,14 +228,6 @@ public class InputHandler : MonoBehaviour
             if (bufferedInputs.Contains(item))
                 bufferedInputs.Remove(item);
         }
-
-    }
-
-    private void Update()
-    {
-        // if (!deviceIsAssigned) return;
-        //inputDirection = controls.Default.LAnalog.ReadValue<Vector2>();
-
     }
 
     public Vector2 TranslateInput(int input)
@@ -301,7 +294,11 @@ public class InputHandler : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //   if (!deviceIsAssigned) return;
+        ExecuteFrame();
+    }
+
+    public void ExecuteFrame()
+    {
         if (!network)
         {
             for (int i = 0; i < heldDirectionals.Length; i++)
@@ -309,16 +306,11 @@ public class InputHandler : MonoBehaviour
                 //Look forward
                 netDirectionals[i] = heldDirectionals[(i + directionOffset) % 4];
                 //Look back
-
-
             }
             ResolveButtons(heldButtons);
             ResolveInputBuffer();
 
         }
-
-
-
 
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
         inputDirection = TranslateInput(netDirectionals);
@@ -379,32 +371,69 @@ public class InputHandler : MonoBehaviour
 
     public void ResolveButtons(bool[] temp)
     {
+        bool foundA = false;
+        bool foundB = false;
+        bool foundJ = false;
+        bool foundC = false;
+        bool foundD = false;
+        bool foundCrouch = false;
+
+
         for (int i = 0; i < temp.Length; i++)
         {
             if (temp[i] && !netButtons[i])
             {
-                StartCoroutine("InputBuffer", i + 1);
+                if (i == 0) foundA = true;
+                if (i == 1) foundB = true;
+                if (i == 2) foundJ = true;
+                if (i == 3) foundC = true;
+                if (i == 4) foundD = true;
+                if (i == 5) foundCrouch = true;
+                // InputBuffer(i + 1);
             }
+
             if (netButtons[i] != temp[i]) updatedButtons = true;
             netButtons[i] = temp[i];
-
         }
+
+        if (foundB && foundC) InputBuffer(7);
+        else
+        {
+            if (foundA) InputBuffer(1);
+            if (foundB) InputBuffer(2);
+            if (foundJ) InputBuffer(3);
+            if (foundC) InputBuffer(4);
+            if (foundD) InputBuffer(5);
+            if (foundCrouch) InputBuffer(6);
+        }
+
+
         buttons.Add(netButtons[5]);
     }
 
     void CheckMotionInputs()
     {
+        if (motionInputCounter > 0)
+        {
+            motionInputCounter--;
+        }
+        if (extraBuffer > 0)
+        {
+            motionInputCounter = motionInputWindow;
+        }
+
+
         if (CheckDashInput())
             dash = true;
-        else if (extraBuffer <= 0)
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
             dash = false;
         if (CheckBackForward())
             bf = true;
-        else if (extraBuffer <= 0)
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
             bf = false;
         if (CheckDownDown())
             dd = true;
-        else if (extraBuffer <= 0)
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
             dd = false;
     }
 
@@ -535,31 +564,31 @@ public class InputHandler : MonoBehaviour
                 {
                     dashInput?.Invoke();
                     if (id == 1)
-                        StartCoroutine("InputBuffer", 10);
+                        InputBuffer(10);
                     else
-                        StartCoroutine("InputBuffer", 13);
+                        InputBuffer(13);
                 }
                 else if (currentInput == 6)
                 {
                     dashInput?.Invoke();
                     if (id == 1)
-                        StartCoroutine("InputBuffer", 11);
-                    else StartCoroutine("InputBuffer", 12);
+                        InputBuffer(11);
+                    else InputBuffer(12);
                 }
                 if (currentInput == 4)
                 {
                     dashInput?.Invoke();
                     if (id == 1)
-                        StartCoroutine("InputBuffer", 12);
-                    else StartCoroutine("InputBuffer", 11);
+                        InputBuffer(12);
+                    else InputBuffer(11);
                 }
                 if (currentInput == 8)
                 {
                     dashInput?.Invoke();
                     if (id == 1)
-                        StartCoroutine("InputBuffer", 13);
+                        InputBuffer(13);
                     else
-                        StartCoroutine("InputBuffer", 10);
+                        InputBuffer(10);
                 }
 
                 return true;
@@ -766,22 +795,22 @@ public class InputHandler : MonoBehaviour
     void On1()
     {
         if (GameHandler.isPaused) return;
-        StartCoroutine("InputBuffer", 7);
+        InputBuffer(7);
     }
     void On2()
     {
         if (GameHandler.isPaused) return;
-        StartCoroutine("InputBuffer", 8);
+        InputBuffer(8);
     }
     void On3()
     {
         if (GameHandler.isPaused) return;
-        StartCoroutine("InputBuffer", 9);
+        InputBuffer(9);
     }
     void On4()
     {
         if (GameHandler.isPaused) return;
-        StartCoroutine("InputBuffer", 10);
+        InputBuffer(10);
     }
 
     int Direction()
@@ -801,25 +830,23 @@ public class InputHandler : MonoBehaviour
         }
         else if (heldDirectionals[1])
         {
-            return 6;
+            if (id == 1)
+                return 6;
+            else return 4;
         }
         else if (heldDirectionals[3])
         {
-            return 4;
+            if (id == 1)
+                return 4;
+            else return 6;
         }
         else
             return 5;
     }
 
-    IEnumerator InputBuffer(int inputID)
+    public void InputBuffer(int inputID)
     {
         bufferedInputs.Add(new BufferedInput(inputID, Direction(), netButtons[5], bufferWindow + extraBuffer));
-
-        for (int i = 0; i < bufferWindow; i++)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-
     }
 }
 [System.Serializable]

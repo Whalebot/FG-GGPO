@@ -6961,6 +6961,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Knockdown
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Hitstun
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2343999713878623003}
   m_Solo: 0

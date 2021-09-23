@@ -130,7 +130,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Physics.autoSimulation)
             mov.direction = relativeDirection;
 
-        input.isPaused = status.hitstopCounter > 0;
+        input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
         input.extraBuffer = status.hitstopCounter;
     }
 
@@ -267,6 +267,7 @@ public class PlayerInputHandler : MonoBehaviour
             //A Button
             if (input.bufferedInputs[i].id == 1)
             {  //Ground
+             //  print(GameHandler.Instance.gameFrameCount + " A start " + status.currentState + " " + status.groundState);
                 if (mov.ground)
                 {
                     if (input.bufferedInputs[i].crouch)
@@ -338,7 +339,7 @@ public class PlayerInputHandler : MonoBehaviour
             else if (input.bufferedInputs[i].id == 2)
 
             {
-                print(GameHandler.Instance.gameFrameCount + " B start " + status.currentState + " " + status.groundState);
+               // print(GameHandler.Instance.gameFrameCount + " B start " + status.currentState + " " + status.groundState);
                 //Ground
                 if (status.groundState == GroundState.Grounded)
                 {

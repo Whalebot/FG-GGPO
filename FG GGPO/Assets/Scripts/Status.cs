@@ -97,9 +97,11 @@ public class Status : MonoBehaviour
 
     void ActivateCollider()
     {
-        standingCollider.SetActive(blockState == BlockState.None || blockState == BlockState.Standing);
-        crouchingCollider.SetActive(blockState == BlockState.Crouching);
-        jumpingCollider.SetActive(blockState == BlockState.Airborne);
+
+        standingCollider.SetActive(blockState == BlockState.None && groundState == GroundState.Grounded || blockState == BlockState.Standing && groundState == GroundState.Grounded);
+        crouchingCollider.SetActive(blockState == BlockState.Crouching || groundState == GroundState.Knockdown);
+
+        jumpingCollider.SetActive(groundState == GroundState.Airborne);
     }
 
     public void AirHurtboxes()
@@ -332,10 +334,10 @@ public class Status : MonoBehaviour
                     break;
                 }
                 else groundState = s;
-                
+
                 break;
         }
-
+        ActivateCollider();
     }
 
     public void GoToState(State transitionState)
@@ -478,7 +480,7 @@ public class Status : MonoBehaviour
 
         int val = 0;
         if (comboCounter > 0)
-            val = (int)(damage * proration);
+            val = (int)(damage * proration * ComboSystem.Instance.comboDamageBaseProration);
         else
         {
             comboDamage = 0;
@@ -492,6 +494,7 @@ public class Status : MonoBehaviour
 
         HitStun = stunVal;
         proration *= p;
+
         if (groundState == GroundState.Knockdown)
             GoToState(State.Knockdown);
         else

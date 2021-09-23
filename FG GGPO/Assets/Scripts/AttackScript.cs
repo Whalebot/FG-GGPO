@@ -18,18 +18,20 @@ public class AttackScript : MonoBehaviour
     public AttackEvent recoveryEvent;
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
+    public Moveset mainMoveset;
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
-    public Move activeMove;
-    public bool canGatling;
-    public int attackID;
-    public int attackFrames;
-    public int movementFrames;
+    [FoldoutGroup("Debug")] public Move activeMove;
+    [FoldoutGroup("Debug")] public bool canGatling;
+    [FoldoutGroup("Debug")] public int attackID;
+    [FoldoutGroup("Debug")] public int attackFrames;
 
-    public int jumpMinusFrames;
-    public int jumpFrameCounter;
-    public Move movementOption;
+    [FoldoutGroup("Debug")] public int movementFrames;
 
+
+    [FoldoutGroup("Debug")] public Move movementOption;
+    [FoldoutGroup("Jump Startup")] public int jumpMinusFrames;
+    [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
@@ -51,6 +53,8 @@ public class AttackScript : MonoBehaviour
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
+
+        if (mainMoveset != null) moveset = mainMoveset;
         // GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
@@ -85,6 +89,11 @@ public class AttackScript : MonoBehaviour
                         if (movementOption.m[i].resetVelocityDuringRecovery)
                         {
                             status.rb.velocity = Vector3.zero;
+                        }
+                        if (i == movementOption.m.Length - 1)
+                        {
+                            movementOption = null;
+                            break;
                         }
                     }
                     else if (GameHandler.Instance.gameFrameCount > movementFrames + movementOption.m[i].startFrame)
@@ -158,7 +167,6 @@ public class AttackScript : MonoBehaviour
 
                 if (attackFrames > totalMoveDuration)
                 {
-                    print(attackFrames);
                     Idle();
                 }
                 else if (attackFrames < firstStartupFrame)
@@ -289,8 +297,17 @@ public class AttackScript : MonoBehaviour
         status.minusFrames = -(move.totalMoveDuration);
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
+
+
         if (move.type == MoveType.Movement)
+        {
             movementOption = move;
+            movementFrames = GameHandler.Instance.gameFrameCount;
+        }
+        if (move.type != MoveType.Movement)
+            movement.ResetRun();
+
+
 
         activeMove = move;
         attackID = move.animationID;
@@ -298,12 +315,7 @@ public class AttackScript : MonoBehaviour
         jumpCancel = false;
         specialCancel = false;
 
-        if (move.type == MoveType.Movement)
-            movementFrames = GameHandler.Instance.gameFrameCount;
-
         attackFrames = 0;
-
-        print(GameHandler.Instance.gameFrameCount + " Attack start");
 
         ClearHitboxes();
         status.crossupState = move.crossupState;
@@ -316,8 +328,6 @@ public class AttackScript : MonoBehaviour
         //Air properties
         if (move.useAirAction) movement.performedJumps++;
 
-        movement.ResetRun();
-
         Startup();
         landCancel = move.landCancel;
         ResetFrames();
@@ -326,7 +336,14 @@ public class AttackScript : MonoBehaviour
         attacking = true;
         newAttack = true;
         movement.isMoving = false;
-        //  ProcessInvul();
+        if (move.stance != null)
+        {
+            moveset = move.stance;
+        }
+        else if (mainMoveset != null) moveset = mainMoveset;
+
+
+
         ExecuteFrame();
     }
 
@@ -344,7 +361,7 @@ public class AttackScript : MonoBehaviour
             }
             else return false;
         }
-    
+
 
         if (attacking && attackString)
         {
@@ -402,8 +419,8 @@ public class AttackScript : MonoBehaviour
         }
         if (attacking && attackString)
         {
-
-            if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
+            print("target");
+            if (activeMove.targetComboMoves.Count > 0)
             {
                 if (activeMove == move || move.targetComboMoves.Contains(activeMove))
                 {
@@ -455,24 +472,6 @@ public class AttackScript : MonoBehaviour
         }
     }
 
-    public void ParticleEnd()
-    {
-        containerScript.DeactivateParticles();
-    }
-
-    public void Recovery()
-    {
-        if (!newAttack) return;
-
-        status.GoToState(Status.State.Recovery);
-        //if (activeMove != null)
-        //    if (activeMove.resetVelocityDuringRecovery)
-        //        status.rb.velocity = Vector3.zero;
-
-        containerScript.DeactivateHitboxes();
-        newAttack = false;
-    }
-
     public void ResetFrames()
     {
         containerScript.DeactivateHitboxes();
@@ -499,39 +498,49 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        // if (!newAttack)
+        //if (attacking)
         {
-            print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
+            //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
             status.GoToState(Status.State.Recovery);
             attackString = false;
             movementOption = null;
             activeMove = null;
             combo = 0;
-            jumpFrameCounter = jumpMinusFrames;
-            status.minusFrames = -jumpMinusFrames;
-            status.frameDataEvent?.Invoke();
             ClearHitboxes();
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();
+
+            jumpFrameCounter = jumpMinusFrames;
+            status.minusFrames = -jumpMinusFrames;
+            status.frameDataEvent?.Invoke();
             movement.LookAtOpponent();
         }
+    }
+
+    public void ResetAllValues()
+    {
+        if (mainMoveset != null) moveset = mainMoveset;
+        attackString = false;
+        activeMove = null;
+        combo = 0;
+        status.GoToState(Status.State.Neutral);
+        specialCancel = false;
+        attacking = false;
+        landCancel = false;
+        recoveryEvent?.Invoke();
+
+        //movement.storedDirection = Vector3.zero;
+
+        ClearHitboxes();
     }
 
     public void Idle()
     {
         if (!newAttack)
         {
-            attackString = false;
-            activeMove = null;
-            combo = 0;
-            print(GameHandler.Instance.gameFrameCount + " Idle");
-            status.GoToState(Status.State.Neutral);
-            specialCancel = false;
-            attacking = false;
-            landCancel = false;
-            recoveryEvent?.Invoke();
-            ClearHitboxes();
+            ResetAllValues();
+
             if (status.groundState == GroundState.Grounded)
                 movement.LookAtOpponent();
         }

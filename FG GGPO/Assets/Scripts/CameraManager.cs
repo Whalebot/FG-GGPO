@@ -8,20 +8,22 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
 
     public CinemachineVirtualCamera[] cameras;
-
     public CinemachineVirtualCamera leftCamera;
     public CinemachineVirtualCamera rightCamera;
-    public bool canSwitchRight;
-    public bool isRightCamera;
+
     CinemachineBasicMultiChannelPerlin[] noises;
     [SerializeField] private float shakeTimer;
     private float startTimer;
     private float startIntensity;
-    public bool toggle;
-    public float toggleTimer;
-    public float toggleCounter;
+    [TabGroup("Right Cam")] public bool canSwitchRight;
+    [TabGroup("Right Cam")] public bool isRightCamera;
+    [TabGroup("Right Cam")] public int rightTimer;
+    [TabGroup("Right Cam")] public int rightCounter;
 
-    public bool canCrossUp;
+    [TabGroup("Crossup Cam")] public bool toggle;
+    [TabGroup("Crossup Cam")] public int toggleTimer;
+    [TabGroup("Crossup Cam")] public int toggleCounter;
+    [TabGroup("Crossup Cam")] public bool canCrossUp;
 
     InputHandler input1;
     InputHandler input2;
@@ -71,6 +73,7 @@ public class CameraManager : MonoBehaviour
         cc1.lookTarget = p2;
         cc2.target = p2;
         cc2.lookTarget = p1;
+
         camTransposer = cameras[1].GetCinemachineComponent<CinemachineTransposer>();
         startZOffset = cameras[1].GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
     }
@@ -91,24 +94,21 @@ public class CameraManager : MonoBehaviour
 
         dist1 = Vector3.Distance(mainCamera.transform.position, v1);
         dist2 = Vector3.Distance(mainCamera.transform.position, v2);
-        //if (dist2 < dist1) {
-        //    cc2.transform.position = cc2.transform.position + mainCamera.transform.forward;
-        //}
 
         toggleCounter++;
-
-
-
-        if (canSwitchRight)
+        rightCounter++;
+        if (canSwitchRight && rightCounter > rightTimer)
         {
-            if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x && !isRightCamera)
+            if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x + deadZone && !isRightCamera)
             {
+                rightCounter = 0;
                 isRightCamera = true;
                 leftCamera.Priority = 9;
                 rightCamera.Priority = 10;
             }
-            else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x && isRightCamera)
+            else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x - deadZone && isRightCamera)
             {
+                rightCounter = 0;
                 isRightCamera = false;
                 leftCamera.Priority = 10;
                 rightCamera.Priority = 9;

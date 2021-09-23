@@ -246,15 +246,15 @@ public class Movement : MonoBehaviour
     }
     public void JumpStartup()
     {
-        if (performedJumps > multiJumps) return;
+        if (performedJumps >= multiJumps) return;
+        if (!ground) performedJumps++;
+
         status.GoToState(Status.State.Startup);
         status.minusFrames = -jumpStartFrames;
         status.frameDataEvent?.Invoke();
         jumpStartEvent?.Invoke();
         jumpStartCounter = jumpStartFrames;
-
         storedDirection = direction.normalized * jumpVelocity;
-        performedJumps++;
     }
 
     public void Jump()
@@ -263,7 +263,7 @@ public class Movement : MonoBehaviour
         {
             LookAtOpponent();
         }
-        print(GameHandler.Instance.gameFrameCount + " Jump");
+       // print(GameHandler.Instance.gameFrameCount + " Jump");
 
         sprinting = false;
         ground = false;
@@ -273,12 +273,12 @@ public class Movement : MonoBehaviour
 
         Vector3 temp = storedDirection.normalized;
 
-        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[performedJumps - 1], temp.z * Speed()) + runDirection * walkSpeed;
+        rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[0 + performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
 
     }
 
     public void LookAtOpponent()
-    {  
+    {
         Vector3 targetNoY = strafeTarget.position;
         targetNoY.y = transform.position.y;
         transform.LookAt(targetNoY);

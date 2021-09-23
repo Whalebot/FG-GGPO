@@ -21,6 +21,7 @@ public class Move : ScriptableObject
     public BlockState collissionState;
     public GroundState groundState;
     public bool isProjectile;
+    public Moveset stance;
     public Move throwFollowup;
 
     public List<Move> gatlingMoves;

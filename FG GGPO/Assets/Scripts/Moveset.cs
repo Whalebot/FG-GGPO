@@ -47,7 +47,7 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("D Buttons")] public Move jcD;
     [FoldoutGroup("D Buttons")] public Move LD;
     [FoldoutGroup("D Buttons")] public Move RD;
-
+    public Move grabF;
     [FoldoutGroup("Movement Options")]
     [Header("Movement Options")]
     public Move backDash;
