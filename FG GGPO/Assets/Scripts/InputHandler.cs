@@ -20,7 +20,7 @@ public class InputHandler : MonoBehaviour
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
 
-
+    public bool isBot;
     public List<int> inputQueue;
     public int bufferWindow = 10;
     public int dashInputWindow = 20;
@@ -302,13 +302,16 @@ public class InputHandler : MonoBehaviour
     {
         if (!network)
         {
-            for (int i = 0; i < heldDirectionals.Length; i++)
+            if (!isBot)
             {
-                //Look forward
-                netDirectionals[i] = heldDirectionals[(i + directionOffset) % 4];
-                //Look back
+                for (int i = 0; i < heldDirectionals.Length; i++)
+                {
+                    //Look forward
+                    netDirectionals[i] = heldDirectionals[(i + directionOffset) % 4];
+                    //Look back
+                }
+                ResolveButtons(heldButtons);
             }
-            ResolveButtons(heldButtons);
             ResolveInputBuffer();
         }
 
@@ -396,7 +399,7 @@ public class InputHandler : MonoBehaviour
             netButtons[i] = temp[i];
         }
 
-        if (foundB && heldButtons[3] || foundC && heldButtons[1])
+        if (foundB && netButtons[3] || foundC && netButtons[1])
         {
             print("input C + C");
             InputBuffer(7);

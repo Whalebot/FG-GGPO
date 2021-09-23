@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         GameHandler.Instance.advanceGameState += UpdateLog;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
         p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
         p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
         p1Input.id = 1;
@@ -87,6 +88,12 @@ public class InputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+ 
+
+
+    }
+
+    void ExecuteFrame() {
         if (replay) ReplayLog();
     }
 
@@ -133,9 +140,9 @@ public class InputManager : MonoBehaviour
         temp.frame = GameHandler.Instance.gameFrameCount;
 
 
-        for (int i = 0; i < p1Input.netButtons.Length; i++)
+        for (int i = 0; i < p1Input.heldButtons.Length; i++)
         {
-            temp.buttons[i] = p1Input.netButtons[i];
+            temp.buttons[i] = p1Input.heldButtons[i];
         }
         for (int i = 0; i < p1Input.netDirectionals.Length; i++)
         {

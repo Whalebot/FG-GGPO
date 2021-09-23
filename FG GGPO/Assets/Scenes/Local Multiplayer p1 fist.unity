@@ -1297,6 +1297,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8174696485712288847, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: replay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174696485712288847, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: replayID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174696485712288847, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: updateDirections
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8186148840648064168, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1722,6 +1734,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654780268560206795, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: isBot
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206796, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
@@ -2527,6 +2543,10 @@ PrefabInstance:
     - target: {fileID: 4447310910784814061, guid: 3f5e5a965793917468f13824079a9318, type: 3}
       propertyPath: motionInputWindow
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447310910784814061, guid: 3f5e5a965793917468f13824079a9318, type: 3}
+      propertyPath: isBot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4447310910784814062, guid: 3f5e5a965793917468f13824079a9318, type: 3}
       propertyPath: m_LocalPosition.x

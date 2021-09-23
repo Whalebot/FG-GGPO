@@ -12,6 +12,6 @@ public class InputLog
 public class Input
 {
     public int frame;
-    public bool[] directionals = new bool[8];
+    public bool[] directionals = new bool[4];
     public bool[] buttons = new bool[6];
 }
