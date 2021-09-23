@@ -40,6 +40,7 @@ public class CameraController : MonoBehaviour
             Vector3 v1 = lookTarget.position;
             v1.y  = (lookTarget.position.y + target.position.y) / 2; 
 
+            if(v1 - yVector != Vector3.zero)
             transform.rotation =
               //   Quaternion.LookRotation(lookTarget.position - transform.position);
             Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(v1 - yVector), rotationLerp);

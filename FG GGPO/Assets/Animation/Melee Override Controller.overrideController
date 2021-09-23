@@ -8,4 +8,10 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Melee Override Controller
   m_Controller: {fileID: 9100000, guid: 1f29fe8637ad3404f9cf6b25aac3bd81, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: fbb0deca098b8c04090df31f66c37d68, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 358f10a7d9d12184a98552ffaccefbcc, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 841adc2ec8c3240429fcfc35e9810f52, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 25fc5df8807c1bc408515a6ff849366a, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 73e7ac7365d411d4fbeef8008e19cd16, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 85036d2a075f4194cb8ebcc064ff055f, type: 3}

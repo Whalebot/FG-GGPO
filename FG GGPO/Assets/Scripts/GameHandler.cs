@@ -11,6 +11,9 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public static bool isPaused;
+
+    public bool runNormally = true;
+
     public bool showHitboxes;
     public bool showHurtboxes;
     public static bool staticHurtboxes;
@@ -79,13 +82,31 @@ public class GameHandler : MonoBehaviour
     }
 
     [Button]
-    public void AdvanceGameState() {
+    public void AdvanceGameState()
+    {
         advanceGameState?.Invoke();
         UpdateGameState();
         gameFrameCount++;
         counter++;
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
     }
+
+    [Button]
+    public void AdvanceGameStateButton()
+    {
+        runNormally = false;
+        Physics.autoSimulation = false;
+        Physics.Simulate(Time.fixedDeltaTime);
+        rollbackTick?.Invoke();
+        advanceGameState?.Invoke();
+        UpdateGameState();
+        gameFrameCount++;
+        counter++;
+        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
+   
+  
+    }
+
     [Button]
     public void RevertGameState()
     {
@@ -119,11 +140,11 @@ public class GameHandler : MonoBehaviour
 
         CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
 
-   
-        if (!isPaused)
+
+        if (!isPaused && runNormally)
         {
-            AdvanceGameState();
-           
+         AdvanceGameState();
+
         }
     }
 
@@ -135,9 +156,13 @@ public class GameHandler : MonoBehaviour
     private void Update()
     {
         staticHurtboxes = showHurtboxes;
-        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        if (Keyboard.current.numpad4Key.wasPressedThisFrame)
         {
             ResimulateGameState();
+        }
+        else if (Keyboard.current.numpad6Key.wasPressedThisFrame)
+        {
+            AdvanceGameStateButton();
         }
     }
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Special 1
   m_EditorClassIdentifier: 
   animationID: 53
+  hitID: 0
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -22,7 +23,10 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   type: 1
   collissionState: 0
+  groundState: 0
   isProjectile: 1
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
   gatlingMoves: []
   firstStartupFrame: 15
   lastActiveFrame: 15
@@ -42,13 +46,14 @@ MonoBehaviour:
     gatlingFrames: 1
     attackHeight: 1
     groundHitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      hitID: 0
     groundBlockProperty:
       damage: 0
       stun: 15
@@ -57,22 +62,25 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      hitID: 0
     groundCounterhitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      hitID: 0
     airHitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
+      hitID: 0
     airBlockProperty:
       damage: 0
       stun: 10
@@ -81,15 +89,16 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
+      hitID: 0
     airCounterhitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
-  canGatling: 0
+      hitID: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0

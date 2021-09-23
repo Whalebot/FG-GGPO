@@ -574,15 +574,16 @@ MonoBehaviour:
   containerScript: {fileID: 1070645526}
   hitboxContainer: {fileID: 1070645525}
   hitboxes: []
+  mainMoveset: {fileID: 0}
   moveset: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
   activeMove: {fileID: 0}
   canGatling: 0
   attackID: 0
   attackFrames: 0
   movementFrames: 0
+  movementOption: {fileID: 0}
   jumpMinusFrames: 5
   jumpFrameCounter: 0
-  movementOption: {fileID: 0}
   attacking: 0
   attackString: 0
   landCancel: 0
@@ -911,8 +912,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025442713406750524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9613, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.6386978, z: 0.2}
+  m_LocalPosition: {x: -0, y: 0.9154, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.68457174, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4235912116155906767}
   m_RootOrder: 2

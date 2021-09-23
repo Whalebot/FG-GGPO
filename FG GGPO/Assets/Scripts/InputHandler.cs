@@ -30,6 +30,7 @@ public class InputHandler : MonoBehaviour
 
     [FoldoutGroup("Debug")] public bool dash;
     [FoldoutGroup("Debug")] public bool bf;
+    [FoldoutGroup("Debug")] public bool fb;
     [FoldoutGroup("Debug")] public bool dd;
     [FoldoutGroup("Debug")] public int extraBuffer = 0;
 
@@ -309,7 +310,6 @@ public class InputHandler : MonoBehaviour
             }
             ResolveButtons(heldButtons);
             ResolveInputBuffer();
-
         }
 
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
@@ -396,7 +396,11 @@ public class InputHandler : MonoBehaviour
             netButtons[i] = temp[i];
         }
 
-        if (foundB && foundC) InputBuffer(7);
+        if (foundB && heldButtons[3] || foundC && heldButtons[1])
+        {
+            print("input C + C");
+            InputBuffer(7);
+        }
         else
         {
             if (foundA) InputBuffer(1);
@@ -406,8 +410,6 @@ public class InputHandler : MonoBehaviour
             if (foundD) InputBuffer(5);
             if (foundCrouch) InputBuffer(6);
         }
-
-
         buttons.Add(netButtons[5]);
     }
 
@@ -427,10 +429,14 @@ public class InputHandler : MonoBehaviour
             dash = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             dash = false;
-        if (CheckBackForward())
+        if (CheckBackForward(8))
             bf = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             bf = false;
+        if (CheckBackForward(2))
+            fb = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            fb = false;
         if (CheckDownDown())
             dd = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
@@ -473,7 +479,7 @@ public class InputHandler : MonoBehaviour
 
         return result;
     }
-    public bool CheckBackForward()
+    public bool CheckBackForward(int dir)
     {
         bool result = false;
         if (directionals.Count <= 0) return false;
@@ -482,6 +488,7 @@ public class InputHandler : MonoBehaviour
         bool foundOppositeInput = false;
         bool foundNeutralInput2 = false;
         if (currentInput == 5) return false;
+        if (currentInput != dir) return false;
         for (int i = 1; i < motionInputWindow; i++)
         {
             if (directionals.Count < i) return false;

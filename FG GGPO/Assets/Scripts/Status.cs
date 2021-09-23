@@ -86,6 +86,7 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
         mov.landEvent += Land;
         GoToState(State.Neutral);
     }
@@ -134,6 +135,10 @@ public class Status : MonoBehaviour
 
     void FixedUpdate()
     {
+        //ExecuteFrame();
+    }
+
+    void ExecuteFrame() {
         if (newMove)
         {
             hitstopCounter--;

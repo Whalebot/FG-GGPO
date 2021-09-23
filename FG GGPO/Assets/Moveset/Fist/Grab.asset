@@ -25,22 +25,18 @@ MonoBehaviour:
   collissionState: 0
   groundState: 0
   isProjectile: 0
+  stance: {fileID: 0}
   throwFollowup: {fileID: 11400000, guid: ecb3a8c2555811f45b7b8bd1521587e4, type: 2}
-  gatlingMoves:
-  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
-  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
+  gatlingMoves: []
   firstStartupFrame: 12
   lastActiveFrame: 12
-  totalMoveDuration: 72
+  totalMoveDuration: 52
   firstGatlingFrame: 17
-  blockAdvantage: -37
-  hitAdvantage: 40
-  blockCancelAdvantage: -32
+  blockAdvantage: -17
+  hitAdvantage: 60
+  blockCancelAdvantage: -12
   hitCancelAdvantage: 95
-  recoveryFrames: 60
+  recoveryFrames: 40
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 2b9398c13be73c34a87c39dcdc74572f, type: 3}
@@ -103,9 +99,9 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

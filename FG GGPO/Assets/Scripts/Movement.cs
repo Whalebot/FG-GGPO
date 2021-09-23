@@ -71,7 +71,8 @@ public class Movement : MonoBehaviour
         strafeTarget = GameHandler.Instance.ReturnPlayer(transform);
         status = GetComponent<Status>();
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        rb.constraints = RigidbodyConstraints.FreezeRotation; 
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     private void FixedUpdate()
@@ -83,7 +84,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        ExecuteFrame();
+        //ExecuteFrame();
     }
     public Vector3 CalculateRight(float f)
     {
@@ -110,12 +111,10 @@ public class Movement : MonoBehaviour
     public void ExecuteFrame()
     {
 
-
-
         if (ground && runMomentumCounter == 0 || ground && sprinting)
         {
-            if (jumpStartCounter <= 0)
-                storedDirection = direction.normalized;
+            if (jumpStartCounter <= 0 )
+                storedDirection = direction;
         }
 
         ProcessJump();
@@ -263,7 +262,7 @@ public class Movement : MonoBehaviour
         {
             LookAtOpponent();
         }
-       // print(GameHandler.Instance.gameFrameCount + " Jump");
+        // print(GameHandler.Instance.gameFrameCount + " Jump");
 
         sprinting = false;
         ground = false;
@@ -333,26 +332,27 @@ public class Movement : MonoBehaviour
 
     public void PlayerMovement()
     {
-        if (ground)
-        {
-            if (runMomentumCounter > 0 && !sprinting && jumpStartCounter <= 0)
+        if (jumpStartCounter <= 0)
+            if (ground)
             {
-                //Run momentum + normal momentum
-                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
-                runMomentumCounter--;
+                if (runMomentumCounter > 0 && !sprinting && jumpStartCounter <= 0)
+                {
+                    //Run momentum + normal momentum
+                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
+                    runMomentumCounter--;
+                }
+                else
+                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
+                //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
             }
             else
-                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
-            //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
-        }
-        else
-        {
-            if (runMomentumCounter > 0)
-                rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
-            else
-                rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
-            //   print(rb.velocity);
-        }
+            {
+                if (runMomentumCounter > 0)
+                    rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
+                else
+                    rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
+                //   print(rb.velocity);
+            }
     }
 
 

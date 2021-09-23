@@ -41,6 +41,7 @@ public class CharacterAnimator : MonoBehaviour
         attack = GetComponentInParent<AttackScript>();
         status = GetComponentInParent<Status>();
         GameHandler.Instance.rollbackEvent += RollbackAnimation;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
 
         status.hitstunEvent += HitStun;
         //status.hitstunEvent += HitStop;
@@ -79,6 +80,12 @@ public class CharacterAnimator : MonoBehaviour
     private void FixedUpdate()
     {
 
+        // ExecuteFrame();
+    }
+
+    void ExecuteFrame()
+    {
+        anim.enabled = true;
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
 
         SaveAnimationData();
@@ -88,10 +95,18 @@ public class CharacterAnimator : MonoBehaviour
             StopCoroutine(HitstopStart());
             hitstop = false;
         }
+        StatusAnimation();
+        BlockAnimation();
+
         anim.enabled = !hitstop;
         MovementAnimation();
+        StartCoroutine(PauseAnimation());
     }
 
+    IEnumerator PauseAnimation() {
+        yield return new WaitForFixedUpdate();
+        anim.enabled = false;
+    }
 
     private void OnValidate()
     {
@@ -156,14 +171,6 @@ public class CharacterAnimator : MonoBehaviour
         AnimationData data = new AnimationData(anim.GetCurrentAnimatorStateInfo(0).fullPathHash, (int)(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f)));
         data.attacking = anim.GetBool("Attacking");
         animationData.Add(data);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        StatusAnimation();
-
-        BlockAnimation();
     }
 
     void BackDash()

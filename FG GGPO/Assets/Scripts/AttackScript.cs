@@ -55,7 +55,7 @@ public class AttackScript : MonoBehaviour
         status.deathEvent += HitstunEvent;
 
         if (mainMoveset != null) moveset = mainMoveset;
-        // GameHandler.Instance.advanceGameState += ExecuteFrame;
+         GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     private void Awake()
@@ -65,7 +65,7 @@ public class AttackScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ExecuteFrame();
+        //ExecuteFrame();
 
     }
 
@@ -367,22 +367,8 @@ public class AttackScript : MonoBehaviour
         {
             if (move.type == MoveType.Special && specialCancel)
             {
-                print("Special cancel");
                 return true;
             }
-            //if (activeMove.targetComboMoves.Count > 0 || move.targetComboMoves.Count > 0)
-            //{
-            //    if (activeMove == move || move.targetComboMoves.Contains(activeMove))
-            //    {
-            //        Attack(move.targetComboMoves[0]);
-            //        return false;
-            //    }
-            //}
-            //if (activeMove.targetComboMoves.Contains(move))
-            //{
-            //    return true;
-            //}
-
             if (activeMove.gatlingMoves.Count <= 0) return false;
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
@@ -419,7 +405,7 @@ public class AttackScript : MonoBehaviour
         }
         if (attacking && attackString)
         {
-            print("target");
+//print("target");
             if (activeMove.targetComboMoves.Count > 0)
             {
                 if (activeMove == move || move.targetComboMoves.Contains(activeMove))
@@ -430,7 +416,7 @@ public class AttackScript : MonoBehaviour
             }
             if (activeMove.targetComboMoves.Contains(move))
             {
-                print("Rekka cancel");
+             //   print("Rekka cancel");
                 AttackProperties(move);
                 return true;
             }
@@ -498,8 +484,9 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        //if (attacking)
+
         {
+            if (attacking) status.rb.velocity = Vector3.zero;
             //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
             status.GoToState(Status.State.Recovery);
             attackString = false;
@@ -510,7 +497,7 @@ public class AttackScript : MonoBehaviour
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();
-
+    
             jumpFrameCounter = jumpMinusFrames;
             status.minusFrames = -jumpMinusFrames;
             status.frameDataEvent?.Invoke();
@@ -521,6 +508,7 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
+
         attackString = false;
         activeMove = null;
         combo = 0;

@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {if (GameHandler.Instance.gameStates.Count - 1 > 0) { 
         GameState state = GameHandler.Instance.gameStates[GameHandler.Instance.gameStates.Count - 1];
         timerText.text = "" +  GameHandler.Instance.roundTime;
 
@@ -40,5 +40,6 @@ public class UIManager : MonoBehaviour
         p2Meter.value = state.p2Meter;
         p1MeterText.text = state.p1Meter + "";
         p2MeterText.text = state.p2Meter + "";
+        }
     }
 }

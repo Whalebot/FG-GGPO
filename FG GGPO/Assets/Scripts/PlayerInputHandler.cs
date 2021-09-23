@@ -33,6 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         status = GetComponent<Status>();
         GameHandler.Instance.rollbackTick += RollbackTick;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
         mov = GetComponent<Movement>();
     }
 
@@ -51,12 +52,6 @@ public class PlayerInputHandler : MonoBehaviour
         rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
         Vector3 temp = ((rightVector * v.x) + (forwardVector * v.y));
         return temp;
-    }
-
-    void Update()
-    {
-        if (GameHandler.isPaused) return;
-        relativeDirection = RelativeToCamera(input.inputDirection);
     }
 
     void UpdateDirection()
@@ -86,7 +81,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ExecuteFrame();
+        //ExecuteFrame();
     }
 
     public void ExecuteFrame()
@@ -96,13 +91,8 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
-
-      
-
-
+        relativeDirection = RelativeToCamera(input.inputDirection);
         float angle = Vector3.SignedAngle(transform.forward, (transform.position - GameHandler.Instance.ReturnPlayer(transform).position).normalized, Vector3.up);
-        //print(angle);
-
         frontTurned = Mathf.Abs(angle) > 90;
 
         //UpdateDirection();
@@ -127,9 +117,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             InAnimationInput();
         }
-        if (Physics.autoSimulation)
-            mov.direction = relativeDirection;
-
+        mov.direction = relativeDirection;
         input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
         input.extraBuffer = status.hitstopCounter;
     }
@@ -137,7 +125,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void RollbackTick()
     {
         mov.isMoving = true;
-        mov.direction = RelativeToCamera(rollbackInput[0]);
+        mov.direction = RelativeToCamera(rollbackInput[0]).normalized;
         //print(mov.direction);
         //if (rollbackInput.Count > 0)
         //    rollbackInput.RemoveAt(0);
@@ -149,7 +137,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
             //if (input.directionals[input.directionals.Count - 1] == 2 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
-        if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
+            if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
 
         ProcessBuffer();
     }
@@ -264,10 +252,17 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
                 }
             }
+            if (input.bufferedInputs[i].id == 7)
+            {
+                if (status.groundState == GroundState.Grounded)
+                {
+                    attack.Attack(attack.moveset.grabF);
+                }
+            }
             //A Button
             if (input.bufferedInputs[i].id == 1)
             {  //Ground
-             //  print(GameHandler.Instance.gameFrameCount + " A start " + status.currentState + " " + status.groundState);
+               //  print(GameHandler.Instance.gameFrameCount + " A start " + status.currentState + " " + status.groundState);
                 if (mov.ground)
                 {
                     if (input.bufferedInputs[i].crouch)
@@ -339,7 +334,7 @@ public class PlayerInputHandler : MonoBehaviour
             else if (input.bufferedInputs[i].id == 2)
 
             {
-               // print(GameHandler.Instance.gameFrameCount + " B start " + status.currentState + " " + status.groundState);
+                // print(GameHandler.Instance.gameFrameCount + " B start " + status.currentState + " " + status.groundState);
                 //Ground
                 if (status.groundState == GroundState.Grounded)
                 {
@@ -422,7 +417,6 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-                    print(input.bufferedInputs[i].dir);
                     if (input.bufferedInputs[i].dir == 6)
                     {
                         if (attack.Attack(attack.moveset.RC))

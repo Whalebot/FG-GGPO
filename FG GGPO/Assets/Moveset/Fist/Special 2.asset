@@ -25,6 +25,7 @@ MonoBehaviour:
   collissionState: 0
   groundState: 1
   isProjectile: 1
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
   firstStartupFrame: 10
@@ -44,7 +45,7 @@ MonoBehaviour:
     gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
-      damage: 100
+      damage: 700
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -62,16 +63,16 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 100
+      damage: 700
       stun: 65
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 10, z: 5}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 100
+      damage: 700
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -89,9 +90,9 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 100
+      damage: 700
       stun: 65
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}

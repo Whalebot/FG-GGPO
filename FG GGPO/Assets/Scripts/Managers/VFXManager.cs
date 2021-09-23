@@ -18,9 +18,8 @@ public class VFXManager : MonoBehaviour
     public GameObject recoveryFX;
     public GameObject wakeupFX;
 
-    public List<ParticleSystem> particles;
-    public int frame;
-    public float time;
+    public List<ParticleObject> particles;
+    public List<ParticleObject> deletedParticles;
     private void Awake()
     {
         Instance = this;
@@ -29,40 +28,61 @@ public class VFXManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameHandler.Instance.advanceGameState += AdvanceParticles;
     }
 
     [Button]
-    public void AdvanceParticles() {
-
-        frame++;
+    public void AdvanceParticles()
+    {
+        deletedParticles.Clear();
         foreach (var item in particles)
         {
-            // time = item.time;
-            item.Play();
-            time = frame * Time.fixedDeltaTime;
-            item.Simulate(time, true, true, true);
+            float tempTime = 0;
+            tempTime = (GameHandler.Instance.gameFrameCount - item.startFrame) * Time.fixedDeltaTime;
+            item.ps.Simulate(Time.fixedDeltaTime, true, false, true);
+            if (item.ps.time == item.ps.main.duration)
+            {
+                deletedParticles.Add(item);
+                //Delete shit
+            }
+
+        }
+        for (int i = 0; i < deletedParticles.Count; i++)
+        {
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
     [Button]
     public void RevertParticles()
     {
-        frame--;
         foreach (var item in particles)
         {
             // time = item.time;
-            item.Play();
-            time = frame * Time.fixedDeltaTime;
-            item.Simulate(time, true, true, true);
+            //item.ps.Play();
+            float tempTime = 0;
+            tempTime = (GameHandler.Instance.gameFrameCount - item.startFrame) * Time.fixedDeltaTime;
+            item.ps.Simulate(tempTime, true, true, true);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddParticle(ParticleSystem ps)
     {
-        foreach (var item in particles)
-        {
-       //     time = item.time;
-        }
+
+        ParticleObject p = new ParticleObject(ps, GameHandler.Instance.gameFrameCount);
+        particles.Add(p);
     }
+}
+
+[System.Serializable]
+public class ParticleObject
+{
+    public ParticleObject(ParticleSystem p, int i)
+    {
+        ps = p;
+        startFrame = i;
+    }
+    public ParticleSystem ps;
+    public int startFrame;
+
 }

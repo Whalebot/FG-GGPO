@@ -27,6 +27,7 @@ MonoBehaviour:
   collissionState: 0
   groundState: 0
   isProjectile: 0
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000}
@@ -61,7 +62,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.9
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 3}
       hitState: 0
       hitID: 0
     groundBlockProperty:
@@ -70,7 +71,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
@@ -79,7 +80,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       hitID: 0
     airHitProperty:
@@ -125,12 +126,7 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 1
-  resetVelocityDuringRecovery: 1
-  m:
-  - startFrame: 10
-    duration: 4
-    momentum: {x: 0, y: 0, z: 2}
-    homing: 0
-    resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
+  m: []
