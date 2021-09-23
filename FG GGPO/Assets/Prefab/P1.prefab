@@ -190,7 +190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255511159481468586}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -441,6 +441,7 @@ MonoBehaviour:
   lastInput: 5
   directionOffset: 0
   controlScheme: 0
+  isBot: 0
   inputQueue: 
   bufferWindow: 10
   dashInputWindow: 20
@@ -448,6 +449,7 @@ MonoBehaviour:
   motionInputCounter: 0
   dash: 0
   bf: 0
+  fb: 0
   dd: 0
   extraBuffer: 0
   R1Hold: 0
@@ -1030,7 +1032,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907261999107621238}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
