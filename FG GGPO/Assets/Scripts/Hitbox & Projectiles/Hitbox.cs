@@ -13,7 +13,7 @@ public class Hitbox : MonoBehaviour
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
-   [SerializeField] List<Status> enemyList;
+    [SerializeField] List<Status> enemyList;
     MeshRenderer mr;
     Transform colPos;
     bool hitOnce;
@@ -56,7 +56,7 @@ public class Hitbox : MonoBehaviour
                 {
                     colPos = other.gameObject.transform;
                     if (enemyStatus.invincible) return;
-
+                    else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
                     enemyList.Add(enemyStatus);
                     DoDamage(enemyStatus, 1);
                 }
@@ -207,7 +207,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop,hit.proration, knockbackDirection, hit.hitState, hit.hitID);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID);
     }
 
     void ExecuteCounterHit(HitProperty hit, Status other)

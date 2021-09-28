@@ -301,7 +301,7 @@ public class Movement : MonoBehaviour
 
             }
             if (rb.velocity.y < 0)
-                status.DisableCollider();
+                status.AirCollider();
         }
 
         if (!ground && transform.position.y < 0.1F)

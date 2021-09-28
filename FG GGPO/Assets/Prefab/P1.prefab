@@ -190,7 +190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255511159481468586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -618,12 +618,12 @@ MonoBehaviour:
   hitstopCounter: 0
   pushbackVector: {x: 0, y: 0, z: 0}
   knockdownValue: 50
-  throwBreakWindow: 0
+  throwBreakWindow: 15
   throwBreakCounter: 0
   newMove: 0
   groundPushbackDuration: 15
   pushbackCounter: 0
-  wakeupRecovery: 20
+  wakeupRecovery: 15
   currentState: 0
   groundState: 0
   blockState: 0
@@ -916,8 +916,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025442713406750524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.9154, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.68457174, z: 0.4}
+  m_LocalPosition: {x: -0, y: 0.85, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.55, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4235912116155906767}
   m_RootOrder: 2
@@ -1034,7 +1034,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907261999107621238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -295,6 +295,16 @@ public class AttackScript : MonoBehaviour
                 status.EnableCollider();
             }
         }
+        //Noclip
+        if (activeMove.linearInvul)
+        {
+            if (attackFrames == activeMove.linearInvulStart)
+                status.linearInvul = true;
+            else if (attackFrames >= activeMove.linearInvulStart + activeMove.linearInvulDuration)
+            {
+                status.linearInvul = false;
+            }
+        }
     }
 
     public void AttackProperties(Move move)
