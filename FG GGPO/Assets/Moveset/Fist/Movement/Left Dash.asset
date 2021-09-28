@@ -43,7 +43,9 @@ MonoBehaviour:
     startupFrame: 10
     activeFrames: 5
     gatlingFrames: 5
+    attackType: 0
     attackHeight: 1
+    homing: 0
     groundHitProperty:
       damage: 0
       stun: 30
@@ -109,9 +111,12 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  counterhitRecovery: 0
+  linearInvul: 1
+  linearInvulStart: 1
+  linearInvulDuration: 14
   noHitstopOnSelf: 0
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
