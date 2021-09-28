@@ -114,7 +114,7 @@ public class GameHandler : MonoBehaviour
     public void P1Win()
     {
         p1RoundWins++;
-        if (p1RoundWins > roundsToWin)
+        if (p1RoundWins >= roundsToWin)
         {
             GameEnd();
         }
@@ -127,7 +127,7 @@ public class GameHandler : MonoBehaviour
     public void P2Win()
     {
         p2RoundWins++;
-        if (p2RoundWins > roundsToWin)
+        if (p2RoundWins >= roundsToWin)
         {
             GameEnd();
         }
