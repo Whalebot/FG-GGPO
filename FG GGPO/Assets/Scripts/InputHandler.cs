@@ -734,13 +734,21 @@ public class InputHandler : MonoBehaviour
     public void OnStart()
     {
         startInput?.Invoke();
+        if (StageManager.Instance != null)
+        {
+            StageManager.Instance.RestartScene();
+        }
     }
     public void OnSelect()
     {
         selectInput?.Invoke();
-        if (StageManager.Instance != null)
+        //if (StageManager.Instance != null)
+        //{
+        //    StageManager.Instance.RestartScene();
+        //}
+        if (GameHandler.Instance != null)
         {
-            StageManager.Instance.RestartScene();
+            GameHandler.Instance.ResetRound();
         }
     }
     void OnR1Release()

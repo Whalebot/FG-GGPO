@@ -22,7 +22,7 @@ public class AttackScript : MonoBehaviour
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
     [FoldoutGroup("Debug")] public Move activeMove;
-    [FoldoutGroup("Debug")] public bool canGatling;
+    [FoldoutGroup("Debug")] public bool gatling;
     [FoldoutGroup("Debug")] public int attackID;
     [FoldoutGroup("Debug")] public int attackFrames;
 
@@ -53,9 +53,11 @@ public class AttackScript : MonoBehaviour
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
+        status.throwBreakEvent += ThrowBreak;
+
 
         if (mainMoveset != null) moveset = mainMoveset;
-         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     private void Awake()
@@ -221,7 +223,7 @@ public class AttackScript : MonoBehaviour
                 {
                     if (activeMove.attacks[i].hitbox != null)
                     {
-                        if (activeMove.isProjectile)
+                        if (activeMove.attacks[i].attackType == AttackType.Projectile)
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
@@ -257,6 +259,7 @@ public class AttackScript : MonoBehaviour
     public void RecoveryFrames()
     {
         newAttack = false;
+        status.counterhitState = activeMove.forcedCounterHit;
         status.GoToState(Status.State.Recovery);
         //if (activeMove != null)
         //    if (activeMove.resetVelocityDuringRecovery)
@@ -272,9 +275,13 @@ public class AttackScript : MonoBehaviour
         if (activeMove.invincible)
         {
             if (attackFrames == activeMove.invincibleStart)
+            {
+                status.invincible = true;
                 status.DisableHurtboxes();
+            }
             else if (attackFrames >= activeMove.invincibleStart + activeMove.invincibleDuration)
             {
+                status.invincible = false;
                 status.EnableHurtboxes();
             }
         }
@@ -298,6 +305,7 @@ public class AttackScript : MonoBehaviour
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
 
+        if (move.resetGatling) usedMoves.Clear();
 
         if (move.type == MoveType.Movement)
         {
@@ -354,41 +362,47 @@ public class AttackScript : MonoBehaviour
 
         if (move.useAirAction)
         {
-            if (movement.performedJumps <= movement.multiJumps)
+            if (movement.performedJumps <= 0)
             {
+                print("Air Action");
                 movement.performedJumps++;
                 return true;
             }
             else return false;
         }
 
+        if (!attacking) return true;
 
-        if (attacking && attackString)
+
+        if (attacking && gatling)
         {
             if (move.type == MoveType.Special && specialCancel)
             {
+                print("Special Cancel");
                 return true;
             }
             if (activeMove.gatlingMoves.Count <= 0) return false;
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
-        }
-
-        if (usedMoves.Contains(move))
-        {
-            int duplicates = 1;
-            foreach (var item in move.gatlingMoves)
+            else
             {
-                if (item == move) duplicates++;
+                if (usedMoves.Contains(move))
+                {
+                    int duplicates = 1;
+                    foreach (var item in move.gatlingMoves)
+                    {
+                        if (item == move) duplicates++;
+                    }
+                    foreach (var item in usedMoves)
+                    {
+                        if (item == move) duplicates--;
+                    }
+                    return duplicates > 0;
+                }
+                else return true;
             }
-            foreach (var item in usedMoves)
-            {
-                if (item == move) duplicates--;
-            }
-            return duplicates > 0;
         }
-
-        return true;
+        return false;
     }
 
     public bool TargetCombo(Move move)
@@ -405,7 +419,7 @@ public class AttackScript : MonoBehaviour
         }
         if (attacking && attackString)
         {
-//print("target");
+
             if (activeMove.targetComboMoves.Count > 0)
             {
                 if (activeMove == move || move.targetComboMoves.Contains(activeMove))
@@ -416,7 +430,7 @@ public class AttackScript : MonoBehaviour
             }
             if (activeMove.targetComboMoves.Contains(move))
             {
-             //   print("Rekka cancel");
+                //   print("Rekka cancel");
                 AttackProperties(move);
                 return true;
             }
@@ -434,7 +448,6 @@ public class AttackScript : MonoBehaviour
         if (!CanUseMove(move)) return false;
         else
         {
-
             AttackProperties(move);
             return true;
         }
@@ -497,7 +510,7 @@ public class AttackScript : MonoBehaviour
             attacking = false;
             landCancel = false;
             recoveryEvent?.Invoke();
-    
+
             jumpFrameCounter = jumpMinusFrames;
             status.minusFrames = -jumpMinusFrames;
             status.frameDataEvent?.Invoke();
@@ -515,12 +528,21 @@ public class AttackScript : MonoBehaviour
         status.GoToState(Status.State.Neutral);
         specialCancel = false;
         attacking = false;
+        gatling = false;
         landCancel = false;
+        status.counterhitState = false;
         recoveryEvent?.Invoke();
 
         //movement.storedDirection = Vector3.zero;
 
         ClearHitboxes();
+    }
+
+    public void ThrowBreak()
+    {
+        ResetAllValues();
+
+        movement.LookAtOpponent();
     }
 
     public void Idle()

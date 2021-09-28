@@ -11,25 +11,34 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public static bool isPaused;
-
+    public static bool cutscene;
+    public static int p1CharacterID;
+    public static int p2CharacterID;
     public bool runNormally = true;
 
     public bool showHitboxes;
     public bool showHurtboxes;
     public static bool staticHurtboxes;
-    public bool disableBlock;
     public int playersInGame;
     public Transform p1Transform;
     public Transform p2Transform;
 
-    public int maxRoundTime;
-    public int roundTime;
+    [FoldoutGroup("Gameplay Settings")] public int maxRoundTime;
+    [FoldoutGroup("Gameplay Settings")] public int roundTime;
+    [FoldoutGroup("Gameplay Settings")] public int roundsToWin;
+    [FoldoutGroup("Gameplay Settings")] public int p1RoundWins;
+    [FoldoutGroup("Gameplay Settings")] public int p2RoundWins;
+    [FoldoutGroup("Starting Position")] public int p1CharacterTrainingID;
+    [FoldoutGroup("Starting Position")] public int p2CharacterTrainingID;
+    [FoldoutGroup("Starting Position")] public GameObject[] characters;
+    [FoldoutGroup("Starting Position")] public Transform p1StartPosition;
+    [FoldoutGroup("Starting Position")] public Transform p2StartPosition;
 
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
 
     public List<GameState> gameStates;
-    public int rollbackFrames;
+    [FoldoutGroup("Rollback")] public int rollbackFrames;
 
     public delegate void GameEvent();
     public GameEvent advanceGameState;
@@ -39,14 +48,10 @@ public class GameHandler : MonoBehaviour
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
 
-    public int gameFrameCount;
-    public int counter;
+    [HideInInspector] public int gameFrameCount;
+    [HideInInspector] public int counter;
 
-    public float hitStop;
-
-    [FoldoutGroup("Feedback")] public float slowMotionValue;
-    [FoldoutGroup("Feedback")] public float slowMotionDuration;
-    [FoldoutGroup("Feedback")] public float slowMotionSmoothing;
+    [HideInInspector] public float hitStop;
     float startTimeStep;
 
     private void Awake()
@@ -54,6 +59,7 @@ public class GameHandler : MonoBehaviour
         Instance = this;
         gameStates = new List<GameState>();
         isPaused = true;
+        LoadCharacters();
         p1Status = p1Transform.GetComponent<Status>();
         p2Status = p2Transform.GetComponent<Status>();
 
@@ -63,7 +69,99 @@ public class GameHandler : MonoBehaviour
     {
         Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
+
+        p1Status.deathEvent += P2Win;
+        p2Status.deathEvent += P1Win;
     }
+
+
+
+    void LoadCharacters() {
+        if (p1CharacterTrainingID != -1) {
+            p1CharacterID = p1CharacterTrainingID;
+        }
+        if (p2CharacterTrainingID != -1) {
+            p2CharacterID = p2CharacterTrainingID;
+        }
+
+        if (p1Transform == null) {
+           GameObject GO = Instantiate(characters[p1CharacterID], p1StartPosition.position, p1StartPosition.rotation);
+            p1Transform = GO.transform;
+            p1Status = GO.GetComponent<Status>();
+        }
+        if (p2Transform == null)
+        {
+            GameObject GO = Instantiate(characters[p2CharacterID], p2StartPosition.position, p2StartPosition.rotation);
+            p2Transform = GO.transform;
+            p2Status = GO.GetComponent<Status>();
+        }
+    }
+
+    public void GameEnd() {
+        StartCoroutine(DelayGameWin());
+    }
+
+
+    IEnumerator DelayGameWin()
+    {
+        cutscene = true;
+        yield return new WaitForSeconds(3);
+        cutscene = false;
+        StageManager.Instance.RestartScene();
+    }
+
+
+    public void P1Win()
+    {
+        p1RoundWins++;
+        if (p1RoundWins > roundsToWin)
+        {
+            GameEnd();
+        }
+        else
+        {
+            StartCoroutine(DelayRoundReset());
+        }
+    }
+
+    public void P2Win()
+    {
+        p2RoundWins++;
+        if (p2RoundWins > roundsToWin)
+        {
+            GameEnd();
+        }
+        else
+        {
+            StartCoroutine(DelayRoundReset());
+        }
+    }
+
+    IEnumerator DelayRoundReset() {
+        cutscene = true;
+        yield return new WaitForSeconds(3);
+        cutscene = false;
+        ResetRound();
+    }
+
+    [Button]
+    public void ResetRound()
+    {
+        p1Status.ResetStatus();
+        p2Status.ResetStatus();
+        ResetPosition();
+    }
+
+    [Button]
+    void ResetPosition()
+    {
+        p1Transform.position = p1StartPosition.position;
+        p1Transform.rotation = p1StartPosition.rotation;
+
+        p2Transform.position = p2StartPosition.position;
+        p2Transform.rotation = p2StartPosition.rotation;
+    }
+
 
     private void OnDestroy()
     {
@@ -103,8 +201,8 @@ public class GameHandler : MonoBehaviour
         gameFrameCount++;
         counter++;
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
-   
-  
+
+
     }
 
     [Button]
@@ -143,7 +241,7 @@ public class GameHandler : MonoBehaviour
 
         if (!isPaused && runNormally)
         {
-         AdvanceGameState();
+            AdvanceGameState();
 
         }
     }
@@ -166,7 +264,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    [Button("Revert Game State")]
+
     void RevertGameState(int i)
     {
         rollbackEvent?.Invoke(i);
@@ -187,33 +285,4 @@ public class GameHandler : MonoBehaviour
         }
         Physics.autoSimulation = true;
     }
-
-    public void Slowmotion(float dur)
-    {
-        StartCoroutine("SetSlowmotion", hitStop);
-    }
-
-    IEnumerator SetSlowmotion(float dur)
-    {
-        Time.timeScale = slowMotionValue;
-        Time.fixedDeltaTime = startTimeStep * Time.timeScale;
-        yield return new WaitForSecondsRealtime(dur);
-        StartCoroutine("RevertSlowmotion");
-    }
-    IEnumerator RevertSlowmotion()
-    {
-        while (Time.timeScale < 1 && !isPaused)
-        {
-            Time.timeScale = Time.timeScale + slowMotionSmoothing;
-
-            Time.fixedDeltaTime = startTimeStep * Time.timeScale;
-            yield return new WaitForEndOfFrame();
-        }
-
-
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = startTimeStep;
-
-    }
-
 }

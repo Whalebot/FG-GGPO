@@ -49,6 +49,9 @@ public class CharacterAnimator : MonoBehaviour
         status.wakeupEvent += WakeUp;
         status.blockEvent += Block;
         status.takeAnimationEvent += LockedAnimation;
+        status.throwBreakEvent += ThrowBreak;
+
+        GameHandler.Instance.ReturnPlayer(transform.parent).GetComponent<Status>().deathEvent += Win;
 
         if (movement != null)
         {
@@ -61,10 +64,19 @@ public class CharacterAnimator : MonoBehaviour
         }
 
     }
+    public void Win()
+    {
+        anim.SetTrigger("Win");
+    }
+
+    public void ThrowBreak()
+    {
+        anim.SetTrigger("ThrowBreak");
+    }
+
     public void HitStop()
     {
         StartCoroutine(HitstopStart());
-
     }
 
     IEnumerator HitstopStart()
@@ -85,7 +97,9 @@ public class CharacterAnimator : MonoBehaviour
 
     void ExecuteFrame()
     {
-        anim.enabled = true;
+        if (!GameHandler.Instance.runNormally) anim.enabled = true;
+        anim.SetBool("Cutscene", GameHandler.cutscene);
+
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
 
         SaveAnimationData();
@@ -100,10 +114,11 @@ public class CharacterAnimator : MonoBehaviour
 
         anim.enabled = !hitstop;
         MovementAnimation();
-        StartCoroutine(PauseAnimation());
+        if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
 
-    IEnumerator PauseAnimation() {
+    IEnumerator PauseAnimation()
+    {
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
     }
@@ -284,7 +299,6 @@ public class CharacterAnimator : MonoBehaviour
 
     }
 
-
     void Release() { anim.SetTrigger("Release"); }
 
     void StartAttack()
@@ -296,14 +310,10 @@ public class CharacterAnimator : MonoBehaviour
 
     }
 
-
-
     void AttackRecovery()
     {
         anim.SetBool("Attacking", false);
     }
-
-
 
     private void RunSpeed()
     {
@@ -315,17 +325,6 @@ public class CharacterAnimator : MonoBehaviour
     void Jump()
     {
         anim.SetTrigger("Jump");
-    }
-
-    void FootL() { }
-    void FootR() { }
-
-    void Land()
-    {
-    }
-    void Hit()
-    {
-
     }
 }
 [System.Serializable]

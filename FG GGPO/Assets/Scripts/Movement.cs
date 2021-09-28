@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
         strafeTarget = GameHandler.Instance.ReturnPlayer(transform);
         status = GetComponent<Status>();
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation; 
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
@@ -113,7 +113,7 @@ public class Movement : MonoBehaviour
 
         if (ground && runMomentumCounter == 0 || ground && sprinting)
         {
-            if (jumpStartCounter <= 0 )
+            if (jumpStartCounter <= 0)
                 storedDirection = direction;
         }
 
@@ -186,10 +186,7 @@ public class Movement : MonoBehaviour
 
     public virtual void MovementProperties()
     {
-        if (!GameHandler.Instance.disableBlock)
-        {
-            holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
-        }
+        holdBack = 90 < Vector3.Angle(strafeTarget.position - transform.position, direction);
 
         if (ground)
         {

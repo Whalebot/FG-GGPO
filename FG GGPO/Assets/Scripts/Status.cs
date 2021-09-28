@@ -24,6 +24,8 @@ public class Status : MonoBehaviour
     [FoldoutGroup("Frames")] public int hitstopCounter;
     [FoldoutGroup("Frames")] public Vector3 pushbackVector;
     [FoldoutGroup("Frames")] public int knockdownValue;
+    [FoldoutGroup("Frames")] public int throwBreakWindow;
+    [FoldoutGroup("Frames")] public int throwBreakCounter;
     public delegate void StatusEvent();
     public StatusEvent healthEvent;
     public StatusEvent hurtEvent;
@@ -31,6 +33,7 @@ public class Status : MonoBehaviour
     public StatusEvent blockEvent;
     public StatusEvent frameDataEvent;
     public StatusEvent hitEvent;
+
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -40,6 +43,7 @@ public class Status : MonoBehaviour
     public TransitionEvent counterhitEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
+    public TransitionEvent throwBreakEvent;
 
     public delegate void AnimationEvent(int animationID);
     public AnimationEvent takeAnimationEvent;
@@ -88,7 +92,23 @@ public class Status : MonoBehaviour
     {
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         mov.landEvent += Land;
-        GoToState(State.Neutral);
+        ResetStatus();
+    }
+
+    [Button]
+    public void ResetStatus()
+    {
+        health = maxHealth;
+        meter = 0;
+
+        hitstunValue = 0;
+        blockstunValue = 0;
+
+        invincible = false;
+        isDead = false;
+
+        groundState = GroundState.Grounded;
+        currentState = State.Neutral;
     }
 
     void Land()
@@ -138,7 +158,8 @@ public class Status : MonoBehaviour
         //ExecuteFrame();
     }
 
-    void ExecuteFrame() {
+    void ExecuteFrame()
+    {
         if (newMove)
         {
             hitstopCounter--;
@@ -184,9 +205,7 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
-        if (hitstunValue > 0
-            //  && hitstopCounter <= 0
-            )
+        if (hitstunValue > 0)
         {
             hitstunValue--;
 
@@ -195,6 +214,7 @@ public class Status : MonoBehaviour
                 pushbackCounter--;
                 if (pushbackCounter <= 0)
                 {
+                    print("pog");
                     rb.velocity = Vector3.zero;
                 }
             }
@@ -395,6 +415,7 @@ public class Status : MonoBehaviour
 
                 break;
             case State.LockedAnimation:
+                blocking = false;
                 DisableHurtboxes();
                 break;
             default: break;
@@ -464,7 +485,7 @@ public class Status : MonoBehaviour
     public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
-        if (hitState == HitState.Launch)
+        if (hitState == HitState.Launch || kb.y > 1)
         {
             GoToGroundState(GroundState.Airborne);
         }
@@ -536,6 +557,13 @@ public class Status : MonoBehaviour
         GoToState(State.LockedAnimation);
     }
 
+    public void ThrowBreak() {
+        print("Throw Break");
+        throwBreakEvent?.Invoke();
+        KnockdownRecovery();
+        
+    }
+
     public void Hitstop()
     {
         pushbackVector = rb.velocity;
@@ -553,8 +581,5 @@ public class Status : MonoBehaviour
         isDead = true;
         deathEvent?.Invoke();
     }
-
-
-
 }
 

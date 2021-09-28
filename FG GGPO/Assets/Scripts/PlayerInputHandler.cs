@@ -86,7 +86,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void ExecuteFrame()
     {
-        if (GameHandler.isPaused)
+        if (GameHandler.isPaused || GameHandler.cutscene)
         {
             mov.direction = Vector3.zero;
             return;
@@ -117,6 +117,11 @@ public class PlayerInputHandler : MonoBehaviour
         {
             InAnimationInput();
         }
+        else if (status.currentState == Status.State.LockedAnimation)
+        {
+            LockedAnimationInput();
+        }
+
         mov.direction = relativeDirection;
         input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
         input.extraBuffer = status.hitstopCounter;
@@ -176,35 +181,36 @@ public class PlayerInputHandler : MonoBehaviour
 
             foreach (var item in attack.moveset.specials)
             {
-
-                if (item.motionInput == SpecialInput.BackForward)
-                {
-                    //
-                    if (input.bf)
+                bool ground = (status.groundState == GroundState.Grounded);
+                if (item.grounded == ground)
+                    if (item.motionInput == SpecialInput.BackForward)
                     {
-                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                        //
+                        if (input.bf)
                         {
-                            attack.Attack(item.move);
-                            doSpecial = true;
-                            bufferID = i;
-                            break;
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                attack.Attack(item.move);
+                                doSpecial = true;
+                                bufferID = i;
+                                break;
+                            }
+                        }
+
+                    }
+                    else if (item.motionInput == SpecialInput.DownDown)
+                    {
+                        if (input.CheckDownDown())
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                attack.Attack(item.move);
+                                doSpecial = true;
+                                bufferID = i;
+                                break;
+                            }
                         }
                     }
-
-                }
-                else if (item.motionInput == SpecialInput.DownDown)
-                {
-                    if (input.CheckDownDown())
-                    {
-                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
-                        {
-                            attack.AttackProperties(item.move);
-                            doSpecial = true;
-                            bufferID = i;
-                            break;
-                        }
-                    }
-                }
 
             }
             if (doSpecial) break;
@@ -557,6 +563,26 @@ public class PlayerInputHandler : MonoBehaviour
         if (attack.attackString)
         {
             ProcessBuffer();
+        }
+
+    }
+
+    void LockedAnimationInput()
+    {
+        int bufferID = -1;
+        for (int i = 0; i < input.bufferedInputs.Count; i++)
+        {
+
+            if (status.currentState == Status.State.LockedAnimation)
+            {
+                if (input.bufferedInputs[i].id == 7)
+                {
+                    status.ThrowBreak();
+                    GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>().ThrowBreak();
+                    bufferID = i;
+                    DeleteInputs(bufferID);
+                }
+            }
         }
     }
 

@@ -30,6 +30,7 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
@@ -70,17 +71,17 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 1000
-      stun: 27
-      hitstop: 10
+      stun: 40
+      hitstop: 20
       proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
-      hitState: 2
+      hitState: 0
       hitID: 0
     airHitProperty:
       damage: 1000
-      stun: 100
-      hitstop: 30
+      stun: 30
+      hitstop: 20
       proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
@@ -97,8 +98,8 @@ MonoBehaviour:
       hitID: 0
     airCounterhitProperty:
       damage: 1000
-      stun: 100
-      hitstop: 30
+      stun: 40
+      hitstop: 20
       proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
@@ -108,6 +109,7 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

@@ -10,43 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Back Dash
+  m_Name: Left Dash
   m_EditorClassIdentifier: 
-  animationID: 100
+  animationID: 102
+  hitID: 0
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
-  type: 0
+  counterhitSFX: {fileID: 0}
+  type: 2
   collissionState: 0
+  groundState: 0
+  isProjectile: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
   gatlingMoves: []
-  firstStartupFrame: 5
-  lastActiveFrame: 9
-  totalMoveDuration: 24
-  firstGatlingFrame: 26
-  blockAdvantage: 1
-  hitAdvantage: 11
-  recoveryFrames: 15
-  canGatling: 0
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  noClip: 0
-  noClipStart: 0
-  noClipDuration: 0
-  invincible: 0
-  invincibleStart: 0
-  invincibleDuration: 0
-  counterhitRecovery: 0
-  noHitstopOnSelf: 0
-  useAirAction: 0
-  landCancel: 0
-  landingRecovery: 0
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 19
+  firstGatlingFrame: 15
+  blockAdvantage: 11
+  hitAdvantage: 21
+  blockCancelAdvantage: 16
+  hitCancelAdvantage: 25
+  recoveryFrames: 5
+  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
-    startupFrame: 5
+    startupFrame: 10
     activeFrames: 5
-    gatlingFrames: 21
+    gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
       damage: 0
@@ -56,6 +52,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     groundBlockProperty:
       damage: 0
       stun: 20
@@ -64,6 +61,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     groundCounterhitProperty:
       damage: 0
       stun: 40
@@ -72,6 +70,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     airHitProperty:
       damage: 0
       stun: 30
@@ -80,6 +79,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     airBlockProperty:
       damage: 0
       stun: 20
@@ -88,6 +88,7 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     airCounterhitProperty:
       damage: 0
       stun: 40
@@ -96,12 +97,30 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
+  resetGatling: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  counterhitRecovery: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 0
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   m:
   - startFrame: 0
-    duration: 12
-    momentum: {x: 0, y: 0, z: -8}
-    homing: 0
+    duration: 20
+    momentum: {x: -8, y: 0, z: 0}
+    homing: 1
     resetVelocityDuringRecovery: 1

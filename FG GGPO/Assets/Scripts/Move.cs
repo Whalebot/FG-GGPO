@@ -46,6 +46,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
     [FoldoutGroup("Move properties")] public bool specialCancelOnBlock = true;
     [FoldoutGroup("Move properties")] public bool specialCancelOnHit = true;
+    [FoldoutGroup("Move properties")] public bool resetGatling = false;
     [FoldoutGroup("Move properties")] public bool noClip;
     [ShowIf("noClip")]
     [FoldoutGroup("Move properties")] public int noClipStart = 1;
@@ -59,6 +60,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool counterhitRecovery;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
+    [FoldoutGroup("Move properties")] public bool forcedCounterHit;
 
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
@@ -199,6 +201,7 @@ public class Attack
     public int startupFrame = 1;
     public int activeFrames = 1;
     public int gatlingFrames = 1;
+    public AttackType attackType = AttackType.Normal;
     public AttackHeight attackHeight = AttackHeight.Mid;
     public HitProperty groundHitProperty;
     public HitProperty groundBlockProperty;

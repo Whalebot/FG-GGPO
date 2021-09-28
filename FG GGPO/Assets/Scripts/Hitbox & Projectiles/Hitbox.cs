@@ -82,6 +82,8 @@ public class Hitbox : MonoBehaviour
     {
         hitOnce = true;
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
+        attack.gatling = move.gatlingMoves.Count > 0;
+
         //Check for block
         if (other.blocking)
         {
@@ -167,6 +169,7 @@ public class Hitbox : MonoBehaviour
     {
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
+
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 

@@ -169,8 +169,7 @@ MonoBehaviour:
   recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
   wakeupFX: {fileID: 2648046891202104306, guid: 3fc83c38f7c4da441a6e0c459f5db94f, type: 3}
   particles: []
-  frame: 0
-  time: 0
+  deletedParticles: []
 --- !u!1 &8174696484485854882
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,14 +296,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53406c3fce05246856a8898ab958ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runNormally: 1
   showHitboxes: 1
   showHurtboxes: 0
-  disableBlock: 0
   playersInGame: 0
   p1Transform: {fileID: 0}
   p2Transform: {fileID: 0}
   maxRoundTime: 80
   roundTime: 0
+  roundsToWin: 2
+  p1RoundWins: 0
+  p2RoundWins: 0
+  p1CharacterTrainingID: -1
+  p2CharacterTrainingID: -1
+  characters:
+  - {fileID: 4447310910784814065, guid: 3f5e5a965793917468f13824079a9318, type: 3}
+  - {fileID: 8115492147606414039, guid: fbd0967f8ce28e74dac0c6ebd3331c5b, type: 3}
+  - {fileID: 7597416821276453505, guid: 2ffd74f33a1d72c47add809dd155af82, type: 3}
+  - {fileID: 1740742798844884058, guid: 0b2eda8742dc81e469f3bdfe3d37de16, type: 3}
+  p1StartPosition: {fileID: 0}
+  p2StartPosition: {fileID: 0}
   p1Status: {fileID: 0}
   p2Status: {fileID: 0}
   gameStates: []
@@ -312,9 +323,6 @@ MonoBehaviour:
   gameFrameCount: 0
   counter: 0
   hitStop: 0
-  slowMotionValue: 0.1
-  slowMotionDuration: 0.1
-  slowMotionSmoothing: 0.1
 --- !u!114 &8174696485712288847
 MonoBehaviour:
   m_ObjectHideFlags: 0

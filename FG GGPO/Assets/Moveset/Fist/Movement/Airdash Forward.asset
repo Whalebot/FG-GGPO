@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Right Dash
+  m_Name: Airdash Forward
   m_EditorClassIdentifier: 
-  animationID: 101
+  animationID: 103
   hitID: 0
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
@@ -22,25 +22,26 @@ MonoBehaviour:
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
   type: 2
-  collissionState: 0
+  collissionState: 3
   groundState: 0
   isProjectile: 0
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
   firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 19
+  lastActiveFrame: 10
+  totalMoveDuration: 11
   firstGatlingFrame: 15
-  blockAdvantage: 11
-  hitAdvantage: 21
-  blockCancelAdvantage: 16
+  blockAdvantage: 19
+  hitAdvantage: 29
+  blockCancelAdvantage: 24
   hitCancelAdvantage: 25
-  recoveryFrames: 5
+  recoveryFrames: 1
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
-    activeFrames: 5
+    activeFrames: 1
     gatlingFrames: 5
     attackHeight: 1
     groundHitProperty:
@@ -98,9 +99,10 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -110,7 +112,7 @@ MonoBehaviour:
   counterhitRecovery: 0
   noHitstopOnSelf: 0
   crossupState: 0
-  useAirAction: 0
+  useAirAction: 1
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 1
@@ -118,7 +120,7 @@ MonoBehaviour:
   resetVelocityDuringRecovery: 0
   m:
   - startFrame: 0
-    duration: 20
-    momentum: {x: 8, y: 0, z: 0}
-    homing: 1
-    resetVelocityDuringRecovery: 1
+    duration: 21
+    momentum: {x: 0, y: 0.1, z: 7}
+    homing: 0
+    resetVelocityDuringRecovery: 0

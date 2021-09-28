@@ -50,6 +50,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1181258991743362198, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: deaccelerateSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1276833228533025198, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -64,7 +68,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206792, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206792, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_LocalRotation.x
@@ -102,6 +106,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: P1 Variant -  Fist
       objectReference: {fileID: 0}
+    - target: {fileID: 3654780269085657820, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: mainMoveset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
+    - target: {fileID: 3654780269085657820, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: jumpMinusFrames
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4501640966231020772, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -110,9 +122,21 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 6e6d0de07b1b08b41b2f6dd84bd423e9, type: 3}
+    - target: {fileID: 5542712886153031611, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 787d55a31587d54488bc969bd88592d2, type: 2}
+    - target: {fileID: 5662932312879541982, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6131400803021489503, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131400803021489503, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6615676997291863081, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_CastShadows

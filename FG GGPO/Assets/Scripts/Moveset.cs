@@ -66,5 +66,6 @@ public class SpecialMove
 {
     public SpecialInput motionInput;
     public ButtonInput buttonInput;
+    public bool grounded;
     public Move move;
 }
