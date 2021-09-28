@@ -7,8 +7,8 @@ using System.Reflection;
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
-    public int animationID;
-    public int hitID;
+    [FoldoutGroup("Animation")] public int animationID;
+    [FoldoutGroup("Animation")] public int hitID;
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
@@ -42,22 +42,27 @@ public class Move : ScriptableObject
     public List<Move> targetComboMoves;
     public Attack[] attacks;
     [Header("Move properties")]
-    [FoldoutGroup("Move properties")] public bool jumpCancelOnBlock;
-    [FoldoutGroup("Move properties")] public bool jumpCancelOnHit = true;
-    [FoldoutGroup("Move properties")] public bool specialCancelOnBlock = true;
-    [FoldoutGroup("Move properties")] public bool specialCancelOnHit = true;
+    [FoldoutGroup("Cancel properties")] public bool jumpCancelOnBlock;
+    [FoldoutGroup("Cancel  properties")] public bool jumpCancelOnHit = true;
+    [FoldoutGroup("Cancel  properties")] public bool specialCancelOnBlock = true;
+    [FoldoutGroup("Cancel  properties")] public bool specialCancelOnHit = true;
     [FoldoutGroup("Move properties")] public bool resetGatling = false;
-    [FoldoutGroup("Move properties")] public bool noClip;
+    [FoldoutGroup("Invul properties")] public bool noClip;
     [ShowIf("noClip")]
-    [FoldoutGroup("Move properties")] public int noClipStart = 1;
+    [FoldoutGroup("Invul properties")] public int noClipStart = 1;
     [ShowIf("noClip")]
-    [FoldoutGroup("Move properties")] public int noClipDuration;
-    [FoldoutGroup("Move properties")] public bool invincible;
+    [FoldoutGroup("Invul properties")] public int noClipDuration;
+    [FoldoutGroup("Invul properties")] public bool invincible;
     [ShowIf("invincible")]
-    [FoldoutGroup("Move properties")] public int invincibleStart = 1;
+    [FoldoutGroup("Invul properties")] public int invincibleStart = 1;
     [ShowIf("invincible")]
-    [FoldoutGroup("Move properties")] public int invincibleDuration;
-    [FoldoutGroup("Move properties")] public bool counterhitRecovery;
+    [FoldoutGroup("Invul properties")] public int invincibleDuration;
+    [FoldoutGroup("Invul properties")] public bool linearInvul;
+    [ShowIf("linearInvul")]
+    [FoldoutGroup("Invul properties")] public int linearInvulStart = 1;
+    [ShowIf("linearInvul")]
+    [FoldoutGroup("Invul properties")] public int linearInvulDuration;
+
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public bool forcedCounterHit;
@@ -203,6 +208,7 @@ public class Attack
     public int gatlingFrames = 1;
     public AttackType attackType = AttackType.Normal;
     public AttackHeight attackHeight = AttackHeight.Mid;
+    public bool homing;
     public HitProperty groundHitProperty;
     public HitProperty groundBlockProperty;
     public HitProperty groundCounterhitProperty;

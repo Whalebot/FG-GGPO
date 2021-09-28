@@ -26,8 +26,6 @@ public class GrabHitbox : Hitbox
 
     void ExecuteThrow(HitProperty hit, Status other)
     {
-        other.transform.position = grabTransform.position;
-        other.transform.rotation = grabTransform.rotation;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
@@ -37,5 +35,9 @@ public class GrabHitbox : Hitbox
         other.TakeThrow(move.hitID);
         attack.Idle();
         attack.AttackProperties(move.throwFollowup);
+
+        other.transform.position = grabTransform.position;
+        other.transform.rotation = grabTransform.rotation;
+       
     }
 }

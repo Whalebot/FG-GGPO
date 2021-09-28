@@ -573,7 +573,7 @@ public class PlayerInputHandler : MonoBehaviour
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
 
-            if (status.currentState == Status.State.LockedAnimation)
+            if (status.currentState == Status.State.LockedAnimation && status.throwBreakCounter > 0)
             {
                 if (input.bufferedInputs[i].id == 7)
                 {

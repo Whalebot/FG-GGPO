@@ -64,6 +64,7 @@ public class Status : MonoBehaviour
     [FoldoutGroup("State")] public bool counterhitState;
     [FoldoutGroup("State")] public bool crossupState;
     [FoldoutGroup("State")] public bool invincible;
+    [FoldoutGroup("State")] public bool linearInvul;
 
     public int maxHealth;
     public int health;
@@ -118,14 +119,14 @@ public class Status : MonoBehaviour
 
     void ActivateCollider()
     {
-
+        jumpingCollider.SetActive(groundState == GroundState.Airborne);
         standingCollider.SetActive(blockState == BlockState.None && groundState == GroundState.Grounded || blockState == BlockState.Standing && groundState == GroundState.Grounded);
         crouchingCollider.SetActive(blockState == BlockState.Crouching || groundState == GroundState.Knockdown);
 
-        jumpingCollider.SetActive(groundState == GroundState.Airborne);
+
     }
 
-    public void AirHurtboxes()
+    public void AirCollider()
     {
         standingCollider.layer = LayerMask.NameToLayer("AirCollision");
         crouchingCollider.layer = LayerMask.NameToLayer("AirCollision");
@@ -214,14 +215,13 @@ public class Status : MonoBehaviour
                 pushbackCounter--;
                 if (pushbackCounter <= 0)
                 {
-                    print("pog");
                     rb.velocity = Vector3.zero;
                 }
             }
         }
         if (hitstunValue <= 0 && inHitStun)
         {
-            if (groundState == GroundState.Knockdown)
+            if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
                 KnockdownRecovery();
 
             else if (groundState == GroundState.Airborne)
@@ -344,6 +344,10 @@ public class Status : MonoBehaviour
                     Instantiate(VFXManager.Instance.wakeupFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
                 }
                 break;
+            case State.LockedAnimation:
+                throwBreakCounter--;
+
+                break;
             default: break;
         }
     }
@@ -372,6 +376,8 @@ public class Status : MonoBehaviour
         {
             case State.Neutral:
                 invincible = false;
+                linearInvul = false;
+
                 EnableHurtboxes();
                 neutralEvent?.Invoke(); break;
             case State.Startup:
@@ -388,6 +394,8 @@ public class Status : MonoBehaviour
                 break;
             case State.Hitstun:
                 inHitStun = true;
+                linearInvul = false;
+
                 EnableHurtboxes();
                 minusFrames = -HitStun;
                 hitEvent?.Invoke();
@@ -521,6 +529,8 @@ public class Status : MonoBehaviour
         HitStun = stunVal;
         proration *= p;
 
+        mov.runMomentumCounter = 0;
+
         if (groundState == GroundState.Knockdown)
             GoToState(State.Knockdown);
         else
@@ -532,6 +542,8 @@ public class Status : MonoBehaviour
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
+        mov.runMomentumCounter = 0;
+
         Health -= damage;
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         TakePushback(kb);
@@ -553,15 +565,21 @@ public class Status : MonoBehaviour
 
     public void TakeThrow(int animationID)
     {
+        mov.runMomentumCounter = 0;
+        mov.storedDirection = Vector3.zero;
+        rb.velocity = Vector3.zero;
+
         takeAnimationEvent?.Invoke(animationID);
+        throwBreakCounter = throwBreakWindow;
         GoToState(State.LockedAnimation);
     }
 
-    public void ThrowBreak() {
+    public void ThrowBreak()
+    {
         print("Throw Break");
         throwBreakEvent?.Invoke();
         KnockdownRecovery();
-        
+
     }
 
     public void Hitstop()
