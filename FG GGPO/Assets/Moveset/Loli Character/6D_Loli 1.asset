@@ -27,6 +27,7 @@ MonoBehaviour:
   collissionState: 0
   groundState: 0
   isProjectile: 1
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
   firstStartupFrame: 15
@@ -45,7 +46,9 @@ MonoBehaviour:
     startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
+    attackType: 1
     attackHeight: 1
+    homing: 0
     groundHitProperty:
       damage: 1000
       stun: 40
@@ -104,15 +107,19 @@ MonoBehaviour:
   jumpCancelOnHit: 0
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 10
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
-  counterhitRecovery: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
   noHitstopOnSelf: 1
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

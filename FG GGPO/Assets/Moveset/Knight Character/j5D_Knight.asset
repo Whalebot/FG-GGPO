@@ -45,8 +45,9 @@ MonoBehaviour:
     startupFrame: 20
     activeFrames: 1
     gatlingFrames: 0
-    attackType: 0
+    attackType: 1
     attackHeight: 1
+    homing: 0
     groundHitProperty:
       damage: 1000
       stun: 20
@@ -112,7 +113,9 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
-  counterhitRecovery: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
