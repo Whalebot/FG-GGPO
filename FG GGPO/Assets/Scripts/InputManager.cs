@@ -14,12 +14,6 @@ public class InputManager : MonoBehaviour
     public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
-    public bool absoluteDirections;
-    public bool updateDirections;
-    public bool replay;
-    public InputLog log;
-    public InputLog replayLog;
-    public int replayID;
 
     private void Awake()
     {
@@ -28,10 +22,12 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-        GameHandler.Instance.advanceGameState += UpdateLog;
-        GameHandler.Instance.advanceGameState += ExecuteFrame;
-        p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
-        p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
+        if (GameHandler.Instance != null)
+        {
+            p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
+            p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
+
+        }
         p1Input.id = 1;
         p2Input.id = 2;
         controllersConnected = Gamepad.all.Count;
@@ -83,75 +79,16 @@ public class InputManager : MonoBehaviour
                 }
             };
 
-        if (replay) LoadLog();
     }
 
     private void FixedUpdate()
     {
- 
 
 
-    }
-
-    void ExecuteFrame() {
-        if (replay) ReplayLog();
-    }
-
-    [Button]
-    public void SaveLog()
-    {
-        string jsonData = JsonUtility.ToJson(log, true);
-        File.WriteAllText(Application.persistentDataPath + "/inputLog.json", jsonData);
-    }
-
-    [Button]
-    public void LoadLog()
-    {
-        replayLog = JsonUtility.FromJson<InputLog>(File.ReadAllText(Application.persistentDataPath + "/inputLog.json"));
-    }
-
-    public void ReplayLog()
-    {
-
-        if (replayLog.inputs.Count > GameHandler.Instance.gameFrameCount)
-        {
-            if (replayID == 0)
-            {
-                p1Input.ResolveButtons(replayLog.inputs[GameHandler.Instance.gameFrameCount].buttons);
-                for (int i = 0; i < p1Input.netDirectionals.Length; i++)
-                {
-                    p1Input.netDirectionals[i] = replayLog.inputs[GameHandler.Instance.gameFrameCount].directionals[i];
-                }
-            }
-            else
-            {
-                p2Input.ResolveButtons(replayLog.inputs[GameHandler.Instance.gameFrameCount].buttons);
-                for (int i = 0; i < p2Input.netDirectionals.Length; i++)
-                {
-                    p2Input.netDirectionals[i] = replayLog.inputs[GameHandler.Instance.gameFrameCount].directionals[i];
-                }
-            }
-        }
-    }
-
-    public void UpdateLog()
-    {
-        Input temp = new Input();
-        temp.frame = GameHandler.Instance.gameFrameCount;
-
-
-        for (int i = 0; i < p1Input.heldButtons.Length; i++)
-        {
-            temp.buttons[i] = p1Input.heldButtons[i];
-        }
-        for (int i = 0; i < p1Input.netDirectionals.Length; i++)
-        {
-            temp.directionals[i] = p1Input.netDirectionals[i];
-        }
-
-        log.inputs.Add(temp);
 
     }
+
+
 
     public InputHandler OnlineInput()
     {

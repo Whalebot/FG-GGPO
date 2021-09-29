@@ -39,13 +39,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     Vector3 RelativeToCamera(Vector2 v)
     {
-        if (InputManager.Instance.absoluteDirections)
-        {
-            forwardVector = (CameraManager.Instance.mainCamera.transform.forward);
-            rightVector = Vector3.Cross(Vector3.up, forwardVector).normalized;
-            Vector3 ab = ((rightVector * v.x) + (forwardVector * v.y));
-            return ab;
-        }
         forwardVector = (mov.strafeTarget.position - transform.position);
         forwardVector.y = 0;
         forwardVector = forwardVector.normalized;
@@ -54,30 +47,7 @@ public class PlayerInputHandler : MonoBehaviour
         return temp;
     }
 
-    void UpdateDirection()
-    {
-        input.directionOffset = 0;
-        if (!InputManager.Instance.updateDirections) return;
 
-        float angle = Vector3.SignedAngle(CameraManager.Instance.mainCamera.transform.forward, (GameHandler.Instance.ReturnPlayer(transform).position - transform.position).normalized, Vector3.up);
-        print(angle);
-        if (angle > 135 || angle < -135)
-        {
-            input.directionOffset = 2;
-        }
-        else if (angle > 45)
-        {
-            input.directionOffset = 1;
-        }
-        else if (angle < -45)
-        {
-            input.directionOffset = 3;
-        }
-        else
-        {
-            input.directionOffset = 0;
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -98,7 +68,7 @@ public class PlayerInputHandler : MonoBehaviour
         //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
-            if (mov.ground && !input.isDummy)
+            if (mov.ground)
             {
                 mov.crouching = input.netButtons[5];
 
@@ -527,7 +497,6 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     if (attack.Attack(attack.moveset.sD))
                     {
-                        print("5d");
                         bufferID = i;
                         break;
                     }

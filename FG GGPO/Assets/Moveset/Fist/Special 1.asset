@@ -31,7 +31,7 @@ MonoBehaviour:
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 50
-  firstGatlingFrame: 16
+  firstGatlingFrame: 20
   blockAdvantage: -15
   hitAdvantage: -5
   blockCancelAdvantage: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
     startupFrame: 15
     activeFrames: 1
-    gatlingFrames: 1
+    gatlingFrames: 5
     attackType: 1
     attackHeight: 1
     homing: 0

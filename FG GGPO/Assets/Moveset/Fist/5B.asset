@@ -40,9 +40,9 @@ MonoBehaviour:
   totalMoveDuration: 32
   firstGatlingFrame: 15
   blockAdvantage: -3
-  hitAdvantage: 8
+  hitAdvantage: 7
   blockCancelAdvantage: 2
-  hitCancelAdvantage: 25
+  hitCancelAdvantage: 24
   recoveryFrames: 20
   targetComboMoves: []
   attacks:
@@ -52,9 +52,10 @@ MonoBehaviour:
     gatlingFrames: 5
     attackType: 0
     attackHeight: 1
+    homing: 0
     groundHitProperty:
       damage: 1000
-      stun: 30
+      stun: 29
       hitstop: 10
       proration: 0.95
       meterGain: 0
@@ -117,6 +118,9 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0

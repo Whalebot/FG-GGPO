@@ -5,8 +5,10 @@ using UnityEngine;
 public class Projectile : Hitbox
 {
     public float velocity;
-    Rigidbody rb;
-    bool hit;
+    public bool destroyOnProjectileClash = true;
+    public bool destroyOnHitboxClash = true;
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public bool hit;
 
 
     private void Awake()
@@ -23,6 +25,10 @@ public class Projectile : Hitbox
 
     private void FixedUpdate()
     {
+        Movement();
+    }
+
+    public virtual void Movement() {
         rb.velocity = transform.forward * velocity;
     }
 
@@ -30,8 +36,14 @@ public class Projectile : Hitbox
     {
         base.OnTriggerEnter(other);
         Projectile proj = other.GetComponentInParent<Projectile>();
-        if (proj != null) {
+        if (proj != null && destroyOnProjectileClash) {
             print("Projectile clash");
+            Destroy(gameObject);
+        }
+
+        Hitbox hitbox = other.GetComponent<Hitbox>();
+        if (hitbox != null && destroyOnHitboxClash) {
+            print("Hitbox clash");
             Destroy(gameObject);
         }
     }

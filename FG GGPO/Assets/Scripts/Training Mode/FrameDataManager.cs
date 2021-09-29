@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FrameDataManager : MonoBehaviour
-{public static FrameDataManager Instance { get; private set; }
+{
+    public static FrameDataManager Instance { get; private set; }
     public Status p1;
     public Status p2;
     public FrameDataOverlay overlay1;
     public FrameDataOverlay overlay2;
     public int frame;
+    public int cancelFrame;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class FrameDataManager : MonoBehaviour
 
     void Start()
     {
-       // if (p1 == null)
+        // if (p1 == null)
         {
             p1 = GameHandler.Instance.p1Status;
             p2 = GameHandler.Instance.p2Status;
@@ -42,17 +44,19 @@ public class FrameDataManager : MonoBehaviour
     void UpdateHit()
     {
         frame = p1.minusFrames - p2.minusFrames;
+        cancelFrame = p1.cancelMinusFrames;
         overlay1.UpdateStartup();
         overlay2.UpdateStartup();
-        overlay1.UpdateAdvantage(frame);
-        overlay2.UpdateAdvantage(-frame);
+        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
     }
 
     // Update is called once per frame
     public void UpdateFrameData()
     {
         frame = p1.minusFrames - p2.minusFrames;
-        overlay1.UpdateAdvantage(frame);
-        overlay2.UpdateAdvantage(-frame);
+        cancelFrame = 0;
+        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
     }
 }

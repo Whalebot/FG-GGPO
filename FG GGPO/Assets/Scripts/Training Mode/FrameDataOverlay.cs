@@ -34,12 +34,12 @@ public class FrameDataOverlay : MonoBehaviour
         else { }
     }
 
-    public void UpdateAdvantage(int frames)
+    public void UpdateAdvantage(int frames, int cancelFrames)
     {
         UpdateStates();
-        if (frames > 0) frameAdvantageText.text = "+" + frames;
+        if (frames > 0) frameAdvantageText.text = "+" + frames + " (" + cancelFrames + ")";
         else
-        frameAdvantageText.text = "" +  frames;
+        frameAdvantageText.text = "" + frames + " (" + cancelFrames + ")";
     }
 
     // Update is called once per frame

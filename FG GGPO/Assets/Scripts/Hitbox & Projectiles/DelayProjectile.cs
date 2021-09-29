@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DelayProjectile : Hitbox
+public class DelayProjectile : Projectile
 {
-    public float velocity;
-    Rigidbody rb;
-    bool hit;
     public int delay;
     Transform target;
 
@@ -25,6 +22,10 @@ public class DelayProjectile : Hitbox
     private void FixedUpdate()
     {
 
+    }
+
+    public override void Movement()
+    {
         if (delay > 0)
         {
             delay--;
@@ -37,15 +38,6 @@ public class DelayProjectile : Hitbox
     new void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Projectile proj = other.GetComponentInParent<Projectile>();
-        if (proj != null)
-        {
-            if (proj.status != status)
-            {
-                print("Projectile clash");
-                Destroy(gameObject);
-            }
-        }
     }
 
     public override void DoDamage(Status other, float dmgMod)

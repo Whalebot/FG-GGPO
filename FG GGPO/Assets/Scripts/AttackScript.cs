@@ -117,7 +117,7 @@ public class AttackScript : MonoBehaviour
             if (attacking)
             {
                 attackFrames++;
-                if (attackFrames >= activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+                if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
                 {
 
                     attackString = true;
@@ -217,7 +217,7 @@ public class AttackScript : MonoBehaviour
         {
             if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
             {
-
+                print("Hitbox " + GameHandler.Instance.gameFrameCount);
                 status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
@@ -311,7 +311,13 @@ public class AttackScript : MonoBehaviour
     {
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
+        if (move.targetComboMoves.Count > 0)
+        {
+            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame;
+        }
+
         status.minusFrames = -(move.totalMoveDuration);
+
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
 
@@ -388,7 +394,6 @@ public class AttackScript : MonoBehaviour
         {
             if (move.type == MoveType.Special && specialCancel)
             {
-                print("Special Cancel");
                 return true;
             }
             if (activeMove.gatlingMoves.Count <= 0) return false;
@@ -477,6 +482,7 @@ public class AttackScript : MonoBehaviour
         {
             newAttack = false;
             Idle();
+            status.minusFrames = 0;
             status.frameDataEvent?.Invoke();
         }
     }
@@ -500,6 +506,7 @@ public class AttackScript : MonoBehaviour
         attacking = false;
         attackString = false;
         combo = 0;
+        jumpFrameCounter = 0;
         ClearHitboxes();
         containerScript.InterruptAttack();
         containerScript.DeactivateParticles();
@@ -507,8 +514,6 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-
-        {
             if (attacking) status.rb.velocity = Vector3.zero;
             //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
             status.GoToState(Status.State.Recovery);
@@ -525,7 +530,6 @@ public class AttackScript : MonoBehaviour
             status.minusFrames = -jumpMinusFrames;
             status.frameDataEvent?.Invoke();
             movement.LookAtOpponent();
-        }
     }
 
     public void ResetAllValues()
@@ -535,6 +539,7 @@ public class AttackScript : MonoBehaviour
         attackString = false;
         activeMove = null;
         combo = 0;
+        jumpFrameCounter = 0;
         status.GoToState(Status.State.Neutral);
         specialCancel = false;
         attacking = false;

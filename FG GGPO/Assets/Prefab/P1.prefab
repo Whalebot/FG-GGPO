@@ -190,7 +190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255511159481468586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -393,9 +393,9 @@ GameObject:
   - component: {fileID: 3654780268560206792}
   - component: {fileID: 3654780268560206795}
   - component: {fileID: 3654780268560206794}
+  - component: {fileID: 3654780269085657827}
   - component: {fileID: 3654780268560206796}
   - component: {fileID: 3654780269085657820}
-  - component: {fileID: 3654780269085657827}
   - component: {fileID: 3654780268560206793}
   m_Layer: 12
   m_Name: P1
@@ -435,10 +435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deviceIsAssigned: 0
-  isDummy: 0
   network: 0
   id: 0
-  lastInput: 5
   directionOffset: 0
   controlScheme: 0
   isBot: 0
@@ -446,12 +444,9 @@ MonoBehaviour:
   bufferWindow: 10
   dashInputWindow: 20
   motionInputWindow: 20
+  bufferedInputs: []
+  deletedInputs: []
   motionInputCounter: 0
-  dash: 0
-  bf: 0
-  fb: 0
-  dd: 0
-  extraBuffer: 0
   R1Hold: 0
   R2Hold: 0
   L1Hold: 0
@@ -466,8 +461,11 @@ MonoBehaviour:
   overlayDirectionals: 
   updatedDirectionals: 0
   updatedButtons: 0
-  bufferedInputs: []
-  deletedInputs: []
+  dash: 0
+  bf: 0
+  fb: 0
+  dd: 0
+  extraBuffer: 0
   isPaused: 0
   debug: 0
 --- !u!114 &3654780268560206794
@@ -524,6 +522,58 @@ MonoBehaviour:
   storedDirection: {x: 0, y: 0, z: 0}
   groundMat: {fileID: 0}
   airMat: {fileID: 0}
+--- !u!114 &3654780269085657827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3654780268560206807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaf9adeff7d31b4d8515fd665af04a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  knockbackDirection: {x: 0, y: 0}
+  isDead: 0
+  forcedCounterhit: 0
+  autoBlock: 0
+  blocking: 0
+  hitstunValue: 0
+  blockstunValue: 0
+  inBlockStun: 0
+  inHitStun: 0
+  minusFrames: 0
+  cancelMinusFrames: 0
+  hitstopCounter: 0
+  pushbackVector: {x: 0, y: 0, z: 0}
+  knockdownValue: 50
+  throwBreakWindow: 15
+  throwBreakCounter: 0
+  newMove: 0
+  groundPushbackDuration: 15
+  pushbackCounter: 0
+  wakeupRecovery: 15
+  currentState: 0
+  groundState: 0
+  blockState: 0
+  counterhitState: 0
+  crossupState: 0
+  invincible: 0
+  linearInvul: 0
+  maxHealth: 10000
+  health: 10000
+  maxMeter: 100
+  meter: 0
+  comboCounter: 0
+  lastAttackDamage: 0
+  comboDamage: 0
+  proration: 0
+  defaultHurtbox: {fileID: 7907261999107621238}
+  standingCollider: {fileID: 3243212134572139080}
+  crouchingCollider: {fileID: 366033417185341652}
+  jumpingCollider: {fileID: 7025442713406750524}
 --- !u!114 &3654780268560206796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,57 +642,6 @@ MonoBehaviour:
   jumpCancel: 0
   specialCancel: 0
   combo: 0
---- !u!114 &3654780269085657827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3654780268560206807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eaf9adeff7d31b4d8515fd665af04a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  knockbackDirection: {x: 0, y: 0}
-  isDead: 0
-  forcedCounterhit: 0
-  autoBlock: 0
-  blocking: 0
-  hitstunValue: 0
-  blockstunValue: 0
-  inBlockStun: 0
-  inHitStun: 0
-  minusFrames: 0
-  hitstopCounter: 0
-  pushbackVector: {x: 0, y: 0, z: 0}
-  knockdownValue: 50
-  throwBreakWindow: 15
-  throwBreakCounter: 0
-  newMove: 0
-  groundPushbackDuration: 15
-  pushbackCounter: 0
-  wakeupRecovery: 15
-  currentState: 0
-  groundState: 0
-  blockState: 0
-  counterhitState: 0
-  crossupState: 0
-  invincible: 0
-  linearInvul: 0
-  maxHealth: 10000
-  health: 10000
-  maxMeter: 100
-  meter: 0
-  comboCounter: 0
-  lastAttackDamage: 0
-  comboDamage: 0
-  proration: 0
-  defaultHurtbox: {fileID: 7907261999107621238}
-  standingCollider: {fileID: 3243212134572139080}
-  crouchingCollider: {fileID: 366033417185341652}
-  jumpingCollider: {fileID: 7025442713406750524}
 --- !u!54 &3654780268560206793
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1035,7 +1034,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907261999107621238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

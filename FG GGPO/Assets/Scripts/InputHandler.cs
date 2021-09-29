@@ -9,30 +9,24 @@ using Sirenix.OdinInspector;
 public class InputHandler : MonoBehaviour
 {
     public bool deviceIsAssigned;
-    public bool isDummy;
     public bool network;
     public int id;
-    public int lastInput = 5;
-
-
     [HideInInspector] public int directionOffset;
 
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
 
     public bool isBot;
-    public List<int> inputQueue;
-    public int bufferWindow = 10;
-    public int dashInputWindow = 20;
-    public int motionInputWindow = 40;
-    public int motionInputCounter;
+    [FoldoutGroup("Input Buffer")] public List<int> inputQueue;
+    [FoldoutGroup("Input Buffer")] public int bufferWindow = 10;
+    [FoldoutGroup("Input Buffer")] public int dashInputWindow = 20;
+    [FoldoutGroup("Input Buffer")] public int motionInputWindow = 40;
+    [FoldoutGroup("Input Buffer")] public List<BufferedInput> bufferedInputs;
+    [HideInInspector] public List<BufferedInput> deletedInputs;
+    [HideInInspector] public int motionInputCounter;
     public Controls controls = null;
 
-    [FoldoutGroup("Debug")] public bool dash;
-    [FoldoutGroup("Debug")] public bool bf;
-    [FoldoutGroup("Debug")] public bool fb;
-    [FoldoutGroup("Debug")] public bool dd;
-    [FoldoutGroup("Debug")] public int extraBuffer = 0;
+
 
     public InputEvent controlSchemeChange;
     public InputEvent keyboardEvent;
@@ -71,8 +65,8 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool L1Hold;
     [HideInInspector] public bool L2Hold;
 
-    public Vector2 inputDirection;
-    [FoldoutGroup("Network Input")] public bool[] netDirectionals = new bool[4];
+    [FoldoutGroup("Input Overlay")] public Vector2 inputDirection;
+    [FoldoutGroup("Input Overlay")] public bool[] netDirectionals = new bool[4];
     [FoldoutGroup("Input Overlay")] public bool[] heldDirectionals = new bool[4];
     [FoldoutGroup("Input Overlay")] public bool[] netButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public bool[] heldButtons = new bool[6];
@@ -81,10 +75,14 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public List<int> overlayDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
-    public List<BufferedInput> bufferedInputs;
-    [HideInInspector] public List<BufferedInput> deletedInputs;
-    public bool isPaused;
-    public bool debug;
+
+    [FoldoutGroup("Debug")] public bool dash;
+    [FoldoutGroup("Debug")] public bool bf;
+    [FoldoutGroup("Debug")] public bool fb;
+    [FoldoutGroup("Debug")] public bool dd;
+    [FoldoutGroup("Debug")] public int extraBuffer = 0;
+    [FoldoutGroup("Debug")] public bool isPaused;
+    [FoldoutGroup("Debug")] public bool debug;
 
     // private void OnEnable() => controls.Default.Enable();
     private void OnDisable()
@@ -108,7 +106,6 @@ public class InputHandler : MonoBehaviour
         deviceIsAssigned = true;
 
         var user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
-
         controls = new Controls();
 
         controls.Default.West.performed += context => OnWest(context);
@@ -160,57 +157,54 @@ public class InputHandler : MonoBehaviour
 
     public void SetupKeyboard()
     {
-        {
-            if (deviceIsAssigned) return;
-            deviceIsAssigned = true;
-            var user = InputUser.PerformPairingWithDevice(Keyboard.current, default(InputUser), InputUserPairingOptions.None);
+        if (deviceIsAssigned) return;
+        deviceIsAssigned = true;
+        var user = InputUser.PerformPairingWithDevice(Keyboard.current, default(InputUser), InputUserPairingOptions.None);
 
-            controls = new Controls();
+        controls = new Controls();
 
-            controls.Default.West.performed += context => OnWest(context);
-            controls.Default.West.canceled += context => OnWest(context);
-            controls.Default.North.performed += context => OnNorth(context);
-            controls.Default.North.canceled += context => OnNorth(context);
-            controls.Default.South.performed += context => OnSouth(context);
-            controls.Default.South.canceled += context => OnSouth(context);
-            controls.Default.East.performed += context => OnEast(context);
-            controls.Default.East.canceled += context => OnEast(context);
+        controls.Default.West.performed += context => OnWest(context);
+        controls.Default.West.canceled += context => OnWest(context);
+        controls.Default.North.performed += context => OnNorth(context);
+        controls.Default.North.canceled += context => OnNorth(context);
+        controls.Default.South.performed += context => OnSouth(context);
+        controls.Default.South.canceled += context => OnSouth(context);
+        controls.Default.East.performed += context => OnEast(context);
+        controls.Default.East.canceled += context => OnEast(context);
 
-            controls.Default.Up.performed += context => OnUp(context);
-            controls.Default.Left.performed += context => OnLeft(context);
-            controls.Default.Right.performed += context => OnRight(context);
-            controls.Default.Down.performed += context => OnDown(context);
+        controls.Default.Up.performed += context => OnUp(context);
+        controls.Default.Left.performed += context => OnLeft(context);
+        controls.Default.Right.performed += context => OnRight(context);
+        controls.Default.Down.performed += context => OnDown(context);
 
-            controls.Default.R1.performed += context => OnR1(context);
-            controls.Default.R1.canceled += context => OnR1(context);
+        controls.Default.R1.performed += context => OnR1(context);
+        controls.Default.R1.canceled += context => OnR1(context);
 
-            controls.Default.R2.performed += _ => OnR2Press();
-            controls.Default.R2.canceled += _ => OnR2Release();
+        controls.Default.R2.performed += _ => OnR2Press();
+        controls.Default.R2.canceled += _ => OnR2Release();
 
-            controls.Default.L1.performed += context => OnL1(context);
-            controls.Default.L1.canceled += context => OnL1(context);
+        controls.Default.L1.performed += context => OnL1(context);
+        controls.Default.L1.canceled += context => OnL1(context);
 
-            controls.Default.L2.performed += _ => OnL2Press();
-            controls.Default.L2.canceled += _ => OnL2Release();
+        controls.Default.L2.performed += _ => OnL2Press();
+        controls.Default.L2.canceled += _ => OnL2Release();
 
-            controls.Default.R3.performed += context => OnR3();
+        controls.Default.R3.performed += context => OnR3();
 
-            controls.Default.Start.performed += _ => OnStart();
-            controls.Default.Select.performed += _ => OnSelect();
+        controls.Default.Start.performed += _ => OnStart();
+        controls.Default.Select.performed += _ => OnSelect();
 
-            controls.Default.Console.performed += _ => OnTouchPad();
+        controls.Default.Console.performed += _ => OnTouchPad();
 
-            controls.Default._1.performed += _ => On1();
-            controls.Default._2.performed += _ => On2();
-            controls.Default._3.performed += _ => On3();
-            controls.Default._4.performed += _ => On4();
+        controls.Default._1.performed += _ => On1();
+        controls.Default._2.performed += _ => On2();
+        controls.Default._3.performed += _ => On3();
+        controls.Default._4.performed += _ => On4();
 
-            directionals = new List<int>();
-            controls.Default.Enable();
-            user.AssociateActionsWithUser(controls);
-        }
+        directionals = new List<int>();
+        controls.Default.Enable();
+        user.AssociateActionsWithUser(controls);
     }
-
 
     public void ResolveInputBuffer()
     {
@@ -337,7 +331,7 @@ public class InputHandler : MonoBehaviour
         }
 
         //IF PLAYER 2, REVERSE INPUTS
-        if (id == 1 || InputManager.Instance.absoluteDirections || InputManager.Instance.updateDirections)
+        if (id == 1)
             inputDirection = TranslateInput(netDirectionals);
         else
         {
@@ -369,7 +363,6 @@ public class InputHandler : MonoBehaviour
         if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
         updatedDirectionals = true;
-
     }
 
     public void ResolveButtons(bool[] temp)
@@ -401,7 +394,6 @@ public class InputHandler : MonoBehaviour
 
         if (foundB && netButtons[3] || foundC && netButtons[1])
         {
-            print("input C + C");
             InputBuffer(7);
         }
         else
@@ -742,10 +734,6 @@ public class InputHandler : MonoBehaviour
     public void OnSelect()
     {
         selectInput?.Invoke();
-        //if (StageManager.Instance != null)
-        //{
-        //    StageManager.Instance.RestartScene();
-        //}
         if (GameHandler.Instance != null)
         {
             GameHandler.Instance.ResetRound();

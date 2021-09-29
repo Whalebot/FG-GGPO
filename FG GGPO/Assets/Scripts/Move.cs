@@ -43,9 +43,9 @@ public class Move : ScriptableObject
     public Attack[] attacks;
     [Header("Move properties")]
     [FoldoutGroup("Cancel properties")] public bool jumpCancelOnBlock;
-    [FoldoutGroup("Cancel  properties")] public bool jumpCancelOnHit = true;
-    [FoldoutGroup("Cancel  properties")] public bool specialCancelOnBlock = true;
-    [FoldoutGroup("Cancel  properties")] public bool specialCancelOnHit = true;
+    [FoldoutGroup("Cancel properties")] public bool jumpCancelOnHit = true;
+    [FoldoutGroup("Cancel properties")] public bool specialCancelOnBlock = true;
+    [FoldoutGroup("Cancel properties")] public bool specialCancelOnHit = true;
     [FoldoutGroup("Move properties")] public bool resetGatling = false;
     [FoldoutGroup("Invul properties")] public bool noClip;
     [ShowIf("noClip")]

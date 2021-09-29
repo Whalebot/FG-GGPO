@@ -30,13 +30,13 @@ MonoBehaviour:
   gatlingMoves: []
   firstStartupFrame: 10
   lastActiveFrame: 14
-  totalMoveDuration: 39
+  totalMoveDuration: 49
   firstGatlingFrame: 15
-  blockAdvantage: -9
-  hitAdvantage: 46
+  blockAdvantage: -19
+  hitAdvantage: 36
   blockCancelAdvantage: 5
   hitCancelAdvantage: 60
-  recoveryFrames: 25
+  recoveryFrames: 35
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: dadbfd72f1b4f464cb53aba9cb6e6f2e, type: 3}
@@ -101,14 +101,14 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
+  jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
   resetGatling: 0
-  noClip: 1
+  noClip: 0
   noClipStart: 5
   noClipDuration: 9
-  invincible: 1
+  invincible: 0
   invincibleStart: 1
   invincibleDuration: 15
   linearInvul: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   forcedCounterHit: 0
-  useAirAction: 0
+  useAirAction: 1
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 1

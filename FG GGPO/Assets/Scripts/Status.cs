@@ -20,6 +20,7 @@ public class Status : MonoBehaviour
     [FoldoutGroup("Frames")] public bool inBlockStun;
     [FoldoutGroup("Frames")] public bool inHitStun;
     [FoldoutGroup("Frames")] public int minusFrames;
+    [FoldoutGroup("Frames")] public int cancelMinusFrames;
 
     [FoldoutGroup("Frames")] public int hitstopCounter;
     [FoldoutGroup("Frames")] public Vector3 pushbackVector;
@@ -206,6 +207,7 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
+     
         if (hitstunValue > 0)
         {
             hitstunValue--;
@@ -221,6 +223,7 @@ public class Status : MonoBehaviour
         }
         if (hitstunValue <= 0 && inHitStun)
         {
+ 
             if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
                 KnockdownRecovery();
 

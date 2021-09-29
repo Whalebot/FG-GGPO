@@ -84,6 +84,9 @@ public class Hitbox : MonoBehaviour
         knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
         attack.gatling = move.gatlingMoves.Count > 0;
 
+        status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
+        other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
+     
         //Check for block
         if (other.blocking)
         {
@@ -184,6 +187,7 @@ public class Hitbox : MonoBehaviour
         else
         {
             status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
+
 
             //Own hitstop
             status.Hitstop();

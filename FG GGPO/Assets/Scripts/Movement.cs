@@ -70,6 +70,7 @@ public class Movement : MonoBehaviour
     {
         strafeTarget = GameHandler.Instance.ReturnPlayer(transform);
         status = GetComponent<Status>();
+        status.hitEvent += Hit;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
@@ -253,6 +254,11 @@ public class Movement : MonoBehaviour
         storedDirection = direction.normalized * jumpVelocity;
     }
 
+    public void Hit() {
+        jumpStartCounter = 0;
+    }
+    
+
     public void Jump()
     {
         if (ground)
@@ -306,12 +312,6 @@ public class Movement : MonoBehaviour
 
         if (!ground && transform.position.y < 0.1F)
         {
-            if (status.currentState == Status.State.Active || status.currentState == Status.State.Recovery)
-            {
-                status.minusFrames = 0;
-                status.frameDataEvent?.Invoke();
-            }
-
             runDirection = Vector3.zero;
             landEvent?.Invoke();
             performedJumps = 0;
