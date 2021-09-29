@@ -1,0 +1,248 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6475013665904511977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6475013665904511983}
+  - component: {fileID: 6475013665904511976}
+  m_Layer: 0
+  m_Name: Input Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6475013665904511983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013665904511977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.85, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6475013667367065373}
+  - {fileID: 6475013666651744619}
+  - {fileID: 6475013666174986748}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6475013665904511976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013665904511977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7272d1af83685ee4b918a86eb4b67442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1Input: {fileID: 6475013667367065372}
+  p2Input: {fileID: 6475013666651744618}
+  controllersConnected: 0
+--- !u!1 &6475013666174986750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6475013666174986748}
+  - component: {fileID: 6475013666174986749}
+  m_Layer: 0
+  m_Name: Stage Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6475013666174986748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013666174986750}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6475013665904511983}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6475013666174986749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013666174986750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82975d7599c208b428e5823959d233bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6475013666651744628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6475013666651744619}
+  - component: {fileID: 6475013666651744618}
+  m_Layer: 0
+  m_Name: P2 Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6475013666651744619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013666651744628}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6475013665904511983}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6475013666651744618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013666651744628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2b77de815f17440839a461384a8aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deviceIsAssigned: 0
+  network: 0
+  id: 0
+  directionOffset: 0
+  controlScheme: 0
+  isBot: 0
+  inputQueue: 
+  bufferWindow: 10
+  dashInputWindow: 20
+  motionInputWindow: 40
+  bufferedInputs: []
+  deletedInputs: []
+  motionInputCounter: 0
+  R1Hold: 0
+  R2Hold: 0
+  L1Hold: 0
+  L2Hold: 0
+  inputDirection: {x: 0, y: 0}
+  netDirectionals: 00000000
+  heldDirectionals: 00000000
+  netButtons: 000000000000
+  heldButtons: 000000000000
+  directionals: 
+  buttons: 
+  overlayDirectionals: 
+  updatedDirectionals: 0
+  updatedButtons: 0
+  dash: 0
+  bf: 0
+  fb: 0
+  dd: 0
+  extraBuffer: 0
+  isPaused: 0
+  debug: 0
+--- !u!1 &6475013667367065374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6475013667367065373}
+  - component: {fileID: 6475013667367065372}
+  m_Layer: 0
+  m_Name: P1 Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6475013667367065373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013667367065374}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6475013665904511983}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6475013667367065372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475013667367065374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2b77de815f17440839a461384a8aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deviceIsAssigned: 0
+  network: 0
+  id: 0
+  directionOffset: 0
+  controlScheme: 0
+  isBot: 0
+  inputQueue: 
+  bufferWindow: 10
+  dashInputWindow: 20
+  motionInputWindow: 40
+  bufferedInputs: []
+  deletedInputs: []
+  motionInputCounter: 0
+  R1Hold: 0
+  R2Hold: 0
+  L1Hold: 0
+  L2Hold: 0
+  inputDirection: {x: 0, y: 0}
+  netDirectionals: 00000000
+  heldDirectionals: 00000000
+  netButtons: 000000000000
+  heldButtons: 000000000000
+  directionals: 
+  buttons: 
+  overlayDirectionals: 
+  updatedDirectionals: 0
+  updatedButtons: 0
+  dash: 0
+  bf: 0
+  fb: 0
+  dd: 0
+  extraBuffer: 0
+  isPaused: 0
+  debug: 0
