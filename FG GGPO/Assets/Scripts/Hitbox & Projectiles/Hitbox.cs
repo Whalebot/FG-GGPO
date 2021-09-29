@@ -13,10 +13,10 @@ public class Hitbox : MonoBehaviour
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
-    [SerializeField] List<Status> enemyList;
+    [SerializeField] public List<Status> enemyList;
     MeshRenderer mr;
-    Transform colPos;
-    bool hitOnce;
+   protected Transform colPos;
+    protected bool hitOnce;
 
     private void Awake()
     {
@@ -43,23 +43,20 @@ public class Hitbox : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // if (!other.transform.IsChildOf(body))
+        if (hitOnce) return;
+        Status enemyStatus = other.GetComponentInParent<Status>();
+
+        if (enemyStatus != null)
         {
-            if (hitOnce) return;
-            Status enemyStatus = other.GetComponentInParent<Status>();
+            if (status == enemyStatus) return;
 
-            if (enemyStatus != null)
+            if (!enemyList.Contains(enemyStatus))
             {
-                if (status == enemyStatus) return;
-
-                if (!enemyList.Contains(enemyStatus))
-                {
-                    colPos = other.gameObject.transform;
-                    if (enemyStatus.invincible) return;
-                    else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
-                    enemyList.Add(enemyStatus);
-                    DoDamage(enemyStatus, 1);
-                }
+                colPos = other.gameObject.transform;
+                if (enemyStatus.invincible) return;
+                else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
+                enemyList.Add(enemyStatus);
+                DoDamage(enemyStatus, 1);
             }
         }
     }
@@ -86,7 +83,7 @@ public class Hitbox : MonoBehaviour
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
-     
+
         //Check for block
         if (other.blocking)
         {

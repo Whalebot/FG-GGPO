@@ -63,10 +63,10 @@ public class CameraController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (frontCamera)
-            Gizmos.color = Color.blue;
-        else Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 1);
-        Gizmos.DrawSphere(yVector, 0.5F);
+        //if (frontCamera)
+        //    Gizmos.color = Color.blue;
+        //else Gizmos.color = Color.red;
+        //Gizmos.DrawSphere(transform.position, 1);
+        //Gizmos.DrawSphere(yVector, 0.5F);
     }
 }

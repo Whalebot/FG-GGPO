@@ -116,6 +116,9 @@ MonoBehaviour:
   invincible: 1
   invincibleStart: 1
   invincibleDuration: 3
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 1
   linearInvulStart: 1
   linearInvulDuration: 14
@@ -131,6 +134,6 @@ MonoBehaviour:
   m:
   - startFrame: 1
     duration: 15
-    momentum: {x: -8, y: 0, z: 0}
+    momentum: {x: -10, y: 0, z: 0}
     homing: 1
     resetVelocityDuringRecovery: 1

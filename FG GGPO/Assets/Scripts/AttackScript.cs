@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 public class AttackScript : MonoBehaviour
 {
     private Status status;
-    [FoldoutGroup("Components")] public HitboxContainer containerScript;
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
 
@@ -44,7 +43,6 @@ public class AttackScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        containerScript = GetComponentInChildren<HitboxContainer>();
         status = GetComponent<Status>();
         movement = GetComponent<Movement>();
         sfx = GetComponentInChildren<CharacterSFX>();
@@ -217,7 +215,7 @@ public class AttackScript : MonoBehaviour
         {
             if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
             {
-                print("Hitbox " + GameHandler.Instance.gameFrameCount);
+               // print("Hitbox " + GameHandler.Instance.gameFrameCount);
                 status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
@@ -295,7 +293,17 @@ public class AttackScript : MonoBehaviour
                 status.EnableCollider();
             }
         }
-        //Noclip
+        //Projectile Invul
+        if (activeMove.projectileInvul)
+        {
+            if (attackFrames == activeMove.projectileInvulStart)
+                status.projectileInvul = true;
+            else if (attackFrames >= activeMove.projectileInvulStart + activeMove.projectileInvulDuration)
+            {
+                status.projectileInvul = false;
+            }
+        }
+        //Linear Invul
         if (activeMove.linearInvul)
         {
             if (attackFrames == activeMove.linearInvulStart)
@@ -354,7 +362,6 @@ public class AttackScript : MonoBehaviour
 
         Startup();
         landCancel = move.landCancel;
-        ResetFrames();
 
         startupEvent?.Invoke();
         attacking = true;
@@ -487,14 +494,6 @@ public class AttackScript : MonoBehaviour
         }
     }
 
-    public void ResetFrames()
-    {
-        containerScript.DeactivateHitboxes();
-        recoveryEvent?.Invoke();
-        attacking = false;
-        attackString = false;
-    }
-
     void ResetCombo()
     {
         combo = 0;
@@ -502,45 +501,37 @@ public class AttackScript : MonoBehaviour
 
     void HitstunEvent()
     {
-        newAttack = false;
-        attacking = false;
-        attackString = false;
-        combo = 0;
-        jumpFrameCounter = 0;
-        ClearHitboxes();
-        containerScript.InterruptAttack();
-        containerScript.DeactivateParticles();
+        ResetAllValues();
     }
 
     public void JumpCancel()
     {
-            if (attacking) status.rb.velocity = Vector3.zero;
-            //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
-            status.GoToState(Status.State.Recovery);
-            attackString = false;
-            movementOption = null;
-            activeMove = null;
-            combo = 0;
-            ClearHitboxes();
-            attacking = false;
-            landCancel = false;
-            recoveryEvent?.Invoke();
+        if (attacking) status.rb.velocity = Vector3.zero;
+        //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
+        status.GoToState(Status.State.Recovery);
+        attackString = false;
+        movementOption = null;
+        activeMove = null;
+        combo = 0;
+        ClearHitboxes();
+        attacking = false;
+        landCancel = false;
+        recoveryEvent?.Invoke();
 
-            jumpFrameCounter = jumpMinusFrames;
-            status.minusFrames = -jumpMinusFrames;
-            status.frameDataEvent?.Invoke();
-            movement.LookAtOpponent();
+        jumpFrameCounter = jumpMinusFrames;
+        status.minusFrames = -jumpMinusFrames;
+        status.frameDataEvent?.Invoke();
+        movement.LookAtOpponent();
     }
 
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
-
+        newAttack = false;
         attackString = false;
         activeMove = null;
         combo = 0;
         jumpFrameCounter = 0;
-        status.GoToState(Status.State.Neutral);
         specialCancel = false;
         attacking = false;
         gatling = false;
@@ -556,7 +547,7 @@ public class AttackScript : MonoBehaviour
     public void ThrowBreak()
     {
         ResetAllValues();
-
+        status.GoToState(Status.State.Neutral);
         movement.LookAtOpponent();
     }
 
@@ -565,7 +556,7 @@ public class AttackScript : MonoBehaviour
         if (!newAttack)
         {
             ResetAllValues();
-
+            status.GoToState(Status.State.Neutral);
             if (status.groundState == GroundState.Grounded)
                 movement.LookAtOpponent();
         }

@@ -6,46 +6,32 @@ public class DelayProjectile : Projectile
 {
     public int delay;
     Transform target;
-
+    Collider col;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
+        col = GetComponent<Collider>();
     }
 
     private void Start()
     {
         target = GameHandler.Instance.ReturnPlayer(status.transform);
+        col.enabled = false;
     }
 
-
-    private void FixedUpdate()
-    {
-
-    }
 
     public override void Movement()
     {
         if (delay > 0)
         {
             delay--;
-            if (delay == 0) transform.LookAt(target);
+            if (delay == 0)
+            {
+                transform.LookAt(target);
+                col.enabled = true;
+            }
         }
         if (delay <= 0)
             rb.velocity = transform.forward * velocity;
-    }
-
-    new void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
-
-    public override void DoDamage(Status other, float dmgMod)
-    {
-        if (!hit)
-            base.DoDamage(other, dmgMod);
-        hit = true;
-
-        Destroy(gameObject);
     }
 }

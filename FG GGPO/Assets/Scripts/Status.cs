@@ -65,6 +65,7 @@ public class Status : MonoBehaviour
     [FoldoutGroup("State")] public bool counterhitState;
     [FoldoutGroup("State")] public bool crossupState;
     [FoldoutGroup("State")] public bool invincible;
+    [FoldoutGroup("State")] public bool projectileInvul;
     [FoldoutGroup("State")] public bool linearInvul;
 
     public int maxHealth;
@@ -563,7 +564,16 @@ public class Status : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         pushbackVector = direction;
-
+        float mag = pushbackVector.magnitude;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, pushbackVector, out hit, mag/2, mov.wallMask)) {
+            print((mag - hit.distance));
+            Debug.DrawRay(transform.position, pushbackVector, Color.yellow);
+            Debug.DrawRay(GameHandler.Instance.ReturnPlayer(transform).position, - pushbackVector.normalized * (mag - hit.distance), Color.yellow);
+            Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
+            enemyStatus.newMove = true;
+            enemyStatus.TakePushback(-pushbackVector.normalized * (mag - hit.distance));
+        }
     }
 
     public void TakeThrow(int animationID)

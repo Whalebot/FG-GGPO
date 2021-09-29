@@ -56,7 +56,7 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 7}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundBlockProperty:
@@ -115,6 +115,9 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
@@ -132,4 +135,4 @@ MonoBehaviour:
     duration: 5
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
-    resetVelocityDuringRecovery: 1
+    resetVelocityDuringRecovery: 0

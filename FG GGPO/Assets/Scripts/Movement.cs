@@ -44,6 +44,7 @@ public class Movement : MonoBehaviour
     RaycastHit hit;
     [TabGroup("Jump")] public float offset;
     [TabGroup("Jump")] public LayerMask groundMask;
+    [TabGroup("Jump")] public LayerMask wallMask;
     [TabGroup("Jump")] public float[] jumpHeight;
     [TabGroup("Jump")] public float fallMultiplier;
     [TabGroup("Jump")] public int minimumJumpTime = 2;

@@ -48,7 +48,9 @@ MonoBehaviour:
     startupFrame: 10
     activeFrames: 1
     gatlingFrames: 5
+    attackType: 0
     attackHeight: 1
+    homing: 0
     groundHitProperty:
       damage: 1000
       stun: 20
@@ -113,10 +115,16 @@ MonoBehaviour:
   noClipDuration: 10
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 6
-  counterhitRecovery: 0
+  invincibleDuration: 10
+  projectileInvul: 1
+  projectileInvulStart: 1
+  projectileInvulDuration: 25
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
   noHitstopOnSelf: 1
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -126,6 +134,6 @@ MonoBehaviour:
   m:
   - startFrame: 1
     duration: 15
-    momentum: {x: 0, y: 0, z: 8}
+    momentum: {x: 0, y: 0, z: 10}
     homing: 0
     resetVelocityDuringRecovery: 1
