@@ -32,6 +32,11 @@ public class InputHandler : MonoBehaviour
     public InputEvent keyboardEvent;
     public InputEvent gamepadEvent;
 
+    public InputEvent leftInput;
+    public InputEvent upInput;
+    public InputEvent rightInput;
+    public InputEvent downInput;
+
     public InputEvent westInput;
     public InputEvent northInput;
     public InputEvent eastInput;
@@ -55,8 +60,7 @@ public class InputHandler : MonoBehaviour
     public InputEvent R3Right;
     public InputEvent R3Left;
     public InputEvent touchPadInput;
-    public InputEvent leftInput;
-    public InputEvent rightInput;
+
 
     public InputEvent dashInput;
 
@@ -612,16 +616,19 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("Up");
         heldDirectionals[0] = !context.canceled;
+        upInput?.Invoke();
     }
     private void OnDown(InputAction.CallbackContext context)
     {
         if (debug) print("Down");
         heldDirectionals[2] = !context.canceled;
+        downInput?.Invoke();
     }
     private void OnRight(InputAction.CallbackContext context)
     {
         if (debug) print("Right");
         heldDirectionals[1] = !context.canceled;
+        rightInput?.Invoke();
     }
     void ChangeControlScheme(InputAction.CallbackContext context)
     {
