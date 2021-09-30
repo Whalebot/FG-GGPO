@@ -36,7 +36,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
     [FoldoutGroup("Move properties")] public bool specialCancel;
-    bool newAttack;
+    [HideInInspector] public bool newAttack;
     [HideInInspector] public int combo;
     List<Move> usedMoves;
 
@@ -215,7 +215,7 @@ public class AttackScript : MonoBehaviour
         {
             if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
             {
-               // print("Hitbox " + GameHandler.Instance.gameFrameCount);
+                // print("Hitbox " + GameHandler.Instance.gameFrameCount);
                 status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
@@ -536,9 +536,14 @@ public class AttackScript : MonoBehaviour
         attacking = false;
         gatling = false;
         landCancel = false;
-        status.counterhitState = false;
-        recoveryEvent?.Invoke();
 
+        status.counterhitState = false;
+        status.projectileInvul = false;
+        status.invincible = false;
+        status.linearInvul = false;
+
+        recoveryEvent?.Invoke();
+        usedMoves.Clear();
         //movement.storedDirection = Vector3.zero;
 
         ClearHitboxes();

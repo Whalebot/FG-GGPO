@@ -40,17 +40,17 @@ public class Projectile : Hitbox
         if (!delayDestroy)
             GameHandler.Instance.advanceGameState += FramePassed;
         delayDestroy = true;
-
+        hitOnce = true;
         //Hit FX
         if (move.hitFX != null)
             Instantiate(move.hitFX, colPos.position, colPos.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
+            Instantiate(VFXManager.Instance.defaultProjectileVFX, transform.position, transform.rotation);
 
         if (move.hitSFX != null)
             Instantiate(move.hitSFX, colPos.position, colPos.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+            Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
     }
 
     void FramePassed()
@@ -87,9 +87,26 @@ public class Projectile : Hitbox
     new void OnTriggerEnter(Collider other)
     {
         if (hitOnce) return;
+
+        Projectile proj = other.GetComponentInParent<Projectile>();
+        if (proj != null && destroyOnProjectileClash)
+        {
+            life--;
+
+            DestroyProjectile();
+        }
+
+        Hitbox hitbox = other.GetComponent<Hitbox>();
+        if (hitbox != null && destroyOnHitboxClash)
+        {
+            life--;
+            DestroyProjectile();
+        }
+
+
         Status enemyStatus = other.GetComponentInParent<Status>();
         colPos = other.gameObject.transform;
-        if (enemyStatus != null)
+        if (enemyStatus != null && hitbox == null)
         {
             if (status == enemyStatus) return;
 
@@ -103,19 +120,7 @@ public class Projectile : Hitbox
                 DoDamage(enemyStatus, 1);
             }
         }
-        Projectile proj = other.GetComponentInParent<Projectile>();
-        if (proj != null && destroyOnProjectileClash)
-        {
-            life--;
-            DestroyProjectile();
-        }
 
-        Hitbox hitbox = other.GetComponent<Hitbox>();
-        if (hitbox != null && destroyOnHitboxClash)
-        {
-            life--;
-            DestroyProjectile();
-        }
     }
 
     public override void DoDamage(Status other, float dmgMod)

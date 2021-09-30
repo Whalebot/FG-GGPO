@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6130433937859647864}
   - component: {fileID: 6130433937859647871}
   - component: {fileID: 6130433937859647870}
-  - component: {fileID: 6130433937859647865}
+  - component: {fileID: 6509929162444635496}
   - component: {fileID: 6130433937859647868}
   - component: {fileID: 713820616680700957}
   m_Layer: 16
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6130433937859647865
+--- !u!114 &6509929162444635496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,21 +93,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 6130433937859647811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4c571378d1dad409ec28ed583ef90c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc62ec274067424b81bb793840ba39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 1
-  baseKnockback: 1
   totalDamage: 0
   hitboxID: 0
-  container: {fileID: 0}
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
-  projectile: {fileID: 0}
   body: {fileID: 6130433937859647864}
   enemyList: []
+  destroyOnBlock: 0
+  destroyOnHit: 0
+  life: 0
   velocity: 15
+  destroyOnProjectileClash: 1
+  destroyOnHitboxClash: 1
+  rb: {fileID: 0}
+  hit: 0
 --- !u!54 &6130433937859647868
 Rigidbody:
   m_ObjectHideFlags: 0

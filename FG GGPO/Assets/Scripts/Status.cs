@@ -310,6 +310,11 @@ public class Status : MonoBehaviour
 
     void StateMachine()
     {
+        if (currentState != State.Hitstun && HitStun > 0) {
+            print("Budget solution");
+            GoToState(State.Hitstun);
+        }
+
         switch (currentState)
         {
             case State.Neutral:
@@ -566,9 +571,9 @@ public class Status : MonoBehaviour
         pushbackVector = direction;
         float mag = pushbackVector.magnitude;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, pushbackVector, out hit, mag/2, mov.wallMask)) {
-            print((mag - hit.distance));
-            Debug.DrawRay(transform.position, pushbackVector, Color.yellow);
+        if (Physics.Raycast(transform.position, pushbackVector, out hit, mag/4, mov.wallMask)) {
+          //  print((mag - hit.distance));
+           // Debug.DrawRay(transform.position, pushbackVector, Color.yellow);
             Debug.DrawRay(GameHandler.Instance.ReturnPlayer(transform).position, - pushbackVector.normalized * (mag - hit.distance), Color.yellow);
             Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
             enemyStatus.newMove = true;

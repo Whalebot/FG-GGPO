@@ -7,6 +7,8 @@ public class VFXScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        VFXManager.Instance.AddParticle(GetComponent<ParticleSystem>());
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        ps.Pause();
+        VFXManager.Instance.AddParticle(ps);
     }
 }
