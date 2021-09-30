@@ -10,130 +10,125 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5D
+  m_Name: Loli Left Dash
   m_EditorClassIdentifier: 
-  animationID: 33
+  animationID: 102
   hitID: 0
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
-  type: 1
+  type: 2
   collissionState: 0
   groundState: 0
-  isProjectile: 1
-  stance: {fileID: 11400000, guid: 3e425d2055164ca4690fc456c328d4e8, type: 2}
+  isProjectile: 0
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
   firstStartupFrame: 10
-  lastActiveFrame: 10
-  totalMoveDuration: 35
-  firstGatlingFrame: 14
-  blockAdvantage: -5
-  hitAdvantage: 5
-  blockCancelAdvantage: 0
-  hitCancelAdvantage: 0
-  recoveryFrames: 25
-  targetComboMoves:
-  - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
-  - {fileID: 11400000, guid: ec3a7f0f0ba097d46916885d3e3658eb, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  lastActiveFrame: 14
+  totalMoveDuration: 19
+  firstGatlingFrame: 15
+  blockAdvantage: 11
+  hitAdvantage: 21
+  blockCancelAdvantage: 16
+  hitCancelAdvantage: 25
+  recoveryFrames: 5
+  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
-    activeFrames: 1
-    gatlingFrames: 4
+    activeFrames: 5
+    gatlingFrames: 5
     attackType: 0
     attackHeight: 1
     homing: 0
     groundHitProperty:
-      damage: 1000
-      stun: 20
-      hitstop: 10
+      damage: 0
+      stun: 30
+      hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 15
+      stun: 20
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
-      stun: 20
+      damage: 0
+      stun: 40
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 1000
-      stun: 20
-      hitstop: 10
+      damage: 0
+      stun: 30
+      hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 10
+      stun: 20
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1000
-      stun: 20
-      hitstop: 10
+      damage: 0
+      stun: 40
+      hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
-  noClipDuration: 10
-  invincible: 1
+  noClipDuration: 0
+  invincible: 0
   invincibleStart: 1
-  invincibleDuration: 10
-  projectileInvul: 1
+  invincibleDuration: 0
+  projectileInvul: 0
   projectileInvulStart: 1
-  projectileInvulDuration: 15
-  linearInvul: 0
+  projectileInvulDuration: 0
+  linearInvul: 1
   linearInvulStart: 1
-  linearInvulDuration: 0
-  noHitstopOnSelf: 1
+  linearInvulDuration: 14
+  noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 1
-  runMomentum: 1
-  resetVelocityDuringRecovery: 1
+  runMomentum: 0
+  resetVelocityDuringRecovery: 0
   m:
-  - startFrame: 1
-    duration: 15
-    momentum: {x: 0, y: 0, z: 10}
-    homing: 0
+  - startFrame: 0
+    duration: 20
+    momentum: {x: -8, y: 0, z: 0}
+    homing: 1
     resetVelocityDuringRecovery: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DelayProjectile : Projectile
 {
     public int delay;
+    public bool ignoreY;
     Transform target;
     Collider col;
     private void Awake()
@@ -27,7 +28,11 @@ public class DelayProjectile : Projectile
             delay--;
             if (delay == 0)
             {
-                transform.LookAt(target);
+                Vector3 aimTarget = target.position;
+                if (ignoreY) aimTarget.y = transform.position.y;
+                else
+                    aimTarget.y += 0.75F;
+                transform.LookAt(aimTarget);
                 col.enabled = true;
             }
         }

@@ -321,7 +321,7 @@ public class AttackScript : MonoBehaviour
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
         {
-            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame;
+            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame +1;
         }
 
         status.minusFrames = -(move.totalMoveDuration);
@@ -333,6 +333,7 @@ public class AttackScript : MonoBehaviour
 
         if (move.type == MoveType.Movement)
         {
+            movement.runMomentumCounter = 0;
             movementOption = move;
             movementFrames = GameHandler.Instance.gameFrameCount;
         }
@@ -387,7 +388,6 @@ public class AttackScript : MonoBehaviour
         {
             if (movement.performedJumps <= 0)
             {
-                print("Air Action");
                 movement.performedJumps++;
                 return true;
             }
@@ -501,6 +501,8 @@ public class AttackScript : MonoBehaviour
 
     void HitstunEvent()
     {
+        movementOption = null;
+
         ResetAllValues();
     }
 
@@ -527,6 +529,7 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
+
         newAttack = false;
         attackString = false;
         activeMove = null;

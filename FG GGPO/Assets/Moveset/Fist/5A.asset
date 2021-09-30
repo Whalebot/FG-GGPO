@@ -42,13 +42,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   firstStartupFrame: 8
   lastActiveFrame: 8
-  totalMoveDuration: 23
+  totalMoveDuration: 20
   firstGatlingFrame: 14
-  blockAdvantage: 0
-  hitAdvantage: 5
-  blockCancelAdvantage: 6
+  blockAdvantage: 3
+  hitAdvantage: 8
+  blockCancelAdvantage: 9
   hitCancelAdvantage: 14
-  recoveryFrames: 15
+  recoveryFrames: 12
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
@@ -123,6 +123,9 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Projectile : Hitbox
 {
+    public GameObject explosionVFX;
+    public GameObject explosionSFX;
+
     public bool destroyOnBlock;
     public bool destroyOnHit;
     bool isDestroying;
@@ -13,6 +16,7 @@ public class Projectile : Hitbox
     public bool destroyOnProjectileClash = true;
     public bool destroyOnHitboxClash = true;
 
+
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool hit;
 
@@ -20,7 +24,7 @@ public class Projectile : Hitbox
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
+        body = transform;
 
     }
 
@@ -42,15 +46,25 @@ public class Projectile : Hitbox
         delayDestroy = true;
         hitOnce = true;
         //Hit FX
-        if (move.hitFX != null)
-            Instantiate(move.hitFX, colPos.position, colPos.rotation);
-        else
-            Instantiate(VFXManager.Instance.defaultProjectileVFX, transform.position, transform.rotation);
+        //if (explosionVFX != null)
+        //    Instantiate(explosionVFX, transform.position, transform.rotation);
+        //else
+        //    Instantiate(VFXManager.Instance.defaultProjectileVFX, transform.position, transform.rotation);
 
-        if (move.hitSFX != null)
-            Instantiate(move.hitSFX, colPos.position, colPos.rotation);
+        //if (explosionSFX != null)
+        //    Instantiate(explosionSFX, transform.position, transform.rotation);
+        //else
+        //    Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
+        //Hit FX
+        if (explosionVFX != null)
+            Instantiate(explosionVFX, colPos.position, transform.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
+            Instantiate(VFXManager.Instance.defaultProjectileVFX, colPos.position, transform.rotation);
+
+        if (explosionSFX != null)
+            Instantiate(explosionSFX, colPos.position, transform.rotation);
+        else
+            Instantiate(VFXManager.Instance.defaultProjectileSFX, colPos.position, transform.rotation);
     }
 
     void FramePassed()
@@ -87,7 +101,7 @@ public class Projectile : Hitbox
     new void OnTriggerEnter(Collider other)
     {
         if (hitOnce) return;
-
+        colPos = other.gameObject.transform;
         Projectile proj = other.GetComponentInParent<Projectile>();
         if (proj != null && destroyOnProjectileClash)
         {
@@ -105,7 +119,7 @@ public class Projectile : Hitbox
 
 
         Status enemyStatus = other.GetComponentInParent<Status>();
-        colPos = other.gameObject.transform;
+
         if (enemyStatus != null && hitbox == null)
         {
             if (status == enemyStatus) return;

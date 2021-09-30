@@ -599,6 +599,8 @@ MonoBehaviour:
   defaultHitSFX: {fileID: 3797316729740095628, guid: 79ac4eef1fdf99241afa26b223b7e98a, type: 3}
   defaultBlockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterHitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
+  defaultProjectileVFX: {fileID: 108546, guid: ab93a26950c85c140b6d2d306a1f7b49, type: 3}
+  defaultProjectileSFX: {fileID: 3797316729740095628, guid: eba7b8a36687ea04687412c72f0b32e6, type: 3}
   recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
   wakeupFX: {fileID: 2648046891202104306, guid: 3fc83c38f7c4da441a6e0c459f5db94f, type: 3}
   particles: []
@@ -731,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runNormally: 1
-  showHitboxes: 0
+  showHitboxes: 1
   showHurtboxes: 0
   playersInGame: 0
   p1Transform: {fileID: 0}

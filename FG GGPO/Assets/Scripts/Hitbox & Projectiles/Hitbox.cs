@@ -93,7 +93,11 @@ public class Hitbox : MonoBehaviour
     public virtual void CheckAttack(Status other, Attack tempAttack)
     {
         hitOnce = true;
-        knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
+        //knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
+        knockbackDirection = transform.forward;
+        knockbackDirection.y = 0;
+        knockbackDirection = knockbackDirection.normalized;
+
         attack.gatling = move.gatlingMoves.Count > 0;
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));

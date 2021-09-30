@@ -190,7 +190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255511159481468586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -644,6 +644,7 @@ MonoBehaviour:
   landCancel: 0
   jumpCancel: 0
   specialCancel: 0
+  newAttack: 0
   combo: 0
 --- !u!54 &3654780268560206793
 Rigidbody:
@@ -791,7 +792,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   frame: 0
   maxSpeed: 1
-  deaccelerateSpeed: 0
+  deaccelerateSpeed: 0.5
   animationData: []
   strafeSmooth: 0.5
   move: {fileID: 0}
@@ -1037,7 +1038,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907261999107621238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
