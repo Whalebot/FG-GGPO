@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Sirenix.OdinInspector;
+using UnityEngine.InputSystem;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
@@ -85,8 +86,6 @@ public class CameraManager : MonoBehaviour
         p2Y = GameHandler.Instance.p2Transform.position.y;
 
         float modLerp = Mathf.SmoothDamp(camTransposer.m_FollowOffset.z, startZOffset - p1Y * heightMod, ref refVelocity, modSmooth);
-
-
         camTransposer.m_FollowOffset.z = modLerp;
 
         Vector3 v1 = new Vector3(p1.position.x, 0, p1.position.z);
@@ -120,30 +119,40 @@ public class CameraManager : MonoBehaviour
         if (dist1 < dist2 + deadZone && toggle)
         {
             FlipCamera();
-            toggleCounter = 0;
-            input1.id = 1;
-            input2.id = 2;
-
-
         }
         else if (dist1 + deadZone > dist2 && !toggle)
         {
             FlipCamera();
-            toggleCounter = 0;
-            input1.id = 2;
-            input2.id = 1;
         }
     }
+
+    public void ResetCamera()
+    {
+        toggleCounter = 0;
+        toggle = false;
+
+        input1.id = 1;
+        input2.id = 2;
+
+        cc1.target = p1;
+        cc1.lookTarget = p2;
+        cc2.target = p2;
+        cc2.lookTarget = p1;
+    }
+
     [Button]
     public void FlipCamera()
     {
         print("flip cam");
-        float dist1 = Vector3.Distance(mainCamera.transform.position, p1.position);
-        float dist2 = Vector3.Distance(mainCamera.transform.position, p2.position);
 
+        toggleCounter = 0;
         if (toggle)
         {
             toggle = false;
+
+            input1.id = 1;
+            input2.id = 2;
+
             cc1.target = p1;
             cc1.lookTarget = p2;
             cc2.target = p2;
@@ -152,8 +161,13 @@ public class CameraManager : MonoBehaviour
         else
         {
             toggle = true;
+
             cc1.target = p2;
             cc1.lookTarget = p1;
+
+            input1.id = 2;
+            input2.id = 1;
+
             cc2.target = p1;
             cc2.lookTarget = p2;
         }
@@ -163,6 +177,7 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame) mainCamera.enabled = !mainCamera.enabled;
         if (shakeTimer > 0)
         {
             shakeTimer -= Time.deltaTime;

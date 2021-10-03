@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962d26227c205334e812547339ca6106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   inputHandler: {fileID: 0}
   marker: {fileID: 8016519877325931364}
   panel: {fileID: 8016519876695356824}
@@ -571,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962d26227c205334e812547339ca6106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   inputHandler: {fileID: 0}
   marker: {fileID: 8016519877325931364}
   panel: {fileID: 8016519876695356824}
@@ -943,6 +945,26 @@ PrefabInstance:
       propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
 --- !u!224 &4315213039136631974 stripped
@@ -1059,6 +1081,26 @@ PrefabInstance:
     - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
       propertyPath: m_text
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584625598427706632, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f482fb35eba58a0449ffbcd033a591e3, type: 3}

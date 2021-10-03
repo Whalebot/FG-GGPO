@@ -255,10 +255,11 @@ public class Movement : MonoBehaviour
         storedDirection = direction.normalized * jumpVelocity;
     }
 
-    public void Hit() {
+    public void Hit()
+    {
         jumpStartCounter = 0;
     }
-    
+
 
     public void Jump()
     {
@@ -307,7 +308,7 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
 
             }
-            if (rb.velocity.y < 0)
+            if (rb.velocity.y < 0 && transform.position.y <= 1.2F)
                 status.AirCollider();
         }
 

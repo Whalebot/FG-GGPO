@@ -104,6 +104,7 @@ public class Status : MonoBehaviour
         health = maxHealth;
         meter = 0;
 
+        comboCounter = 0;
         hitstunValue = 0;
         blockstunValue = 0;
 
