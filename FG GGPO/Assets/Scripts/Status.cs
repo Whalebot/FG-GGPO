@@ -65,6 +65,7 @@ public class Status : MonoBehaviour
     [FoldoutGroup("State")] public bool counterhitState;
     [FoldoutGroup("State")] public bool crossupState;
     [FoldoutGroup("State")] public bool invincible;
+    [FoldoutGroup("State")] public bool projectileInvul;
     [FoldoutGroup("State")] public bool linearInvul;
 
     public int maxHealth;
@@ -103,6 +104,7 @@ public class Status : MonoBehaviour
         health = maxHealth;
         meter = 0;
 
+        comboCounter = 0;
         hitstunValue = 0;
         blockstunValue = 0;
 
@@ -207,7 +209,7 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
-     
+
         if (hitstunValue > 0)
         {
             hitstunValue--;
@@ -223,7 +225,7 @@ public class Status : MonoBehaviour
         }
         if (hitstunValue <= 0 && inHitStun)
         {
- 
+
             if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
                 KnockdownRecovery();
 
@@ -309,6 +311,12 @@ public class Status : MonoBehaviour
 
     void StateMachine()
     {
+        if (currentState == State.Neutral && HitStun > 0)
+        {
+            print("Budget solution");
+            GoToState(State.Hitstun);
+        }
+
         switch (currentState)
         {
             case State.Neutral:
@@ -513,7 +521,9 @@ public class Status : MonoBehaviour
             else GoToGroundState(GroundState.Grounded);
         }
 
+        mov.storedDirection = Vector3.zero;
         TakePushback(kb);
+
 
         int val = 0;
         if (comboCounter > 0)
@@ -546,6 +556,7 @@ public class Status : MonoBehaviour
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)
     {
         mov.runMomentumCounter = 0;
+        mov.storedDirection = Vector3.zero;
 
         Health -= damage;
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
@@ -563,7 +574,20 @@ public class Status : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         pushbackVector = direction;
-
+        Vector3 tempV = pushbackVector;
+        tempV.y = 0;
+        float mag = tempV.magnitude;
+        if (groundState == GroundState.Grounded)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, tempV, out hit, mag / 4, mov.wallMask))
+            {
+                Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
+                enemyStatus.newMove = true;
+                if (enemyStatus.groundState == GroundState.Grounded)
+                    enemyStatus.pushbackVector += (-tempV.normalized * (mag - hit.distance));
+            }
+        }
     }
 
     public void TakeThrow(int animationID)

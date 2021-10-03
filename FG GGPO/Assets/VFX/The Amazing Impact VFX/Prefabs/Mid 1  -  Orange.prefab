@@ -9391,6 +9391,7 @@ GameObject:
   - component: {fileID: 4142521646155784}
   - component: {fileID: 198124039978729808}
   - component: {fileID: 199043944145578584}
+  - component: {fileID: 4466521860536918896}
   m_Layer: 0
   m_Name: Mid 1  -  Orange
   m_TagString: Untagged
@@ -14197,6 +14198,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &4466521860536918896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716202659715490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1731125400282412
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Back Dash
+  m_Name: Loli Left Dash
   m_EditorClassIdentifier: 
-  animationID: 100
+  animationID: 102
   hitID: 0
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
@@ -21,28 +21,28 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
-  type: 0
+  type: 2
   collissionState: 0
   groundState: 0
   isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
-  firstStartupFrame: 5
-  lastActiveFrame: 9
-  totalMoveDuration: 24
-  firstGatlingFrame: 26
-  blockAdvantage: 1
-  hitAdvantage: 11
-  blockCancelAdvantage: 22
-  hitCancelAdvantage: 9
-  recoveryFrames: 15
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 19
+  firstGatlingFrame: 15
+  blockAdvantage: 11
+  hitAdvantage: 21
+  blockCancelAdvantage: 16
+  hitCancelAdvantage: 25
+  recoveryFrames: 5
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
-    startupFrame: 5
+    startupFrame: 10
     activeFrames: 5
-    gatlingFrames: 21
+    gatlingFrames: 5
     attackType: 0
     attackHeight: 1
     homing: 0
@@ -106,17 +106,17 @@ MonoBehaviour:
   specialCancelOnHit: 1
   resetGatling: 0
   noClip: 0
-  noClipStart: 0
+  noClipStart: 1
   noClipDuration: 0
-  invincible: 1
+  invincible: 0
   invincibleStart: 1
-  invincibleDuration: 10
+  invincibleDuration: 0
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
-  linearInvul: 0
+  linearInvul: 1
   linearInvulStart: 1
-  linearInvulDuration: 0
+  linearInvulDuration: 14
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
@@ -125,10 +125,10 @@ MonoBehaviour:
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 0
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   m:
   - startFrame: 0
-    duration: 12
-    momentum: {x: 0, y: 0, z: -8}
-    homing: 0
+    duration: 20
+    momentum: {x: -8, y: 0, z: 0}
+    homing: 1
     resetVelocityDuringRecovery: 1

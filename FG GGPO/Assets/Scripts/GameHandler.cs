@@ -149,7 +149,9 @@ public class GameHandler : MonoBehaviour
     {
         p1Status.ResetStatus();
         p2Status.ResetStatus();
+        counter = 0;
         ResetPosition();
+        CameraManager.Instance.ResetCamera();
     }
 
     [Button]

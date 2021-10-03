@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2207457793526239475}
   - component: {fileID: 4917258513802450924}
   - component: {fileID: 1310680057982903558}
-  - component: {fileID: 5794102245116457387}
+  - component: {fileID: -2983570867557441054}
   m_Layer: 0
   m_Name: Recovery VFX 1
   m_TagString: Untagged
@@ -4880,7 +4880,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5794102245116457387
+--- !u!114 &-2983570867557441054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4889,7 +4889,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2648046891202104306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6363a303b4b062d41a9da204bc6da9a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 2

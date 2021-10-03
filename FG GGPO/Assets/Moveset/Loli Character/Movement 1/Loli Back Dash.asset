@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Back Dash
+  m_Name: Loli Back Dash
   m_EditorClassIdentifier: 
   animationID: 100
   hitID: 0
@@ -30,13 +30,13 @@ MonoBehaviour:
   gatlingMoves: []
   firstStartupFrame: 5
   lastActiveFrame: 9
-  totalMoveDuration: 24
+  totalMoveDuration: 34
   firstGatlingFrame: 26
-  blockAdvantage: 1
-  hitAdvantage: 11
-  blockCancelAdvantage: 22
+  blockAdvantage: -9
+  hitAdvantage: 1
+  blockCancelAdvantage: 12
   hitCancelAdvantage: 9
-  recoveryFrames: 15
+  recoveryFrames: 25
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
   runMomentum: 0
   resetVelocityDuringRecovery: 1
   m:
-  - startFrame: 0
-    duration: 12
-    momentum: {x: 0, y: 0, z: -8}
+  - startFrame: 1
+    duration: 20
+    momentum: {x: 0, y: 0, z: -6}
     homing: 0
     resetVelocityDuringRecovery: 1

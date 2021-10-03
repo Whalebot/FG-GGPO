@@ -5,47 +5,38 @@ using UnityEngine;
 public class DelayProjectile : Projectile
 {
     public int delay;
+    public bool ignoreY;
     Transform target;
-
+    Collider col;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
+        col = GetComponent<Collider>();
     }
 
     private void Start()
     {
         target = GameHandler.Instance.ReturnPlayer(status.transform);
+        col.enabled = false;
     }
 
-
-    private void FixedUpdate()
-    {
-
-    }
 
     public override void Movement()
     {
         if (delay > 0)
         {
             delay--;
-            if (delay == 0) transform.LookAt(target);
+            if (delay == 0)
+            {
+                Vector3 aimTarget = target.position;
+                if (ignoreY) aimTarget.y = transform.position.y;
+                else
+                    aimTarget.y += 0.75F;
+                transform.LookAt(aimTarget);
+                col.enabled = true;
+            }
         }
         if (delay <= 0)
             rb.velocity = transform.forward * velocity;
-    }
-
-    new void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
-
-    public override void DoDamage(Status other, float dmgMod)
-    {
-        if (!hit)
-            base.DoDamage(other, dmgMod);
-        hit = true;
-
-        Destroy(gameObject);
     }
 }

@@ -11,8 +11,6 @@ public class InputHandler : MonoBehaviour
     public bool deviceIsAssigned;
     public bool network;
     public int id;
-    [HideInInspector] public int directionOffset;
-
     public ControlScheme controlScheme = ControlScheme.PS4;
     public delegate void InputEvent();
 
@@ -56,9 +54,10 @@ public class InputHandler : MonoBehaviour
     public InputEvent L1input;
     public InputEvent L2input;
     public InputEvent L2release;
+
+    public InputEvent L3input;
     public InputEvent R3input;
-    public InputEvent R3Right;
-    public InputEvent R3Left;
+
     public InputEvent touchPadInput;
 
 
@@ -91,11 +90,13 @@ public class InputHandler : MonoBehaviour
     // private void OnEnable() => controls.Default.Enable();
     private void OnDisable()
     {
-        if (deviceIsAssigned)
-            controls.Default.Disable();
+        DisableControls();
     }
-    void Awake()
-    {
+    public void DisableControls() {
+        if (deviceIsAssigned) { 
+            controls.Default.Disable();
+            deviceIsAssigned = false;
+        }
     }
     void Start()
     {
@@ -143,6 +144,7 @@ public class InputHandler : MonoBehaviour
         controls.Default.L2.canceled += _ => OnL2Release();
 
         controls.Default.R3.performed += context => OnR3();
+        controls.Default.L3.performed += context => OnL3();
 
         controls.Default.Start.performed += _ => OnStart();
         controls.Default.Select.performed += _ => OnSelect();
@@ -304,9 +306,7 @@ public class InputHandler : MonoBehaviour
             {
                 for (int i = 0; i < heldDirectionals.Length; i++)
                 {
-                    //Look forward
-                    netDirectionals[i] = heldDirectionals[(i + directionOffset) % 4];
-                    //Look back
+                    netDirectionals[i] = heldDirectionals[i];
                 }
                 ResolveButtons(heldButtons);
             }
@@ -533,7 +533,7 @@ public class InputHandler : MonoBehaviour
     public bool CheckDashInput()
     {
         bool result = false;
-        int currentInput = overlayDirectionals[directionals.Count - 1];
+        int currentInput = overlayDirectionals[overlayDirectionals.Count - 1];
         bool foundNeutralInput = false;
         bool foundSameInput = false;
         bool foundNeutralInput2 = false;
@@ -542,30 +542,31 @@ public class InputHandler : MonoBehaviour
         {
             if (overlayDirectionals.Count < i) { break; }
 
-            if (overlayDirectionals[directionals.Count - i] != 5 && overlayDirectionals[directionals.Count - i] != currentInput)
+            if (overlayDirectionals[overlayDirectionals.Count - i] != 5 && overlayDirectionals[overlayDirectionals.Count - i] != currentInput)
             {
                 return false;
             }
-            if (overlayDirectionals[directionals.Count - 2] == currentInput)
+            if (overlayDirectionals[overlayDirectionals.Count - 2] == currentInput)
             {
                 return false;
             }
 
-            if (overlayDirectionals[directionals.Count - i] == 5 && foundSameInput)
+            if (overlayDirectionals[overlayDirectionals.Count - i] == 5 && foundSameInput)
             {
                 foundNeutralInput2 = true;
             }
-            if (overlayDirectionals[directionals.Count - i] == currentInput && foundNeutralInput)
+            if (overlayDirectionals[overlayDirectionals.Count - i] == currentInput && foundNeutralInput)
             {
                 foundSameInput = true;
             }
-            if (overlayDirectionals[directionals.Count - i] == 5)
+            if (overlayDirectionals[overlayDirectionals.Count - i] == 5)
             {
                 foundNeutralInput = true;
             }
 
             if (foundNeutralInput & foundNeutralInput2 && foundSameInput)
             {
+                print("Dash input");
                 if (currentInput == 2)
                 {
                     dashInput?.Invoke();
@@ -802,11 +803,16 @@ public class InputHandler : MonoBehaviour
         L2release?.Invoke();
         L2Hold = false;
     }
-
+    void OnL3()
+    {
+        L3input?.Invoke();
+        print("L3");
+    }
 
     void OnR3()
     {
         R3input?.Invoke();
+        print("R3");
     }
 
     void On1()

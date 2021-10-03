@@ -57,6 +57,11 @@ public class Move : ScriptableObject
     [FoldoutGroup("Invul properties")] public int invincibleStart = 1;
     [ShowIf("invincible")]
     [FoldoutGroup("Invul properties")] public int invincibleDuration;
+    [FoldoutGroup("Invul properties")] public bool projectileInvul;
+    [ShowIf("projectileInvul")]
+    [FoldoutGroup("Invul properties")] public int projectileInvulStart = 1;
+    [ShowIf("projectileInvul")]
+    [FoldoutGroup("Invul properties")] public int projectileInvulDuration;
     [FoldoutGroup("Invul properties")] public bool linearInvul;
     [ShowIf("linearInvul")]
     [FoldoutGroup("Invul properties")] public int linearInvulStart = 1;

@@ -60,13 +60,4 @@ public class CameraController : MonoBehaviour
         transform.position = target.position;
         transform.rotation = Quaternion.LookRotation(lookTarget.position - transform.position);
     }
-
-    private void OnDrawGizmos()
-    {
-        if (frontCamera)
-            Gizmos.color = Color.blue;
-        else Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 1);
-        Gizmos.DrawSphere(yVector, 0.5F);
-    }
 }

@@ -10,9 +10,13 @@ public class InputReplay : MonoBehaviour
     public bool replay;
     public InputLog log;
     public InputLog replayLog;
+    public InputLog recording;
+    public int recordingCounter = -1;
     public int replayID;
+    public int replayStartFrame;
     public InputHandler p1Input;
     public InputHandler p2Input;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,17 +24,67 @@ public class InputReplay : MonoBehaviour
         p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
         p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
 
+        p1Input.R3input += InputManager.Instance.SwitchControls;
+        p2Input.R3input += InputManager.Instance.SwitchControls;
+        p1Input.R3input += StartRecording;
+        p2Input.R3input += StopRecording;
+
+        p1Input.L3input += PlayRecording;
+
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         GameHandler.Instance.advanceGameState += UpdateLog;
 
         if (replay) LoadLog();
+        recordingCounter = -1;
     }
 
 
     void ExecuteFrame()
     {
         if (replay) ReplayLog();
+        if (recordingCounter >= 0) ExecuteRecording();
     }
+
+    public void PlayRecording()
+    {
+        p2Input.isBot = true;
+        replayStartFrame = GameHandler.Instance.gameFrameCount;
+        recordingCounter = 0;
+        print("Start Recording");
+    }
+
+    public void StartRecording()
+    {
+        recording.inputs.Clear();
+        GameHandler.Instance.advanceGameState += UpdateRecording;
+        print("Start Recording");
+    }
+
+
+    public void StopRecording()
+    {
+        GameHandler.Instance.advanceGameState -= UpdateRecording;
+        print("Stop Recording");
+    }
+    public void ExecuteRecording()
+    {
+        if (recording.inputs.Count > recordingCounter)
+        {
+            p2Input.ResolveButtons(recording.inputs[recordingCounter].buttons);
+            for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+            {
+                p2Input.netDirectionals[i] = (recording.inputs[recordingCounter].directionals)[i];
+            }
+            recordingCounter++;
+        }
+        else
+        {
+            print("End Recording");
+            recordingCounter = -1;
+            p2Input.isBot = false;
+        }
+    }
+
     public void ReplayLog()
     {
 
@@ -66,6 +120,22 @@ public class InputReplay : MonoBehaviour
         return temp;
     }
 
+    public void UpdateRecording()
+    {
+        Input temp = new Input();
+        temp.frame = GameHandler.Instance.gameFrameCount;
+
+        for (int i = 0; i < p2Input.heldButtons.Length; i++)
+        {
+            temp.buttons[i] = p2Input.heldButtons[i];
+        }
+        for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+        {
+            temp.directionals[i] = p2Input.netDirectionals[i];
+        }
+        recording.inputs.Add(temp);
+    }
+
     public void UpdateLog()
     {
         Input temp = new Input();
@@ -80,9 +150,7 @@ public class InputReplay : MonoBehaviour
         {
             temp.directionals[i] = p1Input.netDirectionals[i];
         }
-
         log.inputs.Add(temp);
-
     }
 
     [Button]

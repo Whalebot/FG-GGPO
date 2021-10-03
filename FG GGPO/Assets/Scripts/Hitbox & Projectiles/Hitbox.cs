@@ -10,13 +10,14 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
+    bool canClash = true;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
-    [SerializeField] List<Status> enemyList;
+    [SerializeField] public List<Status> enemyList;
     MeshRenderer mr;
-    Transform colPos;
-    bool hitOnce;
+    protected Transform colPos;
+    protected bool hitOnce;
 
     private void Awake()
     {
@@ -43,25 +44,36 @@ public class Hitbox : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // if (!other.transform.IsChildOf(body))
+        if (hitOnce) return;
+        Status enemyStatus = other.GetComponentInParent<Status>();
+        Hitbox hitbox = other.GetComponent<Hitbox>();
+        colPos = other.gameObject.transform;
+
+        if (hitbox != null && canClash)
         {
-            if (hitOnce) return;
-            Status enemyStatus = other.GetComponentInParent<Status>();
+            if (hitbox.GetType() == typeof(Projectile)) return;
+            hitOnce = true;
+            print(move + " clash");
 
-            if (enemyStatus != null)
+            Clash(enemyStatus);
+            return;
+        }
+
+        if (enemyStatus != null)
+        {
+            if (status == enemyStatus) return;
+
+            if (!enemyList.Contains(enemyStatus))
             {
-                if (status == enemyStatus) return;
-
-                if (!enemyList.Contains(enemyStatus))
-                {
-                    colPos = other.gameObject.transform;
-                    if (enemyStatus.invincible) return;
-                    else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
-                    enemyList.Add(enemyStatus);
-                    DoDamage(enemyStatus, 1);
-                }
+                canClash = false;
+                if (enemyStatus.invincible) return;
+                else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
+                enemyList.Add(enemyStatus);
+                DoDamage(enemyStatus, 1);
+                return;
             }
         }
+
     }
     void OnDisable()
     {
@@ -81,12 +93,16 @@ public class Hitbox : MonoBehaviour
     public virtual void CheckAttack(Status other, Attack tempAttack)
     {
         hitOnce = true;
-        knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
+        //knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
+        knockbackDirection = transform.forward;
+        knockbackDirection.y = 0;
+        knockbackDirection = knockbackDirection.normalized;
+
         attack.gatling = move.gatlingMoves.Count > 0;
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
-     
+
         //Check for block
         if (other.blocking)
         {
@@ -256,5 +272,29 @@ public class Hitbox : MonoBehaviour
 
         other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID);
         status.counterhitEvent?.Invoke();
+    }
+    void Clash(Status enemyStatus)
+    {
+
+        Collider col = GetComponent<Collider>();
+        col.enabled = false;
+        status.Hitstop();
+        status.newMove = true;
+        status.hitstopCounter = 25;
+
+        //Hit FX
+        if (move.hitFX != null)
+            Instantiate(move.hitFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
+
+        if (move.hitSFX != null)
+            Instantiate(move.hitSFX, colPos.position, colPos.rotation);
+        else
+            Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+
+
+        attack.newAttack = false;
+        attack.Idle();
     }
 }

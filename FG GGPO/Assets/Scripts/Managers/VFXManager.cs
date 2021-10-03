@@ -15,6 +15,9 @@ public class VFXManager : MonoBehaviour
     public GameObject defaultBlockSFX;
     public GameObject counterHitSFX;
 
+    public GameObject defaultProjectileVFX;
+    public GameObject defaultProjectileSFX;
+
     public GameObject recoveryFX;
     public GameObject wakeupFX;
 
