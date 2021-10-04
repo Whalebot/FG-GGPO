@@ -437,7 +437,6 @@ MonoBehaviour:
   deviceIsAssigned: 0
   network: 0
   id: 0
-  directionOffset: 0
   controlScheme: 0
   isBot: 0
   inputQueue: 
@@ -566,6 +565,10 @@ MonoBehaviour:
   invincible: 0
   projectileInvul: 0
   linearInvul: 0
+  airInvul: 0
+  headInvul: 0
+  bodyInvul: 0
+  footInvul: 0
   maxHealth: 10000
   health: 10000
   maxMeter: 100
@@ -636,9 +639,12 @@ MonoBehaviour:
   attackID: 0
   attackFrames: 0
   movementFrames: 0
+  movementframes: 0
   movementOption: {fileID: 0}
-  jumpMinusFrames: 5
   jumpFrameCounter: 0
+  jumpActionDelay: 5
+  jumpActionDelayCounter: 0
+  jumpDelay: 0
   attacking: 0
   attackString: 0
   landCancel: 0

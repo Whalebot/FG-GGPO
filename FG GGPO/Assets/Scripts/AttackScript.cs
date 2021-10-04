@@ -26,10 +26,13 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Debug")] public int attackFrames;
 
     [FoldoutGroup("Debug")] public int movementFrames;
-
+    [FoldoutGroup("Debug")] public int movementframes;
 
     [FoldoutGroup("Debug")] public Move movementOption;
     [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
+    [FoldoutGroup("Jump Startup")] public int jumpActionDelay;
+    [FoldoutGroup("Jump Startup")] public int jumpActionDelayCounter;
+    [FoldoutGroup("Jump Startup")] public bool jumpDelay;
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
@@ -70,7 +73,21 @@ public class AttackScript : MonoBehaviour
             {
                 jumpFrameCounter--;
                 if (jumpFrameCounter <= 0)
+                {
                     status.GoToState(Status.State.Neutral);
+                    jumpActionDelayCounter = jumpActionDelay;
+                }
+
+            }
+            if (jumpActionDelayCounter > 0)
+            {
+                jumpDelay = true;
+                jumpActionDelayCounter--;
+                if (jumpActionDelayCounter <= 0)
+                {
+                    jumpDelay = false;
+                }
+
             }
 
             if (movementOption != null)
@@ -227,7 +244,7 @@ public class AttackScript : MonoBehaviour
                         hitbox.attack = this;
                         hitbox.status = status;
                         hitbox.move = activeMove;
-                        if (activeMove.isProjectile) hitboxes[i] = null;
+                        if (activeMove.attacks[i].attackType == AttackType.Projectile) hitboxes[i] = null;
                     }
                 }
             }
@@ -494,7 +511,7 @@ public class AttackScript : MonoBehaviour
 
     public bool Attack(Move move)
     {
-
+        if (jumpDelay) return false;
         if (TargetCombo(move)) return true;
         //print(GameHandler.Instance.gameFrameCount +" " +  move + " Attack start");
         if (!CanUseMove(move)) return false;

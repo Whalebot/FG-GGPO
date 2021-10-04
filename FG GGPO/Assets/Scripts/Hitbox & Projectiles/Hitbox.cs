@@ -52,11 +52,15 @@ public class Hitbox : MonoBehaviour
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
-            hitOnce = true;
-            print(move + " clash");
+            if (!CheckInvul(enemyStatus) && !hitbox.CheckInvul(status))
+            {
+                hitOnce = true;
 
-            Clash(enemyStatus);
-            return;
+                Clash(enemyStatus);
+                return;
+            }
+
+
         }
 
         if (enemyStatus != null)
@@ -73,6 +77,8 @@ public class Hitbox : MonoBehaviour
                 return;
             }
         }
+
+
     }
 
     public bool CheckInvul(Status enemyStatus)
