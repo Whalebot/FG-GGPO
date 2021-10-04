@@ -546,6 +546,8 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 if (input.bufferedInputs[i].id == 7)
                 {
+                    Instantiate(VFXManager.Instance.throwBreakVFX, transform.position, transform.rotation);
+                    Instantiate(VFXManager.Instance.throwBreakSFX, transform.position, transform.rotation);
                     status.ThrowBreak();
                     GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>().ThrowBreak();
                     bufferID = i;

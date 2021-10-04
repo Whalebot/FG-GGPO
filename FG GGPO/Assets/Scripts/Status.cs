@@ -67,6 +67,10 @@ public class Status : MonoBehaviour
     [FoldoutGroup("State")] public bool invincible;
     [FoldoutGroup("State")] public bool projectileInvul;
     [FoldoutGroup("State")] public bool linearInvul;
+    [FoldoutGroup("State")] public bool airInvul;
+    [FoldoutGroup("State")] public bool headInvul;
+    [FoldoutGroup("State")] public bool bodyInvul;
+    [FoldoutGroup("State")] public bool footInvul;
 
     public int maxHealth;
     public int health;

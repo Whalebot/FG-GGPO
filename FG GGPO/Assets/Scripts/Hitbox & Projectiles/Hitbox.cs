@@ -66,15 +66,41 @@ public class Hitbox : MonoBehaviour
             if (!enemyList.Contains(enemyStatus))
             {
                 canClash = false;
-                if (enemyStatus.invincible) return;
-                else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return;
+                if (!CheckInvul(enemyStatus)) return;
+
                 enemyList.Add(enemyStatus);
                 DoDamage(enemyStatus, 1);
                 return;
             }
         }
-
     }
+
+    public bool CheckInvul(Status enemyStatus)
+    {
+        if (enemyStatus.invincible) return false;
+        else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return false;
+        switch (move.attacks[hitboxID].bodyProperty)
+        {
+            case BodyProperty.Foot:
+                if (enemyStatus.footInvul) return false;
+                break;
+            case BodyProperty.Body:
+                if (enemyStatus.bodyInvul) return false;
+                break;
+            case BodyProperty.Head:
+                print("head");
+                if (enemyStatus.headInvul) return false;
+                break;
+            case BodyProperty.Air:
+                if (enemyStatus.airInvul) return false;
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
     void OnDisable()
     {
         enemyList.Clear();

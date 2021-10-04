@@ -48,6 +48,8 @@ MonoBehaviour:
     gatlingFrames: 5
     attackType: 0
     attackHeight: 0
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 700
       stun: 30
@@ -113,6 +115,24 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 1
+  headInvulStart: 4
+  headInvulDuration: 20
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0

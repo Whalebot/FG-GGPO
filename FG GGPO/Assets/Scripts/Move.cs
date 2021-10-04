@@ -67,6 +67,27 @@ public class Move : ScriptableObject
     [FoldoutGroup("Invul properties")] public int linearInvulStart = 1;
     [ShowIf("linearInvul")]
     [FoldoutGroup("Invul properties")] public int linearInvulDuration;
+    [FoldoutGroup("Invul properties")] public bool airInvul;
+    [ShowIf("airInvul")]
+    [FoldoutGroup("Invul properties")] public int airInvulStart = 1;
+    [ShowIf("airInvul")]
+    [FoldoutGroup("Invul properties")] public int airInvulDuration;
+    [FoldoutGroup("Invul properties")] public bool headInvul;
+    [ShowIf("headInvul")]
+    [FoldoutGroup("Invul properties")] public int headInvulStart = 1;
+    [ShowIf("headInvul")]
+    [FoldoutGroup("Invul properties")] public int headInvulDuration;
+    [FoldoutGroup("Invul properties")] public bool bodyInvul;
+    [ShowIf("bodyInvul")]
+    [FoldoutGroup("Invul properties")] public int bodyInvulStart = 1;
+    [ShowIf("bodyInvul")]
+    [FoldoutGroup("Invul properties")] public int bodyInvulDuration;
+    [FoldoutGroup("Invul properties")] public bool footInvul;
+    [ShowIf("footInvul")]
+    [FoldoutGroup("Invul properties")] public int footInvulStart = 1;
+    [ShowIf("footInvul")]
+    [FoldoutGroup("Invul properties")] public int footInvulDuration;
+
 
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
@@ -156,10 +177,7 @@ public class Move : ScriptableObject
             CopyProperty(item.groundCounterhitProperty, item.groundHitProperty);
             CopyProperty(item.airCounterhitProperty, item.airHitProperty);
         }
-
     }
-
-
     void CopyProperty(HitProperty hit1, HitProperty hit2)
     {
         FieldInfo[] defInfo1 = hit1.GetType().GetFields();
@@ -205,6 +223,14 @@ public class SFX
 }
 
 [System.Serializable]
+public class CustomHurtbox
+{
+    public int startup = 1;
+    public int duration = 1;
+    public GameObject prefab;
+}
+
+[System.Serializable]
 public class Attack
 {
     public GameObject hitbox;
@@ -213,6 +239,7 @@ public class Attack
     public int gatlingFrames = 1;
     public AttackType attackType = AttackType.Normal;
     public AttackHeight attackHeight = AttackHeight.Mid;
+    public BodyProperty bodyProperty = BodyProperty.Body;
     public bool homing;
     public HitProperty groundHitProperty;
     public HitProperty groundBlockProperty;

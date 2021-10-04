@@ -21,6 +21,12 @@ public class VFXManager : MonoBehaviour
     public GameObject recoveryFX;
     public GameObject wakeupFX;
 
+    public GameObject throwFX;
+    public GameObject throwSFX;
+
+    public GameObject throwBreakVFX;
+    public GameObject throwBreakSFX;
+
     public List<ParticleObject> particles;
     public List<ParticleObject> deletedParticles;
     private void Awake()

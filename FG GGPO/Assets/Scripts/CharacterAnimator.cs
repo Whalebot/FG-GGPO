@@ -29,12 +29,8 @@ public class CharacterAnimator : MonoBehaviour
     private void Awake()
     {
         animationData = new List<AnimationData>();
-    }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
         //   status = GetComponentInParent<Status>();
         anim = GetComponent<Animator>();
         movement = GetComponentInParent<Movement>();
@@ -51,7 +47,16 @@ public class CharacterAnimator : MonoBehaviour
         status.takeAnimationEvent += LockedAnimation;
         status.throwBreakEvent += ThrowBreak;
 
-        GameHandler.Instance.ReturnPlayer(transform.parent).GetComponent<Status>().deathEvent += Win;
+        if (GameHandler.Instance.IsPlayer1(transform.parent))
+        {
+            GameHandler.Instance.p1IntroEvent += Intro;
+            GameHandler.Instance.p1WinEvent += Win;
+        }
+        else
+        {
+            GameHandler.Instance.p2IntroEvent += Intro;
+            GameHandler.Instance.p2WinEvent += Win;
+        }
 
         if (movement != null)
         {
@@ -62,8 +67,21 @@ public class CharacterAnimator : MonoBehaviour
             attack.startupEvent += StartAttack;
             attack.recoveryEvent += AttackRecovery;
         }
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+      
 
     }
+
+    public void Intro()
+    {
+        anim.SetTrigger("Intro");
+    }
+
     public void Win()
     {
         anim.SetTrigger("Win");
@@ -207,8 +225,6 @@ public class CharacterAnimator : MonoBehaviour
     {
         anim.SetTrigger("Parry");
     }
-
-
 
     void StatusAnimation()
     {

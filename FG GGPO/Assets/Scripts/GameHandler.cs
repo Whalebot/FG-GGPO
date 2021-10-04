@@ -10,6 +10,9 @@ using SharedGame;
 public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
+
+    public GameMode gameMode;
+
     public static bool isPaused;
     public static bool cutscene;
     public static int p1CharacterID;
@@ -44,6 +47,11 @@ public class GameHandler : MonoBehaviour
     public GameEvent advanceGameState;
     public GameEvent revertGameState;
     public GameEvent rollbackTick;
+    public GameEvent p1WinEvent;
+    public GameEvent p2WinEvent;
+
+    public GameEvent p1IntroEvent;
+    public GameEvent p2IntroEvent;
 
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
@@ -67,25 +75,32 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
-        Debug.developerConsoleVisible = true;
+        // Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
 
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
+
+        if (gameMode == GameMode.VersusMode)
+            RoundStart();
     }
 
 
 
-    void LoadCharacters() {
-        if (p1CharacterTrainingID != -1) {
+    void LoadCharacters()
+    {
+        if (p1CharacterTrainingID != -1)
+        {
             p1CharacterID = p1CharacterTrainingID;
         }
-        if (p2CharacterTrainingID != -1) {
+        if (p2CharacterTrainingID != -1)
+        {
             p2CharacterID = p2CharacterTrainingID;
         }
 
-        if (p1Transform == null) {
-           GameObject GO = Instantiate(characters[p1CharacterID], p1StartPosition.position, p1StartPosition.rotation);
+        if (p1Transform == null)
+        {
+            GameObject GO = Instantiate(characters[p1CharacterID], p1StartPosition.position, p1StartPosition.rotation);
             p1Transform = GO.transform;
             p1Status = GO.GetComponent<Status>();
         }
@@ -96,12 +111,22 @@ public class GameHandler : MonoBehaviour
             p2Status = GO.GetComponent<Status>();
         }
     }
-
-    public void GameEnd() {
+    public void RoundStart()
+    {
+        p1IntroEvent?.Invoke();
+        p2IntroEvent?.Invoke();
+        StartCoroutine(DelayRoundStart());
+    }
+    IEnumerator DelayRoundStart()
+    {
+        cutscene = true;
+        yield return new WaitForSeconds(3);
+        cutscene = false;
+    }
+    public void GameEnd()
+    {
         StartCoroutine(DelayGameWin());
     }
-
-
     IEnumerator DelayGameWin()
     {
         cutscene = true;
@@ -109,11 +134,10 @@ public class GameHandler : MonoBehaviour
         cutscene = false;
         StageManager.Instance.RestartScene();
     }
-
-
     public void P1Win()
     {
         p1RoundWins++;
+        p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
             GameEnd();
@@ -123,10 +147,10 @@ public class GameHandler : MonoBehaviour
             StartCoroutine(DelayRoundReset());
         }
     }
-
     public void P2Win()
     {
         p2RoundWins++;
+        p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
             GameEnd();
@@ -136,12 +160,21 @@ public class GameHandler : MonoBehaviour
             StartCoroutine(DelayRoundReset());
         }
     }
+    public void Draw()
+    {
+        StartCoroutine(DelayRoundReset());
+    }
 
-    IEnumerator DelayRoundReset() {
-        cutscene = true;
-        yield return new WaitForSeconds(3);
-        cutscene = false;
+    IEnumerator DelayRoundReset()
+    {
+        if (gameMode == GameMode.VersusMode)
+        {
+            cutscene = true;
+            yield return new WaitForSeconds(3);
+            cutscene = false;
+        }
         ResetRound();
+
     }
 
     [Button]
@@ -152,6 +185,8 @@ public class GameHandler : MonoBehaviour
         counter = 0;
         ResetPosition();
         CameraManager.Instance.ResetCamera();
+        if (gameMode == GameMode.VersusMode)
+            RoundStart();
     }
 
     [Button]
@@ -164,17 +199,18 @@ public class GameHandler : MonoBehaviour
         p2Transform.rotation = p2StartPosition.rotation;
     }
 
-
-    private void OnDestroy()
-    {
-
-    }
-
     public Transform ReturnPlayer(Transform source)
     {
         if (source == p1Transform) return p2Transform;
         else return p1Transform;
     }
+
+    public bool IsPlayer1(Transform source)
+    {
+        if (source == p1Transform) return true;
+        else return false;
+    }
+
 
     void StartGame()
     {
@@ -185,10 +221,19 @@ public class GameHandler : MonoBehaviour
     public void AdvanceGameState()
     {
         advanceGameState?.Invoke();
-        UpdateGameState();
+
         gameFrameCount++;
-        counter++;
+        if (!cutscene)
+        {
+            counter++;
+
+        }
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
+        UpdateGameState();
+        if (roundTime <= 0)
+        {
+            TimeoutFinish();
+        }
     }
 
     [Button]
@@ -197,14 +242,37 @@ public class GameHandler : MonoBehaviour
         runNormally = false;
         Physics.autoSimulation = false;
         Physics.Simulate(Time.fixedDeltaTime);
-        rollbackTick?.Invoke();
+        // rollbackTick?.Invoke();
         advanceGameState?.Invoke();
-        UpdateGameState();
+
         gameFrameCount++;
-        counter++;
+        if (!cutscene)
+        {
+            counter++;
+
+        }
+
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
+        if (roundTime <= 0)
+        {
+            TimeoutFinish();
+        }
+    }
 
+    public void TimeoutFinish()
+    {
+        if (p1Status.Health > p2Status.Health)
+            P1Win();
+        else if (p1Status.Health < p2Status.Health)
+            P2Win();
+        else Draw();
+    }
 
+    [Button]
+    public void NormalGameState()
+    {
+        runNormally = true;
+        Physics.autoSimulation = true;
     }
 
     [Button]
@@ -220,7 +288,6 @@ public class GameHandler : MonoBehaviour
 
     void UpdateGameState()
     {
-
         GameState state = new GameState(p1Transform.position, p2Transform.position, p2Transform.rotation, p2Transform.rotation);
         state.p1Health = p1Status.Health;
         state.p2Health = p2Status.Health;
@@ -236,15 +303,17 @@ public class GameHandler : MonoBehaviour
     {
         if (GameManager.Instance != null)
             isPaused = !GameManager.Instance.IsRunning;
-        else isPaused = false;
+        else
+        {
+            isPaused = false;
 
-        CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
 
+        }
 
         if (!isPaused && runNormally)
         {
+            CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
             AdvanceGameState();
-
         }
     }
 
@@ -263,6 +332,10 @@ public class GameHandler : MonoBehaviour
         else if (Keyboard.current.numpad6Key.wasPressedThisFrame)
         {
             AdvanceGameStateButton();
+        }
+        else if (Keyboard.current.numpad5Key.wasPressedThisFrame)
+        {
+            NormalGameState();
         }
     }
 
@@ -287,4 +360,5 @@ public class GameHandler : MonoBehaviour
         }
         Physics.autoSimulation = true;
     }
+
 }
