@@ -20,12 +20,14 @@ public class GrabHitbox : Hitbox
         //Check for airborne or knockdown state
         else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
         {
-          
+
         }
     }
 
     void ExecuteThrow(HitProperty hit, Status other)
     {
+        hitOnce = true;
+
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
@@ -33,11 +35,14 @@ public class GrabHitbox : Hitbox
 
         status.GoToState(Status.State.LockedAnimation);
         other.TakeThrow(move.hitID);
+        attack.newAttack = true;
         attack.Idle();
         attack.AttackProperties(move.throwFollowup);
 
         other.transform.position = grabTransform.position;
         other.transform.rotation = grabTransform.rotation;
-       
+
+        Instantiate(VFXManager.Instance.throwFX, colPos.position, colPos.rotation);
+        Instantiate(VFXManager.Instance.throwSFX, colPos.position, colPos.rotation);
     }
 }

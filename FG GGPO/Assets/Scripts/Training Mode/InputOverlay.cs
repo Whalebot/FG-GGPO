@@ -36,11 +36,16 @@ public class InputOverlay : MonoBehaviour
             inputHandler = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
         else inputHandler = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
 
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        
+    }
+
+    void ExecuteFrame() {
         if (GameHandler.isPaused) return;
 
         Vector2 dir;

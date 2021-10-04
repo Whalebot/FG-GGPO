@@ -29,7 +29,6 @@ public class AttackScript : MonoBehaviour
 
 
     [FoldoutGroup("Debug")] public Move movementOption;
-    [FoldoutGroup("Jump Startup")] public int jumpMinusFrames;
     [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
@@ -61,12 +60,6 @@ public class AttackScript : MonoBehaviour
     private void Awake()
     {
         usedMoves = new List<Move>();
-    }
-
-    private void FixedUpdate()
-    {
-        //ExecuteFrame();
-
     }
 
     public void ExecuteFrame()
@@ -171,7 +164,6 @@ public class AttackScript : MonoBehaviour
                 }
                 else if (attackFrames < firstStartupFrame)
                 {
-                    //print(attack.attackFrames + " Startup");
                     StartupFrames();
                 }
                 else if (attackFrames <= lastActiveFrame)
@@ -205,7 +197,6 @@ public class AttackScript : MonoBehaviour
                 Destroy(hitboxes[i]);
             }
         }
-        //  print("Auto destroy hitbox");
         hitboxes.Clear();
     }
 
@@ -215,7 +206,6 @@ public class AttackScript : MonoBehaviour
         {
             if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
             {
-                // print("Hitbox " + GameHandler.Instance.gameFrameCount);
                 status.GoToState(Status.State.Active);
                 if (hitboxes.Count < i + 1)
                 {
@@ -313,6 +303,46 @@ public class AttackScript : MonoBehaviour
                 status.linearInvul = false;
             }
         }
+        //air Invul
+        if (activeMove.airInvul)
+        {
+            if (attackFrames == activeMove.airInvulStart)
+                status.airInvul = true;
+            else if (attackFrames >= activeMove.airInvulStart + activeMove.airInvulDuration)
+            {
+                status.airInvul = false;
+            }
+        }
+        //head Invul
+        if (activeMove.headInvul)
+        {
+            if (attackFrames == activeMove.headInvulStart)
+                status.headInvul = true;
+            else if (attackFrames >= activeMove.headInvulStart + activeMove.headInvulDuration)
+            {
+                status.headInvul = false;
+            }
+        }
+        //body Invul
+        if (activeMove.bodyInvul)
+        {
+            if (attackFrames == activeMove.bodyInvulStart)
+                status.bodyInvul = true;
+            else if (attackFrames >= activeMove.bodyInvulStart + activeMove.bodyInvulDuration)
+            {
+                status.bodyInvul = false;
+            }
+        }
+        //foot Invul
+        if (activeMove.footInvul)
+        {
+            if (attackFrames == activeMove.footInvulStart)
+                status.footInvul = true;
+            else if (attackFrames >= activeMove.footInvulStart + activeMove.footInvulDuration)
+            {
+                status.footInvul = false;
+            }
+        }
     }
 
     public void AttackProperties(Move move)
@@ -321,7 +351,7 @@ public class AttackScript : MonoBehaviour
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
         {
-            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame +1;
+            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame + 1;
         }
 
         status.minusFrames = -(move.totalMoveDuration);
@@ -513,15 +543,25 @@ public class AttackScript : MonoBehaviour
         status.GoToState(Status.State.Recovery);
         attackString = false;
         movementOption = null;
-        activeMove = null;
+
+        if (activeMove != null)
+        {
+            //if (activeMove.type != MoveType.Movement)
+            //{
+            //    movement.ResetRun();
+            //}
+            //movement.storedDirection = Vector3.zero;
+            activeMove = null;
+        }
+
         combo = 0;
         ClearHitboxes();
         attacking = false;
         landCancel = false;
         recoveryEvent?.Invoke();
 
-        jumpFrameCounter = jumpMinusFrames;
-        status.minusFrames = -jumpMinusFrames;
+        jumpFrameCounter = movement.jumpStartFrames;
+        status.minusFrames = -movement.jumpStartFrames;
         status.frameDataEvent?.Invoke();
         movement.LookAtOpponent();
     }
@@ -532,7 +572,15 @@ public class AttackScript : MonoBehaviour
 
         newAttack = false;
         attackString = false;
-        activeMove = null;
+        if (activeMove != null)
+        {
+            if (activeMove.type != MoveType.Movement)
+            {
+                movement.ResetRun();
+            }
+            activeMove = null;
+        }
+
         combo = 0;
         jumpFrameCounter = 0;
         specialCancel = false;
@@ -547,6 +595,7 @@ public class AttackScript : MonoBehaviour
 
         recoveryEvent?.Invoke();
         usedMoves.Clear();
+        //Cucks airdash
         //movement.storedDirection = Vector3.zero;
 
         ClearHitboxes();

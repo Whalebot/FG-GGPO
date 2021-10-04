@@ -504,7 +504,11 @@ MonoBehaviour:
     inputs: []
   replayLog:
     inputs: []
+  recording:
+    inputs: []
+  recordingCounter: -1
   replayID: 0
+  replayStartFrame: 0
   p1Input: {fileID: 0}
   p2Input: {fileID: 0}
 --- !u!1 &1212849143441753614
@@ -603,6 +607,10 @@ MonoBehaviour:
   defaultProjectileSFX: {fileID: 3797316729740095628, guid: eba7b8a36687ea04687412c72f0b32e6, type: 3}
   recoveryFX: {fileID: 2648046891202104306, guid: c00cd51c8b100bc46b07a6cacdd03145, type: 3}
   wakeupFX: {fileID: 2648046891202104306, guid: 3fc83c38f7c4da441a6e0c459f5db94f, type: 3}
+  throwFX: {fileID: 4537636988911761656, guid: 02f6123dd91ffa14fa6560ee8ffe12ed, type: 3}
+  throwSFX: {fileID: 3797316729740095628, guid: 7992127b82b18e44bbd914b4bc0bccec, type: 3}
+  throwBreakVFX: {fileID: 4537636988911761656, guid: 02f6123dd91ffa14fa6560ee8ffe12ed, type: 3}
+  throwBreakSFX: {fileID: 3797316729740095628, guid: 7992127b82b18e44bbd914b4bc0bccec, type: 3}
   particles: []
   deletedParticles: []
 --- !u!1 &8174696484485854882
@@ -732,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53406c3fce05246856a8898ab958ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMode: 0
   runNormally: 1
   showHitboxes: 1
   showHurtboxes: 0

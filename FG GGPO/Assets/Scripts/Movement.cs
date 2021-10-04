@@ -267,14 +267,12 @@ public class Movement : MonoBehaviour
         {
             LookAtOpponent();
         }
-        // print(GameHandler.Instance.gameFrameCount + " Jump");
 
         sprinting = false;
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
         jumpEvent?.Invoke();
-
         Vector3 temp = storedDirection.normalized;
 
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[0 + performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
@@ -332,9 +330,11 @@ public class Movement : MonoBehaviour
     public void PlayerMovement()
     {
         if (jumpStartCounter <= 0)
+        {
             if (ground)
             {
-                if (runMomentumCounter > 0 && !sprinting && jumpStartCounter <= 0)
+                if (crouching) sprinting = false;
+                if (runMomentumCounter > 0 && !sprinting)
                 {
                     //Run momentum + normal momentum
                     rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);
@@ -347,11 +347,17 @@ public class Movement : MonoBehaviour
             else
             {
                 if (runMomentumCounter > 0)
+                {
+    
                     rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * backWalkSpeed;
+                }
+
                 else
+                {
                     rb.velocity = new Vector3(storedDirection.x, rb.velocity.y, storedDirection.z);
-                //   print(rb.velocity);
+                }
             }
+        }
     }
 
 

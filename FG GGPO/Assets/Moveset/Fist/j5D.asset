@@ -44,7 +44,10 @@ MonoBehaviour:
     startupFrame: 12
     activeFrames: 2
     gatlingFrames: 1
+    attackType: 0
     attackHeight: 1
+    bodyProperty: 3
+    homing: 0
     groundHitProperty:
       damage: 1000
       stun: 40
@@ -103,15 +106,34 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 1
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
-  counterhitRecovery: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0

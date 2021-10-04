@@ -92,8 +92,10 @@ public class InputHandler : MonoBehaviour
     {
         DisableControls();
     }
-    public void DisableControls() {
-        if (deviceIsAssigned) { 
+    public void DisableControls()
+    {
+        if (deviceIsAssigned)
+        {
             controls.Default.Disable();
             deviceIsAssigned = false;
         }
@@ -103,6 +105,11 @@ public class InputHandler : MonoBehaviour
         buttons = new List<bool>();
         bufferedInputs = new List<BufferedInput>();
         deletedInputs = new List<BufferedInput>();
+
+        if (GameHandler.Instance != null)
+        {
+            GameHandler.Instance.advanceGameState += ExecuteFrame;
+        }
     }
 
     public void SetupControls(Gamepad device)
@@ -295,7 +302,7 @@ public class InputHandler : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        ExecuteFrame();
+       // ExecuteFrame();
     }
 
     public void ExecuteFrame()
@@ -566,7 +573,6 @@ public class InputHandler : MonoBehaviour
 
             if (foundNeutralInput & foundNeutralInput2 && foundSameInput)
             {
-                print("Dash input");
                 if (currentInput == 2)
                 {
                     dashInput?.Invoke();

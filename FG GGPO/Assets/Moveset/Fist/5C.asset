@@ -49,6 +49,7 @@ MonoBehaviour:
     gatlingFrames: 3
     attackType: 0
     attackHeight: 1
+    bodyProperty: 2
     homing: 0
     groundHitProperty:
       damage: 1000
@@ -121,6 +122,18 @@ MonoBehaviour:
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
