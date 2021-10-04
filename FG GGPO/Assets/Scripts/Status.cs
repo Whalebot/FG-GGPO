@@ -35,7 +35,8 @@ public class Status : MonoBehaviour
     public StatusEvent frameDataEvent;
     public StatusEvent hitEvent;
     public StatusEvent punishEvent;
-
+    public StatusEvent invincibleEvent;
+    public StatusEvent reversalEvent;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -46,6 +47,7 @@ public class Status : MonoBehaviour
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
     public TransitionEvent throwBreakEvent;
+
 
     public delegate void AnimationEvent(int animationID);
     public AnimationEvent takeAnimationEvent;
@@ -112,8 +114,14 @@ public class Status : MonoBehaviour
         comboCounter = 0;
         hitstunValue = 0;
         blockstunValue = 0;
-
+        inHitStun = false;
         invincible = false;
+        airInvul= false;
+        bodyInvul= false;
+        footInvul = false;
+        headInvul = false;
+        linearInvul = false;
+        projectileInvul = false;
         isDead = false;
 
         groundState = GroundState.Grounded;

@@ -31,8 +31,17 @@ public class ComboSystem : MonoBehaviour
     [TabGroup("Proration Display")] public Slider p2ProrationSlider;
 
 
-    public GameObject p1CounterhitText;
-    public GameObject p2CounterhitText;
+    [FoldoutGroup("On Screen Popups")] public GameObject p1CounterhitText;
+    [FoldoutGroup("On Screen Popups")] public GameObject p2CounterhitText;
+
+    [FoldoutGroup("On Screen Popups")] public GameObject p1PunishText;
+    [FoldoutGroup("On Screen Popups")] public GameObject p2PunishText;
+
+    [FoldoutGroup("On Screen Popups")] public GameObject p1InvincibleText;
+    [FoldoutGroup("On Screen Popups")] public GameObject p2InvincibleText;
+
+    [FoldoutGroup("On Screen Popups")] public GameObject p1ReversalText;
+    [FoldoutGroup("On Screen Popups")] public GameObject p2ReversalText;
 
     int p1Max;
     int p2Max;
@@ -53,6 +62,14 @@ public class ComboSystem : MonoBehaviour
         p2.hitEvent += UpdateP2ComboCounter;
         p1.counterhitEvent += P1Counterhit;
         p2.counterhitEvent += P2Counterhit;
+        p1.punishEvent += P1Punish;
+        p2.punishEvent += P2Punish;
+        p1.invincibleEvent += P1Invincible;
+        p2.invincibleEvent += P2Invincible;
+        p1.reversalEvent += P1Reversal;
+        p2.reversalEvent += P2Reversal;
+
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     // Update is called once per frame
@@ -64,25 +81,66 @@ public class ComboSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+    }
+
+    public void ExecuteFrame() {
         p1Counter--;
         p2Counter--;
-        if (p1Counter <= 0) { p1ComboText.gameObject.SetActive(false); p1CounterhitText.SetActive(false); }
-        if (p2Counter <= 0) { p2ComboText.gameObject.SetActive(false); p2CounterhitText.SetActive(false); }
+        if (p1Counter <= 0) { 
+            p1ComboText.gameObject.SetActive(false); 
+            p1CounterhitText.SetActive(false);
+            p1InvincibleText.SetActive(false);
+            p1ReversalText.SetActive(false);
+            p1PunishText.SetActive(false);
+        }
+        if (p2Counter <= 0) { 
+            p2ComboText.gameObject.SetActive(false); 
+            p2CounterhitText.SetActive(false);
+            p2InvincibleText.SetActive(false);
+            p2ReversalText.SetActive(false);
+            p2PunishText.SetActive(false);
+
+        }
 
         p1ProrationSlider.value = (float)p1.HitStun / 60F;
         p2ProrationSlider.value = (float)p2.HitStun / 60F;
     }
+    public void P1Invincible()
+    {
+        p1InvincibleText.SetActive(true);
+    }
 
+    public void P2Invincible()
+    {
+        p2InvincibleText.SetActive(true);
+    }
+    public void P1Reversal()
+    {
+        p1ReversalText.SetActive(true);
+    }
+
+    public void P2Reversal()
+    {
+        p2ReversalText.SetActive(true);
+    }
+    public void P1Punish()
+    {
+        p1PunishText.SetActive(true);
+    }
+
+    public void P2Punish()
+    {
+        p2PunishText.SetActive(true);
+    }
     public void P1Counterhit()
     {
-
         p2CounterhitText.SetActive(true);
     }
 
     public void P2Counterhit()
     {
         p1CounterhitText.SetActive(true);
-
     }
     public void UpdateP1ComboCounter()
     {
@@ -97,8 +155,6 @@ public class ComboSystem : MonoBehaviour
             p1Max = p1.comboDamage;
         p2MaxComboText.text = "" + p1Max;
         p1ProrationText.text = "" + p1.proration;
-
-
     }
     public void UpdateP2ComboCounter()
     {
@@ -113,6 +169,5 @@ public class ComboSystem : MonoBehaviour
             p2Max = p2.comboDamage;
         p1MaxComboText.text = "" + p2Max;
         p2ProrationText.text = "" + p2.proration;
-
     }
 }

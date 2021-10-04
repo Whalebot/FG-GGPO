@@ -281,6 +281,7 @@ public class AttackScript : MonoBehaviour
         {
             if (attackFrames == activeMove.invincibleStart)
             {
+                status.invincibleEvent?.Invoke();
                 status.invincible = true;
                 status.DisableHurtboxes();
             }
@@ -372,7 +373,6 @@ public class AttackScript : MonoBehaviour
         }
 
         status.minusFrames = -(move.totalMoveDuration);
-
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
 
@@ -399,7 +399,6 @@ public class AttackScript : MonoBehaviour
 
         ClearHitboxes();
         status.crossupState = move.crossupState;
-
         if (movement.ground) movement.LookAtOpponent();
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
@@ -420,9 +419,6 @@ public class AttackScript : MonoBehaviour
             moveset = move.stance;
         }
         else if (mainMoveset != null) moveset = mainMoveset;
-
-
-
         ExecuteFrame();
     }
 

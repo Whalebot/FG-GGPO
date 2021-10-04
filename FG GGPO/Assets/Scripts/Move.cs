@@ -17,6 +17,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("FX")] public GameObject blockSFX;
     [FoldoutGroup("FX")] public GameObject counterhitSFX;
 
+    public AttackLevel attackLevel;
     public MoveType type;
     public BlockState collissionState;
     public GroundState groundState;
@@ -164,6 +165,187 @@ public class Move : ScriptableObject
                 item.airBlockProperty.proration = 0.95F;
             if (item.airCounterhitProperty.proration == 0)
                 item.airCounterhitProperty.proration = 0.95F;
+        }
+
+    }
+
+    [Button]
+    void AutoAssignValues()
+    {
+        switch (attackLevel)
+        {
+            case AttackLevel.Level1:
+                foreach (var item in attacks)
+                {
+                    item.groundHitProperty.hitstop = 8;
+                    item.groundHitProperty.stun = 20;
+                    item.groundHitProperty.proration = 0.75F;
+                    item.groundHitProperty.meterGain = 4;
+
+                    item.groundBlockProperty.hitstop = 8;
+                    item.groundBlockProperty.stun = 15;
+                    item.groundBlockProperty.proration = 0.75F;
+                    item.groundBlockProperty.meterGain = 2;
+
+                    item.groundCounterhitProperty.hitstop = 8;
+                    item.groundCounterhitProperty.stun = 25;
+                    item.groundCounterhitProperty.proration = 0.75F;
+                    item.groundCounterhitProperty.meterGain = 4;
+
+                    item.airHitProperty.hitstop = 8;
+                    item.airHitProperty.stun = 20;
+                    item.airHitProperty.proration = 0.75F;
+                    item.airHitProperty.meterGain = 4;
+
+                    item.airBlockProperty.hitstop = 8;
+                    item.airBlockProperty.stun = 15;
+                    item.airBlockProperty.proration = 0.75F;
+                    item.airBlockProperty.meterGain = 2;
+
+                    item.airCounterhitProperty.hitstop = 8;
+                    item.airCounterhitProperty.stun = 25;
+                    item.airCounterhitProperty.proration = 0.75F;
+                    item.airCounterhitProperty.meterGain = 4;
+                }
+                break;
+            case AttackLevel.Level2:
+                foreach (var item in attacks)
+                {
+                    item.groundHitProperty.hitstop = 9;
+                    item.groundHitProperty.stun = 22;
+                    item.groundHitProperty.proration = 0.8F;
+                    item.groundHitProperty.meterGain = 4;
+
+                    item.groundBlockProperty.hitstop = 9;
+                    item.groundBlockProperty.stun = 17;
+                    item.groundBlockProperty.proration = 0.8F;
+                    item.groundBlockProperty.meterGain = 2;
+
+                    item.groundCounterhitProperty.hitstop = 9;
+                    item.groundCounterhitProperty.stun = 27;
+                    item.groundCounterhitProperty.proration = 0.8F;
+                    item.groundCounterhitProperty.meterGain = 4;
+
+                    item.airHitProperty.hitstop = 9;
+                    item.airHitProperty.stun = 22;
+                    item.airHitProperty.proration = 0.8F;
+                    item.airHitProperty.meterGain = 4;
+
+                    item.airBlockProperty.hitstop = 9;
+                    item.airBlockProperty.stun = 17;
+                    item.airBlockProperty.proration = 0.8F;
+                    item.airBlockProperty.meterGain = 2;
+
+                    item.airCounterhitProperty.hitstop = 9;
+                    item.airCounterhitProperty.stun = 27;
+                    item.airCounterhitProperty.proration = 0.8F;
+                    item.airCounterhitProperty.meterGain = 4;
+                }
+                break;
+            case AttackLevel.Level3:
+                foreach (var item in attacks)
+                {
+                    item.groundHitProperty.hitstop = 10;
+                    item.groundHitProperty.stun = 24;
+                    item.groundHitProperty.proration = 0.85F;
+                    item.groundHitProperty.meterGain = 4;
+
+                    item.groundBlockProperty.hitstop = 10;
+                    item.groundBlockProperty.stun = 19;
+                    item.groundBlockProperty.proration = 0.85F;
+                    item.groundBlockProperty.meterGain = 2;
+
+                    item.groundCounterhitProperty.hitstop = 12;
+                    item.groundCounterhitProperty.stun = 29;
+                    item.groundCounterhitProperty.proration = 0.85F;
+                    item.groundCounterhitProperty.meterGain = 4;
+
+                    item.airHitProperty.hitstop = 10;
+                    item.airHitProperty.stun = 24;
+                    item.airHitProperty.proration = 0.85F;
+                    item.airHitProperty.meterGain = 4;
+
+                    item.airBlockProperty.hitstop = 10;
+                    item.airBlockProperty.stun = 19;
+                    item.airBlockProperty.proration = 0.85F;
+                    item.airBlockProperty.meterGain = 2;
+
+                    item.airCounterhitProperty.hitstop = 12;
+                    item.airCounterhitProperty.stun = 29;
+                    item.airCounterhitProperty.proration = 0.85F;
+                    item.airCounterhitProperty.meterGain = 4;
+                }
+                break;
+            case AttackLevel.Level4:
+                foreach (var item in attacks)
+                {
+                    item.groundHitProperty.hitstop = 11;
+                    item.groundHitProperty.stun = 25;
+                    item.groundHitProperty.proration = 0.90F;
+                    item.groundHitProperty.meterGain = 4;
+
+                    item.groundBlockProperty.hitstop = 11;
+                    item.groundBlockProperty.stun = 20;
+                    item.groundBlockProperty.proration = 0.90F;
+                    item.groundBlockProperty.meterGain = 2;
+
+                    item.groundCounterhitProperty.hitstop = 13;
+                    item.groundCounterhitProperty.stun = 30;
+                    item.groundCounterhitProperty.proration = 0.90F;
+                    item.groundCounterhitProperty.meterGain = 4;
+
+                    item.airHitProperty.hitstop = 11;
+                    item.airHitProperty.stun = 25;
+                    item.airHitProperty.proration = 0.90F;
+                    item.airHitProperty.meterGain = 4;
+
+                    item.airBlockProperty.hitstop = 11;
+                    item.airBlockProperty.stun = 20;
+                    item.airBlockProperty.proration = 0.90F;
+                    item.airBlockProperty.meterGain = 2;
+
+                    item.airCounterhitProperty.hitstop = 13;
+                    item.airCounterhitProperty.stun = 30;
+                    item.airCounterhitProperty.proration = 0.90F;
+                    item.airCounterhitProperty.meterGain = 4;
+                }
+                break;
+            case AttackLevel.Level5:
+                foreach (var item in attacks)
+                {
+                    item.groundHitProperty.hitstop = 12;
+                    item.groundHitProperty.stun = 30;
+                    item.groundHitProperty.proration = 0.95F; 
+                    item.groundHitProperty.meterGain = 4;
+
+                    item.groundBlockProperty.hitstop = 12;
+                    item.groundBlockProperty.stun = 20;
+                    item.groundBlockProperty.proration = 0.95F; 
+                    item.groundBlockProperty.meterGain = 2;
+
+                    item.groundCounterhitProperty.hitstop = 15;
+                    item.groundCounterhitProperty.stun = 40;
+                    item.groundCounterhitProperty.proration = 0.95F; 
+                    item.groundCounterhitProperty.meterGain = 4;
+
+                    item.airHitProperty.hitstop = 12;
+                    item.airHitProperty.stun = 30;
+                    item.airHitProperty.proration = 0.95F; 
+                    item.airHitProperty.meterGain = 4;
+
+                    item.airBlockProperty.hitstop = 12;
+                    item.airBlockProperty.stun = 20;
+                    item.airBlockProperty.proration = 0.95F; 
+                    item.airBlockProperty.meterGain = 2;
+
+                    item.airCounterhitProperty.hitstop = 15;
+                    item.airCounterhitProperty.stun = 40;
+                    item.airCounterhitProperty.proration = 0.95F;
+                    item.airCounterhitProperty.meterGain = 4;
+                }
+                break;
+            default:
+                break;
         }
 
     }
