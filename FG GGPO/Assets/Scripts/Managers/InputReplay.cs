@@ -50,21 +50,18 @@ public class InputReplay : MonoBehaviour
         p2Input.isBot = true;
         replayStartFrame = GameHandler.Instance.gameFrameCount;
         recordingCounter = 0;
-        print("Start Recording");
     }
 
     public void StartRecording()
     {
         recording.inputs.Clear();
         GameHandler.Instance.advanceGameState += UpdateRecording;
-        print("Start Recording");
     }
 
 
     public void StopRecording()
     {
         GameHandler.Instance.advanceGameState -= UpdateRecording;
-        print("Stop Recording");
     }
     public void ExecuteRecording()
     {
@@ -79,7 +76,6 @@ public class InputReplay : MonoBehaviour
         }
         else
         {
-            print("End Recording");
             recordingCounter = -1;
             p2Input.isBot = false;
         }
