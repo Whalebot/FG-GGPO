@@ -21,7 +21,7 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  type: 0
+  type: 1
   collissionState: 0
   groundState: 0
   isProjectile: 0
@@ -39,12 +39,13 @@ MonoBehaviour:
   recoveryFrames: 60
   targetComboMoves: []
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: 28bfcd285fb8b54459b3e66d36ff0e66, type: 3}
     startupFrame: 10
     activeFrames: 5
     gatlingFrames: 5
     attackType: 0
     attackHeight: 1
+    bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 100
@@ -101,9 +102,9 @@ MonoBehaviour:
       hitState: 1
       hitID: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
   resetGatling: 0
   noClip: 1
   noClipStart: 1
@@ -111,9 +112,24 @@ MonoBehaviour:
   invincible: 1
   invincibleStart: 1
   invincibleDuration: 12
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 1

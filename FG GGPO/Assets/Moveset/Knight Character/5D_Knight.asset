@@ -47,6 +47,7 @@ MonoBehaviour:
     gatlingFrames: 5
     attackType: 1
     attackHeight: 1
+    bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 1000
@@ -103,9 +104,9 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
   resetGatling: 0
   noClip: 0
   noClipStart: 1
@@ -113,9 +114,24 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 0
   invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0

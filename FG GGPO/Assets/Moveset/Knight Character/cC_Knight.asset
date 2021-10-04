@@ -12,98 +12,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: cC_Knight
   m_EditorClassIdentifier: 
-  type: 0
-  collissionState: 2
+  animationID: 22
+  hitID: 0
   sfx:
   - startup: 23
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
-  gatlingMoves:
-  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
-  - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  animationID: 22
-  animationClip: {fileID: 0}
+  counterhitSFX: {fileID: 0}
+  type: 0
+  collissionState: 2
+  groundState: 0
+  isProjectile: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
+  gatlingMoves:
+  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
+  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   firstStartupFrame: 25
   lastActiveFrame: 25
-  totalMoveDuration: 55
+  totalMoveDuration: 57
   firstGatlingFrame: 30
-  recoveryFrames: 30
-  canGatling: 1
-  hitSpecialCancelable: 0
-  blockSpecialCancelable: 0
+  blockAdvantage: -12
+  hitAdvantage: 18
+  blockCancelAdvantage: -7
+  hitCancelAdvantage: 45
+  recoveryFrames: 32
+  targetComboMoves: []
   attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: 04943563ebb6fca47894c7385c69af63, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: 1f2857b130736c64eb1699141868b3b8, type: 3}
     startupFrame: 25
     activeFrames: 1
     gatlingFrames: 5
+    attackType: 0
     attackHeight: 0
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 700
       stun: 50
       hitstop: 10
-      proration: 0
+      proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 8}
       hitState: 1
+      hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 0
-      hitstop: 0
-      proration: 0
+      stun: 20
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     groundCounterhitProperty:
       damage: 700
       stun: 90
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     airHitProperty:
       damage: 700
       stun: 90
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      hitID: 0
     airBlockProperty:
       damage: 0
       stun: 15
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      hitID: 0
     airCounterhitProperty:
       damage: 700
       stun: 90
-      hitstop: 0
-      proration: 0
+      hitstop: 5
+      proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
-  particleID: 0
-  landCancel: 0
+      hitID: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  forceCounterhit: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  forcedCounterHit: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
   m:
   - startFrame: 5
-    impulse: 1
     duration: 20
-    momentum: {x: 0, y: 0, z: 8}
+    momentum: {x: 0, y: 0, z: 5}
+    homing: 0
     resetVelocityDuringRecovery: 1

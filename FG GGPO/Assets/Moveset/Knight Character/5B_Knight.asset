@@ -31,12 +31,12 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
   - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
+  - {fileID: 11400000, guid: 57a1fcde1b75f094d8d96e269fa96b1e, type: 2}
   firstStartupFrame: 12
   lastActiveFrame: 14
   totalMoveDuration: 39
@@ -48,19 +48,21 @@ MonoBehaviour:
   recoveryFrames: 25
   targetComboMoves: []
   attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: 04943563ebb6fca47894c7385c69af63, type: 3}
+  - hitbox: {fileID: 3123878921687778490, guid: 534feca517006c74f8c2bc5100ac0ee8, type: 3}
     startupFrame: 12
     activeFrames: 3
     gatlingFrames: 3
     attackType: 0
     attackHeight: 1
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 450
       stun: 27
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 8}
+      pushback: {x: 0, y: 0, z: 9}
       hitState: 0
       hitID: 0
     groundBlockProperty:
@@ -83,11 +85,11 @@ MonoBehaviour:
       hitID: 0
     airHitProperty:
       damage: 450
-      stun: 20
+      stun: 30
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       hitID: 0
     airBlockProperty:
@@ -119,7 +121,24 @@ MonoBehaviour:
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  counterhitRecovery: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
@@ -131,7 +150,7 @@ MonoBehaviour:
   resetVelocityDuringRecovery: 1
   m:
   - startFrame: 1
-    duration: 20
-    momentum: {x: 0, y: 0, z: 10}
+    duration: 10
+    momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 1
