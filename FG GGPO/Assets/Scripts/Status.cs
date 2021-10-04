@@ -34,6 +34,7 @@ public class Status : MonoBehaviour
     public StatusEvent blockEvent;
     public StatusEvent frameDataEvent;
     public StatusEvent hitEvent;
+    public StatusEvent punishEvent;
 
 
     public delegate void TransitionEvent();
@@ -508,6 +509,11 @@ public class Status : MonoBehaviour
     public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+
+        if (currentState == State.Recovery) {
+            punishEvent?.Invoke();
+        }
+
         if (hitState == HitState.Launch || kb.y > 1)
         {
             GoToGroundState(GroundState.Airborne);

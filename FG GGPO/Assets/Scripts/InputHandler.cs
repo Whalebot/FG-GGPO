@@ -141,8 +141,8 @@ public class InputHandler : MonoBehaviour
         controls.Default.R1.performed += context => OnR1(context);
         controls.Default.R1.canceled += context => OnR1(context);
 
-        controls.Default.R2.performed += context => OnR1(context);
-        controls.Default.R2.canceled += context => OnR1(context);
+        controls.Default.R2.performed += context => OnR2Press();
+        controls.Default.R2.canceled += context => OnR2Release();
 
         controls.Default.L1.performed += context => OnL1(context);
         controls.Default.L1.canceled += context => OnL1(context);
@@ -302,7 +302,7 @@ public class InputHandler : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       // ExecuteFrame();
+        // ExecuteFrame();
     }
 
     public void ExecuteFrame()
@@ -812,13 +812,11 @@ public class InputHandler : MonoBehaviour
     void OnL3()
     {
         L3input?.Invoke();
-        print("L3");
     }
 
     void OnR3()
     {
         R3input?.Invoke();
-        print("R3");
     }
 
     void On1()
