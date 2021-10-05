@@ -21,10 +21,10 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
   collissionState: 3
   groundState: 1
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
@@ -131,7 +131,7 @@ MonoBehaviour:
   bodyInvulDuration: 0
   footInvul: 1
   footInvulStart: 3
-  footInvulDuration: 0
+  footInvulDuration: 20
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
