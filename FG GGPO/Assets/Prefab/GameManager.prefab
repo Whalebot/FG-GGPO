@@ -1327,11 +1327,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573244297993740046, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: deadZone
-      value: -0.05
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573244298042959476, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
-      propertyPath: m_DefaultBlend.m_Time
-      value: 2
+    - target: {fileID: 5573244297993740046, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: cameraDeadZone
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244297993740046, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: toggleTimer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298042959479, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.x

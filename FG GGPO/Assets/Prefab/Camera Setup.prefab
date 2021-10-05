@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   lookTarget: {fileID: 0}
-  lerpValue: 0.08
-  rotationLerp: 0.1
-  ignoreY: 0
-  averageHeight: 0
+  lerpValue: 0.2
+  tempLerp: 0
+  tempLerp2: 0
+  rotationLerp: 0.2
   frontCamera: 0
   main: {fileID: 5573244298042959479}
   offset: {x: 0, y: 0, z: 1}
@@ -107,17 +107,24 @@ MonoBehaviour:
   - {fileID: 5573244299070812399}
   leftCamera: {fileID: 5573244299070812399}
   rightCamera: {fileID: 5573244298357222976}
+  shakeTimer: 0
   canSwitchRight: 0
   isRightCamera: 0
-  shakeTimer: 0
+  rightTimer: 0
+  rightCounter: 0
   toggle: 0
   toggleTimer: 30
   toggleCounter: 0
   canCrossUp: 0
+  groundCrossup: 0
   cam1: {fileID: 5573244299070812384}
   cam2: {fileID: 0}
   cc1: {fileID: 5573244299024636423}
   cc2: {fileID: 5573244297467201051}
+  cameraAngle: 0
+  distanceBetweenTargets: 0
+  cameraDeadZone: 0
+  updateCameras: 0
   dist1: 0
   dist2: 0
   v3: {x: 0, y: 0, z: 0}
@@ -263,7 +270,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 1
+    m_Time: 0.8
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -819,10 +826,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   lookTarget: {fileID: 0}
-  lerpValue: 0.08
-  rotationLerp: 0.1
-  ignoreY: 0
-  averageHeight: 0
+  lerpValue: 0.2
+  tempLerp: 0
+  tempLerp2: 0
+  rotationLerp: 0.2
   frontCamera: 0
   main: {fileID: 5573244298042959479}
   offset: {x: 0, y: 0, z: -1}
