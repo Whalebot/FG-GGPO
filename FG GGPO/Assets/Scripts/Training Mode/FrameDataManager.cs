@@ -35,6 +35,8 @@ public class FrameDataManager : MonoBehaviour
         overlay2.attack.startupEvent += P2UpdateHit;
         p1.hitEvent += P2UpdateHit;
         p2.hitEvent += P1UpdateHit;
+        p1.blockEvent += P2UpdateHit;
+        p2.blockEvent += P1UpdateHit;
         p1.knockdownEvent += P2UpdateHit;
         p2.knockdownEvent += P1UpdateHit;
         p1.frameDataEvent += UpdateFrameData;

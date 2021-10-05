@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6130433937859647868}
   - component: {fileID: 7500927992370451724}
   m_Layer: 16
-  m_Name: Hadouken prefab 1
+  m_Name: Fireball Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,8 +105,10 @@ MonoBehaviour:
   status: {fileID: 0}
   body: {fileID: 6130433937859647864}
   enemyList: []
-  destroyOnBlock: 0
-  destroyOnHit: 0
+  explosionVFX: {fileID: 0}
+  explosionSFX: {fileID: 0}
+  destroyOnBlock: 1
+  destroyOnHit: 1
   life: 0
   velocity: 15
   destroyOnProjectileClash: 1

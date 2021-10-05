@@ -10,14 +10,15 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
-    bool canClash = true;
+    [SerializeField] bool canClash = true;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
     [SerializeField] public List<Status> enemyList;
     MeshRenderer mr;
+    protected bool returnWallPushback;
     protected Transform colPos;
-    protected bool hitOnce;
+    [SerializeField] protected bool hitOnce;
 
     private void Awake()
     {
@@ -48,22 +49,20 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
-
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
-            if (!CheckInvul(enemyStatus) && !hitbox.CheckInvul(status))
+            if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
             {
                 hitOnce = true;
-
+                
                 Clash(enemyStatus);
                 return;
             }
 
 
         }
-
-        if (enemyStatus != null)
+        else if (enemyStatus != null)
         {
             if (status == enemyStatus) return;
 
@@ -94,7 +93,6 @@ public class Hitbox : MonoBehaviour
                 if (enemyStatus.bodyInvul) return false;
                 break;
             case BodyProperty.Head:
-                print("head");
                 if (enemyStatus.headInvul) return false;
                 break;
             case BodyProperty.Air:
@@ -125,6 +123,7 @@ public class Hitbox : MonoBehaviour
     public virtual void CheckAttack(Status other, Attack tempAttack)
     {
         hitOnce = true;
+        returnWallPushback = move.attacks[hitboxID].attackType != AttackType.Projectile;
         //knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
         knockbackDirection = transform.forward;
         knockbackDirection.y = 0;
@@ -211,7 +210,7 @@ public class Hitbox : MonoBehaviour
 
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
-        other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection);
+        other.TakeBlock(hit.damage, aVector, hit.stun + hit.hitstop, knockbackDirection, returnWallPushback);
     }
 
 
@@ -220,7 +219,6 @@ public class Hitbox : MonoBehaviour
     {
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
-
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
@@ -242,8 +240,6 @@ public class Hitbox : MonoBehaviour
             status.newMove = true;
             status.hitstopCounter = hit.hitstop;
         }
-
-
 
         //Hit FX
         if (move.hitFX != null)
@@ -259,11 +255,12 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
     }
 
     void ExecuteCounterHit(HitProperty hit, Status other)
     {
+        attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
@@ -286,8 +283,6 @@ public class Hitbox : MonoBehaviour
             status.hitstopCounter = hit.hitstop;
         }
 
-
-
         //Hit FX
         if (move.counterhitFX != null)
             Instantiate(move.counterhitFX, colPos.position, colPos.rotation);
@@ -302,12 +297,13 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID);
+        other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
         status.counterhitEvent?.Invoke();
     }
     void Clash(Status enemyStatus)
     {
-
+        print("Clash");
+        canClash = false;
         Collider col = GetComponent<Collider>();
         col.enabled = false;
         status.Hitstop();
