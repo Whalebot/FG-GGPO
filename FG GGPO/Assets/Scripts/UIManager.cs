@@ -23,11 +23,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     // Update is called once per frame
-    void Update()
+    void ExecuteFrame()
     {
         if (GameHandler.Instance.gameStates.Count - 1 > 0)
         {

@@ -21,10 +21,10 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 4
   type: 0
   collissionState: 0
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
@@ -39,10 +39,10 @@ MonoBehaviour:
   lastActiveFrame: 12
   totalMoveDuration: 32
   firstGatlingFrame: 15
-  blockAdvantage: -3
-  hitAdvantage: 7
-  blockCancelAdvantage: 2
-  hitCancelAdvantage: 24
+  blockAdvantage: -2
+  hitAdvantage: 8
+  blockCancelAdvantage: 3
+  hitCancelAdvantage: 25
   recoveryFrames: 20
   targetComboMoves: []
   attacks:
@@ -52,58 +52,59 @@ MonoBehaviour:
     gatlingFrames: 5
     attackType: 0
     attackHeight: 1
+    bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 1000
-      stun: 29
-      hitstop: 10
+      stun: 30
+      hitstop: 12
       proration: 0.95
-      meterGain: 0
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 19
-      hitstop: 10
+      stun: 20
+      hitstop: 12
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 1000
       stun: 40
-      hitstop: 20
+      hitstop: 15
       proration: 0.95
-      meterGain: 0
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airHitProperty:
       damage: 1000
       stun: 30
-      hitstop: 20
+      hitstop: 12
       proration: 0.95
-      meterGain: 0
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 25
-      hitstop: 10
+      stun: 20
+      hitstop: 12
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: -4}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
       damage: 1000
       stun: 40
-      hitstop: 20
+      hitstop: 15
       proration: 0.95
-      meterGain: 0
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
@@ -124,6 +125,18 @@ MonoBehaviour:
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0

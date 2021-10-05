@@ -25,6 +25,7 @@ public class CameraManager : MonoBehaviour
     [TabGroup("Crossup Cam")] public int toggleTimer;
     [TabGroup("Crossup Cam")] public int toggleCounter;
     [TabGroup("Crossup Cam")] public bool canCrossUp;
+    [TabGroup("Crossup Cam")] public bool groundCrossup;
 
     InputHandler input1;
     InputHandler input2;
@@ -39,6 +40,11 @@ public class CameraManager : MonoBehaviour
     public CameraController cc1;
     public CameraController cc2;
 
+
+    [SerializeField] public float cameraAngle;
+    [SerializeField] public float distanceBetweenTargets;
+    [SerializeField] public float cameraDeadZone;
+    [SerializeField] public bool updateCameras;
     [SerializeField] float dist1;
     [SerializeField] float dist2;
     [SerializeField] Vector3 v3;
@@ -55,6 +61,7 @@ public class CameraManager : MonoBehaviour
     float startZOffset;
     float refVelocity;
     CinemachineTransposer camTransposer;
+    CinemachineTransposer camTransposer2;
 
 
     // Start is called before the first frame update
@@ -75,24 +82,34 @@ public class CameraManager : MonoBehaviour
         cc2.target = p2;
         cc2.lookTarget = p1;
 
-        camTransposer = cameras[1].GetCinemachineComponent<CinemachineTransposer>();
-        startZOffset = cameras[1].GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
+        camTransposer = leftCamera.GetCinemachineComponent<CinemachineTransposer>();
+        camTransposer2 = rightCamera.GetCinemachineComponent<CinemachineTransposer>();
+        startZOffset = leftCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
     }
 
     private void FixedUpdate()
     {
-
+        groundCrossup = canCrossUp && GameHandler.Instance.p1Status.groundState == GroundState.Grounded && GameHandler.Instance.p2Status.groundState == GroundState.Grounded;
         p1Y = GameHandler.Instance.p1Transform.position.y;
         p2Y = GameHandler.Instance.p2Transform.position.y;
 
         float modLerp = Mathf.SmoothDamp(camTransposer.m_FollowOffset.z, startZOffset - p1Y * heightMod, ref refVelocity, modSmooth);
         camTransposer.m_FollowOffset.z = modLerp;
+        camTransposer2.m_FollowOffset.z = modLerp;
 
-        Vector3 v1 = new Vector3(p1.position.x, 0, p1.position.z);
-        Vector3 v2 = new Vector3(p2.position.x, 0, p2.position.z);
+
+        Vector3 v1 = new Vector3(p1.position.x, mainCamera.gameObject.transform.position.y, p1.position.z);
+        Vector3 v2 = new Vector3(p2.position.x, mainCamera.gameObject.transform.position.y, p2.position.z);
 
         dist1 = Vector3.Distance(mainCamera.transform.position, v1);
         dist2 = Vector3.Distance(mainCamera.transform.position, v2);
+        distanceBetweenTargets = Vector3.Distance(v1, v2);
+        updateCameras = distanceBetweenTargets > cameraDeadZone;
+        if (updateCameras)
+        {
+            if (dist1 > dist2) { cameraAngle = Vector3.Angle(mainCamera.transform.forward, v1 - v2); }
+            else cameraAngle = Vector3.Angle(mainCamera.transform.forward, v2 - v1);
+        }
 
         toggleCounter++;
         rightCounter++;
@@ -178,24 +195,6 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame) mainCamera.enabled = !mainCamera.enabled;
-        if (shakeTimer > 0)
-        {
-            shakeTimer -= Time.deltaTime;
-            {
-                for (int i = 0; i < noises.Length; i++)
-                {
-                    noises[i].m_AmplitudeGain = Mathf.Lerp(startIntensity, 0f, (1 - (shakeTimer / startTimer)));
-
-                }
-            }
-        }
-    }
-
-    public void ShakeCamera(float intensity, float time)
-    {
-        //startIntensity = intensity;
-        //shakeTimer = time;
-        //startTimer = time;
     }
 }
 

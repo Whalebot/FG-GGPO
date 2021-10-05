@@ -31,12 +31,12 @@ public class FrameDataManager : MonoBehaviour
             overlay2.attack = p2.GetComponent<AttackScript>();
         }
 
-        overlay1.attack.startupEvent += UpdateHit;
-        overlay2.attack.startupEvent += UpdateHit;
-        p1.hitEvent += UpdateHit;
-        p2.hitEvent += UpdateHit;
-        p1.knockdownEvent += UpdateHit;
-        p2.knockdownEvent += UpdateHit;
+        overlay1.attack.startupEvent += P1UpdateHit;
+        overlay2.attack.startupEvent += P2UpdateHit;
+        p1.hitEvent += P2UpdateHit;
+        p2.hitEvent += P1UpdateHit;
+        p1.knockdownEvent += P2UpdateHit;
+        p2.knockdownEvent += P1UpdateHit;
         p1.frameDataEvent += UpdateFrameData;
         p2.frameDataEvent += UpdateFrameData;
     }
@@ -50,6 +50,26 @@ public class FrameDataManager : MonoBehaviour
         overlay1.UpdateAdvantage(frame, frame + cancelFrame);
         overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
     }
+
+    void P1UpdateHit()
+    {
+        frame = p1.minusFrames - p2.minusFrames;
+        cancelFrame = p1.cancelMinusFrames;
+        overlay1.UpdateStartup();
+        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+    }
+
+    void P2UpdateHit()
+    {
+        frame = p1.minusFrames - p2.minusFrames;
+        cancelFrame = p1.cancelMinusFrames;
+        overlay2.UpdateStartup();
+        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+    }
+
+
 
     // Update is called once per frame
     public void UpdateFrameData()
