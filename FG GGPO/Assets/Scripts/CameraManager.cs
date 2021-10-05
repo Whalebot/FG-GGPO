@@ -155,6 +155,11 @@ public class CameraManager : MonoBehaviour
         cc1.lookTarget = p2;
         cc2.target = p2;
         cc2.lookTarget = p1;
+
+        rightCounter = 0;
+        isRightCamera = false;
+        leftCamera.Priority = 10;
+        rightCamera.Priority = 9;
     }
 
     [Button]

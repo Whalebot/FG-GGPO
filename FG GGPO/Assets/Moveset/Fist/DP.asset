@@ -21,10 +21,10 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 1
   collissionState: 3
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves: []
@@ -43,9 +43,12 @@ MonoBehaviour:
     startupFrame: 10
     activeFrames: 5
     gatlingFrames: 5
+    attackType: 0
     attackHeight: 1
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -54,7 +57,7 @@ MonoBehaviour:
       hitState: 2
       hitID: 0
     groundBlockProperty:
-      damage: 0
+      damage: 100
       stun: 20
       hitstop: 10
       proration: 0.95
@@ -63,7 +66,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -72,7 +75,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -81,7 +84,7 @@ MonoBehaviour:
       hitState: 2
       hitID: 0
     airBlockProperty:
-      damage: 0
+      damage: 100
       stun: 20
       hitstop: 10
       proration: 0.95
@@ -90,7 +93,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 5
       proration: 0.95
@@ -102,15 +105,34 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 1
   noClipStart: 5
   noClipDuration: 9
   invincible: 1
   invincibleStart: 1
   invincibleDuration: 15
-  counterhitRecovery: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

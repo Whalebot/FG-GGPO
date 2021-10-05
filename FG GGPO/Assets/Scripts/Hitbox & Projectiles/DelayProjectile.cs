@@ -18,6 +18,12 @@ public class DelayProjectile : Projectile
     {
         target = GameHandler.Instance.ReturnPlayer(status.transform);
         col.enabled = false;
+
+        if (destroyOnHit)
+            status.hitEvent += DestroyProjectile;
+        if (destroyOnBlock)
+            status.blockEvent += DestroyProjectile;
+
     }
 
 

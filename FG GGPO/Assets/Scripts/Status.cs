@@ -116,8 +116,8 @@ public class Status : MonoBehaviour
         blockstunValue = 0;
         inHitStun = false;
         invincible = false;
-        airInvul= false;
-        bodyInvul= false;
+        airInvul = false;
+        bodyInvul = false;
         footInvul = false;
         headInvul = false;
         linearInvul = false;
@@ -429,7 +429,6 @@ public class Status : MonoBehaviour
                 EnableHurtboxes();
                 inBlockStun = true;
                 minusFrames = -BlockStun;
-                hitEvent?.Invoke();
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
 
@@ -514,11 +513,12 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID, bool returnWallPushback)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
 
-        if (currentState == State.Recovery) {
+        if (currentState == State.Recovery)
+        {
             punishEvent?.Invoke();
         }
 
@@ -540,7 +540,7 @@ public class Status : MonoBehaviour
         }
 
         mov.storedDirection = Vector3.zero;
-        TakePushback(kb);
+        TakePushback(kb,  returnWallPushback);
 
 
         int val = 0;
@@ -571,19 +571,19 @@ public class Status : MonoBehaviour
     }
 
 
-    public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir)
+    public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, bool returnWallPushback)
     {
         mov.runMomentumCounter = 0;
         mov.storedDirection = Vector3.zero;
 
         Health -= damage;
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
-        TakePushback(kb);
+        TakePushback(kb, returnWallPushback);
         BlockStun = stunVal;
         blockEvent?.Invoke();
     }
 
-    public void TakePushback(Vector3 direction)
+    public void TakePushback(Vector3 direction, bool returnWallPushback)
     {
         float temp = Vector3.SignedAngle(new Vector3(direction.x, 0, direction.z), transform.forward, Vector3.up);
         Vector3 tempVector = (Quaternion.Euler(0, temp, 0) * new Vector3(direction.x, 0, direction.z)).normalized;
@@ -595,7 +595,7 @@ public class Status : MonoBehaviour
         Vector3 tempV = pushbackVector;
         tempV.y = 0;
         float mag = tempV.magnitude;
-        if (groundState == GroundState.Grounded)
+        if (returnWallPushback)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, tempV, out hit, mag / 4, mov.wallMask))
@@ -603,7 +603,7 @@ public class Status : MonoBehaviour
                 Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
                 enemyStatus.newMove = true;
                 if (enemyStatus.groundState == GroundState.Grounded)
-                    enemyStatus.pushbackVector += (-tempV.normalized * (mag - hit.distance));
+                    enemyStatus.pushbackVector += (-tempV.normalized * (mag * 2 / 3 - hit.distance));
             }
         }
     }

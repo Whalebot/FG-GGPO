@@ -487,6 +487,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5573244297571242046, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: m_YawDamping
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5573244298249643219, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.030029044
@@ -522,14 +526,6 @@ PrefabInstance:
     - target: {fileID: 5573244299268616773, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573244299317955388, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
-      propertyPath: deadZone
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573244299317955388, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
-      propertyPath: canSwitchRight
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6157746142733274482, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchorMin.x

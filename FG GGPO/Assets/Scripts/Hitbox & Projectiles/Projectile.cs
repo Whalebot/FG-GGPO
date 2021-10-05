@@ -30,7 +30,10 @@ public class Projectile : Hitbox
 
     private void Start()
     {
-
+        if (destroyOnHit)
+            status.hitEvent += DestroyProjectile;
+        if (destroyOnBlock)
+            status.blockEvent += DestroyProjectile;
     }
 
 
@@ -57,14 +60,14 @@ public class Projectile : Hitbox
         //    Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
         //Hit FX
         if (explosionVFX != null)
-            Instantiate(explosionVFX, colPos.position, transform.rotation);
+            Instantiate(explosionVFX, transform.position, transform.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultProjectileVFX, colPos.position, transform.rotation);
+            Instantiate(VFXManager.Instance.defaultProjectileVFX, transform.position, transform.rotation);
 
         if (explosionSFX != null)
-            Instantiate(explosionSFX, colPos.position, transform.rotation);
+            Instantiate(explosionSFX, transform.position, transform.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultProjectileSFX, colPos.position, transform.rotation);
+            Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
     }
 
     void FramePassed()
@@ -77,10 +80,7 @@ public class Projectile : Hitbox
 
     private void OnEnable()
     {
-        if (destroyOnHit)
-            status.hitEvent += DestroyProjectile;
-        if (destroyOnBlock)
-            status.blockEvent += DestroyProjectile;
+
     }
 
     private void OnDestroy()
@@ -103,7 +103,7 @@ public class Projectile : Hitbox
         if (hitOnce) return;
         colPos = other.gameObject.transform;
         Projectile proj = other.GetComponentInParent<Projectile>();
-        if (proj != null && destroyOnProjectileClash)
+        if (proj != null && destroyOnProjectileClash && proj.status != status)
         {
             life--;
 
@@ -111,7 +111,7 @@ public class Projectile : Hitbox
         }
 
         Hitbox hitbox = other.GetComponent<Hitbox>();
-        if (hitbox != null && destroyOnHitboxClash)
+        if (hitbox != null && destroyOnHitboxClash && hitbox.status != status)
         {
             life--;
             DestroyProjectile();
