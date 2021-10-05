@@ -614,8 +614,9 @@ public class InputHandler : MonoBehaviour
     private void OnLeft(InputAction.CallbackContext context)
     {
         if (debug) print("Left");
+        
         heldDirectionals[3] = !context.canceled;
-
+        if(context.performed)
         leftInput?.Invoke();
     }
 
@@ -623,19 +624,22 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("Up");
         heldDirectionals[0] = !context.canceled;
-        upInput?.Invoke();
+        if (context.performed)
+            upInput?.Invoke();
     }
     private void OnDown(InputAction.CallbackContext context)
     {
         if (debug) print("Down");
         heldDirectionals[2] = !context.canceled;
-        downInput?.Invoke();
+        if (context.performed)
+            downInput?.Invoke();
     }
     private void OnRight(InputAction.CallbackContext context)
     {
         if (debug) print("Right");
         heldDirectionals[1] = !context.canceled;
-        rightInput?.Invoke();
+        if (context.performed)
+            rightInput?.Invoke();
     }
     void ChangeControlScheme(InputAction.CallbackContext context)
     {
