@@ -603,7 +603,7 @@ public class Status : MonoBehaviour
                 Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
                 enemyStatus.newMove = true;
                 if (enemyStatus.groundState == GroundState.Grounded)
-                    enemyStatus.pushbackVector += (-tempV.normalized * (mag * 2 / 3 - hit.distance));
+                    enemyStatus.pushbackVector += (-tempV.normalized * (mag * 3 / 4 - hit.distance));
             }
         }
     }
