@@ -11,6 +11,9 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera[] cameras;
     public CinemachineVirtualCamera leftCamera;
     public CinemachineVirtualCamera rightCamera;
+    public CinemachineVirtualCamera counterhitCamera;
+    public int minimumCounterhitDuration;
+    public int counterhitCounter;
 
     CinemachineBasicMultiChannelPerlin[] noises;
     [SerializeField] private float shakeTimer;
@@ -77,6 +80,7 @@ public class CameraManager : MonoBehaviour
         p2 = GameHandler.Instance.p2Transform;
         input1 = InputManager.Instance.p1Input;
         input2 = InputManager.Instance.p2Input;
+
         cc1.target = p1;
         cc1.lookTarget = p2;
         cc2.target = p2;
@@ -85,10 +89,29 @@ public class CameraManager : MonoBehaviour
         camTransposer = leftCamera.GetCinemachineComponent<CinemachineTransposer>();
         camTransposer2 = rightCamera.GetCinemachineComponent<CinemachineTransposer>();
         startZOffset = leftCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
+
+       // GameHandler.Instance.advanceGameState += ExecuteFrame;
+    }
+
+    public void CounterhitCamera(int duration)
+    {
+        if (duration > minimumCounterhitDuration)
+        {
+            toggleCounter =-30;
+            rightCounter = 0;
+            counterhitCounter = duration;
+            counterhitCamera.gameObject.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
     {
+        if (counterhitCounter > 0)
+        {
+            counterhitCounter--;
+            if (counterhitCounter <= 0) counterhitCamera.gameObject.SetActive(false);
+        }
+
         groundCrossup = canCrossUp && GameHandler.Instance.p1Status.groundState == GroundState.Grounded && GameHandler.Instance.p2Status.groundState == GroundState.Grounded;
         p1Y = GameHandler.Instance.p1Transform.position.y;
         p2Y = GameHandler.Instance.p2Transform.position.y;
@@ -105,6 +128,8 @@ public class CameraManager : MonoBehaviour
         dist2 = Vector3.Distance(mainCamera.transform.position, v2);
         distanceBetweenTargets = Vector3.Distance(v1, v2);
         updateCameras = distanceBetweenTargets > cameraDeadZone;
+
+       // if (counterhitCamera.gameObject.activeSelf) { return; }
         if (updateCameras)
         {
             if (dist1 > dist2) { cameraAngle = Vector3.Angle(mainCamera.transform.forward, v1 - v2); }
@@ -165,8 +190,6 @@ public class CameraManager : MonoBehaviour
     [Button]
     public void FlipCamera()
     {
-        print("flip cam");
-
         toggleCounter = 0;
         if (toggle)
         {

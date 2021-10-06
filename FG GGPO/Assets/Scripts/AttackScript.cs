@@ -378,6 +378,8 @@ public class AttackScript : MonoBehaviour
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
 
+        float angle = Vector3.Angle(transform.forward, movement.strafeTarget.position - transform.position);
+
         if (move.resetGatling) usedMoves.Clear();
 
         if (move.type == MoveType.Movement)
@@ -385,6 +387,7 @@ public class AttackScript : MonoBehaviour
             movement.runMomentumCounter = 0;
             movementOption = move;
             movementFrames = GameHandler.Instance.gameFrameCount;
+            
         }
         if (move.type != MoveType.Movement)
             movement.ResetRun();
@@ -401,7 +404,8 @@ public class AttackScript : MonoBehaviour
 
         ClearHitboxes();
         status.crossupState = move.crossupState;
-        if (movement.ground) movement.LookAtOpponent();
+        if (movement.ground ) movement.LookAtOpponent();
+        else if(angle < 90 && move.aimOnStartup) movement.LookAtOpponent();
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;

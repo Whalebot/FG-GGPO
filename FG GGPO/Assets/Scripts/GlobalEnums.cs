@@ -7,7 +7,7 @@ public class GlobalEnums : MonoBehaviour
 }
 public enum GameMode { VersusMode, TrainingMode, TutorialMode }
 public enum GroundState { Grounded, Airborne, Knockdown }
-public enum BlockState { None, Standing, Crouching, Airborne }
+public enum BlockState {Standing, Crouching, Airborne }
 public enum HitState { None, Knockdown, Launch };
 public enum AttackLevel { Level1, Level2, Level3, Level4, Level5 }
 public enum AttackHeight { Low, Mid, High, Overhead }

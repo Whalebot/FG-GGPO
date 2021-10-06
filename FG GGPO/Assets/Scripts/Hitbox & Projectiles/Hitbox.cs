@@ -135,7 +135,7 @@ public class Hitbox : MonoBehaviour
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
 
         //Check for block
-        if (other.blockState != BlockState.None)
+        if (other.blocking)
         {
             //Check if blocked wrong height
             if (tempAttack.attackHeight == AttackHeight.Low && other.blockState == BlockState.Standing || tempAttack.attackHeight == AttackHeight.Overhead && other.blockState == BlockState.Crouching)
@@ -281,6 +281,8 @@ public class Hitbox : MonoBehaviour
             status.Hitstop();
             status.newMove = true;
             status.hitstopCounter = hit.hitstop;
+
+            CameraManager.Instance.CounterhitCamera(hit.hitstop);
         }
 
         //Hit FX
