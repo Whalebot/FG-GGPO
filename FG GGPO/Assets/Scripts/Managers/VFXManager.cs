@@ -38,6 +38,44 @@ public class VFXManager : MonoBehaviour
     void Start()
     {
         GameHandler.Instance.advanceGameState += AdvanceParticles;
+        GameHandler.Instance.p1Status.hitEvent += P1DeleteParticle;
+        GameHandler.Instance.p2Status.hitEvent += P2DeleteParticle;
+
+    }
+
+    public void P1DeleteParticle()
+    {
+        foreach (var item in particles)
+        {
+            if (item.playerID == 1)
+            {
+                deletedParticles.Add(item);
+                //Delete shit
+            }
+
+        }
+        for (int i = 0; i < deletedParticles.Count; i++)
+        {
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+        }
+    }
+    public void P2DeleteParticle()
+    {
+        foreach (var item in particles)
+        {
+            if (item.playerID == 2)
+            {
+                deletedParticles.Add(item);
+                //Delete shit
+            }
+
+        }
+        for (int i = 0; i < deletedParticles.Count; i++)
+        {
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+        }
     }
 
     [Button]
@@ -75,10 +113,12 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    public void AddParticle(ParticleSystem ps)
+    public void AddParticle(ParticleSystem ps, int ID)
     {
 
         ParticleObject p = new ParticleObject(ps, GameHandler.Instance.gameFrameCount);
+        p.playerID = ID;
+
         particles.Add(p);
     }
 }
@@ -93,5 +133,5 @@ public class ParticleObject
     }
     public ParticleSystem ps;
     public int startFrame;
-
+    public int playerID = 0;
 }

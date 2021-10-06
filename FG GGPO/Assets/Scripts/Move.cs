@@ -9,6 +9,7 @@ public class Move : ScriptableObject
 {
     [FoldoutGroup("Animation")] public int animationID;
     [FoldoutGroup("Animation")] public int hitID;
+    [FoldoutGroup("FX")] public VFX[] vfx;
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
@@ -92,7 +93,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public bool forcedCounterHit;
-
+    [FoldoutGroup("Air properties")] public bool aimOnStartup;
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
     [FoldoutGroup("Air properties")] public int landingRecovery;
@@ -379,14 +380,14 @@ public class Move : ScriptableObject
             item.groundCounterhitProperty.damage = (int)(item.groundHitProperty.damage * 1.25F);
             item.groundCounterhitProperty.hitstop = item.groundHitProperty.hitstop + 5;
             item.groundCounterhitProperty.stun = item.groundHitProperty.stun + 10;
-            item.groundCounterhitProperty.proration = item.groundHitProperty.stun + 0.5F;
+            item.groundCounterhitProperty.proration = item.airHitProperty.proration + 0.05F;
             item.groundCounterhitProperty.meterGain = item.groundHitProperty.meterGain * 2;
 
 
             item.airCounterhitProperty.damage = (int)(item.airHitProperty.damage * 1.25F);
             item.airCounterhitProperty.hitstop = item.airHitProperty.hitstop + 5;
             item.airCounterhitProperty.stun = item.airHitProperty.stun + 10;
-            item.airCounterhitProperty.proration = item.airHitProperty.proration + 0.5F;
+            item.airCounterhitProperty.proration = item.airHitProperty.proration + 0.05F;
             item.airCounterhitProperty.meterGain = item.airHitProperty.meterGain * 2;
         }
     }
@@ -434,6 +435,17 @@ public class SFX
     public int startup = 1;
     public GameObject prefab;
 }
+[System.Serializable]
+public class VFX
+{
+    public int startup = 1;
+    public GameObject prefab;
+    public Vector3 position;
+    public Vector3 rotation;
+    public Vector3 scale = Vector3.one;
+}
+
+
 
 [System.Serializable]
 public class CustomHurtbox

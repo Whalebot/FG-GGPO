@@ -75,7 +75,7 @@ MonoBehaviour:
     groundCounterhitProperty:
       damage: 1000
       stun: 40
-      hitstop: 15
+      hitstop: 25
       proration: 0.95
       meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
@@ -140,6 +140,7 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

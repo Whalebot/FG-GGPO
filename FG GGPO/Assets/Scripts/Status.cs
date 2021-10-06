@@ -115,6 +115,14 @@ public class Status : MonoBehaviour
         hitstunValue = 0;
         blockstunValue = 0;
         inHitStun = false;
+        ResetInvincibilities();
+        isDead = false;
+
+        groundState = GroundState.Grounded;
+        currentState = State.Neutral;
+    }
+
+    public void ResetInvincibilities() {
         invincible = false;
         airInvul = false;
         bodyInvul = false;
@@ -122,10 +130,6 @@ public class Status : MonoBehaviour
         headInvul = false;
         linearInvul = false;
         projectileInvul = false;
-        isDead = false;
-
-        groundState = GroundState.Grounded;
-        currentState = State.Neutral;
     }
 
     void Land()
@@ -136,7 +140,7 @@ public class Status : MonoBehaviour
     void ActivateCollider()
     {
         jumpingCollider.SetActive(groundState == GroundState.Airborne);
-        standingCollider.SetActive(blockState == BlockState.None && groundState == GroundState.Grounded || blockState == BlockState.Standing && groundState == GroundState.Grounded);
+        standingCollider.SetActive(blockState == BlockState.Standing && groundState == GroundState.Grounded);
         crouchingCollider.SetActive(blockState == BlockState.Crouching || groundState == GroundState.Knockdown);
 
 
@@ -196,7 +200,6 @@ public class Status : MonoBehaviour
         blockState = state;
         switch (state)
         {
-            case BlockState.None: break;
             case BlockState.Crouching: break;
             case BlockState.Standing: break;
             case BlockState.Airborne: break;
@@ -335,12 +338,10 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 if (forcedCounterhit) counterhitState = true;
                 if (autoBlock) blocking = true;
-                else
-                    blocking = mov.holdBack;
+              
                 break;
             case State.Hitstun:
                 blocking = false;
-                SetBlockState(BlockState.None);
                 ResolveHitstun();
                 minusFrames = -HitStun;
                 break;
@@ -354,7 +355,6 @@ public class Status : MonoBehaviour
                 break;
             case State.Knockdown:
                 blocking = false;
-                SetBlockState(BlockState.None);
                 // ResolveKnockdown();
                 ResolveHitstun();
                 minusFrames = -HitStun;
@@ -395,6 +395,7 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
+        if (currentState == State.LockedAnimation) return;
         currentState = transitionState;
         switch (transitionState)
         {
@@ -516,6 +517,7 @@ public class Status : MonoBehaviour
     public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID, bool returnWallPushback)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+        ResetInvincibilities();
 
         if (currentState == State.Recovery)
         {
@@ -525,6 +527,7 @@ public class Status : MonoBehaviour
         if (hitState == HitState.Launch || kb.y > 1)
         {
             GoToGroundState(GroundState.Airborne);
+            SetBlockState(BlockState.Airborne);
         }
         else if (hitState == HitState.Knockdown)
         {
@@ -540,7 +543,7 @@ public class Status : MonoBehaviour
         }
 
         mov.storedDirection = Vector3.zero;
-        TakePushback(kb,  returnWallPushback);
+        TakePushback(kb, returnWallPushback);
 
 
         int val = 0;
@@ -573,6 +576,7 @@ public class Status : MonoBehaviour
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, bool returnWallPushback)
     {
+        ResetInvincibilities();
         mov.runMomentumCounter = 0;
         mov.storedDirection = Vector3.zero;
 
@@ -603,13 +607,18 @@ public class Status : MonoBehaviour
                 Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
                 enemyStatus.newMove = true;
                 if (enemyStatus.groundState == GroundState.Grounded)
-                    enemyStatus.pushbackVector += (-tempV.normalized * (mag * 2 / 3 - hit.distance));
+                    enemyStatus.pushbackVector += (-tempV.normalized * (mag * 3 / 4 - hit.distance));
             }
         }
     }
 
     public void TakeThrow(int animationID)
     {
+        ResetInvincibilities();
+        if (currentState == State.Recovery)
+        {
+            punishEvent?.Invoke();
+        }
         mov.runMomentumCounter = 0;
         mov.storedDirection = Vector3.zero;
         rb.velocity = Vector3.zero;

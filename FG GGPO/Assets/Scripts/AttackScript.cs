@@ -135,12 +135,8 @@ public class AttackScript : MonoBehaviour
                 //Execute properties
                 ProcessInvul();
 
+                SpawnFX();
 
-                for (int i = 0; i < activeMove.sfx.Length; i++)
-                {
-                    if (attackFrames == activeMove.sfx[i].startup)
-                        Instantiate(activeMove.sfx[i].prefab);
-                }
                 //Execute momentum
                 for (int i = 0; i < activeMove.m.Length; i++)
                 {
@@ -198,6 +194,34 @@ public class AttackScript : MonoBehaviour
         }
     }
 
+    public void SpawnFX()
+    {
+
+        foreach (var item in activeMove.vfx)
+        {
+            if (attackFrames == item.startup)
+            {
+                GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                fx.transform.localPosition = item.position;
+                fx.transform.localRotation = Quaternion.Euler(item.rotation);
+                fx.transform.localScale = item.scale;
+                if (GameHandler.Instance.IsPlayer1(transform))
+                    fx.GetComponent<VFXScript>().ID = 1;
+                else fx.GetComponent<VFXScript>().ID = 2;
+                fx.transform.SetParent(null);
+            }
+        }
+        foreach (var item in activeMove.sfx)
+        {
+            if (attackFrames == item.startup)
+            {
+                GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                fx.transform.localPosition = item.prefab.transform.localPosition;
+                fx.transform.localRotation = item.prefab.transform.rotation;
+                fx.transform.SetParent(null);
+            }
+        }
+    }
 
     public void StartupFrames()
     {
@@ -233,7 +257,7 @@ public class AttackScript : MonoBehaviour
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
                             hitboxes[i].transform.localRotation = activeMove.attacks[i].hitbox.transform.rotation;
-                           hitboxes[i].transform.SetParent(null);
+                            hitboxes[i].transform.SetParent(null);
                         }
                         else
                         {
@@ -378,6 +402,8 @@ public class AttackScript : MonoBehaviour
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
 
+        float angle = Vector3.Angle(transform.forward, movement.strafeTarget.position - transform.position);
+
         if (move.resetGatling) usedMoves.Clear();
 
         if (move.type == MoveType.Movement)
@@ -385,6 +411,7 @@ public class AttackScript : MonoBehaviour
             movement.runMomentumCounter = 0;
             movementOption = move;
             movementFrames = GameHandler.Instance.gameFrameCount;
+
         }
         if (move.type != MoveType.Movement)
             movement.ResetRun();
@@ -402,6 +429,7 @@ public class AttackScript : MonoBehaviour
         ClearHitboxes();
         status.crossupState = move.crossupState;
         if (movement.ground) movement.LookAtOpponent();
+        else if (angle < 90 && move.aimOnStartup) movement.LookAtOpponent();
         //Run momentum
         if (move.overrideVelocity) status.rb.velocity = Vector3.zero;
         else if (move.runMomentum) status.rb.velocity = status.rb.velocity * 0.5F;

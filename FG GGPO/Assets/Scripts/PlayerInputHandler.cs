@@ -68,13 +68,14 @@ public class PlayerInputHandler : MonoBehaviour
         //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
+            status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
+
             if (mov.ground)
             {
                 mov.crouching = input.netButtons[5];
 
                 if (mov.crouching) status.SetBlockState(BlockState.Crouching);
-                else if (mov.holdBack) status.SetBlockState(BlockState.Standing);
-                else status.SetBlockState(BlockState.None);
+                else  status.SetBlockState(BlockState.Standing);
             }
             else status.SetBlockState(BlockState.Airborne);
         }

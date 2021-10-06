@@ -281,6 +281,8 @@ public class Hitbox : MonoBehaviour
             status.Hitstop();
             status.newMove = true;
             status.hitstopCounter = hit.hitstop;
+
+            CameraManager.Instance.CounterhitCamera(hit.hitstop);
         }
 
         //Hit FX
