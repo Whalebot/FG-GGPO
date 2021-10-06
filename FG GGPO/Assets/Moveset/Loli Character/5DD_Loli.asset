@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 6D_Loli
+  m_Name: 5DD_Loli
   m_EditorClassIdentifier: 
   animationID: 63
   hitID: 0
@@ -29,19 +29,22 @@ MonoBehaviour:
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
-  gatlingMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
+  - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45
   firstGatlingFrame: 20
   blockAdvantage: -5
-  hitAdvantage: 0
+  hitAdvantage: 20
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
   recoveryFrames: 30
-  targetComboMoves: []
+  targetComboMoves:
+  - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   attacks:
-  - hitbox: {fileID: 6130433937859647811, guid: 1cdf2a8c8aa3479499a75b3dfdcfa6ef, type: 3}
+  - hitbox: {fileID: 6130433937859647811, guid: 25a33728d54d31c4c885f79e5d009eaa, type: 3}
     startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
@@ -51,7 +54,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 1000
-      stun: 20
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -105,8 +108,8 @@ MonoBehaviour:
       hitID: 0
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
-  specialCancelOnBlock: 0
-  specialCancelOnHit: 0
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
   resetGatling: 0
   noClip: 0
   noClipStart: 1
@@ -144,6 +147,6 @@ MonoBehaviour:
   m:
   - startFrame: 15
     duration: 2
-    momentum: {x: 0, y: 0, z: -6}
+    momentum: {x: 0, y: 0, z: -4}
     homing: 0
     resetVelocityDuringRecovery: 0
