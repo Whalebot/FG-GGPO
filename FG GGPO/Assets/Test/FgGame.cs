@@ -181,10 +181,10 @@ public struct FgGame : IGame
         bool[] but = new bool[6];
 
 
-        temp[0] = ((inputs & INPUT_L) != 0);
-        temp[1] = ((inputs & INPUT_F) != 0);
+        temp[0] = ((inputs & INPUT_F) != 0);
+        temp[1] = ((inputs & INPUT_R) != 0);
         temp[2] = ((inputs & INPUT_B) != 0);
-        temp[3] = ((inputs & INPUT_R) != 0);
+        temp[3] = ((inputs & INPUT_L) != 0);
 
         but[0] = ((inputs & INPUT_1) != 0);
         but[1] = ((inputs & INPUT_2) != 0);
@@ -218,7 +218,8 @@ public struct FgGame : IGame
 
     public void Update(long[] inputs, int disconnect_flags)
     {
-        Framenumber++;
+        Framenumber++; 
+        GameHandler.Instance.AdvanceGameState();
         for (int i = 0; i < _ships.Length; i++)
         {
             bool[] dir;
@@ -252,6 +253,7 @@ public struct FgGame : IGame
             if (i == 0) { InputManager.Instance.p1Input.ResolveButtons(buttons); }
             else { InputManager.Instance.p2Input.ResolveButtons(buttons); }
         }
+
     }
 
     void SavePositions(int index)

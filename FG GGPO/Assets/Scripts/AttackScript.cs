@@ -232,12 +232,14 @@ public class AttackScript : MonoBehaviour
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
-                            hitboxes[i].transform.SetParent(null);
+                            hitboxes[i].transform.localRotation = activeMove.attacks[i].hitbox.transform.rotation;
+                           hitboxes[i].transform.SetParent(null);
                         }
                         else
                         {
                             hitboxes.Add(Instantiate(activeMove.attacks[i].hitbox, hitboxContainer.position, transform.rotation, hitboxContainer));
                             hitboxes[i].transform.localPosition = activeMove.attacks[i].hitbox.transform.localPosition;
+                            hitboxes[i].transform.localRotation = activeMove.attacks[i].hitbox.transform.rotation;
                         }
                         Hitbox hitbox = hitboxes[i].GetComponentInChildren<Hitbox>();
                         hitbox.hitboxID = i;
@@ -427,7 +429,7 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
         if (jumpFrameCounter > 0) return false;
 
-        if (move.useAirAction)
+        if (move.useAirAction && !attacking)
         {
             if (movement.performedJumps <= 0)
             {
@@ -487,19 +489,19 @@ public class AttackScript : MonoBehaviour
 
             if (activeMove.targetComboMoves.Count > 0)
             {
-                if (activeMove == move || move.targetComboMoves.Contains(activeMove))
+                if (activeMove.targetComboMoves.Contains(move))
+                {
+                    AttackProperties(move);
+                    return true;
+                }
+
+                if (usedMoves.Contains(move) && activeMove == move || move.targetComboMoves.Contains(activeMove))
                 {
                     Attack(move.targetComboMoves[0]);
                     return true;
                 }
-            }
-            if (activeMove.targetComboMoves.Contains(move))
-            {
-                //   print("Rekka cancel");
-                AttackProperties(move);
-                return true;
-            }
 
+            }
         }
         return false;
 
@@ -509,7 +511,6 @@ public class AttackScript : MonoBehaviour
     {
         if (jumpDelay) return false;
         if (TargetCombo(move)) return true;
-        //print(GameHandler.Instance.gameFrameCount +" " +  move + " Attack start");
         if (!CanUseMove(move)) return false;
         else
         {

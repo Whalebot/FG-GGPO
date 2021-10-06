@@ -315,27 +315,27 @@ public class Move : ScriptableObject
                 {
                     item.groundHitProperty.hitstop = 12;
                     item.groundHitProperty.stun = 30;
-                    item.groundHitProperty.proration = 0.95F; 
+                    item.groundHitProperty.proration = 0.95F;
                     item.groundHitProperty.meterGain = 4;
 
                     item.groundBlockProperty.hitstop = 12;
                     item.groundBlockProperty.stun = 20;
-                    item.groundBlockProperty.proration = 0.95F; 
+                    item.groundBlockProperty.proration = 0.95F;
                     item.groundBlockProperty.meterGain = 2;
 
                     item.groundCounterhitProperty.hitstop = 15;
                     item.groundCounterhitProperty.stun = 40;
-                    item.groundCounterhitProperty.proration = 0.95F; 
+                    item.groundCounterhitProperty.proration = 0.95F;
                     item.groundCounterhitProperty.meterGain = 4;
 
                     item.airHitProperty.hitstop = 12;
                     item.airHitProperty.stun = 30;
-                    item.airHitProperty.proration = 0.95F; 
+                    item.airHitProperty.proration = 0.95F;
                     item.airHitProperty.meterGain = 4;
 
                     item.airBlockProperty.hitstop = 12;
                     item.airBlockProperty.stun = 20;
-                    item.airBlockProperty.proration = 0.95F; 
+                    item.airBlockProperty.proration = 0.95F;
                     item.airBlockProperty.meterGain = 2;
 
                     item.airCounterhitProperty.hitstop = 15;
@@ -359,6 +359,38 @@ public class Move : ScriptableObject
             CopyProperty(item.airCounterhitProperty, item.airHitProperty);
         }
     }
+
+    [Button]
+    void CopyGroundToAir()
+    {
+        foreach (var item in attacks)
+        {
+            CopyProperty(item.airHitProperty, item.groundHitProperty);
+            CopyProperty(item.airBlockProperty, item.groundBlockProperty);
+            CopyProperty(item.airCounterhitProperty, item.groundCounterhitProperty);
+        }
+    }
+    [Button]
+    void AutoSetCounterhit()
+    {
+        foreach (var item in attacks)
+        {
+
+            item.groundCounterhitProperty.damage = (int)(item.groundHitProperty.damage * 1.25F);
+            item.groundCounterhitProperty.hitstop = item.groundHitProperty.hitstop + 5;
+            item.groundCounterhitProperty.stun = item.groundHitProperty.stun + 10;
+            item.groundCounterhitProperty.proration = item.groundHitProperty.stun + 0.5F;
+            item.groundCounterhitProperty.meterGain = item.groundHitProperty.meterGain * 2;
+
+
+            item.airCounterhitProperty.damage = (int)(item.airHitProperty.damage * 1.25F);
+            item.airCounterhitProperty.hitstop = item.airHitProperty.hitstop + 5;
+            item.airCounterhitProperty.stun = item.airHitProperty.stun + 10;
+            item.airCounterhitProperty.proration = item.airHitProperty.proration + 0.5F;
+            item.airCounterhitProperty.meterGain = item.airHitProperty.meterGain * 2;
+        }
+    }
+
     void CopyProperty(HitProperty hit1, HitProperty hit2)
     {
         FieldInfo[] defInfo1 = hit1.GetType().GetFields();

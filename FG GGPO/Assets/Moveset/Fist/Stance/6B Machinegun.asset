@@ -21,10 +21,11 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
   collissionState: 0
   groundState: 0
-  isProjectile: 0
+  stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
@@ -47,7 +48,10 @@ MonoBehaviour:
     startupFrame: 26
     activeFrames: 1
     gatlingFrames: 1
+    attackType: 0
     attackHeight: 1
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 700
       stun: 40
@@ -106,7 +110,10 @@ MonoBehaviour:
     startupFrame: 30
     activeFrames: 1
     gatlingFrames: 1
+    attackType: 0
     attackHeight: 1
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 700
       stun: 25
@@ -165,7 +172,10 @@ MonoBehaviour:
     startupFrame: 34
     activeFrames: 1
     gatlingFrames: 1
+    attackType: 0
     attackHeight: 1
+    bodyProperty: 1
+    homing: 0
     groundHitProperty:
       damage: 700
       stun: 25
@@ -224,15 +234,34 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 163
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
-  counterhitRecovery: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  forcedCounterHit: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

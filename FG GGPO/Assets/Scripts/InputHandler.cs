@@ -105,6 +105,7 @@ public class InputHandler : MonoBehaviour
         buttons = new List<bool>();
         bufferedInputs = new List<BufferedInput>();
         deletedInputs = new List<BufferedInput>();
+        network = FgGameManager.Instance != null;
 
         if (GameHandler.Instance != null)
         {
@@ -317,9 +318,9 @@ public class InputHandler : MonoBehaviour
                 }
                 ResolveButtons(heldButtons);
             }
-            ResolveInputBuffer();
         }
 
+        ResolveInputBuffer();
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
         inputDirection = TranslateInput(netDirectionals);
         if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)

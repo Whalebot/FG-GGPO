@@ -103,8 +103,10 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
+  canClash: 1
   body: {fileID: 6130433937859647864}
   enemyList: []
+  hitOnce: 0
   explosionVFX: {fileID: 0}
   explosionSFX: {fileID: 0}
   destroyOnBlock: 1
@@ -129,7 +131,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &7500927992370451724
 BoxCollider:

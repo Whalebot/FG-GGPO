@@ -131,8 +131,10 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
+  canClash: 1
   body: {fileID: 6130433937859647864}
   enemyList: []
+  hitOnce: 0
   explosionVFX: {fileID: 0}
   explosionSFX: {fileID: 0}
   destroyOnBlock: 1

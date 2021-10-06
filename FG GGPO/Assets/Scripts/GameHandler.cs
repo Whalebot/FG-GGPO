@@ -12,7 +12,7 @@ public class GameHandler : MonoBehaviour
     public static GameHandler Instance;
 
     public GameMode gameMode;
-
+    public bool network;
     public static bool isPaused;
     public static bool cutscene;
     public static int p1CharacterID;
@@ -75,6 +75,7 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
+        network = FgGameManager.Instance != null;
         // Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
 
@@ -220,6 +221,7 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void AdvanceGameState()
     {
+        CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
         advanceGameState?.Invoke();
 
         gameFrameCount++;
@@ -243,6 +245,7 @@ public class GameHandler : MonoBehaviour
         Physics.autoSimulation = false;
         Physics.Simulate(Time.fixedDeltaTime);
         // rollbackTick?.Invoke();
+        CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
         advanceGameState?.Invoke();
 
         gameFrameCount++;
@@ -310,9 +313,9 @@ public class GameHandler : MonoBehaviour
 
         }
 
-        if (!isPaused && runNormally)
+        if (!isPaused && runNormally && !network)
         {
-            CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
+
             AdvanceGameState();
         }
     }
