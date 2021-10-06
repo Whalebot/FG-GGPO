@@ -24,6 +24,7 @@ public class DelayProjectile : Projectile
         if (destroyOnBlock)
             status.blockEvent += DestroyProjectile;
 
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
 

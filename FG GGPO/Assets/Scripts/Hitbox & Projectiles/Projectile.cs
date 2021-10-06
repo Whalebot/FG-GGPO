@@ -92,7 +92,7 @@ public class Projectile : Hitbox
 
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         if (destroyOnHit)
             status.hitEvent -= DestroyProjectile;
