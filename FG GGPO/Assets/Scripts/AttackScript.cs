@@ -26,7 +26,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Debug")] public int attackFrames;
 
     [FoldoutGroup("Debug")] public int movementFrames;
-    [FoldoutGroup("Debug")] public int movementframes;
+    [FoldoutGroup("Debug")] public List<GameObject> projectiles;
 
     [FoldoutGroup("Debug")] public Move movementOption;
     [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
@@ -270,7 +270,11 @@ public class AttackScript : MonoBehaviour
                         hitbox.attack = this;
                         hitbox.status = status;
                         hitbox.move = activeMove;
-                        if (activeMove.attacks[i].attackType == AttackType.Projectile) hitboxes[i] = null;
+                        if (activeMove.attacks[i].attackType == AttackType.Projectile)
+                        {
+                            projectiles.Add(hitboxes[i]);
+                            hitboxes[i] = null;
+                        }
                     }
                 }
             }
@@ -535,10 +539,31 @@ public class AttackScript : MonoBehaviour
 
     }
 
+    public bool ProjectileLimit(Move move)
+    {
+        if (move != null)
+        {
+            if (move.projectileLimit > 0 && projectiles.Count > 0)
+            {
+                int projectileCount = 0;
+                for (int i = projectiles.Count - 1; i > -1; i--)
+                {
+                    if (projectiles[i] == null) projectiles.RemoveAt(i);
+                    else if (move.sharedLimitProjectiles.Contains(projectiles[i].GetComponent<Hitbox>().move)) projectileCount++;
+
+                }
+                if (projectileCount >= move.projectileLimit) return true;
+            }
+        }
+        return false;
+    }
+
     public bool Attack(Move move)
     {
         if (jumpDelay) return false;
+    
         if (TargetCombo(move)) return true;
+        if (ProjectileLimit(move)) return false;
         if (!CanUseMove(move)) return false;
         else
         {

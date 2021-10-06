@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 52
   hitID: 0
+  vfx:
+  - startup: 14
+    prefab: {fileID: 166982, guid: ae49605d9a4177547b89d38812c03345, type: 3}
+    position: {x: 0, y: 1, z: 1}
+    rotation: {x: -25, y: 10, z: 180}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX: {fileID: 0}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -137,6 +143,7 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
