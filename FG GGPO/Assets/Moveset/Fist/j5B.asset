@@ -30,6 +30,7 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: 7dc509ba7a8ee9e4eb30a3ad807e2c59, type: 2}
   - {fileID: 11400000, guid: c0c6e8e47388a544d9ea79e07b57a3bc, type: 2}
+  - {fileID: 11400000, guid: 4cf933f9befd26f46851c2443e1bd808, type: 2}
   firstStartupFrame: 11
   lastActiveFrame: 18
   totalMoveDuration: 38
@@ -144,7 +145,7 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 4, z: 0}
+      pushback: {x: 0, y: 3.5, z: 0}
       hitState: 0
       hitID: 0
     airBlockProperty:

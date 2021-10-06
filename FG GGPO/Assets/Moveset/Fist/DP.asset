@@ -132,7 +132,7 @@ MonoBehaviour:
   footInvulDuration: 0
   noHitstopOnSelf: 0
   crossupState: 0
-  forcedCounterHit: 0
+  forcedCounterHit: 1
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
@@ -142,6 +142,6 @@ MonoBehaviour:
   m:
   - startFrame: 5
     duration: 2
-    momentum: {x: 0, y: 10, z: 3}
+    momentum: {x: 0, y: 9, z: 3}
     homing: 0
     resetVelocityDuringRecovery: 0

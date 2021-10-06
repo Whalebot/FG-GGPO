@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6130433937859647870}
   - component: {fileID: 6130433937859647869}
   - component: {fileID: 6130433937859647868}
-  - component: {fileID: 88394435237599246}
+  - component: {fileID: 7669256977086027473}
   m_Layer: 16
-  m_Name: Fireball Delay
+  m_Name: Fireball Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130433937859647811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ SphereCollider:
   m_GameObject: {fileID: 6130433937859647811}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -111,9 +111,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &88394435237599246
+--- !u!114 &7669256977086027473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6130433937859647811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4c571378d1dad409ec28ed583ef90c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc62ec274067424b81bb793840ba39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 1
@@ -131,19 +131,15 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
-  canClash: 1
   body: {fileID: 6130433937859647864}
   enemyList: []
-  hitOnce: 0
   explosionVFX: {fileID: 0}
   explosionSFX: {fileID: 0}
   destroyOnBlock: 1
   destroyOnHit: 1
   life: 0
-  velocity: 25
+  velocity: 15
   destroyOnProjectileClash: 1
   destroyOnHitboxClash: 1
   rb: {fileID: 0}
   hit: 0
-  delay: 90
-  ignoreY: 0
