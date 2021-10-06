@@ -9,6 +9,7 @@ public class Move : ScriptableObject
 {
     [FoldoutGroup("Animation")] public int animationID;
     [FoldoutGroup("Animation")] public int hitID;
+    [FoldoutGroup("FX")] public VFX[] vfx;
     [FoldoutGroup("FX")] public SFX[] sfx;
     [FoldoutGroup("FX")] public GameObject hitFX;
     [FoldoutGroup("FX")] public GameObject blockFX;
@@ -434,6 +435,17 @@ public class SFX
     public int startup = 1;
     public GameObject prefab;
 }
+[System.Serializable]
+public class VFX
+{
+    public int startup = 1;
+    public GameObject prefab;
+    public Vector3 position;
+    public Vector3 rotation;
+    public Vector3 scale = Vector3.one;
+}
+
+
 
 [System.Serializable]
 public class CustomHurtbox
