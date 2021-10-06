@@ -205,6 +205,9 @@ public class AttackScript : MonoBehaviour
                 fx.transform.localPosition = item.position;
                 fx.transform.localRotation = Quaternion.Euler(item.rotation);
                 fx.transform.localScale = item.scale;
+                if (GameHandler.Instance.IsPlayer1(transform))
+                    fx.GetComponent<VFXScript>().ID = 1;
+                else fx.GetComponent<VFXScript>().ID = 2;
                 fx.transform.SetParent(null);
             }
         }
