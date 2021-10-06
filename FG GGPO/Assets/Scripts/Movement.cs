@@ -311,7 +311,7 @@ public class Movement : MonoBehaviour
             Vector3 v2 = transform.position;
             v2.y = 0;
             float playerDist = Vector3.Distance(v1, v2);
-            if (rb.velocity.y < 0 && transform.position.y <= 1.2F && playerDist <= 0.8F)
+            if (rb.velocity.y < 0 && transform.position.y <= 1.2F && playerDist <= 0.9F)
                 status.AirCollider();
             else status.EnableCollider();
         }
