@@ -93,6 +93,10 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public bool forcedCounterHit;
+
+    [FoldoutGroup("Projectile properties")] public int projectileLimit;
+    [FoldoutGroup("Projectile properties")] public List<Move> sharedLimitProjectiles;
+
     [FoldoutGroup("Air properties")] public bool aimOnStartup;
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 53
   hitID: 0
+  vfx: []
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -134,6 +135,10 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 1
+  sharedLimitProjectiles:
+  - {fileID: 11400000}
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

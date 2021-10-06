@@ -12,6 +12,7 @@ public class Projectile : Hitbox
     bool isDestroying;
     bool delayDestroy;
     public int life;
+    public int lifetime;
     public float velocity;
     public bool destroyOnProjectileClash = true;
     public bool destroyOnHitboxClash = true;
@@ -34,11 +35,19 @@ public class Projectile : Hitbox
             status.hitEvent += DestroyProjectile;
         if (destroyOnBlock)
             status.blockEvent += DestroyProjectile;
+
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
 
-    private void FixedUpdate()
+    public virtual void ExecuteFrame()
     {
+        if (lifetime > 0)
+        {
+            lifetime--;
+            if (lifetime <= 0) DestroyProjectile();
+        }
+
         Movement();
     }
 
@@ -91,6 +100,7 @@ public class Projectile : Hitbox
             status.blockEvent -= DestroyProjectile;
 
         GameHandler.Instance.advanceGameState -= FramePassed;
+        GameHandler.Instance.advanceGameState -= ExecuteFrame;
     }
 
     public virtual void Movement()
