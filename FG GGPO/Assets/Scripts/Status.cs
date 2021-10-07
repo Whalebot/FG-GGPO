@@ -395,7 +395,7 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
-        if (currentState == State.LockedAnimation) return;
+       if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
         switch (transitionState)
         {

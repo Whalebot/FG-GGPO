@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: fe400427295ff784f942f8a63a4a5925
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 0993c73a79923dd418eada5595a54d2c
+  - enabled: 1
+    path: Assets/Scenes/Character select.unity
+    guid: 68ed5b2a97d1dbf49bfd0e8d5fcd9a3e
+  - enabled: 1
     path: Assets/Scenes/Stages/Training Stage.unity
     guid: 00fe25105a577c64bac5a075d482c79c
   - enabled: 0
     path: Assets/Scenes/Stages/Highway Stage.unity
     guid: b1a5ccaf3a027564b94347ab2531539d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Network Test.unity
     guid: fbcd2f465a1fbeb4290bd9bd4cc90cf2
   m_configObjects:

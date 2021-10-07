@@ -52,6 +52,8 @@ public class GameHandler : MonoBehaviour
 
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
+    public GameEvent gameEndEvent;
+    public GameEvent rematchScreenEvent;
 
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
@@ -81,7 +83,7 @@ public class GameHandler : MonoBehaviour
 
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
-
+        ChangeGameMode(gameMode);
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
@@ -121,23 +123,26 @@ public class GameHandler : MonoBehaviour
     IEnumerator DelayRoundStart()
     {
         cutscene = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.5F);
         cutscene = false;
     }
     public void GameEnd()
     {
+        gameEndEvent?.Invoke();
         StartCoroutine(DelayGameWin());
     }
     IEnumerator DelayGameWin()
     {
         cutscene = true;
         yield return new WaitForSeconds(3);
-        cutscene = false;
-        StageManager.Instance.RestartScene();
+        //cutscene = false;
+        rematchScreenEvent?.Invoke();
+        //StageManager.Instance.RestartScene();
     }
     public void P1Win()
     {
-        p1RoundWins++;
+        if (gameMode == GameMode.VersusMode)
+            p1RoundWins++;
         p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
@@ -150,7 +155,8 @@ public class GameHandler : MonoBehaviour
     }
     public void P2Win()
     {
-        p2RoundWins++;
+        if (gameMode == GameMode.VersusMode)
+            p2RoundWins++;
         p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
@@ -225,14 +231,13 @@ public class GameHandler : MonoBehaviour
         advanceGameState?.Invoke();
 
         gameFrameCount++;
-        if (!cutscene)
+        if (!cutscene && gameMode == GameMode.VersusMode)
         {
             counter++;
-
         }
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
         UpdateGameState();
-        if (roundTime <= 0)
+        if (roundTime <= 0 && !cutscene)
         {
             TimeoutFinish();
         }
@@ -244,22 +249,8 @@ public class GameHandler : MonoBehaviour
         runNormally = false;
         Physics.autoSimulation = false;
         Physics.Simulate(Time.fixedDeltaTime);
-        // rollbackTick?.Invoke();
-        CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
-        advanceGameState?.Invoke();
 
-        gameFrameCount++;
-        if (!cutscene)
-        {
-            counter++;
-
-        }
-
-        roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
-        if (roundTime <= 0)
-        {
-            TimeoutFinish();
-        }
+        AdvanceGameState();
     }
 
     public void TimeoutFinish()
@@ -309,8 +300,6 @@ public class GameHandler : MonoBehaviour
         else
         {
             isPaused = false;
-
-
         }
 
         if (!isPaused && runNormally && !network)
@@ -340,6 +329,20 @@ public class GameHandler : MonoBehaviour
         {
             NormalGameState();
         }
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            ChangeGameMode(GameMode.VersusMode);
+        }
+        else if (Keyboard.current.f2Key.wasPressedThisFrame)
+        {
+            ChangeGameMode(GameMode.TrainingMode);
+        }
+    }
+
+    public void ChangeGameMode(GameMode mode)
+    {
+        gameMode = mode;
+        UIManager.Instance.GameModeUI(gameMode);
     }
 
 

@@ -196,29 +196,31 @@ public class AttackScript : MonoBehaviour
 
     public void SpawnFX()
     {
-
-        foreach (var item in activeMove.vfx)
+        if (activeMove != null)
         {
-            if (attackFrames == item.startup)
+            foreach (var item in activeMove.vfx)
             {
-                GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                fx.transform.localPosition = item.position;
-                fx.transform.localRotation = Quaternion.Euler(item.rotation);
-                fx.transform.localScale = item.scale;
-                if (GameHandler.Instance.IsPlayer1(transform))
-                    fx.GetComponent<VFXScript>().ID = 1;
-                else fx.GetComponent<VFXScript>().ID = 2;
-                fx.transform.SetParent(null);
+                if (attackFrames == item.startup)
+                {
+                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                    fx.transform.localPosition = item.position;
+                    fx.transform.localRotation = Quaternion.Euler(item.rotation);
+                    fx.transform.localScale = item.scale;
+                    if (GameHandler.Instance.IsPlayer1(transform))
+                        fx.GetComponent<VFXScript>().ID = 1;
+                    else fx.GetComponent<VFXScript>().ID = 2;
+                    fx.transform.SetParent(null);
+                }
             }
-        }
-        foreach (var item in activeMove.sfx)
-        {
-            if (attackFrames == item.startup)
+            foreach (var item in activeMove.sfx)
             {
-                GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                fx.transform.localPosition = item.prefab.transform.localPosition;
-                fx.transform.localRotation = item.prefab.transform.rotation;
-                fx.transform.SetParent(null);
+                if (attackFrames == item.startup)
+                {
+                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                    fx.transform.localPosition = item.prefab.transform.localPosition;
+                    fx.transform.localRotation = item.prefab.transform.rotation;
+                    fx.transform.SetParent(null);
+                }
             }
         }
     }
@@ -561,7 +563,7 @@ public class AttackScript : MonoBehaviour
     public bool Attack(Move move)
     {
         if (jumpDelay) return false;
-    
+
         if (TargetCombo(move)) return true;
         if (ProjectileLimit(move)) return false;
         if (!CanUseMove(move)) return false;
