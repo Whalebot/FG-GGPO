@@ -42,43 +42,43 @@ public class FrameDataManager : MonoBehaviour
         p1.frameDataEvent += UpdateFrameData;
         p2.frameDataEvent += UpdateFrameData;
     }
-
-    void UpdateHit()
+    private void OnDisable()
     {
-        frame = p1.minusFrames - p2.minusFrames;
-        cancelFrame = p1.cancelMinusFrames;
-        overlay1.UpdateStartup();
-        overlay2.UpdateStartup();
-        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
-        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+
     }
 
     void P1UpdateHit()
     {
-        frame = p1.minusFrames - p2.minusFrames;
-        cancelFrame = p1.cancelMinusFrames;
-        overlay1.UpdateStartup();
-        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
-        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        if (gameObject.activeInHierarchy)
+        {
+            frame = p1.minusFrames - p2.minusFrames;
+            cancelFrame = p1.cancelMinusFrames;
+            overlay1.UpdateStartup();
+            overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+            overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        }
     }
 
     void P2UpdateHit()
     {
-        frame = p1.minusFrames - p2.minusFrames;
-        cancelFrame = p1.cancelMinusFrames;
-        overlay2.UpdateStartup();
-        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
-        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        if (gameObject.activeInHierarchy)
+        {
+            frame = p1.minusFrames - p2.minusFrames;
+            cancelFrame = p1.cancelMinusFrames;
+            overlay2.UpdateStartup();
+            overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+            overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        }
     }
 
-
-
-    // Update is called once per frame
     public void UpdateFrameData()
     {
-        frame = p1.minusFrames - p2.minusFrames;
-        cancelFrame = 0;
-        overlay1.UpdateAdvantage(frame, frame + cancelFrame);
-        overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        if (gameObject.activeInHierarchy)
+        {
+            frame = p1.minusFrames - p2.minusFrames;
+            cancelFrame = 0;
+            overlay1.UpdateAdvantage(frame, frame + cancelFrame);
+            overlay2.UpdateAdvantage(-frame, -frame - cancelFrame);
+        }
     }
 }

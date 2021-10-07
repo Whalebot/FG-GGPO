@@ -75,7 +75,7 @@ public class PlayerInputHandler : MonoBehaviour
                 mov.crouching = input.netButtons[5];
 
                 if (mov.crouching) status.SetBlockState(BlockState.Crouching);
-                else  status.SetBlockState(BlockState.Standing);
+                else status.SetBlockState(BlockState.Standing);
             }
             else status.SetBlockState(BlockState.Airborne);
         }
@@ -161,10 +161,12 @@ public class PlayerInputHandler : MonoBehaviour
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
                             {
-                                attack.Attack(item.move);
-                                doSpecial = true;
-                                bufferID = i;
-                                break;
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
                             }
                         }
 
@@ -175,10 +177,15 @@ public class PlayerInputHandler : MonoBehaviour
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
                             {
-                                attack.Attack(item.move);
-                                doSpecial = true;
-                                bufferID = i;
-                                break;
+                                if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                                {
+                                    if (attack.Attack(item.move))
+                                    {
+                                        doSpecial = true;
+                                        bufferID = i;
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }

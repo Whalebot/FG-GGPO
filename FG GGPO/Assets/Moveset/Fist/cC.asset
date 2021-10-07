@@ -16,7 +16,10 @@ MonoBehaviour:
   hitID: 0
   vfx:
   - startup: 20
-    prefab: {fileID: 166982, guid: 65ccfa097d79dac4389db6b496dc920e, type: 3}
+    prefab: {fileID: 166982, guid: ae49605d9a4177547b89d38812c03345, type: 3}
+    position: {x: 0, y: 0.3, z: 0.3}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX: {fileID: 2135222606322628325, guid: b56af3462e8f1ab4bad3e6732af6483e, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -139,6 +142,8 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
