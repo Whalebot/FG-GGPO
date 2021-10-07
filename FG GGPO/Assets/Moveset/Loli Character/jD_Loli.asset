@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 43
   hitID: 0
+  vfx: []
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
@@ -32,13 +33,13 @@ MonoBehaviour:
   gatlingMoves: []
   firstStartupFrame: 15
   lastActiveFrame: 15
-  totalMoveDuration: 45
+  totalMoveDuration: 50
   firstGatlingFrame: 20
-  blockAdvantage: -5
-  hitAdvantage: 0
+  blockAdvantage: -10
+  hitAdvantage: -5
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
-  recoveryFrames: 30
+  recoveryFrames: 35
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: c546dda06795e2e47930c4da761ee1cd, type: 3}
@@ -50,7 +51,7 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
@@ -68,7 +69,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
@@ -77,30 +78,30 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 10
+      stun: 15
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1000
+      damage: 700
       stun: 20
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
@@ -135,6 +136,9 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

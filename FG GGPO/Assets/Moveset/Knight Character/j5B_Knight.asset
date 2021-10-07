@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 81
   hitID: 0
+  vfx: []
   sfx:
   - startup: 5
     prefab: {fileID: 3797316729740095628, guid: 253e74f0bc000394383ab7c7205759dd, type: 3}
@@ -23,10 +24,10 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: c54b1e8edf0377f488628b2b33558bd6, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
   collissionState: 3
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
@@ -51,7 +52,7 @@ MonoBehaviour:
     gatlingFrames: 1
     attackType: 0
     attackHeight: 3
-    bodyProperty: 1
+    bodyProperty: 3
     homing: 0
     groundHitProperty:
       damage: 450
@@ -139,6 +140,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0

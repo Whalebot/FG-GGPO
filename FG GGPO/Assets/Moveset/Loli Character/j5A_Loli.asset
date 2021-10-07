@@ -14,6 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 80
   hitID: 0
+  vfx:
+  - startup: 4
+    prefab: {fileID: 344670232931725940, guid: 369fd0272b4cdb746853d163e2e798ae, type: 3}
+    position: {x: 0, y: 0.75, z: 0}
+    rotation: {x: 30, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+  - startup: 10
+    prefab: {fileID: 344670232931725940, guid: 369fd0272b4cdb746853d163e2e798ae, type: 3}
+    position: {x: 0, y: 0.75, z: 0}
+    rotation: {x: 30, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+  - startup: 16
+    prefab: {fileID: 344670232931725940, guid: 369fd0272b4cdb746853d163e2e798ae, type: 3}
+    position: {x: 0, y: 0.75, z: 0}
+    rotation: {x: 30, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
   sfx:
   - startup: 5
     prefab: {fileID: 3797316729740095628, guid: 5a2c6ffb6f74d4643aa8aa89699e36f8, type: 3}
@@ -30,12 +46,9 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
-  - {fileID: 11400000}
-  - {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - {fileID: 11400000, guid: 2d19423b6006b6b438ed2a695095d23b, type: 2}
-  - {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
-  - {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
-  - {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
+  - {fileID: 11400000, guid: 4f8cf43358c210549a5c88e5f963e222, type: 2}
+  - {fileID: 11400000, guid: 527cdb02932b69f4b9a34fcbeaa32a71, type: 2}
+  - {fileID: 11400000, guid: 014e24de4c016044bb4e54abb8674fa0, type: 2}
   firstStartupFrame: 8
   lastActiveFrame: 20
   totalMoveDuration: 40
@@ -265,6 +278,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 1
   landingRecovery: 0

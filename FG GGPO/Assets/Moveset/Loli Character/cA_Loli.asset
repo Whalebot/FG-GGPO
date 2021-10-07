@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 20
   hitID: 0
+  vfx: []
   sfx:
   - startup: 13
     prefab: {fileID: 3797316729740095628, guid: 253e74f0bc000394383ab7c7205759dd, type: 3}
@@ -25,7 +26,7 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   attackLevel: 0
   type: 0
-  collissionState: 2
+  collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
@@ -36,6 +37,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a3e7fcb9c58dad4bbaf52fd35cdebb3, type: 2}
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   - {fileID: 11400000, guid: 26017b3ab3f43954bbff6030f63c1a7b, type: 2}
+  - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
   firstStartupFrame: 15
   lastActiveFrame: 16
   totalMoveDuration: 48
@@ -47,7 +49,7 @@ MonoBehaviour:
   recoveryFrames: 32
   targetComboMoves: []
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: 20b58a9cd33561541b4eb3f51f609eab, type: 3}
     startupFrame: 15
     activeFrames: 2
     gatlingFrames: 1
@@ -74,18 +76,18 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 700
-      stun: 35
-      hitstop: 10
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 8, z: 3}
+      damage: 875
+      stun: 45
+      hitstop: 25
+      proration: 1
+      meterGain: 4
+      pushback: {x: 0, y: 8, z: 5}
       hitState: 0
       hitID: 0
     airHitProperty:
       damage: 700
       stun: 35
-      hitstop: 5
+      hitstop: 10
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 8, z: 5}
@@ -97,16 +99,16 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 700
-      stun: 35
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 8, z: 2}
+      damage: 875
+      stun: 45
+      hitstop: 25
+      proration: 1
+      meterGain: 4
+      pushback: {x: 0, y: 8, z: 5}
       hitState: 0
       hitID: 0
   jumpCancelOnBlock: 0
@@ -141,15 +143,13 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
-  m:
-  - startFrame: 1
-    duration: 10
-    momentum: {x: 0, y: 0, z: 5}
-    homing: 0
-    resetVelocityDuringRecovery: 1
+  m: []

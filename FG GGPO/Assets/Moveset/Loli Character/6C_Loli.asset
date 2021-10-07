@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 62
   hitID: 0
+  vfx:
+  - startup: 16
+    prefab: {fileID: 175624, guid: 8996e6161a984b94b87d6f5dc7b20273, type: 3}
+    position: {x: 0, y: 3, z: 4}
+    rotation: {x: 90, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx:
-  - startup: 23
+  - startup: 17
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -25,7 +31,7 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   attackLevel: 0
   type: 0
-  collissionState: 2
+  collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
@@ -34,19 +40,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   - {fileID: 11400000, guid: 26017b3ab3f43954bbff6030f63c1a7b, type: 2}
   - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
-  firstStartupFrame: 25
-  lastActiveFrame: 25
-  totalMoveDuration: 55
-  firstGatlingFrame: 30
-  blockAdvantage: -10
-  hitAdvantage: 20
-  blockCancelAdvantage: -5
+  - {fileID: 11400000, guid: 679bbb51825a6994bba9285dd42a77e9, type: 2}
+  - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
+  firstStartupFrame: 18
+  lastActiveFrame: 18
+  totalMoveDuration: 53
+  firstGatlingFrame: 23
+  blockAdvantage: -15
+  hitAdvantage: 15
+  blockCancelAdvantage: -10
   hitCancelAdvantage: 45
-  recoveryFrames: 30
+  recoveryFrames: 35
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 9a5a875667658454d9c86153adff6a36, type: 3}
-    startupFrame: 25
+    startupFrame: 18
     activeFrames: 1
     gatlingFrames: 5
     attackType: 0
@@ -87,7 +95,7 @@ MonoBehaviour:
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
-      hitState: 1
+      hitState: 2
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -139,6 +147,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
