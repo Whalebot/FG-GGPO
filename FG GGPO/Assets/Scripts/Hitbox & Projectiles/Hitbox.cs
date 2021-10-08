@@ -124,12 +124,11 @@ public class Hitbox : MonoBehaviour
     {
         hitOnce = true;
         returnWallPushback = move.attacks[hitboxID].attackType != AttackType.Projectile;
-        //knockbackDirection = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(body.position.x, 0, body.position.z)).normalized;
         knockbackDirection = transform.forward;
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-        attack.gatling = move.gatlingMoves.Count > 0;
+    
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
@@ -176,6 +175,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteBlock(HitProperty hit, Status other)
     {
+        attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnBlock;
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
         status.Meter += hit.meterGain;
@@ -217,6 +217,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other)
     {
+        attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
@@ -260,6 +261,7 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteCounterHit(HitProperty hit, Status other)
     {
+        attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;

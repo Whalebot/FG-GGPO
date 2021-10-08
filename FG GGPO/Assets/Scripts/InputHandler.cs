@@ -476,6 +476,7 @@ public class InputHandler : MonoBehaviour
 
         for (int i = 1; i < motionInputWindow; i++)
         {
+            if (directionals.Count < i) return false;
             if (buttons.Count <= i) return false;
             if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
             {
@@ -512,6 +513,7 @@ public class InputHandler : MonoBehaviour
 
         for (int i = 1; i < motionInputWindow; i++)
         {
+            if (directionals.Count < i) return false;
             if (buttons.Count <= i) return false;
             if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
             {
