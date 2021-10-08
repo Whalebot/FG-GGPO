@@ -15,6 +15,6 @@ public enum BodyProperty { Foot, Body, Head, Air }
 public enum AttackType { Normal, Projectile, Throw }
 public enum MoveType { Normal, Special, Movement, EX, Super }
 
-public enum SpecialInput { BackForward, DownDown }
+public enum SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 }
 
 public enum ButtonInput { A, B, J, C, D }

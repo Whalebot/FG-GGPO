@@ -427,6 +427,7 @@ public class AttackScript : MonoBehaviour
         activeMove = move;
         attackID = move.animationID;
         attackString = false;
+        gatling = false;
         jumpCancel = false;
         specialCancel = false;
 
@@ -475,13 +476,13 @@ public class AttackScript : MonoBehaviour
 
         if (!attacking) return true;
 
+        if (move.type == MoveType.Special && specialCancel)
+        {
+            return true;
+        }
 
         if (attacking && gatling)
         {
-            if (move.type == MoveType.Special && specialCancel)
-            {
-                return true;
-            }
             if (activeMove.gatlingMoves.Count <= 0) return false;
             if (move == null) return true;
             if (!activeMove.gatlingMoves.Contains(move)) return false;
@@ -607,19 +608,15 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        if (attacking) status.rb.velocity = Vector3.zero;
-        //print(GameHandler.Instance.gameFrameCount + " Jump Cancel");
+        if (attacking) status.rb.velocity = Vector3.zero; 
+        if (mainMoveset != null) moveset = mainMoveset;
+
         status.GoToState(Status.State.Recovery);
         attackString = false;
         movementOption = null;
 
         if (activeMove != null)
         {
-            //if (activeMove.type != MoveType.Movement)
-            //{
-            //    movement.ResetRun();
-            //}
-            //movement.storedDirection = Vector3.zero;
             activeMove = null;
         }
 

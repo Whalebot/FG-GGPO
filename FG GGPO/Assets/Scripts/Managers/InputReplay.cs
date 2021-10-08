@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.IO;
-
+using UnityEngine.UI;
+using TMPro;
 
 public class InputReplay : MonoBehaviour
 {
+    public InputReplayMode replayMode;
     public bool replay;
     public InputLog log;
     public InputLog replayLog;
@@ -16,6 +18,9 @@ public class InputReplay : MonoBehaviour
     public int replayStartFrame;
     public InputHandler p1Input;
     public InputHandler p2Input;
+
+    public TextMeshProUGUI recordingText;
+    public TextMeshProUGUI frameText;
 
 
     // Start is called before the first frame update
@@ -28,7 +33,6 @@ public class InputReplay : MonoBehaviour
         p2Input.R3input += InputManager.Instance.SwitchControls;
         p1Input.R3input += StartRecording;
         p2Input.R3input += StopRecording;
-
         p1Input.L3input += PlayRecording;
 
         GameHandler.Instance.advanceGameState += ExecuteFrame;
@@ -42,11 +46,27 @@ public class InputReplay : MonoBehaviour
     void ExecuteFrame()
     {
         if (replay) ReplayLog();
-        if (recordingCounter >= 0) ExecuteRecording();
+        switch (replayMode)
+        {
+            case InputReplayMode.StandBy:
+
+                break;
+            case InputReplayMode.Recording:
+                UpdateRecording();
+                break;
+            case InputReplayMode.Replaying:
+                ExecuteRecording();
+                break;
+            default:
+                break;
+        }
+
+        UpdateText();
     }
 
     public void PlayRecording()
     {
+        replayMode = InputReplayMode.Replaying;
         p2Input.isBot = true;
         replayStartFrame = GameHandler.Instance.gameFrameCount;
         recordingCounter = 0;
@@ -54,14 +74,18 @@ public class InputReplay : MonoBehaviour
 
     public void StartRecording()
     {
+        replayMode = InputReplayMode.Recording;
         recording.inputs.Clear();
-        GameHandler.Instance.advanceGameState += UpdateRecording;
+
+        recordingCounter = 0;
     }
 
 
     public void StopRecording()
     {
-        GameHandler.Instance.advanceGameState -= UpdateRecording;
+        replayMode = InputReplayMode.StandBy;
+
+        recordingCounter = 0;
     }
     public void ExecuteRecording()
     {
@@ -76,8 +100,34 @@ public class InputReplay : MonoBehaviour
         }
         else
         {
-            recordingCounter = -1;
+            replayMode = InputReplayMode.StandBy;
+            recordingCounter = 0;
             p2Input.isBot = false;
+        }
+
+    }
+
+    public void UpdateText()
+    {
+        switch (replayMode)
+        {
+            case InputReplayMode.StandBy:
+                frameText.gameObject.SetActive(false);
+                recordingText.text = "Stand By";
+                break;
+            case InputReplayMode.Recording:
+                frameText.gameObject.SetActive(true);
+                frameText.text = "" + recordingCounter;
+                recordingText.text = "Recording";
+                break;
+            case InputReplayMode.Replaying:
+                frameText.gameObject.SetActive(true);
+                frameText.text = "" + recordingCounter;
+
+                recordingText.text = "Play Recording";
+                break;
+            default:
+                break;
         }
     }
 
@@ -119,6 +169,7 @@ public class InputReplay : MonoBehaviour
     public void UpdateRecording()
     {
         Input temp = new Input();
+        recordingCounter++;
         temp.frame = GameHandler.Instance.gameFrameCount;
 
         for (int i = 0; i < p2Input.heldButtons.Length; i++)
@@ -163,3 +214,5 @@ public class InputReplay : MonoBehaviour
     }
 
 }
+
+public enum InputReplayMode { StandBy, Recording, Replaying }

@@ -43,6 +43,8 @@ public class Move : ScriptableObject
     public List<Move> targetComboMoves;
     public Attack[] attacks;
     [Header("Move properties")]
+    [FoldoutGroup("Cancel properties")] public bool gatlingCancelOnBlock = true;
+    [FoldoutGroup("Cancel properties")] public bool gatlingCancelOnHit = true;
     [FoldoutGroup("Cancel properties")] public bool jumpCancelOnBlock;
     [FoldoutGroup("Cancel properties")] public bool jumpCancelOnHit = true;
     [FoldoutGroup("Cancel properties")] public bool specialCancelOnBlock = true;
@@ -116,7 +118,8 @@ public class Move : ScriptableObject
         firstStartupFrame = attacks[0].startupFrame;
         firstGatlingFrame = attacks[0].startupFrame + attacks[0].gatlingFrames;
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
-        totalMoveDuration = lastActiveFrame + recoveryFrames;
+        totalMoveDuration = lastActiveFrame + recoveryFrames; 
+
         if (noHitstopOnSelf)
         {
             blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame) + attacks[attacks.Length - 1].groundBlockProperty.hitstop;
@@ -455,7 +458,7 @@ public class VFX
 public class CustomHurtbox
 {
     public int startup = 1;
-    public int duration = 1;
+    public int end = 1;
     public GameObject prefab;
 }
 

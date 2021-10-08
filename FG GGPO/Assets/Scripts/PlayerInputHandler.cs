@@ -154,7 +154,25 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 bool ground = (status.groundState == GroundState.Grounded);
                 if (item.grounded == ground)
-                    if (item.motionInput == SpecialInput.BackForward)
+                {
+                    if (item.motionInput == SpecialInput.QCF)
+                    {
+                        //
+                        if (input.qcf)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                   else if (item.motionInput == SpecialInput.BackForward)
                     {
                         //
                         if (input.bf)
@@ -189,6 +207,7 @@ public class PlayerInputHandler : MonoBehaviour
                             }
                         }
                     }
+                }
 
             }
             if (doSpecial) break;
