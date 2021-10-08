@@ -455,7 +455,7 @@ public class VFX
 public class CustomHurtbox
 {
     public int startup = 1;
-    public int duration = 1;
+    public int end = 1;
     public GameObject prefab;
 }
 

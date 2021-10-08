@@ -83,6 +83,10 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Debug")] public bool bf;
     [FoldoutGroup("Debug")] public bool fb;
     [FoldoutGroup("Debug")] public bool dd;
+    [FoldoutGroup("Debug")] public bool qcf;
+    [FoldoutGroup("Debug")] public bool qcb;
+    [FoldoutGroup("Debug")] public bool mI478;
+    [FoldoutGroup("Debug")] public bool mI698;
     [FoldoutGroup("Debug")] public int extraBuffer = 0;
     [FoldoutGroup("Debug")] public bool isPaused;
     [FoldoutGroup("Debug")] public bool debug;
@@ -448,8 +452,88 @@ public class InputHandler : MonoBehaviour
             dd = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             dd = false;
+        if (QuarterCircleForward())
+            qcf = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            qcf = false;
+        if (QuarterCircleBack())
+            qcb = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            qcb = false;
     }
 
+    public bool QuarterCircleForward()
+    {
+        bool result = false;
+
+        bool foundDown = false;
+        bool foundDF = false;
+        bool foundF = false;
+
+        if (buttons.Count < 5) return false;
+
+        if (buttons.Count <= 0) return false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (buttons.Count <= i) return false;
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
+            {
+                foundDown = true;
+            }
+    
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
+            {
+          
+                foundDF = true;
+            }
+            if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8)
+            {
+                foundF = true;
+            }
+            if (foundDown)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+    public bool QuarterCircleBack()
+    {
+        bool result = false;
+
+        bool foundDown = false;
+        bool foundDF = false;
+        bool foundF = false;
+
+        if (buttons.Count < 5) return false;
+
+        if (buttons.Count <= 0) return false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (buttons.Count <= i) return false;
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
+            {
+                foundDown = true;
+            }
+
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
+            {
+
+                foundDF = true;
+            }
+            if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 2)
+            {
+                foundF = true;
+            }
+            if (foundDown)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
 
     public bool CheckDownDown()
     {
