@@ -12,44 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 5A
   m_EditorClassIdentifier: 
-  animationID: 50
-  hitID: 0
-  sfx:
-  - startup: 6
-    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
   collissionState: 0
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
-  gatlingMoves:
-  - {fileID: 11400000}
-  - {fileID: 11400000}
-  - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
-  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
-  - {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
-  - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
-  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  firstStartupFrame: 8
-  lastActiveFrame: 8
-  totalMoveDuration: 20
-  firstGatlingFrame: 14
-  blockAdvantage: 3
-  hitAdvantage: 8
-  blockCancelAdvantage: 9
-  hitCancelAdvantage: 14
-  recoveryFrames: 12
-  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: dd9be75264fc9a84190faf997da0ed33, type: 3}
     startupFrame: 8
@@ -57,6 +25,7 @@ MonoBehaviour:
     gatlingFrames: 6
     attackType: 0
     attackHeight: 1
+    bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 450
@@ -112,11 +81,48 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
+  vfx: []
+  sfx:
+  - startup: 6
+    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 50
+  hitID: 0
+  moveName: 
+  description: 
+  firstStartupFrame: 8
+  lastActiveFrame: 8
+  totalMoveDuration: 20
+  firstGatlingFrame: 14
+  blockAdvantage: 3
+  hitAdvantage: 8
+  blockCancelAdvantage: 9
+  hitCancelAdvantage: 14
+  recoveryFrames: 12
+  m: []
+  targetComboMoves: []
+  gatlingMoves:
+  - {fileID: 11400000}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
+  - {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
+  - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+  - {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
+  - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
+  - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
+  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 1
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -129,13 +135,28 @@ MonoBehaviour:
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 0
   runMomentum: 1
   resetVelocityDuringRecovery: 0
-  m: []
