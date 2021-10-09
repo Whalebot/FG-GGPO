@@ -50,4 +50,8 @@ MonoBehaviour:
   leftDash: {fileID: 11400000, guid: 424f743fb3917c149886fac91abce870, type: 2}
   airdashF: {fileID: 11400000, guid: 1dca6cb1909a62440b8bbf3f3e82bc33, type: 2}
   airdashB: {fileID: 11400000, guid: b62102f7ea5e03742a44ab6e19951aa8, type: 2}
-  specials: []
+  specials:
+  - motionInput: 2
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: 8af9b29c953f53246b2a6140fa09b36a, type: 2}
