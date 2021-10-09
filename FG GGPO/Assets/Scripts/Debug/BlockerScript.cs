@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class BlockerScript : MonoBehaviour
 {
-    public Collider playerCollider;
+    public Collider[] playerColliders;
     public Collider playerBlockerCollider;
     // Start is called before the first frame update
     void Start()
     {
-        Physics.IgnoreCollision(playerCollider, playerBlockerCollider, true);
+        foreach (var item in playerColliders)
+        {
+            Physics.IgnoreCollision(item, playerBlockerCollider, true);
+        }
+      
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollissionExit(Collision collision)
     {
-        
+        print("Test");
+        Vector3 vel = collision.collider.attachedRigidbody.velocity;
+        vel.x = 0;
+        vel.z = 0;
+        collision.collider.attachedRigidbody.velocity = vel;
+        playerBlockerCollider.attachedRigidbody.velocity = vel;
     }
 }
