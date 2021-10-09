@@ -39,13 +39,14 @@ MonoBehaviour:
   hitCancelAdvantage: 0
   recoveryFrames: 25
   targetComboMoves:
-  - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
-  - {fileID: 11400000, guid: 70688a04552b0a54f8e3c72ff5683dd0, type: 2}
   - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}
+  - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   - {fileID: 11400000, guid: e7a4d42600dc5ac4396aa885b31affd1, type: 2}
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
+  - {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
+  - {fileID: 11400000, guid: 70688a04552b0a54f8e3c72ff5683dd0, type: 2}
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
@@ -113,7 +114,7 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 10
@@ -153,6 +154,6 @@ MonoBehaviour:
   m:
   - startFrame: 1
     duration: 15
-    momentum: {x: 0, y: 0, z: 10}
+    momentum: {x: 0, y: 0, z: 8}
     homing: 0
     resetVelocityDuringRecovery: 1

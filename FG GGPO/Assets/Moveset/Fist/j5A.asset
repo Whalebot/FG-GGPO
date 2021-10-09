@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 80
   hitID: 0
+  vfx: []
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -54,7 +55,7 @@ MonoBehaviour:
     bodyProperty: 3
     homing: 0
     groundHitProperty:
-      damage: 500
+      damage: 300
       stun: 25
       hitstop: 5
       proration: 0.95
@@ -72,7 +73,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 500
+      damage: 300
       stun: 20
       hitstop: 5
       proration: 0.95
@@ -81,7 +82,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 500
+      damage: 300
       stun: 25
       hitstop: 10
       proration: 0.95
@@ -99,7 +100,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 500
+      damage: 300
       stun: 25
       hitstop: 5
       proration: 0.95
@@ -139,6 +140,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

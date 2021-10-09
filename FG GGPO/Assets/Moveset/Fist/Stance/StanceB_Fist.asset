@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
+  m_Name: StanceB_Fist
+  m_EditorClassIdentifier: 
+  animationID: 1004
+  hitID: 0
+  vfx:
+  - startup: 8
+    prefab: {fileID: 166982, guid: ae49605d9a4177547b89d38812c03345, type: 3}
+    position: {x: 0, y: 1, z: 0.25}
+    rotation: {x: 45, y: 30, z: -60}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+  sfx:
+  - startup: 10
+    prefab: {fileID: 3797316729740095628, guid: d27d78f64d25c2f47847065f853b860e, type: 3}
+  hitFX: {fileID: 100010, guid: 02966b5acd2e50a499ae031073be3f34, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 105340, guid: 72cf50dded273ff4dbe5f2338b06b066, type: 3}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  attackLevel: 4
+  type: 0
+  collissionState: 0
+  groundState: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
+  gatlingMoves:
+  - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}
+  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  - {fileID: 11400000, guid: 70688a04552b0a54f8e3c72ff5683dd0, type: 2}
+  - {fileID: 11400000, guid: e7a4d42600dc5ac4396aa885b31affd1, type: 2}
+  firstStartupFrame: 12
+  lastActiveFrame: 16
+  totalMoveDuration: 42
+  firstGatlingFrame: 17
+  blockAdvantage: -10
+  hitAdvantage: 2
+  blockCancelAdvantage: -5
+  hitCancelAdvantage: 27
+  recoveryFrames: 26
+  targetComboMoves: []
+  attacks:
+  - hitbox: {fileID: 3123878921687778490, guid: 7c10aedb98a52c644a8f4c93e2e60178, type: 3}
+    startupFrame: 12
+    activeFrames: 5
+    gatlingFrames: 5
+    attackType: 0
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 900
+      stun: 32
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 8, z: 2}
+      hitState: 2
+      hitID: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 2}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 900
+      stun: 40
+      hitstop: 25
+      proration: 1.2
+      meterGain: 4
+      pushback: {x: 0, y: 10, z: 2}
+      hitState: 2
+      hitID: 0
+    airHitProperty:
+      damage: 900
+      stun: 32
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 8, z: 2}
+      hitState: 2
+      hitID: 0
+    airBlockProperty:
+      damage: 0
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: -4}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 900
+      stun: 30
+      hitstop: 25
+      proration: 1.2
+      meterGain: 4
+      pushback: {x: 0, y: 8, z: 2}
+      hitState: 0
+      hitID: 0
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
+  resetGatling: 1
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 1
+  headInvulStart: 1
+  headInvulDuration: 10
+  bodyInvul: 1
+  bodyInvulStart: 1
+  bodyInvulDuration: 5
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 1
+  m:
+  - startFrame: 2
+    duration: 5
+    momentum: {x: 0, y: 0, z: 3}
+    homing: 0
+    resetVelocityDuringRecovery: 0
