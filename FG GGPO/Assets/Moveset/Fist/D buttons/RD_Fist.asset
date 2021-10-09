@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 33
   hitID: 0
-  vfx: []
+  vfx:
+  - startup: 5
+    prefab: {fileID: 3664255640070812419, guid: 8cc708a82c38e2448855dbd61316c8df, type: 3}
+    position: {x: 1, y: 0.5, z: 0}
+    rotation: {x: 0, y: -90, z: 0}
+    scale: {x: 0.15, y: 0.15, z: 0.15}
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -110,6 +115,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

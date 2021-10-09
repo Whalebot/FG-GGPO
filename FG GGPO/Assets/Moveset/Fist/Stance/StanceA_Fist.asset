@@ -15,7 +15,7 @@ MonoBehaviour:
   animationID: 1003
   hitID: 0
   vfx:
-  - startup: 8
+  - startup: 6
     prefab: {fileID: 166982, guid: ae49605d9a4177547b89d38812c03345, type: 3}
     position: {x: 0, y: 0.45, z: 0.25}
     rotation: {x: 30, y: -90, z: 30}
@@ -23,10 +23,12 @@ MonoBehaviour:
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: d27d78f64d25c2f47847065f853b860e, type: 3}
+  - startup: 8
+    prefab: {fileID: 3797316729740095628, guid: ce677a0bea8dcfc4ab232696c87ae13e, type: 3}
   hitFX: {fileID: 100010, guid: 02966b5acd2e50a499ae031073be3f34, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 105340, guid: 72cf50dded273ff4dbe5f2338b06b066, type: 3}
-  hitSFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 0ed2ac63d802daa4b86168c04f6fa39b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   attackLevel: 4
@@ -77,14 +79,14 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 800
       stun: 30
-      hitstop: 12
-      proration: 0.95
+      hitstop: 25
+      proration: 1.1
       meterGain: 4
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
@@ -110,12 +112,14 @@ MonoBehaviour:
     airCounterhitProperty:
       damage: 800
       stun: 30
-      hitstop: 12
-      proration: 0.95
+      hitstop: 25
+      proration: 1.1
       meterGain: 4
       pushback: {x: 0, y: 5, z: 4}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 1
