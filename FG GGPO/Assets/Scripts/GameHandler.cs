@@ -222,6 +222,7 @@ public class GameHandler : MonoBehaviour
     void StartGame()
     {
         isPaused = false;
+       
     }
 
     [Button]
