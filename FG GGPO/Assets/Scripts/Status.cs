@@ -140,7 +140,6 @@ public class Status : MonoBehaviour
             GoToGroundState(GroundState.Knockdown);
         }
         else { GoToGroundState(GroundState.Grounded);
-            print("Land");
         }
     }
 
