@@ -321,7 +321,6 @@ public class Movement : MonoBehaviour
             runDirection = Vector3.zero;
             landEvent?.Invoke();
             performedJumps = 0;
-            status.GoToGroundState(GroundState.Grounded);
             ground = true;
             runMomentumCounter = 0;
             status.EnableCollider();
