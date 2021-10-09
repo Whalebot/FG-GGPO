@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityGGPO {
 
     [ExecuteInEditMode]
     public class GgpoPerformancePanel : MonoBehaviour, IPerfUpdate {
+        public Text msPing;
         public Rect fairnessRect;
         public Rect networkRect;
 
@@ -17,21 +19,21 @@ namespace UnityGGPO {
         private const int MAX_FAIRNESS = 20;
         private const int MAX_PLAYERS = 4;
 
-        private string networkLag;
-        private string frameLag;
-        private string bandwidth;
-        private string localAhead;
-        private string remoteAhead;
+       [SerializeField] private string networkLag;
+        [SerializeField] private string frameLag;
+        [SerializeField] private string bandwidth;
+        [SerializeField] private string localAhead;
+        [SerializeField] private string remoteAhead;
 
-        private int _last_text_update_time;
-        private int _first_graph_index = 0;
-        private int _graph_size = 0;
-        private int[][] _ping_graph;
-        private int[][] _local_fairness_graph;
-        private int[][] _remote_fairness_graph;
-        private int[] _fairness_graph;
-        private int[] _remote_queue_graph;
-        private int[] _send_queue_graph;
+        [SerializeField] private int _last_text_update_time;
+        [SerializeField] private int _first_graph_index = 0;
+        [SerializeField] private int _graph_size = 0;
+        [SerializeField] private int[][] _ping_graph;
+        [SerializeField] private int[][] _local_fairness_graph;
+        [SerializeField] private int[][] _remote_fairness_graph;
+        [SerializeField] private int[] _fairness_graph;
+        [SerializeField] private int[] _remote_queue_graph;
+        [SerializeField] private int[] _send_queue_graph;
 
         private Color[] _fairness_pens = new Color[] { Color.blue, Color.grey, Color.red, Color.magenta };
         private List<Vector2> pt = new List<Vector2>();

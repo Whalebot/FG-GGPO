@@ -345,12 +345,23 @@ public class GameHandler : MonoBehaviour
         UIManager.Instance.GameModeUI(gameMode);
     }
 
+    public void Rollback(int frameTarget) {
+        Debug.Log("Rollbacking from " + gameFrameCount + " to " + frameTarget);
+        gameFrameCount = frameTarget;
+
+        RevertGameState(gameFrameCount);
+    }
 
     void RevertGameState(int i)
     {
-        rollbackEvent?.Invoke(i);
-        gameStates.RemoveRange(i, gameStates.Count - i);
+        //rollbackEvent?.Invoke(i);
+     
         p1Transform.position = gameStates[gameStates.Count - 1].p1Position;
+        p2Transform.position = gameStates[gameStates.Count - 1].p2Position;
+
+        p1Status.rb.velocity = gameStates[gameStates.Count - 1].p1Velocity;
+        p2Status.rb.velocity = gameStates[gameStates.Count - 1].p2Velocity;
+        gameStates.RemoveRange(i, gameStates.Count - i);
     }
 
     [Button("Simulate Game State")]

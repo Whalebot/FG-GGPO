@@ -11,7 +11,7 @@ public class FgPlayerView : MonoBehaviour {
    [SerializeField] bool[] inputs = new bool[4];
     [SerializeField] bool[] buttons = new bool[6];
 
-    public void Populate(Ship shipGs, PlayerConnectionInfo info) {
+    public void Populate(OnlinePlayer shipGs, PlayerConnectionInfo info) {
         inputs = new bool[4];
         buttons = new bool[6];
         transform.position = shipGs.position;
