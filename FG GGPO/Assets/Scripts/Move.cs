@@ -7,25 +7,34 @@ using System.Reflection;
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
-    [FoldoutGroup("Animation")] public int animationID;
-    [FoldoutGroup("Animation")] public int hitID;
-    [FoldoutGroup("FX")] public VFX[] vfx;
-    [FoldoutGroup("FX")] public SFX[] sfx;
-    [FoldoutGroup("FX")] public GameObject hitFX;
-    [FoldoutGroup("FX")] public GameObject blockFX;
-    [FoldoutGroup("FX")] public GameObject counterhitFX;
-    [FoldoutGroup("FX")] public GameObject hitSFX;
-    [FoldoutGroup("FX")] public GameObject blockSFX;
-    [FoldoutGroup("FX")] public GameObject counterhitSFX;
 
-    public AttackLevel attackLevel;
-    public MoveType type;
-    public BlockState collissionState;
-    public GroundState groundState;
-    public Moveset stance;
-    public Move throwFollowup;
+    [TabGroup("Attacks")] public AttackLevel attackLevel;
+    [TabGroup("Attacks")] public MoveType type;
+    [TabGroup("Attacks")] 
+    [ShowIf("@type == MoveType.EX || type == MoveType.Super")]
+    public int meterCost;
+    [TabGroup("Attacks")] public BlockState collissionState;
+    [TabGroup("Attacks")] public GroundState groundState;
+    
+    [TabGroup("Attacks")] public Moveset stance;
+    [TabGroup("Attacks")] public Move throwFollowup;
+    [TabGroup("Attacks")] public Attack[] attacks;
 
-    public List<Move> gatlingMoves;
+    [TabGroup("FX")] public VFX[] vfx;
+    [TabGroup("FX")] public SFX[] sfx;
+    [TabGroup("FX")] public GameObject hitFX;
+    [TabGroup("FX")] public GameObject blockFX;
+    [TabGroup("FX")] public GameObject counterhitFX;
+    [TabGroup("FX")] public GameObject hitSFX;
+    [TabGroup("FX")] public GameObject blockSFX;
+    [TabGroup("FX")] public GameObject counterhitSFX;
+
+    [TabGroup("Animation")] public int animationID;
+    [TabGroup("Animation")] public int hitID;
+    [TabGroup("Animation")] public string moveName;
+    [TabGroup("Animation")] 
+    [TextArea ]public string description;
+
     [Header("Read Only")]
     public int firstStartupFrame;
     public int lastActiveFrame;
@@ -40,16 +49,19 @@ public class Move : ScriptableObject
 
     [Header("Editable")]
     public int recoveryFrames;
-    public List<Move> targetComboMoves;
-    public Attack[] attacks;
-    [Header("Move properties")]
+
+    [FoldoutGroup("Momentum")]
+    public Momentum[] m;
+
+    [FoldoutGroup("Cancel properties")] public List<Move> targetComboMoves;
+    [FoldoutGroup("Cancel properties")] public List<Move> gatlingMoves;
     [FoldoutGroup("Cancel properties")] public bool gatlingCancelOnBlock = true;
     [FoldoutGroup("Cancel properties")] public bool gatlingCancelOnHit = true;
     [FoldoutGroup("Cancel properties")] public bool jumpCancelOnBlock;
     [FoldoutGroup("Cancel properties")] public bool jumpCancelOnHit = true;
     [FoldoutGroup("Cancel properties")] public bool specialCancelOnBlock = true;
     [FoldoutGroup("Cancel properties")] public bool specialCancelOnHit = true;
-    [FoldoutGroup("Move properties")] public bool resetGatling = false;
+
     [FoldoutGroup("Invul properties")] public bool noClip;
     [ShowIf("noClip")]
     [FoldoutGroup("Invul properties")] public int noClipStart = 1;
@@ -91,7 +103,7 @@ public class Move : ScriptableObject
     [ShowIf("footInvul")]
     [FoldoutGroup("Invul properties")] public int footInvulDuration;
 
-
+    [FoldoutGroup("Move properties")] public bool resetGatling = false;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public bool forcedCounterHit;
@@ -104,13 +116,9 @@ public class Move : ScriptableObject
     [FoldoutGroup("Air properties")] public bool landCancel;
     [FoldoutGroup("Air properties")] public int landingRecovery;
 
-
-
-    [Header("Momentum")]
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
     [FoldoutGroup("Momentum")] public bool runMomentum = true;
     [FoldoutGroup("Momentum")] public bool resetVelocityDuringRecovery = true;
-    [FoldoutGroup("Momentum")] public Momentum[] m;
 
     private void OnValidate()
     {
@@ -118,7 +126,7 @@ public class Move : ScriptableObject
         firstStartupFrame = attacks[0].startupFrame;
         firstGatlingFrame = attacks[0].startupFrame + attacks[0].gatlingFrames;
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
-        totalMoveDuration = lastActiveFrame + recoveryFrames; 
+        totalMoveDuration = lastActiveFrame + recoveryFrames;
 
         if (noHitstopOnSelf)
         {
@@ -177,7 +185,7 @@ public class Move : ScriptableObject
 
     }
 
-    [Button]
+    [TabGroup("Attacks"), Button]
     void AutoAssignValues()
     {
         switch (attackLevel)
@@ -358,7 +366,7 @@ public class Move : ScriptableObject
 
     }
 
-    [Button]
+    [TabGroup("Attacks"), Button]
     void CopyHitToCounterhit()
     {
         foreach (var item in attacks)
@@ -368,7 +376,7 @@ public class Move : ScriptableObject
         }
     }
 
-    [Button]
+    [TabGroup("Attacks"), Button]
     void CopyGroundToAir()
     {
         foreach (var item in attacks)
@@ -378,7 +386,7 @@ public class Move : ScriptableObject
             CopyProperty(item.airCounterhitProperty, item.groundCounterhitProperty);
         }
     }
-    [Button]
+    [TabGroup("Attacks"), Button]
     void AutoSetCounterhit()
     {
         foreach (var item in attacks)

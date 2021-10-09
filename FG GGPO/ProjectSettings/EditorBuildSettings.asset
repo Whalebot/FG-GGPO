@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Network Test.unity
+    guid: fbcd2f465a1fbeb4290bd9bd4cc90cf2
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 0993c73a79923dd418eada5595a54d2c
@@ -14,11 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/Training Stage.unity
     guid: 00fe25105a577c64bac5a075d482c79c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stages/Highway Stage.unity
     guid: b1a5ccaf3a027564b94347ab2531539d
-  - enabled: 0
-    path: Assets/Scenes/Network Test.unity
-    guid: fbcd2f465a1fbeb4290bd9bd4cc90cf2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 32c04762f372d8042b0a312a366f8874, type: 2}

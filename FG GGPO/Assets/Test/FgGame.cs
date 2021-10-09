@@ -32,7 +32,7 @@ public static class VWConstants
 
 
 [Serializable]
-public class Ship
+public class OnlinePlayer
 {
     public Vector3 position;
     public Vector3 velocity;
@@ -83,17 +83,17 @@ public struct FgGame : IGame
 
     public int Checksum => GetHashCode();
 
-    public Ship[] _ships;
+    public OnlinePlayer[] _players;
 
     public static Rect _bounds = new Rect(0, 0, 640, 480);
 
     public void Serialize(BinaryWriter bw)
     {
         bw.Write(Framenumber);
-        bw.Write(_ships.Length);
-        for (int i = 0; i < _ships.Length; ++i)
+        bw.Write(_players.Length);
+        for (int i = 0; i < _players.Length; ++i)
         {
-            _ships[i].Serialize(bw);
+            _players[i].Serialize(bw);
         }
     }
 
@@ -101,14 +101,16 @@ public struct FgGame : IGame
     {
         Framenumber = br.ReadInt32();
         int length = br.ReadInt32();
-        if (length != _ships.Length)
+        Debug.Log("ROLLBACK I THINK");
+        if (length != _players.Length)
         {
-            _ships = new Ship[length];
+            _players = new OnlinePlayer[length];
         }
-        for (int i = 0; i < _ships.Length; ++i)
+        for (int i = 0; i < _players.Length; ++i)
         {
-            _ships[i].Deserialize(br);
+            _players[i].Deserialize(br);
         }
+        GameHandler.Instance.Rollback(Framenumber);
     }
 
     public NativeArray<byte> ToBytes()
@@ -149,11 +151,11 @@ public struct FgGame : IGame
     public FgGame(int num_players)
     {
         Framenumber = 0;
-        _ships = new Ship[num_players];
-        for (int i = 0; i < _ships.Length; i++)
+        _players = new OnlinePlayer[num_players];
+        for (int i = 0; i < _players.Length; i++)
         {
-            _ships[i] = new Ship();
-            _ships[i].health = STARTING_HEALTH;
+            _players[i] = new OnlinePlayer();
+            _players[i].health = STARTING_HEALTH;
         }
     }
 
@@ -173,7 +175,7 @@ public struct FgGame : IGame
 
     public void ParseShipInputs(long inputs, int i, out bool[] directional, out bool[] buttons)
     {
-        var ship = _ships[i];
+        var ship = _players[i];
 
         GGPORunner.LogGame($"parsing ship {i} inputs: {inputs}.");
 
@@ -204,10 +206,10 @@ public struct FgGame : IGame
         string fp = "";
         fp += "GameState object.\n";
         fp += string.Format("  bounds: {0},{1} x {2},{3}.\n", _bounds.xMin, _bounds.yMin, _bounds.xMax, _bounds.yMax);
-        fp += string.Format("  num_ships: {0}.\n", _ships.Length);
-        for (int i = 0; i < _ships.Length; i++)
+        fp += string.Format("  num_ships: {0}.\n", _players.Length);
+        for (int i = 0; i < _players.Length; i++)
         {
-            var ship = _ships[i];
+            var ship = _players[i];
             fp += string.Format("  ship {0} position:  %.4f, %.4f\n", i, ship.position.x, ship.position.y);
             fp += string.Format("  ship {0} velocity:  %.4f, %.4f\n", i, ship.velocity.x, ship.velocity.y);
             fp += string.Format("  ship {0} health:    %d.\n", i, ship.health);
@@ -220,7 +222,7 @@ public struct FgGame : IGame
     {
         Framenumber++; 
         GameHandler.Instance.AdvanceGameState();
-        for (int i = 0; i < _ships.Length; i++)
+        for (int i = 0; i < _players.Length; i++)
         {
             bool[] dir;
             bool[] buttons;
@@ -232,9 +234,9 @@ public struct FgGame : IGame
             {
                 ParseShipInputs(inputs[i], i, out dir, out buttons);
             }
-            for (int j = 0; j < _ships[i].dir.Length; j++)
+            for (int j = 0; j < _players[i].dir.Length; j++)
             {
-                _ships[i].dir[j] = dir[j];
+                _players[i].dir[j] = dir[j];
                 if (i == 0)
                 {
                     if (InputManager.Instance.p1Input.network)
@@ -247,7 +249,7 @@ public struct FgGame : IGame
                 }
             }
 
-            _ships[i].buttons = buttons;
+            _players[i].buttons = buttons;
             SavePositions(i);
 
             if (i == 0) { InputManager.Instance.p1Input.ResolveButtons(buttons); }
@@ -258,7 +260,7 @@ public struct FgGame : IGame
 
     void SavePositions(int index)
     {
-        var ship = _ships[index];
+        var ship = _players[index];
         GameState state = GameHandler.Instance.gameStates[GameHandler.Instance.gameStates.Count - 1];
         if (index == 1)
             ship.position = GameHandler.Instance.p1Transform.position;
@@ -294,18 +296,6 @@ public struct FgGame : IGame
             if (InputManager.Instance.p1Input.heldButtons[5])
                 input |= INPUT_6;
         }
-        //else if (id == 1)
-        //{
-        //    if (InputManager.Instance.p2Input.heldDirectionals[1])
-        //        input |= INPUT_F;
-        //    if (InputManager.Instance.p2Input.heldDirectionals[2])
-        //        input |= INPUT_B;
-        //    if (InputManager.Instance.p2Input.heldDirectionals[0])
-        //        input |= INPUT_L;
-        //    if (InputManager.Instance.p2Input.heldDirectionals[3])
-        //        input |= INPUT_R;
-        //}
-
         return input;
     }
 
@@ -321,7 +311,7 @@ public struct FgGame : IGame
     {
         int hashCode = -1214587014;
         hashCode = hashCode * -1521134295 + Framenumber.GetHashCode();
-        foreach (var ship in _ships)
+        foreach (var ship in _players)
         {
             hashCode = hashCode * -1521134295 + ship.GetHashCode();
         }

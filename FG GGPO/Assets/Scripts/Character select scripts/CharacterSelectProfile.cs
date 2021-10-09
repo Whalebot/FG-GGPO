@@ -7,10 +7,16 @@ using Sirenix.OdinInspector;
 
 public class CharacterSelectProfile : ScriptableObject
 {
+    [TabGroup("Ingame")]
     public GameObject prefab;
+    [TabGroup("Ingame")]
     public int iD;
 
+    [PreviewField(75)] 
     public Sprite portrait;
+
+    [PreviewField(75)]
+    public Sprite splashArt;
 
     public string characterName;
 
@@ -21,7 +27,9 @@ public class CharacterSelectProfile : ScriptableObject
     public string description;
 
     public int range1;
+
     public int range2;
+
     public int range3;
 
 

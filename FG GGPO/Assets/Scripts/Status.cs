@@ -122,7 +122,8 @@ public class Status : MonoBehaviour
         currentState = State.Neutral;
     }
 
-    public void ResetInvincibilities() {
+    public void ResetInvincibilities()
+    {
         invincible = false;
         airInvul = false;
         bodyInvul = false;
@@ -134,7 +135,12 @@ public class Status : MonoBehaviour
 
     void Land()
     {
-        //  if(groundState ==)
+        if (currentState == State.Hitstun || currentState == State.Knockdown)
+        {
+            GoToGroundState(GroundState.Knockdown);
+        }
+        else { GoToGroundState(GroundState.Grounded);
+        }
     }
 
     void ActivateCollider()
@@ -225,6 +231,7 @@ public class Status : MonoBehaviour
 
     void ResolveHitstun()
     {
+        if (rb.velocity.y > 1) GoToGroundState(GroundState.Airborne);
 
         if (hitstunValue > 0)
         {
@@ -320,10 +327,11 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 if (forcedCounterhit) counterhitState = true;
                 if (autoBlock) blocking = true;
-              
+
                 break;
             case State.Hitstun:
                 blocking = false;
+
                 ResolveHitstun();
                 minusFrames = -HitStun;
                 break;
@@ -359,25 +367,13 @@ public class Status : MonoBehaviour
     }
     public void GoToGroundState(GroundState s)
     {
-        switch (s)
-        {
-
-            default:
-                if (HitStun > 0 && s == GroundState.Grounded && groundState == GroundState.Airborne)
-                {
-                    groundState = GroundState.Knockdown;
-                    break;
-                }
-                else groundState = s;
-
-                break;
-        }
+        groundState = s;
         ActivateCollider();
     }
 
     public void GoToState(State transitionState)
     {
-       if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
+        if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
         switch (transitionState)
         {
@@ -517,7 +513,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            if (groundState != GroundState.Grounded)
+            if (groundState != GroundState.Grounded || currentState == State.Knockdown)
             {
                 GoToGroundState(GroundState.Airborne);
             }
