@@ -62,6 +62,7 @@ public class CharacterSelectManager : MonoBehaviour
         inputManager.p1Input.leftInput += p1Left;
         inputManager.p1Input.rightInput += p1Right;
         inputManager.p1Input.southInput += P1Select;
+        inputManager.p1Input.eastInput += P1Deselect;
 
 
         inputManager.p2Input.upInput += p2Up;
@@ -69,7 +70,7 @@ public class CharacterSelectManager : MonoBehaviour
         inputManager.p2Input.leftInput += p2Left;
         inputManager.p2Input.rightInput += p2Right;
         inputManager.p2Input.southInput += P2Select;
-
+        inputManager.p1Input.eastInput += P2Deselect;
     }
 
     void Start()
@@ -158,6 +159,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         p1SelectFeedback?.PlayFeedbacks();
         p1Selected = true;
+        if (p2Selected) EndCharacterSelect();
     }
 
     [Button]
@@ -165,14 +167,30 @@ public class CharacterSelectManager : MonoBehaviour
     {
         p2SelectFeedback?.PlayFeedbacks();
         p2Selected = true;
+        if (p1Selected) EndCharacterSelect();
     }
+
+    public void P1Deselect()
+    {
+        p1SelectFeedback?.PlayFeedbacks();
+        p1Selected = false;
+    }
+
+    [Button]
+    public void P2Deselect()
+    {
+        p2SelectFeedback?.PlayFeedbacks();
+        p2Selected = false;
+    }
+
 
     [Button]
     public void EndCharacterSelect()
     {
-        SceneManager.LoadScene(stageID);
         GameHandler.p1CharacterID = p1ID;
         GameHandler.p2CharacterID = p2ID;
+        SceneManager.LoadScene(stageID);
+
     }
 
 }

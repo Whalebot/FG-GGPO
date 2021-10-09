@@ -404,6 +404,7 @@ public class AttackScript : MonoBehaviour
             status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame + 1;
         }
 
+        status.Meter -= move.meterCost;
         status.minusFrames = -(move.totalMoveDuration);
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
@@ -464,6 +465,7 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
         if (jumpFrameCounter > 0) return false;
 
+        if (move.meterCost > status.Meter) return false;
         if (move.useAirAction && !attacking)
         {
             if (movement.performedJumps <= 0)
@@ -476,9 +478,10 @@ public class AttackScript : MonoBehaviour
 
         if (!attacking) return true;
 
-        if (move.type == MoveType.Special && specialCancel)
+        if (specialCancel)
         {
-            return true;
+            if (move.type == MoveType.Special || move.type == MoveType.Super)
+                return true;
         }
 
         if (attacking && gatling)
@@ -608,7 +611,7 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        if (attacking) status.rb.velocity = Vector3.zero; 
+        if (attacking) status.rb.velocity = Vector3.zero;
         if (mainMoveset != null) moveset = mainMoveset;
 
         status.GoToState(Status.State.Recovery);

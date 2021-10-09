@@ -33,7 +33,7 @@ public class GameHandler : MonoBehaviour
     [FoldoutGroup("Gameplay Settings")] public int p2RoundWins;
     [FoldoutGroup("Starting Position")] public int p1CharacterTrainingID;
     [FoldoutGroup("Starting Position")] public int p2CharacterTrainingID;
-    [FoldoutGroup("Starting Position")] public GameObject[] characters;
+    [FoldoutGroup("Starting Position")] public CharacterSelectProfile[] characters;
     [FoldoutGroup("Starting Position")] public Transform p1StartPosition;
     [FoldoutGroup("Starting Position")] public Transform p2StartPosition;
 
@@ -103,13 +103,13 @@ public class GameHandler : MonoBehaviour
 
         if (p1Transform == null)
         {
-            GameObject GO = Instantiate(characters[p1CharacterID], p1StartPosition.position, p1StartPosition.rotation);
+            GameObject GO = Instantiate(characters[p1CharacterID].prefab, p1StartPosition.position, p1StartPosition.rotation);
             p1Transform = GO.transform;
             p1Status = GO.GetComponent<Status>();
         }
         if (p2Transform == null)
         {
-            GameObject GO = Instantiate(characters[p2CharacterID], p2StartPosition.position, p2StartPosition.rotation);
+            GameObject GO = Instantiate(characters[p2CharacterID].prefab, p2StartPosition.position, p2StartPosition.rotation);
             p2Transform = GO.transform;
             p2Status = GO.GetComponent<Status>();
         }
@@ -222,6 +222,7 @@ public class GameHandler : MonoBehaviour
     void StartGame()
     {
         isPaused = false;
+       
     }
 
     [Button]
@@ -345,12 +346,23 @@ public class GameHandler : MonoBehaviour
         UIManager.Instance.GameModeUI(gameMode);
     }
 
+    public void Rollback(int frameTarget) {
+        Debug.Log("Rollbacking from " + gameFrameCount + " to " + frameTarget);
+        gameFrameCount = frameTarget;
+
+        RevertGameState(gameFrameCount);
+    }
 
     void RevertGameState(int i)
     {
-        rollbackEvent?.Invoke(i);
-        gameStates.RemoveRange(i, gameStates.Count - i);
+        //rollbackEvent?.Invoke(i);
+     
         p1Transform.position = gameStates[gameStates.Count - 1].p1Position;
+        p2Transform.position = gameStates[gameStates.Count - 1].p2Position;
+
+        p1Status.rb.velocity = gameStates[gameStates.Count - 1].p1Velocity;
+        p2Status.rb.velocity = gameStates[gameStates.Count - 1].p2Velocity;
+        gameStates.RemoveRange(i, gameStates.Count - i);
     }
 
     [Button("Simulate Game State")]

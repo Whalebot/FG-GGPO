@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 50
   hitID: 0
+  vfx:
+  - startup: 1
+    prefab: {fileID: 344670232931725940, guid: 369fd0272b4cdb746853d163e2e798ae, type: 3}
+    position: {x: 0, y: 0.75, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
   sfx:
   - startup: 6
     prefab: {fileID: 3797316729740095628, guid: 5a2c6ffb6f74d4643aa8aa89699e36f8, type: 3}
@@ -38,16 +44,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
+  - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
   firstStartupFrame: 10
   lastActiveFrame: 10
-  totalMoveDuration: 35
+  totalMoveDuration: 31
   firstGatlingFrame: 12
-  blockAdvantage: -6
-  hitAdvantage: -3
-  blockCancelAdvantage: -4
-  hitCancelAdvantage: 20
-  recoveryFrames: 25
+  blockAdvantage: -2
+  hitAdvantage: 3
+  blockCancelAdvantage: 0
+  hitCancelAdvantage: 22
+  recoveryFrames: 21
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 652573e160f74104bb0826f324890c7f, type: 3}
@@ -60,7 +67,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 450
-      stun: 22
+      stun: 24
       hitstop: 7
       proration: 0.8
       meterGain: 2
@@ -78,25 +85,25 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
+      stun: 24
+      hitstop: 7
+      proration: 0.8
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     airHitProperty:
       damage: 450
-      stun: 20
-      hitstop: 5
-      proration: 0.95
+      stun: 24
+      hitstop: 7
+      proration: 0.8
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 15
+      stun: 19
       hitstop: 5
       proration: 0.95
       meterGain: 2
@@ -105,9 +112,9 @@ MonoBehaviour:
       hitID: 0
     airCounterhitProperty:
       damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
+      stun: 24
+      hitstop: 7
+      proration: 0.8
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -144,6 +151,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

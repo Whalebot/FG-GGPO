@@ -930,25 +930,25 @@ public class InputHandler : MonoBehaviour
     int Direction()
     {
 
-        if (heldDirectionals[0])
+        if (netDirectionals[0])
         {
             if (id == 1)
                 return 8;
             else return 2;
         }
-        else if (heldDirectionals[2])
+        else if (netDirectionals[2])
         {
             if (id == 1)
                 return 2;
             else return 8;
         }
-        else if (heldDirectionals[1])
+        else if (netDirectionals[1])
         {
             if (id == 1)
                 return 6;
             else return 4;
         }
-        else if (heldDirectionals[3])
+        else if (netDirectionals[3])
         {
             if (id == 1)
                 return 4;

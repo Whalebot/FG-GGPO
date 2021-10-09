@@ -56,8 +56,9 @@ public class VFXManager : MonoBehaviour
         }
         for (int i = 0; i < deletedParticles.Count; i++)
         {
-            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
-            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]); 
+            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+                Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
     public void P2DeleteParticle()
@@ -74,7 +75,8 @@ public class VFXManager : MonoBehaviour
         for (int i = 0; i < deletedParticles.Count; i++)
         {
             particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
-            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+                Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
 

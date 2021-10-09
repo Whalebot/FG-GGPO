@@ -13,7 +13,7 @@ public class FgGameView : MonoBehaviour, IGameView
 
     private void ResetView(FgGame gs)
     {
-        var shipGss = gs._ships;
+        var shipGss = gs._players;
         shipViews = new FgPlayerView[shipGss.Length];
 
         for (int i = 0; i < shipGss.Length; ++i)
@@ -27,7 +27,7 @@ public class FgGameView : MonoBehaviour, IGameView
     {
         var gs = (FgGame)runner.Game;
         var ngs = runner.GameInfo;
-        var shipsGss = gs._ships;
+        var shipsGss = gs._players;
         if (shipViews.Length != shipsGss.Length)
         {
             ResetView(gs);

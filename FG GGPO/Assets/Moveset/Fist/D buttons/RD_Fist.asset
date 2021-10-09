@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 33
   hitID: 0
+  vfx:
+  - startup: 5
+    prefab: {fileID: 3664255640070812419, guid: 8cc708a82c38e2448855dbd61316c8df, type: 3}
+    position: {x: 1, y: 0.5, z: 0}
+    rotation: {x: 0, y: -90, z: 0}
+    scale: {x: 0.15, y: 0.15, z: 0.15}
   sfx: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
@@ -38,13 +44,14 @@ MonoBehaviour:
   hitCancelAdvantage: 0
   recoveryFrames: 25
   targetComboMoves:
-  - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}
   - {fileID: 11400000, guid: 70688a04552b0a54f8e3c72ff5683dd0, type: 2}
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
+  - {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
@@ -108,11 +115,13 @@ MonoBehaviour:
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 1
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 10
@@ -140,6 +149,9 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 1
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

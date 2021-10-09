@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 63
   hitID: 0
+  vfx: []
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
@@ -135,15 +136,19 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 1
+  sharedLimitProjectiles:
+  - {fileID: 11400000}
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
-  resetVelocityDuringRecovery: 1
+  resetVelocityDuringRecovery: 0
   m:
   - startFrame: 15
-    duration: 2
-    momentum: {x: 0, y: 0, z: -6}
+    duration: 10
+    momentum: {x: 0, y: 0, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 0

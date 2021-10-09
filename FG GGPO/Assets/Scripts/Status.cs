@@ -307,24 +307,6 @@ public class Status : MonoBehaviour
     }
 
 
-    //public void ReplaceStats(Stats stat1, Stats stat2)
-    //{
-    //    //Get stat definition and replace 1 with 2
-    //    Stats def1 = stat1;
-    //    Stats def2 = stat2;
-
-    //    FieldInfo[] defInfo1 = def1.GetType().GetFields();
-    //    FieldInfo[] defInfo2 = def2.GetType().GetFields();
-
-    //    for (int i = 0; i < defInfo1.Length; i++)
-    //    {
-    //        object obj = def1;
-    //        object obj2 = def2;
-    //        // Debug.Log("fi name " + defInfo1[i].Name + " val " + defInfo1[i].GetValue(obj));
-    //        defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
-    //    }
-    //}
-
     void StateMachine()
     {
         if (currentState == State.Neutral && HitStun > 0)

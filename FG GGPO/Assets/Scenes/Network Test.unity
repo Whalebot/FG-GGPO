@@ -280,6 +280,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 36596732258074995, guid: 431b030a766a0ff4eb2d62f720d5c52f, type: 3}
+      propertyPath: toggle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 36596732258074995, guid: 431b030a766a0ff4eb2d62f720d5c52f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 36596732812415644, guid: 431b030a766a0ff4eb2d62f720d5c52f, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1288,6 +1296,10 @@ PrefabInstance:
       propertyPath: p2StartPosition
       value: 
       objectReference: {fileID: 705172527}
+    - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: gameMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
