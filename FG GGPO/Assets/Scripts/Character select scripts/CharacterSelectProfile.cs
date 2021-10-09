@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 
 public class CharacterSelectProfile : ScriptableObject
 {
-
+    public GameObject prefab;
     public int iD;
 
     public Sprite portrait;

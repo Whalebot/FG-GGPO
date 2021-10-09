@@ -68,6 +68,7 @@ public class PlayerInputHandler : MonoBehaviour
         //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
+            if(!status.autoBlock)
             status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
 
             if (mov.ground)
