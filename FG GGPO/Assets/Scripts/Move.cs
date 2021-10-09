@@ -10,8 +10,12 @@ public class Move : ScriptableObject
 
     [TabGroup("Attacks")] public AttackLevel attackLevel;
     [TabGroup("Attacks")] public MoveType type;
+    [TabGroup("Attacks")] 
+    [ShowIf("@type == MoveType.EX || type == MoveType.Super")]
+    public int meterCost;
     [TabGroup("Attacks")] public BlockState collissionState;
     [TabGroup("Attacks")] public GroundState groundState;
+    
     [TabGroup("Attacks")] public Moveset stance;
     [TabGroup("Attacks")] public Move throwFollowup;
     [TabGroup("Attacks")] public Attack[] attacks;
