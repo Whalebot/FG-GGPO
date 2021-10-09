@@ -15,11 +15,13 @@ MonoBehaviour:
   animationID: 51
   hitID: 0
   vfx: []
-  sfx: []
+  sfx:
+  - startup: 5
+    prefab: {fileID: 3797316729740095628, guid: 73f1d444f786d0d4a903890258339666, type: 3}
   hitFX: {fileID: 0}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: f803f863ad5e9da4e87cce7b42074fb2, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   attackLevel: 4
@@ -70,13 +72,13 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 500
-      stun: 40
-      hitstop: 25
+      stun: 30
+      hitstop: 20
       proration: 0.95
       meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
@@ -103,12 +105,14 @@ MonoBehaviour:
     airCounterhitProperty:
       damage: 500
       stun: 40
-      hitstop: 15
+      hitstop: 20
       proration: 0.95
       meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

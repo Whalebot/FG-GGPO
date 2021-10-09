@@ -20,11 +20,13 @@ MonoBehaviour:
     position: {x: 0, y: 1, z: 2}
     rotation: {x: 180, y: 0, z: 0}
     scale: {x: 0.2, y: 0.2, z: 0.2}
-  sfx: []
+  sfx:
+  - startup: 8
+    prefab: {fileID: 3797316729740095628, guid: ce677a0bea8dcfc4ab232696c87ae13e, type: 3}
   hitFX: {fileID: 0}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 0ed2ac63d802daa4b86168c04f6fa39b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   attackLevel: 0
@@ -72,14 +74,14 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 800
-      stun: 30
+      stun: 35
       hitstop: 25
-      proration: 1.2
+      proration: 1.1
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0

@@ -20,11 +20,13 @@ MonoBehaviour:
     position: {x: 0, y: 0.3, z: 0.75}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
-  sfx: []
+  sfx:
+  - startup: 12
+    prefab: {fileID: 3797316729740095628, guid: d27d78f64d25c2f47847065f853b860e, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 0ed2ac63d802daa4b86168c04f6fa39b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   attackLevel: 0
@@ -36,13 +38,13 @@ MonoBehaviour:
   gatlingMoves: []
   firstStartupFrame: 12
   lastActiveFrame: 16
-  totalMoveDuration: 76
+  totalMoveDuration: 56
   firstGatlingFrame: 17
-  blockAdvantage: -44
-  hitAdvantage: 1
-  blockCancelAdvantage: -39
+  blockAdvantage: -24
+  hitAdvantage: 21
+  blockCancelAdvantage: -19
   hitCancelAdvantage: 60
-  recoveryFrames: 60
+  recoveryFrames: 40
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: f75b1f7ebc856e7419b9dec3cf1aec6c, type: 3}
@@ -107,12 +109,14 @@ MonoBehaviour:
       pushback: {x: 0, y: 10, z: 5}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
   resetGatling: 0
-  noClip: 1
+  noClip: 0
   noClipStart: 5
   noClipDuration: 9
   invincible: 1

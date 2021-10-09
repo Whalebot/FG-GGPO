@@ -16,12 +16,12 @@ MonoBehaviour:
   hitID: 0
   vfx: []
   sfx:
-  - startup: 6
-    prefab: {fileID: 3797316729740095628, guid: 2d5f35ded52b30f43bb2830a87d87599, type: 3}
+  - startup: 5
+    prefab: {fileID: 3797316729740095628, guid: 8db2efa43681f414eafceaae1ab103ae, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   attackLevel: 0
@@ -43,9 +43,9 @@ MonoBehaviour:
   lastActiveFrame: 8
   totalMoveDuration: 28
   firstGatlingFrame: 14
-  blockAdvantage: -5
+  blockAdvantage: -3
   hitAdvantage: 10
-  blockCancelAdvantage: 1
+  blockCancelAdvantage: 3
   hitCancelAdvantage: 24
   recoveryFrames: 20
   targetComboMoves: []
@@ -69,7 +69,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 15
+      stun: 17
       hitstop: 5
       proration: 0.95
       meterGain: 0
@@ -112,6 +112,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 1
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

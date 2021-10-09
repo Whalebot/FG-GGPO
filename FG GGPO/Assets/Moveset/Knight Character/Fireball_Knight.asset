@@ -12,13 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Fireball_Knight
   m_EditorClassIdentifier: 
+  animationID: 53
+  hitID: 0
+  vfx: []
+  sfx:
+  - startup: 10
+    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
   attackLevel: 0
   type: 1
-  meterCost: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
+  gatlingMoves: []
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 45
+  firstGatlingFrame: 20
+  blockAdvantage: -15
+  hitAdvantage: -10
+  blockCancelAdvantage: -10
+  hitCancelAdvantage: 15
+  recoveryFrames: 30
+  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
     startupFrame: 15
@@ -82,43 +104,13 @@ MonoBehaviour:
       pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
-  vfx: []
-  sfx:
-  - startup: 10
-    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
-  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  counterhitSFX: {fileID: 0}
-  animationID: 53
-  hitID: 0
-  moveName: 
-  description: 
-  firstStartupFrame: 15
-  lastActiveFrame: 15
-  totalMoveDuration: 45
-  firstGatlingFrame: 20
-  blockAdvantage: -15
-  hitAdvantage: -10
-  blockCancelAdvantage: -10
-  hitCancelAdvantage: 15
-  recoveryFrames: 30
-  m:
-  - startFrame: 3
-    duration: 5
-    momentum: {x: 0, y: 0, z: 6}
-    homing: 0
-    resetVelocityDuringRecovery: 1
-  targetComboMoves: []
-  gatlingMoves: []
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
+  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 10
@@ -143,7 +135,6 @@ MonoBehaviour:
   footInvul: 0
   footInvulStart: 1
   footInvulDuration: 0
-  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
@@ -156,3 +147,9 @@ MonoBehaviour:
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
+  m:
+  - startFrame: 3
+    duration: 5
+    momentum: {x: 0, y: 0, z: 6}
+    homing: 0
+    resetVelocityDuringRecovery: 1
