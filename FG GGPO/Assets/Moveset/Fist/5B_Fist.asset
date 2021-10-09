@@ -43,9 +43,9 @@ MonoBehaviour:
   totalMoveDuration: 34
   firstGatlingFrame: 11
   blockAdvantage: -4
-  hitAdvantage: 6
+  hitAdvantage: 2
   blockCancelAdvantage: -3
-  hitCancelAdvantage: 29
+  hitCancelAdvantage: 25
   recoveryFrames: 20
   targetComboMoves: []
   attacks:
@@ -59,7 +59,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 500
-      stun: 30
+      stun: 26
       hitstop: 12
       proration: 0.95
       meterGain: 4
@@ -77,8 +77,8 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 500
-      stun: 30
-      hitstop: 20
+      stun: 26
+      hitstop: 12
       proration: 0.95
       meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
@@ -86,11 +86,11 @@ MonoBehaviour:
       hitID: 0
     airHitProperty:
       damage: 500
-      stun: 30
+      stun: 26
       hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       hitID: 0
     airBlockProperty:
@@ -99,16 +99,16 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: -4}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
       damage: 500
-      stun: 40
-      hitstop: 20
+      stun: 26
+      hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       hitID: 0
   gatlingCancelOnBlock: 1

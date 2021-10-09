@@ -22,7 +22,7 @@ MonoBehaviour:
     scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx:
   - startup: 17
-    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+    prefab: {fileID: 3797316729740095628, guid: 52737f2c0d28e764a9e6acb278ca6a19, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -52,7 +52,8 @@ MonoBehaviour:
   blockCancelAdvantage: -5
   hitCancelAdvantage: 45
   recoveryFrames: 30
-  targetComboMoves: []
+  targetComboMoves:
+  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 776a96dc3df007547a92972a50207acc, type: 3}
     startupFrame: 14
@@ -116,6 +117,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

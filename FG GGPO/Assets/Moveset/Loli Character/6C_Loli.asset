@@ -15,14 +15,14 @@ MonoBehaviour:
   animationID: 62
   hitID: 0
   vfx:
-  - startup: 16
+  - startup: 13
     prefab: {fileID: 175624, guid: 8996e6161a984b94b87d6f5dc7b20273, type: 3}
     position: {x: 0, y: 3, z: 4}
     rotation: {x: 90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx:
-  - startup: 17
-    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  - startup: 14
+    prefab: {fileID: 3797316729740095628, guid: 52737f2c0d28e764a9e6acb278ca6a19, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -42,10 +42,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
   - {fileID: 11400000, guid: 679bbb51825a6994bba9285dd42a77e9, type: 2}
   - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
-  firstStartupFrame: 18
-  lastActiveFrame: 18
-  totalMoveDuration: 53
-  firstGatlingFrame: 23
+  - {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
+  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
+  - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 50
+  firstGatlingFrame: 20
   blockAdvantage: -15
   hitAdvantage: 15
   blockCancelAdvantage: -10
@@ -54,7 +57,7 @@ MonoBehaviour:
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 9a5a875667658454d9c86153adff6a36, type: 3}
-    startupFrame: 18
+    startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
     attackType: 0
@@ -115,6 +118,8 @@ MonoBehaviour:
       pushback: {x: 0, y: -10, z: 0}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

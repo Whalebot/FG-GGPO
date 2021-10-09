@@ -33,7 +33,7 @@ MonoBehaviour:
   fC: {fileID: 0}
   bC: {fileID: 0}
   jC: {fileID: 11400000, guid: 7dc509ba7a8ee9e4eb30a3ad807e2c59, type: 2}
-  jcC: {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
+  jcC: {fileID: 0}
   LC: {fileID: 0}
   RC: {fileID: 0}
   sD: {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
@@ -51,10 +51,6 @@ MonoBehaviour:
   airdashF: {fileID: 11400000, guid: 5c322c546f1eb314a96f9299a40834cd, type: 2}
   airdashB: {fileID: 11400000, guid: 78b8656b758d9fe44af8a2a4e7697ed2, type: 2}
   specials:
-  - motionInput: 2
-    buttonInput: 1
-    grounded: 0
-    move: {fileID: 11400000, guid: 8c198a435b6cb8b408a72d61baf88abb, type: 2}
   - motionInput: 1
     buttonInput: 3
     grounded: 1
@@ -62,8 +58,4 @@ MonoBehaviour:
   - motionInput: 1
     buttonInput: 3
     grounded: 0
-    move: {fileID: 11400000, guid: 5e89c786d3439c14fbd1222940df7990, type: 2}
-  - motionInput: 0
-    buttonInput: 3
-    grounded: 1
-    move: {fileID: 11400000, guid: ec3a7f0f0ba097d46916885d3e3658eb, type: 2}
+    move: {fileID: 11400000, guid: 09c5dfe7540fa76449f327ebee221cc5, type: 2}

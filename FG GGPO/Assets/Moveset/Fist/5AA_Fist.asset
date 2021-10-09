@@ -78,11 +78,11 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 450
-      stun: 25
+      stun: 30
       hitstop: 5
-      proration: 0.95
-      meterGain: 0
-      pushback: {x: 0, y: 0, z: 4}
+      proration: 0.9
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 3}
       hitState: 0
       hitID: 0
     airHitProperty:
@@ -91,7 +91,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 4, z: 2}
       hitState: 0
       hitID: 0
     airBlockProperty:
@@ -109,7 +109,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 4, z: 2}
       hitState: 0
       hitID: 0
   gatlingCancelOnBlock: 1

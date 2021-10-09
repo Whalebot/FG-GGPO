@@ -37,15 +37,9 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   gatlingMoves:
   - {fileID: 11400000, guid: 07a850d9de9dc1a43a4495036fca67e0, type: 2}
-  - {fileID: 11400000, guid: 6ad6965efb44dfa4f92f9c2aa7faa258, type: 2}
-  - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
   - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
-  - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
   - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
-  - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
   firstStartupFrame: 10
   lastActiveFrame: 10
   totalMoveDuration: 31
@@ -119,6 +113,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

@@ -34,6 +34,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
   - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
+  - {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
+  - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45
@@ -108,6 +110,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 1

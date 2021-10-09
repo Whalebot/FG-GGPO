@@ -15,14 +15,14 @@ MonoBehaviour:
   animationID: 22
   hitID: 0
   vfx:
-  - startup: 22
+  - startup: 13
     prefab: {fileID: 175624, guid: 8996e6161a984b94b87d6f5dc7b20273, type: 3}
     position: {x: 0, y: 0.2, z: 4}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx:
-  - startup: 23
-    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  - startup: 14
+    prefab: {fileID: 3797316729740095628, guid: 52737f2c0d28e764a9e6acb278ca6a19, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -42,11 +42,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   - {fileID: 11400000, guid: 26017b3ab3f43954bbff6030f63c1a7b, type: 2}
   - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
+  - {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
+  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
   - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
-  firstStartupFrame: 25
-  lastActiveFrame: 25
-  totalMoveDuration: 55
-  firstGatlingFrame: 30
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 45
+  firstGatlingFrame: 20
   blockAdvantage: -10
   hitAdvantage: 20
   blockCancelAdvantage: -5
@@ -55,11 +57,11 @@ MonoBehaviour:
   targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 476c2d75f443f704b9ebb948527496bb, type: 3}
-    startupFrame: 25
+    startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
     attackType: 0
-    attackHeight: 0
+    attackHeight: 1
     bodyProperty: 1
     homing: 0
     groundHitProperty:
@@ -116,6 +118,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 10, z: -2}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1

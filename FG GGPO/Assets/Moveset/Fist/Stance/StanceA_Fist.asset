@@ -49,9 +49,9 @@ MonoBehaviour:
   lastActiveFrame: 14
   totalMoveDuration: 34
   firstGatlingFrame: 15
-  blockAdvantage: -4
+  blockAdvantage: -6
   hitAdvantage: 6
-  blockCancelAdvantage: 1
+  blockCancelAdvantage: -1
   hitCancelAdvantage: 25
   recoveryFrames: 20
   targetComboMoves: []
@@ -75,7 +75,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 20
+      stun: 18
       hitstop: 12
       proration: 0.95
       meterGain: 2
@@ -86,7 +86,7 @@ MonoBehaviour:
       damage: 800
       stun: 30
       hitstop: 25
-      proration: 1.1
+      proration: 1.05
       meterGain: 4
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 20
+      stun: 18
       hitstop: 12
       proration: 0.95
       meterGain: 2

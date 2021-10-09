@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 61
   hitID: 0
+  vfx: []
   sfx: []
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: f803f863ad5e9da4e87cce7b42074fb2, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
-  collissionState: 2
+  collissionState: 0
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   gatlingMoves:
@@ -104,6 +105,8 @@ MonoBehaviour:
       pushback: {x: 0, y: -10, z: 2}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
@@ -136,6 +139,9 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   landingRecovery: 0

@@ -83,7 +83,7 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
     airBlockProperty:
@@ -104,6 +104,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
