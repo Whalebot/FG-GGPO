@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9181038622818744073}
   - component: {fileID: 3797315551204697214}
   m_Layer: 9
-  m_Name: j5C
+  m_Name: j5C Hitbox_Fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334434759881567290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.53, z: 1}
-  m_LocalScale: {x: 1.5, y: 1.5392416, z: 1.1876456}
+  m_LocalPosition: {x: -0, y: 0.53, z: 0.5}
+  m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,13 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 1
-  baseKnockback: 1
   totalDamage: 0
   hitboxID: 0
-  container: {fileID: 0}
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
-  projectile: {fileID: 0}
+  canClash: 1
   body: {fileID: 0}
   enemyList: []
+  hitOnce: 0
