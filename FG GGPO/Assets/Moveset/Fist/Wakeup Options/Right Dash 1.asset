@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
+  m_Name: Right Dash 1
+  m_EditorClassIdentifier: 
+  attackLevel: 0
+  type: 2
+  meterCost: 0
+  collissionState: 0
+  groundState: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
+  attacks:
+  - hitbox: {fileID: 0}
+    startupFrame: 10
+    activeFrames: 5
+    gatlingFrames: 5
+    attackType: 0
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 0
+      stun: 30
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 20
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 0
+      stun: 40
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 0
+      stun: 30
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 0
+      stun: 20
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 0
+      stun: 40
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 0}
+      hitState: 0
+      hitID: 0
+  vfx: []
+  sfx: []
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
+  counterhitSFX: {fileID: 0}
+  animationID: 101
+  hitID: 0
+  moveName: 
+  description: 
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 19
+  firstGatlingFrame: 15
+  blockAdvantage: 11
+  hitAdvantage: 21
+  blockCancelAdvantage: 16
+  hitCancelAdvantage: 25
+  recoveryFrames: 5
+  m:
+  - startFrame: 0
+    duration: 20
+    momentum: {x: 8, y: 0, z: 0}
+    homing: 1
+    resetVelocityDuringRecovery: 1
+  targetComboMoves: []
+  gatlingMoves: []
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 1
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 1
+  linearInvulStart: 3
+  linearInvulDuration: 14
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  resetGatling: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
+  useAirAction: 0
+  landCancel: 0
+  landingRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 0
+  resetVelocityDuringRecovery: 0

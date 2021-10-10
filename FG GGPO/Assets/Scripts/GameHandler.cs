@@ -50,13 +50,18 @@ public class GameHandler : MonoBehaviour
     public GameEvent p1WinEvent;
     public GameEvent p2WinEvent;
 
+    public GameEvent gameStartEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
 
+
+    public bool gameStarted;
+
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
+    public RollBackEvent frameCounterEvent;
 
     [HideInInspector] public int gameFrameCount;
     [HideInInspector] public int counter;
@@ -228,10 +233,16 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void AdvanceGameState()
     {
+        if (!gameStarted) {
+            gameStarted = true;
+            gameStartEvent?.Invoke();
+        }
+
         CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
         advanceGameState?.Invoke();
 
         gameFrameCount++;
+        frameCounterEvent?.Invoke(gameFrameCount);
         if (!cutscene && gameMode == GameMode.VersusMode)
         {
             counter++;

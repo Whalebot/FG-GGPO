@@ -644,7 +644,7 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
-
+        ClearHitboxes();
         newAttack = false;
         attackString = false;
         if (activeMove != null)
@@ -673,7 +673,7 @@ public class AttackScript : MonoBehaviour
         //Cucks airdash
         //movement.storedDirection = Vector3.zero;
 
-        ClearHitboxes();
+        
     }
 
     public void ThrowBreak()

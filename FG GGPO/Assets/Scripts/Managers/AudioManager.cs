@@ -11,6 +11,11 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameHandler.Instance.gameStartEvent += StartMusic;
+
+    }
+
+    void StartMusic() {
         if (randomSong)
             bgmID = Random.Range(0, BGM.Length);
 
@@ -19,12 +24,5 @@ public class AudioManager : MonoBehaviour
             bgmAudioSource.clip = BGM[bgmID];
             bgmAudioSource.Play();
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

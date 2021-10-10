@@ -464,6 +464,10 @@ MonoBehaviour:
   bf: 0
   fb: 0
   dd: 0
+  qcf: 0
+  qcb: 0
+  mI478: 0
+  mI698: 0
   extraBuffer: 0
   isPaused: 0
   debug: 0
@@ -556,7 +560,7 @@ MonoBehaviour:
   newMove: 0
   groundPushbackDuration: 15
   pushbackCounter: 0
-  wakeupRecovery: 15
+  wakeupRecovery: 25
   currentState: 0
   groundState: 0
   blockState: 0
@@ -639,7 +643,8 @@ MonoBehaviour:
   attackID: 0
   attackFrames: 0
   movementFrames: 0
-  movementframes: 0
+  projectiles: []
+  inMomentum: 0
   movementOption: {fileID: 0}
   jumpFrameCounter: 0
   jumpActionDelay: 5

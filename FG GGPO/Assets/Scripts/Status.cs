@@ -139,15 +139,38 @@ public class Status : MonoBehaviour
         {
             GoToGroundState(GroundState.Knockdown);
         }
-        else { GoToGroundState(GroundState.Grounded);
+        else
+        {
+            GoToGroundState(GroundState.Grounded);
         }
     }
 
     void ActivateCollider()
     {
-        jumpingCollider.SetActive(groundState == GroundState.Airborne);
-        standingCollider.SetActive(blockState == BlockState.Standing && groundState == GroundState.Grounded);
-        crouchingCollider.SetActive(blockState == BlockState.Crouching || groundState == GroundState.Knockdown);
+        standingCollider.SetActive(false);
+        jumpingCollider.SetActive(false);
+        crouchingCollider.SetActive(false);
+        switch (groundState)
+        {
+            case GroundState.Grounded:
+                if (currentState == State.Wakeup) crouchingCollider.SetActive(true);
+                else
+                {
+                    if (blockState == BlockState.Standing)
+                        standingCollider.SetActive(true);
+                    else crouchingCollider.SetActive(true);
+                }
+                break;
+            case GroundState.Airborne:
+                jumpingCollider.SetActive(true);
+                break;
+            case GroundState.Knockdown:
+                crouchingCollider.SetActive(true);
+                break;
+            default:
+                break;
+        }
+
 
 
     }
@@ -269,7 +292,7 @@ public class Status : MonoBehaviour
     void AirRecovery()
     {
         wakeupEvent?.Invoke();
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
 
         GoToGroundState(GroundState.Airborne);
         GoToState(State.Wakeup);
@@ -281,7 +304,7 @@ public class Status : MonoBehaviour
     void KnockdownRecovery()
     {
         wakeupEvent?.Invoke();
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Wakeup);
         hitstunValue = 0;
@@ -292,7 +315,7 @@ public class Status : MonoBehaviour
     void GroundRecovery()
     {
 
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Neutral);
         hitstunValue = 0;
@@ -355,7 +378,7 @@ public class Status : MonoBehaviour
                 if (wakeupValue <= 0)
                 {
                     GoToState(State.Neutral);
-                    Instantiate(VFXManager.Instance.wakeupFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
+                    Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity);
                 }
                 break;
             case State.LockedAnimation:
