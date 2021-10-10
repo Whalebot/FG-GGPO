@@ -15,7 +15,8 @@ public class VFXScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        ParticleSystem ps = GetComponent<ParticleSystem>();
-        VFXManager.Instance.DeleteParticle(ps);
+        //ParticleSystem ps = GetComponent<ParticleSystem>();
+        //if (ps != null)
+        //    VFXManager.Instance.DeleteParticle(ps);
     }
 }

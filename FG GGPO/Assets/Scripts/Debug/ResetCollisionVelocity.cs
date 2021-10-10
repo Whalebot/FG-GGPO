@@ -11,11 +11,13 @@ public class ResetCollisionVelocity : MonoBehaviour
         if (collision.rigidbody != null)
         {
             Status status = collision.gameObject.GetComponent<Status>();
-            if (status.HitStun <= 0) { 
-            Vector3 vel = collision.collider.attachedRigidbody.velocity;
-            vel.x = 0;
-            vel.z = 0;
-            collision.rigidbody.velocity = vel;
+            AttackScript attack = collision.gameObject.GetComponent<AttackScript>();
+            if (status.HitStun <= 0 && !attack.inMomentum)
+            {
+                Vector3 vel = collision.collider.attachedRigidbody.velocity;
+                vel.x = 0;
+                vel.z = 0;
+                collision.rigidbody.velocity = vel;
             }
         }
     }

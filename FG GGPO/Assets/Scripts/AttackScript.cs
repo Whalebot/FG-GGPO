@@ -27,7 +27,7 @@ public class AttackScript : MonoBehaviour
 
     [FoldoutGroup("Debug")] public int movementFrames;
     [FoldoutGroup("Debug")] public List<GameObject> projectiles;
-
+    [FoldoutGroup("Debug")] public bool inMomentum;
     [FoldoutGroup("Debug")] public Move movementOption;
     [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
     [FoldoutGroup("Jump Startup")] public int jumpActionDelay;
@@ -138,8 +138,12 @@ public class AttackScript : MonoBehaviour
                 SpawnFX();
 
                 //Execute momentum
+                bool tempMomentum = false;
+
                 for (int i = 0; i < activeMove.m.Length; i++)
                 {
+                    if (attackFrames > activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration) { tempMomentum = true; }
+
 
                     if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
                     {
@@ -165,6 +169,8 @@ public class AttackScript : MonoBehaviour
                         }
                     }
                 }
+
+                inMomentum = tempMomentum;
 
 
                 int firstStartupFrame = activeMove.attacks[0].startupFrame;
