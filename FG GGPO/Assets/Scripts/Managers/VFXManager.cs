@@ -42,7 +42,27 @@ public class VFXManager : MonoBehaviour
         GameHandler.Instance.p2Status.hitEvent += P2DeleteParticle;
 
     }
+    public void DeleteParticle(ParticleSystem ps)
+    {
+        if (ps != null)
+        {
+            foreach (var item in particles)
+            {
+                if (item.ps == ps)
+                {
+                    deletedParticles.Add(item);
+                    //Delete shit
+                }
 
+            }
+            for (int i = 0; i < deletedParticles.Count; i++)
+            {
+                particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+                if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+                    Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+            }
+        }
+    }
     public void P1DeleteParticle()
     {
         foreach (var item in particles)
@@ -56,7 +76,7 @@ public class VFXManager : MonoBehaviour
         }
         for (int i = 0; i < deletedParticles.Count; i++)
         {
-            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]); 
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
             if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
                 Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
