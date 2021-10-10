@@ -68,8 +68,8 @@ public class PlayerInputHandler : MonoBehaviour
         //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
-            if(!status.autoBlock)
-            status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
+            if (!status.autoBlock)
+                status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
 
             if (mov.ground)
             {
@@ -93,6 +93,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             LockedAnimationInput();
         }
+        else if (status.currentState == Status.State.Wakeup)
+        {
+            WakeupInput();
+        }
 
         mov.direction = relativeDirection;
         input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
@@ -113,20 +117,23 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
-            //if (input.directionals[input.directionals.Count - 1] == 2 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
             if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
 
         ProcessBuffer();
     }
-
-    public void SpecialInputs()
+    void WakeupInput()
     {
-        foreach (var item in attack.moveset.specials)
+        int bufferID = -1;
+        for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
-            if (item.motionInput == SpecialInput.BackForward)
-            {
 
-            }
+
+            if (input.bufferedInputs[i].dir == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
+            else if (input.bufferedInputs[i].dir == 8) { attack.AttackProperties(attack.moveset.neutralTech); }
+            else if (input.bufferedInputs[i].dir == 2) { attack.AttackProperties(attack.moveset.backRoll); }
+
+            bufferID = i;
+            DeleteInputs(bufferID);
         }
     }
 
@@ -173,7 +180,7 @@ public class PlayerInputHandler : MonoBehaviour
                         }
 
                     }
-                   else if (item.motionInput == SpecialInput.BackForward)
+                    else if (item.motionInput == SpecialInput.BackForward)
                     {
                         //
                         if (input.bf)
@@ -561,7 +568,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             ProcessBuffer();
         }
-
     }
 
     void LockedAnimationInput()
@@ -569,7 +575,6 @@ public class PlayerInputHandler : MonoBehaviour
         int bufferID = -1;
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
-
             if (status.currentState == Status.State.LockedAnimation && status.throwBreakCounter > 0)
             {
                 if (input.bufferedInputs[i].id == 7)

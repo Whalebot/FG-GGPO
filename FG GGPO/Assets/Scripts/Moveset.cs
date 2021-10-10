@@ -57,6 +57,14 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("Movement Options")] public Move airdashF;
     [FoldoutGroup("Movement Options")] public Move airdashB;
 
+    [FoldoutGroup("Wakeup Options")] public Move neutralTech;
+    [FoldoutGroup("Wakeup Options")] public Move quickTech;
+    [FoldoutGroup("Wakeup Options")] public Move backRoll;
+    [FoldoutGroup("Wakeup Options")] public Move leftRoll;
+    [FoldoutGroup("Wakeup Options")] public Move rightRoll;
+
+
+
     [Header("Specials")]
     public SpecialMove[] specials;
 }

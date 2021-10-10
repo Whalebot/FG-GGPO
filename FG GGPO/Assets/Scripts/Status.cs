@@ -295,7 +295,8 @@ public class Status : MonoBehaviour
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
 
         GoToGroundState(GroundState.Airborne);
-        GoToState(State.Wakeup);
+        GoToState(State.Neutral);
+        //GoToState(State.Wakeup);
         hitstunValue = 0;
         comboCounter = 0;
         inHitStun = false;
