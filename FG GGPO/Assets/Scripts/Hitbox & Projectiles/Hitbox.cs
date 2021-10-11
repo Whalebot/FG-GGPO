@@ -49,18 +49,17 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
+        if (!attack.attacking) return;
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
             if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
             {
                 hitOnce = true;
-                
+
                 Clash(enemyStatus);
                 return;
             }
-
-
         }
         else if (enemyStatus != null)
         {
@@ -128,7 +127,7 @@ public class Hitbox : MonoBehaviour
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-    
+
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using SharedGame;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class FgGameView : MonoBehaviour, IGameView
 {
     public FgPlayerView shipPrefab;
-
     private FgPlayerView[] shipViews = Array.Empty<FgPlayerView>();
     private GameManager gameManager => GameManager.Instance;
 

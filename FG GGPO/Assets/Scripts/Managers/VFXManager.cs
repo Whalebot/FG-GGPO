@@ -149,8 +149,9 @@ public class VFXManager : MonoBehaviour
     {
 
         ParticleObject p = new ParticleObject(ps, GameHandler.Instance.gameFrameCount);
+        ps.Simulate(Time.fixedDeltaTime, true, false, true);
+        ps.Pause();
         p.playerID = ID;
-
         particles.Add(p);
     }
 }
