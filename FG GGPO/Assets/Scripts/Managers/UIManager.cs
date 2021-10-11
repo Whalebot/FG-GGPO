@@ -7,6 +7,11 @@ using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
+
+    public Gradient hpColorOverTime;
+    float p1InitialHealth;
+    float p2InitialHealth;
+
     public TextMeshProUGUI timerText;
 
     public Slider p1Health;
@@ -39,6 +44,10 @@ public class UIManager : MonoBehaviour
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         GameHandler.Instance.gameEndEvent+= DisableUI;
         GameHandler.Instance.rematchScreenEvent += RematchScreen;
+
+        p1InitialHealth = GameHandler.Instance.p1Status.maxHealth;
+        p2InitialHealth = GameHandler.Instance.p2Status.maxHealth;
+
     }
 
     public void GameModeUI(GameMode mode)
@@ -82,6 +91,7 @@ public class UIManager : MonoBehaviour
                 timerText.text = "" + GameHandler.Instance.roundTime;
             else timerText.text = "∞";
 
+
             p1Health.value = state.p1Health;
             p2Health.value = state.p2Health;
             p1HealthText.text = state.p1Health + "/";
@@ -91,6 +101,10 @@ public class UIManager : MonoBehaviour
             p2Meter.value = state.p2Meter;
             p1MeterText.text = state.p1Meter + "";
             p2MeterText.text = state.p2Meter + "";
+
+            p1Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p1Health / (float)p1InitialHealth);
+            p2Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p2Health / (float)p2InitialHealth);
+
         }
 
         for (int i = 0; i < p1RoundWinImages.Length; i++)
