@@ -272,12 +272,13 @@ public class GameHandler : MonoBehaviour
     {
         runNormally = false;
 
+
+        AdvanceGameState(); 
         if (!superFlash)
         {
             Physics.autoSimulation = false;
             Physics.Simulate(Time.fixedDeltaTime);
         }
-        AdvanceGameState();
     }
 
     public void TimeoutFinish()

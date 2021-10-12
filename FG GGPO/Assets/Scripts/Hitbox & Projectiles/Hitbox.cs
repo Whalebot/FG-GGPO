@@ -49,7 +49,7 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
-        if (!attack.attacking) return;
+       // if (!attack.attacking) return;
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
@@ -63,6 +63,7 @@ public class Hitbox : MonoBehaviour
         }
         else if (enemyStatus != null)
         {
+            print("Pog");
             if (status == enemyStatus) return;
 
             if (!enemyList.Contains(enemyStatus))
