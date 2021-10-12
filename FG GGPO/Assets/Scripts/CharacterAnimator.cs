@@ -73,7 +73,7 @@ public class CharacterAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+
 
     }
 
@@ -117,6 +117,24 @@ public class CharacterAnimator : MonoBehaviour
     {
         if (!GameHandler.Instance.runNormally) anim.enabled = true;
         anim.SetBool("Cutscene", GameHandler.cutscene);
+        if (GameHandler.Instance.superFlash)
+        {
+            if (attack.superCounter > 0)
+            {
+                anim.speed = 0.5F;
+            }
+            else
+            {
+                anim.enabled = false;
+                StartCoroutine(PauseAnimation());
+                return;
+            }
+        }
+        else
+        {
+            anim.speed = 1;
+        }
+
 
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
 
@@ -129,7 +147,10 @@ public class CharacterAnimator : MonoBehaviour
         }
         StatusAnimation();
         BlockAnimation();
-
+        //if (status.hitstopCounter > 0)
+        //    anim.speed = 1 / status.hitstopCounter;
+        //else
+        //    anim.speed = 1;
         anim.enabled = !hitstop;
         MovementAnimation();
         if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());

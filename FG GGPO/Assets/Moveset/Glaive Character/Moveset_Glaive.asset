@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Moveset_Glaive
   m_EditorClassIdentifier: 
   sA: {fileID: 11400000, guid: 7ad9700fb51a4eb48866f023068a501d, type: 2}
-  cA: {fileID: 0}
+  cA: {fileID: 11400000, guid: 44dea5bda8797424fb5690b4c2ecd964, type: 2}
   fA: {fileID: 0}
   bA: {fileID: 0}
   jA: {fileID: 0}
@@ -22,13 +22,13 @@ MonoBehaviour:
   RA: {fileID: 0}
   sB: {fileID: 11400000, guid: 286af0972994e5846a8c2f12731f86cf, type: 2}
   cB: {fileID: 0}
-  fB: {fileID: 0}
+  fB: {fileID: 11400000, guid: 607eacd42350c9044b73b2c06611e1c0, type: 2}
   bB: {fileID: 0}
   jB: {fileID: 0}
   jcB: {fileID: 0}
   LB: {fileID: 0}
   RB: {fileID: 0}
-  sC: {fileID: 11400000, guid: 06786fad77e756946bac870e88031931, type: 2}
+  sC: {fileID: 11400000, guid: 607eacd42350c9044b73b2c06611e1c0, type: 2}
   cC: {fileID: 0}
   fC: {fileID: 0}
   bC: {fileID: 0}
@@ -36,8 +36,8 @@ MonoBehaviour:
   jcC: {fileID: 0}
   LC: {fileID: 0}
   RC: {fileID: 0}
-  sD: {fileID: 11400000, guid: c7302170560d4684988c48fe178f830d, type: 2}
-  cD: {fileID: 0}
+  sD: {fileID: 11400000, guid: 06786fad77e756946bac870e88031931, type: 2}
+  cD: {fileID: 11400000, guid: 9000abfdf4bf0984ab6c8af7216d2e9b, type: 2}
   bD: {fileID: 0}
   fD: {fileID: 0}
   jD: {fileID: 0}
@@ -50,4 +50,18 @@ MonoBehaviour:
   leftDash: {fileID: 11400000, guid: 80ef29a584237754a8b9f8c5d7a9cdf7, type: 2}
   airdashF: {fileID: 11400000, guid: 5c322c546f1eb314a96f9299a40834cd, type: 2}
   airdashB: {fileID: 11400000, guid: 78b8656b758d9fe44af8a2a4e7697ed2, type: 2}
-  specials: []
+  neutralTech: {fileID: 0}
+  quickTech: {fileID: 0}
+  backRoll: {fileID: 0}
+  leftRoll: {fileID: 0}
+  rightRoll: {fileID: 0}
+  burst: {fileID: 0}
+  specials:
+  - motionInput: 0
+    buttonInput: 3
+    grounded: 1
+    move: {fileID: 11400000, guid: 6ed9ba446ab45ff4e87e5ae29531a987, type: 2}
+  - motionInput: 2
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: ef1d7a14fec4b0c4f98363ae958663b5, type: 2}

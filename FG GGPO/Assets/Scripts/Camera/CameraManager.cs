@@ -106,6 +106,8 @@ public class CameraManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+
         if (counterhitCounter > 0)
         {
             counterhitCounter--;
@@ -135,7 +137,7 @@ public class CameraManager : MonoBehaviour
             if (dist1 > dist2) { cameraAngle = Vector3.Angle(mainCamera.transform.forward, v1 - v2); }
             else cameraAngle = Vector3.Angle(mainCamera.transform.forward, v2 - v1);
         }
-
+        if (GameHandler.Instance.superFlash) return;
         toggleCounter++;
         rightCounter++;
         if (canSwitchRight && rightCounter > rightTimer)

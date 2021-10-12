@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 5A_Glaive
   m_EditorClassIdentifier: 
-  attackLevel: 0
+  attackLevel: 3
   type: 0
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 1bb25c4cf534e7148a1a7352c456a093, type: 3}
-    startupFrame: 10
+    startupFrame: 8
     activeFrames: 2
     gatlingFrames: 5
     attackType: 0
@@ -29,55 +33,55 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 0
-      stun: 20
-      hitstop: 8
-      proration: 0.75
+      damage: 400
+      stun: 30
+      hitstop: 11
+      proration: 0.9
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 15
-      hitstop: 8
-      proration: 0.75
+      stun: 20
+      hitstop: 11
+      proration: 0.9
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 0
-      stun: 25
-      hitstop: 8
-      proration: 0.75
+      stun: 30
+      hitstop: 13
+      proration: 0.9
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airHitProperty:
       damage: 0
-      stun: 20
-      hitstop: 8
-      proration: 0.75
+      stun: 25
+      hitstop: 11
+      proration: 0.9
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 15
-      hitstop: 8
-      proration: 0.75
+      stun: 20
+      hitstop: 11
+      proration: 0.9
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
       damage: 0
-      stun: 25
-      hitstop: 8
-      proration: 0.75
+      stun: 30
+      hitstop: 13
+      proration: 0.9
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
@@ -94,15 +98,15 @@ MonoBehaviour:
   hitID: 0
   moveName: 
   description: 
-  firstStartupFrame: 10
-  lastActiveFrame: 11
-  totalMoveDuration: 21
-  firstGatlingFrame: 15
-  blockAdvantage: 4
-  hitAdvantage: 9
-  blockCancelAdvantage: 9
-  hitCancelAdvantage: 15
-  recoveryFrames: 10
+  firstStartupFrame: 8
+  lastActiveFrame: 9
+  totalMoveDuration: 34
+  firstGatlingFrame: 13
+  blockAdvantage: -6
+  hitAdvantage: 4
+  blockCancelAdvantage: -1
+  hitCancelAdvantage: 25
+  recoveryFrames: 25
   m: []
   targetComboMoves: []
   gatlingMoves:

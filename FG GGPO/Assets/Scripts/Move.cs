@@ -10,12 +10,13 @@ public class Move : ScriptableObject
 
     [TabGroup("Attacks")] public AttackLevel attackLevel;
     [TabGroup("Attacks")] public MoveType type;
-    [TabGroup("Attacks")] 
+    [TabGroup("Attacks")]
     [ShowIf("@type == MoveType.EX || type == MoveType.Super")]
     public int meterCost;
+    [TabGroup("Attacks")] [ShowIf("@type == MoveType.Super")] [HideLabel] public SuperFlash superFlash;
     [TabGroup("Attacks")] public BlockState collissionState;
     [TabGroup("Attacks")] public GroundState groundState;
-    
+
     [TabGroup("Attacks")] public Moveset stance;
     [TabGroup("Attacks")] public Move throwFollowup;
     [TabGroup("Attacks")] public Attack[] attacks;
@@ -32,8 +33,8 @@ public class Move : ScriptableObject
     [TabGroup("Animation")] public int animationID;
     [TabGroup("Animation")] public int hitID;
     [TabGroup("Animation")] public string moveName;
-    [TabGroup("Animation")] 
-    [TextArea ]public string description;
+    [TabGroup("Animation")]
+    [TextArea] public string description;
 
     [Header("Read Only")]
     public int firstStartupFrame;
@@ -511,4 +512,12 @@ public class HitProperty
     public Vector3 pushback;
     public HitState hitState;
     public int hitID = 0;
+}
+
+[System.Serializable]
+public class SuperFlash
+{
+    public GameObject superPrefab;
+    public int startFrame = 1;
+    public int duration;
 }

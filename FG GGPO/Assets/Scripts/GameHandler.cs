@@ -15,6 +15,7 @@ public class GameHandler : MonoBehaviour
     public bool network;
     public static bool isPaused;
     public static bool cutscene;
+    public bool superFlash;
     public static int p1CharacterID;
     public static int p2CharacterID;
     public bool runNormally = true;

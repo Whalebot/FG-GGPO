@@ -15,13 +15,17 @@ MonoBehaviour:
   attackLevel: 4
   type: 0
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: cba0f11858d0186458b329cc0a9d9833, type: 3}
-    startupFrame: 15
+    startupFrame: 18
     activeFrames: 2
     gatlingFrames: 5
     attackType: 0
@@ -29,8 +33,8 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 0
-      stun: 30
+      damage: 700
+      stun: 35
       hitstop: 12
       proration: 0.95
       meterGain: 4
@@ -94,18 +98,25 @@ MonoBehaviour:
   hitID: 0
   moveName: 
   description: 
-  firstStartupFrame: 15
-  lastActiveFrame: 16
-  totalMoveDuration: 36
-  firstGatlingFrame: 20
-  blockAdvantage: -1
-  hitAdvantage: -1
-  blockCancelAdvantage: 4
-  hitCancelAdvantage: 15
-  recoveryFrames: 20
-  m: []
+  firstStartupFrame: 18
+  lastActiveFrame: 19
+  totalMoveDuration: 49
+  firstGatlingFrame: 23
+  blockAdvantage: -11
+  hitAdvantage: 4
+  blockCancelAdvantage: -6
+  hitCancelAdvantage: 30
+  recoveryFrames: 30
+  m:
+  - startFrame: 5
+    duration: 10
+    momentum: {x: 0, y: 0, z: 8}
+    homing: 0
+    resetVelocityDuringRecovery: 1
   targetComboMoves: []
-  gatlingMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: 607eacd42350c9044b73b2c06611e1c0, type: 2}
+  - {fileID: 11400000, guid: 06786fad77e756946bac870e88031931, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
