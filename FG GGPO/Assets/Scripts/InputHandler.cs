@@ -464,6 +464,14 @@ public class InputHandler : MonoBehaviour
             qcb = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             qcb = false;
+
+
+        if (MI478()) mI478 = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            mI478 = false; 
+        if (MI698()) mI698 = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            mI698 = false;
     }
 
     public bool QuarterCircleForward()
@@ -486,10 +494,10 @@ public class InputHandler : MonoBehaviour
             {
                 foundDown = true;
             }
-    
+
             if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
             {
-          
+
                 foundDF = true;
             }
             if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8)
@@ -524,7 +532,7 @@ public class InputHandler : MonoBehaviour
                 foundDown = true;
             }
 
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 2 && foundF)
             {
 
                 foundDF = true;
@@ -540,7 +548,66 @@ public class InputHandler : MonoBehaviour
         }
         return result;
     }
+    public bool MI478()
+    {
+        bool result = false;
+        bool input1 = false;
+        bool input2 = false;
+        bool input3 = false;
 
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+
+            if (directionals[directionals.Count - i] == 4 && input2)
+            {
+                input3 = true;
+            }
+            if (directionals[directionals.Count - i] == 7 && input1)
+            {
+                input2 = true;
+            }
+            if (directionals[directionals.Count - i] == 8)
+            {
+                input1 = true;
+            }
+            if (input3)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+    public bool MI698()
+    {
+        bool result = false;
+        bool input1 = false;
+        bool input2 = false;
+        bool input3 = false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+
+            if (directionals[directionals.Count - i] == 6 && input2)
+            {
+                input3 = true;
+            }
+            if (directionals[directionals.Count - i] == 9 && input1)
+            {
+                input2 = true;
+            }
+            if (directionals[directionals.Count - i] == 8)
+            {
+                input1 = true;
+            }
+            if (input3)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
     public bool CheckDownDown()
     {
         bool result = false;
@@ -705,10 +772,10 @@ public class InputHandler : MonoBehaviour
     private void OnLeft(InputAction.CallbackContext context)
     {
         if (debug) print("Left");
-        
+
         heldDirectionals[3] = !context.canceled;
-        if(context.performed)
-        leftInput?.Invoke();
+        if (context.performed)
+            leftInput?.Invoke();
     }
 
     private void OnUp(InputAction.CallbackContext context)

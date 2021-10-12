@@ -117,6 +117,24 @@ public class CharacterAnimator : MonoBehaviour
     {
         if (!GameHandler.Instance.runNormally) anim.enabled = true;
         anim.SetBool("Cutscene", GameHandler.cutscene);
+        if (GameHandler.Instance.superFlash)
+        {
+            if (attack.superCounter > 0)
+            {
+                anim.speed = 0.05F;
+            }
+            else
+            {
+                anim.enabled = false;
+                StartCoroutine(PauseAnimation());
+                return;
+            }
+        }
+        else
+        {
+            anim.speed = 1;
+        }
+
 
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
 

@@ -202,7 +202,6 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     if (item.motionInput == SpecialInput.QCF)
                     {
-                        //
                         if (input.qcf)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
@@ -217,9 +216,54 @@ public class PlayerInputHandler : MonoBehaviour
                         }
 
                     }
+                    else if (item.motionInput == SpecialInput.QCB)
+                    {
+                        if (input.qcb)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    else if (item.motionInput == SpecialInput.Input478)
+                    {
+                        if (input.mI478)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (item.motionInput == SpecialInput.Input698)
+                    {
+                        if (input.mI698)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     else if (item.motionInput == SpecialInput.BackForward)
                     {
-                        //
                         if (input.bf)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
@@ -236,7 +280,7 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     else if (item.motionInput == SpecialInput.DownDown)
                     {
-                        if (input.CheckDownDown())
+                        if (input.dd)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
                             {

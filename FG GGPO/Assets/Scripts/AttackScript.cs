@@ -17,6 +17,8 @@ public class AttackScript : MonoBehaviour
     public AttackEvent recoveryEvent;
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
+    public AttackEvent superFlashStartEvent;
+    public AttackEvent superFlashEndEvent;
     public Moveset mainMoveset;
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
@@ -40,6 +42,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool specialCancel;
     [HideInInspector] public bool newAttack;
     [HideInInspector] public int combo;
+    public int superCounter;
     List<Move> usedMoves;
 
     // Start is called before the first frame update
@@ -65,9 +68,26 @@ public class AttackScript : MonoBehaviour
         usedMoves = new List<Move>();
     }
 
+    public void ProcessSuperFlash()
+    {
+
+    }
+
     public void ExecuteFrame()
     {
-        if (status.hitstopCounter <= 0)
+        if (superCounter > 0 && GameHandler.Instance.superFlash)
+        {
+            superCounter--;
+            if (superCounter <= 0) {
+                GameHandler.Instance.superFlash = false;
+                superFlashEndEvent?.Invoke();
+            }
+        }
+
+
+
+
+        if (status.hitstopCounter <= 0 && !GameHandler.Instance.superFlash)
         {
             if (jumpFrameCounter > 0)
             {
@@ -127,9 +147,18 @@ public class AttackScript : MonoBehaviour
                 attackFrames++;
                 if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
                 {
-
                     attackString = true;
                     newAttack = false;
+                }
+
+                if (attackFrames == activeMove.superFlash.startFrame && activeMove.type == MoveType.Super)
+                {
+                    superFlashStartEvent?.Invoke();
+                    GameHandler.Instance.superFlash = true;
+                    superCounter = activeMove.superFlash.duration;
+                    GameObject super = Instantiate(activeMove.superFlash.superPrefab, transform.position, transform.rotation, transform);
+                    super.transform.localPosition = activeMove.superFlash.superPrefab.transform.localPosition;
+                    super.transform.localRotation = activeMove.superFlash.superPrefab.transform.localRotation;
                 }
 
                 //Execute properties
@@ -403,7 +432,6 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-        print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
@@ -570,17 +598,18 @@ public class AttackScript : MonoBehaviour
         }
         return false;
     }
-    public bool Burst() {
+    public bool Burst()
+    {
         if (status.burstGauge == 6000)
         {
-         
+
             AttackProperties(moveset.burst);
             status.burstGauge = 0;
             status.hitstunValue = 0;
             return true;
         }
         else return false;
-       
+
     }
     public bool Attack(Move move)
     {
@@ -685,7 +714,7 @@ public class AttackScript : MonoBehaviour
         //Cucks airdash
         //movement.storedDirection = Vector3.zero;
 
-        
+
     }
 
     public void ThrowBreak()
