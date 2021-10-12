@@ -228,13 +228,14 @@ public class GameHandler : MonoBehaviour
     void StartGame()
     {
         isPaused = false;
-       
+
     }
 
     [Button]
     public void AdvanceGameState()
     {
-        if (!gameStarted) {
+        if (!gameStarted)
+        {
             gameStarted = true;
             gameStartEvent?.Invoke();
         }
@@ -255,14 +256,27 @@ public class GameHandler : MonoBehaviour
             TimeoutFinish();
         }
     }
-
+    public void StartSuperFlash()
+    {
+        superFlash = true;
+        Physics.autoSimulation = false;
+    }
+    public void EndSuperFlash()
+    {
+        superFlash = false;
+        if (runNormally)
+            Physics.autoSimulation = true;
+    }
     [Button]
     public void AdvanceGameStateButton()
     {
         runNormally = false;
-        Physics.autoSimulation = false;
-        Physics.Simulate(Time.fixedDeltaTime);
 
+        if (!superFlash)
+        {
+            Physics.autoSimulation = false;
+            Physics.Simulate(Time.fixedDeltaTime);
+        }
         AdvanceGameState();
     }
 
@@ -358,7 +372,8 @@ public class GameHandler : MonoBehaviour
         UIManager.Instance.GameModeUI(gameMode);
     }
 
-    public void Rollback(int frameTarget) {
+    public void Rollback(int frameTarget)
+    {
         Debug.Log("Rollbacking from " + gameFrameCount + " to " + frameTarget);
         gameFrameCount = frameTarget;
 
@@ -368,7 +383,7 @@ public class GameHandler : MonoBehaviour
     void RevertGameState(int i)
     {
         //rollbackEvent?.Invoke(i);
-     
+
         p1Transform.position = gameStates[gameStates.Count - 1].p1Position;
         p2Transform.position = gameStates[gameStates.Count - 1].p2Position;
 
