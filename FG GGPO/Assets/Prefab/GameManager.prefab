@@ -1733,12 +1733,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bf46366f7e93f59419cd8fda9ce5191d, type: 2}
     - target: {fileID: 5573244298042959477, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573244298042959477, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5573244298042959477, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: m_Cameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1532142433550804834}
     - target: {fileID: 5573244298042959478, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 130871
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5573244298042959479, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1915,9 +1923,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5573244297467201050, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
   m_PrefabInstance: {fileID: 1462899762}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &5573244299268616772 stripped
+--- !u!20 &1532142433550804834 stripped
 Camera:
-  m_CorrespondingSourceObject: {fileID: 5573244298042959478, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1532142432293696336, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
   m_PrefabInstance: {fileID: 1462899762}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5573244298304392756 stripped
@@ -2147,7 +2155,7 @@ PrefabInstance:
     - target: {fileID: 1941529086414128613, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 5573244299268616772}
+      objectReference: {fileID: 1532142433550804834}
     - target: {fileID: 1941529086414128613, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -2542,7 +2550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107189361185930020, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -479.99994
+      value: -479.99988
       objectReference: {fileID: 0}
     - target: {fileID: 5757610663684563709, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMin.y
