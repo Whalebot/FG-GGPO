@@ -79,7 +79,7 @@ public class AttackScript : MonoBehaviour
         {
             superCounter--;
             if (superCounter <= 0) {
-                GameHandler.Instance.superFlash = false;
+                GameHandler.Instance.EndSuperFlash();
                 superFlashEndEvent?.Invoke();
             }
         }
@@ -154,7 +154,7 @@ public class AttackScript : MonoBehaviour
                 if (attackFrames == activeMove.superFlash.startFrame && activeMove.type == MoveType.Super)
                 {
                     superFlashStartEvent?.Invoke();
-                    GameHandler.Instance.superFlash = true;
+                    GameHandler.Instance.StartSuperFlash();
                     superCounter = activeMove.superFlash.duration;
                     GameObject super = Instantiate(activeMove.superFlash.superPrefab, transform.position, transform.rotation, transform);
                     super.transform.localPosition = activeMove.superFlash.superPrefab.transform.localPosition;
