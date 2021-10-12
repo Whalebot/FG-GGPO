@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    Status p1Status;
+    Status p2Status;
+
     public Gradient hpColorOverTime;
     float p1InitialHealth;
     float p2InitialHealth;
@@ -19,10 +22,15 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI p1HealthText;
     public TextMeshProUGUI p2HealthText;
 
+
+
     public Slider p1Meter;
     public Slider p2Meter;
     public TextMeshProUGUI p1MeterText;
     public TextMeshProUGUI p2MeterText;
+
+    public Image[] p1BurstImages;
+    public Image[] p2BurstImages;
 
     public Image[] p1RoundWinImages;
     public Image[] p2RoundWinImages;
@@ -42,8 +50,10 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         GameHandler.Instance.advanceGameState += ExecuteFrame;
-        GameHandler.Instance.gameEndEvent+= DisableUI;
+        GameHandler.Instance.gameEndEvent += DisableUI;
         GameHandler.Instance.rematchScreenEvent += RematchScreen;
+        p1Status = GameHandler.Instance.p1Status;
+        p2Status = GameHandler.Instance.p2Status;
 
         p1InitialHealth = GameHandler.Instance.p1Status.maxHealth;
         p2InitialHealth = GameHandler.Instance.p2Status.maxHealth;
@@ -94,13 +104,41 @@ public class UIManager : MonoBehaviour
 
             p1Health.value = state.p1Health;
             p2Health.value = state.p2Health;
-            p1HealthText.text = state.p1Health + "/";
-            p2HealthText.text = state.p2Health + "/";
+            p1HealthText.text = state.p1Health + "/" + p1Status.maxHealth;
+            p2HealthText.text = state.p2Health + "/" + p2Status.maxHealth;
 
             p1Meter.value = state.p1Meter;
             p2Meter.value = state.p2Meter;
             p1MeterText.text = state.p1Meter + "";
             p2MeterText.text = state.p2Meter + "";
+
+            foreach (var item in p1BurstImages)
+            {
+                item.fillAmount = GameHandler.Instance.p1Status.BurstGauge / (float)6000;
+
+                Color col = item.color;
+                if (GameHandler.Instance.p1Status.BurstGauge == 6000)
+                {
+                    col.a = 1;
+                }
+                else col.a = 0.5F;
+
+                item.color = col;
+            }
+            foreach (var item in p2BurstImages)
+            {
+                item.fillAmount = GameHandler.Instance.p2Status.BurstGauge / (float)6000;
+
+                Color col = item.color;
+                if (GameHandler.Instance.p2Status.BurstGauge == 6000)
+                {
+                    col.a = 1;
+                }
+                else col.a = 0.5F;
+
+                item.color = col;
+            }
+
 
             p1Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p1Health / (float)p1InitialHealth);
             p2Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p2Health / (float)p2InitialHealth);
@@ -118,13 +156,15 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void DisableUI() {
+    public void DisableUI()
+    {
         foreach (var item in allUI)
         {
             item.SetActive(false);
         }
     }
-    public void RematchScreen() {
+    public void RematchScreen()
+    {
         rematchScreen.SetActive(true);
     }
 

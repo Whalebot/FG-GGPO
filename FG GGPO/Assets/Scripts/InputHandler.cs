@@ -408,7 +408,11 @@ public class InputHandler : MonoBehaviour
             netButtons[i] = temp[i];
         }
 
-        if (foundB && netButtons[3] || foundC && netButtons[1])
+        if (foundC && netButtons[4] || foundD && netButtons[3])
+        {
+            InputBuffer(9);
+        }
+        else if (foundB && netButtons[3] || foundC && netButtons[1])
         {
             InputBuffer(7);
         }

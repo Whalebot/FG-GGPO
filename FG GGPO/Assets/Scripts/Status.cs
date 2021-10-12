@@ -37,6 +37,7 @@ public class Status : MonoBehaviour
     public StatusEvent punishEvent;
     public StatusEvent invincibleEvent;
     public StatusEvent reversalEvent;
+    public StatusEvent recoveryEvent;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -79,6 +80,7 @@ public class Status : MonoBehaviour
     public int health;
     public int maxMeter;
     public int meter;
+    public int burstGauge;
 
 
     public int comboCounter;
@@ -103,6 +105,75 @@ public class Status : MonoBehaviour
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         mov.landEvent += Land;
         ResetStatus();
+    }
+
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            if (isDead)
+                if (health == value) return;
+
+            health = Mathf.Clamp(value, 0, maxHealth);
+
+            healthEvent?.Invoke();
+            if (health <= 0 && !isDead)
+            {
+                Death();
+            }
+        }
+    }
+
+    public int Meter
+    {
+        get
+        {
+            return meter;
+        }
+        set
+        {
+
+            meter = Mathf.Clamp(value, 0, maxMeter);
+        }
+    }
+
+    public int HitStun
+    {
+        get { return hitstunValue; }
+        set
+        {
+            if (value <= 0) return;
+            if (comboCounter > 0)
+                hitstunValue = (int)(value * proration);
+            else hitstunValue = value;
+            comboCounter++;
+            //GoToState(State.Hitstun);
+            counterhitState = false;
+        }
+    }
+
+    public int BlockStun
+    {
+        get { return blockstunValue; }
+        set
+        {
+            blockstunValue = value;
+            GoToState(State.Blockstun);
+        }
+    }
+
+    public int BurstGauge
+    {
+        get { return burstGauge; }
+        set
+        {
+            burstGauge = Mathf.Clamp(value, 0, 6000);
+
+        }
     }
 
     [Button]
@@ -221,6 +292,9 @@ public class Status : MonoBehaviour
                 ApplyPushback();
             }
         }
+
+        BurstGauge++;
+
         StateMachine();
     }
 
@@ -271,7 +345,7 @@ public class Status : MonoBehaviour
         }
         if (hitstunValue <= 0 && inHitStun)
         {
-
+            recoveryEvent?.Invoke();
             if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
                 KnockdownRecovery();
 
@@ -345,6 +419,7 @@ public class Status : MonoBehaviour
             print("Budget solution");
             GoToState(State.Hitstun);
         }
+
 
         switch (currentState)
         {
@@ -455,65 +530,6 @@ public class Status : MonoBehaviour
             default: break;
         }
 
-    }
-
-    public int Health
-    {
-        get
-        {
-            return health;
-        }
-        set
-        {
-            if (isDead)
-                if (health == value) return;
-
-            health = Mathf.Clamp(value, 0, maxHealth);
-
-            healthEvent?.Invoke();
-            if (health <= 0 && !isDead)
-            {
-                Death();
-            }
-        }
-    }
-
-    public int Meter
-    {
-        get
-        {
-            return meter;
-        }
-        set
-        {
-
-            meter = Mathf.Clamp(value, 0, maxMeter);
-        }
-    }
-
-    public int HitStun
-    {
-        get { return hitstunValue; }
-        set
-        {
-            if (value <= 0) return;
-            if (comboCounter > 0)
-                hitstunValue = (int)(value * proration);
-            else hitstunValue = value;
-            comboCounter++;
-            //GoToState(State.Hitstun);
-            counterhitState = false;
-        }
-    }
-
-    public int BlockStun
-    {
-        get { return blockstunValue; }
-        set
-        {
-            blockstunValue = value;
-            GoToState(State.Blockstun);
-        }
     }
 
     public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID, bool returnWallPushback)

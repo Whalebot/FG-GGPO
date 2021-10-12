@@ -180,6 +180,7 @@ public class Hitbox : MonoBehaviour
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
+
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
@@ -221,7 +222,7 @@ public class Hitbox : MonoBehaviour
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
-
+        other.burstGauge += hit.meterGain * 60;
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
@@ -265,7 +266,7 @@ public class Hitbox : MonoBehaviour
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
-
+        other.burstGauge += hit.meterGain * 60;
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;

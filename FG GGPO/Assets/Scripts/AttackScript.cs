@@ -403,6 +403,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
+        print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
@@ -569,7 +570,18 @@ public class AttackScript : MonoBehaviour
         }
         return false;
     }
-
+    public bool Burst() {
+        if (status.burstGauge == 6000)
+        {
+         
+            AttackProperties(moveset.burst);
+            status.burstGauge = 0;
+            status.hitstunValue = 0;
+            return true;
+        }
+        else return false;
+       
+    }
     public bool Attack(Move move)
     {
         if (jumpDelay) return false;

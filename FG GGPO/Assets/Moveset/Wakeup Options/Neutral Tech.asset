@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Wakeup Back Roll
+  m_Name: Neutral Tech
   m_EditorClassIdentifier: 
   attackLevel: 0
   type: 0
@@ -22,8 +22,8 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 5
-    activeFrames: 5
-    gatlingFrames: 21
+    activeFrames: 0
+    gatlingFrames: 5
     attackType: 0
     attackHeight: 1
     bodyProperty: 1
@@ -95,18 +95,18 @@ MonoBehaviour:
   moveName: 
   description: 
   firstStartupFrame: 5
-  lastActiveFrame: 9
-  totalMoveDuration: 29
-  firstGatlingFrame: 26
-  blockAdvantage: -4
-  hitAdvantage: 6
-  blockCancelAdvantage: 17
-  hitCancelAdvantage: 9
-  recoveryFrames: 20
+  lastActiveFrame: 4
+  totalMoveDuration: 25
+  firstGatlingFrame: 10
+  blockAdvantage: 0
+  hitAdvantage: 10
+  blockCancelAdvantage: 5
+  hitCancelAdvantage: 25
+  recoveryFrames: 21
   m:
-  - startFrame: 0
+  - startFrame: 1
     duration: 20
-    momentum: {x: 0, y: 0, z: -8}
+    momentum: {x: 0, y: 0, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 1
   targetComboMoves: []
@@ -122,7 +122,7 @@ MonoBehaviour:
   noClipDuration: 0
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 15
+  invincibleDuration: 20
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0

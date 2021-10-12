@@ -63,6 +63,8 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("Wakeup Options")] public Move leftRoll;
     [FoldoutGroup("Wakeup Options")] public Move rightRoll;
 
+    public Move burst;
+
 
 
     [Header("Specials")]

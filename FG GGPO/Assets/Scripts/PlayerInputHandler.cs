@@ -97,6 +97,23 @@ public class PlayerInputHandler : MonoBehaviour
         {
             WakeupInput();
         }
+        else if (status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun)
+        {
+            for (int i = 0; i < input.bufferedInputs.Count; i++)
+            {
+                //Burst  
+                int bufferID = -1;
+                if (input.bufferedInputs[i].id == 9)
+                {
+                    if (attack.Burst())
+                    {
+                        bufferID = i;
+                        DeleteInputs(bufferID);
+                        break;
+                    }
+                }
+            }
+        }
 
         mov.direction = relativeDirection;
         input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
@@ -143,6 +160,26 @@ public class PlayerInputHandler : MonoBehaviour
         bool doSpecial = false;
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
+            ////Burst  
+            //if (input.bufferedInputs[i].id == 9)
+            //{
+            //    if (attack.Burst())
+            //    {
+            //        bufferID = i;
+            //        DeleteInputs(bufferID);
+            //        break;
+            //    }
+            //}
+
+            ////RC
+            //if (input.bufferedInputs[i].id == 8)
+            //{
+            //    if (status.groundState == GroundState.Grounded)
+            //    {
+            //        attack.Attack(attack.moveset.grabF);
+            //    }
+            //}
+
             //Jump Button
             if (input.bufferedInputs[i].id == 3)
             {
