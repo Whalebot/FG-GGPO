@@ -281,6 +281,11 @@ public class Status : MonoBehaviour
 
     void ExecuteFrame()
     {
+        if (GameHandler.Instance.superFlash)
+        {
+            return;
+        }
+
         if (newMove)
         {
             hitstopCounter--;

@@ -15,6 +15,10 @@ MonoBehaviour:
   attackLevel: 4
   type: 0
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -125,7 +129,7 @@ MonoBehaviour:
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
-  specialCancelOnHit: 0
+  specialCancelOnHit: 1
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

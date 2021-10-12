@@ -121,7 +121,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             if (attack.superCounter > 0)
             {
-                anim.speed = 0.05F;
+                anim.speed = 0.5F;
             }
             else
             {

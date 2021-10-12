@@ -17,8 +17,8 @@ MonoBehaviour:
   meterCost: 0
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
-    startFrame: 1
-    duration: 120
+    startFrame: 2
+    duration: 90
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -26,7 +26,7 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 9e605b8b2da2b9e498abe36b1e0621e9, type: 3}
     startupFrame: 7
-    activeFrames: 5
+    activeFrames: 15
     gatlingFrames: 5
     attackType: 0
     attackHeight: 1
@@ -35,10 +35,10 @@ MonoBehaviour:
     groundHitProperty:
       damage: 3500
       stun: 40
-      hitstop: 12
+      hitstop: 25
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 5, z: 12}
+      pushback: {x: 0, y: 8, z: 0}
       hitState: 2
       hitID: 0
     groundBlockProperty:
@@ -103,23 +103,23 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 0ed2ac63d802daa4b86168c04f6fa39b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  animationID: 1005
+  animationID: 2000
   hitID: 0
   moveName: 
   description: 
   firstStartupFrame: 7
-  lastActiveFrame: 11
-  totalMoveDuration: 41
+  lastActiveFrame: 21
+  totalMoveDuration: 51
   firstGatlingFrame: 12
-  blockAdvantage: -14
-  hitAdvantage: 6
-  blockCancelAdvantage: -9
+  blockAdvantage: -24
+  hitAdvantage: -4
+  blockCancelAdvantage: -19
   hitCancelAdvantage: 35
   recoveryFrames: 30
   m:
   - startFrame: 2
-    duration: 10
-    momentum: {x: 0, y: 0, z: 17}
+    duration: 20
+    momentum: {x: 0, y: 0, z: 20}
     homing: 0
     resetVelocityDuringRecovery: 1
   targetComboMoves: []
@@ -130,12 +130,12 @@ MonoBehaviour:
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
-  noClip: 0
+  noClip: 1
   noClipStart: 1
-  noClipDuration: 0
-  invincible: 0
+  noClipDuration: 20
+  invincible: 1
   invincibleStart: 1
-  invincibleDuration: 0
+  invincibleDuration: 10
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0

@@ -61,6 +61,10 @@ public class PlayerInputHandler : MonoBehaviour
             mov.direction = Vector3.zero;
             return;
         }
+        if (GameHandler.Instance.superFlash)
+        {
+            return;
+        }
         relativeDirection = RelativeToCamera(input.inputDirection);
         float angle = Vector3.SignedAngle(transform.forward, (transform.position - GameHandler.Instance.ReturnPlayer(transform).position).normalized, Vector3.up);
         frontTurned = Mathf.Abs(angle) > 90;

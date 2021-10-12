@@ -12,6 +12,7 @@ public class SuperCam : MonoBehaviour
     {
  
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        anim = GetComponent<Animator>();
         attack = GetComponentInParent<AttackScript>();
         attack.superFlashEndEvent += DestroyMe;
     }

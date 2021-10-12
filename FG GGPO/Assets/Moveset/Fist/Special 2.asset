@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Special 2
   m_EditorClassIdentifier: 
   attackLevel: 0
-  type: 4
-  meterCost: 10
+  type: 1
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 1
   stance: {fileID: 0}
