@@ -34,7 +34,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 800
-      stun: 30
+      stun: 16
       hitstop: 12
       proration: 0.95
       meterGain: 4
@@ -43,7 +43,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 18
+      stun: 12
       hitstop: 12
       proration: 0.95
       meterGain: 2
@@ -109,13 +109,13 @@ MonoBehaviour:
   description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
-  totalMoveDuration: 34
+  totalMoveDuration: 24
   firstGatlingFrame: 15
-  blockAdvantage: -6
-  hitAdvantage: 6
-  blockCancelAdvantage: -1
-  hitCancelAdvantage: 25
-  recoveryFrames: 20
+  blockAdvantage: -2
+  hitAdvantage: 2
+  blockCancelAdvantage: 3
+  hitCancelAdvantage: 11
+  recoveryFrames: 10
   m:
   - startFrame: 2
     duration: 5
@@ -131,6 +131,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0

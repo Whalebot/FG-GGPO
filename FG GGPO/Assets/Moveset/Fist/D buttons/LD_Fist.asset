@@ -15,6 +15,10 @@ MonoBehaviour:
   attackLevel: 0
   type: 1
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 11400000, guid: 3e425d2055164ca4690fc456c328d4e8, type: 2}
@@ -123,6 +127,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7a4d42600dc5ac4396aa885b31affd1, type: 2}
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
   - {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   gatlingMoves: []
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
@@ -163,6 +168,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1

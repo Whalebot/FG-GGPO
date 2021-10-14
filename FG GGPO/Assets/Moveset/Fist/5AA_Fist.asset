@@ -102,13 +102,13 @@ MonoBehaviour:
   description: 
   firstStartupFrame: 8
   lastActiveFrame: 8
-  totalMoveDuration: 28
+  totalMoveDuration: 31
   firstGatlingFrame: 14
-  blockAdvantage: 0
-  hitAdvantage: 10
-  blockCancelAdvantage: 6
+  blockAdvantage: -3
+  hitAdvantage: 7
+  blockCancelAdvantage: 3
   hitCancelAdvantage: 24
-  recoveryFrames: 20
+  recoveryFrames: 23
   m:
   - startFrame: 2
     duration: 5
@@ -164,6 +164,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
