@@ -50,11 +50,12 @@ MonoBehaviour:
   leftDash: {fileID: 11400000, guid: 80ef29a584237754a8b9f8c5d7a9cdf7, type: 2}
   airdashF: {fileID: 11400000, guid: 5c322c546f1eb314a96f9299a40834cd, type: 2}
   airdashB: {fileID: 11400000, guid: 78b8656b758d9fe44af8a2a4e7697ed2, type: 2}
-  neutralTech: {fileID: 0}
-  quickTech: {fileID: 0}
-  backRoll: {fileID: 0}
-  leftRoll: {fileID: 0}
-  rightRoll: {fileID: 0}
+  neutralTech: {fileID: 11400000, guid: 301b76b5e2efbe04e9d0637a6e97cbcc, type: 2}
+  backTech: {fileID: 11400000, guid: e22016732a8a85140b7219500c1a4008, type: 2}
+  forwadTech: {fileID: 11400000, guid: 5fe8d7d52f48cb447803f8d3f4122632, type: 2}
+  leftTech: {fileID: 11400000, guid: 61db3035516316d4a811861650534266, type: 2}
+  rightTech: {fileID: 11400000, guid: 5c311c481a6b6a44198675675cdeb938, type: 2}
+  airTech: {fileID: 0}
   burst: {fileID: 0}
   specials:
   - motionInput: 0

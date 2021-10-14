@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Right Dash 1
+  m_Name: Wakeup Right Tech
   m_EditorClassIdentifier: 
   attackLevel: 0
   type: 2
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -90,23 +94,23 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
-  animationID: 101
+  animationID: 109
   hitID: 0
   moveName: 
   description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
-  totalMoveDuration: 19
+  totalMoveDuration: 24
   firstGatlingFrame: 15
-  blockAdvantage: 11
-  hitAdvantage: 21
-  blockCancelAdvantage: 16
+  blockAdvantage: 6
+  hitAdvantage: 16
+  blockCancelAdvantage: 11
   hitCancelAdvantage: 25
-  recoveryFrames: 5
+  recoveryFrames: 10
   m:
-  - startFrame: 0
+  - startFrame: 1
     duration: 20
-    momentum: {x: 8, y: 0, z: 0}
+    momentum: {x: 5, y: 0, z: 0}
     homing: 1
     resetVelocityDuringRecovery: 1
   targetComboMoves: []
@@ -150,6 +154,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 0

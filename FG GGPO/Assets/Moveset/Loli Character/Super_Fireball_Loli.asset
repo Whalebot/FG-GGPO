@@ -1,0 +1,412 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
+  m_Name: Super_Fireball_Loli
+  m_EditorClassIdentifier: 
+  attackLevel: 4
+  type: 4
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
+    startFrame: 2
+    duration: 75
+  collissionState: 0
+  groundState: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
+  attacks:
+  - hitbox: {fileID: 6130433937859647811, guid: 816957d72484bfe4cb6a2a887dbe95d3, type: 3}
+    startupFrame: 15
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+  - hitbox: {fileID: 7335423932486207822, guid: 8faa3ef7366b8624aad7fc6f930aa332, type: 3}
+    startupFrame: 18
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+  - hitbox: {fileID: 654002752159171958, guid: 1a1c440eae07ce042855c2ab2ebc24f1, type: 3}
+    startupFrame: 18
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+  - hitbox: {fileID: 8144037422309531492, guid: 2fdb67d93c0c6be4998f4e4305e4e4fb, type: 3}
+    startupFrame: 21
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+  - hitbox: {fileID: 2302100461094808694, guid: bb26275dd4817b94c92aeeb0c8a72374, type: 3}
+    startupFrame: 21
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 100
+      stun: 20
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 40
+      hitstop: 15
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+  vfx: []
+  sfx:
+  - startup: 10
+    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 63
+  hitID: 0
+  moveName: 
+  description: 
+  firstStartupFrame: 15
+  lastActiveFrame: 21
+  totalMoveDuration: 66
+  firstGatlingFrame: 20
+  blockAdvantage: -14
+  hitAdvantage: -9
+  blockCancelAdvantage: -10
+  hitCancelAdvantage: 15
+  recoveryFrames: 45
+  m:
+  - startFrame: 15
+    duration: 10
+    momentum: {x: 0, y: 0, z: 0}
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  targetComboMoves: []
+  gatlingMoves: []
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 10
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  resetGatling: 0
+  noHitstopOnSelf: 1
+  crossupState: 0
+  forcedCounterHit: 0
+  projectileLimit: 1
+  sharedLimitProjectiles:
+  - {fileID: 11400000}
+  aimOnStartup: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  landingRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 0

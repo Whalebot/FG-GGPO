@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Neutral Tech
+  m_Name: Wakeup Neutral Tech
   m_EditorClassIdentifier: 
   attackLevel: 0
   type: 0
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -23,7 +27,7 @@ MonoBehaviour:
   - hitbox: {fileID: 0}
     startupFrame: 5
     activeFrames: 0
-    gatlingFrames: 5
+    gatlingFrames: 0
     attackType: 0
     attackHeight: 1
     bodyProperty: 1
@@ -96,13 +100,13 @@ MonoBehaviour:
   description: 
   firstStartupFrame: 5
   lastActiveFrame: 4
-  totalMoveDuration: 25
-  firstGatlingFrame: 10
-  blockAdvantage: 0
-  hitAdvantage: 10
-  blockCancelAdvantage: 5
-  hitCancelAdvantage: 25
-  recoveryFrames: 21
+  totalMoveDuration: 24
+  firstGatlingFrame: 5
+  blockAdvantage: 1
+  hitAdvantage: 11
+  blockCancelAdvantage: 1
+  hitCancelAdvantage: 30
+  recoveryFrames: 20
   m:
   - startFrame: 1
     duration: 20
@@ -122,7 +126,7 @@ MonoBehaviour:
   noClipDuration: 0
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 20
+  invincibleDuration: 25
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -150,6 +154,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 0
