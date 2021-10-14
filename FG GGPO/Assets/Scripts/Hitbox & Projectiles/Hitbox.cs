@@ -49,7 +49,7 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
-        if (!attack.attacking) return;
+        //if (!attack.attacking) return;
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
@@ -81,7 +81,11 @@ public class Hitbox : MonoBehaviour
 
     public bool CheckInvul(Status enemyStatus)
     {
-        if (enemyStatus.invincible) return false;
+    
+        if (enemyStatus.invincible) {
+          //  Debug.Break();
+            return false;
+        }
         else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return false;
         switch (move.attacks[hitboxID].bodyProperty)
         {

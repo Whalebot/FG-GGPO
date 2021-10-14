@@ -79,7 +79,7 @@ public class VFXManager : MonoBehaviour
         for (int i = 0; i < deletedParticles.Count; i++)
         {
             particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
-            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+            if (deletedParticles[deletedParticles.Count - i - 1].ps != null)
                 Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }

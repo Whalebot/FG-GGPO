@@ -40,6 +40,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
     [FoldoutGroup("Move properties")] public bool specialCancel;
+    [FoldoutGroup("Move properties")] public bool recoverOnlyOnLand;
     [HideInInspector] public bool newAttack;
     [HideInInspector] public int combo;
     public int superCounter;
@@ -78,7 +79,8 @@ public class AttackScript : MonoBehaviour
         if (superCounter > 0 && GameHandler.Instance.superFlash)
         {
             superCounter--;
-            if (superCounter <= 0) {
+            if (superCounter <= 0)
+            {
                 GameHandler.Instance.EndSuperFlash();
                 superFlashEndEvent?.Invoke();
             }
@@ -217,6 +219,8 @@ public class AttackScript : MonoBehaviour
                 else if (attackFrames <= lastActiveFrame)
                 {
                     ActiveFrames();
+                    if (recoverOnlyOnLand) attackFrames--;
+
                 }
 
                 else if (attackFrames <= totalMoveDuration)
@@ -432,6 +436,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
+        //print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
@@ -459,7 +464,7 @@ public class AttackScript : MonoBehaviour
             movement.ResetRun();
 
 
-
+        recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
         attackID = move.animationID;
         attackString = false;
@@ -634,7 +639,7 @@ public class AttackScript : MonoBehaviour
 
     void Land()
     {
-
+        recoverOnlyOnLand = false;
         if (landCancel)
         {
             newAttack = false;

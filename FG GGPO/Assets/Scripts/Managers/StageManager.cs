@@ -13,7 +13,15 @@ public class StageManager : MonoBehaviour
         Instance = this;
     }
 
+    public void CharacterSelect()
+    {
+        LoadScene(1);
+    }
 
+    public void MainMenu()
+    {
+        LoadScene(0);
+    }
 
     // Start is called before the first frame update
     [Button]

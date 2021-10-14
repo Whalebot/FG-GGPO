@@ -76,6 +76,7 @@ public class FrameDataManager : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
         {
+            print("frame");
             frame = p1.minusFrames - p2.minusFrames;
             cancelFrame = 0;
             overlay1.UpdateAdvantage(frame, frame + cancelFrame);

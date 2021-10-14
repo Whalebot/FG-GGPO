@@ -109,7 +109,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        //if(GameHandler.Instance)
         // ExecuteFrame();
     }
 
@@ -262,7 +262,7 @@ public class CharacterAnimator : MonoBehaviour
         else if (Mathf.Abs(status.pushbackVector.y) < 0.1F) anim.SetInteger("Falling", 0);
         else anim.SetInteger("Falling", 1);
 
-        anim.SetBool("Knockdown", false);
+        //anim.SetBool("Knockdown", false);
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
@@ -278,7 +278,7 @@ public class CharacterAnimator : MonoBehaviour
         else if (Mathf.Abs(status.pushbackVector.y) < 0.1F) anim.SetInteger("Falling", 0);
         else anim.SetInteger("Falling", 1);
 
-        anim.SetBool("Knockdown", false);
+        //anim.SetBool("Knockdown", false);
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
@@ -287,13 +287,14 @@ public class CharacterAnimator : MonoBehaviour
 
     void Knockdown()
     {
+        print("Knockdown bool");
         anim.SetBool("Knockdown", true);
         anim.SetTrigger("Hit");
 
     }
     void WakeUp()
     {
-        anim.SetBool("Knockdown", false);
+      anim.SetBool("Knockdown", false);
     }
 
     void MovementAnimation()

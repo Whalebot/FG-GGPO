@@ -57,16 +57,16 @@ public class GameHandler : MonoBehaviour
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
 
-
     public bool gameStarted;
-
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
     public RollBackEvent frameCounterEvent;
 
+    public GameObject pauseMenu;
+    public GameObject trainingMenu;
+
     [HideInInspector] public int gameFrameCount;
     [HideInInspector] public int counter;
-
     [HideInInspector] public float hitStop;
     float startTimeStep;
 
@@ -80,22 +80,43 @@ public class GameHandler : MonoBehaviour
         p2Status = p2Transform.GetComponent<Status>();
 
     }
-
     private void Start()
     {
         network = FgGameManager.Instance != null;
         // Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
-
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
+
+        isPaused = false;
+
         ChangeGameMode(gameMode);
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
+    public void PauseMenu()
+    {
+        if (isPaused) ResumeGame();
+        else
+        {
+         //   if (gameMode == GameMode.VersusMode)
+            {
+                pauseMenu.SetActive(true);
+                isPaused = true;
+                Time.timeScale = 0;
+            }
+        }
+    }
+    public void CancelPauseMenu()
+    {
 
-
-
+    }
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1;
+    }
     void LoadCharacters()
     {
         if (p1CharacterTrainingID != -1)
@@ -177,7 +198,6 @@ public class GameHandler : MonoBehaviour
     {
         StartCoroutine(DelayRoundReset());
     }
-
     IEnumerator DelayRoundReset()
     {
         if (gameMode == GameMode.VersusMode)
@@ -189,7 +209,6 @@ public class GameHandler : MonoBehaviour
         ResetRound();
 
     }
-
     [Button]
     public void ResetRound()
     {
@@ -201,7 +220,6 @@ public class GameHandler : MonoBehaviour
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
-
     [Button]
     void ResetPosition()
     {
@@ -211,29 +229,28 @@ public class GameHandler : MonoBehaviour
         p2Transform.position = p2StartPosition.position;
         p2Transform.rotation = p2StartPosition.rotation;
     }
-
     public Transform ReturnPlayer(Transform source)
     {
         if (source == p1Transform) return p2Transform;
         else return p1Transform;
     }
-
     public bool IsPlayer1(Transform source)
     {
         if (source == p1Transform) return true;
         else return false;
     }
-
-
     void StartGame()
     {
         isPaused = false;
-
     }
-
     [Button]
     public void AdvanceGameState()
     {
+        //if (isPaused) {
+        //    Physics.autoSimulation = false;
+        //    return;
+        //}
+
         if (!gameStarted)
         {
             gameStarted = true;
@@ -279,7 +296,6 @@ public class GameHandler : MonoBehaviour
         }
         AdvanceGameState();
     }
-
     public void TimeoutFinish()
     {
         if (p1Status.Health > p2Status.Health)
@@ -288,14 +304,12 @@ public class GameHandler : MonoBehaviour
             P2Win();
         else Draw();
     }
-
     [Button]
     public void NormalGameState()
     {
         runNormally = true;
         Physics.autoSimulation = true;
     }
-
     [Button]
     public void RevertGameState()
     {
@@ -305,8 +319,6 @@ public class GameHandler : MonoBehaviour
         counter--;
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
     }
-
-
     void UpdateGameState()
     {
         GameState state = new GameState(p1Transform.position, p2Transform.position, p2Transform.rotation, p2Transform.rotation);
@@ -317,30 +329,24 @@ public class GameHandler : MonoBehaviour
         state.p2Meter = p2Status.Meter;
         gameStates.Add(state);
     }
-
-
-
     private void FixedUpdate()
     {
         if (GameManager.Instance != null)
             isPaused = !GameManager.Instance.IsRunning;
         else
         {
-            isPaused = false;
+            // isPaused = false;
         }
 
-        if (!isPaused && runNormally && !network)
+        if (runNormally && !network)
         {
-
             AdvanceGameState();
         }
     }
-
     private void OnValidate()
     {
         staticHurtboxes = showHurtboxes;
     }
-
     private void Update()
     {
         staticHurtboxes = showHurtboxes;
@@ -365,21 +371,17 @@ public class GameHandler : MonoBehaviour
             ChangeGameMode(GameMode.TrainingMode);
         }
     }
-
     public void ChangeGameMode(GameMode mode)
     {
         gameMode = mode;
         UIManager.Instance.GameModeUI(gameMode);
     }
-
     public void Rollback(int frameTarget)
     {
         Debug.Log("Rollbacking from " + gameFrameCount + " to " + frameTarget);
         gameFrameCount = frameTarget;
-
         RevertGameState(gameFrameCount);
     }
-
     void RevertGameState(int i)
     {
         //rollbackEvent?.Invoke(i);
@@ -391,7 +393,6 @@ public class GameHandler : MonoBehaviour
         p2Status.rb.velocity = gameStates[gameStates.Count - 1].p2Velocity;
         gameStates.RemoveRange(i, gameStates.Count - i);
     }
-
     [Button("Simulate Game State")]
     public void ResimulateGameState()
     {

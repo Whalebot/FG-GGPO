@@ -109,6 +109,12 @@ public class ComboSystem : MonoBehaviour
         p2LastHP = p2.Health;
         if (p1Counter <= 0)
         {
+            p1PunishText.SetActive(false);
+            p1InvincibleText.SetActive(false);
+            p1ComboText.gameObject.SetActive(false);
+            p1CounterhitText.SetActive(false);
+
+            p1ReversalText.SetActive(false);
             ResetP1Combo();
             p1HealthFeedback.fillAmount =
                 Mathf.Lerp(p1HealthFeedback.fillAmount, GameHandler.Instance.p1Status.Health / (float)GameHandler.Instance.p1Status.maxHealth, (float)Mathf.Clamp(Mathf.Abs(p1Counter), 0, healthBarRevertFrames) / healthBarRevertFrames);
@@ -116,6 +122,11 @@ public class ComboSystem : MonoBehaviour
 
         if (p2Counter <= 0)
         {
+            p2PunishText.SetActive(false);
+            p2ComboText.gameObject.SetActive(false);
+            p2CounterhitText.SetActive(false);
+            p2InvincibleText.SetActive(false);
+            p2ReversalText.SetActive(false);
             ResetP2Combo();
             p2HealthFeedback.fillAmount = Mathf.Lerp(p2HealthFeedback.fillAmount, GameHandler.Instance.p2Status.Health / (float)GameHandler.Instance.p2Status.maxHealth, (float)Mathf.Clamp(Mathf.Abs(p2Counter), 0, healthBarRevertFrames) / healthBarRevertFrames);
         }
@@ -124,11 +135,8 @@ public class ComboSystem : MonoBehaviour
     public void ResetP1Combo()
     {
         // p1HealthFeedback.fillAmount = p1LastHP / (float)GameHandler.Instance.p1Status.maxHealth;
-        p1ComboText.gameObject.SetActive(false);
-        p1CounterhitText.SetActive(false);
-        p1InvincibleText.SetActive(false);
-        p1ReversalText.SetActive(false);
-        p1PunishText.SetActive(false);
+   
+
         p1ComboEndEvent?.Invoke();
 
     }
@@ -136,11 +144,7 @@ public class ComboSystem : MonoBehaviour
     public void ResetP2Combo()
     {
         // p2HealthFeedback.fillAmount = p2LastHP / (float)GameHandler.Instance.p2Status.maxHealth;
-        p2ComboText.gameObject.SetActive(false);
-        p2CounterhitText.SetActive(false);
-        p2InvincibleText.SetActive(false);
-        p2ReversalText.SetActive(false);
-        p2PunishText.SetActive(false);
+
         p2ComboEndEvent?.Invoke();
 
     }
@@ -158,11 +162,15 @@ public class ComboSystem : MonoBehaviour
 
     public void P1Invincible()
     {
+        print("d2"); p1Counter = comboDisplayDuration;
+    
         p1InvincibleText.SetActive(true);
     }
 
     public void P2Invincible()
     {
+        print("d"); p2Counter = comboDisplayDuration;
+
         p2InvincibleText.SetActive(true);
     }
     public void P1Reversal()
@@ -172,18 +180,22 @@ public class ComboSystem : MonoBehaviour
 
     public void P2Reversal()
     {
+
         p2ReversalText.SetActive(true);
     }
     public void P1Punish()
     {
+   
         p1PunishText.SetActive(true);
     }
     public void P2Punish()
     {
+
         p2PunishText.SetActive(true);
     }
     public void P1Counterhit()
     {
+   
         p2CounterhitText.SetActive(true);
     }
 

@@ -38,6 +38,7 @@ public class Status : MonoBehaviour
     public StatusEvent invincibleEvent;
     public StatusEvent reversalEvent;
     public StatusEvent recoveryEvent;
+    public StatusEvent comboReset;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -273,12 +274,6 @@ public class Status : MonoBehaviour
     {
         defaultHurtbox.layer = LayerMask.NameToLayer("Disabled");
     }
-
-    void FixedUpdate()
-    {
-        //ExecuteFrame();
-    }
-
     void ExecuteFrame()
     {
         if (GameHandler.Instance.superFlash)
@@ -353,15 +348,12 @@ public class Status : MonoBehaviour
             recoveryEvent?.Invoke();
             if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
                 KnockdownRecovery();
-
             else if (groundState == GroundState.Airborne)
             {
                 if (!mov.ground)
                     AirRecovery();
                 else KnockdownRecovery();
-
             }
-
             else GroundRecovery();
         }
     }
@@ -370,9 +362,8 @@ public class Status : MonoBehaviour
 
     void AirRecovery()
     {
-        wakeupEvent?.Invoke();
+        print("air recovery");
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
-
         GoToGroundState(GroundState.Airborne);
         GoToState(State.Neutral);
         //GoToState(State.Wakeup);
@@ -383,8 +374,8 @@ public class Status : MonoBehaviour
 
     void KnockdownRecovery()
     {
-        wakeupEvent?.Invoke();
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
+        print("kd recovery");
+        // Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Wakeup);
         hitstunValue = 0;
@@ -394,8 +385,8 @@ public class Status : MonoBehaviour
 
     void GroundRecovery()
     {
-
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
+        print("ground recovery");
+        //Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Neutral);
         hitstunValue = 0;
@@ -411,7 +402,6 @@ public class Status : MonoBehaviour
         }
         else if (knockdownValue <= 0)
         {
-
             KnockdownRecovery();
         }
     }
@@ -441,10 +431,7 @@ public class Status : MonoBehaviour
                 break;
             case State.Blockstun:
                 if (autoBlock) blocking = true;
-                else
-                    blocking = mov.holdBack;
                 ResolveBlockstun();
-
                 minusFrames = -BlockStun;
                 break;
             case State.Knockdown:
@@ -455,11 +442,12 @@ public class Status : MonoBehaviour
                 break;
             case State.Wakeup:
                 wakeupValue--;
-                invincible = true;
+                //invincible = true;
                 if (wakeupValue <= 0)
                 {
+                    wakeupEvent?.Invoke();
                     GoToState(State.Neutral);
-                    Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity);
+                  
                 }
                 break;
             case State.LockedAnimation:
@@ -477,26 +465,34 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
+        if (currentState == State.Wakeup && transitionState != State.Hitstun) {
+            wakeupEvent?.Invoke();
+            Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity); 
+        }
         if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
+
         switch (transitionState)
         {
             case State.Neutral:
                 invincible = false;
                 linearInvul = false;
-
+                wakeupEvent?.Invoke();
                 EnableHurtboxes();
                 neutralEvent?.Invoke(); break;
             case State.Startup:
                 blocking = false;
+                minusFrames++;
                 break;
             case State.Active:
                 blocking = false;
+                minusFrames++;
                 break;
             case State.Recovery:
                 crossupState = false;
                 blocking = false;
-                invincible = false;
+                minusFrames++;
+                //invincible = false;
                 EnableHurtboxes();
                 break;
             case State.Hitstun:
@@ -541,9 +537,10 @@ public class Status : MonoBehaviour
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         ResetInvincibilities();
-
+ 
         if (currentState == State.Recovery)
         {
+            print(currentState);
             punishEvent?.Invoke();
         }
 
@@ -558,7 +555,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            if (groundState != GroundState.Grounded || currentState == State.Knockdown)
+            if (groundState != GroundState.Grounded || currentState == State.Knockdown || currentState == State.Wakeup)
             {
                 GoToGroundState(GroundState.Airborne);
             }
@@ -585,7 +582,6 @@ public class Status : MonoBehaviour
 
         HitStun = stunVal;
         proration *= p;
-
         mov.runMomentumCounter = 0;
 
         if (groundState == GroundState.Knockdown)

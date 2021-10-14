@@ -312,6 +312,9 @@ public class InputHandler : MonoBehaviour
 
     public void ExecuteFrame()
     {
+        if (GameHandler.Instance != null)
+            if (GameHandler.isPaused) return;
+
         if (!network)
         {
             if (!isBot)
@@ -468,7 +471,7 @@ public class InputHandler : MonoBehaviour
 
         if (MI478()) mI478 = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
-            mI478 = false; 
+            mI478 = false;
         if (MI698()) mI698 = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             mI698 = false;
@@ -904,7 +907,7 @@ public class InputHandler : MonoBehaviour
         startInput?.Invoke();
         if (StageManager.Instance != null)
         {
-            StageManager.Instance.RestartScene();
+            //StageManager.Instance.RestartScene();
         }
     }
     public void OnSelect()
@@ -998,7 +1001,7 @@ public class InputHandler : MonoBehaviour
         InputBuffer(10);
     }
 
-    int Direction()
+   public int Direction()
     {
 
         if (netDirectionals[0])

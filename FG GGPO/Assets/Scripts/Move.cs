@@ -115,6 +115,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Air properties")] public bool aimOnStartup;
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
+    [FoldoutGroup("Air properties")] public bool recoverOnlyOnLand;
     [FoldoutGroup("Air properties")] public int landingRecovery;
 
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;

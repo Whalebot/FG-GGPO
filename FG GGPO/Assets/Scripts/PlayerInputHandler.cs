@@ -34,6 +34,8 @@ public class PlayerInputHandler : MonoBehaviour
         status = GetComponent<Status>();
         GameHandler.Instance.rollbackTick += RollbackTick;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        input.startInput += GameHandler.Instance.PauseMenu;
+
         mov = GetComponent<Movement>();
     }
 
@@ -144,17 +146,29 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void WakeupInput()
     {
-        int bufferID = -1;
-        for (int i = 0; i < input.bufferedInputs.Count; i++)
+        if (!input.deviceIsAssigned)
         {
+            attack.AttackProperties(attack.moveset.neutralTech);
+            return;
+        }
+        int bufferID = -1;
+        for (int i = 0; i < input.netButtons.Length; i++)
+        {
+            if (input.netButtons[i])
+            {
+                if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
+                else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.forwadTech); }
+                else if (input.Direction() == 6) { attack.AttackProperties(attack.moveset.rightTech); }
+                else if (input.Direction() == 4) { attack.AttackProperties(attack.moveset.leftTech); }
+                else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.backTech); }
 
-
-            if (input.bufferedInputs[i].dir == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
-            else if (input.bufferedInputs[i].dir == 8) { attack.AttackProperties(attack.moveset.neutralTech); }
-            else if (input.bufferedInputs[i].dir == 2) { attack.AttackProperties(attack.moveset.backRoll); }
-
-            bufferID = i;
-            DeleteInputs(bufferID);
+                for (int j = 0; j < input.bufferedInputs.Count; j++)
+                {
+                    bufferID = j;
+                    DeleteInputs(bufferID);
+                    return;
+                }
+            }
         }
     }
 
