@@ -94,7 +94,7 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  animationID: 200
+  animationID: 201
   hitID: 0
   moveName: 
   description: 
@@ -113,6 +113,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1

@@ -60,8 +60,17 @@ public class ComboSystem : MonoBehaviour
     int p1LastHP;
     int p2LastHP;
 
-    int p1Max;
-    int p2Max;
+    public int p1Max;
+    public int p2Max;
+
+    public int p1Average;
+    public int p2Average;
+
+    int p1Last;
+    int p2Last;
+
+    public List<int> p1ComboDamages;
+    public List<int> p2ComboDamages;
 
     int p1Counter;
     int p2Counter;
@@ -90,10 +99,25 @@ public class ComboSystem : MonoBehaviour
         p2.recoveryEvent += P2ComboEnd;
 
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.roundStartEvent += ResetValues;
 
         p1LastHP = p1.maxHealth;
         p2LastHP = p2.maxHealth;
+
+        p1ComboDamages = new List<int>();
+        p2ComboDamages = new List<int>();
     }
+    public void ResetValues() {
+        p1Max = 0;
+        p2Max = 0;
+
+        p1Average = 0;
+        p2Average = 0;
+
+        p1ComboDamages.Clear();
+        p2ComboDamages.Clear();
+    }
+
     public void ExecuteFrame()
     {
         p1ComboCounter = p1.comboCounter;
@@ -135,7 +159,7 @@ public class ComboSystem : MonoBehaviour
     public void ResetP1Combo()
     {
         // p1HealthFeedback.fillAmount = p1LastHP / (float)GameHandler.Instance.p1Status.maxHealth;
-   
+
 
         p1ComboEndEvent?.Invoke();
 
@@ -163,7 +187,7 @@ public class ComboSystem : MonoBehaviour
     public void P1Invincible()
     {
         print("d2"); p1Counter = comboDisplayDuration;
-    
+
         p1InvincibleText.SetActive(true);
     }
 
@@ -185,7 +209,7 @@ public class ComboSystem : MonoBehaviour
     }
     public void P1Punish()
     {
-   
+
         p1PunishText.SetActive(true);
     }
     public void P2Punish()
@@ -195,7 +219,7 @@ public class ComboSystem : MonoBehaviour
     }
     public void P1Counterhit()
     {
-   
+
         p2CounterhitText.SetActive(true);
     }
 
@@ -207,6 +231,13 @@ public class ComboSystem : MonoBehaviour
     {
         if (p1ComboEnd)
         {
+            p1ComboDamages.Add(p1Last);
+            int sum = 0;
+            foreach (var item in p1ComboDamages)
+            {
+                sum += item;
+            }
+            p1Average = sum / p1ComboDamages.Count;
             ResetP1Combo();
             p1HealthFeedback.fillAmount = p1LastHP / (float)GameHandler.Instance.p1Status.maxHealth;
             p1ComboEnd = false;
@@ -218,6 +249,7 @@ public class ComboSystem : MonoBehaviour
         p1ComboText.text = p1.comboCounter + " HITS";
         p2ComboDamageText.text = "" + p1.comboDamage;
 
+        p1Last = p1.comboDamage;
         p1ComboDamageTrainingText.text = "" + p1.comboDamage;
         p2DamageText.text = "" + p1.lastAttackDamage;
 
@@ -225,11 +257,19 @@ public class ComboSystem : MonoBehaviour
             p1Max = p1.comboDamage;
         p2MaxComboText.text = "" + p1Max;
         p1ProrationText.text = "" + p1.proration;
+
     }
     public void UpdateP2ComboCounter()
     {
         if (p2ComboEnd)
         {
+            p2ComboDamages.Add(p2Last);
+            int sum = 0;
+            foreach (var item in p2ComboDamages)
+            {
+                sum += item;
+            }
+            p1Average = sum / p2ComboDamages.Count;
             ResetP2Combo();
             p2HealthFeedback.fillAmount = p2LastHP / (float)GameHandler.Instance.p2Status.maxHealth;
             p2ComboEnd = false;
@@ -240,6 +280,7 @@ public class ComboSystem : MonoBehaviour
 
         p2ComboText.text = p2.comboCounter + " HITS";
         p2ComboDamageText.text = "" + p2.comboDamage;
+        p2Last = p2.comboDamage;
 
         p1ComboDamageTrainingText.text = "" + p2.comboDamage;
         p1DamageText.text = "" + p2.lastAttackDamage;

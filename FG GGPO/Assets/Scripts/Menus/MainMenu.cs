@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class MainMenu : MonoBehaviour
 {
+    public StageManager stageManager;
     public GameObject defaultButton;
     public EventSystem eventSystem;
     public GameObject hoverSound;
@@ -23,8 +24,8 @@ public class MainMenu : MonoBehaviour
         Instantiate(clickSound);
 
     }
-    public void VersusMode() { 
-    
+    public void VersusMode() {
+        stageManager.LoadScene(1);
     }
     public void SetActive(GameObject GO)
     {

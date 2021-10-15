@@ -180,6 +180,7 @@ public class Status : MonoBehaviour
     [Button]
     public void ResetStatus()
     {
+        wakeupEvent?.Invoke();
         health = maxHealth;
         meter = 0;
 

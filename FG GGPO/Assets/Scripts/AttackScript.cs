@@ -7,6 +7,7 @@ public class AttackScript : MonoBehaviour
     private Status status;
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
+    [FoldoutGroup("Components")] public List<GameObject> hurtboxes;
 
     Movement movement;
     CharacterSFX sfx;
@@ -86,9 +87,6 @@ public class AttackScript : MonoBehaviour
             }
         }
 
-
-
-
         if (status.hitstopCounter <= 0 && !GameHandler.Instance.superFlash)
         {
             if (jumpFrameCounter > 0)
@@ -99,7 +97,6 @@ public class AttackScript : MonoBehaviour
                     status.GoToState(Status.State.Neutral);
                     jumpActionDelayCounter = jumpActionDelay;
                 }
-
             }
             if (jumpActionDelayCounter > 0)
             {
@@ -109,7 +106,6 @@ public class AttackScript : MonoBehaviour
                 {
                     jumpDelay = false;
                 }
-
             }
 
             if (movementOption != null)
@@ -202,7 +198,7 @@ public class AttackScript : MonoBehaviour
                 }
 
                 inMomentum = tempMomentum;
-
+                CustomHurtboxes();
 
                 int firstStartupFrame = activeMove.attacks[0].startupFrame;
                 int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
@@ -237,33 +233,71 @@ public class AttackScript : MonoBehaviour
     {
         if (activeMove != null)
         {
-            foreach (var item in activeMove.vfx)
-            {
-                if (attackFrames == item.startup)
+            if (activeMove.vfx.Length > 0)
+                foreach (var item in activeMove.vfx)
                 {
-                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                    fx.transform.localPosition = item.position;
-                    fx.transform.localRotation = Quaternion.Euler(item.rotation);
-                    fx.transform.localScale = item.scale;
-                    if (GameHandler.Instance.IsPlayer1(transform))
-                        fx.GetComponent<VFXScript>().ID = 1;
-                    else fx.GetComponent<VFXScript>().ID = 2;
-                    fx.transform.SetParent(null);
+                    if (attackFrames == item.startup)
+                    {
+                        GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                        fx.transform.localPosition = item.position;
+                        fx.transform.localRotation = Quaternion.Euler(item.rotation);
+                        fx.transform.localScale = item.scale;
+                        if (GameHandler.Instance.IsPlayer1(transform))
+                            fx.GetComponent<VFXScript>().ID = 1;
+                        else fx.GetComponent<VFXScript>().ID = 2;
+                        fx.transform.SetParent(null);
+                    }
                 }
-            }
-            foreach (var item in activeMove.sfx)
-            {
-                if (attackFrames == item.startup)
+            if (activeMove.sfx.Length > 0)
+                foreach (var item in activeMove.sfx)
                 {
-                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                    fx.transform.localPosition = item.prefab.transform.localPosition;
-                    fx.transform.localRotation = item.prefab.transform.rotation;
-                    fx.transform.SetParent(null);
+                    if (attackFrames == item.startup)
+                    {
+                        GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                        fx.transform.localPosition = item.prefab.transform.localPosition;
+                        fx.transform.localRotation = item.prefab.transform.rotation;
+                        fx.transform.SetParent(null);
+                    }
                 }
-            }
         }
     }
-
+    public void CustomHurtboxes()
+    {
+        if (activeMove.hurtboxes.Length > 0)
+            for (int i = 0; i < activeMove.hurtboxes.Length; i++)
+            {
+                if (attackFrames < activeMove.hurtboxes[i].end && attackFrames >= activeMove.attacks[i].startupFrame)
+                {
+                    if (hurtboxes.Count < i + 1)
+                    {
+                        hurtboxes.Add(Instantiate(activeMove.hurtboxes[i].prefab, hitboxContainer.position, transform.rotation, hitboxContainer));
+                        hurtboxes[i].transform.localPosition = activeMove.hurtboxes[i].prefab.transform.localPosition;
+                        hurtboxes[i].transform.localRotation = activeMove.hurtboxes[i].prefab.transform.rotation;
+                    }
+                }
+                else if (attackFrames > activeMove.hurtboxes[i].end)
+                {
+                    if (hurtboxes.Count == i + 1)
+                    {
+                        if (activeMove.hurtboxes != null)
+                        {
+                            Destroy(hurtboxes[i]);
+                        }
+                    }
+                }
+            }
+    }
+    void ClearHurtboxes()
+    {
+        for (int i = 0; i < hurtboxes.Count; i++)
+        {
+            if (hurtboxes[i] != null)
+            {
+                Destroy(hurtboxes[i]);
+            }
+        }
+        hurtboxes.Clear();
+    }
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
@@ -474,7 +508,9 @@ public class AttackScript : MonoBehaviour
 
         attackFrames = 0;
 
+        ClearHurtboxes();
         ClearHitboxes();
+
         status.crossupState = move.crossupState;
         if (movement.ground) movement.LookAtOpponent();
         else if (angle < 90 && move.aimOnStartup) movement.LookAtOpponent();
@@ -676,6 +712,7 @@ public class AttackScript : MonoBehaviour
         }
 
         combo = 0;
+        ClearHurtboxes();
         ClearHitboxes();
         attacking = false;
         landCancel = false;
@@ -690,6 +727,7 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
+        ClearHurtboxes();
         ClearHitboxes();
         newAttack = false;
         attackString = false;

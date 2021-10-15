@@ -54,6 +54,7 @@ public class GameHandler : MonoBehaviour
     public GameEvent gameStartEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
+    public GameEvent roundStartEvent;
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
 
@@ -61,6 +62,16 @@ public class GameHandler : MonoBehaviour
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
     public RollBackEvent frameCounterEvent;
+
+    public int roundCount;
+    public int round1Time;
+    public int round2Time;
+    public int round3Time;
+
+    public int round1Winner;
+    public int round2Winner;
+    public int round3Winner;
+
 
     public GameObject pauseMenu;
     public GameObject trainingMenu;
@@ -91,6 +102,8 @@ public class GameHandler : MonoBehaviour
         isPaused = false;
 
         ChangeGameMode(gameMode);
+        ResetAnalyticsData(); 
+        roundStartEvent?.Invoke();
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
@@ -99,7 +112,7 @@ public class GameHandler : MonoBehaviour
         if (isPaused) ResumeGame();
         else
         {
-         //   if (gameMode == GameMode.VersusMode)
+            //   if (gameMode == GameMode.VersusMode)
             {
                 pauseMenu.SetActive(true);
                 isPaused = true;
@@ -143,9 +156,25 @@ public class GameHandler : MonoBehaviour
     }
     public void RoundStart()
     {
+       // roundCount = 1;
+   
+       // ResetAnalyticsData();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
         StartCoroutine(DelayRoundStart());
+    }
+
+    void ResetAnalyticsData()
+    {
+        counter = 0;
+
+        round1Time = 0;
+        round2Time = 0;
+        round3Time = 0;
+
+        round1Winner = 0;
+        round2Winner = 0;
+        round3Winner = 0;
     }
     IEnumerator DelayRoundStart()
     {
@@ -155,12 +184,14 @@ public class GameHandler : MonoBehaviour
     }
     public void GameEnd()
     {
-        gameEndEvent?.Invoke();
+    
         StartCoroutine(DelayGameWin());
     }
     IEnumerator DelayGameWin()
     {
         cutscene = true;
+        yield return new WaitForFixedUpdate();
+        gameEndEvent?.Invoke();
         yield return new WaitForSeconds(3);
         //cutscene = false;
         rematchScreenEvent?.Invoke();
@@ -169,7 +200,25 @@ public class GameHandler : MonoBehaviour
     public void P1Win()
     {
         if (gameMode == GameMode.VersusMode)
+        {
+            if (roundCount == 1)
+            {
+                round1Time = roundTime;
+                round1Winner = 1;
+            }
+            if (roundCount == 2)
+            {
+                round2Time = roundTime;
+                round2Winner = 1;
+            }
+            if (roundCount == 3)
+            {
+                round3Time = roundTime;
+                round3Winner = 1;
+            }
+            roundCount++;
             p1RoundWins++;
+        }
         p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
@@ -183,7 +232,25 @@ public class GameHandler : MonoBehaviour
     public void P2Win()
     {
         if (gameMode == GameMode.VersusMode)
+        {
+            if (roundCount == 1)
+            {
+                round1Time = roundTime;
+                round1Winner = 2;
+            }
+            if (roundCount == 2)
+            {
+                round2Time = roundTime;
+                round2Winner = 2;
+            }
+            if (roundCount == 3)
+            {
+                round3Time = roundTime;
+                round3Winner = 2;
+            }
+            roundCount++;
             p2RoundWins++;
+        }
         p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
@@ -209,6 +276,18 @@ public class GameHandler : MonoBehaviour
         ResetRound();
 
     }
+    [Button]
+    public void ResetGame()
+    {
+        p1Status.ResetStatus();
+        p2Status.ResetStatus();
+        counter = 0;
+        ResetPosition();
+        CameraManager.Instance.ResetCamera();
+        if (gameMode == GameMode.VersusMode)
+            RoundStart();
+    }
+
     [Button]
     public void ResetRound()
     {

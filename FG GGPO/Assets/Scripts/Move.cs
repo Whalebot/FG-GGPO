@@ -53,6 +53,7 @@ public class Move : ScriptableObject
 
     [FoldoutGroup("Momentum")]
     public Momentum[] m;
+    public CustomHurtbox[] hurtboxes;
 
     [FoldoutGroup("Cancel properties")] public List<Move> targetComboMoves;
     [FoldoutGroup("Cancel properties")] public List<Move> gatlingMoves;
@@ -467,7 +468,7 @@ public class VFX
 [System.Serializable]
 public class CustomHurtbox
 {
-    public int startup = 1;
+    public int startFrame = 1;
     public int end = 1;
     public GameObject prefab;
 }

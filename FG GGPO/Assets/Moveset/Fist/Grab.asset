@@ -12,32 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Grab
   m_EditorClassIdentifier: 
-  animationID: 51
-  hitID: 1
-  sfx: []
-  hitFX: {fileID: 0}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 11400000, guid: ecb3a8c2555811f45b7b8bd1521587e4, type: 2}
-  gatlingMoves: []
-  firstStartupFrame: 10
-  lastActiveFrame: 10
-  totalMoveDuration: 50
-  firstGatlingFrame: 15
-  blockAdvantage: 160
-  hitAdvantage: 160
-  blockCancelAdvantage: 165
-  hitCancelAdvantage: 195
-  recoveryFrames: 40
-  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 2b9398c13be73c34a87c39dcdc74572f, type: 3}
     startupFrame: 10
@@ -45,6 +30,7 @@ MonoBehaviour:
     gatlingFrames: 5
     attackType: 2
     attackHeight: 1
+    bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 1000
@@ -100,27 +86,72 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
+  vfx: []
+  sfx: []
+  hitFX: {fileID: 0}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 200
+  hitID: 1
+  moveName: 
+  description: 
+  firstStartupFrame: 10
+  lastActiveFrame: 10
+  totalMoveDuration: 50
+  firstGatlingFrame: 15
+  blockAdvantage: 160
+  hitAdvantage: 160
+  blockCancelAdvantage: 165
+  hitCancelAdvantage: 195
+  recoveryFrames: 40
+  m: []
+  hurtboxes: []
+  targetComboMoves: []
+  gatlingMoves: []
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
-  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
   invincible: 0
   invincibleStart: 1
   invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 1
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
-  m: []
