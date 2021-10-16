@@ -118,16 +118,16 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: -7}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves:
-  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  - {fileID: 11400000, guid: 70688a04552b0a54f8e3c72ff5683dd0, type: 2}
-  - {fileID: 11400000, guid: e7a4d42600dc5ac4396aa885b31affd1, type: 2}
+  - {fileID: 11400000, guid: 54ec82d8cda9fd940882b9d9a78e14f3, type: 2}
+  - {fileID: 11400000, guid: 8d00abbee1663f8459c69616412157e3, type: 2}
+  - {fileID: 11400000, guid: 982c3e23ceac94d46ac0736b1283c07b, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
   - {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
-  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   gatlingMoves: []
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
