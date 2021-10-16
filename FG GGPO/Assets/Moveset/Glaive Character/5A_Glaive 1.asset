@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 5A_Glaive
+  m_Name: 5A_Glaive 1
   m_EditorClassIdentifier: 
   attackLevel: 3
   type: 0
@@ -24,8 +24,8 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: 1bb25c4cf534e7148a1a7352c456a093, type: 3}
-    startupFrame: 9
+  - hitbox: {fileID: 3123878921687778490, guid: cba0f11858d0186458b329cc0a9d9833, type: 3}
+    startupFrame: 12
     activeFrames: 2
     gatlingFrames: 5
     attackType: 0
@@ -98,10 +98,10 @@ MonoBehaviour:
   hitID: 0
   moveName: 
   description: 
-  firstStartupFrame: 9
-  lastActiveFrame: 10
-  totalMoveDuration: 35
-  firstGatlingFrame: 14
+  firstStartupFrame: 12
+  lastActiveFrame: 13
+  totalMoveDuration: 38
+  firstGatlingFrame: 17
   blockAdvantage: -6
   hitAdvantage: 4
   blockCancelAdvantage: -1

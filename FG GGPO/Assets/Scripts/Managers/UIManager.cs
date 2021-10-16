@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject rematchScreen;
     public EventSystem eventSystem;
+
+    public Canvas canvas;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -52,6 +54,8 @@ public class UIManager : MonoBehaviour
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         GameHandler.Instance.gameEndEvent += DisableUI;
         GameHandler.Instance.rematchScreenEvent += RematchScreen;
+        GameHandler.Instance.superFlashStartEvent += DisableUI;
+        GameHandler.Instance.superFlashEndEvent += EnableUI;
         p1Status = GameHandler.Instance.p1Status;
         p2Status = GameHandler.Instance.p2Status;
 
@@ -158,11 +162,18 @@ public class UIManager : MonoBehaviour
 
     public void DisableUI()
     {
-        foreach (var item in allUI)
-        {
-            item.SetActive(false);
-        }
+        canvas.enabled = false;
+        //foreach (var item in allUI)
+        //{
+        //    item.SetActive(false);
+        //}
     }
+
+    public void EnableUI()
+    {
+        canvas.enabled = true;
+    }
+
     public void RematchScreen()
     {
         rematchScreen.SetActive(true);
