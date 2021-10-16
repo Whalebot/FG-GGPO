@@ -20,6 +20,9 @@ public class AttackScript : MonoBehaviour
     public AttackEvent blockEvent;
     public AttackEvent superFlashStartEvent;
     public AttackEvent superFlashEndEvent;
+    public delegate void MoveEvent(Move move);
+    public MoveEvent attackHitEvent;
+
     public Moveset mainMoveset;
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]

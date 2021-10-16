@@ -307,7 +307,7 @@ public class CharacterAnimator : MonoBehaviour
 
 
         anim.SetBool("Walking", movement.isMoving);
-        anim.SetBool("Crouch", movement.crouching);
+        anim.SetBool("Crouch", status.blockState == BlockState.Crouching);
         anim.SetBool("Run", movement.sprinting);
         x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, strafeSmooth);
         y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, strafeSmooth);

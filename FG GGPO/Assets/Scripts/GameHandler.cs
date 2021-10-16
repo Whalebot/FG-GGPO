@@ -57,6 +57,8 @@ public class GameHandler : MonoBehaviour
     public GameEvent roundStartEvent;
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
+    public GameEvent superFlashStartEvent;
+    public GameEvent superFlashEndEvent;
 
     public bool gameStarted;
     public delegate void RollBackEvent(int i);
@@ -102,7 +104,7 @@ public class GameHandler : MonoBehaviour
         isPaused = false;
 
         ChangeGameMode(gameMode);
-        ResetAnalyticsData(); 
+        ResetAnalyticsData();
         roundStartEvent?.Invoke();
         if (gameMode == GameMode.VersusMode)
             RoundStart();
@@ -156,9 +158,9 @@ public class GameHandler : MonoBehaviour
     }
     public void RoundStart()
     {
-       // roundCount = 1;
-   
-       // ResetAnalyticsData();
+        // roundCount = 1;
+
+        // ResetAnalyticsData();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
         StartCoroutine(DelayRoundStart());
@@ -184,7 +186,7 @@ public class GameHandler : MonoBehaviour
     }
     public void GameEnd()
     {
-    
+
         StartCoroutine(DelayGameWin());
     }
     IEnumerator DelayGameWin()
@@ -355,11 +357,13 @@ public class GameHandler : MonoBehaviour
     public void StartSuperFlash()
     {
         superFlash = true;
+        superFlashStartEvent?.Invoke();
         Physics.autoSimulation = false;
     }
     public void EndSuperFlash()
     {
         superFlash = false;
+        superFlashEndEvent?.Invoke();
         if (runNormally)
             Physics.autoSimulation = true;
     }

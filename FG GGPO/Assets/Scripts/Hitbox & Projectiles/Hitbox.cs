@@ -246,6 +246,8 @@ public class Hitbox : MonoBehaviour
             status.hitstopCounter = hit.hitstop;
         }
 
+        attack.attackHitEvent?.Invoke(move);
+
         //Hit FX
         if (move.hitFX != null)
             Instantiate(move.hitFX, colPos.position, colPos.rotation);
