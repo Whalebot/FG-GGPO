@@ -237,7 +237,7 @@ public class ComboSystem : MonoBehaviour
             {
                 sum += item;
             }
-            p1Average = sum / p1ComboDamages.Count;
+            p2Average = sum / p1ComboDamages.Count;
             ResetP1Combo();
             p1HealthFeedback.fillAmount = p1LastHP / (float)GameHandler.Instance.p1Status.maxHealth;
             p1ComboEnd = false;
@@ -253,8 +253,8 @@ public class ComboSystem : MonoBehaviour
         p1ComboDamageTrainingText.text = "" + p1.comboDamage;
         p2DamageText.text = "" + p1.lastAttackDamage;
 
-        if (p1.comboDamage > p1Max)
-            p1Max = p1.comboDamage;
+        if (p1.comboDamage > p2Max)
+            p2Max = p1.comboDamage;
         p2MaxComboText.text = "" + p1Max;
         p1ProrationText.text = "" + p1.proration;
 
@@ -285,8 +285,8 @@ public class ComboSystem : MonoBehaviour
         p1ComboDamageTrainingText.text = "" + p2.comboDamage;
         p1DamageText.text = "" + p2.lastAttackDamage;
 
-        if (p2.comboDamage > p2Max)
-            p2Max = p2.comboDamage;
+        if (p2.comboDamage > p1Max)
+            p1Max = p2.comboDamage;
         p1MaxComboText.text = "" + p2Max;
         p2ProrationText.text = "" + p2.proration;
     }
