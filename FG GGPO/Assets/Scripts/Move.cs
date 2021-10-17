@@ -33,6 +33,7 @@ public class Move : ScriptableObject
     [TabGroup("Animation")] public int animationID;
     [TabGroup("Animation")] public int hitID;
     [TabGroup("Animation")] public string moveName;
+    [TabGroup("Animation")] public string moveInput;
     [TabGroup("Animation")]
     [TextArea] public string description;
 

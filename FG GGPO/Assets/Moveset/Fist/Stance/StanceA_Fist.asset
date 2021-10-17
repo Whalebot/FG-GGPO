@@ -106,6 +106,7 @@ MonoBehaviour:
   animationID: 1003
   hitID: 0
   moveName: 
+  moveInput: Dynamic A
   description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
@@ -122,6 +123,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}

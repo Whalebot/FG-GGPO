@@ -106,6 +106,7 @@ MonoBehaviour:
   animationID: 1005
   hitID: 0
   moveName: 
+  moveInput: Dynamic C
   description: 
   firstStartupFrame: 7
   lastActiveFrame: 11
@@ -122,6 +123,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 17}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 0
@@ -163,6 +165,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1

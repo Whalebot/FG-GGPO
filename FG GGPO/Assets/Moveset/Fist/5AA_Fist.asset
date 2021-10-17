@@ -99,6 +99,7 @@ MonoBehaviour:
   animationID: 1000
   hitID: 0
   moveName: 
+  moveInput: AA
   description: 
   firstStartupFrame: 8
   lastActiveFrame: 8
@@ -115,6 +116,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 8}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}

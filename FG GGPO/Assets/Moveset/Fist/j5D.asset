@@ -12,34 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: j5D
   m_EditorClassIdentifier: 
-  animationID: 83
-  hitID: 0
-  sfx: []
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  counterhitSFX: {fileID: 0}
   attackLevel: 0
   type: 0
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 3
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
-  gatlingMoves:
-  - {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
-  - {fileID: 11400000, guid: 4cf933f9befd26f46851c2443e1bd808, type: 2}
-  firstStartupFrame: 12
-  lastActiveFrame: 13
-  totalMoveDuration: 38
-  firstGatlingFrame: 13
-  blockAdvantage: -6
-  hitAdvantage: 14
-  blockCancelAdvantage: -5
-  hitCancelAdvantage: 39
-  recoveryFrames: 25
-  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: 7f7f12a1f1a69434ba3ff2d96eee9d18, type: 3}
     startupFrame: 12
@@ -103,11 +86,40 @@ MonoBehaviour:
       pushback: {x: 0, y: 8, z: 0}
       hitState: 0
       hitID: 0
+  vfx: []
+  sfx: []
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 83
+  hitID: 0
+  moveName: 
+  moveInput: j.D
+  description: 
+  firstStartupFrame: 12
+  lastActiveFrame: 13
+  totalMoveDuration: 38
+  firstGatlingFrame: 13
+  blockAdvantage: -6
+  hitAdvantage: 14
+  blockCancelAdvantage: -5
+  hitCancelAdvantage: 39
+  recoveryFrames: 25
+  m: []
+  hurtboxes: []
+  targetComboMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
+  - {fileID: 11400000, guid: 4cf933f9befd26f46851c2443e1bd808, type: 2}
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 1
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 0
   noClip: 1
   noClipStart: 1
   noClipDuration: 0
@@ -132,13 +144,17 @@ MonoBehaviour:
   footInvul: 0
   footInvulStart: 1
   footInvulDuration: 0
+  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 1
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 0
   runMomentum: 0
   resetVelocityDuringRecovery: 0
-  m: []

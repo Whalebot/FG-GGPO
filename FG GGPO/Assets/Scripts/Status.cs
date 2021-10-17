@@ -188,6 +188,7 @@ public class Status : MonoBehaviour
         hitstunValue = 0;
         blockstunValue = 0;
         inHitStun = false;
+        GroundRecovery();
         ResetInvincibilities();
         isDead = false;
 

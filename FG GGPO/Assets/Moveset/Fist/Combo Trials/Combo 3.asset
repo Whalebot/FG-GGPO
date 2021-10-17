@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62f58dc0b403b0d428b7f764b3c535bc, type: 3}
-  m_Name: Combo 1
+  m_Name: Combo 3
   m_EditorClassIdentifier: 
   comboDemonstration:
     inputs:
@@ -534,8 +534,12 @@ MonoBehaviour:
       directionals: 00000000
       buttons: 000000000000
   actions:
+  - type: 0
+    move: {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   - type: 1
-    move: {fileID: 11400000, guid: 38b05df55f07afa45aec5de8b8d007da, type: 2}
+    move: {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   - type: 1
     move: {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
   - type: 1
@@ -544,3 +548,5 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   - type: 1
     move: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}

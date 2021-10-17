@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlobalEnums : MonoBehaviour
 {
 }
-public enum GameMode { VersusMode, TrainingMode, TutorialMode }
+public enum GameMode { VersusMode, TrainingMode, TutorialMode, TrialMode }
 public enum GroundState { Grounded, Airborne, Knockdown }
 public enum BlockState {Standing, Crouching, Airborne }
 public enum HitState { None, Knockdown, Launch };
