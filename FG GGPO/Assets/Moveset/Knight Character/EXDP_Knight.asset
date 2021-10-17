@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EXDP_Knight
   m_EditorClassIdentifier: 
   attackLevel: 0
-  type: 1
-  meterCost: 0
+  type: 3
+  meterCost: 25
   superFlash:
     superPrefab: {fileID: 0}
     startFrame: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 100
+      damage: 1500
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -51,7 +51,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 100
+      damage: 1500
       stun: 65
       hitstop: 5
       proration: 0.95
@@ -60,7 +60,7 @@ MonoBehaviour:
       hitState: 1
       hitID: 0
     airHitProperty:
-      damage: 100
+      damage: 1500
       stun: 65
       hitstop: 5
       proration: 0.95
@@ -78,7 +78,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 100
+      damage: 1500
       stun: 65
       hitstop: 5
       proration: 0.95

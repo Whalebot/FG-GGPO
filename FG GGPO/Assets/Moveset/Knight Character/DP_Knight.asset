@@ -33,7 +33,7 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 10
       proration: 0.95
@@ -51,7 +51,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 5
       proration: 0.95
@@ -60,7 +60,7 @@ MonoBehaviour:
       hitState: 1
       hitID: 0
     airHitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 5
       proration: 0.95
@@ -78,7 +78,7 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 100
+      damage: 1000
       stun: 65
       hitstop: 5
       proration: 0.95

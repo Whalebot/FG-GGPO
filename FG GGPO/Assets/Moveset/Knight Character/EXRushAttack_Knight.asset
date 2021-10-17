@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EXRushAttack_Knight
   m_EditorClassIdentifier: 
   attackLevel: 0
-  type: 1
-  meterCost: 0
+  type: 3
+  meterCost: 25
   superFlash:
     superPrefab: {fileID: 0}
     startFrame: 1
@@ -33,17 +33,17 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 1000
-      stun: 43
+      damage: 1250
+      stun: 50
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 13}
+      pushback: {x: 0, y: 10, z: 0}
       hitState: 2
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 18
+      stun: 30
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -51,26 +51,26 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
-      stun: 43
+      damage: 1250
+      stun: 50
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 13}
-      hitState: 0
+      pushback: {x: 0, y: 10, z: 2}
+      hitState: 2
       hitID: 0
     airHitProperty:
-      damage: 700
+      damage: 1250
       stun: 50
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 13}
+      pushback: {x: 0, y: 10, z: 2}
       hitState: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 20
+      stun: 30
       hitstop: 5
       proration: 0.95
       meterGain: 2
@@ -78,12 +78,12 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 700
-      stun: 30
+      damage: 1250
+      stun: 50
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 13}
+      pushback: {x: 0, y: 10, z: 2}
       hitState: 0
       hitID: 0
   vfx: []
@@ -102,10 +102,10 @@ MonoBehaviour:
   lastActiveFrame: 18
   totalMoveDuration: 48
   firstGatlingFrame: 19
-  blockAdvantage: -13
-  hitAdvantage: 12
-  blockCancelAdvantage: -11
-  hitCancelAdvantage: 41
+  blockAdvantage: -1
+  hitAdvantage: 19
+  blockCancelAdvantage: 1
+  hitCancelAdvantage: 48
   recoveryFrames: 30
   m:
   - startFrame: 1
