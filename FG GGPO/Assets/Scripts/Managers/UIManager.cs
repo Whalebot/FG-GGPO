@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] allUI;
     public GameObject[] versusModeObjects;
     public GameObject[] trainingModeObjects;
+    public GameObject[] trialModeObjects;
 
     public GameObject rematchScreen;
     public EventSystem eventSystem;
@@ -89,6 +90,12 @@ public class UIManager : MonoBehaviour
                 }
                 break;
             case GameMode.TutorialMode:
+                break;
+            case GameMode.TrialMode:
+                foreach (var item in trialModeObjects)
+                {
+                    item.SetActive(true);
+                }
                 break;
             default:
                 break;

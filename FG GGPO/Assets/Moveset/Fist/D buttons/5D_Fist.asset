@@ -102,6 +102,7 @@ MonoBehaviour:
   animationID: 33
   hitID: 0
   moveName: 
+  moveInput: D
   description: 
   firstStartupFrame: 10
   lastActiveFrame: 10
@@ -118,6 +119,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 8}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves:
   - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}

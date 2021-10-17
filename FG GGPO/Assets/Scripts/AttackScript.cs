@@ -19,9 +19,12 @@ public class AttackScript : MonoBehaviour
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
     public AttackEvent superFlashStartEvent;
-    public AttackEvent superFlashEndEvent;
+    public AttackEvent superFlashEndEvent;    
+    public AttackEvent jumpEvent;
+    public AttackEvent jumpCancelEvent;
     public delegate void MoveEvent(Move move);
     public MoveEvent attackHitEvent;
+    public MoveEvent attackPerformedEvent;
 
     public Moveset mainMoveset;
     public Moveset moveset;
@@ -527,6 +530,7 @@ public class AttackScript : MonoBehaviour
         Startup();
         landCancel = move.landCancel;
 
+        attackPerformedEvent?.Invoke(move);
         startupEvent?.Invoke();
         attacking = true;
         newAttack = true;
@@ -702,9 +706,13 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        if (attacking) status.rb.velocity = Vector3.zero;
+        if (attacking) { 
+            status.rb.velocity = Vector3.zero;
+            jumpCancelEvent?.Invoke();
+        }
         if (mainMoveset != null) moveset = mainMoveset;
 
+        jumpEvent?.Invoke();
         status.GoToState(Status.State.Recovery);
         attackString = false;
         movementOption = null;

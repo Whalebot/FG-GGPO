@@ -99,6 +99,7 @@ MonoBehaviour:
   animationID: 51
   hitID: 0
   moveName: 
+  moveInput: B
   description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
@@ -115,6 +116,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
@@ -163,6 +165,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
