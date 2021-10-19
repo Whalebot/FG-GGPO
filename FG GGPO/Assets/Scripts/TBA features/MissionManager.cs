@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
 
 public class MissionManager : MonoBehaviour
 {
+    public static MissionManager Instance { get; private set; }
+    public InputReplay replayer;
     public int comboStep;
     public bool clear;
     public Combo activeComboTrial;
-
+    public TextMeshProUGUI comboName;
     public int comboTrialID;
     public Combo[] comboTrials;
     public Status playerStatus;
@@ -18,14 +21,24 @@ public class MissionManager : MonoBehaviour
     public GameObject comboUIPrefab;
     public Transform prefabContainer;
     public List<ActionUI> comboTrialObjects;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
+        playerStatus = GameHandler.Instance.p1Status;
+        dummyStatus = GameHandler.Instance.p2Status;
+        playerAttack = playerStatus.GetComponent<AttackScript>();
+        dummyAttack = dummyStatus.GetComponent<AttackScript>();
+
         playerAttack.jumpEvent += JumpPerformed;
         playerAttack.attackHitEvent += ActionHit;
         playerAttack.attackPerformedEvent += ActionPerformed;
         dummyStatus.recoveryEvent += FailedMission;
-
+        comboTrials = GameHandler.Instance.characters[GameHandler.p1CharacterID].comboTrials;
         ChangeComboTrial(0);
     }
 
@@ -40,7 +53,18 @@ public class MissionManager : MonoBehaviour
     {
         comboTrialID = id;
         activeComboTrial = comboTrials[id];
+        comboName.text = activeComboTrial.description;
+
+        GameHandler.Instance.startPosition = activeComboTrial.startPosition;
+        InputLog log = new InputLog();
+        log.inputs = new List<Input>();
+        foreach (var item in activeComboTrial.comboDemonstration.inputs)
+        {
+            log.inputs.Add(item);
+        }
+        replayer.SetRecording(log);
         SetupUI();
+        GameHandler.Instance.ResetRound();
     }
 
     public void ActionHit(Move move)
@@ -100,9 +124,9 @@ public class MissionManager : MonoBehaviour
     }
     void ComboClear()
     {
-        comboStep = 0; 
+        comboStep = 0;
         clear = true;
-      
+
     }
 
     public void FailedMission()
@@ -114,3 +138,4 @@ public class MissionManager : MonoBehaviour
         }
     }
 }
+

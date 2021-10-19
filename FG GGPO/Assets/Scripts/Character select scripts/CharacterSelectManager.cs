@@ -57,6 +57,13 @@ public class CharacterSelectManager : MonoBehaviour
     {
         inputManager = InputManager.Instance.GetComponent<InputManager>();
 
+
+    }
+
+
+
+    void Start()
+    {
         inputManager.p1Input.upInput += p1Up;
         inputManager.p1Input.downInput += p1Down;
         inputManager.p1Input.leftInput += p1Left;
@@ -73,10 +80,22 @@ public class CharacterSelectManager : MonoBehaviour
         inputManager.p1Input.eastInput += P2Deselect;
     }
 
-    void Start()
+    private void OnDisable()
     {
-        //UpdateP1();
-        //UpdateP2();
+        inputManager.p1Input.upInput -= p1Up;
+        inputManager.p1Input.downInput -= p1Down;
+        inputManager.p1Input.leftInput -= p1Left;
+        inputManager.p1Input.rightInput -= p1Right;
+        inputManager.p1Input.southInput -= P1Select;
+        inputManager.p1Input.eastInput -= P1Deselect;
+
+
+        inputManager.p2Input.upInput -= p2Up;
+        inputManager.p2Input.downInput -= p2Down;
+        inputManager.p2Input.leftInput -= p2Left;
+        inputManager.p2Input.rightInput -= p2Right;
+        inputManager.p2Input.southInput -= P2Select;
+        inputManager.p1Input.eastInput -= P2Deselect;
     }
 
     // Update is called once per frame
@@ -159,7 +178,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         p1SelectFeedback?.PlayFeedbacks();
         p1Selected = true;
-        if (p2Selected) EndCharacterSelect();
+        if (p2Selected || GameHandler.gameModeID == 2) EndCharacterSelect();
     }
 
     [Button]
@@ -187,10 +206,14 @@ public class CharacterSelectManager : MonoBehaviour
     [Button]
     public void EndCharacterSelect()
     {
+        StartCoroutine(DelayTransition());
+    }
+    IEnumerator DelayTransition()
+    {
         GameHandler.p1CharacterID = p1ID;
         GameHandler.p2CharacterID = p2ID;
+        yield return new WaitForSeconds(1);
+
         SceneManager.LoadScene(stageID);
-
     }
-
 }

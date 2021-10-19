@@ -63,6 +63,8 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("Wakeup Options")] public Move leftTech;
     [FoldoutGroup("Wakeup Options")] public Move rightTech;
     [FoldoutGroup("Wakeup Options")] public Move airTech;
+    [FoldoutGroup("Wakeup Options")] public Move airFTech;
+    [FoldoutGroup("Wakeup Options")] public Move airBTech;
 
     public Move burst;
 

@@ -66,6 +66,10 @@ public class InputReplay : MonoBehaviour
 
     public void PlayRecording()
     {
+        if (GameHandler.Instance.gameMode == GameMode.TrialMode)
+        {
+            GameHandler.Instance.ResetRound();
+        }
         replayMode = InputReplayMode.Replaying;
         p2Input.isBot = true;
         replayStartFrame = GameHandler.Instance.gameFrameCount;
@@ -74,37 +78,67 @@ public class InputReplay : MonoBehaviour
 
     public void StartRecording()
     {
-        replayMode = InputReplayMode.Recording;
-        recording.inputs.Clear();
 
-        recordingCounter = 0;
+        if (GameHandler.Instance.gameMode != GameMode.VersusMode)
+        {
+            if (replayMode == InputReplayMode.StandBy)
+            {
+                replayMode = InputReplayMode.Recording;
+                recording.inputs.Clear();
+                recordingCounter = 0;
+            }
+            else if (replayMode == InputReplayMode.Recording)
+            {
+                StopRecording();
+            }
+        }
     }
+
 
 
     public void StopRecording()
     {
         replayMode = InputReplayMode.StandBy;
-
         recordingCounter = 0;
+    }
+
+    public void SetRecording(InputLog log)
+    {
+        recording = log;
     }
     public void ExecuteRecording()
     {
         if (recording.inputs.Count > recordingCounter)
         {
-            p2Input.ResolveButtons(recording.inputs[recordingCounter].buttons);
-            for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+            if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
             {
-                p2Input.netDirectionals[i] = (recording.inputs[recordingCounter].directionals)[i];
+                p2Input.ResolveButtons(recording.inputs[recordingCounter].buttons);
+                for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+                {
+                    p2Input.netDirectionals[i] = (recording.inputs[recordingCounter].directionals)[i];
+                }
+            }
+            else if (GameHandler.Instance.gameMode == GameMode.TrialMode)
+            {
+                p1Input.isBot = true;
+                p1Input.ResolveButtons(recording.inputs[recordingCounter].buttons);
+                for (int i = 0; i < p1Input.netDirectionals.Length; i++)
+                {
+                    p1Input.netDirectionals[i] = (recording.inputs[recordingCounter].directionals)[i];
+                }
             }
             recordingCounter++;
         }
         else
         {
+            if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
+            {
+            }
             replayMode = InputReplayMode.StandBy;
             recordingCounter = 0;
+            p1Input.isBot = false;
             p2Input.isBot = false;
         }
-
     }
 
     public void UpdateText()
@@ -172,13 +206,27 @@ public class InputReplay : MonoBehaviour
         recordingCounter++;
         temp.frame = GameHandler.Instance.gameFrameCount;
 
-        for (int i = 0; i < p2Input.heldButtons.Length; i++)
+        if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
         {
-            temp.buttons[i] = p2Input.heldButtons[i];
+            for (int i = 0; i < p2Input.heldButtons.Length; i++)
+            {
+                temp.buttons[i] = p2Input.heldButtons[i];
+            }
+            for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+            {
+                temp.directionals[i] = p2Input.netDirectionals[i];
+            }
         }
-        for (int i = 0; i < p2Input.netDirectionals.Length; i++)
+        else if (GameHandler.Instance.gameMode == GameMode.TrialMode)
         {
-            temp.directionals[i] = p2Input.netDirectionals[i];
+            for (int i = 0; i < p1Input.heldButtons.Length; i++)
+            {
+                temp.buttons[i] = p1Input.heldButtons[i];
+            }
+            for (int i = 0; i < p1Input.netDirectionals.Length; i++)
+            {
+                temp.directionals[i] = p1Input.netDirectionals[i];
+            }
         }
         recording.inputs.Add(temp);
     }

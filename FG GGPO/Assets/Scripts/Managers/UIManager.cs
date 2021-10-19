@@ -67,11 +67,19 @@ public class UIManager : MonoBehaviour
 
     public void GameModeUI(GameMode mode)
     {
+        //foreach (var item in allUI)
+        //{
+        //    item.SetActive(false);
+        //}    
         foreach (var item in trainingModeObjects)
         {
             item.SetActive(false);
         }
         foreach (var item in versusModeObjects)
+        {
+            item.SetActive(false);
+        }
+        foreach (var item in trialModeObjects)
         {
             item.SetActive(false);
         }

@@ -32,5 +32,5 @@ public class CharacterSelectProfile : ScriptableObject
 
     public int range3;
 
-
+    public Combo[] comboTrials;
 }

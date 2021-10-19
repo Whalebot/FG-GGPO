@@ -172,7 +172,7 @@ public class CameraManager : MonoBehaviour
 
     public void ResetCamera()
     {
-        toggleCounter = 0;
+        toggleCounter = -60;
         toggle = false;
 
         input1.id = 1;
@@ -183,7 +183,7 @@ public class CameraManager : MonoBehaviour
         cc2.target = p2;
         cc2.lookTarget = p1;
 
-        rightCounter = 0;
+        rightCounter = -60;
         isRightCamera = false;
         leftCamera.Priority = 10;
         rightCamera.Priority = 9;

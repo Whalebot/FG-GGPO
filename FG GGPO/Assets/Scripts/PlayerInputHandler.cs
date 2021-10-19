@@ -49,13 +49,6 @@ public class PlayerInputHandler : MonoBehaviour
         return temp;
     }
 
-
-
-    private void FixedUpdate()
-    {
-        //ExecuteFrame();
-    }
-
     public void ExecuteFrame()
     {
         if (GameHandler.isPaused || GameHandler.cutscene)
@@ -151,23 +144,30 @@ public class PlayerInputHandler : MonoBehaviour
             attack.AttackProperties(attack.moveset.neutralTech);
             return;
         }
-        int bufferID = -1;
+
         for (int i = 0; i < input.netButtons.Length; i++)
         {
             if (input.netButtons[i])
             {
-                if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
-                else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.forwadTech); }
-                else if (input.Direction() == 6) { attack.AttackProperties(attack.moveset.rightTech); }
-                else if (input.Direction() == 4) { attack.AttackProperties(attack.moveset.leftTech); }
-                else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.backTech); }
-
-                for (int j = 0; j < input.bufferedInputs.Count; j++)
+                if (status.groundState != GroundState.Airborne)
                 {
-                    bufferID = j;
-                    DeleteInputs(bufferID);
-                    return;
+                    if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
+                    else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.forwadTech); }
+                    else if (input.Direction() == 6) { attack.AttackProperties(attack.moveset.rightTech); }
+                    else if (input.Direction() == 4) { attack.AttackProperties(attack.moveset.leftTech); }
+                    else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.backTech); }
                 }
+                else
+                {
+
+                    if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.airFTech); }
+                    else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.airBTech); }
+                    else if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.airTech); }
+                }
+
+                if (input.bufferedInputs.Count > 0)
+                    DeleteInputs(0);
+                return;
             }
         }
     }

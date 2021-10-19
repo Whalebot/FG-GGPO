@@ -10,7 +10,7 @@ using SharedGame;
 public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
-
+    public static int gameModeID = -1;
     public GameMode gameMode;
     public bool network;
     public static bool isPaused;
@@ -37,6 +37,7 @@ public class GameHandler : MonoBehaviour
     [FoldoutGroup("Starting Position")] public CharacterSelectProfile[] characters;
     [FoldoutGroup("Starting Position")] public Transform p1StartPosition;
     [FoldoutGroup("Starting Position")] public Transform p2StartPosition;
+    [FoldoutGroup("Starting Position")] public StagePosition startPosition;
 
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
@@ -87,6 +88,9 @@ public class GameHandler : MonoBehaviour
     {
         Instance = this;
         gameStates = new List<GameState>();
+        if (gameModeID != -1) {
+            gameMode = (GameMode)gameModeID;
+        }
         isPaused = true;
         LoadCharacters();
         p1Status = p1Transform.GetComponent<Status>();
@@ -134,6 +138,27 @@ public class GameHandler : MonoBehaviour
     }
     void LoadCharacters()
     {
+        //switch (startPosition)
+        //{
+        //    case StagePosition.RoundStart:
+        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
+        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
+        //        break;
+        //    case StagePosition.Wall1:
+        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
+        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
+        //        break;
+        //    case StagePosition.Wall2:
+        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
+        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
+        //        break;
+        //    case StagePosition.MidScreen:
+        //        p1StartPosition = StageScript.Instance.midScreenCloseRange[0];
+        //        p2StartPosition = StageScript.Instance.midScreenCloseRange[1];
+        //        break;
+        //    default:
+        //        break;
+        //}
         if (p1CharacterTrainingID != -1)
         {
             p1CharacterID = p1CharacterTrainingID;
@@ -161,6 +186,7 @@ public class GameHandler : MonoBehaviour
         // roundCount = 1;
 
         // ResetAnalyticsData();
+        ResetPosition();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
         StartCoroutine(DelayRoundStart());
@@ -304,6 +330,27 @@ public class GameHandler : MonoBehaviour
     [Button]
     void ResetPosition()
     {
+        switch (startPosition)
+        {
+            case StagePosition.RoundStart:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.Wall1:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.Wall2:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.MidScreen:
+                p1StartPosition = StageScript.Instance.midScreenCloseRange[0];
+                p2StartPosition = StageScript.Instance.midScreenCloseRange[1];
+                break;
+            default:
+                break;
+        }
         p1Transform.position = p1StartPosition.position;
         p1Transform.rotation = p1StartPosition.rotation;
 
@@ -445,6 +492,7 @@ public class GameHandler : MonoBehaviour
         {
             NormalGameState();
         }
+
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             ChangeGameMode(GameMode.VersusMode);
@@ -452,6 +500,10 @@ public class GameHandler : MonoBehaviour
         else if (Keyboard.current.f2Key.wasPressedThisFrame)
         {
             ChangeGameMode(GameMode.TrainingMode);
+        }
+        else if (Keyboard.current.f3Key.wasPressedThisFrame)
+        {
+            ChangeGameMode(GameMode.TrialMode);
         }
     }
     public void ChangeGameMode(GameMode mode)

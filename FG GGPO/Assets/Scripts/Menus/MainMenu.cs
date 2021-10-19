@@ -25,6 +25,12 @@ public class MainMenu : MonoBehaviour
 
     }
     public void VersusMode() {
+        GameHandler.gameModeID = 0;
+        stageManager.LoadScene(1);
+    }
+    public void TrialMode()
+    {
+        GameHandler.gameModeID = 2;
         stageManager.LoadScene(1);
     }
     public void SetActive(GameObject GO)
