@@ -364,10 +364,10 @@ public class Status : MonoBehaviour
 
     void AirRecovery()
     {
-        print("air recovery");
+      //  print("air recovery");
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Airborne);
-        GoToState(State.Neutral);
+        GoToState(State.Wakeup);
         //GoToState(State.Wakeup);
         hitstunValue = 0;
         comboCounter = 0;
@@ -376,7 +376,7 @@ public class Status : MonoBehaviour
 
     void KnockdownRecovery()
     {
-        print("kd recovery");
+       // print("kd recovery");
         // Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Wakeup);
@@ -387,7 +387,7 @@ public class Status : MonoBehaviour
 
     void GroundRecovery()
     {
-        print("ground recovery");
+     //   print("ground recovery");
         //Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Neutral);

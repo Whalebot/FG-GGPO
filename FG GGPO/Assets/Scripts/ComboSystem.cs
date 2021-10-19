@@ -107,7 +107,8 @@ public class ComboSystem : MonoBehaviour
         p1ComboDamages = new List<int>();
         p2ComboDamages = new List<int>();
     }
-    public void ResetValues() {
+    public void ResetValues()
+    {
         p1Max = 0;
         p2Max = 0;
 
@@ -186,14 +187,14 @@ public class ComboSystem : MonoBehaviour
 
     public void P1Invincible()
     {
-        print("d2"); p1Counter = comboDisplayDuration;
+        p1Counter = comboDisplayDuration;
 
         p1InvincibleText.SetActive(true);
     }
 
     public void P2Invincible()
     {
-        print("d"); p2Counter = comboDisplayDuration;
+        p2Counter = comboDisplayDuration;
 
         p2InvincibleText.SetActive(true);
     }

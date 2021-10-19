@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlobalEnums : MonoBehaviour
 {
 }
-public enum GameMode { VersusMode, TrainingMode, TutorialMode, TrialMode }
+public enum GameMode { VersusMode, TrainingMode, TrialMode, TutorialMode}
 public enum GroundState { Grounded, Airborne, Knockdown }
 public enum BlockState {Standing, Crouching, Airborne }
 public enum HitState { None, Knockdown, Launch };
@@ -18,3 +18,4 @@ public enum MoveType { Normal, Special, Movement, EX, Super }
 public enum SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 }
 
 public enum ButtonInput { A, B, J, C, D }
+public enum StagePosition{ RoundStart, Wall1, Wall2, MidScreen }

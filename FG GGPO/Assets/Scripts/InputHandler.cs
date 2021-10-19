@@ -94,7 +94,7 @@ public class InputHandler : MonoBehaviour
     // private void OnEnable() => controls.Default.Enable();
     private void OnDisable()
     {
-        DisableControls();
+        //DisableControls();
     }
     public void DisableControls()
     {

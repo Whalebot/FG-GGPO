@@ -81,16 +81,19 @@ public class InputManager : MonoBehaviour
 
     public void SwitchControls()
     {
-        if (p1Input.deviceIsAssigned)
+        if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
         {
-            p1Input.DisableControls();
-            p2Input.SetupControls(Gamepad.all[0]);
+            if (p1Input.deviceIsAssigned)
+            {
+                p1Input.DisableControls();
+                p2Input.SetupControls(Gamepad.all[0]);
+            }
+            else if (p2Input.deviceIsAssigned)
+            {
+                p2Input.DisableControls();
+                p1Input.SetupControls(Gamepad.all[0]);
+            }
         }
-        else if (p2Input.deviceIsAssigned)
-        {
-            p2Input.DisableControls();
-            p1Input.SetupControls(Gamepad.all[0]);
-        } 
     }
 
     private void FixedUpdate()
