@@ -99,6 +99,7 @@ MonoBehaviour:
   animationID: 43
   hitID: 0
   moveName: 
+  moveInput: j.D
   description: 
   firstStartupFrame: 15
   lastActiveFrame: 15
@@ -120,6 +121,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 4, z: -4}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1

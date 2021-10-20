@@ -159,7 +159,7 @@ public class CharacterSelectManager : MonoBehaviour
         p1Name.text = p1Hover.profile.name;
         p1Description.text = p1Hover.profile.description;
         p1Playstyle.text = p1Hover.profile.playstyle;
-        p1Portrait.sprite = p1Hover.profile.portrait;
+        p1Portrait.sprite = p1Hover.profile.splashArt;
         p1ID = p1Hover.profile.iD;
     }
 
@@ -169,7 +169,7 @@ public class CharacterSelectManager : MonoBehaviour
         p2Name.text = p2Hover.profile.name;
         p2Description.text = p2Hover.profile.description;
         p2Playstyle.text = p2Hover.profile.playstyle;
-        p2Portrait.sprite = p2Hover.profile.portrait;
+        p2Portrait.sprite = p2Hover.profile.splashArt;
         p2ID = p2Hover.profile.iD;
     }
 

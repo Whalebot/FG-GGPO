@@ -17,6 +17,11 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI timerText;
 
+
+    public Image p1Portrait;
+    public Image p2Portrait;
+    public TextMeshProUGUI p1Name;
+    public TextMeshProUGUI p2Name;
     public Slider p1Health;
     public Slider p2Health;
     public TextMeshProUGUI p1HealthText;
@@ -62,6 +67,12 @@ public class UIManager : MonoBehaviour
 
         p1InitialHealth = GameHandler.Instance.p1Status.maxHealth;
         p2InitialHealth = GameHandler.Instance.p2Status.maxHealth;
+
+        p1Portrait.sprite = GameHandler.Instance.characters[GameHandler.p1CharacterID].portrait;
+        p2Portrait.sprite = GameHandler.Instance.characters[GameHandler.p2CharacterID].portrait;
+
+        p1Name.text = GameHandler.Instance.characters[GameHandler.p1CharacterID].name;
+        p2Name.text = GameHandler.Instance.characters[GameHandler.p2CharacterID].name;
 
     }
 
