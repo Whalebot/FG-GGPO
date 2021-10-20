@@ -421,7 +421,7 @@ public class Status : MonoBehaviour
         switch (currentState)
         {
             case State.Neutral:
-                if (forcedCounterhit) counterhitState = true;
+                counterhitState = forcedCounterhit;
                 if (autoBlock) blocking = true;
 
                 break;

@@ -58,6 +58,8 @@ public class MissionManager : MonoBehaviour
         GameHandler.Instance.startPosition = activeComboTrial.startPosition;
         InputLog log = new InputLog();
         log.inputs = new List<Input>();
+
+        dummyStatus.forcedCounterhit = activeComboTrial.counterhit;
         foreach (var item in activeComboTrial.comboDemonstration.inputs)
         {
             log.inputs.Add(item);
