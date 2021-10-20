@@ -7,6 +7,7 @@ public class Combo : ScriptableObject
     [TextArea]
     public string description;
     public StagePosition startPosition;
+    public bool counterhit;
     public InputLog comboDemonstration;
     public Action[] actions;
 }

@@ -292,6 +292,7 @@ public class Hitbox : MonoBehaviour
 
             CameraManager.Instance.CounterhitCamera(hit.hitstop);
         }
+        attack.attackHitEvent?.Invoke(move);
 
         //Hit FX
         if (move.counterhitFX != null)
