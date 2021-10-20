@@ -11,6 +11,10 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public static int gameModeID = -1;
+    public static int p1Wins;
+    public static int p2Wins;
+    public static int p1WinStreak;
+    public static int p2WinStreak;
     public GameMode gameMode;
     public bool network;
     public static bool isPaused;
@@ -106,6 +110,7 @@ public class GameHandler : MonoBehaviour
         p2Status.deathEvent += P1Win;
 
         isPaused = false;
+        cutscene = false;
 
         ChangeGameMode(gameMode);
         ResetAnalyticsData();
@@ -132,33 +137,20 @@ public class GameHandler : MonoBehaviour
     }
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        isPaused = false;
-        Time.timeScale = 1;
+
+        StartCoroutine(DelayResume());
     }
+
+    IEnumerator DelayResume() {
+        pauseMenu.SetActive(false); 
+        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(0.2F);
+        isPaused = false;
+
+    }
+
     void LoadCharacters()
     {
-        //switch (startPosition)
-        //{
-        //    case StagePosition.RoundStart:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.Wall1:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.Wall2:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.MidScreen:
-        //        p1StartPosition = StageScript.Instance.midScreenCloseRange[0];
-        //        p2StartPosition = StageScript.Instance.midScreenCloseRange[1];
-        //        break;
-        //    default:
-        //        break;
-        //}
         if (p1CharacterTrainingID != -1)
         {
             p1CharacterID = p1CharacterTrainingID;
@@ -250,6 +242,9 @@ public class GameHandler : MonoBehaviour
         p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
+            p1Wins++;
+            p1WinStreak++;
+            p2WinStreak = 0;
             GameEnd();
         }
         else
@@ -282,6 +277,9 @@ public class GameHandler : MonoBehaviour
         p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
+            p2Wins++;
+            p2WinStreak++;
+            p1WinStreak = 0;
             GameEnd();
         }
         else

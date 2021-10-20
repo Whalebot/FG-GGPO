@@ -26,12 +26,14 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     [Button]
     public void LoadScene(int index) {
+        Time.timeScale = 1;
         SceneManager.LoadScene(index);
     }
 
     [Button]
     public void RestartScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

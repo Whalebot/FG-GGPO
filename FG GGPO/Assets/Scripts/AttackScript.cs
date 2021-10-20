@@ -19,7 +19,7 @@ public class AttackScript : MonoBehaviour
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
     public AttackEvent superFlashStartEvent;
-    public AttackEvent superFlashEndEvent;    
+    public AttackEvent superFlashEndEvent;
     public AttackEvent jumpEvent;
     public AttackEvent jumpCancelEvent;
     public delegate void MoveEvent(Move move);
@@ -269,29 +269,30 @@ public class AttackScript : MonoBehaviour
     }
     public void CustomHurtboxes()
     {
-        if (activeMove.hurtboxes.Length > 0)
-            for (int i = 0; i < activeMove.hurtboxes.Length; i++)
-            {
-                if (attackFrames < activeMove.hurtboxes[i].end && attackFrames >= activeMove.attacks[i].startupFrame)
+        if (activeMove != null)
+            if (activeMove.hurtboxes.Length > 0)
+                for (int i = 0; i < activeMove.hurtboxes.Length; i++)
                 {
-                    if (hurtboxes.Count < i + 1)
+                    if (attackFrames < activeMove.hurtboxes[i].end && attackFrames >= activeMove.attacks[i].startupFrame)
                     {
-                        hurtboxes.Add(Instantiate(activeMove.hurtboxes[i].prefab, hitboxContainer.position, transform.rotation, hitboxContainer));
-                        hurtboxes[i].transform.localPosition = activeMove.hurtboxes[i].prefab.transform.localPosition;
-                        hurtboxes[i].transform.localRotation = activeMove.hurtboxes[i].prefab.transform.rotation;
-                    }
-                }
-                else if (attackFrames > activeMove.hurtboxes[i].end)
-                {
-                    if (hurtboxes.Count == i + 1)
-                    {
-                        if (activeMove.hurtboxes != null)
+                        if (hurtboxes.Count < i + 1)
                         {
-                            Destroy(hurtboxes[i]);
+                            hurtboxes.Add(Instantiate(activeMove.hurtboxes[i].prefab, hitboxContainer.position, transform.rotation, hitboxContainer));
+                            hurtboxes[i].transform.localPosition = activeMove.hurtboxes[i].prefab.transform.localPosition;
+                            hurtboxes[i].transform.localRotation = activeMove.hurtboxes[i].prefab.transform.rotation;
+                        }
+                    }
+                    else if (attackFrames > activeMove.hurtboxes[i].end)
+                    {
+                        if (hurtboxes.Count == i + 1)
+                        {
+                            if (activeMove.hurtboxes != null)
+                            {
+                                Destroy(hurtboxes[i]);
+                            }
                         }
                     }
                 }
-            }
     }
     void ClearHurtboxes()
     {
@@ -706,7 +707,8 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        if (attacking) { 
+        if (attacking)
+        {
             status.rb.velocity = Vector3.zero;
             jumpCancelEvent?.Invoke();
         }

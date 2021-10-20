@@ -39,6 +39,13 @@ public class PlayerInputHandler : MonoBehaviour
         mov = GetComponent<Movement>();
     }
 
+    private void OnDisable()
+    {
+        GameHandler.Instance.rollbackTick -= RollbackTick;
+        GameHandler.Instance.advanceGameState -= ExecuteFrame;
+        input.startInput -= GameHandler.Instance.PauseMenu;
+    }
+
     Vector3 RelativeToCamera(Vector2 v)
     {
         forwardVector = (mov.strafeTarget.position - transform.position);

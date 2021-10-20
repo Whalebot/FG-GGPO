@@ -312,8 +312,6 @@ public class InputHandler : MonoBehaviour
 
     public void ExecuteFrame()
     {
-        if (GameHandler.Instance != null)
-            if (GameHandler.isPaused) return;
 
         if (!network)
         {
@@ -323,9 +321,14 @@ public class InputHandler : MonoBehaviour
                 {
                     netDirectionals[i] = heldDirectionals[i];
                 }
+                if (GameHandler.Instance != null)
+                    if (GameHandler.isPaused) return;
+
                 ResolveButtons(heldButtons);
             }
         }
+        if (GameHandler.Instance != null)
+            if (GameHandler.isPaused) return;
 
         ResolveInputBuffer();
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
@@ -404,7 +407,6 @@ public class InputHandler : MonoBehaviour
                 if (i == 3) foundC = true;
                 if (i == 4) foundD = true;
                 if (i == 5) foundCrouch = true;
-                // InputBuffer(i + 1);
             }
 
             if (netButtons[i] != temp[i]) updatedButtons = true;
@@ -875,8 +877,15 @@ public class InputHandler : MonoBehaviour
         if (debug) print("X");
         ChangeControlScheme(context);
         //   updatedButtons = true;
+
+        if (isPaused)
+        {
+            print("dog");
+            netButtons[2] = true;
+        }
         heldButtons[2] = !context.canceled;
-        southInput?.Invoke();
+        if (context.performed)
+            southInput?.Invoke();
     }
     public void OnEast(InputAction.CallbackContext context)
     {
@@ -1001,7 +1010,7 @@ public class InputHandler : MonoBehaviour
         InputBuffer(10);
     }
 
-   public int Direction()
+    public int Direction()
     {
 
         if (netDirectionals[0])
