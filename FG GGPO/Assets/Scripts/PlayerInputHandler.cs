@@ -146,15 +146,11 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void WakeupInput()
     {
-        if (!input.deviceIsAssigned)
-        {
-            attack.AttackProperties(attack.moveset.neutralTech);
-            return;
-        }
+
 
         for (int i = 0; i < input.netButtons.Length; i++)
         {
-            if (input.netButtons[i])
+            if (input.netButtons[i] || !input.deviceIsAssigned)
             {
                 if (status.groundState != GroundState.Airborne)
                 {

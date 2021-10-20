@@ -249,7 +249,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         GameHandler.p1CharacterID = p1ID;
         GameHandler.p2CharacterID = p2ID;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForFixedUpdate();
 
         SceneManager.LoadScene(stageID);
     }

@@ -878,7 +878,7 @@ public class InputHandler : MonoBehaviour
         ChangeControlScheme(context);
         //   updatedButtons = true;
 
-        if (isPaused)
+        if (GameHandler.isPaused)
         {
             print("dog");
             netButtons[2] = true;

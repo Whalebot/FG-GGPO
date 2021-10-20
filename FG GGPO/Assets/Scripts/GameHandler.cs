@@ -57,6 +57,7 @@ public class GameHandler : MonoBehaviour
     public GameEvent p2WinEvent;
 
     public GameEvent gameStartEvent;
+    public GameEvent resetEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
     public GameEvent roundStartEvent;
@@ -70,14 +71,14 @@ public class GameHandler : MonoBehaviour
     public RollBackEvent rollbackEvent;
     public RollBackEvent frameCounterEvent;
 
-    public int roundCount;
-    public int round1Time;
-    public int round2Time;
-    public int round3Time;
+    [FoldoutGroup("Analytics")] public int roundCount;
+    [FoldoutGroup("Analytics")] public int round1Time;
+    [FoldoutGroup("Analytics")] public int round2Time;
+    [FoldoutGroup("Analytics")] public int round3Time;
 
-    public int round1Winner;
-    public int round2Winner;
-    public int round3Winner;
+    [FoldoutGroup("Analytics")] public int round1Winner;
+    [FoldoutGroup("Analytics")] public int round2Winner;
+    [FoldoutGroup("Analytics")] public int round3Winner;
 
 
     public GameObject pauseMenu;
@@ -114,7 +115,7 @@ public class GameHandler : MonoBehaviour
 
         ChangeGameMode(gameMode);
         ResetAnalyticsData();
-        roundStartEvent?.Invoke();
+
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
@@ -178,6 +179,7 @@ public class GameHandler : MonoBehaviour
         // roundCount = 1;
 
         // ResetAnalyticsData();
+        roundStartEvent?.Invoke();
         ResetPosition();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
@@ -317,6 +319,7 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void ResetRound()
     {
+        resetEvent?.Invoke();
         p1Status.ResetStatus();
         p2Status.ResetStatus();
         counter = 0;
