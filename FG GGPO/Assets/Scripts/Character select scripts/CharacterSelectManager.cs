@@ -97,13 +97,15 @@ public class CharacterSelectManager : MonoBehaviour
         inputManager.p1Input.southInput += P1Select;
         inputManager.p1Input.eastInput += P1Deselect;
 
-
-        inputManager.p2Input.upInput += p2Up;
-        inputManager.p2Input.downInput += p2Down;
-        inputManager.p2Input.leftInput += p2Left;
-        inputManager.p2Input.rightInput += p2Right;
-        inputManager.p2Input.southInput += P2Select;
-        inputManager.p1Input.eastInput += P2Deselect;
+        if (GameHandler.gameModeID == 0 || GameHandler.gameModeID == -1)
+        {
+            inputManager.p2Input.upInput += p2Up;
+            inputManager.p2Input.downInput += p2Down;
+            inputManager.p2Input.leftInput += p2Left;
+            inputManager.p2Input.rightInput += p2Right;
+            inputManager.p2Input.southInput += P2Select;
+            inputManager.p2Input.eastInput += P2Deselect;
+        }
     }
 
     private void OnDisable()
@@ -115,13 +117,26 @@ public class CharacterSelectManager : MonoBehaviour
         inputManager.p1Input.southInput -= P1Select;
         inputManager.p1Input.eastInput -= P1Deselect;
 
+        if (GameHandler.gameModeID == 0 || GameHandler.gameModeID == -1)
+        {
+            inputManager.p2Input.upInput -= p2Up;
+            inputManager.p2Input.downInput -= p2Down;
+            inputManager.p2Input.leftInput -= p2Left;
+            inputManager.p2Input.rightInput -= p2Right;
+            inputManager.p2Input.southInput -= P2Select;
+            inputManager.p2Input.eastInput -= P2Deselect;
+        }
 
-        inputManager.p2Input.upInput -= p2Up;
-        inputManager.p2Input.downInput -= p2Down;
-        inputManager.p2Input.leftInput -= p2Left;
-        inputManager.p2Input.rightInput -= p2Right;
-        inputManager.p2Input.southInput -= P2Select;
-        inputManager.p1Input.eastInput -= P2Deselect;
+        else if (GameHandler.gameModeID == 1)
+        {
+            inputManager.p1Input.upInput -= p2Up;
+            inputManager.p1Input.downInput -= p2Down;
+            inputManager.p1Input.leftInput -= p2Left;
+            inputManager.p1Input.rightInput -= p2Right;
+            inputManager.p1Input.southInput -= P2Select;
+            inputManager.p1Input.eastInput -= P2Deselect;
+        }
+
     }
 
     // Update is called once per frame
@@ -300,12 +315,19 @@ public class CharacterSelectManager : MonoBehaviour
     [Button]
     public void P1Select()
     {
+
         switch (phase)
         {
             case Phase.charSelect:
                 p1SelectFeedback?.PlayFeedbacks();
                 p1Selected = true;
-                if (p2Selected || GameHandler.gameModeID == 2) StageBGMSelect();
+                if (GameHandler.gameModeID == 1)
+                {
+                    P1ControlP2();
+                }
+                else if (GameHandler.gameModeID == 2) EndCharacterSelect();
+
+                if (p2Selected) StageBGMSelect();
                 break;
 
             case Phase.stageBGMSelect:
@@ -313,6 +335,26 @@ public class CharacterSelectManager : MonoBehaviour
                 EndCharacterSelect();
                 break;
         }
+
+
+    }
+
+    public void P1ControlP2()
+    {
+        inputManager.p1Input.upInput += p2Up;
+        inputManager.p1Input.downInput += p2Down;
+        inputManager.p1Input.leftInput += p2Left;
+        inputManager.p1Input.rightInput += p2Right;
+        inputManager.p1Input.southInput += P2Select;
+        inputManager.p1Input.eastInput += P2Deselect;
+
+        inputManager.p1Input.upInput -= p1Up;
+        inputManager.p1Input.downInput -= p1Down;
+        inputManager.p1Input.leftInput -= p1Left;
+        inputManager.p1Input.rightInput -= p1Right;
+        inputManager.p1Input.southInput -= P1Select;
+        inputManager.p1Input.eastInput -= P1Deselect;
+       
     }
 
     [Button]
@@ -399,7 +441,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         GameHandler.p1CharacterID = p1ID;
         GameHandler.p2CharacterID = p2ID;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForFixedUpdate();
 
         SceneManager.LoadScene(stageID);
     }

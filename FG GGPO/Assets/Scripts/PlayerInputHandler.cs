@@ -39,6 +39,13 @@ public class PlayerInputHandler : MonoBehaviour
         mov = GetComponent<Movement>();
     }
 
+    private void OnDisable()
+    {
+        GameHandler.Instance.rollbackTick -= RollbackTick;
+        GameHandler.Instance.advanceGameState -= ExecuteFrame;
+        input.startInput -= GameHandler.Instance.PauseMenu;
+    }
+
     Vector3 RelativeToCamera(Vector2 v)
     {
         forwardVector = (mov.strafeTarget.position - transform.position);
@@ -139,15 +146,11 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void WakeupInput()
     {
-        if (!input.deviceIsAssigned)
-        {
-            attack.AttackProperties(attack.moveset.neutralTech);
-            return;
-        }
+
 
         for (int i = 0; i < input.netButtons.Length; i++)
         {
-            if (input.netButtons[i])
+            if (input.netButtons[i] || !input.deviceIsAssigned)
             {
                 if (status.groundState != GroundState.Airborne)
                 {

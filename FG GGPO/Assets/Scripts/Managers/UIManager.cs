@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
     public Image[] p1RoundWinImages;
     public Image[] p2RoundWinImages;
 
+    public TextMeshProUGUI p1WinCounter;
+    public TextMeshProUGUI p2WinCounter;
+
     public GameObject[] allUI;
     public GameObject[] versusModeObjects;
     public GameObject[] trainingModeObjects;
@@ -141,6 +144,19 @@ public class UIManager : MonoBehaviour
             p2Meter.value = state.p2Meter;
             p1MeterText.text = state.p1Meter + "";
             p2MeterText.text = state.p2Meter + "";
+
+            if (GameHandler.p1WinStreak > 0) { 
+                p1WinCounter.text = "Wins: " + GameHandler.p1WinStreak;
+                p1WinCounter.gameObject.SetActive(true);
+            }
+            else p1WinCounter.gameObject.SetActive(false);
+
+            if (GameHandler.p2WinStreak > 0)
+            {
+                p2WinCounter.text = "Wins: " + GameHandler.p2WinStreak;
+                p2WinCounter.gameObject.SetActive(true);
+            }
+            else p2WinCounter.gameObject.SetActive(false);
 
             foreach (var item in p1BurstImages)
             {

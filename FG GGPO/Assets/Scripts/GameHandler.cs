@@ -11,6 +11,10 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public static int gameModeID = -1;
+    public static int p1Wins;
+    public static int p2Wins;
+    public static int p1WinStreak;
+    public static int p2WinStreak;
     public GameMode gameMode;
     public bool network;
     public static bool isPaused;
@@ -53,6 +57,7 @@ public class GameHandler : MonoBehaviour
     public GameEvent p2WinEvent;
 
     public GameEvent gameStartEvent;
+    public GameEvent resetEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
     public GameEvent roundStartEvent;
@@ -66,14 +71,14 @@ public class GameHandler : MonoBehaviour
     public RollBackEvent rollbackEvent;
     public RollBackEvent frameCounterEvent;
 
-    public int roundCount;
-    public int round1Time;
-    public int round2Time;
-    public int round3Time;
+    [FoldoutGroup("Analytics")] public int roundCount;
+    [FoldoutGroup("Analytics")] public int round1Time;
+    [FoldoutGroup("Analytics")] public int round2Time;
+    [FoldoutGroup("Analytics")] public int round3Time;
 
-    public int round1Winner;
-    public int round2Winner;
-    public int round3Winner;
+    [FoldoutGroup("Analytics")] public int round1Winner;
+    [FoldoutGroup("Analytics")] public int round2Winner;
+    [FoldoutGroup("Analytics")] public int round3Winner;
 
 
     public GameObject pauseMenu;
@@ -106,10 +111,11 @@ public class GameHandler : MonoBehaviour
         p2Status.deathEvent += P1Win;
 
         isPaused = false;
+        cutscene = false;
 
         ChangeGameMode(gameMode);
         ResetAnalyticsData();
-        roundStartEvent?.Invoke();
+
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
@@ -132,33 +138,20 @@ public class GameHandler : MonoBehaviour
     }
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        isPaused = false;
-        Time.timeScale = 1;
+
+        StartCoroutine(DelayResume());
     }
+
+    IEnumerator DelayResume() {
+        pauseMenu.SetActive(false); 
+        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(0.2F);
+        isPaused = false;
+
+    }
+
     void LoadCharacters()
     {
-        //switch (startPosition)
-        //{
-        //    case StagePosition.RoundStart:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.Wall1:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.Wall2:
-        //        p1StartPosition = StageScript.Instance.roundStartPosition[0];
-        //        p2StartPosition = StageScript.Instance.roundStartPosition[1];
-        //        break;
-        //    case StagePosition.MidScreen:
-        //        p1StartPosition = StageScript.Instance.midScreenCloseRange[0];
-        //        p2StartPosition = StageScript.Instance.midScreenCloseRange[1];
-        //        break;
-        //    default:
-        //        break;
-        //}
         if (p1CharacterTrainingID != -1)
         {
             p1CharacterID = p1CharacterTrainingID;
@@ -186,6 +179,7 @@ public class GameHandler : MonoBehaviour
         // roundCount = 1;
 
         // ResetAnalyticsData();
+        roundStartEvent?.Invoke();
         ResetPosition();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
@@ -250,6 +244,9 @@ public class GameHandler : MonoBehaviour
         p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
+            p1Wins++;
+            p1WinStreak++;
+            p2WinStreak = 0;
             GameEnd();
         }
         else
@@ -282,6 +279,9 @@ public class GameHandler : MonoBehaviour
         p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
+            p2Wins++;
+            p2WinStreak++;
+            p1WinStreak = 0;
             GameEnd();
         }
         else
@@ -319,6 +319,7 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void ResetRound()
     {
+        resetEvent?.Invoke();
         p1Status.ResetStatus();
         p2Status.ResetStatus();
         counter = 0;

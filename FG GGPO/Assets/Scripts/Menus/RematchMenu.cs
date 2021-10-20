@@ -14,6 +14,7 @@ public class RematchMenu : MonoBehaviour
     }
 
     public void Rematch() {
+        GameHandler.isPaused = false;
         StageManager.Instance.RestartScene();
     }
     public void CharacterSelect()
