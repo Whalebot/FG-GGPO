@@ -21,7 +21,7 @@ MonoBehaviour:
     duration: 0
   collissionState: 0
   groundState: 0
-  stance: {fileID: 11400000, guid: 3e425d2055164ca4690fc456c328d4e8, type: 2}
+  stance: {fileID: 11400000, guid: 911ecd14aa7d5fa44bea67d340b390f3, type: 2}
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 0}
@@ -121,7 +121,9 @@ MonoBehaviour:
     resetVelocityDuringRecovery: 1
   hurtboxes: []
   targetComboMoves:
-  - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
+  - {fileID: 11400000, guid: bc925224e2161474e9f5131c749ed60c, type: 2}
+  - {fileID: 11400000, guid: 54ec82d8cda9fd940882b9d9a78e14f3, type: 2}
+  - {fileID: 11400000, guid: 8d00abbee1663f8459c69616412157e3, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}

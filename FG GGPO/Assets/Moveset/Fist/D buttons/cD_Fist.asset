@@ -113,8 +113,11 @@ MonoBehaviour:
     momentum: {x: 0, y: 10, z: 3}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves:
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
+  - {fileID: 11400000, guid: bc925224e2161474e9f5131c749ed60c, type: 2}
+  - {fileID: 11400000, guid: 54ec82d8cda9fd940882b9d9a78e14f3, type: 2}
   gatlingMoves: []
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1

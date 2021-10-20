@@ -99,6 +99,7 @@ MonoBehaviour:
   animationID: 43
   hitID: 0
   moveName: 
+  moveInput: b.D
   description: 
   firstStartupFrame: 15
   lastActiveFrame: 15
@@ -115,6 +116,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: -5}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1
