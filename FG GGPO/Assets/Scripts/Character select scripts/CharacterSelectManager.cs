@@ -214,7 +214,6 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void p1Right()
     {
-        print("pap");
         switch (phase)
         {
             case Phase.charSelect:
