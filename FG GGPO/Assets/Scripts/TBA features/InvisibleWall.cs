@@ -24,7 +24,7 @@ public class InvisibleWall : MonoBehaviour
         }
 
         Vector3 v = GameHandler.Instance.p2Transform.position - GameHandler.Instance.p1Transform.position;
-        v.y = transform.position.y;
+        v.y = 0;
         transform.rotation = Quaternion.LookRotation(v, Vector3.up);
     }
 }

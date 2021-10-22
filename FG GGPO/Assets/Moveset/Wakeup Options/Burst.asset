@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Burst
   m_EditorClassIdentifier: 
   attackLevel: 0
-  type: 1
+  type: 2
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -100,6 +104,9 @@ MonoBehaviour:
   animationID: 1007
   hitID: 0
   moveName: 
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
   description: 
   firstStartupFrame: 12
   lastActiveFrame: 16
@@ -116,6 +123,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1
@@ -157,6 +165,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1

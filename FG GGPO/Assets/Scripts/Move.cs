@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using System.Reflection;
 
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
-
+    [TabGroup("Description")] public string moveName;
+    [TabGroup("Description")] [PreviewField] public Sprite sprite;
+    [TabGroup("Description")] public InputDirection moveDirection;
+    [TabGroup("Description")] public ButtonInput moveButton;
+    [TabGroup("Description")] public string moveInput;
+    [TabGroup("Description")] [TextArea] public string description;
     [TabGroup("Attacks")] public AttackLevel attackLevel;
     [TabGroup("Attacks")] public MoveType type;
     [TabGroup("Attacks")]
@@ -32,10 +38,7 @@ public class Move : ScriptableObject
 
     [TabGroup("Animation")] public int animationID;
     [TabGroup("Animation")] public int hitID;
-    [TabGroup("Animation")] public string moveName;
-    [TabGroup("Animation")] public string moveInput;
-    [TabGroup("Animation")]
-    [TextArea] public string description;
+
 
     [Header("Read Only")]
     public int firstStartupFrame;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wakeup Air Forward Tech
   m_EditorClassIdentifier: 
   attackLevel: 0
-  type: 0
+  type: 2
   meterCost: 0
   superFlash:
     superPrefab: {fileID: 0}
@@ -97,6 +97,8 @@ MonoBehaviour:
   animationID: 107
   hitID: 0
   moveName: 
+  moveDirection: 0
+  moveButton: 0
   moveInput: 
   description: 
   firstStartupFrame: 5

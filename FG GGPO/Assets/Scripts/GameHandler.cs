@@ -23,7 +23,7 @@ public class GameHandler : MonoBehaviour
     public static int p1CharacterID;
     public static int p2CharacterID;
     public bool runNormally = true;
-
+    public bool isMirror;
     public bool showHitboxes;
     public bool showHurtboxes;
     public static bool staticHurtboxes;
@@ -160,6 +160,9 @@ public class GameHandler : MonoBehaviour
         {
             p2CharacterID = p2CharacterTrainingID;
         }
+
+        isMirror = p1CharacterID == p2CharacterID;
+           
 
         if (p1Transform == null)
         {
