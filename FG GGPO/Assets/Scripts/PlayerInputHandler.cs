@@ -165,7 +165,7 @@ public class PlayerInputHandler : MonoBehaviour
 
                     if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.airFTech); }
                     else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.airBTech); }
-                    else if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.airTech); }
+                    else  { attack.AttackProperties(attack.moveset.airTech); }
                 }
 
                 if (input.bufferedInputs.Count > 0)

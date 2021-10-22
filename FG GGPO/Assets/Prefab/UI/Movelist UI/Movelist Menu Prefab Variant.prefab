@@ -148,6 +148,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2616438110919088462, guid: c0609bffe9158a24a9efdb3e54934ae5, type: 3}
+      propertyPath: l1Sprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616438110919088462, guid: c0609bffe9158a24a9efdb3e54934ae5, type: 3}
+      propertyPath: r1Sprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616438110919088462, guid: c0609bffe9158a24a9efdb3e54934ae5, type: 3}
+      propertyPath: l1Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: efa3072094be3cf42876449f0b91cace, type: 3}
+    - target: {fileID: 2616438110919088462, guid: c0609bffe9158a24a9efdb3e54934ae5, type: 3}
+      propertyPath: r1Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: df7c0893d99b1634caebd544f0601f79, type: 3}
     - target: {fileID: 6349636240606399210, guid: c0609bffe9158a24a9efdb3e54934ae5, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

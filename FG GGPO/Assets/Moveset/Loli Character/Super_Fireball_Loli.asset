@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Super_Fireball_Loli
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 1
+  moveButton: 4
+  moveInput: 
+  description: 
   attackLevel: 4
-  type: 4
-  meterCost: 0
+  type: 5
+  meterCost: 50
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
     startFrame: 2
@@ -346,14 +352,12 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 63
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 15
   lastActiveFrame: 21
   totalMoveDuration: 66
   firstGatlingFrame: 20
-  blockAdvantage: -14
-  hitAdvantage: -9
+  blockAdvantage: -13
+  hitAdvantage: -3
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
   recoveryFrames: 45
@@ -363,6 +367,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1

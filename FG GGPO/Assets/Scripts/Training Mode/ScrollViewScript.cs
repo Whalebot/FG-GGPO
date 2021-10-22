@@ -11,6 +11,7 @@ public class ScrollViewScript : MonoBehaviour
     public Scrollbar bar;
     public Transform contentContainer;
     public int step;
+    public int top, bot;
     ScrollRect scroll;
 
     public void Awake()
@@ -40,10 +41,22 @@ public class ScrollViewScript : MonoBehaviour
     {
        // GetChildrenInContainer();
         step = t.GetSiblingIndex();
-        print(step);
-        scrollValue = 1 - ( (1 / (float)bar.numberOfSteps) * Mathf.Clamp((step - bar.numberOfSteps), 0, bar.numberOfSteps));
-        print(scrollValue);
+        if (step > bot) {
+            bot = step;
+            top = bot - 5;
+        }
+        if (step < top) {
+            top = step;
+            bot = top + 5;
+        }
+        scrollValue = 1 - ((1 / (float)bar.numberOfSteps) * Mathf.Clamp((bot - 5), 0, bar.numberOfSteps));
         bar.value = scrollValue;
+    }
+
+    private void OnValidate()
+    {
+        //scrollValue = 1 - ((1 / (float)bar.numberOfSteps) * Mathf.Clamp((step - 5), 0, bar.numberOfSteps));
+        //bar.value = scrollValue;
     }
 
     private void OnEnable()

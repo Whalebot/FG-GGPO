@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 6D_Loli
   m_EditorClassIdentifier: 
+  moveName: f.D
+  sprite: {fileID: 0}
+  moveDirection: 3
+  moveButton: 4
+  moveInput: f.D
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -98,9 +104,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 63
   hitID: 0
-  moveName: 
-  moveInput: f.D
-  description: 
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 45

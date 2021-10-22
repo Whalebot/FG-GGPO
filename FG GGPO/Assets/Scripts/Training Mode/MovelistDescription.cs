@@ -10,6 +10,8 @@ public class MovelistDescription : MonoBehaviour
     public Move move;
     public Image moveImage;
     public TextMeshProUGUI moveName;
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI blockDamageText;
     public TextMeshProUGUI startupText;
     public TextMeshProUGUI activeText;
     public TextMeshProUGUI recoveryText;
@@ -26,15 +28,38 @@ public class MovelistDescription : MonoBehaviour
     public void DisplayMove(Move m)
     {
         move = m;
+        if (move == null)
+        {
+            foreach (Transform child in transform)
+                child.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            foreach (Transform child in transform)
+                child.gameObject.SetActive(true);
+        }
+
         moveImage.sprite = move.sprite;
 
         moveName.text = move.moveName;
-        startupText.text = "" + move.firstStartupFrame;
+
+
+
+        string tempStartup = "";
         string tempActive = "";
+        string tempDamage = "";
+        string tempChipDamage = "";
         foreach (var item in move.attacks)
         {
+            tempStartup += item.startupFrame + " ";
             tempActive += item.activeFrames + " ";
+            tempDamage += item.groundHitProperty.damage + " ";
+            tempChipDamage += item.groundBlockProperty.damage + " ";
         }
+        startupText.text = tempStartup;
+        damageText.text = tempDamage;
+        blockDamageText.text = tempChipDamage;
         activeText.text = tempActive;
         recoveryText.text = "" + move.recoveryFrames;
         hitText.text = "" + move.hitAdvantage;
