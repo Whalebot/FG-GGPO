@@ -10,7 +10,9 @@ public class MovelistManager : MonoBehaviour
 {
     public enum MovelistTab { Normals, Specials, Supers }
     public MovelistTab activeTab;
+    public CustomButton[] tabButtons;
     public GameObject[] tabs;
+    public GameObject[] defaultGO;
     public Moveset moveset;
     public List<Move> moves;
     public GameObject movelistPrefab;
@@ -18,19 +20,80 @@ public class MovelistManager : MonoBehaviour
     public Transform normalDivider;
     public Transform specialDivider;
     public Transform superDivider;
+    public MovelistDescription description;
+
+
+    private void OnEnable()
+    {
+        InputManager.Instance.p1Input.rightInput += RightTab;
+        InputManager.Instance.p1Input.leftInput += LeftTab;
+        InputManager.Instance.p2Input.rightInput += RightTab;
+        InputManager.Instance.p2Input.leftInput += LeftTab;
+        OpenTab();
+    }
+
+    private void OnDisable()
+    {
+        InputManager.Instance.p1Input.rightInput -= RightTab;
+        InputManager.Instance.p1Input.leftInput -= LeftTab;
+        InputManager.Instance.p2Input.rightInput -= RightTab;
+        InputManager.Instance.p2Input.leftInput -= LeftTab;
+    }
+
+
+    [Button]
+    public void RightTab()
+    {
+        int tabID = (int)activeTab;
+        tabID = (tabID + 1) % 3;
+        activeTab = (MovelistTab)(tabID);
+        OpenTab();
+    }
+    [Button]
+    public void LeftTab()
+    {
+        int tabID = (int)activeTab;
+        tabID = ((tabID - 1) % 3);
+        if (tabID < 0) tabID = 2;
+
+        activeTab = (MovelistTab)(tabID);
+        OpenTab();
+    }
+
 
     [Button]
     public void OpenTab()
     {
-        //foreach (var item in tabs)
-        //{
-        //    item.SetActive(false);
-        //}
+
+        for (int i = 0; i < tabButtons.Length; i++)
+        {
+            tabButtons[i].selected = (i == (int)activeTab);
+            tabButtons[i].ExpandTab();
+        }
         for (int i = 0; i < tabs.Length; i++)
         {
             tabs[i].SetActive(i == (int)activeTab);
         }
+        if (UIManager.Instance != null)
+            switch (activeTab)
+            {
+                case MovelistTab.Normals:
+                    UIManager.Instance.SetActive(normalDivider.gameObject);
+                    break;
+                case MovelistTab.Specials:
+                    UIManager.Instance.SetActive(specialDivider.gameObject);
+                    break;
+                case MovelistTab.Supers:
+                    UIManager.Instance.SetActive(superDivider.gameObject);
+                    break;
+                default:
+                    break;
+            }
+    }
 
+    public void DescriptionWindow(Move move)
+    {
+        description.DisplayMove(move);
     }
 
     private void OnValidate()

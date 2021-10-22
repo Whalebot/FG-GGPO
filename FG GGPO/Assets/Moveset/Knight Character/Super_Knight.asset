@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: EXFireball_Knight
+  m_Name: Super_Knight
   m_EditorClassIdentifier: 
-  moveName: Fireball
+  moveName: 
   sprite: {fileID: 0}
   moveDirection: 0
   moveButton: 0
   moveInput: 
   description: 
   attackLevel: 0
-  type: 4
-  meterCost: 25
+  type: 5
+  meterCost: 50
   superFlash:
-    superPrefab: {fileID: 0}
+    superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
     startFrame: 1
-    duration: 0
+    duration: 90
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}

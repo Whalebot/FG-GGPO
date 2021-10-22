@@ -95,4 +95,9 @@ public class MovelistDisplay : MonoBehaviour
 
         //inputImage.sprite =
     }
+
+    public void Selected() {
+        GetComponentInParent<MovelistManager>().DescriptionWindow(move);
+    }
+
 }

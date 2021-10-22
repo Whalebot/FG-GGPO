@@ -880,7 +880,6 @@ public class InputHandler : MonoBehaviour
 
         if (GameHandler.isPaused)
         {
-            print("dog");
             netButtons[2] = true;
         }
         heldButtons[2] = !context.canceled;
@@ -893,22 +892,26 @@ public class InputHandler : MonoBehaviour
         ChangeControlScheme(context);
         //  updatedButtons = true;
         heldButtons[3] = !context.canceled;
-        eastInput?.Invoke();
+        if (context.performed)
+            eastInput?.Invoke();
     }
     public void OnR1(InputAction.CallbackContext context)
     {
         if (debug) print("R1");
 
-        R1input?.Invoke();
+   
         heldButtons[4] = !context.canceled;
         R1Hold = true;
+        if (context.performed)
+            R1input?.Invoke();
         //updatedButtons = true;
     }
     public void OnL1(InputAction.CallbackContext context)
     {
         if (debug) print("L1");
         heldButtons[5] = !context.canceled;
-        L1input?.Invoke();
+        if (context.performed)
+            L1input?.Invoke();
         //updatedButtons = true;
     }
     public void OnStart()

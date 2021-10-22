@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: Knight moveset
   m_EditorClassIdentifier: 
   sA: {fileID: 11400000, guid: a082f70d85fdeab4fa2c2a0da183a4b5, type: 2}
+  sB: {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
+  sC: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
   cA: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  cB: {fileID: 11400000, guid: 57a1fcde1b75f094d8d96e269fa96b1e, type: 2}
+  cC: {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   fA: {fileID: 0}
+  fB: {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
+  fC: {fileID: 0}
   bA: {fileID: 0}
-  jA: {fileID: 11400000, guid: bc8ef9a7b04199d499d1f945dc85679a, type: 2}
-  jcA: {fileID: 0}
+  bB: {fileID: 0}
+  bC: {fileID: 0}
   LA: {fileID: 0}
   RA: {fileID: 0}
-  sB: {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
-  cB: {fileID: 11400000, guid: 57a1fcde1b75f094d8d96e269fa96b1e, type: 2}
-  fB: {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
-  bB: {fileID: 0}
-  jB: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
-  jcB: {fileID: 0}
   LB: {fileID: 0}
   RB: {fileID: 0}
-  sC: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  cC: {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
-  fC: {fileID: 0}
-  bC: {fileID: 0}
-  jC: {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
-  jcC: {fileID: 0}
   LC: {fileID: 0}
   RC: {fileID: 0}
+  jA: {fileID: 11400000, guid: bc8ef9a7b04199d499d1f945dc85679a, type: 2}
+  jcA: {fileID: 0}
+  jB: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
+  jcB: {fileID: 0}
+  jC: {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
+  jcC: {fileID: 0}
   sD: {fileID: 11400000, guid: 28b2dd8a8dd5aba48805eebf0e210336, type: 2}
   cD: {fileID: 11400000, guid: da0dd9a91beeae84aa5513200e2d9456, type: 2}
   bD: {fileID: 0}
@@ -56,6 +56,8 @@ MonoBehaviour:
   leftTech: {fileID: 11400000, guid: 61db3035516316d4a811861650534266, type: 2}
   rightTech: {fileID: 11400000, guid: 5c311c481a6b6a44198675675cdeb938, type: 2}
   airTech: {fileID: 0}
+  airFTech: {fileID: 0}
+  airBTech: {fileID: 0}
   burst: {fileID: 0}
   specials:
   - motionInput: 2
@@ -78,3 +80,7 @@ MonoBehaviour:
     buttonInput: 3
     grounded: 1
     move: {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
+  - motionInput: 1
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: 974bf938dbf90424aa21f45267cd1f82, type: 2}

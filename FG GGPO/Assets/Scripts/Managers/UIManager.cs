@@ -145,7 +145,8 @@ public class UIManager : MonoBehaviour
             p1MeterText.text = state.p1Meter + "";
             p2MeterText.text = state.p2Meter + "";
 
-            if (GameHandler.p1WinStreak > 0) { 
+            if (GameHandler.p1WinStreak > 0)
+            {
                 p1WinCounter.text = "Wins: " + GameHandler.p1WinStreak;
                 p1WinCounter.gameObject.SetActive(true);
             }
@@ -223,6 +224,17 @@ public class UIManager : MonoBehaviour
 
     public void SetActive(GameObject GO)
     {
+        GO.GetComponent<Selectable>().Select();
+        //eventSystem.SetSelectedGameObject(null);
+        //eventSystem.SetSelectedGameObject(GO);
+        StartCoroutine(DelayActivation(GO));
+    }
+
+    IEnumerator DelayActivation(GameObject GO)
+    {
+
+        //yield return new WaitForFixedUpdate();
+        yield return null;
         eventSystem.SetSelectedGameObject(null);
         eventSystem.SetSelectedGameObject(GO);
     }

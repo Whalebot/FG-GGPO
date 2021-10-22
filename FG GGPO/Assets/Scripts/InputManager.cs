@@ -26,7 +26,6 @@ public class InputManager : MonoBehaviour
         {
             p1Input = GameHandler.Instance.p1Transform.GetComponent<InputHandler>();
             p2Input = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
-
         }
         p1Input.id = 1;
         p2Input.id = 2;
