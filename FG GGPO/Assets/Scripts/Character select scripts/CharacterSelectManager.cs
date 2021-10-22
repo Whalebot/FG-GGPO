@@ -126,17 +126,6 @@ public class CharacterSelectManager : MonoBehaviour
             inputManager.p2Input.southInput -= P2Select;
             inputManager.p2Input.eastInput -= P2Deselect;
         }
-
-        else if (GameHandler.gameModeID == 1)
-        {
-            inputManager.p1Input.upInput -= p2Up;
-            inputManager.p1Input.downInput -= p2Down;
-            inputManager.p1Input.leftInput -= p2Left;
-            inputManager.p1Input.rightInput -= p2Right;
-            inputManager.p1Input.southInput -= P2Select;
-            inputManager.p1Input.eastInput -= P2Deselect;
-        }
-
     }
 
     // Update is called once per frame
@@ -170,8 +159,6 @@ public class CharacterSelectManager : MonoBehaviour
                 UpdateBGM();
                 break;
         }
-
-
     }
 
     public void p1Down()
@@ -182,6 +169,7 @@ public class CharacterSelectManager : MonoBehaviour
                 if (p1Selected) return;
                 p1Hover = p1Hover.down.GetComponent<CharacterSelectButton>();
                 UpdateP1();
+            
                 break;
 
             case Phase.stageBGMSelect:
@@ -226,6 +214,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void p1Right()
     {
+        print("pap");
         switch (phase)
         {
             case Phase.charSelect:
@@ -311,7 +300,38 @@ public class CharacterSelectManager : MonoBehaviour
         bgmName.text = bgmProfiles[bgmHoverID].name;
         bgmID = bgmProfiles[bgmHoverID].ID;
     }
+    public void P1ControlP2()
+    {
+        inputManager.p1Input.upInput += p2Up;
+        inputManager.p1Input.downInput += p2Down;
+        inputManager.p1Input.leftInput += p2Left;
+        inputManager.p1Input.rightInput += p2Right;
+        inputManager.p1Input.southInput += P2Select;
+        inputManager.p1Input.eastInput += P2Deselect;
 
+        inputManager.p1Input.upInput -= p1Up;
+        inputManager.p1Input.downInput -= p1Down;
+        inputManager.p1Input.leftInput -= p1Left;
+        inputManager.p1Input.rightInput -= p1Right;
+        inputManager.p1Input.southInput -= P1Select;
+        inputManager.p1Input.eastInput -= P1Deselect;
+    }
+    public void P1ControlP1()
+    {
+        inputManager.p1Input.upInput -= p2Up;
+        inputManager.p1Input.downInput -= p2Down;
+        inputManager.p1Input.leftInput -= p2Left;
+        inputManager.p1Input.rightInput -= p2Right;
+        inputManager.p1Input.southInput -= P2Select;
+        inputManager.p1Input.eastInput -= P2Deselect;
+
+        inputManager.p1Input.upInput += p1Up;
+        inputManager.p1Input.downInput += p1Down;
+        inputManager.p1Input.leftInput += p1Left;
+        inputManager.p1Input.rightInput += p1Right;
+        inputManager.p1Input.southInput += P1Select;
+        inputManager.p1Input.eastInput += P1Deselect;
+    }
     [Button]
     public void P1Select()
     {
@@ -335,28 +355,7 @@ public class CharacterSelectManager : MonoBehaviour
                 EndCharacterSelect();
                 break;
         }
-
-
     }
-
-    public void P1ControlP2()
-    {
-        inputManager.p1Input.upInput += p2Up;
-        inputManager.p1Input.downInput += p2Down;
-        inputManager.p1Input.leftInput += p2Left;
-        inputManager.p1Input.rightInput += p2Right;
-        inputManager.p1Input.southInput += P2Select;
-        inputManager.p1Input.eastInput += P2Deselect;
-
-        inputManager.p1Input.upInput -= p1Up;
-        inputManager.p1Input.downInput -= p1Down;
-        inputManager.p1Input.leftInput -= p1Left;
-        inputManager.p1Input.rightInput -= p1Right;
-        inputManager.p1Input.southInput -= P1Select;
-        inputManager.p1Input.eastInput -= P1Deselect;
-       
-    }
-
     [Button]
     public void P2Select()
     {
@@ -364,7 +363,13 @@ public class CharacterSelectManager : MonoBehaviour
         {
             case Phase.charSelect:
                 p2SelectFeedback?.PlayFeedbacks();
-                p2Selected = true;
+                p2Selected = true; 
+                
+                if (GameHandler.gameModeID == 1)
+                {
+                    P1ControlP1();
+                }
+
                 if (p1Selected) StageBGMSelect();
                 break;
 
@@ -379,7 +384,9 @@ public class CharacterSelectManager : MonoBehaviour
         switch (phase)
         {
             case Phase.charSelect:
+           
                 p1Selected = false;
+
                 break;
 
             case Phase.stageBGMSelect:
@@ -387,7 +394,6 @@ public class CharacterSelectManager : MonoBehaviour
                 CharacterSelect();
                 break;
         }
-
     }
 
     [Button]
@@ -397,6 +403,12 @@ public class CharacterSelectManager : MonoBehaviour
         {
             case Phase.charSelect:
                 p2Selected = false;
+                if (GameHandler.gameModeID == 1)
+                {
+                    p1Selected = false;
+                    P1ControlP1();
+                }
+
                 break;
 
             case Phase.stageBGMSelect:
