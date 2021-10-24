@@ -10,7 +10,7 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
-    [SerializeField] bool canClash = true;
+    [SerializeField] protected bool canClash = true;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
@@ -75,8 +75,6 @@ public class Hitbox : MonoBehaviour
                 return;
             }
         }
-
-
     }
 
     public bool CheckInvul(Status enemyStatus)

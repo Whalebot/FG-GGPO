@@ -48,6 +48,7 @@ public class Status : MonoBehaviour
     public TransitionEvent counterhitEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
+    public TransitionEvent throwEvent;
     public TransitionEvent throwBreakEvent;
 
 
@@ -471,7 +472,7 @@ public class Status : MonoBehaviour
             wakeupEvent?.Invoke();
             Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity); 
         }
-        if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
+     //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
 
         switch (transitionState)
@@ -644,6 +645,7 @@ public class Status : MonoBehaviour
         mov.storedDirection = Vector3.zero;
         rb.velocity = Vector3.zero;
 
+        throwEvent?.Invoke();
         takeAnimationEvent?.Invoke(animationID);
         throwBreakCounter = throwBreakWindow;
         GoToState(State.LockedAnimation);
@@ -653,8 +655,6 @@ public class Status : MonoBehaviour
     {
         print("Throw Break");
         throwBreakEvent?.Invoke();
-        KnockdownRecovery();
-
     }
 
     public void Hitstop()

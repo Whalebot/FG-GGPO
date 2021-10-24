@@ -42,6 +42,8 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Jump Startup")] public int jumpActionDelay;
     [FoldoutGroup("Jump Startup")] public int jumpActionDelayCounter;
     [FoldoutGroup("Jump Startup")] public bool jumpDelay;
+    [FoldoutGroup("Throw properties")] public int throwBreakCounter;
+
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
@@ -64,6 +66,7 @@ public class AttackScript : MonoBehaviour
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
+        status.throwEvent += TakeThrow;
         status.throwBreakEvent += ThrowBreak;
 
 
@@ -80,7 +83,22 @@ public class AttackScript : MonoBehaviour
     {
 
     }
-
+    public void ThrowLanded()
+    {
+        //Wait for throw break
+        throwBreakCounter = status.throwBreakWindow;
+    }
+    public void ProcessThrow()
+    {
+        if (throwBreakCounter > 0)
+        {
+            throwBreakCounter--;
+            if (throwBreakCounter <= 0)
+            {
+                AttackProperties(moveset.throwF.throwFollowup);
+            }
+        }
+    }
     public void ExecuteFrame()
     {
         if (superCounter > 0 && GameHandler.Instance.superFlash)
@@ -95,6 +113,8 @@ public class AttackScript : MonoBehaviour
 
         if (status.hitstopCounter <= 0 && !GameHandler.Instance.superFlash)
         {
+            ProcessThrow();
+
             if (jumpFrameCounter > 0)
             {
                 jumpFrameCounter--;
@@ -775,9 +795,16 @@ public class AttackScript : MonoBehaviour
 
     public void ThrowBreak()
     {
-        ResetAllValues();
-        status.GoToState(Status.State.Neutral);
-        movement.LookAtOpponent();
+        throwBreakCounter = 0;
+        AttackProperties(moveset.throwBreak);
+        //ResetAllValues();
+        //status.GoToState(Status.State.Neutral);
+        //movement.LookAtOpponent();
+    }
+    public void TakeThrow()
+    {
+        attacking = false;
+
     }
 
     public void Idle()

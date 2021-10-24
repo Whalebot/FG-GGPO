@@ -46,7 +46,7 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("D Buttons")] public Move jcD;
     [FoldoutGroup("D Buttons")] public Move LD;
     [FoldoutGroup("D Buttons")] public Move RD;
-    public Move grabF;
+
     [FoldoutGroup("Movement Options")]
     [Header("Movement Options")]
     public Move backDash;
@@ -65,7 +65,9 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("Wakeup Options")] public Move airFTech;
     [FoldoutGroup("Wakeup Options")] public Move airBTech;
 
-    public Move burst;
+    [FoldoutGroup("Universal Options")] public Move burst;
+    [FoldoutGroup("Universal Options")] public Move throwF;
+    [FoldoutGroup("Universal Options")] public Move throwBreak;
 
 
 

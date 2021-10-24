@@ -6,6 +6,29 @@ public class GrabHitbox : Hitbox
 {
     public Transform grabTransform;
 
+    public new void OnTriggerEnter(Collider other)
+    {
+        if (hitOnce) return;
+        Status enemyStatus = other.GetComponentInParent<Status>();
+        Hitbox hitbox = other.GetComponent<Hitbox>();
+        colPos = other.gameObject.transform;
+        if (!attack.attacking) return;
+       if (enemyStatus != null)
+        {
+            if (status == enemyStatus) return;
+
+            if (!enemyList.Contains(enemyStatus))
+            {
+                canClash = false;
+                if (!CheckInvul(enemyStatus)) return;
+
+                enemyList.Add(enemyStatus);
+                DoDamage(enemyStatus, 1);
+                return;
+            }
+        }
+    }
+
     public override void DoDamage(Status other, float dmgMod)
     {
         base.DoDamage(other, dmgMod);
@@ -33,11 +56,15 @@ public class GrabHitbox : Hitbox
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
-        status.GoToState(Status.State.LockedAnimation);
-        other.TakeThrow(move.hitID);
+
+        attack.attacking = false;
         attack.newAttack = true;
         attack.Idle();
-        attack.AttackProperties(move.throwFollowup);
+        status.GoToState(Status.State.LockedAnimation);
+        attack.ThrowLanded();
+        other.TakeThrow(move.hitID);
+        //
+        //attack.AttackProperties(move.throwFollowup);
 
         other.transform.position = grabTransform.position;
         other.transform.rotation = grabTransform.rotation;

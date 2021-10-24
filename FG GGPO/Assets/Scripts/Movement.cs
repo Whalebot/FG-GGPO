@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
         //CalculateRight(1);
         if (GameHandler.isPaused)
         {
-            isMoving = false;
+           // isMoving = false;
             return;
         }
 
@@ -126,15 +126,17 @@ public class Movement : MonoBehaviour
             MovementProperties();
             Rotation();
             PlayerMovement();
+
+            if (direction != Vector3.zero)
+            {
+                isMoving = true;
+            }
+            else { isMoving = false; }
         }
 
         if (rb.velocity.y < 0 && status.groundState == GroundState.Airborne) rb.velocity += Physics.gravity * fallMultiplier;
 
-        if (direction != Vector3.zero)
-        {
-            isMoving = true;
-        }
-        else { isMoving = false; }
+      
 
         GroundDetection();
     }

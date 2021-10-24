@@ -10,8 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Grab Followup
+  m_Name: Throw Followup
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -33,7 +39,7 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 750
+      damage: 1000
       stun: 70
       hitstop: 20
       proration: 0.8
@@ -96,17 +102,15 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 201
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 68
   lastActiveFrame: 68
-  totalMoveDuration: 118
+  totalMoveDuration: 108
   firstGatlingFrame: 73
-  blockAdvantage: -27
-  hitAdvantage: 20
-  blockCancelAdvantage: -22
+  blockAdvantage: -17
+  hitAdvantage: 30
+  blockCancelAdvantage: -12
   hitCancelAdvantage: 65
-  recoveryFrames: 50
+  recoveryFrames: 40
   m:
   - startFrame: 2
     duration: 5

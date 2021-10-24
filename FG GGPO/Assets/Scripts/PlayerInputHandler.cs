@@ -369,7 +369,7 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 if (status.groundState == GroundState.Grounded)
                 {
-                    attack.Attack(attack.moveset.grabF);
+                    attack.Attack(attack.moveset.throwF);
                 }
             }
             //A Button
