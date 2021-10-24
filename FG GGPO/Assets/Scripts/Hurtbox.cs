@@ -11,7 +11,8 @@ public class Hurtbox : MonoBehaviour
     {
         status = GetComponentInParent<Status>();
         //if(destroyOnDeath)
-
+        mr = GetComponent<MeshRenderer>();
+        mr.enabled = GameHandler.staticHurtboxes;
     }
 
     private void OnDisable()
@@ -20,8 +21,7 @@ public class Hurtbox : MonoBehaviour
 
     private void OnValidate()
     {
-        mr = GetComponent<MeshRenderer>();
-        mr.enabled = GameHandler.staticHurtboxes;
+       
     }
 
     public void AutoDestroy()

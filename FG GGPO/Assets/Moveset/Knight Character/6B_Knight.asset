@@ -12,35 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 6B_Knight
   m_EditorClassIdentifier: 
-  animationID: 61
-  hitID: 0
-  sfx: []
-  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
-  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
-  counterhitSFX: {fileID: 0}
+  attackLevel: 0
   type: 0
-  collissionState: 2
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
+  collissionState: 0
   groundState: 0
-  isProjectile: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
-  gatlingMoves:
-  - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
-  firstStartupFrame: 20
-  lastActiveFrame: 21
-  totalMoveDuration: 43
-  firstGatlingFrame: 25
-  blockAdvantage: -3
-  hitAdvantage: 7
-  blockCancelAdvantage: 2
-  hitCancelAdvantage: 25
-  recoveryFrames: 22
-  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 9f4522ff835c8e44db486748c0d26a88, type: 3}
     startupFrame: 20
@@ -104,11 +86,48 @@ MonoBehaviour:
       pushback: {x: 0, y: -10, z: 2}
       hitState: 0
       hitID: 0
+  vfx: []
+  sfx: []
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: f803f863ad5e9da4e87cce7b42074fb2, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 61
+  hitID: 0
+  moveName: Ferrari Shoulder
+  moveDirection: 3
+  moveButton: 1
+  moveInput: 
+  description: 
+  firstStartupFrame: 20
+  lastActiveFrame: 21
+  totalMoveDuration: 43
+  firstGatlingFrame: 25
+  blockAdvantage: -3
+  hitAdvantage: 7
+  blockCancelAdvantage: 2
+  hitCancelAdvantage: 25
+  recoveryFrames: 22
+  m:
+  - startFrame: 2
+    duration: 11
+    momentum: {x: 0, y: 0, z: 7}
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  hurtboxes: []
+  targetComboMoves: []
+  gatlingMoves:
+  - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
+  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
+  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -133,18 +152,17 @@ MonoBehaviour:
   footInvul: 0
   footInvulStart: 1
   footInvulDuration: 0
+  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 0
-  m:
-  - startFrame: 2
-    duration: 11
-    momentum: {x: 0, y: 0, z: 7}
-    homing: 0
-    resetVelocityDuringRecovery: 0

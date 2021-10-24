@@ -12,8 +12,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: StanceA_Fist
   m_EditorClassIdentifier: 
-  animationID: 1003
-  hitID: 0
+  attackLevel: 4
+  type: 0
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
+  collissionState: 0
+  groundState: 0
+  stance: {fileID: 11400000, guid: 3e425d2055164ca4690fc456c328d4e8, type: 2}
+  throwFollowup: {fileID: 0}
+  attacks:
+  - hitbox: {fileID: 3123878921687778490, guid: baf0c830af94ea74ea4c081b524b0a3b, type: 3}
+    startupFrame: 10
+    activeFrames: 5
+    gatlingFrames: 5
+    attackType: 0
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 800
+      stun: 16
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 4}
+      hitState: 0
+      hitID: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 12
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 25
+      proration: 1.05
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 4}
+      hitState: 0
+      hitID: 0
+    airHitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 12
+      proration: 0.95
+      meterGain: 4
+      pushback: {x: 0, y: 5, z: 4}
+      hitState: 0
+      hitID: 0
+    airBlockProperty:
+      damage: 0
+      stun: 18
+      hitstop: 12
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: -4}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 800
+      stun: 30
+      hitstop: 25
+      proration: 1.1
+      meterGain: 4
+      pushback: {x: 0, y: 5, z: 4}
+      hitState: 0
+      hitID: 0
   vfx:
   - startup: 6
     prefab: {fileID: 166982, guid: ae49605d9a4177547b89d38812c03345, type: 3}
@@ -31,12 +103,28 @@ MonoBehaviour:
   hitSFX: {fileID: 3797316729740095628, guid: 0ed2ac63d802daa4b86168c04f6fa39b, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  attackLevel: 4
-  type: 0
-  collissionState: 0
-  groundState: 0
-  stance: {fileID: 11400000, guid: 3e425d2055164ca4690fc456c328d4e8, type: 2}
-  throwFollowup: {fileID: 0}
+  animationID: 1003
+  hitID: 0
+  moveName: 
+  moveInput: Dynamic A
+  description: 
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 24
+  firstGatlingFrame: 15
+  blockAdvantage: -2
+  hitAdvantage: 2
+  blockCancelAdvantage: 3
+  hitCancelAdvantage: 11
+  recoveryFrames: 10
+  m:
+  - startFrame: 2
+    duration: 5
+    momentum: {x: 0, y: 0, z: 5}
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  hurtboxes: []
+  targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 9d9bfe9826934124699849898f3c7ccd, type: 2}
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
@@ -45,86 +133,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
-  firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 34
-  firstGatlingFrame: 15
-  blockAdvantage: -4
-  hitAdvantage: 6
-  blockCancelAdvantage: 1
-  hitCancelAdvantage: 25
-  recoveryFrames: 20
-  targetComboMoves: []
-  attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: baf0c830af94ea74ea4c081b524b0a3b, type: 3}
-    startupFrame: 10
-    activeFrames: 5
-    gatlingFrames: 5
-    attackType: 0
-    attackHeight: 1
-    bodyProperty: 1
-    homing: 0
-    groundHitProperty:
-      damage: 800
-      stun: 30
-      hitstop: 12
-      proration: 0.95
-      meterGain: 4
-      pushback: {x: 0, y: 0, z: 4}
-      hitState: 0
-      hitID: 0
-    groundBlockProperty:
-      damage: 0
-      stun: 20
-      hitstop: 12
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
-      hitState: 0
-      hitID: 0
-    groundCounterhitProperty:
-      damage: 800
-      stun: 30
-      hitstop: 25
-      proration: 1.1
-      meterGain: 4
-      pushback: {x: 0, y: 0, z: 4}
-      hitState: 0
-      hitID: 0
-    airHitProperty:
-      damage: 800
-      stun: 30
-      hitstop: 12
-      proration: 0.95
-      meterGain: 4
-      pushback: {x: 0, y: 5, z: 4}
-      hitState: 0
-      hitID: 0
-    airBlockProperty:
-      damage: 0
-      stun: 20
-      hitstop: 12
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: -4}
-      hitState: 0
-      hitID: 0
-    airCounterhitProperty:
-      damage: 800
-      stun: 30
-      hitstop: 25
-      proration: 1.1
-      meterGain: 4
-      pushback: {x: 0, y: 5, z: 4}
-      hitState: 0
-      hitID: 0
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  resetGatling: 1
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -149,6 +164,7 @@ MonoBehaviour:
   footInvul: 0
   footInvulStart: 1
   footInvulDuration: 0
+  resetGatling: 1
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
@@ -157,13 +173,8 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
   resetVelocityDuringRecovery: 1
-  m:
-  - startFrame: 2
-    duration: 5
-    momentum: {x: 0, y: 0, z: 5}
-    homing: 0
-    resetVelocityDuringRecovery: 0

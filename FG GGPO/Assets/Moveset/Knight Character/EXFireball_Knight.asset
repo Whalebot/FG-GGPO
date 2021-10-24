@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
+  m_Name: EXFireball_Knight
+  m_EditorClassIdentifier: 
+  moveName: Fireball
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
+  attackLevel: 0
+  type: 4
+  meterCost: 25
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
+  collissionState: 0
+  groundState: 0
+  stance: {fileID: 0}
+  throwFollowup: {fileID: 0}
+  attacks:
+  - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
+    startupFrame: 15
+    activeFrames: 1
+    gatlingFrames: 5
+    attackType: 1
+    attackHeight: 1
+    bodyProperty: 1
+    homing: 0
+    groundHitProperty:
+      damage: 1000
+      stun: 30
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 10}
+      hitState: 2
+      hitID: 0
+    groundBlockProperty:
+      damage: 0
+      stun: 25
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 5}
+      hitState: 0
+      hitID: 0
+    groundCounterhitProperty:
+      damage: 1000
+      stun: 30
+      hitstop: 5
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 5}
+      hitState: 2
+      hitID: 0
+    airHitProperty:
+      damage: 1000
+      stun: 30
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 10}
+      hitState: 2
+      hitID: 0
+    airBlockProperty:
+      damage: 0
+      stun: 25
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 10}
+      hitState: 0
+      hitID: 0
+    airCounterhitProperty:
+      damage: 1000
+      stun: 30
+      hitstop: 10
+      proration: 0.95
+      meterGain: 2
+      pushback: {x: 0, y: 5, z: 10}
+      hitState: 2
+      hitID: 0
+  vfx: []
+  sfx:
+  - startup: 10
+    prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 3797316729740095628, guid: 931d73e57a0db6849acdb094c585541b, type: 3}
+  blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
+  counterhitSFX: {fileID: 0}
+  animationID: 53
+  hitID: 0
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 45
+  firstGatlingFrame: 20
+  blockAdvantage: -5
+  hitAdvantage: 0
+  blockCancelAdvantage: 0
+  hitCancelAdvantage: 25
+  recoveryFrames: 30
+  m:
+  - startFrame: 3
+    duration: 5
+    momentum: {x: 0, y: 0, z: 6}
+    homing: 0
+    resetVelocityDuringRecovery: 1
+  hurtboxes: []
+  targetComboMoves: []
+  gatlingMoves: []
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
+  jumpCancelOnBlock: 0
+  jumpCancelOnHit: 0
+  specialCancelOnBlock: 0
+  specialCancelOnHit: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 10
+  invincible: 0
+  invincibleStart: 0
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  linearInvul: 0
+  linearInvulStart: 1
+  linearInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  headInvul: 0
+  headInvulStart: 1
+  headInvulDuration: 0
+  bodyInvul: 0
+  bodyInvulStart: 1
+  bodyInvulDuration: 0
+  footInvul: 0
+  footInvulStart: 1
+  footInvulDuration: 0
+  resetGatling: 0
+  noHitstopOnSelf: 0
+  crossupState: 0
+  forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
+  aimOnStartup: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  landingRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 1

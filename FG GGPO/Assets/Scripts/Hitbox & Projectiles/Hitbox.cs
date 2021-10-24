@@ -10,7 +10,7 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
-    [SerializeField] bool canClash = true;
+    [SerializeField] protected bool canClash = true;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
@@ -49,18 +49,17 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
+        //if (!attack.attacking) return;
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
             if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
             {
                 hitOnce = true;
-                
+
                 Clash(enemyStatus);
                 return;
             }
-
-
         }
         else if (enemyStatus != null)
         {
@@ -76,13 +75,15 @@ public class Hitbox : MonoBehaviour
                 return;
             }
         }
-
-
     }
 
     public bool CheckInvul(Status enemyStatus)
     {
-        if (enemyStatus.invincible) return false;
+    
+        if (enemyStatus.invincible) {
+          //  Debug.Break();
+            return false;
+        }
         else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return false;
         switch (move.attacks[hitboxID].bodyProperty)
         {
@@ -128,7 +129,7 @@ public class Hitbox : MonoBehaviour
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-    
+
 
         status.cancelMinusFrames = (move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
         other.cancelMinusFrames = -(move.totalMoveDuration - (tempAttack.gatlingFrames + tempAttack.startupFrame));
@@ -181,6 +182,7 @@ public class Hitbox : MonoBehaviour
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
 
+
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
@@ -222,7 +224,7 @@ public class Hitbox : MonoBehaviour
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
-
+        other.burstGauge += hit.meterGain * 60;
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
@@ -241,6 +243,8 @@ public class Hitbox : MonoBehaviour
             status.newMove = true;
             status.hitstopCounter = hit.hitstop;
         }
+
+        attack.attackHitEvent?.Invoke(move);
 
         //Hit FX
         if (move.hitFX != null)
@@ -266,7 +270,7 @@ public class Hitbox : MonoBehaviour
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
-
+        other.burstGauge += hit.meterGain * 60;
         //Enemy Hitstop
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
@@ -286,6 +290,7 @@ public class Hitbox : MonoBehaviour
 
             CameraManager.Instance.CounterhitCamera(hit.hitstop);
         }
+        attack.attackHitEvent?.Invoke(move);
 
         //Hit FX
         if (move.counterhitFX != null)

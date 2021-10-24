@@ -15,27 +15,31 @@ MonoBehaviour:
   attackLevel: 4
   type: 0
   meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 3123878921687778490, guid: cba0f11858d0186458b329cc0a9d9833, type: 3}
-    startupFrame: 15
-    activeFrames: 2
+  - hitbox: {fileID: 3123878921687778490, guid: d52af68ebeeb0d541bde9a41c0e96486, type: 3}
+    startupFrame: 27
+    activeFrames: 3
     gatlingFrames: 5
     attackType: 0
     attackHeight: 1
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 0
+      damage: 1200
       stun: 30
-      hitstop: 12
+      hitstop: 20
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 0}
-      hitState: 0
+      pushback: {x: 0, y: 5, z: 10}
+      hitState: 2
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -47,21 +51,21 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 0
+      damage: 1500
       stun: 40
-      hitstop: 15
-      proration: 0.95
-      meterGain: 4
-      pushback: {x: 0, y: 0, z: 0}
+      hitstop: 25
+      proration: 1
+      meterGain: 8
+      pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 0
+      damage: 1200
       stun: 30
-      hitstop: 12
+      hitstop: 20
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
     airBlockProperty:
@@ -74,12 +78,12 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 0
+      damage: 1500
       stun: 40
-      hitstop: 15
-      proration: 0.95
-      meterGain: 4
-      pushback: {x: 0, y: 0, z: 0}
+      hitstop: 25
+      proration: 1
+      meterGain: 8
+      pushback: {x: 0, y: 5, z: 10}
       hitState: 0
       hitID: 0
   vfx: []
@@ -94,18 +98,24 @@ MonoBehaviour:
   hitID: 0
   moveName: 
   description: 
-  firstStartupFrame: 15
-  lastActiveFrame: 16
-  totalMoveDuration: 66
-  firstGatlingFrame: 20
-  blockAdvantage: -31
-  hitAdvantage: -21
-  blockCancelAdvantage: -26
+  firstStartupFrame: 27
+  lastActiveFrame: 29
+  totalMoveDuration: 79
+  firstGatlingFrame: 32
+  blockAdvantage: -32
+  hitAdvantage: -22
+  blockCancelAdvantage: -27
   hitCancelAdvantage: 25
   recoveryFrames: 50
-  m: []
+  m:
+  - startFrame: 10
+    duration: 5
+    momentum: {x: 0, y: 0, z: 5}
+    homing: 0
+    resetVelocityDuringRecovery: 0
   targetComboMoves: []
-  gatlingMoves: []
+  gatlingMoves:
+  - {fileID: 11400000}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0

@@ -10,15 +10,20 @@ using SharedGame;
 public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
-
+    public static int gameModeID = -1;
+    public static int p1Wins;
+    public static int p2Wins;
+    public static int p1WinStreak;
+    public static int p2WinStreak;
     public GameMode gameMode;
     public bool network;
     public static bool isPaused;
     public static bool cutscene;
+    public bool superFlash;
     public static int p1CharacterID;
     public static int p2CharacterID;
     public bool runNormally = true;
-
+    public bool isMirror;
     public bool showHitboxes;
     public bool showHurtboxes;
     public static bool staticHurtboxes;
@@ -36,6 +41,7 @@ public class GameHandler : MonoBehaviour
     [FoldoutGroup("Starting Position")] public CharacterSelectProfile[] characters;
     [FoldoutGroup("Starting Position")] public Transform p1StartPosition;
     [FoldoutGroup("Starting Position")] public Transform p2StartPosition;
+    [FoldoutGroup("Starting Position")] public StagePosition startPosition;
 
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
@@ -50,17 +56,36 @@ public class GameHandler : MonoBehaviour
     public GameEvent p1WinEvent;
     public GameEvent p2WinEvent;
 
+    public GameEvent gameStartEvent;
+    public GameEvent resetEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
+    public GameEvent roundStartEvent;
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
+    public GameEvent superFlashStartEvent;
+    public GameEvent superFlashEndEvent;
 
+    public bool gameStarted;
     public delegate void RollBackEvent(int i);
     public RollBackEvent rollbackEvent;
+    public RollBackEvent frameCounterEvent;
+
+    [FoldoutGroup("Analytics")] public int roundCount;
+    [FoldoutGroup("Analytics")] public int round1Time;
+    [FoldoutGroup("Analytics")] public int round2Time;
+    [FoldoutGroup("Analytics")] public int round3Time;
+
+    [FoldoutGroup("Analytics")] public int round1Winner;
+    [FoldoutGroup("Analytics")] public int round2Winner;
+    [FoldoutGroup("Analytics")] public int round3Winner;
+
+
+    public GameObject pauseMenu;
+    public GameObject trainingMenu;
 
     [HideInInspector] public int gameFrameCount;
     [HideInInspector] public int counter;
-
     [HideInInspector] public float hitStop;
     float startTimeStep;
 
@@ -68,27 +93,62 @@ public class GameHandler : MonoBehaviour
     {
         Instance = this;
         gameStates = new List<GameState>();
+        if (gameModeID != -1) {
+            gameMode = (GameMode)gameModeID;
+        }
         isPaused = true;
         LoadCharacters();
         p1Status = p1Transform.GetComponent<Status>();
         p2Status = p2Transform.GetComponent<Status>();
 
     }
-
     private void Start()
     {
         network = FgGameManager.Instance != null;
         // Debug.developerConsoleVisible = true;
         startTimeStep = Time.fixedDeltaTime;
-
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
+
+        isPaused = false;
+        cutscene = false;
+
         ChangeGameMode(gameMode);
+        ResetAnalyticsData();
+
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }
+    public void PauseMenu()
+    {
+        if (isPaused) ResumeGame();
+        else
+        {
+            //   if (gameMode == GameMode.VersusMode)
+            {
+                pauseMenu.SetActive(true);
+                isPaused = true;
+                Time.timeScale = 0;
+            }
+        }
+    }
+    public void CancelPauseMenu()
+    {
 
+    }
+    public void ResumeGame()
+    {
 
+        StartCoroutine(DelayResume());
+    }
+
+    IEnumerator DelayResume() {
+        pauseMenu.SetActive(false); 
+        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(0.2F);
+        isPaused = false;
+
+    }
 
     void LoadCharacters()
     {
@@ -100,6 +160,9 @@ public class GameHandler : MonoBehaviour
         {
             p2CharacterID = p2CharacterTrainingID;
         }
+
+        isMirror = p1CharacterID == p2CharacterID;
+           
 
         if (p1Transform == null)
         {
@@ -116,9 +179,27 @@ public class GameHandler : MonoBehaviour
     }
     public void RoundStart()
     {
+        // roundCount = 1;
+
+        // ResetAnalyticsData();
+        roundStartEvent?.Invoke();
+        ResetPosition();
         p1IntroEvent?.Invoke();
         p2IntroEvent?.Invoke();
         StartCoroutine(DelayRoundStart());
+    }
+
+    void ResetAnalyticsData()
+    {
+        counter = 0;
+
+        round1Time = 0;
+        round2Time = 0;
+        round3Time = 0;
+
+        round1Winner = 0;
+        round2Winner = 0;
+        round3Winner = 0;
     }
     IEnumerator DelayRoundStart()
     {
@@ -128,12 +209,14 @@ public class GameHandler : MonoBehaviour
     }
     public void GameEnd()
     {
-        gameEndEvent?.Invoke();
+
         StartCoroutine(DelayGameWin());
     }
     IEnumerator DelayGameWin()
     {
         cutscene = true;
+        yield return new WaitForFixedUpdate();
+        gameEndEvent?.Invoke();
         yield return new WaitForSeconds(3);
         //cutscene = false;
         rematchScreenEvent?.Invoke();
@@ -142,10 +225,31 @@ public class GameHandler : MonoBehaviour
     public void P1Win()
     {
         if (gameMode == GameMode.VersusMode)
+        {
+            if (roundCount == 1)
+            {
+                round1Time = roundTime;
+                round1Winner = 1;
+            }
+            if (roundCount == 2)
+            {
+                round2Time = roundTime;
+                round2Winner = 1;
+            }
+            if (roundCount == 3)
+            {
+                round3Time = roundTime;
+                round3Winner = 1;
+            }
+            roundCount++;
             p1RoundWins++;
+        }
         p1WinEvent?.Invoke();
         if (p1RoundWins >= roundsToWin)
         {
+            p1Wins++;
+            p1WinStreak++;
+            p2WinStreak = 0;
             GameEnd();
         }
         else
@@ -156,10 +260,31 @@ public class GameHandler : MonoBehaviour
     public void P2Win()
     {
         if (gameMode == GameMode.VersusMode)
+        {
+            if (roundCount == 1)
+            {
+                round1Time = roundTime;
+                round1Winner = 2;
+            }
+            if (roundCount == 2)
+            {
+                round2Time = roundTime;
+                round2Winner = 2;
+            }
+            if (roundCount == 3)
+            {
+                round3Time = roundTime;
+                round3Winner = 2;
+            }
+            roundCount++;
             p2RoundWins++;
+        }
         p2WinEvent?.Invoke();
         if (p2RoundWins >= roundsToWin)
         {
+            p2Wins++;
+            p2WinStreak++;
+            p1WinStreak = 0;
             GameEnd();
         }
         else
@@ -171,7 +296,6 @@ public class GameHandler : MonoBehaviour
     {
         StartCoroutine(DelayRoundReset());
     }
-
     IEnumerator DelayRoundReset()
     {
         if (gameMode == GameMode.VersusMode)
@@ -183,9 +307,8 @@ public class GameHandler : MonoBehaviour
         ResetRound();
 
     }
-
     [Button]
-    public void ResetRound()
+    public void ResetGame()
     {
         p1Status.ResetStatus();
         p2Status.ResetStatus();
@@ -197,41 +320,80 @@ public class GameHandler : MonoBehaviour
     }
 
     [Button]
+    public void ResetRound()
+    {
+        resetEvent?.Invoke();
+        p1Status.ResetStatus();
+        p2Status.ResetStatus();
+        counter = 0;
+        ResetPosition();
+        CameraManager.Instance.ResetCamera();
+        if (gameMode == GameMode.VersusMode)
+            RoundStart();
+    }
+    [Button]
     void ResetPosition()
     {
+        switch (startPosition)
+        {
+            case StagePosition.RoundStart:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.Wall1:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.Wall2:
+                p1StartPosition = StageScript.Instance.roundStartPosition[0];
+                p2StartPosition = StageScript.Instance.roundStartPosition[1];
+                break;
+            case StagePosition.MidScreen:
+                p1StartPosition = StageScript.Instance.midScreenCloseRange[0];
+                p2StartPosition = StageScript.Instance.midScreenCloseRange[1];
+                break;
+            default:
+                break;
+        }
         p1Transform.position = p1StartPosition.position;
         p1Transform.rotation = p1StartPosition.rotation;
 
         p2Transform.position = p2StartPosition.position;
         p2Transform.rotation = p2StartPosition.rotation;
     }
-
     public Transform ReturnPlayer(Transform source)
     {
         if (source == p1Transform) return p2Transform;
         else return p1Transform;
     }
-
     public bool IsPlayer1(Transform source)
     {
         if (source == p1Transform) return true;
         else return false;
     }
-
-
     void StartGame()
     {
         isPaused = false;
-       
     }
-
     [Button]
     public void AdvanceGameState()
     {
+        //if (isPaused) {
+        //    Physics.autoSimulation = false;
+        //    return;
+        //}
+
+        if (!gameStarted)
+        {
+            gameStarted = true;
+            gameStartEvent?.Invoke();
+        }
+
         CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;
         advanceGameState?.Invoke();
 
         gameFrameCount++;
+        frameCounterEvent?.Invoke(gameFrameCount);
         if (!cutscene && gameMode == GameMode.VersusMode)
         {
             counter++;
@@ -243,17 +405,31 @@ public class GameHandler : MonoBehaviour
             TimeoutFinish();
         }
     }
-
+    public void StartSuperFlash()
+    {
+        superFlash = true;
+        superFlashStartEvent?.Invoke();
+        Physics.autoSimulation = false;
+    }
+    public void EndSuperFlash()
+    {
+        superFlash = false;
+        superFlashEndEvent?.Invoke();
+        if (runNormally)
+            Physics.autoSimulation = true;
+    }
     [Button]
     public void AdvanceGameStateButton()
     {
         runNormally = false;
-        Physics.autoSimulation = false;
-        Physics.Simulate(Time.fixedDeltaTime);
 
+        if (!superFlash)
+        {
+            Physics.autoSimulation = false;
+            Physics.Simulate(Time.fixedDeltaTime);
+        }
         AdvanceGameState();
     }
-
     public void TimeoutFinish()
     {
         if (p1Status.Health > p2Status.Health)
@@ -262,14 +438,12 @@ public class GameHandler : MonoBehaviour
             P2Win();
         else Draw();
     }
-
     [Button]
     public void NormalGameState()
     {
         runNormally = true;
         Physics.autoSimulation = true;
     }
-
     [Button]
     public void RevertGameState()
     {
@@ -279,8 +453,6 @@ public class GameHandler : MonoBehaviour
         counter--;
         roundTime = Mathf.Clamp(maxRoundTime - (int)(counter / 60), 0, maxRoundTime);
     }
-
-
     void UpdateGameState()
     {
         GameState state = new GameState(p1Transform.position, p2Transform.position, p2Transform.rotation, p2Transform.rotation);
@@ -291,30 +463,24 @@ public class GameHandler : MonoBehaviour
         state.p2Meter = p2Status.Meter;
         gameStates.Add(state);
     }
-
-
-
     private void FixedUpdate()
     {
         if (GameManager.Instance != null)
             isPaused = !GameManager.Instance.IsRunning;
         else
         {
-            isPaused = false;
+            // isPaused = false;
         }
 
-        if (!isPaused && runNormally && !network)
+        if (runNormally && !network)
         {
-
             AdvanceGameState();
         }
     }
-
     private void OnValidate()
     {
         staticHurtboxes = showHurtboxes;
     }
-
     private void Update()
     {
         staticHurtboxes = showHurtboxes;
@@ -330,6 +496,7 @@ public class GameHandler : MonoBehaviour
         {
             NormalGameState();
         }
+
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             ChangeGameMode(GameMode.VersusMode);
@@ -338,25 +505,26 @@ public class GameHandler : MonoBehaviour
         {
             ChangeGameMode(GameMode.TrainingMode);
         }
+        else if (Keyboard.current.f3Key.wasPressedThisFrame)
+        {
+            ChangeGameMode(GameMode.TrialMode);
+        }
     }
-
     public void ChangeGameMode(GameMode mode)
     {
         gameMode = mode;
         UIManager.Instance.GameModeUI(gameMode);
     }
-
-    public void Rollback(int frameTarget) {
+    public void Rollback(int frameTarget)
+    {
         Debug.Log("Rollbacking from " + gameFrameCount + " to " + frameTarget);
         gameFrameCount = frameTarget;
-
         RevertGameState(gameFrameCount);
     }
-
     void RevertGameState(int i)
     {
         //rollbackEvent?.Invoke(i);
-     
+
         p1Transform.position = gameStates[gameStates.Count - 1].p1Position;
         p2Transform.position = gameStates[gameStates.Count - 1].p2Position;
 
@@ -364,7 +532,6 @@ public class GameHandler : MonoBehaviour
         p2Status.rb.velocity = gameStates[gameStates.Count - 1].p2Velocity;
         gameStates.RemoveRange(i, gameStates.Count - i);
     }
-
     [Button("Simulate Game State")]
     public void ResimulateGameState()
     {

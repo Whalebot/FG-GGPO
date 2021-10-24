@@ -94,7 +94,7 @@ public class InputHandler : MonoBehaviour
     // private void OnEnable() => controls.Default.Enable();
     private void OnDisable()
     {
-        DisableControls();
+        //DisableControls();
     }
     public void DisableControls()
     {
@@ -312,6 +312,7 @@ public class InputHandler : MonoBehaviour
 
     public void ExecuteFrame()
     {
+
         if (!network)
         {
             if (!isBot)
@@ -320,9 +321,14 @@ public class InputHandler : MonoBehaviour
                 {
                     netDirectionals[i] = heldDirectionals[i];
                 }
+                if (GameHandler.Instance != null)
+                    if (GameHandler.isPaused) return;
+
                 ResolveButtons(heldButtons);
             }
         }
+        if (GameHandler.Instance != null)
+            if (GameHandler.isPaused) return;
 
         ResolveInputBuffer();
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
@@ -401,14 +407,17 @@ public class InputHandler : MonoBehaviour
                 if (i == 3) foundC = true;
                 if (i == 4) foundD = true;
                 if (i == 5) foundCrouch = true;
-                // InputBuffer(i + 1);
             }
 
             if (netButtons[i] != temp[i]) updatedButtons = true;
             netButtons[i] = temp[i];
         }
 
-        if (foundB && netButtons[3] || foundC && netButtons[1])
+        if (foundC && netButtons[4] || foundD && netButtons[3])
+        {
+            InputBuffer(9);
+        }
+        else if (foundB && netButtons[3] || foundC && netButtons[1])
         {
             InputBuffer(7);
         }
@@ -460,6 +469,14 @@ public class InputHandler : MonoBehaviour
             qcb = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             qcb = false;
+
+
+        if (MI478()) mI478 = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            mI478 = false;
+        if (MI698()) mI698 = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            mI698 = false;
     }
 
     public bool QuarterCircleForward()
@@ -482,10 +499,10 @@ public class InputHandler : MonoBehaviour
             {
                 foundDown = true;
             }
-    
+
             if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
             {
-          
+
                 foundDF = true;
             }
             if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8)
@@ -520,7 +537,7 @@ public class InputHandler : MonoBehaviour
                 foundDown = true;
             }
 
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
+            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 2 && foundF)
             {
 
                 foundDF = true;
@@ -536,7 +553,66 @@ public class InputHandler : MonoBehaviour
         }
         return result;
     }
+    public bool MI478()
+    {
+        bool result = false;
+        bool input1 = false;
+        bool input2 = false;
+        bool input3 = false;
 
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+
+            if (directionals[directionals.Count - i] == 4 && input2)
+            {
+                input3 = true;
+            }
+            if (directionals[directionals.Count - i] == 7 && input1)
+            {
+                input2 = true;
+            }
+            if (directionals[directionals.Count - i] == 8)
+            {
+                input1 = true;
+            }
+            if (input3)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+    public bool MI698()
+    {
+        bool result = false;
+        bool input1 = false;
+        bool input2 = false;
+        bool input3 = false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+
+            if (directionals[directionals.Count - i] == 6 && input2)
+            {
+                input3 = true;
+            }
+            if (directionals[directionals.Count - i] == 9 && input1)
+            {
+                input2 = true;
+            }
+            if (directionals[directionals.Count - i] == 8)
+            {
+                input1 = true;
+            }
+            if (input3)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
     public bool CheckDownDown()
     {
         bool result = false;
@@ -701,10 +777,10 @@ public class InputHandler : MonoBehaviour
     private void OnLeft(InputAction.CallbackContext context)
     {
         if (debug) print("Left");
-        
+
         heldDirectionals[3] = !context.canceled;
-        if(context.performed)
-        leftInput?.Invoke();
+        if (context.performed)
+            leftInput?.Invoke();
     }
 
     private void OnUp(InputAction.CallbackContext context)
@@ -801,8 +877,14 @@ public class InputHandler : MonoBehaviour
         if (debug) print("X");
         ChangeControlScheme(context);
         //   updatedButtons = true;
+
+        if (GameHandler.isPaused)
+        {
+            netButtons[2] = true;
+        }
         heldButtons[2] = !context.canceled;
-        southInput?.Invoke();
+        if (context.performed)
+            southInput?.Invoke();
     }
     public void OnEast(InputAction.CallbackContext context)
     {
@@ -810,22 +892,26 @@ public class InputHandler : MonoBehaviour
         ChangeControlScheme(context);
         //  updatedButtons = true;
         heldButtons[3] = !context.canceled;
-        eastInput?.Invoke();
+        if (context.performed)
+            eastInput?.Invoke();
     }
     public void OnR1(InputAction.CallbackContext context)
     {
         if (debug) print("R1");
 
-        R1input?.Invoke();
+   
         heldButtons[4] = !context.canceled;
         R1Hold = true;
+        if (context.performed)
+            R1input?.Invoke();
         //updatedButtons = true;
     }
     public void OnL1(InputAction.CallbackContext context)
     {
         if (debug) print("L1");
         heldButtons[5] = !context.canceled;
-        L1input?.Invoke();
+        if (context.performed)
+            L1input?.Invoke();
         //updatedButtons = true;
     }
     public void OnStart()
@@ -833,7 +919,7 @@ public class InputHandler : MonoBehaviour
         startInput?.Invoke();
         if (StageManager.Instance != null)
         {
-            StageManager.Instance.RestartScene();
+            //StageManager.Instance.RestartScene();
         }
     }
     public void OnSelect()
@@ -927,7 +1013,7 @@ public class InputHandler : MonoBehaviour
         InputBuffer(10);
     }
 
-    int Direction()
+    public int Direction()
     {
 
         if (netDirectionals[0])

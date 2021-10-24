@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4447310910784814065, guid: 3f5e5a965793917468f13824079a9318, type: 3}
   iD: 0
-  portrait: {fileID: 21300000, guid: bcb0652aba541534daaae9ced4bacfca, type: 3}
+  portrait: {fileID: 21300000, guid: 4ff82b9a969f7e44e921d8d6dfd89641, type: 3}
+  splashArt: {fileID: 21300000, guid: bcb0652aba541534daaae9ced4bacfca, type: 3}
   characterName: DYNAMIC
   difficulty: 0
   playstyle: RUSHDOWN
@@ -22,3 +23,8 @@ MonoBehaviour:
   range1: 5
   range2: 1
   range3: 1
+  comboTrials:
+  - {fileID: 11400000, guid: 8a0a28d54a686b74b832a80542e014ac, type: 2}
+  - {fileID: 11400000, guid: fc449a053f15e784698f0d5ba206714e, type: 2}
+  - {fileID: 11400000, guid: 4a12c43b945cda54ba82e826c5226391, type: 2}
+  - {fileID: 11400000, guid: 5f3628b8ae7b662438189e2686e941f4, type: 2}

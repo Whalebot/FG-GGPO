@@ -9,7 +9,14 @@ public class VFXScript : MonoBehaviour
     void Start()
     {
         ParticleSystem ps = GetComponent<ParticleSystem>();
-        ps.Pause();
+        //if (!GameHandler.Instance.runNormally) ps.Pause();
         VFXManager.Instance.AddParticle(ps, ID);
+    }
+
+    private void OnDestroy()
+    {
+        //ParticleSystem ps = GetComponent<ParticleSystem>();
+        //if (ps != null)
+        //    VFXManager.Instance.DeleteParticle(ps);
     }
 }

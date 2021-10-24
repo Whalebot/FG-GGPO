@@ -37,6 +37,8 @@ public class Status : MonoBehaviour
     public StatusEvent punishEvent;
     public StatusEvent invincibleEvent;
     public StatusEvent reversalEvent;
+    public StatusEvent recoveryEvent;
+    public StatusEvent comboReset;
 
     public delegate void TransitionEvent();
     public TransitionEvent neutralEvent;
@@ -46,6 +48,7 @@ public class Status : MonoBehaviour
     public TransitionEvent counterhitEvent;
     public TransitionEvent knockdownEvent;
     public TransitionEvent wakeupEvent;
+    public TransitionEvent throwEvent;
     public TransitionEvent throwBreakEvent;
 
 
@@ -79,6 +82,7 @@ public class Status : MonoBehaviour
     public int health;
     public int maxMeter;
     public int meter;
+    public int burstGauge;
 
 
     public int comboCounter;
@@ -103,338 +107,6 @@ public class Status : MonoBehaviour
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         mov.landEvent += Land;
         ResetStatus();
-    }
-
-    [Button]
-    public void ResetStatus()
-    {
-        health = maxHealth;
-        meter = 0;
-
-        comboCounter = 0;
-        hitstunValue = 0;
-        blockstunValue = 0;
-        inHitStun = false;
-        ResetInvincibilities();
-        isDead = false;
-
-        groundState = GroundState.Grounded;
-        currentState = State.Neutral;
-    }
-
-    public void ResetInvincibilities() {
-        invincible = false;
-        airInvul = false;
-        bodyInvul = false;
-        footInvul = false;
-        headInvul = false;
-        linearInvul = false;
-        projectileInvul = false;
-    }
-
-    void Land()
-    {
-        //  if(groundState ==)
-    }
-
-    void ActivateCollider()
-    {
-        jumpingCollider.SetActive(groundState == GroundState.Airborne);
-        standingCollider.SetActive(blockState == BlockState.Standing && groundState == GroundState.Grounded);
-        crouchingCollider.SetActive(blockState == BlockState.Crouching || groundState == GroundState.Knockdown);
-
-
-    }
-
-    public void AirCollider()
-    {
-        standingCollider.layer = LayerMask.NameToLayer("AirCollision");
-        crouchingCollider.layer = LayerMask.NameToLayer("AirCollision");
-        jumpingCollider.layer = LayerMask.NameToLayer("AirCollision");
-    }
-
-    public void EnableCollider()
-    {
-        standingCollider.layer = LayerMask.NameToLayer("Collision");
-        crouchingCollider.layer = LayerMask.NameToLayer("Collision");
-        jumpingCollider.layer = LayerMask.NameToLayer("Collision");
-    }
-    public void DisableCollider()
-    {
-        standingCollider.layer = LayerMask.NameToLayer("Disabled");
-        crouchingCollider.layer = LayerMask.NameToLayer("Disabled");
-        jumpingCollider.layer = LayerMask.NameToLayer("Disabled");
-    }
-    public void EnableHurtboxes()
-    {
-        defaultHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
-    }
-    public void DisableHurtboxes()
-    {
-        defaultHurtbox.layer = LayerMask.NameToLayer("Disabled");
-    }
-
-    void FixedUpdate()
-    {
-        //ExecuteFrame();
-    }
-
-    void ExecuteFrame()
-    {
-        if (newMove)
-        {
-            hitstopCounter--;
-            if (hitstopCounter > 1) rb.velocity = Vector3.zero;
-            else
-            if (hitstopCounter <= 0)
-            {
-                newMove = false;
-                ApplyPushback();
-            }
-        }
-        StateMachine();
-    }
-
-    public void SetBlockState(BlockState state)
-    {
-        blockState = state;
-        switch (state)
-        {
-            case BlockState.Crouching: break;
-            case BlockState.Standing: break;
-            case BlockState.Airborne: break;
-            default: break;
-        }
-        ActivateCollider();
-    }
-
-    void ResolveBlockstun()
-    {
-        if (blockstunValue > 0)
-        {
-
-            blockstunValue--;
-        }
-        if (blockstunValue <= 0 && inBlockStun)
-        {
-            GoToState(State.Neutral);
-            blockstunValue = 0;
-            inBlockStun = false;
-        }
-    }
-
-    void ResolveHitstun()
-    {
-
-        if (hitstunValue > 0)
-        {
-            hitstunValue--;
-
-            if (groundState != GroundState.Airborne)
-            {
-                pushbackCounter--;
-                if (pushbackCounter <= 0)
-                {
-                    rb.velocity = Vector3.zero;
-                }
-            }
-        }
-        if (hitstunValue <= 0 && inHitStun)
-        {
-
-            if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
-                KnockdownRecovery();
-
-            else if (groundState == GroundState.Airborne)
-            {
-                if (!mov.ground)
-                    AirRecovery();
-                else KnockdownRecovery();
-
-            }
-
-            else GroundRecovery();
-        }
-    }
-
-
-
-    void AirRecovery()
-    {
-        wakeupEvent?.Invoke();
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
-
-        GoToGroundState(GroundState.Airborne);
-        GoToState(State.Wakeup);
-        hitstunValue = 0;
-        comboCounter = 0;
-        inHitStun = false;
-    }
-
-    void KnockdownRecovery()
-    {
-        wakeupEvent?.Invoke();
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
-        GoToGroundState(GroundState.Grounded);
-        GoToState(State.Wakeup);
-        hitstunValue = 0;
-        comboCounter = 0;
-        inHitStun = false;
-    }
-
-    void GroundRecovery()
-    {
-
-        Instantiate(VFXManager.Instance.recoveryFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
-        GoToGroundState(GroundState.Grounded);
-        GoToState(State.Neutral);
-        hitstunValue = 0;
-        comboCounter = 0;
-        inHitStun = false;
-    }
-
-    void ResolveKnockdown()
-    {
-        if (knockdownValue > 0)
-        {
-            knockdownValue--;
-        }
-        else if (knockdownValue <= 0)
-        {
-
-            KnockdownRecovery();
-        }
-    }
-
-
-    void StateMachine()
-    {
-        if (currentState == State.Neutral && HitStun > 0)
-        {
-            print("Budget solution");
-            GoToState(State.Hitstun);
-        }
-
-        switch (currentState)
-        {
-            case State.Neutral:
-                if (forcedCounterhit) counterhitState = true;
-                if (autoBlock) blocking = true;
-              
-                break;
-            case State.Hitstun:
-                blocking = false;
-                ResolveHitstun();
-                minusFrames = -HitStun;
-                break;
-            case State.Blockstun:
-                if (autoBlock) blocking = true;
-                else
-                    blocking = mov.holdBack;
-                ResolveBlockstun();
-
-                minusFrames = -BlockStun;
-                break;
-            case State.Knockdown:
-                blocking = false;
-                // ResolveKnockdown();
-                ResolveHitstun();
-                minusFrames = -HitStun;
-                break;
-            case State.Wakeup:
-                wakeupValue--;
-                invincible = true;
-                if (wakeupValue <= 0)
-                {
-                    GoToState(State.Neutral);
-                    Instantiate(VFXManager.Instance.wakeupFX, transform.position + Vector3.up * 0.5F, Quaternion.identity);
-                }
-                break;
-            case State.LockedAnimation:
-                throwBreakCounter--;
-
-                break;
-            default: break;
-        }
-    }
-    public void GoToGroundState(GroundState s)
-    {
-        switch (s)
-        {
-
-            default:
-                if (HitStun > 0 && s == GroundState.Grounded && groundState == GroundState.Airborne)
-                {
-                    groundState = GroundState.Knockdown;
-                    break;
-                }
-                else groundState = s;
-
-                break;
-        }
-        ActivateCollider();
-    }
-
-    public void GoToState(State transitionState)
-    {
-       if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
-        currentState = transitionState;
-        switch (transitionState)
-        {
-            case State.Neutral:
-                invincible = false;
-                linearInvul = false;
-
-                EnableHurtboxes();
-                neutralEvent?.Invoke(); break;
-            case State.Startup:
-                blocking = false;
-                break;
-            case State.Active:
-                blocking = false;
-                break;
-            case State.Recovery:
-                crossupState = false;
-                blocking = false;
-                invincible = false;
-                EnableHurtboxes();
-                break;
-            case State.Hitstun:
-                inHitStun = true;
-                linearInvul = false;
-
-                EnableHurtboxes();
-                minusFrames = -HitStun;
-                hitEvent?.Invoke();
-                hitstunEvent?.Invoke();
-                break;
-            case State.Blockstun:
-                EnableHurtboxes();
-                inBlockStun = true;
-                minusFrames = -BlockStun;
-                blockstunEvent?.Invoke(); break;
-            case State.Knockdown:
-
-                knockdownValue = HitStun + 50;
-                EnableHurtboxes();
-                inHitStun = true;
-                minusFrames = -HitStun;
-                hitEvent?.Invoke();
-                knockdownEvent?.Invoke();
-                //frameDataEvent?.Invoke();
-
-                break;
-            case State.Wakeup:
-                wakeupValue = wakeupRecovery;
-
-                break;
-            case State.LockedAnimation:
-                blocking = false;
-                DisableHurtboxes();
-                break;
-            default: break;
-        }
-
     }
 
     public int Health
@@ -496,13 +168,382 @@ public class Status : MonoBehaviour
         }
     }
 
+    public int BurstGauge
+    {
+        get { return burstGauge; }
+        set
+        {
+            burstGauge = Mathf.Clamp(value, 0, 6000);
+
+        }
+    }
+
+    [Button]
+    public void ResetStatus()
+    {
+        wakeupEvent?.Invoke();
+        health = maxHealth;
+        meter = 0;
+
+        comboCounter = 0;
+        hitstunValue = 0;
+        blockstunValue = 0;
+        inHitStun = false;
+        GroundRecovery();
+        ResetInvincibilities();
+        isDead = false;
+
+        groundState = GroundState.Grounded;
+        currentState = State.Neutral;
+    }
+
+    public void ResetInvincibilities()
+    {
+        invincible = false;
+        airInvul = false;
+        bodyInvul = false;
+        footInvul = false;
+        headInvul = false;
+        linearInvul = false;
+        projectileInvul = false;
+    }
+
+    void Land()
+    {
+        if (currentState == State.Hitstun || currentState == State.Knockdown)
+        {
+            GoToGroundState(GroundState.Knockdown);
+        }
+        else
+        {
+            GoToGroundState(GroundState.Grounded);
+        }
+    }
+
+    void ActivateCollider()
+    {
+        standingCollider.SetActive(false);
+        jumpingCollider.SetActive(false);
+        crouchingCollider.SetActive(false);
+        switch (groundState)
+        {
+            case GroundState.Grounded:
+                if (currentState == State.Wakeup) crouchingCollider.SetActive(true);
+                else
+                {
+                    if (blockState == BlockState.Standing)
+                        standingCollider.SetActive(true);
+                    else crouchingCollider.SetActive(true);
+                }
+                break;
+            case GroundState.Airborne:
+                jumpingCollider.SetActive(true);
+                break;
+            case GroundState.Knockdown:
+                crouchingCollider.SetActive(true);
+                break;
+            default:
+                break;
+        }
+
+
+
+    }
+
+    public void AirCollider()
+    {
+        standingCollider.layer = LayerMask.NameToLayer("AirCollision");
+        crouchingCollider.layer = LayerMask.NameToLayer("AirCollision");
+        jumpingCollider.layer = LayerMask.NameToLayer("AirCollision");
+    }
+
+    public void EnableCollider()
+    {
+        standingCollider.layer = LayerMask.NameToLayer("Collision");
+        crouchingCollider.layer = LayerMask.NameToLayer("Collision");
+        jumpingCollider.layer = LayerMask.NameToLayer("Collision");
+    }
+    public void DisableCollider()
+    {
+        standingCollider.layer = LayerMask.NameToLayer("Disabled");
+        crouchingCollider.layer = LayerMask.NameToLayer("Disabled");
+        jumpingCollider.layer = LayerMask.NameToLayer("Disabled");
+    }
+    public void EnableHurtboxes()
+    {
+        defaultHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
+    }
+    public void DisableHurtboxes()
+    {
+        defaultHurtbox.layer = LayerMask.NameToLayer("Disabled");
+    }
+    void ExecuteFrame()
+    {
+        if (GameHandler.Instance.superFlash)
+        {
+            return;
+        }
+
+        if (newMove)
+        {
+            hitstopCounter--;
+            if (hitstopCounter > 1) rb.velocity = Vector3.zero;
+            else
+            if (hitstopCounter <= 0)
+            {
+                newMove = false;
+                ApplyPushback();
+            }
+        }
+
+        BurstGauge++;
+
+        StateMachine();
+    }
+
+    public void SetBlockState(BlockState state)
+    {
+        blockState = state;
+        switch (state)
+        {
+            case BlockState.Crouching: break;
+            case BlockState.Standing: break;
+            case BlockState.Airborne: break;
+            default: break;
+        }
+        ActivateCollider();
+    }
+
+    void ResolveBlockstun()
+    {
+        if (blockstunValue > 0)
+        {
+
+            blockstunValue--;
+        }
+        if (blockstunValue <= 0 && inBlockStun)
+        {
+            GoToState(State.Neutral);
+            blockstunValue = 0;
+            inBlockStun = false;
+        }
+    }
+
+    void ResolveHitstun()
+    {
+        if (rb.velocity.y > 1) GoToGroundState(GroundState.Airborne);
+
+        if (hitstunValue > 0)
+        {
+            hitstunValue--;
+
+            if (groundState != GroundState.Airborne)
+            {
+                pushbackCounter--;
+                if (pushbackCounter <= 0)
+                {
+                    rb.velocity = Vector3.zero;
+                }
+            }
+        }
+        if (hitstunValue <= 0 && inHitStun)
+        {
+            recoveryEvent?.Invoke();
+            if (groundState == GroundState.Knockdown || currentState == State.Knockdown)
+                KnockdownRecovery();
+            else if (groundState == GroundState.Airborne)
+            {
+                if (!mov.ground)
+                    AirRecovery();
+                else KnockdownRecovery();
+            }
+            else GroundRecovery();
+        }
+    }
+
+
+
+    void AirRecovery()
+    {
+      //  print("air recovery");
+        Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
+        GoToGroundState(GroundState.Airborne);
+        GoToState(State.Wakeup);
+        //GoToState(State.Wakeup);
+        hitstunValue = 0;
+        comboCounter = 0;
+        inHitStun = false;
+    }
+
+    void KnockdownRecovery()
+    {
+       // print("kd recovery");
+        // Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
+        GoToGroundState(GroundState.Grounded);
+        GoToState(State.Wakeup);
+        hitstunValue = 0;
+        comboCounter = 0;
+        inHitStun = false;
+    }
+
+    void GroundRecovery()
+    {
+     //   print("ground recovery");
+        //Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
+        GoToGroundState(GroundState.Grounded);
+        GoToState(State.Neutral);
+        hitstunValue = 0;
+        comboCounter = 0;
+        inHitStun = false;
+    }
+
+    void ResolveKnockdown()
+    {
+        if (knockdownValue > 0)
+        {
+            knockdownValue--;
+        }
+        else if (knockdownValue <= 0)
+        {
+            KnockdownRecovery();
+        }
+    }
+
+
+    void StateMachine()
+    {
+        if (currentState == State.Neutral && HitStun > 0)
+        {
+            print("Budget solution");
+            GoToState(State.Hitstun);
+        }
+
+
+        switch (currentState)
+        {
+            case State.Neutral:
+                counterhitState = forcedCounterhit;
+                if (autoBlock) blocking = true;
+
+                break;
+            case State.Hitstun:
+                blocking = false;
+
+                ResolveHitstun();
+                minusFrames = -HitStun;
+                break;
+            case State.Blockstun:
+                if (autoBlock) blocking = true;
+                ResolveBlockstun();
+                minusFrames = -BlockStun;
+                break;
+            case State.Knockdown:
+                blocking = false;
+                // ResolveKnockdown();
+                ResolveHitstun();
+                minusFrames = -HitStun;
+                break;
+            case State.Wakeup:
+                wakeupValue--;
+                //invincible = true;
+                if (wakeupValue <= 0)
+                {
+                    wakeupEvent?.Invoke();
+                    GoToState(State.Neutral);
+                  
+                }
+                break;
+            case State.LockedAnimation:
+                throwBreakCounter--;
+
+                break;
+            default: break;
+        }
+    }
+    public void GoToGroundState(GroundState s)
+    {
+        groundState = s;
+        ActivateCollider();
+    }
+
+    public void GoToState(State transitionState)
+    {
+        if (currentState == State.Wakeup && transitionState != State.Hitstun) {
+            wakeupEvent?.Invoke();
+            Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity); 
+        }
+     //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
+        currentState = transitionState;
+
+        switch (transitionState)
+        {
+            case State.Neutral:
+                invincible = false;
+                linearInvul = false;
+                wakeupEvent?.Invoke();
+                EnableHurtboxes();
+                neutralEvent?.Invoke(); break;
+            case State.Startup:
+                blocking = false;
+                minusFrames++;
+                break;
+            case State.Active:
+                blocking = false;
+                minusFrames++;
+                break;
+            case State.Recovery:
+                crossupState = false;
+                blocking = false;
+                minusFrames++;
+                //invincible = false;
+                EnableHurtboxes();
+                break;
+            case State.Hitstun:
+                inHitStun = true;
+                linearInvul = false;
+
+                EnableHurtboxes();
+                minusFrames = -HitStun;
+                hitEvent?.Invoke();
+                hitstunEvent?.Invoke();
+                break;
+            case State.Blockstun:
+                EnableHurtboxes();
+                inBlockStun = true;
+                minusFrames = -BlockStun;
+                blockstunEvent?.Invoke(); break;
+            case State.Knockdown:
+
+                knockdownValue = HitStun + 50;
+                EnableHurtboxes();
+                inHitStun = true;
+                minusFrames = -HitStun;
+                hitEvent?.Invoke();
+                knockdownEvent?.Invoke();
+                //frameDataEvent?.Invoke();
+
+                break;
+            case State.Wakeup:
+                wakeupValue = wakeupRecovery;
+
+                break;
+            case State.LockedAnimation:
+                blocking = false;
+                DisableHurtboxes();
+                break;
+            default: break;
+        }
+
+    }
+
     public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID, bool returnWallPushback)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         ResetInvincibilities();
-
+ 
         if (currentState == State.Recovery)
         {
+            print(currentState);
             punishEvent?.Invoke();
         }
 
@@ -517,7 +558,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            if (groundState != GroundState.Grounded)
+            if (groundState != GroundState.Grounded || currentState == State.Knockdown || currentState == State.Wakeup)
             {
                 GoToGroundState(GroundState.Airborne);
             }
@@ -544,7 +585,6 @@ public class Status : MonoBehaviour
 
         HitStun = stunVal;
         proration *= p;
-
         mov.runMomentumCounter = 0;
 
         if (groundState == GroundState.Knockdown)
@@ -605,6 +645,7 @@ public class Status : MonoBehaviour
         mov.storedDirection = Vector3.zero;
         rb.velocity = Vector3.zero;
 
+        throwEvent?.Invoke();
         takeAnimationEvent?.Invoke(animationID);
         throwBreakCounter = throwBreakWindow;
         GoToState(State.LockedAnimation);
@@ -614,8 +655,6 @@ public class Status : MonoBehaviour
     {
         print("Throw Break");
         throwBreakEvent?.Invoke();
-        KnockdownRecovery();
-
     }
 
     public void Hitstop()

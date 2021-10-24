@@ -43,6 +43,28 @@ public class VFXManager : MonoBehaviour
 
     }
 
+    //public void DeleteParticle(ParticleSystem ps)
+    //{
+    //    if (ps != null)
+    //    {
+    //        foreach (var item in particles)
+    //        {
+    //            if (item.ps == ps)
+    //            {
+    //                deletedParticles.Add(item);
+    //                //Delete shit
+    //            }
+
+    //        }
+    //        for (int i = 0; i < deletedParticles.Count; i++)
+    //        {
+    //            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+    //            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+    //                Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+    //        }
+    //    }
+    //}
+
     public void P1DeleteParticle()
     {
         foreach (var item in particles)
@@ -56,8 +78,8 @@ public class VFXManager : MonoBehaviour
         }
         for (int i = 0; i < deletedParticles.Count; i++)
         {
-            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]); 
-            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+            if (deletedParticles[deletedParticles.Count - i - 1].ps != null)
                 Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
@@ -75,7 +97,7 @@ public class VFXManager : MonoBehaviour
         for (int i = 0; i < deletedParticles.Count; i++)
         {
             particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
-            if (deletedParticles[deletedParticles.Count - i - 1].ps.gameObject != null)
+            if (deletedParticles[deletedParticles.Count - i - 1].ps != null)
                 Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
@@ -86,6 +108,13 @@ public class VFXManager : MonoBehaviour
         deletedParticles.Clear();
         foreach (var item in particles)
         {
+            if (item.ps == null)
+            {
+                deletedParticles.Add(item);
+                continue;
+                //Delete shit
+            }
+
             float tempTime = 0;
             tempTime = (GameHandler.Instance.gameFrameCount - item.startFrame) * Time.fixedDeltaTime;
             item.ps.Simulate(Time.fixedDeltaTime, true, false, true);
@@ -99,7 +128,8 @@ public class VFXManager : MonoBehaviour
         for (int i = 0; i < deletedParticles.Count; i++)
         {
             particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
-            Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+            if (deletedParticles[deletedParticles.Count - i - 1].ps != null)
+                Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
         }
     }
     [Button]
@@ -119,8 +149,9 @@ public class VFXManager : MonoBehaviour
     {
 
         ParticleObject p = new ParticleObject(ps, GameHandler.Instance.gameFrameCount);
+        ps.Simulate(Time.fixedDeltaTime, true, false, true);
+        ps.Pause();
         p.playerID = ID;
-
         particles.Add(p);
     }
 }

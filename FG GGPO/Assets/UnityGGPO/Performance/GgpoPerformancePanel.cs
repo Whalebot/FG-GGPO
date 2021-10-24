@@ -2,11 +2,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityGGPO {
+namespace UnityGGPO
+{
 
     [ExecuteInEditMode]
-    public class GgpoPerformancePanel : MonoBehaviour, IPerfUpdate {
-        public Text msPing;
+    public class GgpoPerformancePanel : MonoBehaviour, IPerfUpdate
+    {
+        public Text frameText;
+        [SerializeField] private Text networkLagText;
+        [SerializeField] private Text frameLagText;
+        [SerializeField] private Text bandwidthText;
+        [SerializeField] private Text localAheadText;
+        [SerializeField] private Text remoteAheadText;
+
+
         public Rect fairnessRect;
         public Rect networkRect;
 
@@ -19,7 +28,7 @@ namespace UnityGGPO {
         private const int MAX_FAIRNESS = 20;
         private const int MAX_PLAYERS = 4;
 
-       [SerializeField] private string networkLag;
+        [SerializeField] private string networkLag;
         [SerializeField] private string frameLag;
         [SerializeField] private string bandwidth;
         [SerializeField] private string localAhead;
@@ -38,7 +47,8 @@ namespace UnityGGPO {
         private Color[] _fairness_pens = new Color[] { Color.blue, Color.grey, Color.red, Color.magenta };
         private List<Vector2> pt = new List<Vector2>();
 
-        public void Setup() {
+        public void Setup()
+        {
             _fairness_graph = new int[MAX_GRAPH_SIZE];
             _remote_queue_graph = new int[MAX_GRAPH_SIZE];
             _send_queue_graph = new int[MAX_GRAPH_SIZE];
@@ -47,17 +57,20 @@ namespace UnityGGPO {
             _local_fairness_graph = new int[MAX_PLAYERS][];
             _remote_fairness_graph = new int[MAX_PLAYERS][];
 
-            for (int i = 0; i < MAX_PLAYERS; ++i) {
+            for (int i = 0; i < MAX_PLAYERS; ++i)
+            {
                 _ping_graph[i] = new int[MAX_GRAPH_SIZE];
                 _local_fairness_graph[i] = new int[MAX_GRAPH_SIZE];
                 _remote_fairness_graph[i] = new int[MAX_GRAPH_SIZE];
             }
         }
 
-        private void DrawGraph(Rect di, Color pen, int[] graph, int count, int min, int max) {
+        private void DrawGraph(Rect di, Color pen, int[] graph, int count, int min, int max)
+        {
             pt.Clear();
 
-            for (int i = 0; i < count; i += step) {
+            for (int i = 0; i < count; i += step)
+            {
                 float y = Mathf.InverseLerp(min, max, graph[(_first_graph_index + i) % MAX_GRAPH_SIZE]);
 
                 pt.Add(new Vector2(Mathf.Lerp(di.xMin, di.xMax, (float)i / count),
@@ -67,51 +80,62 @@ namespace UnityGGPO {
             GuiHelper.DrawLine(pt.ToArray(), pen, 1);
         }
 
-        private void DrawGrid(Rect di) {
+        private void DrawGrid(Rect di)
+        {
             GuiHelper.DrawRect(di, Color.gray);
         }
 
-        private void draw_network_graph_control(Rect di) {
+        private void draw_network_graph_control(Rect di)
+        {
             DrawGrid(di);
-            for (int i = 0; i < _num_players; i++) {
+            for (int i = 0; i < _num_players; i++)
+            {
                 DrawGraph(di, Color.green, _ping_graph[i], _graph_size, 0, 500);
             }
             DrawGraph(di, Color.red, _remote_queue_graph, _graph_size, 0, 14);
             DrawGraph(di, Color.blue, _send_queue_graph, _graph_size, 0, 14);
         }
 
-        private void draw_fairness_graph_control(Rect di) {
+        private void draw_fairness_graph_control(Rect di)
+        {
             DrawGrid(di);
 
-            for (int i = 0; i < _num_players; i++) {
+            for (int i = 0; i < _num_players; i++)
+            {
                 DrawGraph(di, _fairness_pens[i], _remote_fairness_graph[i], _graph_size, -MAX_FAIRNESS, MAX_FAIRNESS);
             }
             DrawGraph(di, Color.yellow, _fairness_graph, _graph_size, -MAX_FAIRNESS, MAX_FAIRNESS);
         }
 
-        public void ggpoutil_perfmon_update(GGPONetworkStats[] statss) {
+        public void ggpoutil_perfmon_update(GGPONetworkStats[] statss)
+        {
             int num_players = statss.Length;
 
             int i;
 
-            if (_graph_size < MAX_GRAPH_SIZE) {
+            if (_graph_size < MAX_GRAPH_SIZE)
+            {
                 i = _graph_size++;
             }
-            else {
+            else
+            {
                 i = _first_graph_index;
                 _first_graph_index = (_first_graph_index + 1) % MAX_GRAPH_SIZE;
             }
 
-            for (int j = 0; j < num_players; j++) {
+            for (int j = 0; j < num_players; j++)
+            {
                 UpdateStats(i, j, statss[j]);
             }
         }
 
-        private void UpdateStats(int i, int j, GGPONetworkStats stats) {
+        private void UpdateStats(int i, int j, GGPONetworkStats stats)
+        {
             /*
              * Random graphs
              */
-            if (j == 0) {
+            if (j == 0)
+            {
                 _remote_queue_graph[i] = stats.recv_queue_len;
                 _send_queue_graph[i] = stats.send_queue_len;
             }
@@ -126,19 +150,22 @@ namespace UnityGGPO {
              */
             _local_fairness_graph[j][i] = stats.local_frames_behind;
             _remote_fairness_graph[j][i] = stats.remote_frames_behind;
-            if (stats.local_frames_behind < 0 && stats.remote_frames_behind < 0) {
+            if (stats.local_frames_behind < 0 && stats.remote_frames_behind < 0)
+            {
                 /*
                  * Both think it's unfair (which, ironically, is fair).  Scale both and subtrace.
                  */
                 _fairness_graph[i] = Mathf.Abs(Mathf.Abs(stats.local_frames_behind) - Mathf.Abs(stats.remote_frames_behind));
             }
-            else if (stats.local_frames_behind > 0 && stats.remote_frames_behind > 0) {
+            else if (stats.local_frames_behind > 0 && stats.remote_frames_behind > 0)
+            {
                 /*
                  * Impossible!  Unless the network has negative transmit time.  Odd....
                  */
                 _fairness_graph[i] = 0;
             }
-            else {
+            else
+            {
                 /*
                  * They disagree.  Add.
                  */
@@ -146,30 +173,46 @@ namespace UnityGGPO {
             }
 
             int now = Utils.TimeGetTime();
-            if (now > _last_text_update_time + 500) {
+            if (now > _last_text_update_time + 500)
+            {
                 networkLag = $"{stats.ping} ms";
                 frameLag = $"{((stats.ping != 0) ? stats.ping * 60f / 1000f : 0f)} frames";
                 bandwidth = $"{stats.kbps_sent / 8f} kilobytes/sec";
                 localAhead = $"{stats.local_frames_behind} frames";
                 remoteAhead = $"{stats.remote_frames_behind} frames";
+
+                networkLagText.text = networkLag;
+                frameLagText.text = frameLag;
+                bandwidthText.text = bandwidth;
+                localAheadText.text = localAhead;
+                remoteAheadText.text = remoteAhead;
+
+
+
+
                 _last_text_update_time = now;
             }
         }
 
-        private void RandomGraph(int[] graph, int size, int min, int max) {
-            for (int i = 0; i < size; ++i) {
+        private void RandomGraph(int[] graph, int size, int min, int max)
+        {
+            for (int i = 0; i < size; ++i)
+            {
                 graph[i] = UnityEngine.Random.Range(min, max);
             }
         }
 
-        public void OnGUI() {
-            if (random) {
+        public void OnGUI()
+        {
+            if (random)
+            {
                 random = false;
                 Debug.Log("RANDOM!!!");
                 Setup();
 
                 _graph_size = MAX_GRAPH_SIZE;
-                for (int i = 0; i < MAX_PLAYERS; ++i) {
+                for (int i = 0; i < MAX_PLAYERS; ++i)
+                {
                     _graph_size = MAX_GRAPH_SIZE;
                     RandomGraph(_ping_graph[i], _graph_size, 0, 500);
                     RandomGraph(_local_fairness_graph[i], _graph_size, -MAX_FAIRNESS, MAX_FAIRNESS);
@@ -181,7 +224,8 @@ namespace UnityGGPO {
                 RandomGraph(_fairness_graph, _graph_size, -MAX_FAIRNESS, MAX_FAIRNESS);
             }
 
-            if (toggle && _remote_queue_graph != null && _remote_queue_graph.Length == MAX_GRAPH_SIZE) {
+            if (toggle && _remote_queue_graph != null && _remote_queue_graph.Length == MAX_GRAPH_SIZE)
+            {
                 GUILayout.Label(networkLag);
                 GUILayout.Label(frameLag);
                 GUILayout.Label(bandwidth);

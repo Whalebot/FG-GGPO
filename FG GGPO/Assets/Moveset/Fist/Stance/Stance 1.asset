@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e03075a984e8a42bb1c73c1a4b9448, type: 3}
+  m_Name: Stance 1
+  m_EditorClassIdentifier: 
+  sA: {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
+  cA: {fileID: 0}
+  fA: {fileID: 0}
+  bA: {fileID: 0}
+  jA: {fileID: 0}
+  jcA: {fileID: 0}
+  LA: {fileID: 0}
+  RA: {fileID: 0}
+  sB: {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
+  cB: {fileID: 0}
+  fB: {fileID: 0}
+  bB: {fileID: 0}
+  jB: {fileID: 0}
+  jcB: {fileID: 0}
+  LB: {fileID: 0}
+  RB: {fileID: 0}
+  sC: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  cC: {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
+  fC: {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
+  bC: {fileID: 0}
+  jC: {fileID: 0}
+  jcC: {fileID: 0}
+  LC: {fileID: 0}
+  RC: {fileID: 0}
+  sD: {fileID: 11400000, guid: 54ec82d8cda9fd940882b9d9a78e14f3, type: 2}
+  cD: {fileID: 0}
+  bD: {fileID: 11400000, guid: bc925224e2161474e9f5131c749ed60c, type: 2}
+  fD: {fileID: 0}
+  jD: {fileID: 0}
+  jcD: {fileID: 0}
+  LD: {fileID: 11400000, guid: 8d00abbee1663f8459c69616412157e3, type: 2}
+  RD: {fileID: 11400000, guid: 982c3e23ceac94d46ac0736b1283c07b, type: 2}
+  grabF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  backDash: {fileID: 0}
+  rightDash: {fileID: 0}
+  leftDash: {fileID: 0}
+  airdashF: {fileID: 0}
+  airdashB: {fileID: 0}
+  neutralTech: {fileID: 0}
+  backTech: {fileID: 0}
+  forwadTech: {fileID: 0}
+  leftTech: {fileID: 0}
+  rightTech: {fileID: 0}
+  airTech: {fileID: 0}
+  burst: {fileID: 11400000, guid: 832efc469cb973b44b4ac661b4b8271c, type: 2}
+  specials:
+  - motionInput: 2
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}

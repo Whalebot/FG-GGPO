@@ -7,6 +7,7 @@ public class AttackScript : MonoBehaviour
     private Status status;
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
+    [FoldoutGroup("Components")] public List<GameObject> hurtboxes;
 
     Movement movement;
     CharacterSFX sfx;
@@ -17,6 +18,14 @@ public class AttackScript : MonoBehaviour
     public AttackEvent recoveryEvent;
     public AttackEvent parryEvent;
     public AttackEvent blockEvent;
+    public AttackEvent superFlashStartEvent;
+    public AttackEvent superFlashEndEvent;
+    public AttackEvent jumpEvent;
+    public AttackEvent jumpCancelEvent;
+    public delegate void MoveEvent(Move move);
+    public MoveEvent attackHitEvent;
+    public MoveEvent attackPerformedEvent;
+
     public Moveset mainMoveset;
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
@@ -27,19 +36,23 @@ public class AttackScript : MonoBehaviour
 
     [FoldoutGroup("Debug")] public int movementFrames;
     [FoldoutGroup("Debug")] public List<GameObject> projectiles;
-
+    [FoldoutGroup("Debug")] public bool inMomentum;
     [FoldoutGroup("Debug")] public Move movementOption;
     [FoldoutGroup("Jump Startup")] public int jumpFrameCounter;
     [FoldoutGroup("Jump Startup")] public int jumpActionDelay;
     [FoldoutGroup("Jump Startup")] public int jumpActionDelayCounter;
     [FoldoutGroup("Jump Startup")] public bool jumpDelay;
+    [FoldoutGroup("Throw properties")] public int throwBreakCounter;
+
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
     [FoldoutGroup("Move properties")] public bool specialCancel;
+    [FoldoutGroup("Move properties")] public bool recoverOnlyOnLand;
     [HideInInspector] public bool newAttack;
     [HideInInspector] public int combo;
+    public int superCounter;
     List<Move> usedMoves;
 
     // Start is called before the first frame update
@@ -53,6 +66,7 @@ public class AttackScript : MonoBehaviour
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
         status.deathEvent += HitstunEvent;
+        status.throwEvent += TakeThrow;
         status.throwBreakEvent += ThrowBreak;
 
 
@@ -65,10 +79,42 @@ public class AttackScript : MonoBehaviour
         usedMoves = new List<Move>();
     }
 
+    public void ProcessSuperFlash()
+    {
+
+    }
+    public void ThrowLanded()
+    {
+        //Wait for throw break
+        throwBreakCounter = status.throwBreakWindow;
+    }
+    public void ProcessThrow()
+    {
+        if (throwBreakCounter > 0)
+        {
+            throwBreakCounter--;
+            if (throwBreakCounter <= 0)
+            {
+                AttackProperties(moveset.throwF.throwFollowup);
+            }
+        }
+    }
     public void ExecuteFrame()
     {
-        if (status.hitstopCounter <= 0)
+        if (superCounter > 0 && GameHandler.Instance.superFlash)
         {
+            superCounter--;
+            if (superCounter <= 0)
+            {
+                GameHandler.Instance.EndSuperFlash();
+                superFlashEndEvent?.Invoke();
+            }
+        }
+
+        if (status.hitstopCounter <= 0 && !GameHandler.Instance.superFlash)
+        {
+            ProcessThrow();
+
             if (jumpFrameCounter > 0)
             {
                 jumpFrameCounter--;
@@ -77,7 +123,6 @@ public class AttackScript : MonoBehaviour
                     status.GoToState(Status.State.Neutral);
                     jumpActionDelayCounter = jumpActionDelay;
                 }
-
             }
             if (jumpActionDelayCounter > 0)
             {
@@ -87,7 +132,6 @@ public class AttackScript : MonoBehaviour
                 {
                     jumpDelay = false;
                 }
-
             }
 
             if (movementOption != null)
@@ -127,9 +171,18 @@ public class AttackScript : MonoBehaviour
                 attackFrames++;
                 if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
                 {
-
                     attackString = true;
                     newAttack = false;
+                }
+
+                if (attackFrames == activeMove.superFlash.startFrame && activeMove.type == MoveType.Super)
+                {
+                    superFlashStartEvent?.Invoke();
+                    GameHandler.Instance.StartSuperFlash();
+                    superCounter = activeMove.superFlash.duration;
+                    GameObject super = Instantiate(activeMove.superFlash.superPrefab, transform.position, transform.rotation, transform);
+                    super.transform.localPosition = activeMove.superFlash.superPrefab.transform.localPosition;
+                    super.transform.localRotation = activeMove.superFlash.superPrefab.transform.localRotation;
                 }
 
                 //Execute properties
@@ -138,8 +191,12 @@ public class AttackScript : MonoBehaviour
                 SpawnFX();
 
                 //Execute momentum
+                bool tempMomentum = false;
+
                 for (int i = 0; i < activeMove.m.Length; i++)
                 {
+                    if (attackFrames > activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration) { tempMomentum = true; }
+
 
                     if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
                     {
@@ -166,6 +223,8 @@ public class AttackScript : MonoBehaviour
                     }
                 }
 
+                inMomentum = tempMomentum;
+                CustomHurtboxes();
 
                 int firstStartupFrame = activeMove.attacks[0].startupFrame;
                 int lastActiveFrame = activeMove.attacks[activeMove.attacks.Length - 1].startupFrame + activeMove.attacks[activeMove.attacks.Length - 1].activeFrames - 1;
@@ -182,6 +241,8 @@ public class AttackScript : MonoBehaviour
                 else if (attackFrames <= lastActiveFrame)
                 {
                     ActiveFrames();
+                    if (recoverOnlyOnLand) attackFrames--;
+
                 }
 
                 else if (attackFrames <= totalMoveDuration)
@@ -198,33 +259,72 @@ public class AttackScript : MonoBehaviour
     {
         if (activeMove != null)
         {
-            foreach (var item in activeMove.vfx)
-            {
-                if (attackFrames == item.startup)
+            if (activeMove.vfx.Length > 0)
+                foreach (var item in activeMove.vfx)
                 {
-                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                    fx.transform.localPosition = item.position;
-                    fx.transform.localRotation = Quaternion.Euler(item.rotation);
-                    fx.transform.localScale = item.scale;
-                    if (GameHandler.Instance.IsPlayer1(transform))
-                        fx.GetComponent<VFXScript>().ID = 1;
-                    else fx.GetComponent<VFXScript>().ID = 2;
-                    fx.transform.SetParent(null);
+                    if (attackFrames == item.startup)
+                    {
+                        GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                        fx.transform.localPosition = item.position;
+                        fx.transform.localRotation = Quaternion.Euler(item.rotation);
+                        fx.transform.localScale = item.scale;
+                        if (GameHandler.Instance.IsPlayer1(transform))
+                            fx.GetComponent<VFXScript>().ID = 1;
+                        else fx.GetComponent<VFXScript>().ID = 2;
+                        fx.transform.SetParent(null);
+                    }
                 }
-            }
-            foreach (var item in activeMove.sfx)
-            {
-                if (attackFrames == item.startup)
+            if (activeMove.sfx.Length > 0)
+                foreach (var item in activeMove.sfx)
                 {
-                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                    fx.transform.localPosition = item.prefab.transform.localPosition;
-                    fx.transform.localRotation = item.prefab.transform.rotation;
-                    fx.transform.SetParent(null);
+                    if (attackFrames == item.startup)
+                    {
+                        GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
+                        fx.transform.localPosition = item.prefab.transform.localPosition;
+                        fx.transform.localRotation = item.prefab.transform.rotation;
+                        fx.transform.SetParent(null);
+                    }
                 }
-            }
         }
     }
-
+    public void CustomHurtboxes()
+    {
+        if (activeMove != null)
+            if (activeMove.hurtboxes.Length > 0)
+                for (int i = 0; i < activeMove.hurtboxes.Length; i++)
+                {
+                    if (attackFrames < activeMove.hurtboxes[i].end && attackFrames >= activeMove.attacks[i].startupFrame)
+                    {
+                        if (hurtboxes.Count < i + 1)
+                        {
+                            hurtboxes.Add(Instantiate(activeMove.hurtboxes[i].prefab, hitboxContainer.position, transform.rotation, hitboxContainer));
+                            hurtboxes[i].transform.localPosition = activeMove.hurtboxes[i].prefab.transform.localPosition;
+                            hurtboxes[i].transform.localRotation = activeMove.hurtboxes[i].prefab.transform.rotation;
+                        }
+                    }
+                    else if (attackFrames > activeMove.hurtboxes[i].end)
+                    {
+                        if (hurtboxes.Count == i + 1)
+                        {
+                            if (activeMove.hurtboxes != null)
+                            {
+                                Destroy(hurtboxes[i]);
+                            }
+                        }
+                    }
+                }
+    }
+    void ClearHurtboxes()
+    {
+        for (int i = 0; i < hurtboxes.Count; i++)
+        {
+            if (hurtboxes[i] != null)
+            {
+                Destroy(hurtboxes[i]);
+            }
+        }
+        hurtboxes.Clear();
+    }
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
@@ -397,6 +497,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
+        //print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move.targetComboMoves.Count > 0)
@@ -424,7 +525,7 @@ public class AttackScript : MonoBehaviour
             movement.ResetRun();
 
 
-
+        recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
         attackID = move.animationID;
         attackString = false;
@@ -434,7 +535,9 @@ public class AttackScript : MonoBehaviour
 
         attackFrames = 0;
 
+        ClearHurtboxes();
         ClearHitboxes();
+
         status.crossupState = move.crossupState;
         if (movement.ground) movement.LookAtOpponent();
         else if (angle < 90 && move.aimOnStartup) movement.LookAtOpponent();
@@ -448,6 +551,7 @@ public class AttackScript : MonoBehaviour
         Startup();
         landCancel = move.landCancel;
 
+        attackPerformedEvent?.Invoke(move);
         startupEvent?.Invoke();
         attacking = true;
         newAttack = true;
@@ -563,7 +667,19 @@ public class AttackScript : MonoBehaviour
         }
         return false;
     }
+    public bool Burst()
+    {
+        if (status.burstGauge == 6000)
+        {
 
+            AttackProperties(moveset.burst);
+            status.burstGauge = 0;
+            status.hitstunValue = 0;
+            return true;
+        }
+        else return false;
+
+    }
     public bool Attack(Move move)
     {
         if (jumpDelay) return false;
@@ -587,7 +703,7 @@ public class AttackScript : MonoBehaviour
 
     void Land()
     {
-
+        recoverOnlyOnLand = false;
         if (landCancel)
         {
             newAttack = false;
@@ -611,9 +727,14 @@ public class AttackScript : MonoBehaviour
 
     public void JumpCancel()
     {
-        if (attacking) status.rb.velocity = Vector3.zero;
+        if (attacking)
+        {
+            status.rb.velocity = Vector3.zero;
+            jumpCancelEvent?.Invoke();
+        }
         if (mainMoveset != null) moveset = mainMoveset;
 
+        jumpEvent?.Invoke();
         status.GoToState(Status.State.Recovery);
         attackString = false;
         movementOption = null;
@@ -624,6 +745,7 @@ public class AttackScript : MonoBehaviour
         }
 
         combo = 0;
+        ClearHurtboxes();
         ClearHitboxes();
         attacking = false;
         landCancel = false;
@@ -638,7 +760,8 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         if (mainMoveset != null) moveset = mainMoveset;
-
+        ClearHurtboxes();
+        ClearHitboxes();
         newAttack = false;
         attackString = false;
         if (activeMove != null)
@@ -667,14 +790,21 @@ public class AttackScript : MonoBehaviour
         //Cucks airdash
         //movement.storedDirection = Vector3.zero;
 
-        ClearHitboxes();
+
     }
 
     public void ThrowBreak()
     {
-        ResetAllValues();
-        status.GoToState(Status.State.Neutral);
-        movement.LookAtOpponent();
+        throwBreakCounter = 0;
+        AttackProperties(moveset.throwBreak);
+        //ResetAllValues();
+        //status.GoToState(Status.State.Neutral);
+        //movement.LookAtOpponent();
+    }
+    public void TakeThrow()
+    {
+        attacking = false;
+
     }
 
     public void Idle()

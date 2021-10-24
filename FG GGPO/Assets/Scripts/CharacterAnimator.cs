@@ -73,7 +73,7 @@ public class CharacterAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+
 
     }
 
@@ -109,7 +109,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        //if(GameHandler.Instance)
         // ExecuteFrame();
     }
 
@@ -117,6 +117,24 @@ public class CharacterAnimator : MonoBehaviour
     {
         if (!GameHandler.Instance.runNormally) anim.enabled = true;
         anim.SetBool("Cutscene", GameHandler.cutscene);
+        if (GameHandler.Instance.superFlash)
+        {
+            if (attack.superCounter > 0)
+            {
+                anim.speed = 0.5F;
+            }
+            else
+            {
+                anim.enabled = false;
+                StartCoroutine(PauseAnimation());
+                return;
+            }
+        }
+        else
+        {
+            anim.speed = 1;
+        }
+
 
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
 
@@ -129,7 +147,10 @@ public class CharacterAnimator : MonoBehaviour
         }
         StatusAnimation();
         BlockAnimation();
-
+        //if (status.hitstopCounter > 0)
+        //    anim.speed = 1 / status.hitstopCounter;
+        //else
+        //    anim.speed = 1;
         anim.enabled = !hitstop;
         MovementAnimation();
         if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());
@@ -241,7 +262,7 @@ public class CharacterAnimator : MonoBehaviour
         else if (Mathf.Abs(status.pushbackVector.y) < 0.1F) anim.SetInteger("Falling", 0);
         else anim.SetInteger("Falling", 1);
 
-        anim.SetBool("Knockdown", false);
+        //anim.SetBool("Knockdown", false);
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
@@ -257,7 +278,7 @@ public class CharacterAnimator : MonoBehaviour
         else if (Mathf.Abs(status.pushbackVector.y) < 0.1F) anim.SetInteger("Falling", 0);
         else anim.SetInteger("Falling", 1);
 
-        anim.SetBool("Knockdown", false);
+        //anim.SetBool("Knockdown", false);
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
@@ -266,13 +287,14 @@ public class CharacterAnimator : MonoBehaviour
 
     void Knockdown()
     {
+        print("Knockdown bool");
         anim.SetBool("Knockdown", true);
         anim.SetTrigger("Hit");
 
     }
     void WakeUp()
     {
-        anim.SetBool("Knockdown", false);
+      anim.SetBool("Knockdown", false);
     }
 
     void MovementAnimation()
@@ -285,7 +307,7 @@ public class CharacterAnimator : MonoBehaviour
 
 
         anim.SetBool("Walking", movement.isMoving);
-        anim.SetBool("Crouch", movement.crouching);
+        anim.SetBool("Crouch", status.blockState == BlockState.Crouching);
         anim.SetBool("Run", movement.sprinting);
         x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, strafeSmooth);
         y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, strafeSmooth);

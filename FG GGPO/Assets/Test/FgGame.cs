@@ -101,7 +101,6 @@ public struct FgGame : IGame
     {
         Framenumber = br.ReadInt32();
         int length = br.ReadInt32();
-        Debug.Log("ROLLBACK I THINK");
         if (length != _players.Length)
         {
             _players = new OnlinePlayer[length];
@@ -136,18 +135,6 @@ public struct FgGame : IGame
         }
     }
 
-    private static float DegToRad(float deg)
-    {
-        return PI * deg / 180;
-    }
-
-    private static float Distance(Vector2 lhs, Vector2 rhs)
-    {
-        float x = rhs.x - lhs.x;
-        float y = rhs.y - lhs.y;
-        return Mathf.Sqrt(x * x + y * y);
-    }
-
     public FgGame(int num_players)
     {
         Framenumber = 0;
@@ -158,7 +145,6 @@ public struct FgGame : IGame
             _players[i].health = STARTING_HEALTH;
         }
     }
-
     public void GetShipAI(int i, out bool[] directional, out bool[] buttons)
     {
         bool[] temp = new bool[4];
@@ -172,7 +158,6 @@ public struct FgGame : IGame
         buttons = tempButtons;
         directional = temp;
     }
-
     public void ParseShipInputs(long inputs, int i, out bool[] directional, out bool[] buttons)
     {
         var ship = _players[i];
@@ -199,8 +184,6 @@ public struct FgGame : IGame
         buttons = but;
 
     }
-
-
     public void LogInfo(string filename)
     {
         string fp = "";

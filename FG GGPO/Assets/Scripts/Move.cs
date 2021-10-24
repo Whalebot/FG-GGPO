@@ -1,21 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using System.Reflection;
 
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
-
+    [TabGroup("Description")] public string moveName;
+    [TabGroup("Description")] [PreviewField] public Sprite sprite;
+    [TabGroup("Description")] public InputDirection moveDirection;
+    [TabGroup("Description")] public ButtonInput moveButton;
+    [TabGroup("Description")] public string moveInput;
+    [TabGroup("Description")] [TextArea] public string description;
     [TabGroup("Attacks")] public AttackLevel attackLevel;
     [TabGroup("Attacks")] public MoveType type;
-    [TabGroup("Attacks")] 
+    [TabGroup("Attacks")]
     [ShowIf("@type == MoveType.EX || type == MoveType.Super")]
     public int meterCost;
+    [TabGroup("Attacks")] [ShowIf("@type == MoveType.Super")] [HideLabel] public SuperFlash superFlash;
     [TabGroup("Attacks")] public BlockState collissionState;
     [TabGroup("Attacks")] public GroundState groundState;
-    
+
     [TabGroup("Attacks")] public Moveset stance;
     [TabGroup("Attacks")] public Move throwFollowup;
     [TabGroup("Attacks")] public Attack[] attacks;
@@ -31,9 +38,7 @@ public class Move : ScriptableObject
 
     [TabGroup("Animation")] public int animationID;
     [TabGroup("Animation")] public int hitID;
-    [TabGroup("Animation")] public string moveName;
-    [TabGroup("Animation")] 
-    [TextArea ]public string description;
+
 
     [Header("Read Only")]
     public int firstStartupFrame;
@@ -52,6 +57,7 @@ public class Move : ScriptableObject
 
     [FoldoutGroup("Momentum")]
     public Momentum[] m;
+    public CustomHurtbox[] hurtboxes;
 
     [FoldoutGroup("Cancel properties")] public List<Move> targetComboMoves;
     [FoldoutGroup("Cancel properties")] public List<Move> gatlingMoves;
@@ -114,6 +120,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Air properties")] public bool aimOnStartup;
     [FoldoutGroup("Air properties")] public bool useAirAction;
     [FoldoutGroup("Air properties")] public bool landCancel;
+    [FoldoutGroup("Air properties")] public bool recoverOnlyOnLand;
     [FoldoutGroup("Air properties")] public int landingRecovery;
 
     [FoldoutGroup("Momentum")] public bool overrideVelocity = true;
@@ -465,7 +472,7 @@ public class VFX
 [System.Serializable]
 public class CustomHurtbox
 {
-    public int startup = 1;
+    public int startFrame = 1;
     public int end = 1;
     public GameObject prefab;
 }
@@ -511,4 +518,12 @@ public class HitProperty
     public Vector3 pushback;
     public HitState hitState;
     public int hitID = 0;
+}
+
+[System.Serializable]
+public class SuperFlash
+{
+    public GameObject superPrefab;
+    public int startFrame = 1;
+    public int duration;
 }

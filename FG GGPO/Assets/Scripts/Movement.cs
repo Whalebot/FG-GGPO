@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
         //CalculateRight(1);
         if (GameHandler.isPaused)
         {
-            isMoving = false;
+           // isMoving = false;
             return;
         }
 
@@ -126,15 +126,17 @@ public class Movement : MonoBehaviour
             MovementProperties();
             Rotation();
             PlayerMovement();
+
+            if (direction != Vector3.zero)
+            {
+                isMoving = true;
+            }
+            else { isMoving = false; }
         }
 
         if (rb.velocity.y < 0 && status.groundState == GroundState.Airborne) rb.velocity += Physics.gravity * fallMultiplier;
 
-        if (direction != Vector3.zero)
-        {
-            isMoving = true;
-        }
-        else { isMoving = false; }
+      
 
         GroundDetection();
     }
@@ -311,7 +313,7 @@ public class Movement : MonoBehaviour
             Vector3 v2 = transform.position;
             v2.y = 0;
             float playerDist = Vector3.Distance(v1, v2);
-            if (transform.position.y <= 1.2F && playerDist <= 0.75F)
+            if (rb.velocity.y < 0 && transform.position.y <= 1.2F && transform.position.y >= 0.25F && playerDist <= 0.75F)
                 status.AirCollider();
             else status.EnableCollider();
         }
@@ -321,7 +323,6 @@ public class Movement : MonoBehaviour
             runDirection = Vector3.zero;
             landEvent?.Invoke();
             performedJumps = 0;
-            status.GoToGroundState(GroundState.Grounded);
             ground = true;
             runMomentumCounter = 0;
             status.EnableCollider();

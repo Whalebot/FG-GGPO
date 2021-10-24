@@ -29,7 +29,7 @@ MonoBehaviour:
   LB: {fileID: 0}
   RB: {fileID: 0}
   sC: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
-  cC: {fileID: 0}
+  cC: {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   fC: {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   bC: {fileID: 0}
   jC: {fileID: 0}
@@ -50,4 +50,15 @@ MonoBehaviour:
   leftDash: {fileID: 0}
   airdashF: {fileID: 0}
   airdashB: {fileID: 0}
-  specials: []
+  neutralTech: {fileID: 0}
+  backTech: {fileID: 0}
+  forwadTech: {fileID: 0}
+  leftTech: {fileID: 0}
+  rightTech: {fileID: 0}
+  airTech: {fileID: 0}
+  burst: {fileID: 11400000, guid: 832efc469cb973b44b4ac661b4b8271c, type: 2}
+  specials:
+  - motionInput: 2
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}

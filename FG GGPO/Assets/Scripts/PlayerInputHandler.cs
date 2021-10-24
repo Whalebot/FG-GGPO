@@ -34,7 +34,16 @@ public class PlayerInputHandler : MonoBehaviour
         status = GetComponent<Status>();
         GameHandler.Instance.rollbackTick += RollbackTick;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        input.startInput += GameHandler.Instance.PauseMenu;
+
         mov = GetComponent<Movement>();
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.Instance.rollbackTick -= RollbackTick;
+        GameHandler.Instance.advanceGameState -= ExecuteFrame;
+        input.startInput -= GameHandler.Instance.PauseMenu;
     }
 
     Vector3 RelativeToCamera(Vector2 v)
@@ -47,18 +56,15 @@ public class PlayerInputHandler : MonoBehaviour
         return temp;
     }
 
-
-
-    private void FixedUpdate()
-    {
-        //ExecuteFrame();
-    }
-
     public void ExecuteFrame()
     {
         if (GameHandler.isPaused || GameHandler.cutscene)
         {
             mov.direction = Vector3.zero;
+            return;
+        }
+        if (GameHandler.Instance.superFlash)
+        {
             return;
         }
         relativeDirection = RelativeToCamera(input.inputDirection);
@@ -68,14 +74,14 @@ public class PlayerInputHandler : MonoBehaviour
         //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
-            if(!status.autoBlock)
-            status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
+            if (!status.autoBlock)
+                status.blocking = 90 < Vector3.Angle(mov.strafeTarget.position - transform.position, relativeDirection);
 
             if (mov.ground)
             {
                 mov.crouching = input.netButtons[5];
 
-                if (mov.crouching) status.SetBlockState(BlockState.Crouching);
+                if (input.netButtons[5]) status.SetBlockState(BlockState.Crouching);
                 else status.SetBlockState(BlockState.Standing);
             }
             else status.SetBlockState(BlockState.Airborne);
@@ -92,6 +98,27 @@ public class PlayerInputHandler : MonoBehaviour
         else if (status.currentState == Status.State.LockedAnimation)
         {
             LockedAnimationInput();
+        }
+        else if (status.currentState == Status.State.Wakeup)
+        {
+            WakeupInput();
+        }
+        else if (status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun)
+        {
+            for (int i = 0; i < input.bufferedInputs.Count; i++)
+            {
+                //Burst  
+                int bufferID = -1;
+                if (input.bufferedInputs[i].id == 9)
+                {
+                    if (attack.Burst())
+                    {
+                        bufferID = i;
+                        DeleteInputs(bufferID);
+                        break;
+                    }
+                }
+            }
         }
 
         mov.direction = relativeDirection;
@@ -113,19 +140,37 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (input.dash) mov.sprinting = true;
         if (input.directionals.Count > 0)
-            //if (input.directionals[input.directionals.Count - 1] == 2 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
             if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
 
         ProcessBuffer();
     }
-
-    public void SpecialInputs()
+    void WakeupInput()
     {
-        foreach (var item in attack.moveset.specials)
-        {
-            if (item.motionInput == SpecialInput.BackForward)
-            {
 
+
+        for (int i = 0; i < input.netButtons.Length; i++)
+        {
+            if (input.netButtons[i] || !input.deviceIsAssigned)
+            {
+                if (status.groundState != GroundState.Airborne)
+                {
+                    if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
+                    else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.forwadTech); }
+                    else if (input.Direction() == 6) { attack.AttackProperties(attack.moveset.rightTech); }
+                    else if (input.Direction() == 4) { attack.AttackProperties(attack.moveset.leftTech); }
+                    else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.backTech); }
+                }
+                else
+                {
+
+                    if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.airFTech); }
+                    else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.airBTech); }
+                    else  { attack.AttackProperties(attack.moveset.airTech); }
+                }
+
+                if (input.bufferedInputs.Count > 0)
+                    DeleteInputs(0);
+                return;
             }
         }
     }
@@ -136,6 +181,26 @@ public class PlayerInputHandler : MonoBehaviour
         bool doSpecial = false;
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
+            ////Burst  
+            //if (input.bufferedInputs[i].id == 9)
+            //{
+            //    if (attack.Burst())
+            //    {
+            //        bufferID = i;
+            //        DeleteInputs(bufferID);
+            //        break;
+            //    }
+            //}
+
+            ////RC
+            //if (input.bufferedInputs[i].id == 8)
+            //{
+            //    if (status.groundState == GroundState.Grounded)
+            //    {
+            //        attack.Attack(attack.moveset.grabF);
+            //    }
+            //}
+
             //Jump Button
             if (input.bufferedInputs[i].id == 3)
             {
@@ -158,7 +223,6 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     if (item.motionInput == SpecialInput.QCF)
                     {
-                        //
                         if (input.qcf)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
@@ -173,9 +237,54 @@ public class PlayerInputHandler : MonoBehaviour
                         }
 
                     }
-                   else if (item.motionInput == SpecialInput.BackForward)
+                    else if (item.motionInput == SpecialInput.QCB)
                     {
-                        //
+                        if (input.qcb)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    else if (item.motionInput == SpecialInput.Input478)
+                    {
+                        if (input.mI478)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (item.motionInput == SpecialInput.Input698)
+                    {
+                        if (input.mI698)
+                        {
+                            if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
+                            {
+                                if (attack.Attack(item.move))
+                                {
+                                    doSpecial = true;
+                                    bufferID = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (item.motionInput == SpecialInput.BackForward)
+                    {
                         if (input.bf)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
@@ -192,7 +301,7 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     else if (item.motionInput == SpecialInput.DownDown)
                     {
-                        if (input.CheckDownDown())
+                        if (input.dd)
                         {
                             if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput)
                             {
@@ -260,7 +369,7 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 if (status.groundState == GroundState.Grounded)
                 {
-                    attack.Attack(attack.moveset.grabF);
+                    attack.Attack(attack.moveset.throwF);
                 }
             }
             //A Button
@@ -561,7 +670,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             ProcessBuffer();
         }
-
     }
 
     void LockedAnimationInput()
@@ -569,7 +677,6 @@ public class PlayerInputHandler : MonoBehaviour
         int bufferID = -1;
         for (int i = 0; i < input.bufferedInputs.Count; i++)
         {
-
             if (status.currentState == Status.State.LockedAnimation && status.throwBreakCounter > 0)
             {
                 if (input.bufferedInputs[i].id == 7)
