@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: Loli moveset
   m_EditorClassIdentifier: 
   sA: {fileID: 11400000, guid: f49dd89bac8d71249badacda80ce37a2, type: 2}
+  sB: {fileID: 11400000, guid: 07a850d9de9dc1a43a4495036fca67e0, type: 2}
+  sC: {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
   cA: {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
+  cB: {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
+  cC: {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
   fA: {fileID: 0}
+  fB: {fileID: 11400000, guid: f3687893955997941b4f4bfa8582d4b8, type: 2}
+  fC: {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   bA: {fileID: 0}
-  jA: {fileID: 11400000, guid: 8dd7288b44a640d4bbd807e24eb87433, type: 2}
-  jcA: {fileID: 0}
+  bB: {fileID: 0}
+  bC: {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
   LA: {fileID: 0}
   RA: {fileID: 0}
-  sB: {fileID: 11400000, guid: 07a850d9de9dc1a43a4495036fca67e0, type: 2}
-  cB: {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
-  fB: {fileID: 11400000, guid: f3687893955997941b4f4bfa8582d4b8, type: 2}
-  bB: {fileID: 0}
-  jB: {fileID: 11400000, guid: 4f8cf43358c210549a5c88e5f963e222, type: 2}
-  jcB: {fileID: 0}
   LB: {fileID: 0}
   RB: {fileID: 0}
-  sC: {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
-  cC: {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
-  fC: {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
-  bC: {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
-  jC: {fileID: 11400000, guid: 527cdb02932b69f4b9a34fcbeaa32a71, type: 2}
-  jcC: {fileID: 0}
   LC: {fileID: 0}
   RC: {fileID: 0}
+  jA: {fileID: 11400000, guid: 8dd7288b44a640d4bbd807e24eb87433, type: 2}
+  jcA: {fileID: 0}
+  jB: {fileID: 11400000, guid: 4f8cf43358c210549a5c88e5f963e222, type: 2}
+  jcB: {fileID: 0}
+  jC: {fileID: 11400000, guid: 527cdb02932b69f4b9a34fcbeaa32a71, type: 2}
+  jcC: {fileID: 0}
   sD: {fileID: 11400000, guid: 8a3e7fcb9c58dad4bbaf52fd35cdebb3, type: 2}
   cD: {fileID: 11400000, guid: 679bbb51825a6994bba9285dd42a77e9, type: 2}
   bD: {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
@@ -44,7 +44,6 @@ MonoBehaviour:
   jcD: {fileID: 0}
   LD: {fileID: 0}
   RD: {fileID: 0}
-  grabF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   backDash: {fileID: 11400000, guid: 499bb2b47f9ed9046a64473c7b41f433, type: 2}
   rightDash: {fileID: 11400000, guid: 3925325277850d448b24e2d6e238000c, type: 2}
   leftDash: {fileID: 11400000, guid: 424f743fb3917c149886fac91abce870, type: 2}
@@ -56,7 +55,11 @@ MonoBehaviour:
   leftTech: {fileID: 11400000, guid: 61db3035516316d4a811861650534266, type: 2}
   rightTech: {fileID: 11400000, guid: 5c311c481a6b6a44198675675cdeb938, type: 2}
   airTech: {fileID: 0}
-  burst: {fileID: 0}
+  airFTech: {fileID: 0}
+  airBTech: {fileID: 0}
+  burst: {fileID: 11400000, guid: 832efc469cb973b44b4ac661b4b8271c, type: 2}
+  throwF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  throwBreak: {fileID: 11400000, guid: d7e58a7282faebc4284f18dec9403dfc, type: 2}
   specials:
   - motionInput: 2
     buttonInput: 4
