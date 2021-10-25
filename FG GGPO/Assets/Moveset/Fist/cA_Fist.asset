@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: cA_Fist
   m_EditorClassIdentifier: 
+  moveName: c.A
+  sprite: {fileID: 0}
+  moveDirection: 1
+  moveButton: 0
+  moveInput: c.A
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -98,9 +104,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 20
   hitID: 0
-  moveName: 
-  moveInput: c.A
-  description: 
   firstStartupFrame: 12
   lastActiveFrame: 14
   totalMoveDuration: 34

@@ -112,7 +112,8 @@ MonoBehaviour:
   destroyOnBlock: 1
   destroyOnHit: 1
   life: 0
-  velocity: 15
+  lifetime: 0
+  velocity: 20
   destroyOnProjectileClash: 1
   destroyOnHitboxClash: 1
   rb: {fileID: 0}

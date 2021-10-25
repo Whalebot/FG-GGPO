@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Special 2
   m_EditorClassIdentifier: 
+  moveName: Special 478/698.B
+  sprite: {fileID: 0}
+  moveDirection: 3
+  moveButton: 1
+  moveInput: 478/698.B
+  description: 
   attackLevel: 0
   type: 1
   meterCost: 0
@@ -96,8 +102,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 83
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
   totalMoveDuration: 49
@@ -113,6 +117,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 5, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1
@@ -155,6 +160,7 @@ MonoBehaviour:
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1

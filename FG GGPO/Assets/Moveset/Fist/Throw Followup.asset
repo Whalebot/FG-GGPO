@@ -42,7 +42,7 @@ MonoBehaviour:
       damage: 1000
       stun: 70
       hitstop: 20
-      proration: 0.8
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: -5}
       hitState: 1
@@ -57,10 +57,10 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
-      stun: 27
-      hitstop: 10
-      proration: 0.95
+      damage: 1250
+      stun: 80
+      hitstop: 25
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 2
@@ -84,10 +84,10 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1000
-      stun: 100
-      hitstop: 30
-      proration: 0.95
+      damage: 1250
+      stun: 110
+      hitstop: 35
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
