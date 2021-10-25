@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Super_Fist
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: qcf.D
+  description: 
   attackLevel: 4
-  type: 4
+  type: 5
   meterCost: 0
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
@@ -105,9 +111,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 2000
   hitID: 0
-  moveName: 
-  moveInput: qcf.D
-  description: 
   firstStartupFrame: 7
   lastActiveFrame: 21
   totalMoveDuration: 51

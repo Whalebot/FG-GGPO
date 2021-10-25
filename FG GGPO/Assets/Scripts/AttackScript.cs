@@ -505,6 +505,8 @@ public class AttackScript : MonoBehaviour
             status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame + 1;
         }
 
+        if (move.type == MoveType.EX)
+            Instantiate(VFXManager.Instance.exMoveVFX, transform.position, transform.rotation);
         status.Meter -= move.meterCost;
         status.minusFrames = -(move.totalMoveDuration);
         status.EnableCollider();
