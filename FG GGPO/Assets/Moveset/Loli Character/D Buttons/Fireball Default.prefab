@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6130433937859647868}
   - component: {fileID: 7669256977086027473}
   m_Layer: 16
-  m_Name: Fireball Up
+  m_Name: Fireball Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,15 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130433937859647811}
-  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
-  - {fileID: 2927409800503549363}
-  - {fileID: 4888163116889832088}
+  - {fileID: 2100187987340079498}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6130433937859647871
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,7 +112,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &7669256977086027473
 MonoBehaviour:
@@ -145,72 +144,10 @@ MonoBehaviour:
   lifetime: 0
   velocity: 15
   destroyOnProjectileClash: 1
-  destroyOnHitboxClash: 1
+  destroyOnHitboxClash: 0
   rb: {fileID: 0}
   hit: 0
---- !u!1001 &1064021471999447345
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6130433937859647864}
-    m_Modifications:
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553527201595373449, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-      propertyPath: m_Name
-      value: ArcaneOrbitSphere 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
---- !u!4 &4888163116889832088 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5553527201594878889, guid: b4866554982c0084f8d6f6a2a9a7bf99, type: 3}
-  m_PrefabInstance: {fileID: 1064021471999447345}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2927409800503674683
+--- !u!1001 &2100187987340208898
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -279,8 +216,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9aec8d4db6354b409031ef9b1ed9777, type: 3}
---- !u!4 &2927409800503549363 stripped
+--- !u!4 &2100187987340079498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: a9aec8d4db6354b409031ef9b1ed9777, type: 3}
-  m_PrefabInstance: {fileID: 2927409800503674683}
+  m_PrefabInstance: {fileID: 2100187987340208898}
   m_PrefabAsset: {fileID: 0}

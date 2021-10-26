@@ -10,8 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Delay_Fireball_Ground_Loli
+  m_Name: Delay_Fireball_Air_Loli
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -98,23 +104,22 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 63
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 15
   lastActiveFrame: 15
-  totalMoveDuration: 45
+  totalMoveDuration: 35
   firstGatlingFrame: 20
-  blockAdvantage: -5
-  hitAdvantage: 0
+  blockAdvantage: 5
+  hitAdvantage: 10
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
-  recoveryFrames: 30
+  recoveryFrames: 20
   m:
-  - startFrame: 15
-    duration: 10
-    momentum: {x: 0, y: 0, z: 0}
+  - startFrame: 1
+    duration: 25
+    momentum: {x: 0, y: 2, z: 0}
     homing: 0
     resetVelocityDuringRecovery: 0
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
   gatlingCancelOnBlock: 1

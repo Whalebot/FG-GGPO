@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: 6D_Loli
+  m_Name: 5DD_Loli
   m_EditorClassIdentifier: 
-  moveName: f.D
+  moveName: DD
   sprite: {fileID: 0}
-  moveDirection: 3
+  moveDirection: 0
   moveButton: 4
-  moveInput: f.D
+  moveInput: DD
   description: 
   attackLevel: 0
   type: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 6130433937859647811, guid: 1cdf2a8c8aa3479499a75b3dfdcfa6ef, type: 3}
+  - hitbox: {fileID: 6130433937859647811, guid: 25a33728d54d31c4c885f79e5d009eaa, type: 3}
     startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
@@ -39,8 +39,8 @@ MonoBehaviour:
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 1000
-      stun: 20
+      damage: 700
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -48,48 +48,48 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundBlockProperty:
-      damage: 0
+      damage: 50
       stun: 15
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
-      stun: 20
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 875
+      stun: 50
+      hitstop: 15
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 1000
-      stun: 20
+      damage: 700
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airBlockProperty:
-      damage: 0
-      stun: 10
+      damage: 50
+      stun: 15
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1000
-      stun: 20
-      hitstop: 10
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 5, z: 10}
+      damage: 875
+      stun: 50
+      hitstop: 15
+      proration: 1
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
   vfx: []
@@ -109,25 +109,31 @@ MonoBehaviour:
   totalMoveDuration: 45
   firstGatlingFrame: 20
   blockAdvantage: -5
-  hitAdvantage: 0
+  hitAdvantage: 20
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
   recoveryFrames: 30
   m:
   - startFrame: 15
-    duration: 10
-    momentum: {x: 0, y: 0, z: 0}
+    duration: 2
+    momentum: {x: 0, y: 0, z: -4}
     homing: 0
     resetVelocityDuringRecovery: 0
   hurtboxes: []
-  targetComboMoves: []
-  gatlingMoves: []
+  targetComboMoves:
+  - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
+  gatlingMoves:
+  - {fileID: 11400000, guid: f3afe6d567c94f44fbea2563de44d175, type: 2}
+  - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
+  - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
+  - {fileID: 11400000, guid: e00fc94eab26c00458c1727c17fc79d3, type: 2}
+  - {fileID: 11400000, guid: ab46b5c6658ac9142a89a8eafcffade6, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
-  specialCancelOnBlock: 0
-  specialCancelOnHit: 0
+  specialCancelOnBlock: 1
+  specialCancelOnHit: 1
   noClip: 0
   noClipStart: 1
   noClipDuration: 10
@@ -156,9 +162,8 @@ MonoBehaviour:
   noHitstopOnSelf: 1
   crossupState: 0
   forcedCounterHit: 0
-  projectileLimit: 1
-  sharedLimitProjectiles:
-  - {fileID: 11400000}
+  projectileLimit: 0
+  sharedLimitProjectiles: []
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
@@ -166,4 +171,4 @@ MonoBehaviour:
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1
-  resetVelocityDuringRecovery: 0
+  resetVelocityDuringRecovery: 1

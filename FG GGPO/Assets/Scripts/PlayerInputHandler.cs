@@ -146,15 +146,13 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void WakeupInput()
     {
-
-
         for (int i = 0; i < input.netButtons.Length; i++)
         {
             if (input.netButtons[i] || !input.deviceIsAssigned)
             {
                 if (status.groundState != GroundState.Airborne)
                 {
-                    if (input.Direction() == 5) { attack.AttackProperties(attack.moveset.neutralTech); }
+                    if (input.Direction() == 5 || input.netButtons[0]) { attack.AttackProperties(attack.moveset.neutralTech); }
                     else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.forwadTech); }
                     else if (input.Direction() == 6) { attack.AttackProperties(attack.moveset.rightTech); }
                     else if (input.Direction() == 4) { attack.AttackProperties(attack.moveset.leftTech); }
@@ -162,10 +160,9 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 else
                 {
-
-                    if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.airFTech); }
+                    if (input.Direction() == 5 || input.netButtons[0]) { attack.AttackProperties(attack.moveset.airTech); }
+                    else if (input.Direction() == 8) { attack.AttackProperties(attack.moveset.airFTech); }
                     else if (input.Direction() == 2) { attack.AttackProperties(attack.moveset.airBTech); }
-                    else  { attack.AttackProperties(attack.moveset.airTech); }
                 }
 
                 if (input.bufferedInputs.Count > 0)

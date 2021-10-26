@@ -497,13 +497,14 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-        //print(move);
+        print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
-        if (move.targetComboMoves.Count > 0)
-        {
-            status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame + 1;
-        }
+        if (move != null)
+            if (move.targetComboMoves.Count > 0)
+            {
+                status.cancelMinusFrames = move.totalMoveDuration - move.firstGatlingFrame + 1;
+            }
 
         if (move.type == MoveType.EX)
             Instantiate(VFXManager.Instance.exMoveVFX, transform.position, transform.rotation);
