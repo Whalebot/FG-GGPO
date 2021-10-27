@@ -8,6 +8,7 @@ public class Combo : ScriptableObject
     public string description;
     public StagePosition startPosition;
     public bool counterhit;
+    public int meter;
     public InputLog comboDemonstration;
     public Action[] actions;
 }
