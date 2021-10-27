@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 5A_Fist
   m_EditorClassIdentifier: 
+  moveName: Jab
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: A
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -98,11 +104,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 50
   hitID: 0
-  moveName: Jab
-  moveDirection: 0
-  moveButton: 0
-  moveInput: A
-  description: 
   firstStartupFrame: 8
   lastActiveFrame: 8
   totalMoveDuration: 23
@@ -122,10 +123,11 @@ MonoBehaviour:
   targetComboMoves:
   - {fileID: 11400000, guid: 346a2cc5f15250b48bb024085c62c391, type: 2}
   gatlingMoves:
+  - {fileID: 11400000, guid: 537a21d96b74e974ab042b540a4fa8f6, type: 2}
   - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
   - {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
-  - {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}

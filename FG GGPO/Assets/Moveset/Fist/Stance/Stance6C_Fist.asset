@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Stance6C_Fist
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 3
+  moveButton: 3
+  moveInput: Dynamic f.C
+  description: 
   attackLevel: 4
   type: 0
   meterCost: 0
@@ -105,9 +111,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 1006
   hitID: 0
-  moveName: 
-  moveInput: Dynamic f.C
-  description: 
   firstStartupFrame: 30
   lastActiveFrame: 34
   totalMoveDuration: 49
