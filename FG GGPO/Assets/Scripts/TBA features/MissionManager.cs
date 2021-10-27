@@ -38,6 +38,7 @@ public class MissionManager : MonoBehaviour
         playerAttack.attackHitEvent += ActionHit;
         playerAttack.attackPerformedEvent += ActionPerformed;
         dummyStatus.recoveryEvent += FailedMission;
+        GameHandler.Instance.resetEvent += FailedMission;
         comboTrials = GameHandler.Instance.characters[GameHandler.p1CharacterID].comboTrials;
         ChangeComboTrial(0);
     }
@@ -59,6 +60,7 @@ public class MissionManager : MonoBehaviour
         InputLog log = new InputLog();
         log.inputs = new List<Input>();
 
+        playerStatus.meter = activeComboTrial.meter;
         dummyStatus.forcedCounterhit = activeComboTrial.counterhit;
         foreach (var item in activeComboTrial.comboDemonstration.inputs)
         {
