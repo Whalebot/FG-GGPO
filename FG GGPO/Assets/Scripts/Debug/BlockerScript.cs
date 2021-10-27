@@ -6,8 +6,12 @@ public class BlockerScript : MonoBehaviour
 {
     public Collider[] playerColliders;
     public Collider playerBlockerCollider;
+    public Rigidbody rb;
+    public Movement mov;
+    public Vector3 ownVelocity;
+    public Vector3 pushVelocity;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         foreach (var item in playerColliders)
         {
@@ -17,13 +21,14 @@ public class BlockerScript : MonoBehaviour
 
     }
 
-    private void OnCollissionExit(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        print("Test");
-        Vector3 vel = collision.collider.attachedRigidbody.velocity;
-        vel.x = 0;
-        vel.z = 0;
-        collision.collider.attachedRigidbody.velocity = vel;
-        playerBlockerCollider.attachedRigidbody.velocity = vel;
+        if (collision.rigidbody != null)
+        {
+            ownVelocity = new Vector3((mov.storedDirection.normalized * mov.actualVelocity).x, rb.velocity.y, (mov.storedDirection.normalized * mov.actualVelocity).z);
+            ownVelocity.y = 0;
+            pushVelocity = ownVelocity * 0.5F;
+            collision.gameObject.GetComponent<Status>().pushVelocity = pushVelocity;
+        }
     }
 }
