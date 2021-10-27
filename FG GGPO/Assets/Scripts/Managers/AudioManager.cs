@@ -5,7 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public bool randomSong;
-    public int bgmID;
+    public static int bgmID = -1;
+    public int bgmIDEditor;
     public AudioClip[] BGM;
     public AudioSource bgmAudioSource;
     // Start is called before the first frame update
@@ -15,14 +16,16 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    void StartMusic() {
-        if (randomSong)
-            bgmID = Random.Range(0, BGM.Length);
+    void StartMusic()
+    {
+        if (bgmIDEditor > 0) bgmID = bgmIDEditor;
+        if (bgmID == -1) randomSong = true;
 
-        if (bgmID <= BGM.Length - 1)
-        {
-            bgmAudioSource.clip = BGM[bgmID];
-            bgmAudioSource.Play();
-        }
+        if (randomSong)
+            bgmID = Random.Range(0, BGM.Length - 1);
+
+        bgmAudioSource.clip = BGM[bgmID];
+        bgmAudioSource.Play();
+
     }
 }
