@@ -89,6 +89,7 @@ public class Status : MonoBehaviour
     public int lastAttackDamage;
     public int comboDamage;
     public float proration;
+    public Vector3 pushVelocity;
 
     [FoldoutGroup("Components")] public GameObject standingHurtbox;
     [FoldoutGroup("Components")] public GameObject crouchingHurtbox;
@@ -430,6 +431,7 @@ public class Status : MonoBehaviour
     }
 
 
+
     void StateMachine()
     {
         if (currentState == State.Neutral && HitStun > 0)
@@ -444,12 +446,13 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 counterhitState = forcedCounterhit;
                 if (autoBlock) blocking = true;
-
+               // PushVelocity();
                 break;
             case State.Hitstun:
                 blocking = false;
 
                 ResolveHitstun();
+              //  PushVelocity();
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
@@ -461,6 +464,7 @@ public class Status : MonoBehaviour
                 blocking = false;
                 // ResolveKnockdown();
                 ResolveHitstun();
+             //   PushVelocity();
                 minusFrames = -HitStun;
                 break;
             case State.Wakeup:

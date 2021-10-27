@@ -76,22 +76,8 @@ public class Movement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
-
-    private void FixedUpdate()
-    {
-        //CalculateRight(1);
-        if (GameHandler.isPaused)
-        {
-           // isMoving = false;
-            return;
-        }
-
-        //ExecuteFrame();
-    }
     public Vector3 CalculateRight(float f)
     {
-
-
         Vector3 targetNoY = strafeTarget.position;
         targetNoY.y = transform.position.y;
         float distance = Vector3.Distance(targetNoY, transform.position);
@@ -135,9 +121,6 @@ public class Movement : MonoBehaviour
         }
 
         if (rb.velocity.y < 0 && status.groundState == GroundState.Airborne) rb.velocity += Physics.gravity * fallMultiplier;
-
-      
-
         GroundDetection();
     }
 
@@ -333,7 +316,11 @@ public class Movement : MonoBehaviour
         }
         return ground;
     }
-
+    public void PushVelocity()
+    {
+        rb.velocity += status.pushVelocity;
+        status.pushVelocity = Vector3.zero;
+    }
     public void PlayerMovement()
     {
         if (jumpStartCounter <= 0)
@@ -349,7 +336,6 @@ public class Movement : MonoBehaviour
                 }
                 else
                     rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z);
-                //rb.velocity = CalculateRight(activeMove.m[i].momentum.x) + transform.up * rb.velocity.y + transform.forward * ;
             }
             else
             {
@@ -365,6 +351,7 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+        PushVelocity();
     }
 
 
