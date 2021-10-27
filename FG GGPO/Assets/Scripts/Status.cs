@@ -90,7 +90,9 @@ public class Status : MonoBehaviour
     public int comboDamage;
     public float proration;
 
-    [FoldoutGroup("Components")] public GameObject defaultHurtbox;
+    [FoldoutGroup("Components")] public GameObject standingHurtbox;
+    [FoldoutGroup("Components")] public GameObject crouchingHurtbox;
+    [FoldoutGroup("Components")] public GameObject groundedHurtbox;
     [FoldoutGroup("Components")] public GameObject standingCollider;
     [FoldoutGroup("Components")] public GameObject crouchingCollider;
     [FoldoutGroup("Components")] public GameObject jumpingCollider;
@@ -225,6 +227,11 @@ public class Status : MonoBehaviour
         standingCollider.SetActive(false);
         jumpingCollider.SetActive(false);
         crouchingCollider.SetActive(false);
+
+        standingHurtbox.SetActive(false);
+        crouchingHurtbox.SetActive(false);
+        groundedHurtbox.SetActive(false);
+
         switch (groundState)
         {
             case GroundState.Grounded:
@@ -232,15 +239,24 @@ public class Status : MonoBehaviour
                 else
                 {
                     if (blockState == BlockState.Standing)
+                    {
                         standingCollider.SetActive(true);
-                    else crouchingCollider.SetActive(true);
+                        standingHurtbox.SetActive(true);
+                    }
+                    else
+                    {
+                        crouchingCollider.SetActive(true);
+                        crouchingHurtbox.SetActive(true);
+                    }
                 }
                 break;
             case GroundState.Airborne:
                 jumpingCollider.SetActive(true);
+                standingHurtbox.SetActive(true);
                 break;
             case GroundState.Knockdown:
                 crouchingCollider.SetActive(true);
+                groundedHurtbox.SetActive(true);
                 break;
             default:
                 break;
@@ -256,7 +272,6 @@ public class Status : MonoBehaviour
         crouchingCollider.layer = LayerMask.NameToLayer("AirCollision");
         jumpingCollider.layer = LayerMask.NameToLayer("AirCollision");
     }
-
     public void EnableCollider()
     {
         standingCollider.layer = LayerMask.NameToLayer("Collision");
@@ -271,12 +286,17 @@ public class Status : MonoBehaviour
     }
     public void EnableHurtboxes()
     {
-        defaultHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
+        standingHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
+        crouchingHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
+        groundedHurtbox.layer = LayerMask.NameToLayer("Hurtbox");
     }
     public void DisableHurtboxes()
     {
-        defaultHurtbox.layer = LayerMask.NameToLayer("Disabled");
+        standingHurtbox.layer = LayerMask.NameToLayer("Disabled");
+        crouchingHurtbox.layer = LayerMask.NameToLayer("Disabled");
+        groundedHurtbox.layer = LayerMask.NameToLayer("Disabled");
     }
+
     void ExecuteFrame()
     {
         if (GameHandler.Instance.superFlash)
@@ -365,7 +385,7 @@ public class Status : MonoBehaviour
 
     void AirRecovery()
     {
-      //  print("air recovery");
+        //  print("air recovery");
         Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Airborne);
         GoToState(State.Wakeup);
@@ -377,7 +397,7 @@ public class Status : MonoBehaviour
 
     void KnockdownRecovery()
     {
-       // print("kd recovery");
+        // print("kd recovery");
         // Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Wakeup);
@@ -388,7 +408,7 @@ public class Status : MonoBehaviour
 
     void GroundRecovery()
     {
-     //   print("ground recovery");
+        //   print("ground recovery");
         //Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
         GoToGroundState(GroundState.Grounded);
         GoToState(State.Neutral);
@@ -450,7 +470,7 @@ public class Status : MonoBehaviour
                 {
                     wakeupEvent?.Invoke();
                     GoToState(State.Neutral);
-                  
+
                 }
                 break;
             case State.LockedAnimation:
@@ -468,11 +488,12 @@ public class Status : MonoBehaviour
 
     public void GoToState(State transitionState)
     {
-        if (currentState == State.Wakeup && transitionState != State.Hitstun) {
+        if (currentState == State.Wakeup && transitionState != State.Hitstun)
+        {
             wakeupEvent?.Invoke();
-            Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity); 
+            Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity);
         }
-     //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
+        //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
 
         switch (transitionState)
@@ -540,7 +561,7 @@ public class Status : MonoBehaviour
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
         ResetInvincibilities();
- 
+
         if (currentState == State.Recovery)
         {
             print(currentState);

@@ -28,6 +28,13 @@ public class CharacterAnimator : MonoBehaviour
     public bool isPaused;
     private void Awake()
     {
+    
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
         animationData = new List<AnimationData>();
 
 
@@ -67,13 +74,6 @@ public class CharacterAnimator : MonoBehaviour
             attack.startupEvent += StartAttack;
             attack.recoveryEvent += AttackRecovery;
         }
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
 
     }
 
@@ -84,6 +84,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Win()
     {
+        print("Winnering");
         anim.SetTrigger("Win");
     }
 
@@ -287,7 +288,7 @@ public class CharacterAnimator : MonoBehaviour
 
     void Knockdown()
     {
-        print("Knockdown bool");
+        //print("Knockdown bool");
         anim.SetBool("Knockdown", true);
         anim.SetTrigger("Hit");
 

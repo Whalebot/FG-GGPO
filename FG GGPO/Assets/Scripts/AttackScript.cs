@@ -497,7 +497,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-        print(move);
+       // print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move != null)

@@ -569,6 +569,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -479.99988
       objectReference: {fileID: 0}
+    - target: {fileID: 5570499021391474113, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: BGM.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c59ac82279614994eac0fd91a9895392, type: 3}
+    - target: {fileID: 5570499021391474113, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: BGM.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 76febdb4aff87c74481e5728bff71a7a, type: 3}
     - target: {fileID: 5573244299268616773, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.12720506
@@ -978,12 +986,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1907155767}
     - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
-      propertyPath: p2CharacterTrainingID
-      value: -1
+      propertyPath: showHitboxes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
-      propertyPath: p1CharacterTrainingID
-      value: -1
+      propertyPath: showHurtboxes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.x

@@ -71,7 +71,7 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 6, z: 3}
+      pushback: {x: 0, y: 8, z: 2}
       hitState: 2
       hitID: 0
     airBlockProperty:
@@ -80,16 +80,16 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: -4}
+      pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
       damage: 850
-      stun: 30
+      stun: 40
       hitstop: 25
       proration: 1.1
       meterGain: 4
-      pushback: {x: 0, y: 8, z: 2}
+      pushback: {x: 0, y: 9, z: 2}
       hitState: 0
       hitID: 0
   vfx:

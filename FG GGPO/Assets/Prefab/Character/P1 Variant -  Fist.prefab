@@ -1,54 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &9036894720501737990
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726222532472881394}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6086621519965081346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726222532472881394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0eb88ecbde69214191dd09eaec12dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5318039822124288349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450612129561563758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0eb88ecbde69214191dd09eaec12dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1688394264732069324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7962087147456450330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0eb88ecbde69214191dd09eaec12dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7813759067026948028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +99,14 @@ PrefabInstance:
       propertyPath: mainMoveset
       value: 
       objectReference: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
+    - target: {fileID: 3654780269085657827, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: standingHurtbox
+      value: 
+      objectReference: {fileID: 7114660585470308688}
+    - target: {fileID: 3654780269085657827, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: crouchingHurtbox
+      value: 
+      objectReference: {fileID: 2192160382418810508}
     - target: {fileID: 4501640966231020772, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -224,19 +183,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8428258729492785552, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
   m_PrefabInstance: {fileID: 1080977159003009062}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &726222532472881394 stripped
+--- !u!1 &7114660585470308688 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 366033417185341652, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7907261999107621238, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
   m_PrefabInstance: {fileID: 1080977159003009062}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2450612129561563758 stripped
+--- !u!1 &2192160382418810508 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3243212134572139080, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
-  m_PrefabInstance: {fileID: 1080977159003009062}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7962087147456450330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7025442713406750524, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1255511159481468586, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
   m_PrefabInstance: {fileID: 1080977159003009062}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2873079985113699270
