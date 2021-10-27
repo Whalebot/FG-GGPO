@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: j5C_Loli
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: j.C
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -24,21 +30,21 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: 8a756fccf7ee3ea4ba2a257fa42d4897, type: 3}
+  - hitbox: {fileID: 3123878921687778490, guid: 24433b8bb41699e429b7063b224c5bb0, type: 3}
     startupFrame: 15
     activeFrames: 5
-    gatlingFrames: 10
+    gatlingFrames: 2
     attackType: 0
     attackHeight: 3
     bodyProperty: 1
     homing: 0
     groundHitProperty:
-      damage: 1000
-      stun: 40
+      damage: 800
+      stun: 30
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     groundBlockProperty:
@@ -47,20 +53,20 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 3}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
+      damage: 800
       stun: 40
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       hitID: 0
     airHitProperty:
-      damage: 1000
+      damage: 800
       stun: 40
       hitstop: 12
       proration: 0.95
@@ -86,7 +92,12 @@ MonoBehaviour:
       pushback: {x: 0, y: -10, z: 5}
       hitState: 0
       hitID: 0
-  vfx: []
+  vfx:
+  - startup: 13
+    prefab: {fileID: 175624, guid: 8996e6161a984b94b87d6f5dc7b20273, type: 3}
+    position: {x: 0, y: 0.5, z: 2}
+    rotation: {x: 20, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
@@ -98,19 +109,21 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 82
   hitID: 0
-  moveName: 
-  moveInput: j.C
-  description: 
   firstStartupFrame: 15
   lastActiveFrame: 19
-  totalMoveDuration: 39
-  firstGatlingFrame: 25
-  blockAdvantage: -4
-  hitAdvantage: 16
-  blockCancelAdvantage: 6
-  hitCancelAdvantage: 30
-  recoveryFrames: 20
-  m: []
+  totalMoveDuration: 44
+  firstGatlingFrame: 17
+  blockAdvantage: -9
+  hitAdvantage: 1
+  blockCancelAdvantage: -7
+  hitCancelAdvantage: 28
+  recoveryFrames: 25
+  m:
+  - startFrame: 1
+    duration: 10
+    momentum: {x: 0, y: 2, z: 0}
+    homing: 0
+    resetVelocityDuringRecovery: 0
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
@@ -121,7 +134,7 @@ MonoBehaviour:
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
+  specialCancelOnBlock: 0
   specialCancelOnHit: 1
   noClip: 0
   noClipStart: 1
@@ -155,9 +168,9 @@ MonoBehaviour:
   sharedLimitProjectiles: []
   aimOnStartup: 0
   useAirAction: 0
-  landCancel: 1
+  landCancel: 0
   recoverOnlyOnLand: 0
   landingRecovery: 0
-  overrideVelocity: 0
+  overrideVelocity: 1
   runMomentum: 0
   resetVelocityDuringRecovery: 0
