@@ -44,7 +44,6 @@ MonoBehaviour:
   jcD: {fileID: 11400000, guid: efc24db199539b4489f253dfded11dab, type: 2}
   LD: {fileID: 0}
   RD: {fileID: 0}
-  grabF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   backDash: {fileID: 11400000, guid: bf2f121d5d77d66448e6363eed038d18, type: 2}
   rightDash: {fileID: 11400000, guid: 88802049d92b659418d3db97b525615e, type: 2}
   leftDash: {fileID: 11400000, guid: c411cba3fb28d2b47a6da763995e364a, type: 2}
@@ -55,10 +54,12 @@ MonoBehaviour:
   forwadTech: {fileID: 11400000, guid: 5fe8d7d52f48cb447803f8d3f4122632, type: 2}
   leftTech: {fileID: 11400000, guid: 61db3035516316d4a811861650534266, type: 2}
   rightTech: {fileID: 11400000, guid: 5c311c481a6b6a44198675675cdeb938, type: 2}
-  airTech: {fileID: 0}
-  airFTech: {fileID: 0}
-  airBTech: {fileID: 0}
-  burst: {fileID: 0}
+  airTech: {fileID: 11400000, guid: 87793c4b5dfafd74c910c2f2ef7f9e74, type: 2}
+  airFTech: {fileID: 11400000, guid: 852cb30c43ff7a8489f14db66bc7704f, type: 2}
+  airBTech: {fileID: 11400000, guid: e22016732a8a85140b7219500c1a4008, type: 2}
+  burst: {fileID: 11400000, guid: 832efc469cb973b44b4ac661b4b8271c, type: 2}
+  throwF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
+  throwBreak: {fileID: 11400000, guid: d7e58a7282faebc4284f18dec9403dfc, type: 2}
   specials:
   - motionInput: 2
     buttonInput: 0

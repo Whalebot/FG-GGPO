@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Wakeup Air Back Tech
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
   type: 2
   meterCost: 0
@@ -96,11 +102,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 106
   hitID: 0
-  moveName: 
-  moveDirection: 0
-  moveButton: 0
-  moveInput: 
-  description: 
   firstStartupFrame: 5
   lastActiveFrame: 9
   totalMoveDuration: 29
@@ -130,7 +131,7 @@ MonoBehaviour:
   noClipDuration: 0
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 10
+  invincibleDuration: 25
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0

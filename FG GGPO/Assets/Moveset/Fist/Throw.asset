@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Throw
   m_EditorClassIdentifier: 
-  moveName: 
+  moveName: Throw
   sprite: {fileID: 0}
   moveDirection: 0
   moveButton: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
       damage: 1000
       stun: 200
       hitstop: 10
-      proration: 0.95
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
@@ -51,16 +51,16 @@ MonoBehaviour:
       damage: 0
       stun: 200
       hitstop: 10
-      proration: 0.95
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1000
-      stun: 27
-      hitstop: 10
-      proration: 0.95
+      damage: 1250
+      stun: 210
+      hitstop: 15
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 2
@@ -84,10 +84,10 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1000
-      stun: 100
-      hitstop: 30
-      proration: 0.95
+      damage: 1250
+      stun: 110
+      hitstop: 35
+      proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0

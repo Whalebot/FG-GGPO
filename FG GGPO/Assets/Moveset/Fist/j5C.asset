@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: j5C
   m_EditorClassIdentifier: 
+  moveName: j.C
+  sprite: {fileID: 0}
+  moveDirection: 2
+  moveButton: 3
+  moveInput: j.C
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -98,9 +104,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 82
   hitID: 0
-  moveName: 
-  moveInput: j.C
-  description: 
   firstStartupFrame: 12
   lastActiveFrame: 16
   totalMoveDuration: 36

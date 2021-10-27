@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class CharacterSelectManager : MonoBehaviour
 {
 
-    public enum Phase {charSelect, stageBGMSelect };
+    public enum Phase { charSelect, stageBGMSelect };
 
     public Phase phase = Phase.charSelect;
 
@@ -169,11 +169,11 @@ public class CharacterSelectManager : MonoBehaviour
                 if (p1Selected) return;
                 p1Hover = p1Hover.down.GetComponent<CharacterSelectButton>();
                 UpdateP1();
-            
+
                 break;
 
             case Phase.stageBGMSelect:
-                if(bgmHoverID == bgmProfiles.Length - 1)
+                if (bgmHoverID == bgmProfiles.Length - 1)
                 {
                     bgmHoverID = 0;
                 }
@@ -290,14 +290,16 @@ public class CharacterSelectManager : MonoBehaviour
         stagePreview.sprite = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.preview;
         stageLayout.sprite = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.overview;
         stageName.text = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.name;
+
         stageID = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.ID;
+        if (stageID == 0) stageID = Random.Range(2, 2 + stages.Length - 1);
     }
 
     public void UpdateBGM()
     {
         bgmPortrait.sprite = bgmProfiles[bgmHoverID].characterPortrait;
         bgmName.text = bgmProfiles[bgmHoverID].name;
-        bgmID = bgmProfiles[bgmHoverID].ID;
+        AudioManager.bgmID = bgmProfiles[bgmHoverID].ID;
     }
     public void P1ControlP2()
     {
@@ -362,8 +364,8 @@ public class CharacterSelectManager : MonoBehaviour
         {
             case Phase.charSelect:
                 p2SelectFeedback?.PlayFeedbacks();
-                p2Selected = true; 
-                
+                p2Selected = true;
+
                 if (GameHandler.gameModeID == 1)
                 {
                     P1ControlP1();
@@ -383,7 +385,7 @@ public class CharacterSelectManager : MonoBehaviour
         switch (phase)
         {
             case Phase.charSelect:
-           
+
                 p1Selected = false;
 
                 break;

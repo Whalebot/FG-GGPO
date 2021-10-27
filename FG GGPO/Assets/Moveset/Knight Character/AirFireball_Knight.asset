@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: AirFireball_Knight
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
   type: 1
   meterCost: 0
@@ -25,7 +31,7 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: dadbfd72f1b4f464cb53aba9cb6e6f2e, type: 3}
-    startupFrame: 20
+    startupFrame: 15
     activeFrames: 1
     gatlingFrames: 0
     attackType: 1
@@ -98,12 +104,10 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 83
   hitID: 0
-  moveName: 
-  description: 
-  firstStartupFrame: 20
-  lastActiveFrame: 20
-  totalMoveDuration: 40
-  firstGatlingFrame: 20
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 35
+  firstGatlingFrame: 15
   blockAdvantage: -5
   hitAdvantage: 0
   blockCancelAdvantage: -5

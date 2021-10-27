@@ -248,15 +248,16 @@ public class ComboSystem : MonoBehaviour
         p1ComboText.gameObject.SetActive(true);
 
         p1ComboText.text = p1.comboCounter + " HITS";
-        p2ComboDamageText.text = "" + p1.comboDamage;
+        p1ComboDamageText.text = "" + p1.comboDamage;
 
         p1Last = p1.comboDamage;
-        p1ComboDamageTrainingText.text = "" + p1.comboDamage;
+        p2ComboDamageTrainingText.text = "" + p1.comboDamage;
         p2DamageText.text = "" + p1.lastAttackDamage;
 
         if (p1.comboDamage > p2Max)
             p2Max = p1.comboDamage;
-        p2MaxComboText.text = "" + p1Max;
+
+        p2MaxComboText.text = "" + p2Max;
         p1ProrationText.text = "" + p1.proration;
 
     }
@@ -278,17 +279,19 @@ public class ComboSystem : MonoBehaviour
 
         p2Counter = comboDisplayDuration;
         p2ComboText.gameObject.SetActive(true);
+        print("s");
 
         p2ComboText.text = p2.comboCounter + " HITS";
         p2ComboDamageText.text = "" + p2.comboDamage;
-        p2Last = p2.comboDamage;
 
+        p2Last = p2.comboDamage;
         p1ComboDamageTrainingText.text = "" + p2.comboDamage;
         p1DamageText.text = "" + p2.lastAttackDamage;
 
         if (p2.comboDamage > p1Max)
             p1Max = p2.comboDamage;
-        p1MaxComboText.text = "" + p2Max;
+
+        p1MaxComboText.text = "" + p1Max;
         p2ProrationText.text = "" + p2.proration;
     }
 }

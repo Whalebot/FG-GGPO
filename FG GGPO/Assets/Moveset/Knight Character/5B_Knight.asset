@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 450
-      stun: 27
+      stun: 26
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -57,11 +57,11 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 562
+      stun: 44
+      hitstop: 15
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
@@ -84,11 +84,11 @@ MonoBehaviour:
       hitState: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 450
-      stun: 21
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 562
+      stun: 40
+      hitstop: 10
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   totalMoveDuration: 39
   firstGatlingFrame: 15
   blockAdvantage: -9
-  hitAdvantage: 0
+  hitAdvantage: -1
   blockCancelAdvantage: -6
-  hitCancelAdvantage: 24
+  hitCancelAdvantage: 23
   recoveryFrames: 25
   m:
   - startFrame: 1

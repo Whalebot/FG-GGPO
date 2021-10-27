@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: StanceB_Fist
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: Dynamic B
+  description: 
   attackLevel: 4
   type: 0
   meterCost: 0
@@ -65,7 +71,7 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 6, z: 3}
+      pushback: {x: 0, y: 8, z: 2}
       hitState: 2
       hitID: 0
     airBlockProperty:
@@ -74,16 +80,16 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: -4}
+      pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       hitID: 0
     airCounterhitProperty:
       damage: 850
-      stun: 30
+      stun: 40
       hitstop: 25
       proration: 1.1
       meterGain: 4
-      pushback: {x: 0, y: 8, z: 2}
+      pushback: {x: 0, y: 9, z: 2}
       hitState: 0
       hitID: 0
   vfx:
@@ -105,9 +111,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 1004
   hitID: 0
-  moveName: 
-  moveInput: Dynamic B
-  description: 
   firstStartupFrame: 12
   lastActiveFrame: 16
   totalMoveDuration: 42

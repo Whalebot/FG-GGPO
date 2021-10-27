@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: cC_Fist
   m_EditorClassIdentifier: 
+  moveName: c.C
+  sprite: {fileID: 0}
+  moveDirection: 1
+  moveButton: 3
+  moveInput: c.C
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -34,7 +40,7 @@ MonoBehaviour:
     homing: 1
     groundHitProperty:
       damage: 700
-      stun: 30
+      stun: 35
       hitstop: 10
       proration: 0.9
       meterGain: 0
@@ -103,17 +109,14 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 22
   hitID: 0
-  moveName: 
-  moveInput: c.C
-  description: 
   firstStartupFrame: 22
   lastActiveFrame: 22
   totalMoveDuration: 52
   firstGatlingFrame: 27
   blockAdvantage: -20
-  hitAdvantage: 0
+  hitAdvantage: 5
   blockCancelAdvantage: -15
-  hitCancelAdvantage: 25
+  hitCancelAdvantage: 30
   recoveryFrames: 30
   m: []
   hurtboxes: []

@@ -27,6 +27,10 @@ public class MovelistDisplay : MonoBehaviour
     public Sprite[] eastSprites;
     public Sprite[] southSprites;
 
+
+    public GameObject attackHeightGO;
+    public TextMeshProUGUI attackHeightText;
+
     public TextMeshProUGUI meterCost;
 
     [Button]
@@ -40,7 +44,11 @@ public class MovelistDisplay : MonoBehaviour
         plus.SetActive(true);
         meterCost.gameObject.SetActive(move.meterCost > 0);
         meterCost.text = "Meter cost: " + move.meterCost;
-
+        if (m.type != MoveType.Movement && m.type != MoveType.UniversalMechanics)
+            attackHeightText.text = "" + m.attacks[0].attackHeight;
+        else {
+            attackHeightGO.SetActive(false);
+        }
         switch (move.moveDirection)
         {
             case InputDirection.Neutral:
@@ -96,7 +104,8 @@ public class MovelistDisplay : MonoBehaviour
         //inputImage.sprite =
     }
 
-    public void Selected() {
+    public void Selected()
+    {
         GetComponentInParent<MovelistManager>().DescriptionWindow(move);
     }
 

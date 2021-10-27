@@ -12,32 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Airdash Forward
   m_EditorClassIdentifier: 
-  animationID: 103
-  hitID: 0
-  sfx: []
-  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
-  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
-  type: 2
+  type: 3
+  meterCost: 0
+  superFlash:
+    superPrefab: {fileID: 0}
+    startFrame: 1
+    duration: 0
   collissionState: 3
   groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
-  gatlingMoves: []
-  firstStartupFrame: 10
-  lastActiveFrame: 10
-  totalMoveDuration: 11
-  firstGatlingFrame: 15
-  blockAdvantage: 19
-  hitAdvantage: 29
-  blockCancelAdvantage: 24
-  hitCancelAdvantage: 25
-  recoveryFrames: 1
-  targetComboMoves: []
   attacks:
   - hitbox: {fileID: 0}
     startupFrame: 10
@@ -101,11 +92,40 @@ MonoBehaviour:
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       hitID: 0
+  vfx: []
+  sfx: []
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
+  blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
+  counterhitSFX: {fileID: 0}
+  animationID: 103
+  hitID: 0
+  firstStartupFrame: 10
+  lastActiveFrame: 10
+  totalMoveDuration: 11
+  firstGatlingFrame: 15
+  blockAdvantage: 19
+  hitAdvantage: 29
+  blockCancelAdvantage: 24
+  hitCancelAdvantage: 25
+  recoveryFrames: 1
+  m:
+  - startFrame: 0
+    duration: 21
+    momentum: {x: 0, y: 0.1, z: 7}
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  hurtboxes: []
+  targetComboMoves: []
+  gatlingMoves: []
+  gatlingCancelOnBlock: 1
+  gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
   jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
-  resetGatling: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -130,19 +150,17 @@ MonoBehaviour:
   footInvul: 0
   footInvulStart: 1
   footInvulDuration: 0
+  resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
   forcedCounterHit: 0
+  projectileLimit: 0
+  sharedLimitProjectiles: []
   aimOnStartup: 1
   useAirAction: 1
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 0
   resetVelocityDuringRecovery: 0
-  m:
-  - startFrame: 0
-    duration: 21
-    momentum: {x: 0, y: 0.1, z: 7}
-    homing: 0
-    resetVelocityDuringRecovery: 0
