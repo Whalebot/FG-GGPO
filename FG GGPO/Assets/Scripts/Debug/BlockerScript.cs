@@ -31,4 +31,12 @@ public class BlockerScript : MonoBehaviour
             collision.gameObject.GetComponent<Status>().pushVelocity = pushVelocity;
         }
     }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.rigidbody != null)
+    //    {
+    //        pushVelocity = Vector3.zero;
+    //        collision.gameObject.GetComponent<Status>().pushVelocity = pushVelocity;
+    //    }
+    //}
 }

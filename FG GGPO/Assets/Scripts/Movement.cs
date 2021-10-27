@@ -319,7 +319,7 @@ public class Movement : MonoBehaviour
     public void PushVelocity()
     {
         rb.velocity += status.pushVelocity;
-        status.pushVelocity = Vector3.zero;
+        //status.pushVelocity = Vector3.zero;
     }
     public void PlayerMovement()
     {
