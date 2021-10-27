@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject trialMenu;
     public GameObject defaultButton;
     public GameObject trialDefaultButton;
+    public GameObject buttoDefault;
     public GameObject[] moveLists;
     public GameObject buttonSettings;
     public GameObject soundSettings;
@@ -142,6 +143,11 @@ public class PauseMenu : MonoBehaviour
     }
     public void ButtonSettings()
     {
+        currentTab = PauseMenuTabs.Buttons;
+        versusMenu.SetActive(false);
+        trialMenu.SetActive(false);
+
+
         buttonSettings.SetActive(true);
     }
     public void SoundSettings()
