@@ -189,7 +189,6 @@ public class Move : ScriptableObject
             if (item.airCounterhitProperty.proration == 0)
                 item.airCounterhitProperty.proration = 0.95F;
         }
-
     }
 
     [TabGroup("Attacks"), Button]
@@ -517,6 +516,8 @@ public class HitProperty
     public int meterGain = 2;
     public Vector3 pushback;
     public HitState hitState;
+    public int minimumDamage;
+    public int minimumStun;
     public int hitID = 0;
 }
 

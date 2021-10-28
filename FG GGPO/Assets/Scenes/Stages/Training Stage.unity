@@ -567,7 +567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107189361448435065, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -479.99985
+      value: -479.99988
       objectReference: {fileID: 0}
     - target: {fileID: 5570499021391474113, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: BGM.Array.data[0]
@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6014432669876130925, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -487.00003
+      value: -487
       objectReference: {fileID: 0}
     - target: {fileID: 6230488219751169925, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_AnchorMin.y
@@ -987,11 +987,15 @@ PrefabInstance:
       objectReference: {fileID: 1907155767}
     - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: showHitboxes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: showHurtboxes
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174696485712288840, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
+      propertyPath: gameMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalPosition.x

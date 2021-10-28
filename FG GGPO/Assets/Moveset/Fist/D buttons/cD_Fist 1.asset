@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 2
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 100
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 100
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 2
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 100
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx: []
@@ -120,6 +132,7 @@ MonoBehaviour:
   hurtboxes: []
   targetComboMoves:
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
+  - {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}
   gatlingMoves: []
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
