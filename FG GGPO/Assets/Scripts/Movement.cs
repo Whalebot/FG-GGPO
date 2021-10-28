@@ -291,9 +291,9 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector3(-transform.forward.x, rb.velocity.y, -transform.forward.z);
             }
             Vector3 v1 = GameHandler.Instance.ReturnPlayer(transform).position;
-            v1.y = 0;
+            //v1.y = 0;
             Vector3 v2 = transform.position;
-            v2.y = 0;
+            //v2.y = 0;
             float playerDist = Vector3.Distance(v1, v2);
             //if (rb.velocity.y < 0 && transform.position.y <= 1.2F && transform.position.y >= 0.25F && playerDist <= 0.75F)
             //{
@@ -303,7 +303,7 @@ public class Movement : MonoBehaviour
             //{
             //    status.EnableCollider();
             //} 
-            if (transform.position.y >= 1.2F && playerDist <= 0.75F || transform.position.y >= 1.2F && rb.velocity.y <= 0)
+            if (transform.position.y >= 1.2F && playerDist <= 0.3F)
             {
                 status.EnableCollider();
             }
