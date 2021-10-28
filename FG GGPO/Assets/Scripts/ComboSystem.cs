@@ -279,8 +279,7 @@ public class ComboSystem : MonoBehaviour
 
         p2Counter = comboDisplayDuration;
         p2ComboText.gameObject.SetActive(true);
-        print("s");
-
+     
         p2ComboText.text = p2.comboCounter + " HITS";
         p2ComboDamageText.text = "" + p2.comboDamage;
 

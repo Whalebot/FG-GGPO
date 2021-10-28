@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 1145908638295728051}
   - component: {fileID: 4853751501773634633}
   m_Layer: 18
-  m_Name: Capsule
+  m_Name: Standing Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145736429325292288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -179,7 +179,9 @@ MonoBehaviour:
   playerBlockerCollider: {fileID: 3150538188972538879}
   rb: {fileID: 3654780268560206793}
   mov: {fileID: 3654780268560206794}
+  enemyMov: {fileID: 0}
   ownVelocity: {x: 0, y: 0, z: 0}
+  enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &366033417185341652
 GameObject:
@@ -466,7 +468,7 @@ Transform:
   m_GameObject: {fileID: 3243212134572139080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.6, z: 0.80000037}
+  m_LocalScale: {x: 0.7, y: 0.6, z: 0.7}
   m_Children:
   - {fileID: 1602557766296817321}
   m_Father: {fileID: 4235912116155906767}
@@ -754,6 +756,9 @@ MonoBehaviour:
   standingCollider: {fileID: 3243212134572139080}
   crouchingCollider: {fileID: 366033417185341652}
   jumpingCollider: {fileID: 7025442713406750524}
+  standingBlocker: {fileID: 145736429325292288}
+  crouchingBlocker: {fileID: 4521657981609401532}
+  jumpingBlocker: {fileID: 3738484886954546419}
 --- !u!114 &3654780268560206796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +866,7 @@ GameObject:
   - component: {fileID: 8587647292706447304}
   - component: {fileID: 6154398429829075564}
   m_Layer: 18
-  m_Name: Capsule
+  m_Name: Jump Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,7 +901,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3738484886954546419}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -980,7 +985,9 @@ MonoBehaviour:
   playerBlockerCollider: {fileID: 4746270581067171149}
   rb: {fileID: 3654780268560206793}
   mov: {fileID: 3654780268560206794}
+  enemyMov: {fileID: 0}
   ownVelocity: {x: 0, y: 0, z: 0}
+  enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4521657981609401532
 GameObject:
@@ -997,7 +1004,7 @@ GameObject:
   - component: {fileID: 9136533730562846429}
   - component: {fileID: 698901276900549216}
   m_Layer: 18
-  m_Name: Capsule
+  m_Name: Crouching Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,7 +1019,7 @@ Transform:
   m_GameObject: {fileID: 4521657981609401532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.7}
   m_Children: []
   m_Father: {fileID: 3019384793260998202}
   m_RootOrder: 0
@@ -1032,7 +1039,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4521657981609401532}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1116,7 +1123,9 @@ MonoBehaviour:
   playerBlockerCollider: {fileID: 7342384710211879156}
   rb: {fileID: 3654780268560206793}
   mov: {fileID: 3654780268560206794}
+  enemyMov: {fileID: 0}
   ownVelocity: {x: 0, y: 0, z: 0}
+  enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &5326138877486991374
 GameObject:
@@ -1302,7 +1311,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6585271229476464486}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1816,7 +1825,9 @@ MonoBehaviour:
   playerBlockerCollider: {fileID: 2021025216474201000}
   rb: {fileID: 0}
   mov: {fileID: 0}
+  enemyMov: {fileID: 0}
   ownVelocity: {x: 0, y: 0, z: 0}
+  enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &3654780268407351733
 PrefabInstance:
@@ -2172,13 +2183,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 14d1b303fa2ebb94da557d91e14fd43f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14d1b303fa2ebb94da557d91e14fd43f, type: 3}
---- !u!4 &3102363867123881597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 14d1b303fa2ebb94da557d91e14fd43f, type: 3}
-  m_PrefabInstance: {fileID: 3654780268407351733}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3833366163412979294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 14d1b303fa2ebb94da557d91e14fd43f, type: 3}
+  m_PrefabInstance: {fileID: 3654780268407351733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3102363867123881597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 14d1b303fa2ebb94da557d91e14fd43f, type: 3}
   m_PrefabInstance: {fileID: 3654780268407351733}
   m_PrefabAsset: {fileID: 0}

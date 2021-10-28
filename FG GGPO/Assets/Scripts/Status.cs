@@ -97,6 +97,9 @@ public class Status : MonoBehaviour
     [FoldoutGroup("Components")] public GameObject standingCollider;
     [FoldoutGroup("Components")] public GameObject crouchingCollider;
     [FoldoutGroup("Components")] public GameObject jumpingCollider;
+    [FoldoutGroup("Components")] public GameObject standingBlocker;
+    [FoldoutGroup("Components")] public GameObject crouchingBlocker;
+    [FoldoutGroup("Components")] public GameObject jumpingBlocker;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -152,9 +155,7 @@ public class Status : MonoBehaviour
         set
         {
             if (value <= 0) return;
-            if (comboCounter > 0)
-                hitstunValue = (int)(value * proration);
-            else hitstunValue = value;
+            hitstunValue = value;
             comboCounter++;
             //GoToState(State.Hitstun);
             counterhitState = false;
@@ -278,12 +279,18 @@ public class Status : MonoBehaviour
         standingCollider.layer = LayerMask.NameToLayer("Collision");
         crouchingCollider.layer = LayerMask.NameToLayer("Collision");
         jumpingCollider.layer = LayerMask.NameToLayer("Collision");
+        standingBlocker.layer = LayerMask.NameToLayer("Blocker");
+        crouchingBlocker.layer = LayerMask.NameToLayer("Blocker");
+        jumpingBlocker.layer = LayerMask.NameToLayer("Blocker");
     }
     public void DisableCollider()
     {
         standingCollider.layer = LayerMask.NameToLayer("Disabled");
         crouchingCollider.layer = LayerMask.NameToLayer("Disabled");
         jumpingCollider.layer = LayerMask.NameToLayer("Disabled");
+        standingBlocker.layer = LayerMask.NameToLayer("Disabled");
+        crouchingBlocker.layer = LayerMask.NameToLayer("Disabled");
+        jumpingBlocker.layer = LayerMask.NameToLayer("Disabled");
     }
     public void EnableHurtboxes()
     {
@@ -446,13 +453,13 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 counterhitState = forcedCounterhit;
                 if (autoBlock) blocking = true;
-               // PushVelocity();
+                // PushVelocity();
                 break;
             case State.Hitstun:
                 blocking = false;
 
                 ResolveHitstun();
-              //  PushVelocity();
+                //  PushVelocity();
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
@@ -464,7 +471,7 @@ public class Status : MonoBehaviour
                 blocking = false;
                 // ResolveKnockdown();
                 ResolveHitstun();
-             //   PushVelocity();
+                //   PushVelocity();
                 minusFrames = -HitStun;
                 break;
             case State.Wakeup:
@@ -554,25 +561,26 @@ public class Status : MonoBehaviour
                 break;
             case State.LockedAnimation:
                 blocking = false;
-                DisableHurtboxes();
+                //DisableHurtboxes();
                 break;
             default: break;
         }
 
     }
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, float p, Vector3 dir, HitState hitState, int animationID, bool returnWallPushback)
+    public void TakeHit(HitProperty hit, Vector3 dir, HitState hitState, bool returnWallPushback)
     {
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+        Vector3 push = dir * hit.pushback.z + Vector3.Cross(Vector3.up, dir) * hit.pushback.x + Vector3.up * hit.pushback.y;
+
         ResetInvincibilities();
 
         if (currentState == State.Recovery)
         {
-            print(currentState);
             punishEvent?.Invoke();
         }
 
-        if (hitState == HitState.Launch || kb.y > 1)
+        if (hitState == HitState.Launch || push.y > 1)
         {
             GoToGroundState(GroundState.Airborne);
             SetBlockState(BlockState.Airborne);
@@ -591,35 +599,41 @@ public class Status : MonoBehaviour
         }
 
         mov.storedDirection = Vector3.zero;
-        TakePushback(kb, returnWallPushback);
+        TakePushback(push, returnWallPushback);
 
 
         int val = 0;
+        int stunVal = 0;
         if (comboCounter > 0)
-            val = (int)(damage * proration * ComboSystem.Instance.comboDamageBaseProration);
+        {
+            val = (int)(hit.damage * proration * ComboSystem.Instance.comboDamageBaseProration);
+            if (val < hit.minimumDamage) val = hit.minimumDamage;
+            stunVal = (int)(hit.stun * proration);
+            if (stunVal < hit.minimumStun) stunVal = hit.minimumStun;
+        }
         else
         {
             comboDamage = 0;
-            val = damage;
+            val = hit.damage;
+            stunVal = hit.stun;
             proration = 1;
         }
 
         lastAttackDamage = val;
         comboDamage += val;
         Health -= val;
+        HitStun = stunVal + hit.hitstop;
 
-        HitStun = stunVal;
-        proration *= p;
+        proration *= hit.proration;
         mov.runMomentumCounter = 0;
 
         if (groundState == GroundState.Knockdown)
             GoToState(State.Knockdown);
         else
             GoToState(State.Hitstun);
-        takeAnimationEvent?.Invoke(animationID);
+        takeAnimationEvent?.Invoke(hit.hitID);
         hurtEvent?.Invoke();
     }
-
 
     public void TakeBlock(int damage, Vector3 kb, int stunVal, Vector3 dir, bool returnWallPushback)
     {

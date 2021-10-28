@@ -31,6 +31,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1145908638295728051, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145908638295728051, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145908638295728051, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1160346031811592237, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -41,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1524786593874898358, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3243212134572139080, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_IsActive
@@ -191,6 +203,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8587647292706447304, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8587647292706447304, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8587647292706447304, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8882313369364416974, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -203,7 +227,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9136533730562846429, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136533730562846429, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136533730562846429, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3511192245027709801, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+    - {fileID: 8486450029484555535, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+    - {fileID: 3260706820838754966, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
 --- !u!4 &4447310910784814062 stripped
 Transform:
