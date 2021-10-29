@@ -90,24 +90,22 @@ public class CameraManager : MonoBehaviour
         camTransposer2 = rightCamera.GetCinemachineComponent<CinemachineTransposer>();
         startZOffset = leftCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
 
-       // GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
     }
 
     public void CounterhitCamera(int duration)
     {
         if (duration > minimumCounterhitDuration)
         {
-            toggleCounter =-30;
+            toggleCounter = -30;
             rightCounter = 0;
             counterhitCounter = duration;
             counterhitCamera.gameObject.SetActive(true);
         }
     }
 
-    private void FixedUpdate()
+    void ExecuteFrame()
     {
-
-
         if (counterhitCounter > 0)
         {
             counterhitCounter--;
@@ -131,7 +129,7 @@ public class CameraManager : MonoBehaviour
         distanceBetweenTargets = Vector3.Distance(v1, v2);
         updateCameras = distanceBetweenTargets > cameraDeadZone;
 
-       // if (counterhitCamera.gameObject.activeSelf) { return; }
+        // if (counterhitCamera.gameObject.activeSelf) { return; }
         if (updateCameras)
         {
             if (dist1 > dist2) { cameraAngle = Vector3.Angle(mainCamera.transform.forward, v1 - v2); }
@@ -168,6 +166,12 @@ public class CameraManager : MonoBehaviour
         {
             FlipCamera();
         }
+    }
+
+    private void FixedUpdate()
+    {
+
+
     }
 
     public void ResetCamera()

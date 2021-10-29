@@ -2,33 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackOverlayAnimation : MonoBehaviour
+public class IntroCam : MonoBehaviour
 {
-    public Animator anim;
-    bool resetting;
+    CharacterAnimator animatorScript;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         GameHandler.Instance.advanceGameState += ExecuteFrame;
-        GameHandler.Instance.resetEvent += ResetEvent;
-        GameHandler.Instance.roundStartEvent += ResetEvent;
+        anim = GetComponent<Animator>();
     }
 
-    void ResetEvent()
-    {
-        anim.SetTrigger("IsOn");
-    }
-
+    // Update is called once per frame
     void ExecuteFrame()
     {
         if (!GameHandler.Instance.runNormally) anim.enabled = true;
+        //if (status.hitstopCounter > 0)
+
+        //else
+        //    anim.speed = 1;
         if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
-
-
     IEnumerator PauseAnimation()
     {
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
+    }
+    void DestroyMe()
+    {
+        GameHandler.Instance.advanceGameState -= ExecuteFrame;
+        Destroy(gameObject);
     }
 }

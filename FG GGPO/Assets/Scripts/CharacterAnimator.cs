@@ -28,7 +28,7 @@ public class CharacterAnimator : MonoBehaviour
     public bool isPaused;
     private void Awake()
     {
-    
+
     }
 
 
@@ -105,15 +105,6 @@ public class CharacterAnimator : MonoBehaviour
         // yield return new WaitForFixedUpdate();
         hitstop = true;
     }
-
-
-
-    private void FixedUpdate()
-    {
-        //if(GameHandler.Instance)
-        // ExecuteFrame();
-    }
-
     void ExecuteFrame()
     {
         if (!GameHandler.Instance.runNormally) anim.enabled = true;
@@ -295,7 +286,7 @@ public class CharacterAnimator : MonoBehaviour
     }
     void WakeUp()
     {
-      anim.SetBool("Knockdown", false);
+        anim.SetBool("Knockdown", false);
     }
 
     void MovementAnimation()
