@@ -42,7 +42,9 @@ public class GameHandler : MonoBehaviour
     [FoldoutGroup("Starting Position")] public Transform p1StartPosition;
     [FoldoutGroup("Starting Position")] public Transform p2StartPosition;
     [FoldoutGroup("Starting Position")] public StagePosition startPosition;
-
+    public int introCounter;
+    public GameObject introCam1;
+    public GameObject introCam2;
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
 
@@ -93,7 +95,8 @@ public class GameHandler : MonoBehaviour
     {
         Instance = this;
         gameStates = new List<GameState>();
-        if (gameModeID != -1) {
+        if (gameModeID != -1)
+        {
             gameMode = (GameMode)gameModeID;
         }
         isPaused = true;
@@ -116,8 +119,7 @@ public class GameHandler : MonoBehaviour
         ChangeGameMode(gameMode);
         ResetAnalyticsData();
 
-        if (gameMode == GameMode.VersusMode)
-            RoundStart();
+
     }
     public void PauseMenu()
     {
@@ -142,8 +144,9 @@ public class GameHandler : MonoBehaviour
         StartCoroutine(DelayResume());
     }
 
-    IEnumerator DelayResume() {
-        pauseMenu.SetActive(false); 
+    IEnumerator DelayResume()
+    {
+        pauseMenu.SetActive(false);
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(0.2F);
         isPaused = false;
@@ -162,7 +165,7 @@ public class GameHandler : MonoBehaviour
         }
 
         isMirror = p1CharacterID == p2CharacterID;
-           
+
 
         if (p1Transform == null)
         {
@@ -179,13 +182,9 @@ public class GameHandler : MonoBehaviour
     }
     public void RoundStart()
     {
-        // roundCount = 1;
-
         // ResetAnalyticsData();
         roundStartEvent?.Invoke();
         ResetPosition();
-        p1IntroEvent?.Invoke();
-        p2IntroEvent?.Invoke();
         StartCoroutine(DelayRoundStart());
     }
 
@@ -385,8 +384,40 @@ public class GameHandler : MonoBehaviour
 
         if (!gameStarted)
         {
-            gameStarted = true;
-            gameStartEvent?.Invoke();
+            introCounter--;
+            if (gameMode == GameMode.VersusMode)
+            {
+                if (introCam1 == null)
+                {
+                    ResetPosition();
+                    introCounter = characters[p1CharacterID].introDuration;
+                    introCam1 = Instantiate(characters[p1CharacterID].introPrefab, p1Transform);
+                    introCam1.transform.localPosition = characters[p1CharacterID].introPrefab.transform.localPosition;
+                    introCam1.transform.localRotation = characters[p1CharacterID].introPrefab.transform.localRotation;
+
+                    p1IntroEvent?.Invoke();
+                    return;
+                }
+                if (introCam2 == null && introCounter <= 0)
+                {
+                    introCounter = characters[p2CharacterID].introDuration;
+                    introCam2 = Instantiate(characters[p2CharacterID].introPrefab, p2Transform);
+                    introCam2.transform.localPosition = characters[p2CharacterID].introPrefab.transform.localPosition;
+                    introCam2.transform.localRotation = characters[p2CharacterID].introPrefab.transform.localRotation;
+                    p2IntroEvent?.Invoke();
+                    return;
+                }
+            }
+            if (introCounter <= 0)
+            {
+                if (gameMode == GameMode.VersusMode)
+                {
+                    RoundStart();
+                }
+                gameStarted = true;
+                //gameStartEvent?.Invoke();
+            }
+            return;
         }
 
         CameraManager.Instance.canCrossUp = p1Status.groundState == GroundState.Airborne || p2Status.groundState == GroundState.Airborne || p1Status.crossupState || p2Status.crossupState;

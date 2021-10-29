@@ -65,6 +65,9 @@ public class UIManager : MonoBehaviour
         GameHandler.Instance.rematchScreenEvent += RematchScreen;
         GameHandler.Instance.superFlashStartEvent += DisableUI;
         GameHandler.Instance.superFlashEndEvent += EnableUI;
+
+        GameHandler.Instance.p1IntroEvent += DisableUI;
+        GameHandler.Instance.roundStartEvent+= EnableUI;
         p1Status = GameHandler.Instance.p1Status;
         p2Status = GameHandler.Instance.p2Status;
 
@@ -76,7 +79,7 @@ public class UIManager : MonoBehaviour
 
         p1Name.text = GameHandler.Instance.characters[GameHandler.p1CharacterID].name;
         p2Name.text = GameHandler.Instance.characters[GameHandler.p2CharacterID].name;
-
+        ExecuteFrame();
     }
 
     public void GameModeUI(GameMode mode)
@@ -127,70 +130,68 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void ExecuteFrame()
     {
-        if (GameHandler.Instance.gameStates.Count - 1 > 0)
+
+        if (GameHandler.Instance.gameMode == GameMode.VersusMode)
+            timerText.text = "" + GameHandler.Instance.roundTime;
+        else timerText.text = "∞";
+
+
+        p1Health.value = p1Status.Health;
+        p2Health.value = p2Status.Health;
+        p1HealthText.text = p1Status.Health + "/" + p1Status.maxHealth;
+        p2HealthText.text = p2Status.Health + "/" + p2Status.maxHealth;
+
+        p1Meter.value = p1Status.Meter;
+        p2Meter.value = p2Status.Meter;
+        p1MeterText.text = p1Status.Meter + "";
+        p2MeterText.text = p2Status.Meter + "";
+
+        if (GameHandler.p1WinStreak > 0)
         {
-            GameState state = GameHandler.Instance.gameStates[GameHandler.Instance.gameStates.Count - 1];
-            if (GameHandler.Instance.gameMode == GameMode.VersusMode)
-                timerText.text = "" + GameHandler.Instance.roundTime;
-            else timerText.text = "∞";
-
-
-            p1Health.value = state.p1Health;
-            p2Health.value = state.p2Health;
-            p1HealthText.text = state.p1Health + "/" + p1Status.maxHealth;
-            p2HealthText.text = state.p2Health + "/" + p2Status.maxHealth;
-
-            p1Meter.value = state.p1Meter;
-            p2Meter.value = state.p2Meter;
-            p1MeterText.text = state.p1Meter + "";
-            p2MeterText.text = state.p2Meter + "";
-
-            if (GameHandler.p1WinStreak > 0)
-            {
-                p1WinCounter.text = "Wins: " + GameHandler.p1WinStreak;
-                p1WinCounter.gameObject.SetActive(true);
-            }
-            else p1WinCounter.gameObject.SetActive(false);
-
-            if (GameHandler.p2WinStreak > 0)
-            {
-                p2WinCounter.text = "Wins: " + GameHandler.p2WinStreak;
-                p2WinCounter.gameObject.SetActive(true);
-            }
-            else p2WinCounter.gameObject.SetActive(false);
-
-            foreach (var item in p1BurstImages)
-            {
-                item.fillAmount = GameHandler.Instance.p1Status.BurstGauge / (float)6000;
-
-                Color col = item.color;
-                if (GameHandler.Instance.p1Status.BurstGauge == 6000)
-                {
-                    col.a = 1;
-                }
-                else col.a = 0.5F;
-
-                item.color = col;
-            }
-            foreach (var item in p2BurstImages)
-            {
-                item.fillAmount = GameHandler.Instance.p2Status.BurstGauge / (float)6000;
-
-                Color col = item.color;
-                if (GameHandler.Instance.p2Status.BurstGauge == 6000)
-                {
-                    col.a = 1;
-                }
-                else col.a = 0.5F;
-
-                item.color = col;
-            }
-
-
-            p1Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p1Health / (float)p1InitialHealth);
-            p2Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)state.p2Health / (float)p2InitialHealth);
-
+            p1WinCounter.text = "Wins: " + GameHandler.p1WinStreak;
+            p1WinCounter.gameObject.SetActive(true);
         }
+        else p1WinCounter.gameObject.SetActive(false);
+
+        if (GameHandler.p2WinStreak > 0)
+        {
+            p2WinCounter.text = "Wins: " + GameHandler.p2WinStreak;
+            p2WinCounter.gameObject.SetActive(true);
+        }
+        else p2WinCounter.gameObject.SetActive(false);
+
+        foreach (var item in p1BurstImages)
+        {
+            item.fillAmount = GameHandler.Instance.p1Status.BurstGauge / (float)6000;
+
+            Color col = item.color;
+            if (GameHandler.Instance.p1Status.BurstGauge == 6000)
+            {
+                col.a = 1;
+            }
+            else col.a = 0.5F;
+
+            item.color = col;
+        }
+        foreach (var item in p2BurstImages)
+        {
+            item.fillAmount = GameHandler.Instance.p2Status.BurstGauge / (float)6000;
+
+            Color col = item.color;
+            if (GameHandler.Instance.p2Status.BurstGauge == 6000)
+            {
+                col.a = 1;
+            }
+            else col.a = 0.5F;
+
+            item.color = col;
+        }
+
+
+        p1Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)p1Status.Health / (float)p1InitialHealth);
+        p2Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)p2Status.Health / (float)p2InitialHealth);
+
+
 
         for (int i = 0; i < p1RoundWinImages.Length; i++)
         {
@@ -199,6 +200,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < p2RoundWinImages.Length; i++)
         {
             p2RoundWinImages[i].gameObject.SetActive(i < GameHandler.Instance.p2RoundWins);
+
         }
     }
 
@@ -206,10 +208,6 @@ public class UIManager : MonoBehaviour
     public void DisableUI()
     {
         canvas.enabled = false;
-        //foreach (var item in allUI)
-        //{
-        //    item.SetActive(false);
-        //}
     }
 
     public void EnableUI()

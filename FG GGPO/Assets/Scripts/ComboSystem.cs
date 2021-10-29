@@ -106,6 +106,9 @@ public class ComboSystem : MonoBehaviour
 
         p1ComboDamages = new List<int>();
         p2ComboDamages = new List<int>();
+
+        ExecuteFrame();
+        ResetValues();
     }
     public void ResetValues()
     {

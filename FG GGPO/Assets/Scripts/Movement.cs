@@ -295,6 +295,7 @@ public class Movement : MonoBehaviour
             Vector3 v2 = transform.position;
             //v2.y = 0;
             float playerDist = Vector3.Distance(v1, v2);
+            //print(playerDist + " " + (v1.y - v2.y));
             //if (rb.velocity.y < 0 && transform.position.y <= 1.2F && transform.position.y >= 0.25F && playerDist <= 0.75F)
             //{
             //    status.AirCollider();
@@ -303,7 +304,8 @@ public class Movement : MonoBehaviour
             //{
             //    status.EnableCollider();
             //} 
-            if (transform.position.y >= 1.2F && playerDist <= 0.3F)
+            //if (transform.position.y >= 1 && playerDist <= 0.3F)
+            if (transform.position.y >= 1 && Mathf.Abs(v1.y - v2.y) <= 0.2F)
             {
                 status.EnableCollider();
             }
