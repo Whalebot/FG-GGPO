@@ -56,7 +56,11 @@ public class GameHandler : MonoBehaviour
     public GameEvent revertGameState;
     public GameEvent rollbackTick;
     public GameEvent p1WinEvent;
-    public GameEvent p2WinEvent;
+    public GameEvent p2WinEvent;    
+    public GameEvent hideP1Event;
+    public GameEvent hideP2Event;    
+    public GameEvent displayP1Event;
+    public GameEvent displayP2Event;
 
     public GameEvent gameStartEvent;
     public GameEvent resetEvent;
@@ -390,6 +394,8 @@ public class GameHandler : MonoBehaviour
                 if (introCam1 == null)
                 {
                     ResetPosition();
+                    hideP2Event?.Invoke();
+                    displayP1Event?.Invoke();
                     introCounter = characters[p1CharacterID].introDuration;
                     introCam1 = Instantiate(characters[p1CharacterID].introPrefab, p1Transform);
                     introCam1.transform.localPosition = characters[p1CharacterID].introPrefab.transform.localPosition;
@@ -400,6 +406,8 @@ public class GameHandler : MonoBehaviour
                 }
                 if (introCam2 == null && introCounter <= 0)
                 {
+                    hideP1Event?.Invoke();
+                    displayP2Event?.Invoke();
                     introCounter = characters[p2CharacterID].introDuration;
                     introCam2 = Instantiate(characters[p2CharacterID].introPrefab, p2Transform);
                     introCam2.transform.localPosition = characters[p2CharacterID].introPrefab.transform.localPosition;
@@ -412,6 +420,8 @@ public class GameHandler : MonoBehaviour
             {
                 if (gameMode == GameMode.VersusMode)
                 {
+                    displayP1Event?.Invoke();
+                    displayP2Event?.Invoke();
                     RoundStart();
                 }
                 gameStarted = true;
