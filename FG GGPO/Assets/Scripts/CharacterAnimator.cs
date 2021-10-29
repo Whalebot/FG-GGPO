@@ -26,6 +26,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public Move move;
     public bool isPaused;
+    public GameObject graphics;
     private void Awake()
     {
 
@@ -46,6 +47,7 @@ public class CharacterAnimator : MonoBehaviour
         GameHandler.Instance.rollbackEvent += RollbackAnimation;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
 
+
         status.hitstunEvent += HitStun;
         //status.hitstunEvent += HitStop;
         status.knockdownEvent += Knockdown;
@@ -54,15 +56,21 @@ public class CharacterAnimator : MonoBehaviour
         status.takeAnimationEvent += LockedAnimation;
         status.throwBreakEvent += ThrowBreak;
 
+       
+
         if (GameHandler.Instance.IsPlayer1(transform.parent))
         {
             GameHandler.Instance.p1IntroEvent += Intro;
             GameHandler.Instance.p1WinEvent += Win;
+            GameHandler.Instance.hideP1Event += HideGraphics;
+            GameHandler.Instance.displayP1Event += DisplayGraphics;
         }
         else
         {
             GameHandler.Instance.p2IntroEvent += Intro;
             GameHandler.Instance.p2WinEvent += Win;
+            GameHandler.Instance.hideP2Event += HideGraphics;
+            GameHandler.Instance.displayP2Event += DisplayGraphics;
         }
 
         if (movement != null)
@@ -74,7 +82,13 @@ public class CharacterAnimator : MonoBehaviour
             attack.startupEvent += StartAttack;
             attack.recoveryEvent += AttackRecovery;
         }
+    }
 
+    public void HideGraphics() {
+        graphics.SetActive(false);
+    }
+    public void DisplayGraphics() {
+        graphics.SetActive(true);
     }
 
     public void Intro()
