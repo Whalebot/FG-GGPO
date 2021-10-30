@@ -75,7 +75,7 @@ public class MissionManager : MonoBehaviour
 
     public void ActionHit(Move move)
     {
-        if (activeComboTrial.actions[comboStep].type == Action.ActionType.Hit)
+        if (activeComboTrial.actions[comboStep].type == ActionType.Hit)
             if (activeComboTrial.actions[comboStep].move == move)
             {
                 UpdateUI();
@@ -86,7 +86,7 @@ public class MissionManager : MonoBehaviour
     }
     public void ActionPerformed(Move move)
     {
-        if (activeComboTrial.actions[comboStep].type == Action.ActionType.Performed)
+        if (activeComboTrial.actions[comboStep].type == ActionType.Performed)
             if (activeComboTrial.actions[comboStep].move == move)
             {
                 UpdateUI();
@@ -97,7 +97,7 @@ public class MissionManager : MonoBehaviour
     }
     public void JumpPerformed()
     {
-        if (activeComboTrial.actions[comboStep].type == Action.ActionType.Jump)
+        if (activeComboTrial.actions[comboStep].type == ActionType.Jump)
         {
             UpdateUI();
             comboStep++;

@@ -15,7 +15,9 @@ public class Combo : ScriptableObject
 
 [System.Serializable]
 public class Action {
-    public enum ActionType { Performed, Hit, Jump}
+
     public ActionType type;
-    [HideIf("@type == ActionType.Jump")]public Move move;
+    [HideIf("@type != ActionType.Performed && type != ActionType.Hit")] public Move move;
+
+    [HideIf("@type == ActionType.Performed || type == ActionType.Hit")] public InputDirection inputDirection;
 }
