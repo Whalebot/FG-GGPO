@@ -46,7 +46,8 @@ public class UIManager : MonoBehaviour
     public GameObject[] allUI;
     public GameObject[] versusModeObjects;
     public GameObject[] trainingModeObjects;
-    public GameObject[] trialModeObjects;
+    public GameObject[] trialModeObjects;    
+    public GameObject[] tutorialModeObjects;
 
     public GameObject rematchScreen;
     public EventSystem eventSystem;

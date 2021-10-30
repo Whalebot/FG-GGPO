@@ -386,12 +386,13 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void ResetRound()
     {
-        resetEvent?.Invoke();
+       
         p1Status.ResetStatus();
         p2Status.ResetStatus();
         counter = 0;
         ResetPosition();
         CameraManager.Instance.ResetCamera();
+        resetEvent?.Invoke();
         if (gameMode == GameMode.VersusMode)
             RoundStart();
     }

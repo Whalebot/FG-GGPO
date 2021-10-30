@@ -60,15 +60,17 @@ public class MissionManager : MonoBehaviour
         InputLog log = new InputLog();
         log.inputs = new List<Input>();
 
+        GameHandler.Instance.ResetRound();
         playerStatus.meter = activeComboTrial.meter;
         dummyStatus.forcedCounterhit = activeComboTrial.counterhit;
+
         foreach (var item in activeComboTrial.comboDemonstration.inputs)
         {
             log.inputs.Add(item);
         }
         replayer.SetRecording(log);
         SetupUI();
-        GameHandler.Instance.ResetRound();
+       
     }
 
     public void ActionHit(Move move)
@@ -140,6 +142,8 @@ public class MissionManager : MonoBehaviour
         {
             item.ResetUI();
         }
+        playerStatus.meter = activeComboTrial.meter;
+        dummyStatus.forcedCounterhit = activeComboTrial.counterhit;
     }
 }
 
