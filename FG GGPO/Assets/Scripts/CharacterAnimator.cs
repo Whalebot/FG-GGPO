@@ -29,7 +29,9 @@ public class CharacterAnimator : MonoBehaviour
     public GameObject graphics;
     private void Awake()
     {
-
+        GameHandler.Instance.rollbackEvent += RollbackAnimation;
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.skipCutsceneEvent += Skip;
     }
 
 
@@ -44,8 +46,8 @@ public class CharacterAnimator : MonoBehaviour
         movement = GetComponentInParent<Movement>();
         attack = GetComponentInParent<AttackScript>();
         status = GetComponentInParent<Status>();
-        GameHandler.Instance.rollbackEvent += RollbackAnimation;
-        GameHandler.Instance.advanceGameState += ExecuteFrame;
+  
+     
 
 
         status.hitstunEvent += HitStun;
@@ -95,15 +97,21 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Intro()
     {
+        anim.SetBool("Cutscene", true);
         anim.SetTrigger("Intro");
     }
-
+    public void Skip()
+    {
+        anim.SetBool("Cutscene", false);
+    }
     public void Win()
     {
+        anim.SetBool("Cutscene", true);
         anim.SetTrigger("Win");
     }   
     public void Round()
     {
+        anim.SetBool("Cutscene", true);
         anim.SetTrigger("Round");
     }
 

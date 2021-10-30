@@ -59,7 +59,7 @@ public class GameHandler : MonoBehaviour
     public GameEvent rollbackTick;
 
     public GameEvent p1WinEvent;
-    public GameEvent p2WinEvent;    
+    public GameEvent p2WinEvent;
     public GameEvent p1RoundEvent;
     public GameEvent p2RoundEvent;
 
@@ -70,6 +70,8 @@ public class GameHandler : MonoBehaviour
 
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
+
+    public GameEvent skipCutsceneEvent;
 
     public GameEvent gameStartEvent;
     public GameEvent resetEvent;
@@ -154,6 +156,7 @@ public class GameHandler : MonoBehaviour
     }
     public void Skip()
     {
+        skipCutsceneEvent?.Invoke();
         introCounter = 0;
     }
 
@@ -360,7 +363,7 @@ public class GameHandler : MonoBehaviour
             yield return new WaitForSecondsRealtime(1);
             Time.timeScale = 1F;
             Time.fixedDeltaTime = startTimeStep;
- 
+
             yield return new WaitForSecondsRealtime(2);
 
             cutscene = false;
@@ -446,48 +449,7 @@ public class GameHandler : MonoBehaviour
 
         if (!gameStarted)
         {
-            introCounter--;
-            if (gameMode == GameMode.VersusMode)
-            {
-                if (introCam1 == null)
-                {
-                    cutscene = true;
-                    ResetPosition();
-                    hideP2Event?.Invoke();
-                    displayP1Event?.Invoke();
-                    introCounter = characters[p1CharacterID].introDuration;
-                    introCam1 = Instantiate(characters[p1CharacterID].introPrefab, p1Transform);
-                    introCam1.transform.localPosition = characters[p1CharacterID].introPrefab.transform.localPosition;
-                    introCam1.transform.localRotation = characters[p1CharacterID].introPrefab.transform.localRotation;
-
-                    p1IntroEvent?.Invoke();
-                    return;
-                }
-                if (introCam2 == null && introCounter <= 0)
-                {
-                    hideP1Event?.Invoke();
-                    displayP2Event?.Invoke();
-                    introCounter = characters[p2CharacterID].introDuration;
-                    introCam2 = Instantiate(characters[p2CharacterID].introPrefab, p2Transform);
-                    introCam2.transform.localPosition = characters[p2CharacterID].introPrefab.transform.localPosition;
-                    introCam2.transform.localRotation = characters[p2CharacterID].introPrefab.transform.localRotation;
-                    p2IntroEvent?.Invoke();
-                    return;
-                }
-            }
-            if (introCounter <= 0)
-            {
-                cutscene = false;
-                if (gameMode == GameMode.VersusMode)
-                {
-                    
-                    displayP1Event?.Invoke();
-                    displayP2Event?.Invoke();
-                    RoundStart();
-                }
-                gameStarted = true;
-                //gameStartEvent?.Invoke();
-            }
+            ExecuteIntro();
             return;
         }
 
@@ -507,6 +469,54 @@ public class GameHandler : MonoBehaviour
             TimeoutFinish();
         }
     }
+    void ExecuteIntro()
+    {
+        introCounter--;
+        if (gameMode == GameMode.VersusMode)
+        {
+            if (introCam1 == null)
+            {
+                cutscene = true;
+                ResetPosition();
+                hideP2Event?.Invoke();
+                displayP1Event?.Invoke();
+                introCounter = characters[p1CharacterID].introDuration;
+                introCam1 = Instantiate(characters[p1CharacterID].introPrefab, p1Transform);
+                introCam1.transform.localPosition = characters[p1CharacterID].introPrefab.transform.localPosition;
+                introCam1.transform.localRotation = characters[p1CharacterID].introPrefab.transform.localRotation;
+
+                p1IntroEvent?.Invoke();
+                return;
+            }
+            if (introCam2 == null && introCounter <= 0)
+            {
+                hideP1Event?.Invoke();
+                displayP2Event?.Invoke();
+                introCounter = characters[p2CharacterID].introDuration;
+                introCam2 = Instantiate(characters[p2CharacterID].introPrefab, p2Transform);
+                introCam2.transform.localPosition = characters[p2CharacterID].introPrefab.transform.localPosition;
+                introCam2.transform.localRotation = characters[p2CharacterID].introPrefab.transform.localRotation;
+                p2IntroEvent?.Invoke();
+                return;
+            }
+        }
+        if (introCounter <= 0)
+        {
+            cutscene = false;
+            if (gameMode == GameMode.VersusMode)
+            {
+
+                displayP1Event?.Invoke();
+                displayP2Event?.Invoke();
+                RoundStart();
+                introCam1.gameObject.SetActive(false);
+                introCam2.gameObject.SetActive(false);
+            }
+            gameStarted = true;
+            //gameStartEvent?.Invoke();
+        }
+    }
+
     public void StartSuperFlash()
     {
         superFlash = true;
