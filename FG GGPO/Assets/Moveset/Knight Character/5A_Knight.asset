@@ -44,8 +44,10 @@ MonoBehaviour:
       hitstop: 7
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -53,8 +55,10 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 300
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 300
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 300
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
