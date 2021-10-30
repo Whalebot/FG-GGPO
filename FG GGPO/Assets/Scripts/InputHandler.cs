@@ -444,6 +444,7 @@ public class InputHandler : MonoBehaviour
             motionInputCounter = motionInputWindow;
         }
 
+        if (directionals.Count <= 0 || overlayDirectionals.Count <= 0) return;
 
         if (CheckDashInput())
             dash = true;
@@ -710,7 +711,7 @@ public class InputHandler : MonoBehaviour
         if (currentInput == 5) return false;
         for (int i = 1; i < dashInputWindow; i++)
         {
-            if (overlayDirectionals.Count < i) { break; }
+            if (overlayDirectionals.Count <= i) { break; }
 
             if (overlayDirectionals[overlayDirectionals.Count - i] != 5 && overlayDirectionals[overlayDirectionals.Count - i] != currentInput)
             {

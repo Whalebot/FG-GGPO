@@ -79,9 +79,10 @@ public class Hitbox : MonoBehaviour
 
     public bool CheckInvul(Status enemyStatus)
     {
-    
-        if (enemyStatus.invincible) {
-          //  Debug.Break();
+
+        if (enemyStatus.invincible)
+        {
+            //  Debug.Break();
             return false;
         }
         else if (enemyStatus.linearInvul && !move.attacks[hitboxID].homing) return false;
@@ -225,23 +226,45 @@ public class Hitbox : MonoBehaviour
         status.Meter += hit.meterGain;
         other.Meter += hit.meterGain / 2;
         other.burstGauge += hit.meterGain * 60;
-        //Enemy Hitstop
-        other.newMove = true;
-        other.hitstopCounter = hit.hitstop;
 
-        if (move.noHitstopOnSelf)
+
+        if (hit.damage > other.health)
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
-        }
-        else
-        {
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
-
-
+            //Enemy Hitstop
+            other.newMove = true;
+            other.hitstopCounter = 60;
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + 60);
             //Own hitstop
             status.Hitstop();
             status.newMove = true;
-            status.hitstopCounter = hit.hitstop;
+            status.hitstopCounter = 60;
+            CameraManager.Instance.CounterhitCamera(60);
+        }
+        else
+        {
+            //Enemy Hitstop
+            other.newMove = true;
+            other.hitstopCounter = hit.hitstop;
+
+            if (move.noHitstopOnSelf)
+            {
+                status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
+            }
+            else
+            {
+                status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
+
+
+                //Own hitstop
+                status.Hitstop();
+                status.newMove = true;
+                status.hitstopCounter = hit.hitstop;
+            }
+        }
+
+        if (hit.damage > other.health)
+        {
+            CameraManager.Instance.CounterhitCamera(hit.hitstop + 30);
         }
 
         attack.attackHitEvent?.Invoke(move);
@@ -260,7 +283,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-       // other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
+        // other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
         other.TakeHit(hit, knockbackDirection, hit.hitState, returnWallPushback);
     }
 
@@ -276,20 +299,35 @@ public class Hitbox : MonoBehaviour
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
 
-        if (move.noHitstopOnSelf)
+        if (hit.damage > other.health)
         {
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
-        }
-        else
-        {
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
-
+            //Enemy Hitstop
+            other.newMove = true;
+            other.hitstopCounter = 60;
+            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + 60);
             //Own hitstop
             status.Hitstop();
             status.newMove = true;
-            status.hitstopCounter = hit.hitstop;
+            status.hitstopCounter = 60;
+            CameraManager.Instance.CounterhitCamera(60);
+        }
+        else
+        {
+            if (move.noHitstopOnSelf)
+            {
+                status.minusFrames = -(move.totalMoveDuration - attack.attackFrames);
+            }
+            else
+            {
+                status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + hit.hitstop);
 
-            CameraManager.Instance.CounterhitCamera(hit.hitstop);
+                //Own hitstop
+                status.Hitstop();
+                status.newMove = true;
+                status.hitstopCounter = hit.hitstop;
+
+                CameraManager.Instance.CounterhitCamera(hit.hitstop);
+            }
         }
         attack.attackHitEvent?.Invoke(move);
 

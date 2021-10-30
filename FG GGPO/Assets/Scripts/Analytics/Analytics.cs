@@ -15,12 +15,14 @@ public class Analytics : MonoBehaviour
 
     void SendData()
     {
-
-        if (GameHandler.Instance.p1RoundWins > GameHandler.Instance.p2RoundWins)
+        if (isOn)
         {
-            StartCoroutine(Post(true));
+            if (GameHandler.Instance.p1RoundWins > GameHandler.Instance.p2RoundWins)
+            {
+                StartCoroutine(Post(true));
+            }
+            else StartCoroutine(Post(false));
         }
-        else StartCoroutine(Post(false));
     }
     public IEnumerator Post(bool p1win)
     {

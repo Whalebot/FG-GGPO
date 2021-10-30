@@ -45,6 +45,8 @@ public class GameHandler : MonoBehaviour
     public int introCounter;
     public GameObject introCam1;
     public GameObject introCam2;
+    public GameObject winCam1;
+    public GameObject winCam2;
     [HideInInspector] public Status p1Status;
     [HideInInspector] public Status p2Status;
 
@@ -55,17 +57,23 @@ public class GameHandler : MonoBehaviour
     public GameEvent advanceGameState;
     public GameEvent revertGameState;
     public GameEvent rollbackTick;
+
     public GameEvent p1WinEvent;
     public GameEvent p2WinEvent;    
+    public GameEvent p1RoundEvent;
+    public GameEvent p2RoundEvent;
+
     public GameEvent hideP1Event;
-    public GameEvent hideP2Event;    
+    public GameEvent hideP2Event;
     public GameEvent displayP1Event;
     public GameEvent displayP2Event;
 
-    public GameEvent gameStartEvent;
-    public GameEvent resetEvent;
     public GameEvent p1IntroEvent;
     public GameEvent p2IntroEvent;
+
+    public GameEvent gameStartEvent;
+    public GameEvent resetEvent;
+
     public GameEvent roundStartEvent;
     public GameEvent gameEndEvent;
     public GameEvent rematchScreenEvent;
@@ -98,6 +106,7 @@ public class GameHandler : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        startTimeStep = Time.fixedDeltaTime;
         gameStates = new List<GameState>();
         if (gameModeID != -1)
         {
@@ -113,38 +122,47 @@ public class GameHandler : MonoBehaviour
     {
         network = FgGameManager.Instance != null;
         // Debug.developerConsoleVisible = true;
-        startTimeStep = Time.fixedDeltaTime;
+
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
 
         isPaused = false;
-        cutscene = false;
+        //cutscene = false;
 
         ChangeGameMode(gameMode);
         ResetAnalyticsData();
-
-
     }
     public void PauseMenu()
     {
-        if (isPaused) ResumeGame();
-        else
+        if (!cutscene)
         {
-            //   if (gameMode == GameMode.VersusMode)
+            if (isPaused) ResumeGame();
+            else
             {
-                pauseMenu.SetActive(true);
-                isPaused = true;
-                Time.timeScale = 0;
+                //   if (gameMode == GameMode.VersusMode)
+                {
+                    pauseMenu.SetActive(true);
+                    isPaused = true;
+                    Time.timeScale = 0;
+                }
             }
         }
+        else
+        {
+            Skip();
+        }
     }
+    public void Skip()
+    {
+        introCounter = 0;
+    }
+
     public void CancelPauseMenu()
     {
 
     }
     public void ResumeGame()
     {
-
         StartCoroutine(DelayResume());
     }
 
@@ -210,20 +228,49 @@ public class GameHandler : MonoBehaviour
         yield return new WaitForSeconds(2.5F);
         cutscene = false;
     }
-    public void GameEnd()
+    public void GameEnd(int frames)
     {
-
-        StartCoroutine(DelayGameWin());
+        StartCoroutine(DelayGameWin((float)frames / 60));
     }
-    IEnumerator DelayGameWin()
+    IEnumerator DelayGameWin(float dur)
     {
         cutscene = true;
+
         yield return new WaitForFixedUpdate();
+        Time.timeScale = 0.1F;
+        Time.fixedDeltaTime = startTimeStep * Time.timeScale;
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = startTimeStep;
+
+        if (gameMode == GameMode.VersusMode)
+        {
+            if (winCam1 == null && p1RoundWins > p2RoundWins)
+            {
+                hideP2Event?.Invoke();
+                displayP1Event?.Invoke();
+
+                winCam1 = Instantiate(characters[p1CharacterID].outroPrefab, p1Transform);
+                winCam1.transform.localPosition = characters[p1CharacterID].outroPrefab.transform.localPosition;
+                winCam1.transform.localRotation = characters[p1CharacterID].outroPrefab.transform.localRotation;
+                p1WinEvent?.Invoke();
+            }
+            else if (winCam2 == null && p1RoundWins < p2RoundWins)
+            {
+                hideP1Event?.Invoke();
+                displayP2Event?.Invoke();
+
+                winCam2 = Instantiate(characters[p2CharacterID].outroPrefab, p2Transform);
+                winCam2.transform.localPosition = characters[p2CharacterID].outroPrefab.transform.localPosition;
+                winCam2.transform.localRotation = characters[p2CharacterID].outroPrefab.transform.localRotation;
+
+                p2WinEvent?.Invoke();
+            }
+        }
+
         gameEndEvent?.Invoke();
-        yield return new WaitForSeconds(3);
-        //cutscene = false;
+        yield return new WaitForSeconds(dur + 0.5F);
         rematchScreenEvent?.Invoke();
-        //StageManager.Instance.RestartScene();
     }
     public void P1Win()
     {
@@ -246,18 +293,21 @@ public class GameHandler : MonoBehaviour
             }
             roundCount++;
             p1RoundWins++;
-        }
-        p1WinEvent?.Invoke();
-        if (p1RoundWins >= roundsToWin)
-        {
-            p1Wins++;
-            p1WinStreak++;
-            p2WinStreak = 0;
-            GameEnd();
-        }
-        else
-        {
-            StartCoroutine(DelayRoundReset());
+
+
+            if (p1RoundWins >= roundsToWin)
+            {
+                p1Wins++;
+                p1WinStreak++;
+                p2WinStreak = 0;
+
+                GameEnd(characters[p2CharacterID].outroDuration);
+            }
+            else
+            {
+                p1RoundEvent?.Invoke();
+                StartCoroutine(DelayRoundReset());
+            }
         }
     }
     public void P2Win()
@@ -281,18 +331,21 @@ public class GameHandler : MonoBehaviour
             }
             roundCount++;
             p2RoundWins++;
-        }
-        p2WinEvent?.Invoke();
-        if (p2RoundWins >= roundsToWin)
-        {
-            p2Wins++;
-            p2WinStreak++;
-            p1WinStreak = 0;
-            GameEnd();
-        }
-        else
-        {
-            StartCoroutine(DelayRoundReset());
+
+
+            if (p2RoundWins >= roundsToWin)
+            {
+                p2Wins++;
+                p2WinStreak++;
+                p1WinStreak = 0;
+
+                GameEnd(characters[p2CharacterID].outroDuration);
+            }
+            else
+            {
+                p2RoundEvent?.Invoke();
+                StartCoroutine(DelayRoundReset());
+            }
         }
     }
     public void Draw()
@@ -304,7 +357,12 @@ public class GameHandler : MonoBehaviour
         if (gameMode == GameMode.VersusMode)
         {
             cutscene = true;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSecondsRealtime(1);
+            Time.timeScale = 1F;
+            Time.fixedDeltaTime = startTimeStep;
+ 
+            yield return new WaitForSecondsRealtime(2);
+
             cutscene = false;
         }
         ResetRound();
@@ -393,6 +451,7 @@ public class GameHandler : MonoBehaviour
             {
                 if (introCam1 == null)
                 {
+                    cutscene = true;
                     ResetPosition();
                     hideP2Event?.Invoke();
                     displayP1Event?.Invoke();
@@ -418,8 +477,10 @@ public class GameHandler : MonoBehaviour
             }
             if (introCounter <= 0)
             {
+                cutscene = false;
                 if (gameMode == GameMode.VersusMode)
                 {
+                    
                     displayP1Event?.Invoke();
                     displayP2Event?.Invoke();
                     RoundStart();

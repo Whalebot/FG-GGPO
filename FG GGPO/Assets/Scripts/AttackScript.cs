@@ -587,7 +587,7 @@ public class AttackScript : MonoBehaviour
 
         if (specialCancel)
         {
-            if (move.type == MoveType.Special || move.type == MoveType.Super)
+            if (move.type == MoveType.Special || move.type == MoveType.EX || move.type == MoveType.Super)
                 return true;
         }
 
