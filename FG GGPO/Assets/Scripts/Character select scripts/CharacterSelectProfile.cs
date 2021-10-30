@@ -35,4 +35,7 @@ public class CharacterSelectProfile : ScriptableObject
     public Combo[] comboTrials;
     public int introDuration;
     public GameObject introPrefab;
+    public int outroDuration;
+    public GameObject outroPrefab;
+
 }

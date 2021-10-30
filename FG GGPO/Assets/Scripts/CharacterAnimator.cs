@@ -62,6 +62,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             GameHandler.Instance.p1IntroEvent += Intro;
             GameHandler.Instance.p1WinEvent += Win;
+            GameHandler.Instance.p1RoundEvent += Round;
             GameHandler.Instance.hideP1Event += HideGraphics;
             GameHandler.Instance.displayP1Event += DisplayGraphics;
         }
@@ -69,6 +70,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             GameHandler.Instance.p2IntroEvent += Intro;
             GameHandler.Instance.p2WinEvent += Win;
+            GameHandler.Instance.p2RoundEvent += Round;
             GameHandler.Instance.hideP2Event += HideGraphics;
             GameHandler.Instance.displayP2Event += DisplayGraphics;
         }
@@ -98,8 +100,11 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Win()
     {
-        print("Winnering");
         anim.SetTrigger("Win");
+    }   
+    public void Round()
+    {
+        anim.SetTrigger("Round");
     }
 
     public void ThrowBreak()
