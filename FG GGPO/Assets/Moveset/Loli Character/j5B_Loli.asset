@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: j5B_Loli
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: j.B
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -34,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 750
-      stun: 50
+      stun: 30
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -98,25 +104,20 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 81
   hitID: 0
-  moveName: 
-  moveInput: j.B
-  description: 
   firstStartupFrame: 11
   lastActiveFrame: 13
   totalMoveDuration: 33
   firstGatlingFrame: 12
   blockAdvantage: -2
-  hitAdvantage: 28
+  hitAdvantage: 8
   blockCancelAdvantage: -1
-  hitCancelAdvantage: 49
+  hitCancelAdvantage: 29
   recoveryFrames: 20
   m: []
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
-  - {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
-  - {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - {fileID: 11400000, guid: 2d19423b6006b6b438ed2a695095d23b, type: 2}
+  - {fileID: 11400000, guid: 527cdb02932b69f4b9a34fcbeaa32a71, type: 2}
   - {fileID: 11400000, guid: 014e24de4c016044bb4e54abb8674fa0, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1

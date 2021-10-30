@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f58dc0b403b0d428b7f764b3c535bc, type: 3}
   m_Name: Loli Combo Trial 1
   m_EditorClassIdentifier: 
-  description: 1-1 Poke Combo
+  description: 1-1 A starter 1
   startPosition: 3
+  counterhit: 0
+  meter: 0
   comboDemonstration:
     inputs:
     - frame: 677
@@ -599,7 +601,7 @@ MonoBehaviour:
   - type: 1
     move: {fileID: 11400000, guid: f49dd89bac8d71249badacda80ce37a2, type: 2}
   - type: 1
-    move: {fileID: 11400000, guid: 07a850d9de9dc1a43a4495036fca67e0, type: 2}
+    move: {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
   - type: 1
     move: {fileID: 11400000, guid: f3687893955997941b4f4bfa8582d4b8, type: 2}
   - type: 1

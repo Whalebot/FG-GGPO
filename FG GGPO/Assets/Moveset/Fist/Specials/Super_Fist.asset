@@ -20,7 +20,7 @@ MonoBehaviour:
   description: 
   attackLevel: 4
   type: 5
-  meterCost: 0
+  meterCost: 50
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
     startFrame: 2
@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 8, z: 0}
       hitState: 2
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 3500
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 8, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 3500
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 8, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 3500
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 8, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx:
   - startup: 3
