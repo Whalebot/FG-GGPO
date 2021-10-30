@@ -1,0 +1,1171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f58dc0b403b0d428b7f764b3c535bc, type: 3}
+  m_Name: Combo 3
+  m_EditorClassIdentifier: 
+  description: 1-3 B starter
+  startPosition: 3
+  counterhit: 0
+  meter: 0
+  comboDemonstration:
+    inputs:
+    - frame: 1586
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1587
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1588
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1589
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1590
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1591
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1592
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1593
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1594
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1595
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1596
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1597
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1598
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1599
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1600
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1601
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1602
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1603
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1604
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1605
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1606
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1607
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1608
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1609
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1610
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1611
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1612
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1613
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1614
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1615
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1616
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1617
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1618
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1619
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1620
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1621
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1622
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1623
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1624
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1625
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1626
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1627
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1628
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1629
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1630
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1631
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1632
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1633
+      directionals: 00000000
+      buttons: 000000010000
+    - frame: 1634
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1635
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1636
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1637
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1638
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1639
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1640
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1641
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1642
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1643
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1644
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1645
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1646
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1647
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1648
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1649
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1650
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1651
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1652
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1653
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1654
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1655
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1656
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1657
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1658
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1659
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1660
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1661
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1662
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1663
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1664
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1665
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1666
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1667
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1668
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1669
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1670
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1671
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1672
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1673
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1674
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1675
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1676
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1677
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1678
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1679
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1680
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1681
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1682
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1683
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1684
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1685
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1686
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1687
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1688
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1689
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1690
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1691
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1692
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1693
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1694
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1695
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1696
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1697
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1698
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1699
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1700
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1701
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1702
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1703
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1704
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1705
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1706
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1707
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1708
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1709
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1710
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1711
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1712
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1713
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1714
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1715
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1716
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1717
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1718
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1719
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1720
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1721
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1722
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1723
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1724
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1725
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1726
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1727
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1728
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1729
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1730
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1731
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1732
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1733
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1734
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1735
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1736
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1737
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1738
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1739
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1740
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1741
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1742
+      directionals: 00000000
+      buttons: 010000000001
+    - frame: 1743
+      directionals: 00000000
+      buttons: 010000000001
+    - frame: 1744
+      directionals: 00000000
+      buttons: 010000000001
+    - frame: 1745
+      directionals: 00000000
+      buttons: 010000000001
+    - frame: 1746
+      directionals: 00000000
+      buttons: 010000000001
+    - frame: 1747
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1748
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1749
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1750
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1751
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1752
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1753
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1754
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1755
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1756
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1757
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1758
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1759
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1760
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1761
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1762
+      directionals: 00000000
+      buttons: 010000000000
+    - frame: 1763
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1764
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1765
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1766
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1767
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1768
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1769
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1770
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1771
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1772
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1773
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1774
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1775
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1776
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1777
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1778
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1779
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1780
+      directionals: 00000000
+      buttons: 000100000001
+    - frame: 1781
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1782
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1783
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1784
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1785
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1786
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1787
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1788
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1789
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1790
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1791
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1792
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1793
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1794
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1795
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1796
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1797
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1798
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1799
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1800
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1801
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1802
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1803
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1804
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1805
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1806
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1807
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1808
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1809
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1810
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1811
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1812
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1813
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1814
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1815
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1816
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1817
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1818
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1819
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1820
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1821
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1822
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1823
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1824
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1825
+      directionals: 01000000
+      buttons: 000100000000
+    - frame: 1826
+      directionals: 01000000
+      buttons: 000100000000
+    - frame: 1827
+      directionals: 01000000
+      buttons: 000100000000
+    - frame: 1828
+      directionals: 01000000
+      buttons: 000100000000
+    - frame: 1829
+      directionals: 01000000
+      buttons: 000100000000
+    - frame: 1830
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1831
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1832
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1833
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1834
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1835
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1836
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1837
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1838
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1839
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1840
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1841
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1842
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1843
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1844
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1845
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1846
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1847
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1848
+      directionals: 01000000
+      buttons: 000001000000
+    - frame: 1849
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1850
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1851
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1852
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1853
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1854
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1855
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1856
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1857
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1858
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1859
+      directionals: 01000000
+      buttons: 010000000000
+    - frame: 1860
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1861
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1862
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1863
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1864
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1865
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1866
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1867
+      directionals: 01000000
+      buttons: 000000000000
+    - frame: 1868
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1869
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1870
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1871
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1872
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1873
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1874
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1875
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1876
+      directionals: 00000000
+      buttons: 000100000000
+    - frame: 1877
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1878
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1879
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1880
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1881
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1882
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1883
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1884
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1885
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1886
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1887
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1888
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1889
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1890
+      directionals: 00000000
+      buttons: 000000000001
+    - frame: 1891
+      directionals: 01000000
+      buttons: 000000000001
+    - frame: 1892
+      directionals: 01000000
+      buttons: 000000000001
+    - frame: 1893
+      directionals: 01000000
+      buttons: 000000000001
+    - frame: 1894
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1895
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1896
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1897
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1898
+      directionals: 01000000
+      buttons: 000000010000
+    - frame: 1899
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1900
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1901
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1902
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1903
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1904
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1905
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1906
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1907
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1908
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1909
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1910
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1911
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1912
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1913
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1914
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1915
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1916
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1917
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1918
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1919
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1920
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1921
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1922
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1923
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1924
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1925
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1926
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1927
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1928
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1929
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1930
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1931
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1932
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1933
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1934
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1935
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1936
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1937
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1938
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1939
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1940
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1941
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1942
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1943
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1944
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1945
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1946
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1947
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1948
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1949
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1950
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1951
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1952
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1953
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1954
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1955
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1956
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1957
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1958
+      directionals: 00000000
+      buttons: 000000000000
+    - frame: 1959
+      directionals: 00000000
+      buttons: 000000000000
+  actions:
+  - type: 1
+    move: {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 57a1fcde1b75f094d8d96e269fa96b1e, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 62e7c7688a6ac0a45a89ffa26d4c60b6, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: a082f70d85fdeab4fa2c2a0da183a4b5, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - type: 2
+    move: {fileID: 0}
+  - type: 1
+    move: {fileID: 11400000, guid: bc8ef9a7b04199d499d1f945dc85679a, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
+  - type: 2
+    move: {fileID: 0}
+  - type: 1
+    move: {fileID: 11400000, guid: bc8ef9a7b04199d499d1f945dc85679a, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
+  - type: 1
+    move: {fileID: 11400000, guid: 2d19423b6006b6b438ed2a695095d23b, type: 2}

@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   moveDirection: 2
   moveButton: 3
-  moveInput: 
+  moveInput: j.C
   description: 
   attackLevel: 0
   type: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   - hitbox: {fileID: 334434759881567290, guid: 6648cfa774de9fe4aa3b7f0dd509f400, type: 3}
     startupFrame: 15
     activeFrames: 5
-    gatlingFrames: 10
+    gatlingFrames: 5
     attackType: 0
     attackHeight: 3
     bodyProperty: 3
@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 800
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 800
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 10}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 800
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 10}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
@@ -107,11 +119,11 @@ MonoBehaviour:
   firstStartupFrame: 15
   lastActiveFrame: 19
   totalMoveDuration: 39
-  firstGatlingFrame: 25
+  firstGatlingFrame: 20
   blockAdvantage: -4
   hitAdvantage: 16
-  blockCancelAdvantage: 6
-  hitCancelAdvantage: 30
+  blockCancelAdvantage: 1
+  hitCancelAdvantage: 35
   recoveryFrames: 20
   m: []
   hurtboxes: []
