@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: FallingAttack_Knight
   m_EditorClassIdentifier: 
+  moveName: j.qcf.C
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 3
+  moveInput: j.qcf.C
+  description: 
   attackLevel: 0
   type: 1
   meterCost: 0
@@ -40,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -49,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 1000
@@ -58,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 1000
@@ -67,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 5}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -76,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 1000
@@ -85,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
@@ -98,8 +116,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 73
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 27
   lastActiveFrame: 36
   totalMoveDuration: 56

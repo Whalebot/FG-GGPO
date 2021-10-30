@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 6B_Knight
   m_EditorClassIdentifier: 
+  moveName: Ferrari Shoulder
+  sprite: {fileID: 0}
+  moveDirection: 3
+  moveButton: 1
+  moveInput: f.B
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -40,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -49,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 450
@@ -58,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 450
@@ -67,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -76,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 450
@@ -85,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx: []
@@ -96,11 +114,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 61
   hitID: 0
-  moveName: Ferrari Shoulder
-  moveDirection: 3
-  moveButton: 1
-  moveInput: 
-  description: 
   firstStartupFrame: 20
   lastActiveFrame: 21
   totalMoveDuration: 43

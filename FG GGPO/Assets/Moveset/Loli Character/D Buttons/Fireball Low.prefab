@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130433937859647811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996889519935553840}
   m_Father: {fileID: 0}
@@ -154,9 +154,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6130433937859647864}
     m_Modifications:
+    - target: {fileID: 132028, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 146952, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 168660, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 183712, guid: 308934d96789188408305801c5283e7d, type: 3}
       propertyPath: m_Name
       value: ArcaneCleave 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183712, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 196198, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 429334, guid: 308934d96789188408305801c5283e7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -213,6 +233,26 @@ PrefabInstance:
     - target: {fileID: 429334, guid: 308934d96789188408305801c5283e7d, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19824366, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19868942, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870082, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19872866, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19877576, guid: 308934d96789188408305801c5283e7d, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308934d96789188408305801c5283e7d, type: 3}
