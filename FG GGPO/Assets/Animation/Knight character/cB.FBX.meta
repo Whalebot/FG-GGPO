@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c374c11719285645a319bacc5445ef1
+guid: d6f4517ff73081e4e8f483b541d6a487
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
@@ -21,10 +21,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 29.764503 mm\n\t'calf_l' : position error = 39.334667 mm\n\t'foot_l'
-      : position error = 44.551468 mm\n\t'ball_l' : position error = 18.131330 mm\n\t'thigh_r'
-      : position error = 33.565601 mm\n\t'calf_r' : position error = 30.679407 mm\n\t'foot_r'
-      : position error = 46.097984 mm\n\t'ball_r' : position error = 17.420815 mm\n"
+      : position error = 21.507055 mm\n\t'calf_l' : position error = 27.854046 mm\n\t'foot_l'
+      : position error = 50.651882 mm\n\t'ball_l' : position error = 3.825541 mm\n\t'thigh_r'
+      : position error = 31.742130 mm\n\t'calf_r' : position error = 20.448721 mm\n\t'foot_r'
+      : position error = 40.215866 mm\n\t'ball_r' : position error = 5.104709 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -85,8 +85,8 @@ ModelImporter:
       name: cB
       takeName: Take 001
       internalID: 0
-      firstFrame: 3
-      lastFrame: 41
+      firstFrame: 6.2
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -99,9 +99,9 @@ ModelImporter:
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
+      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
-      heightFromFeet: 1
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
