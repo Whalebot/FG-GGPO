@@ -289,7 +289,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         stagePreview.sprite = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.preview;
         stageLayout.sprite = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.overview;
-        stageName.text = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.name;
+        stageName.text = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.stageName;
 
         stageID = stages[stageHoverID].GetComponent<StageSelectButton>().stageProfile.ID;
         if (stageID == 0) stageID = Random.Range(2, 2 + stages.Length - 1);
@@ -298,7 +298,7 @@ public class CharacterSelectManager : MonoBehaviour
     public void UpdateBGM()
     {
         bgmPortrait.sprite = bgmProfiles[bgmHoverID].characterPortrait;
-        bgmName.text = bgmProfiles[bgmHoverID].name;
+        bgmName.text = bgmProfiles[bgmHoverID].bgmName;
         AudioManager.bgmID = bgmProfiles[bgmHoverID].ID;
     }
     public void P1ControlP2()
