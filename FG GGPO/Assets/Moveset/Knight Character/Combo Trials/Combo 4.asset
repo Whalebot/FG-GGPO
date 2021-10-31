@@ -1081,27 +1081,39 @@ MonoBehaviour:
       directionals: 00000000
       buttons: 000000000000
   actions:
-  - type: 1
+  - type: 2
     move: {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 7840dbfc76687b146a74c995f91f702c, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
   - type: 2
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
+  - type: 3
     move: {fileID: 0}
-  - type: 1
+    inputDirection: 3
+  - type: 2
     move: {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
-  - type: 2
+    inputDirection: 0
+  - type: 3
     move: {fileID: 0}
-  - type: 1
+    inputDirection: 3
+  - type: 2
     move: {fileID: 11400000, guid: bc8ef9a7b04199d499d1f945dc85679a, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
+    inputDirection: 0
   - type: 2
-    move: {fileID: 0}
-  - type: 1
     move: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 3
+    move: {fileID: 0}
+    inputDirection: 3
+  - type: 2
+    move: {fileID: 11400000, guid: 7c0efb89d543fe043b2e288344186ae9, type: 2}
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 2d19423b6006b6b438ed2a695095d23b, type: 2}
+    inputDirection: 0

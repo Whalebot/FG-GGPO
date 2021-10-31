@@ -1648,33 +1648,48 @@ MonoBehaviour:
       directionals: 00000000
       buttons: 000000000000
   actions:
-  - type: 1
-    move: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
   - type: 2
+    move: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
+    inputDirection: 0
+  - type: 2
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
+  - type: 3
     move: {fileID: 0}
-  - type: 1
+    inputDirection: 3
+  - type: 2
     move: {fileID: 11400000, guid: 7adf9b624380d60488b32ef0f187b7c3, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
   - type: 2
-    move: {fileID: 0}
-  - type: 1
     move: {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
   - type: 2
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
+  - type: 3
     move: {fileID: 0}
-  - type: 1
+    inputDirection: 3
+  - type: 2
     move: {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
+    move: {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+    inputDirection: 0
+  - type: 3
+    move: {fileID: 0}
+    inputDirection: 3
+  - type: 2
+    move: {fileID: 11400000, guid: 52ed4e190a44437488283d9f54f4ae51, type: 2}
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 62e7c7688a6ac0a45a89ffa26d4c60b6, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 1dce35979f5f59245badc09036cf58a2, type: 2}
+    inputDirection: 0

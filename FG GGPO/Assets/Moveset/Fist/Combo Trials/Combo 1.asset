@@ -454,15 +454,21 @@ MonoBehaviour:
       directionals: 00000000
       buttons: 000000000000
   actions:
-  - type: 1
+  - type: 2
     move: {fileID: 11400000, guid: 38b05df55f07afa45aec5de8b8d007da, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 346a2cc5f15250b48bb024085c62c391, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+    inputDirection: 0
   - type: 0
     move: {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+    inputDirection: 0

@@ -901,25 +901,36 @@ MonoBehaviour:
       directionals: 00000000
       buttons: 000000000000
   actions:
-  - type: 1
+  - type: 2
     move: {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
+    inputDirection: 0
   - type: 0
     move: {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
-  - type: 2
+    inputDirection: 0
+  - type: 3
     move: {fileID: 0}
-  - type: 1
-    move: {fileID: 11400000, guid: 3b36b1c8826d72943a26ce7e57994380, type: 2}
-  - type: 1
-    move: {fileID: 11400000, guid: e3a6f32079e25fc4caab6d84e01e4e2d, type: 2}
+    inputDirection: 3
   - type: 2
-    move: {fileID: 0}
-  - type: 1
     move: {fileID: 11400000, guid: 3b36b1c8826d72943a26ce7e57994380, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: e3a6f32079e25fc4caab6d84e01e4e2d, type: 2}
-  - type: 1
+    inputDirection: 0
+  - type: 3
+    move: {fileID: 0}
+    inputDirection: 3
+  - type: 2
+    move: {fileID: 11400000, guid: 3b36b1c8826d72943a26ce7e57994380, type: 2}
+    inputDirection: 0
+  - type: 2
+    move: {fileID: 11400000, guid: e3a6f32079e25fc4caab6d84e01e4e2d, type: 2}
+    inputDirection: 0
+  - type: 2
     move: {fileID: 11400000, guid: 09c5dfe7540fa76449f327ebee221cc5, type: 2}
+    inputDirection: 0
