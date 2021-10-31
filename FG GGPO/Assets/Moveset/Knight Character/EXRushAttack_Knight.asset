@@ -42,9 +42,9 @@ MonoBehaviour:
       damage: 1250
       stun: 50
       hitstop: 10
-      proration: 0.95
+      proration: 1
       meterGain: 2
-      pushback: {x: 0, y: 10, z: 0}
+      pushback: {x: 0, y: 10, z: 2}
       hitState: 2
       minimumDamage: 0
       minimumStun: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
       damage: 1250
       stun: 50
       hitstop: 10
-      proration: 0.95
+      proration: 1
       meterGain: 2
       pushback: {x: 0, y: 10, z: 2}
       hitState: 2
@@ -75,7 +75,7 @@ MonoBehaviour:
       damage: 1250
       stun: 50
       hitstop: 5
-      proration: 0.95
+      proration: 1
       meterGain: 2
       pushback: {x: 0, y: 10, z: 2}
       hitState: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
       damage: 1250
       stun: 50
       hitstop: 5
-      proration: 0.95
+      proration: 1
       meterGain: 2
       pushback: {x: 0, y: 10, z: 2}
       hitState: 0
