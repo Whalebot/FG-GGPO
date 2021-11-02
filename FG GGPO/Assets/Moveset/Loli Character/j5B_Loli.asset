@@ -30,7 +30,7 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: c3846f43cdbb6ba40bd022ab5d3aa483, type: 3}
+  - hitbox: {fileID: 3123878921687778490, guid: d2aeb6f38b62e34469c703534f58e6b6, type: 3}
     startupFrame: 11
     activeFrames: 3
     gatlingFrames: 1
@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 750
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 750
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 750
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:

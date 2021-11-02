@@ -55,7 +55,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
       hitstop: 5
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09572289c1fff234084868290e73b1a7, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
-  jumpCancelOnBlock: 0
+  jumpCancelOnBlock: 1
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
