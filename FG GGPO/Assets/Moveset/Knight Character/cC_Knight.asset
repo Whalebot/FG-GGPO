@@ -61,12 +61,12 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 700
-      stun: 90
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 0}
+      damage: 875
+      stun: 60
+      hitstop: 15
+      proration: 1
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 8}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -94,11 +94,11 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 700
-      stun: 90
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 875
+      stun: 100
+      hitstop: 10
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
       minimumDamage: 0

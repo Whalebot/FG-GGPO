@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 700
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 700
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 2
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 700
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: -10, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx:
   - startup: 13
@@ -111,13 +123,13 @@ MonoBehaviour:
   hitID: 0
   firstStartupFrame: 15
   lastActiveFrame: 15
-  totalMoveDuration: 50
+  totalMoveDuration: 45
   firstGatlingFrame: 20
-  blockAdvantage: -15
-  hitAdvantage: 15
-  blockCancelAdvantage: -10
+  blockAdvantage: -10
+  hitAdvantage: 20
+  blockCancelAdvantage: -5
   hitCancelAdvantage: 45
-  recoveryFrames: 35
+  recoveryFrames: 30
   m: []
   hurtboxes: []
   targetComboMoves: []

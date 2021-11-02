@@ -134,10 +134,10 @@ MonoBehaviour:
   recoveryFrames: 26
   m:
   - startFrame: 2
-    duration: 5
-    momentum: {x: 0, y: 0, z: 5}
+    duration: 10
+    momentum: {x: 0, y: 0, z: 10}
     homing: 0
-    resetVelocityDuringRecovery: 0
+    resetVelocityDuringRecovery: 1
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
