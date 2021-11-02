@@ -221,6 +221,7 @@ public class Movement : MonoBehaviour
         if (jumpStartCounter > 0 && status.hitstopCounter <= 0)
         {
             jumpStartCounter--;
+            if (status.groundState == GroundState.Airborne) jumpStartCounter = 0;
             if (jumpStartCounter <= 0)
             {
                 Jump();
@@ -305,7 +306,7 @@ public class Movement : MonoBehaviour
             //    status.EnableCollider();
             //} 
             //if (transform.position.y >= 1 && playerDist <= 0.3F)
-            if (transform.position.y >= 1 && Mathf.Abs(v1.y - v2.y) <= 0.2F)
+            if (transform.position.y >= 1 && Mathf.Abs(v1.y - v2.y) <= 0.4F)
             {
                 status.EnableCollider();
             }

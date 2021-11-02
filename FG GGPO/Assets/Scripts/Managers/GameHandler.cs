@@ -513,6 +513,7 @@ public class GameHandler : MonoBehaviour
                 introCam1.gameObject.SetActive(false);
                 introCam2.gameObject.SetActive(false);
             }
+            gameStartEvent?.Invoke();
             gameStarted = true;
             //gameStartEvent?.Invoke();
         }

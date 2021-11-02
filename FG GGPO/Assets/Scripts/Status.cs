@@ -187,7 +187,22 @@ public class Status : MonoBehaviour
     {
         wakeupEvent?.Invoke();
         health = maxHealth;
-        meter = 0;
+        switch (GameHandler.Instance.gameMode)
+        {
+            case GameMode.VersusMode:
+                meter = 0;
+                break;
+            case GameMode.TrainingMode:
+                meter = 100;
+                break;
+            case GameMode.TrialMode:
+                break;
+            case GameMode.TutorialMode:
+                break;
+            default:
+                break;
+        }
+       
 
         comboCounter = 0;
         hitstunValue = 0;
@@ -621,6 +636,23 @@ public class Status : MonoBehaviour
 
         lastAttackDamage = val;
         comboDamage += val;
+
+
+        if (val >= Health)
+        {
+            print(val + " " + Health);
+            ////Enemy Hitstop     
+            Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
+            enemyStatus.newMove = true;
+            enemyStatus.hitstopCounter = 60;
+            minusFrames = 60;
+            ////Own hitstop
+            Hitstop();
+            newMove = true;
+            hitstopCounter = 60;
+            CameraManager.Instance.CounterhitCamera(60);
+        }
+
         Health -= val;
         HitStun = stunVal + hit.hitstop;
 

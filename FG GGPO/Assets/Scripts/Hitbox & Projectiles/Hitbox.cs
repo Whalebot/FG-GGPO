@@ -228,19 +228,7 @@ public class Hitbox : MonoBehaviour
         other.burstGauge += hit.meterGain * 60;
 
 
-        if (hit.damage > other.health)
-        {
-            //Enemy Hitstop
-            other.newMove = true;
-            other.hitstopCounter = 60;
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + 60);
-            //Own hitstop
-            status.Hitstop();
-            status.newMove = true;
-            status.hitstopCounter = 60;
-            CameraManager.Instance.CounterhitCamera(60);
-        }
-        else
+       
         {
             //Enemy Hitstop
             other.newMove = true;
@@ -262,10 +250,6 @@ public class Hitbox : MonoBehaviour
             }
         }
 
-        if (hit.damage > other.health)
-        {
-            CameraManager.Instance.CounterhitCamera(hit.hitstop + 30);
-        }
 
         attack.attackHitEvent?.Invoke(move);
 
@@ -299,19 +283,7 @@ public class Hitbox : MonoBehaviour
         other.newMove = true;
         other.hitstopCounter = hit.hitstop;
 
-        if (hit.damage > other.health)
-        {
-            //Enemy Hitstop
-            other.newMove = true;
-            other.hitstopCounter = 60;
-            status.minusFrames = -(move.totalMoveDuration - attack.attackFrames + 60);
-            //Own hitstop
-            status.Hitstop();
-            status.newMove = true;
-            status.hitstopCounter = 60;
-            CameraManager.Instance.CounterhitCamera(60);
-        }
-        else
+
         {
             if (move.noHitstopOnSelf)
             {

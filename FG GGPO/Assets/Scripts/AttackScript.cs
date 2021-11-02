@@ -497,7 +497,7 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-       // print(move);
+        // print(move);
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move != null)
@@ -754,8 +754,15 @@ public class AttackScript : MonoBehaviour
         landCancel = false;
         recoveryEvent?.Invoke();
 
-        jumpFrameCounter = movement.jumpStartFrames;
-        status.minusFrames = -movement.jumpStartFrames;
+        if (status.groundState == GroundState.Airborne) {
+            jumpFrameCounter = 1;
+            status.minusFrames = -1;
+        }
+        else
+        {
+            jumpFrameCounter = movement.jumpStartFrames;
+            status.minusFrames = -movement.jumpStartFrames;
+        }
         status.frameDataEvent?.Invoke();
         movement.LookAtOpponent();
     }
