@@ -47,12 +47,18 @@ public class PauseMenu : MonoBehaviour
         applicationIsClosing = true;
     }
 
+
+    private void OnDestroy()
+    {
+        applicationIsClosing = true;
+    }
+
     private void OnDisable()
     {
         InputManager.Instance.p1Input.eastInput -= CancelButton;
         InputManager.Instance.p1Input.R1input -= NextCharacterTab;
         InputManager.Instance.p1Input.L1input -= PreviousCharacterTab;
-        if (!applicationIsClosing)
+        if (!applicationIsClosing && !GameHandler.isPaused)
         {
             ResetPauseMenu();
         }
