@@ -131,7 +131,10 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 1
-  hurtboxes: []
+  hurtboxes:
+  - startFrame: 14
+    end: 30
+    prefab: {fileID: 3177392228787048669, guid: 8321fd77cd074bd47998184284953d5b, type: 3}
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}

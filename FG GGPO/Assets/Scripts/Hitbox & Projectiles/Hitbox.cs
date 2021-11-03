@@ -49,7 +49,7 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
-        //if (!attack.attacking) return;
+        if (attack.landCancelFrame) return;
         if (hitbox != null && canClash)
         {
             if (hitbox.GetType() == typeof(Projectile)) return;
@@ -228,7 +228,7 @@ public class Hitbox : MonoBehaviour
         other.burstGauge += hit.meterGain * 60;
 
 
-       
+
         {
             //Enemy Hitstop
             other.newMove = true;

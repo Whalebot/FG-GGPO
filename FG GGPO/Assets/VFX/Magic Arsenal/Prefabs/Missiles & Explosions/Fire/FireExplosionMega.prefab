@@ -14223,6 +14223,7 @@ GameObject:
   - component: {fileID: 19989200}
   - component: {fileID: 19867940}
   - component: {fileID: 8267442}
+  - component: {fileID: 2343263728892619017}
   m_Layer: 0
   m_Name: FireExplosionMega
   m_TagString: Untagged
@@ -19095,6 +19096,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2343263728892619017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &153106
 GameObject:
   m_ObjectHideFlags: 0

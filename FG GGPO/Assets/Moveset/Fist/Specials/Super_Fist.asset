@@ -24,7 +24,7 @@ MonoBehaviour:
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: efcb6eee62545d94690a01f187dbd34b, type: 3}
     startFrame: 2
-    duration: 90
+    duration: 88
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   hitCancelAdvantage: 35
   recoveryFrames: 30
   m:
-  - startFrame: 2
+  - startFrame: 7
     duration: 15
     momentum: {x: 0, y: 0, z: 30}
     homing: 0

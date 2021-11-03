@@ -51,6 +51,7 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Move properties")] public bool specialCancel;
     [FoldoutGroup("Move properties")] public bool recoverOnlyOnLand;
     [HideInInspector] public bool newAttack;
+    [HideInInspector] public bool landCancelFrame;
     [HideInInspector] public int combo;
     public int superCounter;
     List<Move> usedMoves;
@@ -114,7 +115,7 @@ public class AttackScript : MonoBehaviour
         if (status.hitstopCounter <= 0 && !GameHandler.Instance.superFlash)
         {
             ProcessThrow();
-
+            landCancelFrame = false;
             if (jumpFrameCounter > 0)
             {
                 jumpFrameCounter--;
@@ -710,9 +711,11 @@ public class AttackScript : MonoBehaviour
         if (landCancel)
         {
             newAttack = false;
+            landCancelFrame = true;
             Idle();
             status.minusFrames = 0;
             status.frameDataEvent?.Invoke();
+
         }
     }
 
