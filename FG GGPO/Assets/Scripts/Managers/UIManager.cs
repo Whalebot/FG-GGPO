@@ -78,8 +78,8 @@ public class UIManager : MonoBehaviour
         p1Portrait.sprite = GameHandler.Instance.characters[GameHandler.p1CharacterID].portrait;
         p2Portrait.sprite = GameHandler.Instance.characters[GameHandler.p2CharacterID].portrait;
 
-        p1Name.text = GameHandler.Instance.characters[GameHandler.p1CharacterID].name;
-        p2Name.text = GameHandler.Instance.characters[GameHandler.p2CharacterID].name;
+        p1Name.text = GameHandler.Instance.characters[GameHandler.p1CharacterID].characterName;
+        p2Name.text = GameHandler.Instance.characters[GameHandler.p2CharacterID].characterName;
         ExecuteFrame();
     }
 

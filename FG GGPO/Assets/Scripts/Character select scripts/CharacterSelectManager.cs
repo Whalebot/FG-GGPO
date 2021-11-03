@@ -268,7 +268,7 @@ public class CharacterSelectManager : MonoBehaviour
     public void UpdateP1()
     {
         p1UpdateFeedback?.PlayFeedbacks();
-        p1Name.text = p1Hover.profile.name;
+        p1Name.text = p1Hover.profile.characterName;
         p1Description.text = p1Hover.profile.description;
         p1Playstyle.text = p1Hover.profile.playstyle;
         p1Portrait.sprite = p1Hover.profile.splashArt;
@@ -278,7 +278,7 @@ public class CharacterSelectManager : MonoBehaviour
     public void UpdateP2()
     {
         p2UpdateFeedback?.PlayFeedbacks();
-        p2Name.text = p2Hover.profile.name;
+        p2Name.text = p2Hover.profile.characterName;
         p2Description.text = p2Hover.profile.description;
         p2Playstyle.text = p2Hover.profile.playstyle;
         p2Portrait.sprite = p2Hover.profile.splashArt;
