@@ -12,6 +12,7 @@ public class InputHandler : MonoBehaviour
     public bool network;
     public int id;
     public ControlScheme controlScheme = ControlScheme.PS4;
+    public InputActionAsset inputAsset;
     public delegate void InputEvent();
 
     public bool isBot;
@@ -123,7 +124,17 @@ public class InputHandler : MonoBehaviour
         deviceIsAssigned = true;
 
         user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
+
+        //var oldActions = inputAsset;
+        //for (var actionMap = 0; actionMap < oldActions.actionMaps.Count; actionMap++)
+        //{
+        //    for (var binding = 0; binding < oldActions.actionMaps[actionMap].bindings.Count; binding++)
+        //        inputAsset.actionMaps[actionMap].ApplyBindingOverride(binding, oldActions.actionMaps[actionMap].bindings[binding]);
+        //}
+
         controls = new Controls();
+        
+
         user.ActivateControlScheme(controls.JoystickScheme);
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
@@ -170,7 +181,8 @@ public class InputHandler : MonoBehaviour
 
         directionals = new List<int>();
         controls.Default.Enable();
-        user.AssociateActionsWithUser(controls);
+        inputAsset.FindActionMap("Joystick").Enable();
+        user.AssociateActionsWithUser(inputAsset);
     }
 
     [Button]

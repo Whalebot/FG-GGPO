@@ -367,6 +367,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
+
+
         [Tooltip("Reference to action that is to be rebound from the UI.")]
         [SerializeField]
         private InputActionReference m_Action;
