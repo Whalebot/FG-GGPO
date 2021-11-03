@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public List<BufferedInput> deletedInputs;
     [HideInInspector] public int motionInputCounter;
     public Controls controls = null;
-
+    public InputUser user;
 
 
     public InputEvent controlSchemeChange;
@@ -122,9 +122,9 @@ public class InputHandler : MonoBehaviour
         if (deviceIsAssigned) return;
         deviceIsAssigned = true;
 
-        var user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
+        user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
         controls = new Controls();
-
+        user.ActivateControlScheme(controls.JoystickScheme);
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
         controls.Default.North.performed += context => OnNorth(context);
@@ -171,6 +171,16 @@ public class InputHandler : MonoBehaviour
         directionals = new List<int>();
         controls.Default.Enable();
         user.AssociateActionsWithUser(controls);
+    }
+
+    [Button]
+    public void EnableActionMap()
+    {
+        controls.Default.Enable();
+    }
+    [Button]
+    public void DisableActionMap() { 
+        controls.Default.Disable();
     }
 
     public void SetupKeyboard()
@@ -900,7 +910,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("R1");
 
-   
+
         heldButtons[4] = !context.canceled;
         R1Hold = true;
         if (context.performed)

@@ -15,7 +15,7 @@ public class ControlRebindingUI : MonoBehaviour
     public Button[] m_CompositeButtons;
     public TextMeshProUGUI[] m_CompositeTexts;
 
-    private InputAction m_Action;
+    public InputAction m_Action;
     private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
     private int[] m_CompositeBindingIndices;
     private string m_CompositeType;
