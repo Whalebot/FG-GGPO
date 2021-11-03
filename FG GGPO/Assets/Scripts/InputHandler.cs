@@ -135,7 +135,7 @@ public class InputHandler : MonoBehaviour
         controls = new Controls();
         
 
-        user.ActivateControlScheme(controls.JoystickScheme);
+        //user.ActivateControlScheme(inputAsset.controlSchemes);
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
         controls.Default.North.performed += context => OnNorth(context);
@@ -180,9 +180,13 @@ public class InputHandler : MonoBehaviour
         controls.Default._4.performed += _ => On4();
 
         directionals = new List<int>();
-        controls.Default.Enable();
-        inputAsset.FindActionMap("Joystick").Enable();
+        //controls.Default.Enable();
+      
+        
+        //inputAsset.FindActionMap("Joystick").Enable();
         user.AssociateActionsWithUser(inputAsset);
+        user.actions.Enable();
+        //inputAsset.actionMaps[0].
     }
 
     [Button]
