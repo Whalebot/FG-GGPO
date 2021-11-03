@@ -184,7 +184,7 @@ public class InputHandler : MonoBehaviour
       
         
         //inputAsset.FindActionMap("Joystick").Enable();
-        user.AssociateActionsWithUser(inputAsset);
+        user.AssociateActionsWithUser(controls);
         user.actions.Enable();
         //inputAsset.actionMaps[0].
     }
