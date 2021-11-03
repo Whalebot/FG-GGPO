@@ -19,30 +19,6 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""4af1f215-05bb-4b68-a00f-e9b25af158d6"",
             ""actions"": [
                 {
-                    ""name"": ""DPad"",
-                    ""type"": ""Value"",
-                    ""id"": ""041381d5-f3b4-410b-afde-85061bf4b19b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""LAnalog"",
-                    ""type"": ""Value"",
-                    ""id"": ""36953092-2ca6-4c7c-8b5d-cf8d7388df00"",
-                    ""expectedControlType"": ""Dpad"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""RAnalog"",
-                    ""type"": ""Value"",
-                    ""id"": ""a3a34c91-95d9-40a6-911a-7ba4748c945f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""West"",
                     ""type"": ""Button"",
                     ""id"": ""10b16df8-52f5-48b7-8b8d-3369f525fb5e"",
@@ -214,99 +190,22 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""1c3c9527-83aa-4804-b46e-4fbaf9a251af"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All"",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9fc393b0-34ba-4785-aee7-39e26c54ca69"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""e54249b6-be24-4669-a9e0-f20f339d077f"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""90cc627b-4ac5-4c77-8579-594f4f984578"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse"",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""00285973-6357-4155-bbad-540d864613b3"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse"",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""c42a150c-e09f-448b-975c-a85566efc464"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse"",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""622c2202-8fa7-46f2-927a-110627296bd3"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse"",
-                    ""action"": ""LAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2c2e6319-3a75-458e-ac0e-55c4d1b1cc36"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e45c6d46-ba4c-4fe5-bdaa-5fd91ebb4cb2"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""984810a3-90d8-4ae7-9a18-ce7abc737b20"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -317,7 +216,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -325,33 +224,11 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""678134fe-7d0c-4421-ae54-77c8cf99be60"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""East"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3b68eddd-39e3-49d2-aa36-1191a563cff1"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All"",
-                    ""action"": ""RAnalog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f68bb11f-f9a0-466e-83de-35522247b3a6"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=0.15,y=0.15)"",
-                    ""groups"": ""Mouse"",
-                    ""action"": ""RAnalog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -361,7 +238,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""West"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -369,10 +246,10 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""986016f5-0b5c-4147-85c8-35830a6d7f28"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""West"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -383,7 +260,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""North"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -391,189 +268,13 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f077e372-b389-4e63-9021-a868715b1d6f"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""North"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ec47b2b1-6387-48f2-96dd-3d911d3332f1"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All;Joystick"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""dfa79ded-9fa3-4cec-ac31-6239949d3919"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DPad"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""36919d65-2e12-423f-a5f4-3dc371654564"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""54623999-1bdb-47e7-b066-cf6cd4bb878e"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""01bfb18c-97ed-47b6-a74c-500e35571f5e"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""8acec1f8-49ed-4d47-8b66-e72c4b82f463"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""1da8871a-b863-4c5a-8c20-f71cae65458f"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DPad"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""2600e73e-0e23-4ba4-b7db-1970021cbea7"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f2f67af8-8734-45bc-8930-448c2e046017"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""0e7153e8-ecf6-4faf-9399-f554130482e0"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""82a33236-e22d-444d-9fcf-286f7a7af963"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse;All"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""ab78a1ba-7a7b-47d2-8682-5b9c96642e1f"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DPad"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""81907f5b-7e20-43de-9834-a8846014c686"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All;Joystick"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""30d9614d-3a4a-4db7-ac06-a34d2f58ab82"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All;Joystick"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""5f988caf-9724-4d54-8848-d86f5b2c573f"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All;Joystick"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""166999ec-f0b4-428a-92bc-c6d200bb397a"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""All;Joystick"",
-                    ""action"": ""DPad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -592,7 +293,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<DualShockGamepad>/touchpadButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Console"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -603,7 +304,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -614,7 +315,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -625,7 +326,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -655,10 +356,10 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""142af3b5-c3d4-4483-9329-02a164844405"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""R1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -691,7 +392,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""L1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -735,7 +436,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -757,7 +458,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -768,7 +469,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -790,7 +491,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -801,7 +502,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -812,7 +513,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": ""AxisDeadzone"",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -823,7 +524,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
+                    ""groups"": ""All;Joystick"",
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -834,7 +535,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -845,7 +546,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": ""AxisDeadzone"",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -878,7 +579,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""R3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -889,7 +590,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -900,7 +601,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -911,7 +612,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -922,7 +623,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -948,8 +649,8 @@ public class @Controls : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Mouse"",
-            ""bindingGroup"": ""Mouse"",
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Mouse>"",
@@ -978,9 +679,6 @@ public class @Controls : IInputActionCollection, IDisposable
 }");
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
-        m_Default_DPad = m_Default.FindAction("DPad", throwIfNotFound: true);
-        m_Default_LAnalog = m_Default.FindAction("LAnalog", throwIfNotFound: true);
-        m_Default_RAnalog = m_Default.FindAction("RAnalog", throwIfNotFound: true);
         m_Default_West = m_Default.FindAction("West", throwIfNotFound: true);
         m_Default_North = m_Default.FindAction("North", throwIfNotFound: true);
         m_Default_South = m_Default.FindAction("South", throwIfNotFound: true);
@@ -1051,9 +749,6 @@ public class @Controls : IInputActionCollection, IDisposable
     // Default
     private readonly InputActionMap m_Default;
     private IDefaultActions m_DefaultActionsCallbackInterface;
-    private readonly InputAction m_Default_DPad;
-    private readonly InputAction m_Default_LAnalog;
-    private readonly InputAction m_Default_RAnalog;
     private readonly InputAction m_Default_West;
     private readonly InputAction m_Default_North;
     private readonly InputAction m_Default_South;
@@ -1079,9 +774,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         private @Controls m_Wrapper;
         public DefaultActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @DPad => m_Wrapper.m_Default_DPad;
-        public InputAction @LAnalog => m_Wrapper.m_Default_LAnalog;
-        public InputAction @RAnalog => m_Wrapper.m_Default_RAnalog;
         public InputAction @West => m_Wrapper.m_Default_West;
         public InputAction @North => m_Wrapper.m_Default_North;
         public InputAction @South => m_Wrapper.m_Default_South;
@@ -1112,15 +804,6 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_DefaultActionsCallbackInterface != null)
             {
-                @DPad.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDPad;
-                @DPad.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDPad;
-                @DPad.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDPad;
-                @LAnalog.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnLAnalog;
-                @LAnalog.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnLAnalog;
-                @LAnalog.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnLAnalog;
-                @RAnalog.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRAnalog;
-                @RAnalog.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRAnalog;
-                @RAnalog.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRAnalog;
                 @West.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWest;
                 @West.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWest;
                 @West.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWest;
@@ -1188,15 +871,6 @@ public class @Controls : IInputActionCollection, IDisposable
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @DPad.started += instance.OnDPad;
-                @DPad.performed += instance.OnDPad;
-                @DPad.canceled += instance.OnDPad;
-                @LAnalog.started += instance.OnLAnalog;
-                @LAnalog.performed += instance.OnLAnalog;
-                @LAnalog.canceled += instance.OnLAnalog;
-                @RAnalog.started += instance.OnRAnalog;
-                @RAnalog.performed += instance.OnRAnalog;
-                @RAnalog.canceled += instance.OnRAnalog;
                 @West.started += instance.OnWest;
                 @West.performed += instance.OnWest;
                 @West.canceled += instance.OnWest;
@@ -1273,13 +947,13 @@ public class @Controls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_AllSchemeIndex];
         }
     }
-    private int m_MouseSchemeIndex = -1;
-    public InputControlScheme MouseScheme
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
     {
         get
         {
-            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
-            return asset.controlSchemes[m_MouseSchemeIndex];
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
     private int m_JoystickSchemeIndex = -1;
@@ -1293,9 +967,6 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IDefaultActions
     {
-        void OnDPad(InputAction.CallbackContext context);
-        void OnLAnalog(InputAction.CallbackContext context);
-        void OnRAnalog(InputAction.CallbackContext context);
         void OnWest(InputAction.CallbackContext context);
         void OnNorth(InputAction.CallbackContext context);
         void OnSouth(InputAction.CallbackContext context);

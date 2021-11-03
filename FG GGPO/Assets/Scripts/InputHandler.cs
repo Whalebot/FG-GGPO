@@ -12,6 +12,7 @@ public class InputHandler : MonoBehaviour
     public bool network;
     public int id;
     public ControlScheme controlScheme = ControlScheme.PS4;
+    public InputActionAsset inputAsset;
     public delegate void InputEvent();
 
     public bool isBot;
@@ -23,7 +24,7 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public List<BufferedInput> deletedInputs;
     [HideInInspector] public int motionInputCounter;
     public Controls controls = null;
-
+    public InputUser user;
 
 
     public InputEvent controlSchemeChange;
@@ -122,9 +123,19 @@ public class InputHandler : MonoBehaviour
         if (deviceIsAssigned) return;
         deviceIsAssigned = true;
 
-        var user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
-        controls = new Controls();
+        user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
 
+        //var oldActions = inputAsset;
+        //for (var actionMap = 0; actionMap < oldActions.actionMaps.Count; actionMap++)
+        //{
+        //    for (var binding = 0; binding < oldActions.actionMaps[actionMap].bindings.Count; binding++)
+        //        inputAsset.actionMaps[actionMap].ApplyBindingOverride(binding, oldActions.actionMaps[actionMap].bindings[binding]);
+        //}
+
+        controls = new Controls();
+        
+
+        user.ActivateControlScheme(controls.JoystickScheme);
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
         controls.Default.North.performed += context => OnNorth(context);
@@ -170,7 +181,18 @@ public class InputHandler : MonoBehaviour
 
         directionals = new List<int>();
         controls.Default.Enable();
-        user.AssociateActionsWithUser(controls);
+        inputAsset.FindActionMap("Joystick").Enable();
+        user.AssociateActionsWithUser(inputAsset);
+    }
+
+    [Button]
+    public void EnableActionMap()
+    {
+        controls.Default.Enable();
+    }
+    [Button]
+    public void DisableActionMap() { 
+        controls.Default.Disable();
     }
 
     public void SetupKeyboard()
@@ -900,7 +922,7 @@ public class InputHandler : MonoBehaviour
     {
         if (debug) print("R1");
 
-   
+
         heldButtons[4] = !context.canceled;
         R1Hold = true;
         if (context.performed)
