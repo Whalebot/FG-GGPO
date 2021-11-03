@@ -28,16 +28,16 @@ public class Analytics : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         //P1 Char
-        form.AddField("entry.437435726", GameHandler.Instance.characters[GameHandler.p1CharacterID].name.ToString());
+        form.AddField("entry.437435726", GameHandler.Instance.characters[GameHandler.p1CharacterID].characterName.ToString());
         //P2 Char
-        form.AddField("entry.1259043234", GameHandler.Instance.characters[GameHandler.p2CharacterID].name.ToString());
+        form.AddField("entry.1259043234", GameHandler.Instance.characters[GameHandler.p2CharacterID].characterName.ToString());
         if (p1win)
         {
-            form.AddField("entry.354554606", GameHandler.Instance.characters[GameHandler.p1CharacterID].name.ToString() + " P1");
+            form.AddField("entry.354554606", GameHandler.Instance.characters[GameHandler.p1CharacterID].characterName.ToString() + " P1");
         }
         else
         {
-            form.AddField("entry.354554606", GameHandler.Instance.characters[GameHandler.p2CharacterID].name.ToString() + " P2");
+            form.AddField("entry.354554606", GameHandler.Instance.characters[GameHandler.p2CharacterID].characterName.ToString() + " P2");
         }
         form.AddField("entry.566602199", ComboSystem.Instance.p1Max.ToString());
         form.AddField("entry.515275570", ComboSystem.Instance.p2Max.ToString());
