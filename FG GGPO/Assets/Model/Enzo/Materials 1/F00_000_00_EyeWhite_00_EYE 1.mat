@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4827268973104592993
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,23 +20,23 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: F00_000_00_EyeHighlight_00_EYE 1
+  m_Name: F00_000_00_EyeWhite_00_EYE 1
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
-  m_ShaderKeywords: N_F_CO_ON N_F_EAL_ON N_F_RELGI_ON N_F_SS_ON N_F_TRANSAFFSHA N_F_TRANSAFFSHA_ON
+  m_ShaderKeywords: NOKEWO N_F_EAL_ON N_F_RELGI_ON N_F_SS_ON N_F_TRANSAFFSHA N_F_TRANSAFFSHA_ON
     N_F_TRANS_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: TransparentCutout
+    RenderType: Transparent
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 395d24ee7a5bfd84a9cceabb3d1c7c5a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 505a69c073bf8844c8fbebbc5458bf15, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -51,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3249fc091464f584c927343f951c9ad8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8f32965b376c81540999bd6769bf9dc8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -119,7 +132,7 @@ Material:
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
-    - _Cutout: 0.5
+    - _Cutout: 0.53
     - _DepthThreshold: 900
     - _DirectionalLightIntensity: 0
     - _DoubleSidedOutline: 1
@@ -154,7 +167,7 @@ Material:
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
-    - _N_F_CO: 1
+    - _N_F_CO: 0
     - _N_F_DCS: 0
     - _N_F_EAL: 1
     - _N_F_FR: 0
@@ -216,7 +229,7 @@ Material:
     - _SelfShadowRealTimeShadowColorPower: 1
     - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
-    - _SelfShadowThreshold: 1
+    - _SelfShadowThreshold: 0.93
     - _ShadowColorTexturePower: 0
     - _ShadowHardness: 0
     - _ShadowTColorPower: 1
@@ -265,16 +278,3 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &6390450377411964262
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2

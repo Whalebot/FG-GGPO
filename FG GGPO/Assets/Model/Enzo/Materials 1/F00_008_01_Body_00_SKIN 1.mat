@@ -7,23 +7,22 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: F00_000_00_EyeHighlight_00_EYE 1
+  m_Name: F00_008_01_Body_00_SKIN 1
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
-  m_ShaderKeywords: N_F_CO_ON N_F_EAL_ON N_F_RELGI_ON N_F_SS_ON N_F_TRANSAFFSHA N_F_TRANSAFFSHA_ON
-    N_F_TRANS_ON
+  m_ShaderKeywords: N_F_CO_ON N_F_EAL_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_RL_ON
+    N_F_SS_ON N_F_STIAL_ON N_F_STIS_ON N_F_ST_ON N_F_TRANSAFFSHA N_F_TRANSAFFSHA_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap:
-    RenderType: TransparentCutout
-  disabledShaderPasses:
-  - SRPDEFAULTUNLIT
+    RenderType: Opaque
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 395d24ee7a5bfd84a9cceabb3d1c7c5a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c9c520e02783134eb57323d139c31de, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -51,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3249fc091464f584c927343f951c9ad8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55d2cef5d4193a04aac591f047a08a7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -75,7 +74,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1f2e578ff79c8a54daeb0e702a6351c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -99,7 +98,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowT:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b3135609c9ea14b46944be412241f9e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -109,8 +108,8 @@ Material:
     m_Floats:
     - _AlphaBaseCutout: 1
     - _AlphaClip: 0
-    - _BleModDest: 10
-    - _BleModSour: 5
+    - _BleModDest: 0
+    - _BleModSour: 1
     - _Blend: 0
     - _BumpScale: 1
     - _Compa: 4
@@ -128,22 +127,22 @@ Material:
     - _EnvironmentReflections: 1
     - _EnvironmentalLightingIntensity: 1
     - _FarDistanceMaxWidth: 10
-    - _GIFlatShade: 0
+    - _GIFlatShade: 1
     - _GIShadeThreshold: 0
     - _GlossColorPower: 10
-    - _GlossIntensity: 1
+    - _GlossIntensity: 0
     - _GlossMapScale: 0
     - _GlossSoftness: 0
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 0
+    - _Glossiness: 0.327
     - _GlossyReflections: 0
     - _HighlightColorPower: 1
     - _LightAffectOutlineColor: 0
-    - _LightAffectRimLightColor: 0
-    - _LightAffectShadow: 0
+    - _LightAffectRimLightColor: 1
+    - _LightAffectShadow: 1
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
     - _LightIntensity: 1
@@ -165,26 +164,26 @@ Material:
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
     - _N_F_NLASOBF: 0
-    - _N_F_NM: 0
-    - _N_F_O: 0
+    - _N_F_NM: 1
+    - _N_F_O: 1
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
     - _N_F_SS: 1
-    - _N_F_ST: 0
-    - _N_F_STIAL: 0
-    - _N_F_STIS: 0
+    - _N_F_ST: 1
+    - _N_F_STIAL: 1
+    - _N_F_STIS: 1
     - _NoisyOutlineIntensity: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 0.5
+    - _OutlineWidth: 0.15
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
     - _OverallShadowColorPower: 1
@@ -199,11 +198,11 @@ Material:
     - _RefVal: 0
     - _ReflectionIntensity: 0
     - _ReflectionRoughtness: 0
-    - _RimLigInt: 1
-    - _RimLightColorPower: 10
+    - _RimLigInt: 0.073
+    - _RimLightColorPower: 0.05
     - _RimLightInLight: 1
-    - _RimLightSoftness: 1
-    - _RimLightUnfill: 1.5
+    - _RimLightSoftness: 0.075
+    - _RimLightUnfill: 2.39
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
@@ -212,18 +211,18 @@ Material:
     - _SelfLitIntensity: 0
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
-    - _SelfShadowHardness: 1
+    - _SelfShadowHardness: 0.958
     - _SelfShadowRealTimeShadowColorPower: 1
     - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
-    - _SelfShadowThreshold: 1
+    - _SelfShadowThreshold: 0.75
     - _ShadowColorTexturePower: 0
-    - _ShadowHardness: 0
+    - _ShadowHardness: 0.903
     - _ShadowTColorPower: 1
-    - _ShadowTHardness: 1
-    - _ShadowTIntensity: 1
+    - _ShadowTHardness: 0.97
+    - _ShadowTIntensity: 0.552
     - _ShadowTLightThreshold: 50
-    - _ShadowTShadowThreshold: 0
+    - _ShadowTShadowThreshold: -0.36
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
@@ -234,7 +233,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TEXMCOLINT: 1
-    - _TRANSMODE: 1
+    - _TRANSMODE: 0
     - _TexturePatternStyle: 0
     - _TransAffSha: 1
     - _TransparentThreshold: 0
@@ -256,7 +255,7 @@ Material:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverallShadowColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -265,7 +264,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &6390450377411964262
+--- !u!114 &944489993293762759
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
