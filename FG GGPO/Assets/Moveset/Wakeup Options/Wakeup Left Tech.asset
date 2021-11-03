@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: Wakeup Left Tech
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 0
   type: 2
   meterCost: 0
@@ -40,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -49,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 0
@@ -58,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 0
@@ -67,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -76,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 0
@@ -85,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx: []
@@ -96,11 +114,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 108
   hitID: 0
-  moveName: 
-  moveDirection: 0
-  moveButton: 0
-  moveInput: 
-  description: 
   firstStartupFrame: 10
   lastActiveFrame: 14
   totalMoveDuration: 24
@@ -152,6 +165,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 1
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

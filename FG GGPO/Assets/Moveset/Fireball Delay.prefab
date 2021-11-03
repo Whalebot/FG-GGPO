@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130433937859647811}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -140,6 +140,7 @@ MonoBehaviour:
   destroyOnBlock: 1
   destroyOnHit: 1
   life: 0
+  lifetime: 0
   velocity: 25
   destroyOnProjectileClash: 1
   destroyOnHitboxClash: 1
