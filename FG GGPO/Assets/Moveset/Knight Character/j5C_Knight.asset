@@ -33,7 +33,7 @@ MonoBehaviour:
   - hitbox: {fileID: 334434759881567290, guid: 6648cfa774de9fe4aa3b7f0dd509f400, type: 3}
     startupFrame: 15
     activeFrames: 5
-    gatlingFrames: 5
+    gatlingFrames: 1
     attackType: 0
     attackHeight: 3
     bodyProperty: 3
@@ -119,11 +119,11 @@ MonoBehaviour:
   firstStartupFrame: 15
   lastActiveFrame: 19
   totalMoveDuration: 39
-  firstGatlingFrame: 20
+  firstGatlingFrame: 16
   blockAdvantage: -4
   hitAdvantage: 16
-  blockCancelAdvantage: 1
-  hitCancelAdvantage: 35
+  blockCancelAdvantage: -3
+  hitCancelAdvantage: 39
   recoveryFrames: 20
   m: []
   hurtboxes: []

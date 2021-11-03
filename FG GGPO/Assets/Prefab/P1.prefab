@@ -453,8 +453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3243212134572139080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.6, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1602557766296817321}
   m_Father: {fileID: 4235912116155906767}
@@ -581,7 +581,7 @@ MonoBehaviour:
   controlScheme: 0
   isBot: 0
   inputQueue: 
-  bufferWindow: 10
+  bufferWindow: 7
   dashInputWindow: 20
   motionInputWindow: 20
   bufferedInputs: []
@@ -1237,6 +1237,7 @@ MonoBehaviour:
   strafeSmooth: 0.5
   move: {fileID: 0}
   isPaused: 0
+  graphics: {fileID: 0}
 --- !u!1 &6585271229476464486
 GameObject:
   m_ObjectHideFlags: 0

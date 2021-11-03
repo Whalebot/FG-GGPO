@@ -32,7 +32,7 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 652573e160f74104bb0826f324890c7f, type: 3}
     startupFrame: 10
-    activeFrames: 1
+    activeFrames: 2
     gatlingFrames: 1
     attackType: 0
     attackHeight: 1
@@ -46,15 +46,19 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 19
+      stun: 10
       hitstop: 5
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 450
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 450
@@ -73,15 +79,19 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 19
+      stun: 10
       hitstop: 5
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 450
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx:
   - startup: 1
@@ -110,14 +122,14 @@ MonoBehaviour:
   animationID: 50
   hitID: 0
   firstStartupFrame: 10
-  lastActiveFrame: 10
-  totalMoveDuration: 31
+  lastActiveFrame: 11
+  totalMoveDuration: 26
   firstGatlingFrame: 11
-  blockAdvantage: -2
-  hitAdvantage: 5
-  blockCancelAdvantage: -1
+  blockAdvantage: -6
+  hitAdvantage: 10
+  blockCancelAdvantage: -5
   hitCancelAdvantage: 25
-  recoveryFrames: 21
+  recoveryFrames: 15
   m: []
   hurtboxes: []
   targetComboMoves: []

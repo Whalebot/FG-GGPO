@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 700
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 700
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 700
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 5, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx:
   - startup: 12
@@ -111,17 +123,16 @@ MonoBehaviour:
   hitID: 0
   firstStartupFrame: 14
   lastActiveFrame: 14
-  totalMoveDuration: 44
+  totalMoveDuration: 49
   firstGatlingFrame: 19
-  blockAdvantage: -10
-  hitAdvantage: 20
-  blockCancelAdvantage: -5
+  blockAdvantage: -15
+  hitAdvantage: 15
+  blockCancelAdvantage: -10
   hitCancelAdvantage: 45
-  recoveryFrames: 30
+  recoveryFrames: 35
   m: []
   hurtboxes: []
-  targetComboMoves:
-  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
+  targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 8a3e7fcb9c58dad4bbaf52fd35cdebb3, type: 2}
   - {fileID: 11400000, guid: 6292d727fc52bad42ab1e6d59b0290ab, type: 2}
@@ -130,6 +141,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 679bbb51825a6994bba9285dd42a77e9, type: 2}
   - {fileID: 11400000, guid: 874829cf4b2e5814ea19f75ad1f809d0, type: 2}
   - {fileID: 11400000, guid: 82b751fbc8138eb4ea2e54e6dc582e62, type: 2}
+  - {fileID: 11400000, guid: 43769b3229533c447bf5c7a371bbea93, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
