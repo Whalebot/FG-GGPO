@@ -228,7 +228,7 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) mainCamera.enabled = !mainCamera.enabled;
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame) mainCamera.enabled = !mainCamera.enabled;
     }
 }
 

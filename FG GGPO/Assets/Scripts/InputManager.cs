@@ -48,7 +48,13 @@ public class InputManager : MonoBehaviour
             p2Input.SetupControls(Gamepad.all[1]);
             p1Input.SetupControls(Gamepad.all[0]);
         }
-        else p1Input.SetupControls(Gamepad.all[0]);
+        else
+        {
+            p1Input.SetupControls(Gamepad.all[0]);
+            if (GameHandler.gameModeID <= 0) {
+                p2Input.SetupKeyboard();
+            }
+        }
 
         InputSystem.onDeviceChange += (device, change) =>
             {

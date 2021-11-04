@@ -220,12 +220,16 @@ public class InputHandler : MonoBehaviour
         controls.Default.Left.performed += context => OnLeft(context);
         controls.Default.Right.performed += context => OnRight(context);
         controls.Default.Down.performed += context => OnDown(context);
+        controls.Default.Up.canceled += context => OnUp(context);
+        controls.Default.Left.canceled += context => OnLeft(context);
+        controls.Default.Right.canceled += context => OnRight(context);
+        controls.Default.Down.canceled += context => OnDown(context);
 
         controls.Default.R1.performed += context => OnR1(context);
         controls.Default.R1.canceled += context => OnR1(context);
 
-        controls.Default.R2.performed += _ => OnR2Press();
-        controls.Default.R2.canceled += _ => OnR2Release();
+        controls.Default.R2.performed += context => OnR2Press();
+        controls.Default.R2.canceled += context => OnR2Release();
 
         controls.Default.L1.performed += context => OnL1(context);
         controls.Default.L1.canceled += context => OnL1(context);
@@ -234,6 +238,7 @@ public class InputHandler : MonoBehaviour
         controls.Default.L2.canceled += _ => OnL2Release();
 
         controls.Default.R3.performed += context => OnR3();
+        controls.Default.L3.performed += context => OnL3();
 
         controls.Default.Start.performed += _ => OnStart();
         controls.Default.Select.performed += _ => OnSelect();
@@ -244,10 +249,10 @@ public class InputHandler : MonoBehaviour
         controls.Default._2.performed += _ => On2();
         controls.Default._3.performed += _ => On3();
         controls.Default._4.performed += _ => On4();
-
         directionals = new List<int>();
-        controls.Default.Enable();
         user.AssociateActionsWithUser(controls);
+
+        user.actions.Enable();
     }
 
     public void ResolveInputBuffer()
