@@ -112,6 +112,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Move properties")] public bool resetGatling = false;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
+    [FoldoutGroup("Move properties")] public bool noCounterHit;
     [FoldoutGroup("Move properties")] public bool forcedCounterHit;
 
     [FoldoutGroup("Projectile properties")] public int projectileLimit;

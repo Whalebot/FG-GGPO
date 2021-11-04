@@ -232,7 +232,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366033417185341652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -475,7 +475,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3243212134572139080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -663,7 +663,7 @@ MonoBehaviour:
   jumpHeight:
   - 9
   - 8
-  fallMultiplier: 0.05
+  fallMultiplier: 0.025
   minimumJumpTime: 2
   zeroFloat: 0
   direction: {x: 0, y: 0, z: 0}
@@ -697,7 +697,7 @@ MonoBehaviour:
   hitstopCounter: 0
   pushbackVector: {x: 0, y: 0, z: 0}
   knockdownValue: 50
-  throwBreakWindow: 20
+  throwBreakWindow: 15
   throwBreakCounter: 0
   newMove: 0
   groundPushbackDuration: 15
@@ -808,6 +808,7 @@ MonoBehaviour:
   specialCancel: 0
   recoverOnlyOnLand: 0
   newAttack: 0
+  landCancelFrame: 0
   combo: 0
   superCounter: 0
 --- !u!54 &3654780268560206793
@@ -1384,7 +1385,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025442713406750524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

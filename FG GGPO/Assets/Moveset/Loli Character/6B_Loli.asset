@@ -126,7 +126,7 @@ MonoBehaviour:
     groundBlockProperty:
       damage: 0
       stun: 16
-      hitstop: 13
+      hitstop: 5
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
@@ -148,7 +148,7 @@ MonoBehaviour:
     airHitProperty:
       damage: 200
       stun: 35
-      hitstop: 10
+      hitstop: 5
       proration: 1
       meterGain: 2
       pushback: {x: 0, y: 5, z: 7}
@@ -170,7 +170,7 @@ MonoBehaviour:
     airCounterhitProperty:
       damage: 200
       stun: 35
-      hitstop: 10
+      hitstop: 5
       proration: 1
       meterGain: 2
       pushback: {x: 0, y: 5, z: 7}
@@ -274,7 +274,7 @@ MonoBehaviour:
     groundBlockProperty:
       damage: 0
       stun: 16
-      hitstop: 13
+      hitstop: 5
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
@@ -296,7 +296,7 @@ MonoBehaviour:
     airHitProperty:
       damage: 200
       stun: 35
-      hitstop: 10
+      hitstop: 5
       proration: 1
       meterGain: 2
       pushback: {x: 0, y: 5, z: 7}
@@ -348,7 +348,7 @@ MonoBehaviour:
     groundBlockProperty:
       damage: 0
       stun: 16
-      hitstop: 13
+      hitstop: 5
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
@@ -370,7 +370,7 @@ MonoBehaviour:
     airHitProperty:
       damage: 200
       stun: 35
-      hitstop: 10
+      hitstop: 5
       proration: 1
       meterGain: 2
       pushback: {x: 0, y: 5, z: 7}
@@ -392,7 +392,7 @@ MonoBehaviour:
     airCounterhitProperty:
       damage: 200
       stun: 35
-      hitstop: 10
+      hitstop: 5
       proration: 1
       meterGain: 2
       pushback: {x: 0, y: 5, z: 7}
@@ -544,6 +544,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

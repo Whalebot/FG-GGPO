@@ -32,7 +32,7 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: 01d34ed964d46e34f93b7e22ea9e8ab6, type: 3}
     startupFrame: 8
-    activeFrames: 2
+    activeFrames: 4
     gatlingFrames: 1
     attackType: 0
     attackHeight: 3
@@ -117,12 +117,12 @@ MonoBehaviour:
   animationID: 80
   hitID: 0
   firstStartupFrame: 8
-  lastActiveFrame: 9
-  totalMoveDuration: 29
+  lastActiveFrame: 11
+  totalMoveDuration: 31
   firstGatlingFrame: 9
-  blockAdvantage: -1
-  hitAdvantage: 4
-  blockCancelAdvantage: 0
+  blockAdvantage: -3
+  hitAdvantage: 2
+  blockCancelAdvantage: -2
   hitCancelAdvantage: 24
   recoveryFrames: 20
   m: []
@@ -168,7 +168,8 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
-  forcedCounterHit: 0
+  noCounterHit: 0
+  forcedCounterHit: 1
   projectileLimit: 0
   sharedLimitProjectiles: []
   aimOnStartup: 0

@@ -30,7 +30,7 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: 28bfcd285fb8b54459b3e66d36ff0e66, type: 3}
+  - hitbox: {fileID: 334434759881567290, guid: 7566b272e5fb41043ad9db72a7332aa4, type: 3}
     startupFrame: 15
     activeFrames: 2
     gatlingFrames: 1
@@ -169,6 +169,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

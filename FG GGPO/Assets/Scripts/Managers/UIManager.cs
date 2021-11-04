@@ -75,6 +75,10 @@ public class UIManager : MonoBehaviour
         p1InitialHealth = GameHandler.Instance.p1Status.maxHealth;
         p2InitialHealth = GameHandler.Instance.p2Status.maxHealth;
 
+        p1Health.maxValue = p1InitialHealth;
+        p2Health.maxValue = p2InitialHealth;
+
+
         p1Portrait.sprite = GameHandler.Instance.characters[GameHandler.p1CharacterID].portrait;
         p2Portrait.sprite = GameHandler.Instance.characters[GameHandler.p2CharacterID].portrait;
 

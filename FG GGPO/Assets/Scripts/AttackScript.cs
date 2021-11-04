@@ -329,7 +329,7 @@ public class AttackScript : MonoBehaviour
     public void StartupFrames()
     {
         status.GoToState(Status.State.Startup);
-        status.counterhitState = true;
+        status.counterhitState = !activeMove.noCounterHit;
         //ClearHitboxes();
     }
     void ClearHitboxes()
@@ -346,6 +346,7 @@ public class AttackScript : MonoBehaviour
 
     public void ActiveFrames()
     {
+        status.counterhitState = !activeMove.noCounterHit;
         for (int i = 0; i < activeMove.attacks.Length; i++)
         {
             if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)

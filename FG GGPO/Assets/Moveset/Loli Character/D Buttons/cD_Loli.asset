@@ -51,7 +51,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 50
-      stun: 15
+      stun: 10
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -77,14 +77,14 @@ MonoBehaviour:
       hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 50
-      stun: 15
+      stun: 10
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -120,7 +120,7 @@ MonoBehaviour:
   lastActiveFrame: 15
   totalMoveDuration: 55
   firstGatlingFrame: 20
-  blockAdvantage: -15
+  blockAdvantage: -20
   hitAdvantage: 10
   blockCancelAdvantage: -10
   hitCancelAdvantage: 15
@@ -167,6 +167,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 1
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

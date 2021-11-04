@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6130433937859647868}
   - component: {fileID: 7500927992370451724}
   m_Layer: 16
-  m_Name: Fireball Horizontal
+  m_Name: EX Fireball Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,8 @@ MonoBehaviour:
   life: 0
   lifetime: 0
   velocity: 20
-  destroyOnProjectileClash: 1
-  destroyOnHitboxClash: 1
+  destroyOnProjectileClash: 0
+  destroyOnHitboxClash: 0
   rb: {fileID: 0}
   hit: 0
 --- !u!54 &6130433937859647868
@@ -154,6 +154,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6130433937859647864}
     m_Modifications:
+    - target: {fileID: 2189116981814738142, guid: 8d7792f03acb7e743821811609390056, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ca4190bfb837aad43b0033df1090d810, type: 2}
     - target: {fileID: 4833096103000416840, guid: 8d7792f03acb7e743821811609390056, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

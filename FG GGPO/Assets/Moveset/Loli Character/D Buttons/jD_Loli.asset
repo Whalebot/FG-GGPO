@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: jD_Loli
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: j.D
+  description: 
   attackLevel: 0
   type: 0
   meterCost: 0
@@ -40,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 1
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 100
@@ -49,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 700
@@ -58,6 +68,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 700
@@ -67,6 +79,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -76,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 700
@@ -85,6 +101,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
@@ -98,9 +116,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 43
   hitID: 0
-  moveName: 
-  moveInput: j.D
-  description: 
   firstStartupFrame: 15
   lastActiveFrame: 15
   totalMoveDuration: 50
@@ -157,6 +172,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 1
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

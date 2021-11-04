@@ -51,7 +51,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 50
-      stun: 15
+      stun: 10
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -84,7 +84,7 @@ MonoBehaviour:
       hitID: 0
     airBlockProperty:
       damage: 50
-      stun: 15
+      stun: 10
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -389,6 +389,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 1
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles:

@@ -20,11 +20,11 @@ MonoBehaviour:
   description: 
   attackLevel: 4
   type: 5
-  meterCost: 0
+  meterCost: 50
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: eb3566b01e3dc8e4ebcdc15bb75cba4e, type: 3}
     startFrame: 2
-    duration: 90
+    duration: 88
   collissionState: 0
   groundState: 0
   stance: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 3500
-      stun: 40
+      stun: 50
       hitstop: 25
       proration: 0.95
       meterGain: 4
@@ -62,7 +62,7 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 3500
-      stun: 40
+      stun: 50
       hitstop: 25
       proration: 0.95
       meterGain: 4
@@ -73,7 +73,7 @@ MonoBehaviour:
       hitID: 0
     airHitProperty:
       damage: 3500
-      stun: 40
+      stun: 50
       hitstop: 25
       proration: 0.95
       meterGain: 4
@@ -95,7 +95,7 @@ MonoBehaviour:
       hitID: 0
     airCounterhitProperty:
       damage: 3500
-      stun: 40
+      stun: 50
       hitstop: 25
       proration: 0.95
       meterGain: 4
@@ -123,12 +123,12 @@ MonoBehaviour:
   totalMoveDuration: 51
   firstGatlingFrame: 12
   blockAdvantage: -24
-  hitAdvantage: -4
+  hitAdvantage: 6
   blockCancelAdvantage: -19
-  hitCancelAdvantage: 35
+  hitCancelAdvantage: 45
   recoveryFrames: 30
   m:
-  - startFrame: 2
+  - startFrame: 7
     duration: 15
     momentum: {x: 0, y: 0, z: 30}
     homing: 0
@@ -144,23 +144,23 @@ MonoBehaviour:
   specialCancelOnHit: 0
   noClip: 1
   noClipStart: 1
-  noClipDuration: 20
+  noClipDuration: 10
   invincible: 1
   invincibleStart: 1
   invincibleDuration: 10
-  projectileInvul: 0
+  projectileInvul: 1
   projectileInvulStart: 1
-  projectileInvulDuration: 0
+  projectileInvulDuration: 21
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  headInvul: 1
+  headInvul: 0
   headInvulStart: 1
   headInvulDuration: 10
-  bodyInvul: 1
+  bodyInvul: 0
   bodyInvulStart: 1
   bodyInvulDuration: 5
   footInvul: 0
@@ -169,6 +169,7 @@ MonoBehaviour:
   resetGatling: 1
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

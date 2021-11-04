@@ -35,7 +35,7 @@ MonoBehaviour:
     activeFrames: 1
     gatlingFrames: 6
     attackType: 0
-    attackHeight: 1
+    attackHeight: 0
     bodyProperty: 1
     homing: 0
     groundHitProperty:
@@ -177,6 +177,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
