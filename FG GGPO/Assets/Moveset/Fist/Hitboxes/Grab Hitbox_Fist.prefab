@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2591316948672879920}
   - component: {fileID: -2571423313439521720}
   m_Layer: 9
-  m_Name: Grab Hitbox
+  m_Name: Grab Hitbox_Fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3177392228787048669}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.3}
   m_Children:
   - {fileID: 3351072435462638538}
   m_Father: {fileID: 0}
@@ -115,8 +115,10 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
+  canClash: 1
   body: {fileID: 0}
   enemyList: []
+  hitOnce: 0
   grabTransform: {fileID: 3351072435462638538}
 --- !u!1 &8778754930445186077
 GameObject:

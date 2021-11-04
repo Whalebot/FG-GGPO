@@ -19,6 +19,7 @@ public class BlockerScript : MonoBehaviour
         {
             Physics.IgnoreCollision(item, playerBlockerCollider, true);
         }
+     
     }
 
     private void Start()

@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 700
-      stun: 50
+      stun: 30
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
       hitID: 0
     airHitProperty:
       damage: 700
-      stun: 50
+      stun: 30
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -126,9 +126,9 @@ MonoBehaviour:
   totalMoveDuration: 45
   firstGatlingFrame: 20
   blockAdvantage: 0
-  hitAdvantage: 20
+  hitAdvantage: 0
   blockCancelAdvantage: 5
-  hitCancelAdvantage: 45
+  hitCancelAdvantage: 25
   recoveryFrames: 30
   m: []
   hurtboxes: []
@@ -176,6 +176,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

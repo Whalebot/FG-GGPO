@@ -20,7 +20,7 @@ MonoBehaviour:
   description: 
   attackLevel: 4
   type: 5
-  meterCost: 0
+  meterCost: 50
   superFlash:
     superPrefab: {fileID: 8606573427595286309, guid: eb3566b01e3dc8e4ebcdc15bb75cba4e, type: 3}
     startFrame: 2
@@ -144,23 +144,23 @@ MonoBehaviour:
   specialCancelOnHit: 0
   noClip: 1
   noClipStart: 1
-  noClipDuration: 20
+  noClipDuration: 10
   invincible: 1
   invincibleStart: 1
   invincibleDuration: 10
-  projectileInvul: 0
+  projectileInvul: 1
   projectileInvulStart: 1
-  projectileInvulDuration: 0
+  projectileInvulDuration: 21
   linearInvul: 0
   linearInvulStart: 1
   linearInvulDuration: 0
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  headInvul: 1
+  headInvul: 0
   headInvulStart: 1
   headInvulDuration: 10
-  bodyInvul: 1
+  bodyInvul: 0
   bodyInvulStart: 1
   bodyInvulDuration: 5
   footInvul: 0
