@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI p2HealthText;
 
 
-
+    public Gradient meterColorOverTime;
     public Slider p1Meter;
     public Slider p2Meter;
     public TextMeshProUGUI p1MeterText;
@@ -192,6 +192,8 @@ public class UIManager : MonoBehaviour
         p1Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)p1Status.Health / (float)p1InitialHealth);
         p2Health.targetGraphic.color = hpColorOverTime.Evaluate(1 - (float)p2Status.Health / (float)p2InitialHealth);
 
+        p1Meter.targetGraphic.color = meterColorOverTime.Evaluate(1 - (float)p1Status.meter / 100);
+        p2Meter.targetGraphic.color = meterColorOverTime.Evaluate(1 - (float)p2Status.meter / 100);
 
 
         for (int i = 0; i < p1RoundWinImages.Length; i++)
