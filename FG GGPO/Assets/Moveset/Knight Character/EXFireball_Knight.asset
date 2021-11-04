@@ -30,7 +30,7 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 6130433937859647811, guid: 0bab4c4f9bcdc424e992695a7a25d51c, type: 3}
+  - hitbox: {fileID: 6130433937859647811, guid: d7aa1b93790c66c42b581fa9e664668a, type: 3}
     startupFrame: 15
     activeFrames: 1
     gatlingFrames: 5
@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 1000
-      stun: 30
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -62,18 +62,18 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 1000
-      stun: 30
-      hitstop: 5
+      stun: 40
+      hitstop: 10
       proration: 0.95
       meterGain: 2
-      pushback: {x: 0, y: 5, z: 5}
+      pushback: {x: 0, y: 5, z: 10}
       hitState: 2
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 1000
-      stun: 30
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -95,7 +95,7 @@ MonoBehaviour:
       hitID: 0
     airCounterhitProperty:
       damage: 1000
-      stun: 30
+      stun: 40
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -108,6 +108,8 @@ MonoBehaviour:
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
+  - startup: 1
+    prefab: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -121,9 +123,9 @@ MonoBehaviour:
   totalMoveDuration: 45
   firstGatlingFrame: 20
   blockAdvantage: -5
-  hitAdvantage: 0
+  hitAdvantage: 10
   blockCancelAdvantage: 0
-  hitCancelAdvantage: 25
+  hitCancelAdvantage: 35
   recoveryFrames: 30
   m:
   - startFrame: 3
@@ -167,6 +169,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

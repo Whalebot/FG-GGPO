@@ -31,7 +31,7 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: 7566b272e5fb41043ad9db72a7332aa4, type: 3}
-    startupFrame: 10
+    startupFrame: 8
     activeFrames: 5
     gatlingFrames: 5
     attackType: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     groundHitProperty:
       damage: 1500
       stun: 65
-      hitstop: 10
+      hitstop: 15
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
@@ -61,11 +61,11 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1500
-      stun: 65
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 1875
+      stun: 75
+      hitstop: 20
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 10, z: 5}
       hitState: 1
       minimumDamage: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     airHitProperty:
       damage: 1500
       stun: 65
-      hitstop: 5
+      hitstop: 15
       proration: 0.95
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
@@ -94,18 +94,20 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1500
-      stun: 65
-      hitstop: 5
-      proration: 0.95
-      meterGain: 2
+      damage: 1875
+      stun: 75
+      hitstop: 20
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 10, z: 5}
       hitState: 1
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
   vfx: []
-  sfx: []
+  sfx:
+  - startup: 1
+    prefab: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -114,10 +116,10 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 23
   hitID: 0
-  firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 74
-  firstGatlingFrame: 15
+  firstStartupFrame: 8
+  lastActiveFrame: 12
+  totalMoveDuration: 72
+  firstGatlingFrame: 13
   blockAdvantage: -44
   hitAdvantage: 1
   blockCancelAdvantage: -39
@@ -135,7 +137,7 @@ MonoBehaviour:
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 0
+  jumpCancelOnHit: 1
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
   noClip: 1
