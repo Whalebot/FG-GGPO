@@ -175,9 +175,14 @@ public class Hitbox : MonoBehaviour
         }
     }
 
+
     void ExecuteBlock(HitProperty hit, Status other)
     {
-        attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnBlock;
+        if (move.gatlingMoves.Count > 0 && move.gatlingCancelOnBlock)
+            attack.GatlingStart(true);
+        else
+            attack.GatlingStart(false);
+
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
         status.Meter += hit.meterGain;
@@ -220,7 +225,11 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other)
     {
-        attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit;
+        if  (move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit)
+            attack.GatlingStart(true);
+        else
+            attack.GatlingStart(false);
+
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
         status.Meter += hit.meterGain;

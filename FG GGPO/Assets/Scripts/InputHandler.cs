@@ -748,9 +748,8 @@ public class InputHandler : MonoBehaviour
         bool result = false;
         if (directionals.Count <= 0) return false;
         int currentInput = directionals[directionals.Count - 1];
-        bool foundNeutralInput = false;
         bool foundOppositeInput = false;
-        bool foundNeutralInput2 = false;
+        bool foundNeutralInput = false;
         if (currentInput == 5) return false;
         if (currentInput != dir) return false;
         for (int i = 1; i < motionInputWindow; i++)
@@ -762,18 +761,13 @@ public class InputHandler : MonoBehaviour
             }
             if (directionals[directionals.Count - i] != ReverseDirection(currentInput) && foundOppositeInput)
             {
-                foundNeutralInput2 = true;
+                foundNeutralInput = true;
             }
-            if (directionals[directionals.Count - i] == ReverseDirection(currentInput) && foundNeutralInput)
+            if (directionals[directionals.Count - i] == ReverseDirection(currentInput))
             {
                 foundOppositeInput = true;
             }
-            if (directionals[directionals.Count - i] == 5)
-            {
-                foundNeutralInput = true;
-            }
-
-            if (foundNeutralInput & foundNeutralInput2 && foundOppositeInput)
+            if (foundNeutralInput && foundOppositeInput)
             {
                 return true;
             }

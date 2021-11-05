@@ -110,6 +110,7 @@ public class Move : ScriptableObject
     [FoldoutGroup("Invul properties")] public int footInvulDuration;
 
     [FoldoutGroup("Move properties")] public bool resetGatling = false;
+    [FoldoutGroup("Move properties")] public int extendedBuffer = 0;
     [FoldoutGroup("Move properties")] public bool noHitstopOnSelf;
     [FoldoutGroup("Move properties")] public bool crossupState;
     [FoldoutGroup("Move properties")] public bool noCounterHit;

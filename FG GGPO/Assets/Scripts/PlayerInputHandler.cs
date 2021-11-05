@@ -122,7 +122,10 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         mov.direction = relativeDirection;
-        input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0;
+        //Pause input buffer
+        input.isPaused = status.hitstopCounter > 0 || attack.jumpFrameCounter > 0 || attack.extendedBuffer > 0;
+
+        //Extra buffer for special inputs
         input.extraBuffer = status.hitstopCounter;
     }
 
