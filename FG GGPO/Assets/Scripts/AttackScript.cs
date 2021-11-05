@@ -185,7 +185,7 @@ public class AttackScript : MonoBehaviour
                     attackString = true;
                     newAttack = false;
                 }
-                if (attackFrames > activeMove.firstStartupFrame + activeMove.firstGatlingFrame)
+                if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
                 {
                     canTargetCombo = true;
                 }
@@ -551,6 +551,7 @@ public class AttackScript : MonoBehaviour
         extendedBuffer = move.extendedBuffer;
         attackID = move.animationID;
         attackString = false;
+        canTargetCombo = false;
         gatling = false;
         jumpCancel = false;
         specialCancel = false;
@@ -638,9 +639,8 @@ public class AttackScript : MonoBehaviour
 
     public bool TargetCombo(Move move)
     {
-        if (move == null) return false;
         if (jumpFrameCounter > 0) return false;
-
+        if (move == null) return false;
         if (move.useAirAction)
         {
             if (movement.performedJumps > movement.multiJumps)
@@ -650,7 +650,6 @@ public class AttackScript : MonoBehaviour
         }
         if (attacking && canTargetCombo)
         {
-
             if (activeMove.targetComboMoves.Count > 0)
             {
                 if (activeMove.targetComboMoves.Contains(move))
@@ -761,6 +760,7 @@ public class AttackScript : MonoBehaviour
         jumpEvent?.Invoke();
         status.GoToState(Status.State.Recovery);
         attackString = false;
+        canTargetCombo = false;
         movementOption = null;
 
         if (activeMove != null)
@@ -811,6 +811,7 @@ public class AttackScript : MonoBehaviour
         specialCancel = false;
         attacking = false;
         gatling = false;
+        canTargetCombo = false;
         landCancel = false;
 
         status.counterhitState = false;

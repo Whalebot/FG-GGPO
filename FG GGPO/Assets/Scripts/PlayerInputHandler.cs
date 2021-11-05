@@ -666,7 +666,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         status.blocking = false;
 
-        if (attack.attackString)
+        if (attack.attackString || attack.canTargetCombo)
         {
             ProcessBuffer();
         }
