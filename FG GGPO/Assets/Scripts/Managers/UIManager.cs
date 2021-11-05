@@ -146,10 +146,10 @@ public class UIManager : MonoBehaviour
         p1HealthText.text = p1Status.Health + "/" + p1Status.maxHealth;
         p2HealthText.text = p2Status.Health + "/" + p2Status.maxHealth;
 
-        p1Meter.value = p1Status.Meter;
-        p2Meter.value = p2Status.Meter;
-        p1MeterText.text = p1Status.Meter + "";
-        p2MeterText.text = p2Status.Meter + "";
+        p1Meter.value = p1Status.Meter/100;
+        p2Meter.value = p2Status.Meter / 100;
+        p1MeterText.text = p1Status.Meter / 100 + "";
+        p2MeterText.text = p2Status.Meter / 100 + "";
 
         if (GameHandler.p1WinStreak > 0)
         {

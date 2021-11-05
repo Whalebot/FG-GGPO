@@ -717,10 +717,11 @@ MonoBehaviour:
   footInvul: 0
   maxHealth: 10000
   health: 10000
-  maxMeter: 100
+  maxMeter: 10000
   meter: 0
   burstGauge: 6000
   comboCounter: 0
+  blockCounter: 0
   lastAttackDamage: 0
   comboDamage: 0
   proration: 0
@@ -790,8 +791,10 @@ MonoBehaviour:
   moveset: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
   activeMove: {fileID: 0}
   gatling: 0
+  gatlingFrame: 0
   attackID: 0
   attackFrames: 0
+  extendedBuffer: 0
   movementFrames: 0
   projectiles: []
   inMomentum: 0
@@ -803,6 +806,7 @@ MonoBehaviour:
   throwBreakCounter: 0
   attacking: 0
   attackString: 0
+  canTargetCombo: 0
   landCancel: 0
   jumpCancel: 0
   specialCancel: 0

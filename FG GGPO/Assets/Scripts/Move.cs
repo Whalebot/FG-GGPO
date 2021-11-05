@@ -137,6 +137,16 @@ public class Move : ScriptableObject
         lastActiveFrame = attacks[attacks.Length - 1].startupFrame + attacks[attacks.Length - 1].activeFrames - 1;
         totalMoveDuration = lastActiveFrame + recoveryFrames;
 
+        //foreach (var item in attacks)
+        //{
+        //    if (item.groundHitProperty.meterGain < 100) item.groundHitProperty.meterGain *= 100;
+        //    if (item.groundBlockProperty.meterGain < 100) item.groundBlockProperty.meterGain *= 100;
+        //    if (item.groundCounterhitProperty.meterGain < 100) item.groundCounterhitProperty.meterGain *= 100;
+        //    if (item.airHitProperty.meterGain < 100) item.airHitProperty.meterGain *= 100;
+        //    if (item.airBlockProperty.meterGain < 100) item.airBlockProperty.meterGain *= 100;
+        //    if (item.airCounterhitProperty.meterGain < 100) item.airCounterhitProperty.meterGain *= 100;
+        //}
+
         if (noHitstopOnSelf)
         {
             blockAdvantage = attacks[attacks.Length - 1].groundBlockProperty.stun - (totalMoveDuration - attacks[attacks.Length - 1].startupFrame) + attacks[attacks.Length - 1].groundBlockProperty.hitstop;
@@ -193,7 +203,7 @@ public class Move : ScriptableObject
         }
     }
 
-    [TabGroup("Attacks"), Button]
+    //[TabGroup("Attacks"), Button]
     void AutoAssignValues()
     {
         switch (attackLevel)
@@ -374,6 +384,10 @@ public class Move : ScriptableObject
 
     }
 
+
+    void SetValuesBasedOnGroundProperties() { 
+    
+    }
     [TabGroup("Attacks"), Button]
     void CopyHitToCounterhit()
     {

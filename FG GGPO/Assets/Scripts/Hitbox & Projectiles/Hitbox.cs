@@ -185,9 +185,10 @@ public class Hitbox : MonoBehaviour
 
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
-        status.Meter += hit.meterGain;
-        other.Meter += hit.meterGain / 2;
 
+        int meterVal = (int)(hit.meterGain * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.blockCounter));
+        status.Meter += meterVal;
+        other.Meter += meterVal / 2;
 
         //Enemy Hitstop
         other.newMove = true;
@@ -225,15 +226,17 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other)
     {
-        if  (move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit)
+        if (move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit)
             attack.GatlingStart(true);
         else
             attack.GatlingStart(false);
 
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
-        status.Meter += hit.meterGain;
-        other.Meter += hit.meterGain / 2;
+        int meterVal = (int)(hit.meterGain * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
+        status.Meter += meterVal;
+        other.Meter += meterVal / 2;
+
         other.burstGauge += hit.meterGain * 60;
 
 

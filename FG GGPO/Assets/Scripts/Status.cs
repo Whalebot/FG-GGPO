@@ -84,8 +84,8 @@ public class Status : MonoBehaviour
     public int meter;
     public int burstGauge;
 
-
     public int comboCounter;
+    public int blockCounter;
     public int lastAttackDamage;
     public int comboDamage;
     public float proration;
@@ -203,8 +203,8 @@ public class Status : MonoBehaviour
             default:
                 break;
         }
-       
 
+        blockCounter = 0;
         comboCounter = 0;
         hitstunValue = 0;
         blockstunValue = 0;
@@ -528,6 +528,7 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 invincible = false;
                 linearInvul = false;
+                blockCounter = 0;
                 wakeupEvent?.Invoke();
                 EnableHurtboxes();
                 neutralEvent?.Invoke(); break;
@@ -641,7 +642,6 @@ public class Status : MonoBehaviour
 
         if (val >= Health)
         {
-        
             ////Enemy Hitstop     
             Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
             enemyStatus.newMove = true;
@@ -673,6 +673,8 @@ public class Status : MonoBehaviour
         ResetInvincibilities();
         mov.runMomentumCounter = 0;
         mov.storedDirection = Vector3.zero;
+
+        blockCounter++;
 
         Health -= damage;
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
