@@ -33,7 +33,7 @@ MonoBehaviour:
   - hitbox: {fileID: 0}
     startupFrame: 10
     activeFrames: 1
-    gatlingFrames: 8
+    gatlingFrames: 4
     attackType: 0
     attackHeight: 1
     bodyProperty: 1
@@ -122,7 +122,7 @@ MonoBehaviour:
   firstStartupFrame: 10
   lastActiveFrame: 10
   totalMoveDuration: 35
-  firstGatlingFrame: 18
+  firstGatlingFrame: 14
   blockAdvantage: -5
   hitAdvantage: 5
   blockCancelAdvantage: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
     resetVelocityDuringRecovery: 1
   hurtboxes: []
   targetComboMoves:
-  - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   - {fileID: 11400000, guid: 52eacb4dc57bcb84a99f1b446b026f09, type: 2}
   - {fileID: 11400000, guid: 08da8e6a8d749334cbc9a513a0980b42, type: 2}
@@ -179,7 +179,7 @@ MonoBehaviour:
   footInvulDuration: 0
   resetGatling: 0
   noHitstopOnSelf: 1
-  crossupState: 1
+  crossupState: 0
   noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
