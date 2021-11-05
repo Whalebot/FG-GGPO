@@ -136,7 +136,7 @@ MonoBehaviour:
     resetVelocityDuringRecovery: 1
   hurtboxes: []
   targetComboMoves:
-  - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   - {fileID: 11400000, guid: 52eacb4dc57bcb84a99f1b446b026f09, type: 2}
   - {fileID: 11400000, guid: 08da8e6a8d749334cbc9a513a0980b42, type: 2}
@@ -178,6 +178,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 20
   noHitstopOnSelf: 1
   crossupState: 1
   noCounterHit: 0
