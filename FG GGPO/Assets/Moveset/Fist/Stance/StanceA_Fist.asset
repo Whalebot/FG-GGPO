@@ -40,12 +40,14 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 800
-      stun: 16
+      stun: 20
       hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 4}
+      pushback: {x: 0, y: 0, z: 6}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 5}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 800
@@ -64,6 +68,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 800
@@ -73,6 +79,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 5, z: 4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -82,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: -4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 800
@@ -91,6 +101,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 5, z: 4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx:
   - startup: 6
@@ -116,14 +128,14 @@ MonoBehaviour:
   totalMoveDuration: 24
   firstGatlingFrame: 15
   blockAdvantage: -2
-  hitAdvantage: 2
+  hitAdvantage: 6
   blockCancelAdvantage: 3
-  hitCancelAdvantage: 11
+  hitCancelAdvantage: 15
   recoveryFrames: 10
   m:
   - startFrame: 2
     duration: 5
-    momentum: {x: 0, y: 0, z: 5}
+    momentum: {x: 0, y: 0, z: 4}
     homing: 0
     resetVelocityDuringRecovery: 0
   hurtboxes: []
@@ -171,6 +183,7 @@ MonoBehaviour:
   resetGatling: 1
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

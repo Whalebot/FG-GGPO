@@ -138,6 +138,8 @@ MonoBehaviour:
   targetComboMoves:
   - {fileID: 11400000, guid: bc925224e2161474e9f5131c749ed60c, type: 2}
   - {fileID: 11400000, guid: 54ec82d8cda9fd940882b9d9a78e14f3, type: 2}
+  - {fileID: 11400000, guid: 52eacb4dc57bcb84a99f1b446b026f09, type: 2}
+  - {fileID: 11400000, guid: 08da8e6a8d749334cbc9a513a0980b42, type: 2}
   - {fileID: 11400000, guid: 8d00abbee1663f8459c69616412157e3, type: 2}
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
@@ -183,6 +185,7 @@ MonoBehaviour:
   resetGatling: 0
   noHitstopOnSelf: 1
   crossupState: 1
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

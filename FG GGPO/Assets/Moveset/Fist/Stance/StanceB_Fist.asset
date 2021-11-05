@@ -44,8 +44,8 @@ MonoBehaviour:
       hitstop: 12
       proration: 0.95
       meterGain: 4
-      pushback: {x: 0, y: 8, z: 2}
-      hitState: 2
+      pushback: {x: 0, y: 0, z: 6}
+      hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
   - {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   - {fileID: 11400000, guid: 42eab9449d6ba6a42b660c57b63f0885, type: 2}
+  - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   gatlingCancelOnBlock: 0
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   resetGatling: 1
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
