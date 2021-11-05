@@ -31,8 +31,10 @@ public class AttackScript : MonoBehaviour
     [HeaderAttribute("Attack attributes")]
     [FoldoutGroup("Debug")] public Move activeMove;
     [FoldoutGroup("Debug")] public bool gatling;
+    [FoldoutGroup("Debug")] public int gatlingFrame;
     [FoldoutGroup("Debug")] public int attackID;
     [FoldoutGroup("Debug")] public int attackFrames;
+    [FoldoutGroup("Debug")] public int extendedBuffer;
 
     [FoldoutGroup("Debug")] public int movementFrames;
     [FoldoutGroup("Debug")] public List<GameObject> projectiles;
@@ -46,6 +48,7 @@ public class AttackScript : MonoBehaviour
 
     [FoldoutGroup("Move properties")] public bool attacking;
     [FoldoutGroup("Move properties")] public bool attackString;
+    [FoldoutGroup("Move properties")] public bool canTargetCombo;
     [FoldoutGroup("Move properties")] public bool landCancel;
     [FoldoutGroup("Move properties")] public bool jumpCancel;
     [FoldoutGroup("Move properties")] public bool specialCancel;
@@ -100,6 +103,13 @@ public class AttackScript : MonoBehaviour
             }
         }
     }
+
+    public void GatlingStart(bool g)
+    {
+        gatling = g;
+        gatlingFrame = attackFrames;
+    }
+
     public void ExecuteFrame()
     {
         if (superCounter > 0 && GameHandler.Instance.superFlash)
@@ -170,11 +180,17 @@ public class AttackScript : MonoBehaviour
             if (attacking)
             {
                 attackFrames++;
-                if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+                if (attackFrames > gatlingFrame + activeMove.attacks[0].gatlingFrames)
                 {
                     attackString = true;
                     newAttack = false;
                 }
+                if (attackFrames > activeMove.firstStartupFrame + activeMove.firstGatlingFrame)
+                {
+                    canTargetCombo = true;
+                }
+                if (extendedBuffer > 0)
+                    extendedBuffer--;
 
                 if (attackFrames == activeMove.superFlash.startFrame && activeMove.type == MoveType.Super)
                 {
@@ -532,6 +548,7 @@ public class AttackScript : MonoBehaviour
 
         recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
+        extendedBuffer = move.extendedBuffer;
         attackID = move.animationID;
         attackString = false;
         gatling = false;
@@ -631,7 +648,7 @@ public class AttackScript : MonoBehaviour
                 return false;
             }
         }
-        if (attacking && attackString)
+        if (attacking && canTargetCombo)
         {
 
             if (activeMove.targetComboMoves.Count > 0)
@@ -758,7 +775,8 @@ public class AttackScript : MonoBehaviour
         landCancel = false;
         recoveryEvent?.Invoke();
 
-        if (status.groundState == GroundState.Airborne) {
+        if (status.groundState == GroundState.Airborne)
+        {
             jumpFrameCounter = 1;
             status.minusFrames = -1;
         }
@@ -787,6 +805,7 @@ public class AttackScript : MonoBehaviour
             activeMove = null;
         }
 
+        extendedBuffer = 0;
         combo = 0;
         jumpFrameCounter = 0;
         specialCancel = false;
