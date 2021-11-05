@@ -43,6 +43,15 @@ public class MissionManager : MonoBehaviour
         ChangeComboTrial(0);
     }
 
+    private void OnDisable()
+    {
+        playerAttack.jumpEvent -= JumpPerformed;
+        playerAttack.attackHitEvent -= ActionHit;
+        playerAttack.attackPerformedEvent -= ActionPerformed;
+        dummyStatus.recoveryEvent -= FailedMission;
+        GameHandler.Instance.resetEvent -= FailedMission;
+    }
+
     [Button]
     public void NextComboTrial()
     {
@@ -70,7 +79,7 @@ public class MissionManager : MonoBehaviour
         }
         replayer.SetRecording(log);
         SetupUI();
-       
+
     }
 
     public void ActionHit(Move move)
