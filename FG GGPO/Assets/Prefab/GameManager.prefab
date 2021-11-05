@@ -2899,6 +2899,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5573244298042959478, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ba4538f65c1c34bb06da08322411f6, type: 3}
 --- !u!20 &5573244299268616772 stripped
@@ -3192,7 +3196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941529086414128613, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_PlaneDistance
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1941529086414128614, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_Name
@@ -3584,7 +3588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107189361185930020, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -479.9997
+      value: -479.99976
       objectReference: {fileID: 0}
     - target: {fileID: 5757610663684563709, guid: 68c8ca0cef895ff46a0bed6857ec235f, type: 3}
       propertyPath: m_AnchorMin.y

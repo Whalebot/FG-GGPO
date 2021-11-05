@@ -114,6 +114,7 @@ public class GameHandler : MonoBehaviour
         {
             gameMode = (GameMode)gameModeID;
         }
+        gameModeID = (int)gameMode;
         isPaused = true;
         LoadCharacters();
         p1Status = p1Transform.GetComponent<Status>();

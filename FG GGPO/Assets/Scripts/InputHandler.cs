@@ -124,14 +124,6 @@ public class InputHandler : MonoBehaviour
         deviceIsAssigned = true;
 
         user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
-
-        //var oldActions = inputAsset;
-        //for (var actionMap = 0; actionMap < oldActions.actionMaps.Count; actionMap++)
-        //{
-        //    for (var binding = 0; binding < oldActions.actionMaps[actionMap].bindings.Count; binding++)
-        //        inputAsset.actionMaps[actionMap].ApplyBindingOverride(binding, oldActions.actionMaps[actionMap].bindings[binding]);
-        //}
-
         controls = new Controls();
         
 
