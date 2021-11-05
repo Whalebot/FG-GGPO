@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 1-7 50% meter Stance B CH starter
   startPosition: 0
   counterhit: 1
-  meter: 50
+  meter: 5000
   comboDemonstration:
     inputs:
     - frame: 11841
@@ -1697,7 +1697,7 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: 4cf933f9befd26f46851c2443e1bd808, type: 2}
     inputDirection: 0
   - type: 2
-    move: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+    move: {fileID: 0}
     inputDirection: 0
   - type: 2
     move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}

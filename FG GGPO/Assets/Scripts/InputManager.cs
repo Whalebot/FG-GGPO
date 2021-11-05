@@ -86,7 +86,7 @@ public class InputManager : MonoBehaviour
                         break;
                     default:
                         // See InputDeviceChange reference for other event types.
-                        print("Default");
+                        //print("Default");
                         break;
                 }
             };

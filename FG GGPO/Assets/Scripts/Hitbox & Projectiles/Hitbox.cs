@@ -233,7 +233,7 @@ public class Hitbox : MonoBehaviour
 
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
-        int meterVal = (int)(hit.meterGain * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
+        int meterVal = (int)(hit.meterGain * 100 * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
         status.Meter += meterVal;
         other.Meter += meterVal / 2;
 

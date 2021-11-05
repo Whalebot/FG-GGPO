@@ -227,11 +227,14 @@ public class AttackScript : MonoBehaviour
                     else if (attackFrames > activeMove.m[i].startFrame)
                     {
                         movement.storedDirection = movement.rb.velocity;
+                        Vector3 targetNoY = movement.strafeTarget.position;
+                        targetNoY.y = transform.position.y;
+                        float angle = Vector3.SignedAngle(transform.forward, (targetNoY - transform.position).normalized, Vector3.up);
                         if (activeMove.m[i].resetVelocityDuringRecovery)
                             status.rb.velocity = Vector3.zero;
                         if (activeMove.overrideVelocity)
                         {
-                            if (activeMove.m[i].homing)
+                            if (activeMove.m[i].homing && Mathf.Abs(angle) < 90)
                                 status.rb.velocity = movement.CalculateRight(activeMove.m[i].momentum.x) + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
                             else status.rb.velocity = activeMove.m[i].momentum.x * transform.right + transform.up * activeMove.m[i].momentum.y + transform.forward * activeMove.m[i].momentum.z;
 
@@ -526,7 +529,7 @@ public class AttackScript : MonoBehaviour
 
         if (move.type == MoveType.EX)
             Instantiate(VFXManager.Instance.exMoveVFX, transform.position, transform.rotation);
-        status.Meter -= move.meterCost;
+        status.Meter -= move.meterCost * 100;
         status.minusFrames = -(move.totalMoveDuration);
         status.EnableCollider();
         status.SetBlockState(move.collissionState);
@@ -592,7 +595,7 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
         if (jumpFrameCounter > 0) return false;
 
-        if (move.meterCost > status.Meter) return false;
+        if (move.meterCost * 100 > status.Meter) return false;
         if (move.useAirAction && !attacking)
         {
             if (movement.performedJumps <= 0)

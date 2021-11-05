@@ -193,7 +193,7 @@ public class Status : MonoBehaviour
                 meter = 0;
                 break;
             case GameMode.TrainingMode:
-                meter = 100;
+                meter = maxMeter;
                 BurstGauge = 6000;
                 break;
             case GameMode.TrialMode:
