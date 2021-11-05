@@ -124,14 +124,6 @@ public class InputHandler : MonoBehaviour
         deviceIsAssigned = true;
 
         user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
-
-        //var oldActions = inputAsset;
-        //for (var actionMap = 0; actionMap < oldActions.actionMaps.Count; actionMap++)
-        //{
-        //    for (var binding = 0; binding < oldActions.actionMaps[actionMap].bindings.Count; binding++)
-        //        inputAsset.actionMaps[actionMap].ApplyBindingOverride(binding, oldActions.actionMaps[actionMap].bindings[binding]);
-        //}
-
         controls = new Controls();
         
 
@@ -183,6 +175,77 @@ public class InputHandler : MonoBehaviour
         //controls.Default.Enable();
       
         
+        //inputAsset.FindActionMap("Joystick").Enable();
+        user.AssociateActionsWithUser(controls);
+        user.actions.Enable();
+        //inputAsset.actionMaps[0].
+    }
+
+    public void SetupControls(Joystick device)
+    {
+        if (deviceIsAssigned) return;
+        deviceIsAssigned = true;
+
+        user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
+
+        //var oldActions = inputAsset;
+        //for (var actionMap = 0; actionMap < oldActions.actionMaps.Count; actionMap++)
+        //{
+        //    for (var binding = 0; binding < oldActions.actionMaps[actionMap].bindings.Count; binding++)
+        //        inputAsset.actionMaps[actionMap].ApplyBindingOverride(binding, oldActions.actionMaps[actionMap].bindings[binding]);
+        //}
+
+        controls = new Controls();
+
+
+        //user.ActivateControlScheme(inputAsset.controlSchemes);
+        controls.Default.West.performed += context => OnWest(context);
+        controls.Default.West.canceled += context => OnWest(context);
+        controls.Default.North.performed += context => OnNorth(context);
+        controls.Default.North.canceled += context => OnNorth(context);
+        controls.Default.South.performed += context => OnSouth(context);
+        controls.Default.South.canceled += context => OnSouth(context);
+        controls.Default.East.performed += context => OnEast(context);
+        controls.Default.East.canceled += context => OnEast(context);
+
+        controls.Default.Up.performed += context => OnUp(context);
+        controls.Default.Left.performed += context => OnLeft(context);
+        controls.Default.Right.performed += context => OnRight(context);
+        controls.Default.Down.performed += context => OnDown(context);
+        controls.Default.Up.canceled += context => OnUp(context);
+        controls.Default.Left.canceled += context => OnLeft(context);
+        controls.Default.Right.canceled += context => OnRight(context);
+        controls.Default.Down.canceled += context => OnDown(context);
+
+        controls.Default.R1.performed += context => OnR1(context);
+        controls.Default.R1.canceled += context => OnR1(context);
+
+        controls.Default.R2.performed += context => OnR2Press();
+        controls.Default.R2.canceled += context => OnR2Release();
+
+        controls.Default.L1.performed += context => OnL1(context);
+        controls.Default.L1.canceled += context => OnL1(context);
+
+        controls.Default.L2.performed += _ => OnL2Press();
+        controls.Default.L2.canceled += _ => OnL2Release();
+
+        controls.Default.R3.performed += context => OnR3();
+        controls.Default.L3.performed += context => OnL3();
+
+        controls.Default.Start.performed += _ => OnStart();
+        controls.Default.Select.performed += _ => OnSelect();
+
+        controls.Default.Console.performed += _ => OnTouchPad();
+
+        controls.Default._1.performed += _ => On1();
+        controls.Default._2.performed += _ => On2();
+        controls.Default._3.performed += _ => On3();
+        controls.Default._4.performed += _ => On4();
+
+        directionals = new List<int>();
+        //controls.Default.Enable();
+
+
         //inputAsset.FindActionMap("Joystick").Enable();
         user.AssociateActionsWithUser(controls);
         user.actions.Enable();

@@ -14,10 +14,13 @@ public class InputManager : MonoBehaviour
     public InputHandler p2Input;
     public static bool isServer;
     public int controllersConnected;
+    public List<InputDevice> controllers;
+
 
     private void Awake()
     {
         Instance = this;
+        controllers = new List<InputDevice>();
     }
 
     void Start()
@@ -29,29 +32,34 @@ public class InputManager : MonoBehaviour
         }
         p1Input.id = 1;
         p2Input.id = 2;
-        controllersConnected = Gamepad.all.Count;
+        controllersConnected = Gamepad.all.Count + Joystick.all.Count;
 
-        foreach (var item in Gamepad.all)
+        foreach (var item in InputSystem.devices)
         {
-            // print(item.name);
+            if (item is Gamepad || item is Joystick)
+                controllers.Add(item);
         }
-
-        //for (int i = 0; i < controllersConnected; i++)
-        //{
-        //    p1Input.SetupControls(Gamepad.all[i]);
-
-        //}
-
-
-        if (Gamepad.all.Count > 1)
+        if (controllers.Count > 1)
         {
-            p2Input.SetupControls(Gamepad.all[1]);
-            p1Input.SetupControls(Gamepad.all[0]);
+            if (controllers[1] is Gamepad)
+                p2Input.SetupControls((Gamepad)controllers[1]);
+            else if(controllers[1] is Joystick)
+                p2Input.SetupControls((Joystick)controllers[1]);
+
+            if (controllers[0] is Gamepad)
+                p1Input.SetupControls((Gamepad)controllers[0]);
+            else if (controllers[0] is Joystick)
+                p1Input.SetupControls((Joystick)controllers[0]);
         }
         else
         {
-            p1Input.SetupControls(Gamepad.all[0]);
-            if (GameHandler.gameModeID <= 0) {
+            if (controllers[0] is Gamepad)
+                p1Input.SetupControls((Gamepad)controllers[0]);
+            else if (controllers[0] is Joystick)
+                p1Input.SetupControls((Joystick)controllers[0]);
+
+            if (GameHandler.gameModeID <= 0)
+            {
                 p2Input.SetupKeyboard();
             }
         }

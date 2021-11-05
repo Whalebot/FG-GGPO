@@ -641,7 +641,7 @@ public class Status : MonoBehaviour
 
         if (val >= Health)
         {
-            print(val + " " + Health);
+        
             ////Enemy Hitstop     
             Status enemyStatus = GameHandler.Instance.ReturnPlayer(transform).GetComponent<Status>();
             enemyStatus.newMove = true;
