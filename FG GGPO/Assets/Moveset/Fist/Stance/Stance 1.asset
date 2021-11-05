@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sA: {fileID: 11400000, guid: 20e17bd4dd7c98e46a9bb29ca6e80e68, type: 2}
   sB: {fileID: 11400000, guid: bb04360bcd687ad4f8d0fdbe27cbbe9e, type: 2}
-  sC: {fileID: 11400000, guid: a851a8a58b6e45d45be8784f7436faeb, type: 2}
+  sC: {fileID: 11400000, guid: 42eab9449d6ba6a42b660c57b63f0885, type: 2}
   cA: {fileID: 0}
   cB: {fileID: 0}
   cC: {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
-  fA: {fileID: 11400000, guid: 42eab9449d6ba6a42b660c57b63f0885, type: 2}
+  fA: {fileID: 0}
   fB: {fileID: 0}
   fC: {fileID: 11400000, guid: 794868953c84c3040846f5055b218d1a, type: 2}
   bA: {fileID: 0}
@@ -65,3 +65,11 @@ MonoBehaviour:
     buttonInput: 4
     grounded: 1
     move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}
+  - motionInput: 2
+    buttonInput: 1
+    grounded: 1
+    move: {fileID: 11400000, guid: 52eacb4dc57bcb84a99f1b446b026f09, type: 2}
+  - motionInput: 2
+    buttonInput: 3
+    grounded: 1
+    move: {fileID: 11400000, guid: 08da8e6a8d749334cbc9a513a0980b42, type: 2}
