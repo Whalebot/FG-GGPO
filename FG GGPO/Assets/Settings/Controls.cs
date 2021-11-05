@@ -212,6 +212,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""eece433d-14be-441d-8fb5-8813ba5cdf4f"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""70748675-6b59-4310-ac69-cb26893c4dfb"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -228,6 +239,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d009ccf-e6db-4e76-ab59-7b24b4600587"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -256,6 +278,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e72be3f1-019e-449c-8934-d9e68fed8597"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ed677a22-5573-4c1a-aa31-02ec7aead5cd"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -278,6 +311,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a1b74988-f972-419d-83de-7b851e7ceef6"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b2ee02dd-de39-4191-afbf-f3d14fad53d8"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -291,6 +335,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""150ff40f-5830-4036-9214-5f6e79d3e94e"",
                     ""path"": ""<DualShockGamepad>/touchpadButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Console"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc2b396a-75bf-4426-ba23-e687c5e372c7"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button13"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
@@ -322,6 +377,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2f87bd97-409d-4cc1-9176-ed63c8bd9883"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ff15e37e-dfb5-4f02-9bc3-e281f608e9c9"",
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
@@ -338,6 +404,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44b42366-c079-417c-8af3-28dbd05f8268"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -366,11 +443,33 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c8bca7c5-1d78-462d-afa5-2e8cb96bc0d0"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""R1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9a9a6365-28f4-43a4-8ced-28fc0eed4a48"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""R2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa732aad-56f6-472f-bdd4-472d6208f789"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""R2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -399,6 +498,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bd84552d-6f30-44da-931b-06c4154727ba"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""L1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d86b233b-74a7-4b33-9c7e-6eb93a0417ba"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
@@ -415,6 +525,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""L2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""132d639e-951d-4b9d-8035-c79bccec5d49"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""L2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
