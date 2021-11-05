@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
 
         //}
 
-
+        print(Joystick.all[0]);
         if (Gamepad.all.Count > 1)
         {
             p2Input.SetupControls(Gamepad.all[1]);
@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            p1Input.SetupControls(Gamepad.all[0]);
+            p1Input.SetupControls(Joystick.all[0]);
             if (GameHandler.gameModeID <= 0) {
                 p2Input.SetupKeyboard();
             }
