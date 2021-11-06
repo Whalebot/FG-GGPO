@@ -129,10 +129,9 @@ MonoBehaviour:
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
-  - {fileID: 11400000, guid: c0c6e8e47388a544d9ea79e07b57a3bc, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: ca3dd07b65fb4834aa8f84ace4850211, type: 2}
   - {fileID: 11400000, guid: 4cf933f9befd26f46851c2443e1bd808, type: 2}
-  - {fileID: 11400000, guid: 5c322c546f1eb314a96f9299a40834cd, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 1
@@ -164,6 +163,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0

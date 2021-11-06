@@ -43,7 +43,7 @@ MonoBehaviour:
       stun: 20
       hitstop: 12
       proration: 0.95
-      meterGain: 400
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 6}
       hitState: 0
       minimumDamage: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
       stun: 12
       hitstop: 12
       proration: 0.95
-      meterGain: 200
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 6}
       hitState: 0
       minimumDamage: 0
@@ -64,8 +64,8 @@ MonoBehaviour:
       damage: 800
       stun: 30
       hitstop: 25
-      proration: 1.05
-      meterGain: 400
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       minimumDamage: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
       stun: 30
       hitstop: 12
       proration: 0.95
-      meterGain: 400
+      meterGain: 4
       pushback: {x: 0, y: 5, z: 2}
       hitState: 0
       minimumDamage: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
       stun: 18
       hitstop: 12
       proration: 0.95
-      meterGain: 200
+      meterGain: 2
       pushback: {x: 0, y: 0, z: -4}
       hitState: 0
       minimumDamage: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
       damage: 800
       stun: 30
       hitstop: 25
-      proration: 1.1
-      meterGain: 400
+      proration: 1
+      meterGain: 4
       pushback: {x: 0, y: 5, z: 2}
       hitState: 0
       minimumDamage: 0

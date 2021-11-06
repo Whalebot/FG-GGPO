@@ -135,7 +135,7 @@ MonoBehaviour:
   m:
   - startFrame: 2
     duration: 5
-    momentum: {x: 0, y: 7.4, z: 5}
+    momentum: {x: 0, y: 6, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 0
   hurtboxes: []
@@ -173,8 +173,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 50
   resetGatling: 1
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

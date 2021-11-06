@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 850
-      stun: 32
+      stun: 29
       hitstop: 12
       proration: 0.95
       meterGain: 4
@@ -128,9 +128,9 @@ MonoBehaviour:
   totalMoveDuration: 42
   firstGatlingFrame: 17
   blockAdvantage: -15
-  hitAdvantage: 2
+  hitAdvantage: -1
   blockCancelAdvantage: -10
-  hitCancelAdvantage: 27
+  hitCancelAdvantage: 24
   recoveryFrames: 26
   m:
   - startFrame: 2
@@ -181,6 +181,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 1
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0
