@@ -12,6 +12,7 @@ public class EngineScript : MonoBehaviour
     public InputHandler input;
     public AttackScript attackScript;
     public GameObject engineFX;
+    public GameObject engineVFX;
     public Moveset fireMoveset;
     public FireMove[] fireMoves;
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class EngineScript : MonoBehaviour
     // Update is called once per frame
     void ExecuteFrame()
     {
-        if (fireLevel > 0) attackScript.moveset = fireMoveset;
+        if (fireLevel > 3) attackScript.moveset = fireMoveset;
         if (attackScript.attacking && checkJustFrame)
         {
             if (attackScript.attackFrames == attackScript.gatlingFrame)
@@ -56,6 +57,7 @@ public class EngineScript : MonoBehaviour
                     if (input.inputLog[input.inputLog.Count - i - 1].buttons[4] && !input.inputLog[input.inputLog.Count - i - 2].buttons[4])
                     {
                         Instantiate(engineFX, transform.position, transform.rotation);
+                        Instantiate(engineVFX, transform.position + Vector3.up * 0.5f, transform.rotation);
                         fireLevel++;
                         fireLevel = Mathf.Clamp(fireLevel, 0, maxFireLevel);
                         checkJustFrame = false;

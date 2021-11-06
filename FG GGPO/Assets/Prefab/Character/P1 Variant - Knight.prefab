@@ -147,17 +147,18 @@ MonoBehaviour:
   justFrameCounter: 0
   input: {fileID: 9196460269979701997}
   attackScript: {fileID: 9196460269431444474}
-  engineFX: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
+  engineFX: {fileID: 3797316729740095628, guid: e2a0aeb5d5800f74bb064c8ea949fd60, type: 3}
+  engineVFX: {fileID: 123764, guid: ab1d5b74be3b35840b3467265a97b28f, type: 3}
   fireMoveset: {fileID: 11400000, guid: 6ef9835566a665e489ce9ddf5422d82b, type: 2}
   fireMoves:
   - move: {fileID: 11400000, guid: f3e605008ae34174a89e3b2ae4d6114e, type: 2}
-    fireCost: 1
+    fireCost: 3
   - move: {fileID: 11400000, guid: da0dd9a91beeae84aa5513200e2d9456, type: 2}
-    fireCost: 1
+    fireCost: 3
   - move: {fileID: 11400000, guid: 28b2dd8a8dd5aba48805eebf0e210336, type: 2}
-    fireCost: 1
+    fireCost: 3
   - move: {fileID: 11400000, guid: 7840dbfc76687b146a74c995f91f702c, type: 2}
-    fireCost: 1
+    fireCost: 3
   - move: {fileID: 11400000, guid: 76be411d57638b94da1e501d20f30432, type: 2}
     fireCost: -3
 --- !u!1001 &5555190869038029094
