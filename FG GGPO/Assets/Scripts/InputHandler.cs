@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.Controls;
 using Sirenix.OdinInspector;
+using TMPro;
 
 public class InputHandler : MonoBehaviour
 {
@@ -59,6 +60,10 @@ public class InputHandler : MonoBehaviour
     public InputEvent L3input;
     public InputEvent R3input;
 
+    public InputEvent rebindStarted;
+    public InputEvent rebindCancelled;
+    public InputEvent rebindComplete;
+
     public InputEvent touchPadInput;
 
 
@@ -96,6 +101,64 @@ public class InputHandler : MonoBehaviour
     {
         //DisableControls();
     }
+
+    public void StartRebind(string actionName, int bindingIndex, TextMeshProUGUI statusText)
+    {
+        InputAction action = controls.asset.FindAction(actionName);
+        if (action == null || action.bindings.Count <= bindingIndex)
+        {
+            Debug.Log("ERROR BINDING");
+            return;
+        }
+
+        if (action.bindings[bindingIndex].isComposite)
+        {
+            //Not used
+        }
+        else
+        {
+            DoRebind(action, bindingIndex, statusText);
+        }
+
+    }
+
+    public void DoRebind(InputAction actionToRebind, int bindingIndex, TextMeshProUGUI statusText)
+    {
+        if (actionToRebind == null || bindingIndex < 0)
+        {
+            return;
+        }
+
+        statusText.text = $"Press a {actionToRebind.expectedControlType}";
+        actionToRebind.Disable();
+        var rebind = actionToRebind.PerformInteractiveRebinding(bindingIndex);
+
+        rebind.OnComplete(operation =>
+        {
+            actionToRebind.Enable();
+            operation.Dispose();
+            if (id == 1)
+                InputManager.SaveBindingOverrideP1(actionToRebind);
+            else
+                InputManager.SaveBindingOverrideP2(actionToRebind);
+            rebindComplete?.Invoke();
+        });
+
+        rebind.OnCancel(operation =>
+        {
+            actionToRebind.Enable();
+            operation.Dispose();
+
+            rebindCancelled?.Invoke();
+        });
+
+        rebind.WithCancelingThrough("<Keyboard>/escape");
+        rebind.WithControlsExcluding("Mouse");
+
+        rebindStarted?.Invoke();
+        rebind.Start();
+    }
+
     public void DisableControls()
     {
         if (deviceIsAssigned)
@@ -117,13 +180,16 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+
     public void SetupControls(Gamepad device)
     {
         if (deviceIsAssigned) return;
         deviceIsAssigned = true;
 
         user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
-        controls = new Controls();
+        if (id == 1)
+            controls = InputManager.p1Controls;
+        else controls = InputManager.p2Controls;
 
 
         //user.ActivateControlScheme(inputAsset.controlSchemes);

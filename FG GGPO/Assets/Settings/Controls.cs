@@ -246,7 +246,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""path"": ""<HID::Core (Plus) Wired Controller>/button2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -279,7 +279,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""path"": ""<HID::Core (Plus) Wired Controller>/button3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""East"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -312,7 +312,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""path"": ""<Joystick>/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""West"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -345,7 +345,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""path"": ""<HID::Core (Plus) Wired Controller>/button4"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": ""Joystick;All"",
                     ""action"": ""North"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

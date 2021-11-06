@@ -6,9 +6,14 @@ using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.Controls;
 using Sirenix.OdinInspector;
 using System.IO;
+using System;
 
 public class InputManager : MonoBehaviour
 {
+    public static Controls p1Controls;
+    public static Controls p2Controls;
+
+
     public static InputManager Instance;
     public InputHandler p1Input;
     public InputHandler p2Input;
@@ -20,7 +25,30 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (p1Controls == null)
+            p1Controls = new Controls();
+        if (p2Controls == null)
+            p2Controls = new Controls();
+
         controllers = new List<InputDevice>();
+    }
+
+    public static string GetBindingNameP1(string actionName, int bindingIndex)
+    {
+        if (p1Controls == null)
+            p1Controls = new Controls();
+
+        InputAction action = p1Controls.asset.FindAction(actionName);
+        return action.GetBindingDisplayString(bindingIndex);
+    }
+
+    public static string GetBindingNameP2(string actionName, int bindingIndex)
+    {
+        if (p2Controls == null)
+            p2Controls = new Controls();
+
+        InputAction action = p2Controls.asset.FindAction(actionName);
+        return action.GetBindingDisplayString(bindingIndex);
     }
 
     void Start()
@@ -43,7 +71,7 @@ public class InputManager : MonoBehaviour
         {
             if (controllers[1] is Gamepad)
                 p2Input.SetupControls((Gamepad)controllers[1]);
-            else if(controllers[1] is Joystick)
+            else if (controllers[1] is Joystick)
                 p2Input.SetupControls((Joystick)controllers[1]);
 
             if (controllers[0] is Gamepad)
@@ -141,5 +169,74 @@ public class InputManager : MonoBehaviour
         //p2Input.network = isServer;
     }
 
+    public static void SaveBindingOverrideP1(InputAction action)
+    {
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            PlayerPrefs.SetString("1" + action.actionMap + action.name + i, action.bindings[i].overridePath);
+        }
+    }
+    public static void SaveBindingOverrideP2(InputAction action)
+    {
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            PlayerPrefs.SetString("2" + action.actionMap + action.name + i, action.bindings[i].overridePath);
+        }
+    }
 
+    public static void LoadBindingOverrideP1(string actionName)
+    {
+        if (p1Controls == null) p1Controls = new Controls();
+
+        InputAction action = p1Controls.asset.FindAction(actionName);
+
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+            {
+                action.ApplyBindingOverride(i, PlayerPrefs.GetString("1" + action.actionMap + action.name + i));
+            }
+        }
+    }
+
+    public static void LoadBindingOverrideP2(string actionName)
+    {
+        if (p2Controls == null) p2Controls = new Controls();
+
+        InputAction action = p2Controls.asset.FindAction(actionName);
+
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+            {
+                action.ApplyBindingOverride(i, PlayerPrefs.GetString("2" + action.actionMap + action.name + i));
+            }
+        }
+    }
+
+    public static void ResetBindingP1(string actionName, int bindingIndex)
+    {
+        InputAction action = p1Controls.asset.FindAction(actionName);
+
+        if (action == null || action.bindings.Count <= bindingIndex)
+        {
+            Debug.Log("Error reset");
+        }
+
+        action.RemoveBindingOverride(bindingIndex);
+        SaveBindingOverrideP1(action);
+    }
+
+    public static void ResetBindingP2(string actionName, int bindingIndex)
+    {
+        InputAction action = p2Controls.asset.FindAction(actionName);
+
+        if (action == null || action.bindings.Count <= bindingIndex)
+        {
+            Debug.Log("Error reset");
+        }
+
+        action.RemoveBindingOverride(bindingIndex);
+        SaveBindingOverrideP2(action);
+    }
 }

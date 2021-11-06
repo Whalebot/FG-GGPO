@@ -317,9 +317,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             m_RebindOperation.Start();
         }
+        //private Control m_Actions;
+
 
         protected void OnEnable()
         {
+            //var ui = GetComponent<RebindActionUI>();
+            //var currentReference = ui.actionReference;
+            //var actionName = currentReference.action.name;
+            //ui.actionReference = InputActionReference.Create(m_Actions[actionName]);
+
             if (s_RebindActionUIs == null)
                 s_RebindActionUIs = new List<RebindActionUI>();
             s_RebindActionUIs.Add(this);
