@@ -1,0 +1,75 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EngineScript : MonoBehaviour
+{
+    public int fireLevel;
+    public int maxFireLevel;
+    public int justFrameWindow;
+    public bool checkJustFrame;
+    public int justFrameCounter;
+    public InputHandler input;
+    public AttackScript attackScript;
+    public GameObject engineFX;
+    public Moveset fireMoveset;
+    public FireMove[] fireMoves;
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
+        attackScript.attackPerformedEvent += ResetCheck;
+    }
+
+    private void ResetCheck(Move move)
+    {
+        foreach (var item in fireMoves)
+        {
+            if (item.move == move)
+            {
+                fireLevel -= item.fireCost;
+                fireLevel = Mathf.Clamp(fireLevel, 0, maxFireLevel);
+                return;
+            }
+        }
+        checkJustFrame = true;
+        justFrameCounter = justFrameWindow / 2;
+    }
+
+    // Update is called once per frame
+    void ExecuteFrame()
+    {
+        if (fireLevel > 0) attackScript.moveset = fireMoveset;
+        if (attackScript.attacking && checkJustFrame)
+        {
+            if (attackScript.attackFrames == attackScript.gatlingFrame)
+            {
+                if (justFrameCounter < 0)
+                {
+                    checkJustFrame = false;
+                    return;
+                }
+                justFrameCounter--;
+                for (int i = 0; i <= justFrameWindow / 2; i++)
+                {
+                    if (input.inputLog.Count < i - 2) return;
+                    if (input.inputLog[input.inputLog.Count - i - 1].buttons[4] && !input.inputLog[input.inputLog.Count - i - 2].buttons[4])
+                    {
+                        Instantiate(engineFX, transform.position, transform.rotation);
+                        fireLevel++;
+                        fireLevel = Mathf.Clamp(fireLevel, 0, maxFireLevel);
+                        checkJustFrame = false;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class FireMove
+{
+    public Move move;
+    public int fireCost;
+}

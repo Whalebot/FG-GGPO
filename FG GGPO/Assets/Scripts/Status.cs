@@ -182,6 +182,17 @@ public class Status : MonoBehaviour
         }
     }
 
+    public void TrainingModeReset()
+    {
+        wakeupEvent?.Invoke();
+        health = maxHealth;
+        meter = maxMeter;
+        BurstGauge = 6000;
+
+
+        isDead = false;
+    }
+
     [Button]
     public void ResetStatus()
     {
@@ -367,6 +378,7 @@ public class Status : MonoBehaviour
         }
         if (blockstunValue <= 0 && inBlockStun)
         {
+            recoveryEvent?.Invoke();
             GoToState(State.Neutral);
             blockstunValue = 0;
             inBlockStun = false;

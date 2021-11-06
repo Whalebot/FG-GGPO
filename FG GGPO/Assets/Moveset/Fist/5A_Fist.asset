@@ -46,15 +46,19 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
       stun: 15
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 300
@@ -64,33 +68,41 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 300
       stun: 25
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 4, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
       stun: 15
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 300
       stun: 25
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 4, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
@@ -163,8 +175,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

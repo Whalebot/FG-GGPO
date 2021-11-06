@@ -29,7 +29,7 @@ public class BlockerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody != null)
+        if (collision.rigidbody != null && enemyMov != null)
         {
             enemyVelocity = new Vector3((enemyMov.storedDirection.normalized * enemyMov.actualVelocity).x, rb.velocity.y, (enemyMov.storedDirection.normalized * enemyMov.actualVelocity).z);
             ownVelocity = new Vector3((mov.storedDirection.normalized * mov.actualVelocity).x, rb.velocity.y, (mov.storedDirection.normalized * mov.actualVelocity).z);

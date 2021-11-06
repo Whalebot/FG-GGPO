@@ -75,11 +75,10 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Overlay")] public bool[] netButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public bool[] heldButtons = new bool[6];
     [FoldoutGroup("Input Overlay")] public List<int> directionals;
-    [FoldoutGroup("Input Overlay")] public List<bool> buttons;
     [FoldoutGroup("Input Overlay")] public List<int> overlayDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedDirectionals;
     [FoldoutGroup("Input Overlay")] public bool updatedButtons;
-
+    public List<Input> inputLog;
     [FoldoutGroup("Debug")] public bool dash;
     [FoldoutGroup("Debug")] public bool bf;
     [FoldoutGroup("Debug")] public bool fb;
@@ -107,10 +106,10 @@ public class InputHandler : MonoBehaviour
     }
     void Start()
     {
-        buttons = new List<bool>();
         bufferedInputs = new List<BufferedInput>();
         deletedInputs = new List<BufferedInput>();
         network = FgGameManager.Instance != null;
+        inputLog = new List<Input>();
 
         if (GameHandler.Instance != null)
         {
@@ -125,7 +124,7 @@ public class InputHandler : MonoBehaviour
 
         user = InputUser.PerformPairingWithDevice(device, default(InputUser), InputUserPairingOptions.None);
         controls = new Controls();
-        
+
 
         //user.ActivateControlScheme(inputAsset.controlSchemes);
         controls.Default.West.performed += context => OnWest(context);
@@ -173,8 +172,8 @@ public class InputHandler : MonoBehaviour
 
         directionals = new List<int>();
         //controls.Default.Enable();
-      
-        
+
+
         //inputAsset.FindActionMap("Joystick").Enable();
         user.AssociateActionsWithUser(controls);
         user.actions.Enable();
@@ -258,7 +257,8 @@ public class InputHandler : MonoBehaviour
         controls.Default.Enable();
     }
     [Button]
-    public void DisableActionMap() { 
+    public void DisableActionMap()
+    {
         controls.Default.Disable();
     }
 
@@ -472,13 +472,32 @@ public class InputHandler : MonoBehaviour
             else if (inputDirection.x < -0.5F) directionals.Add(1);
             else directionals.Add(2);
         }
-
+        SaveInputLog();
         CheckMotionInputs();
+
+
         //CHECK IF INPUTS HAVE BEEN DUPLICATED
         if (directionals.Count <= 2) { updatedDirectionals = true; return; }
         if (directionals[directionals.Count - 1] == directionals[directionals.Count - 2]) return;
 
         updatedDirectionals = true;
+    }
+
+    void SaveInputLog()
+    {
+        Input temp = new Input();
+        temp.frame = GameHandler.Instance.gameFrameCount;
+
+        for (int i = 0; i < netButtons.Length; i++)
+        {
+            temp.buttons[i] = netButtons[i];
+        }
+        for (int i = 0; i < netDirectionals.Length; i++)
+        {
+            temp.directionals[i] = netDirectionals[i];
+        }
+        inputLog.Add(temp);
+        if (inputLog.Count > 200) inputLog.RemoveAt(0);
     }
 
     public void ResolveButtons(bool[] temp)
@@ -524,7 +543,6 @@ public class InputHandler : MonoBehaviour
             if (foundD) InputBuffer(5);
             if (foundCrouch) InputBuffer(6);
         }
-        buttons.Add(netButtons[5]);
     }
 
     void CheckMotionInputs()
@@ -582,25 +600,25 @@ public class InputHandler : MonoBehaviour
         bool foundDF = false;
         bool foundF = false;
 
-        if (buttons.Count < 5) return false;
+        if (inputLog.Count < 5) return false;
 
-        if (buttons.Count <= 0) return false;
+        if (inputLog.Count <= 0) return false;
 
         for (int i = 1; i < motionInputWindow; i++)
         {
             if (directionals.Count < i) return false;
-            if (buttons.Count <= i) return false;
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
+            if (inputLog.Count <= i) return false;
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
             {
                 foundDown = true;
             }
 
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8 && foundF)
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundF)
             {
 
                 foundDF = true;
             }
-            if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 8)
+            if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8)
             {
                 foundF = true;
             }
@@ -619,25 +637,27 @@ public class InputHandler : MonoBehaviour
         bool foundDF = false;
         bool foundF = false;
 
-        if (buttons.Count < 5) return false;
+        if (inputLog.Count < 5) return false;
 
-        if (buttons.Count <= 0) return false;
+        if (inputLog.Count <= 0) return false;
+
+
 
         for (int i = 1; i < motionInputWindow; i++)
         {
             if (directionals.Count < i) return false;
-            if (buttons.Count <= i) return false;
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 5 && foundDF)
+            if (inputLog.Count <= i) return false;
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
             {
                 foundDown = true;
             }
 
-            if (buttons[buttons.Count - i] && directionals[directionals.Count - i] == 2 && foundF)
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 2 && foundF)
             {
 
                 foundDF = true;
             }
-            if (!buttons[buttons.Count - i] && directionals[directionals.Count - i] == 2)
+            if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 2)
             {
                 foundF = true;
             }
@@ -715,27 +735,27 @@ public class InputHandler : MonoBehaviour
         bool foundDown = false;
         bool foundNeutral2 = false;
 
-        if (buttons.Count < 5) return false;
+        if (inputLog.Count < 5) return false;
 
-        if (buttons.Count <= 0) return false;
+        if (inputLog.Count <= 0) return false;
 
         for (int i = 1; i < motionInputWindow; i++)
         {
-            if (buttons.Count <= i) return false;
+            if (inputLog.Count <= i) return false;
 
-            if (!buttons[buttons.Count - i] && foundDown)
+            if (!inputLog[inputLog.Count - i].buttons[5] && foundDown)
             {
                 foundNeutral2 = true;
             }
-            if (buttons[buttons.Count - i] && foundNeutral)
+            if (inputLog[inputLog.Count - i].buttons[5] && foundNeutral)
             {
                 foundDown = true;
             }
-            if (buttons[buttons.Count - i] == false)
+            if (inputLog[inputLog.Count - i].buttons[5] == false)
             {
                 foundNeutral = true;
             }
-            if (foundNeutral2 && buttons[buttons.Count - 1])
+            if (foundNeutral2 && inputLog[inputLog.Count - i].buttons[5])
             {
                 return true;
             }
@@ -1135,7 +1155,16 @@ public class InputHandler : MonoBehaviour
 
     public void InputBuffer(int inputID)
     {
-        bufferedInputs.Add(new BufferedInput(inputID, Direction(), netButtons[5], bufferWindow + extraBuffer));
+        BufferedInput temp = new BufferedInput(inputID, Direction(), netButtons[5], bufferWindow + extraBuffer);
+        //SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 }
+        temp.bufferedSpecialMotions = new bool[6];
+        temp.bufferedSpecialMotions[0] = bf;
+        temp.bufferedSpecialMotions[1] = dd;
+        temp.bufferedSpecialMotions[2] = qcf;
+        temp.bufferedSpecialMotions[3] = qcb;
+        temp.bufferedSpecialMotions[4] = mI478;
+        temp.bufferedSpecialMotions[5] = mI698;
+        bufferedInputs.Add(temp);
     }
 }
 [System.Serializable]
@@ -1153,6 +1182,7 @@ public class BufferedInput
     public int dir;
     public bool crouch;
     public int frame;
+    public bool[] bufferedSpecialMotions;
 }
 
 public enum ControlScheme { PS4, XBOX, MouseAndKeyboard }
