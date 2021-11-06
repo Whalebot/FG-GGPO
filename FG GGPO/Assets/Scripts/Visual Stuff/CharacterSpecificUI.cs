@@ -9,6 +9,7 @@ public class CharacterSpecificUI : MonoBehaviour
     public Characters character;
     public GameObject enzoUI;
     public Slider enzoSlider;
+    public Gradient firelevelColor;
     EngineScript engineScript;
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,8 @@ public class CharacterSpecificUI : MonoBehaviour
         if (character == Characters.Knight)
         {
             enzoSlider.value = engineScript.fireLevel;
+
+            enzoSlider.targetGraphic.color = firelevelColor.Evaluate(1 - (float)engineScript.fireLevel / (float)engineScript.maxFireLevel);
         }
     }
 }

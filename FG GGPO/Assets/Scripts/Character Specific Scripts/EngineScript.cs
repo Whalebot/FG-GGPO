@@ -9,6 +9,7 @@ public class EngineScript : MonoBehaviour
     public int justFrameWindow;
     public bool checkJustFrame;
     public int justFrameCounter;
+    public int justFrameGain;
     public InputHandler input;
     public AttackScript attackScript;
     public GameObject engineFX;
@@ -40,7 +41,10 @@ public class EngineScript : MonoBehaviour
     // Update is called once per frame
     void ExecuteFrame()
     {
-        if (fireLevel > 3) attackScript.moveset = fireMoveset;
+        fireLevel -= 1;
+        fireLevel = Mathf.Clamp(fireLevel, 0, maxFireLevel);
+
+        if (fireLevel > 300) attackScript.moveset = fireMoveset;
         if (attackScript.attacking && checkJustFrame)
         {
             if (attackScript.attackFrames == attackScript.gatlingFrame)
@@ -58,7 +62,7 @@ public class EngineScript : MonoBehaviour
                     {
                         Instantiate(engineFX, transform.position, transform.rotation);
                         Instantiate(engineVFX, transform.position + Vector3.up * 0.5f, transform.rotation);
-                        fireLevel++;
+                        fireLevel += justFrameGain;
                         fireLevel = Mathf.Clamp(fireLevel, 0, maxFireLevel);
                         checkJustFrame = false;
                         return;

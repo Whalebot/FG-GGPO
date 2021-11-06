@@ -141,10 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireLevel: 0
-  maxFireLevel: 7
+  maxFireLevel: 1000
   justFrameWindow: 6
   checkJustFrame: 0
   justFrameCounter: 0
+  justFrameGain: 150
   input: {fileID: 9196460269979701997}
   attackScript: {fileID: 9196460269431444474}
   engineFX: {fileID: 3797316729740095628, guid: e2a0aeb5d5800f74bb064c8ea949fd60, type: 3}
@@ -152,15 +153,17 @@ MonoBehaviour:
   fireMoveset: {fileID: 11400000, guid: 6ef9835566a665e489ce9ddf5422d82b, type: 2}
   fireMoves:
   - move: {fileID: 11400000, guid: f3e605008ae34174a89e3b2ae4d6114e, type: 2}
-    fireCost: 3
+    fireCost: 300
   - move: {fileID: 11400000, guid: da0dd9a91beeae84aa5513200e2d9456, type: 2}
-    fireCost: 3
+    fireCost: 300
   - move: {fileID: 11400000, guid: 28b2dd8a8dd5aba48805eebf0e210336, type: 2}
-    fireCost: 3
+    fireCost: 300
   - move: {fileID: 11400000, guid: 7840dbfc76687b146a74c995f91f702c, type: 2}
-    fireCost: 3
+    fireCost: 300
+  - move: {fileID: 11400000, guid: efc24db199539b4489f253dfded11dab, type: 2}
+    fireCost: 300
   - move: {fileID: 11400000, guid: 76be411d57638b94da1e501d20f30432, type: 2}
-    fireCost: -3
+    fireCost: -400
 --- !u!1001 &5555190869038029094
 PrefabInstance:
   m_ObjectHideFlags: 0
