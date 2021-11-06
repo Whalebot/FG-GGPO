@@ -20,7 +20,7 @@ MonoBehaviour:
   description: 
   attackLevel: 0
   type: 4
-  meterCost: 25
+  meterCost: 0
   superFlash:
     superPrefab: {fileID: 0}
     startFrame: 1
@@ -172,6 +172,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0

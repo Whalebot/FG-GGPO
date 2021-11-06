@@ -45,7 +45,7 @@ public class FrameDataOverlay : MonoBehaviour
     // Update is called once per frame
     void UpdateStates()
     {
-        blockStateText.text = "" + status.blockState;
+        blockStateText.text = "" + status.blockState.ToString();
         hitStateText.text = "" + status.currentState;
         groundStateText.text = "" + status.groundState;
     }

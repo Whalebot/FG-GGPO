@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: EXDP_Knight
+  m_Name: Engine_Charge_Knight
   m_EditorClassIdentifier: 
-  moveName: EX DP
+  moveName: Jab
   sprite: {fileID: 0}
   moveDirection: 1
-  moveButton: 4
-  moveInput: c.D
+  moveButton: 0
+  moveInput: c.A
   description: 
   attackLevel: 0
-  type: 4
+  type: 0
   meterCost: 0
   superFlash:
     superPrefab: {fileID: 0}
@@ -30,77 +30,77 @@ MonoBehaviour:
   stance: {fileID: 0}
   throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 334434759881567290, guid: 7566b272e5fb41043ad9db72a7332aa4, type: 3}
-    startupFrame: 8
-    activeFrames: 5
-    gatlingFrames: 5
+  - hitbox: {fileID: 0}
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 1
     attackType: 0
-    attackHeight: 1
-    bodyProperty: 1
+    attackHeight: 0
+    bodyProperty: 0
     homing: 0
     groundHitProperty:
-      damage: 1500
-      stun: 65
-      hitstop: 15
-      proration: 0.95
+      damage: 300
+      stun: 20
+      hitstop: 5
+      proration: 0.9
       meterGain: 2
-      pushback: {x: 0, y: 10, z: 5}
-      hitState: 1
+      pushback: {x: 0, y: 0, z: 3}
+      hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 20
-      hitstop: 10
+      stun: 15
+      hitstop: 5
       proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 5}
+      meterGain: 0
+      pushback: {x: 0, y: 0, z: 4}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 1875
-      stun: 75
-      hitstop: 20
-      proration: 1
-      meterGain: 4
-      pushback: {x: 0, y: 10, z: 5}
-      hitState: 1
+      damage: 300
+      stun: 20
+      hitstop: 5
+      proration: 0.9
+      meterGain: 2
+      pushback: {x: 0, y: 0, z: 3}
+      hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     airHitProperty:
-      damage: 1500
-      stun: 65
-      hitstop: 15
+      damage: 300
+      stun: 25
+      hitstop: 5
       proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 10, z: 5}
-      hitState: 1
+      meterGain: 0
+      pushback: {x: 0, y: 5, z: 2}
+      hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
-      stun: 11
+      stun: 15
       hitstop: 5
       proration: 0.95
-      meterGain: 2
+      meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 1875
-      stun: 75
-      hitstop: 20
-      proration: 1
-      meterGain: 4
-      pushback: {x: 0, y: 10, z: 5}
-      hitState: 1
+      damage: 300
+      stun: 25
+      hitstop: 5
+      proration: 0.95
+      meterGain: 0
+      pushback: {x: 0, y: 5, z: 2}
+      hitState: 0
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
@@ -108,44 +108,39 @@ MonoBehaviour:
   sfx:
   - startup: 1
     prefab: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
-  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
+  hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  animationID: 23
+  animationID: 300
   hitID: 0
-  firstStartupFrame: 8
-  lastActiveFrame: 12
-  totalMoveDuration: 72
-  firstGatlingFrame: 13
-  blockAdvantage: -44
-  hitAdvantage: 1
-  blockCancelAdvantage: -39
-  hitCancelAdvantage: 60
-  recoveryFrames: 60
-  m:
-  - startFrame: 5
-    duration: 2
-    momentum: {x: 0, y: 10, z: 3}
-    homing: 0
-    resetVelocityDuringRecovery: 0
+  firstStartupFrame: 20
+  lastActiveFrame: 20
+  totalMoveDuration: 35
+  firstGatlingFrame: 21
+  blockAdvantage: 0
+  hitAdvantage: 5
+  blockCancelAdvantage: 1
+  hitCancelAdvantage: 19
+  recoveryFrames: 15
+  m: []
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
-  gatlingCancelOnBlock: 1
-  gatlingCancelOnHit: 1
+  gatlingCancelOnBlock: 0
+  gatlingCancelOnHit: 0
   jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
+  jumpCancelOnHit: 0
   specialCancelOnBlock: 0
   specialCancelOnHit: 0
-  noClip: 1
+  noClip: 0
   noClipStart: 1
-  noClipDuration: 3
-  invincible: 1
+  noClipDuration: 0
+  invincible: 0
   invincibleStart: 1
-  invincibleDuration: 12
+  invincibleDuration: 0
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -169,7 +164,7 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0
-  forcedCounterHit: 1
+  forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
   aimOnStartup: 0

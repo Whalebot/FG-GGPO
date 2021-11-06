@@ -46,6 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -55,6 +57,8 @@ MonoBehaviour:
       meterGain: 0
       pushback: {x: 0, y: 0, z: 4}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 450
@@ -64,33 +68,41 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 3}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 450
       stun: 25
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 4, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
       stun: 15
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 450
       stun: 25
       hitstop: 5
       proration: 0.95
-      meterGain: 0
+      meterGain: 2
       pushback: {x: 0, y: 4, z: 2}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx:
@@ -125,7 +137,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 17c80e085438a8547937f29af5f2e7fd, type: 2}
   - {fileID: 11400000, guid: c2a31dce22075d045931a60da7d8eb44, type: 2}
   - {fileID: 11400000, guid: 74042c04679ebf5488e9b747ae614a20, type: 2}
-  - {fileID: 11400000, guid: 9272e78483b45d9488f261b7124d8850, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 4572beaa2ca16ae46a1d27f23238b8ec, type: 2}
   - {fileID: 11400000, guid: 6455f5b04e5c0584581bf9b99ef8c4ca, type: 2}
   - {fileID: 11400000, guid: 1094480063c9de944bb4cccd672e0756, type: 2}
@@ -161,8 +173,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

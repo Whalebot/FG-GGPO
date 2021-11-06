@@ -129,6 +129,9 @@ public class GameHandler : MonoBehaviour
         p1Status.deathEvent += P2Win;
         p2Status.deathEvent += P1Win;
 
+        p1Status.recoveryEvent += TrainingModeRecovery;
+        p2Status.recoveryEvent += TrainingModeRecovery;
+
         isPaused = false;
         //cutscene = false;
 
@@ -155,6 +158,16 @@ public class GameHandler : MonoBehaviour
             Skip();
         }
     }
+
+    public void TrainingModeRecovery()
+    {
+        if (gameMode == GameMode.TrainingMode)
+        {
+            p1Status.TrainingModeReset();
+            p2Status.TrainingModeReset();
+        }
+    }
+
     public void Skip()
     {
         skipCutsceneEvent?.Invoke();
@@ -387,7 +400,7 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void ResetRound()
     {
-       
+
         p1Status.ResetStatus();
         p2Status.ResetStatus();
         counter = 0;
@@ -502,12 +515,13 @@ public class GameHandler : MonoBehaviour
                 return;
             }
         }
+        else introCounter = 0;
         if (introCounter <= 0)
         {
             cutscene = false;
             if (gameMode == GameMode.VersusMode)
             {
-
+                skipCutsceneEvent?.Invoke();
                 displayP1Event?.Invoke();
                 displayP2Event?.Invoke();
                 RoundStart();
@@ -541,9 +555,12 @@ public class GameHandler : MonoBehaviour
         if (!superFlash)
         {
             Physics.autoSimulation = false;
-            Physics.Simulate(Time.fixedDeltaTime);
         }
         AdvanceGameState();
+        if (!superFlash)
+        {
+            Physics.Simulate(Time.fixedDeltaTime);
+        }
     }
     public void TimeoutFinish()
     {
