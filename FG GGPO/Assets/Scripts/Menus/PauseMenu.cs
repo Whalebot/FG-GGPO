@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject buttoDefault;
     public GameObject[] moveLists;
     public GameObject buttonSettings;
+    public GameObject defaultRemapButton;
     public GameObject soundSettings;
     bool applicationIsClosing;
     // Start is called before the first frame update
@@ -103,7 +104,7 @@ public class PauseMenu : MonoBehaviour
 
     public void CancelButton()
     {
-        if (currentTab == PauseMenuTabs.Movelist)
+        if (currentTab != PauseMenuTabs.Default)
         {
             ResetPauseMenu();
         }
@@ -131,6 +132,7 @@ public class PauseMenu : MonoBehaviour
             versusMenu.SetActive(true);
             UIManager.Instance.SetActive(defaultButton);
         }
+        buttonSettings.SetActive(false);
         currentTab = PauseMenuTabs.Default;
         foreach (var item in moveLists)
         {
@@ -152,9 +154,9 @@ public class PauseMenu : MonoBehaviour
         currentTab = PauseMenuTabs.Buttons;
         versusMenu.SetActive(false);
         trialMenu.SetActive(false);
-
-
         buttonSettings.SetActive(true);
+        UIManager.Instance.SetActive(defaultRemapButton);
+
     }
     public void SoundSettings()
     {

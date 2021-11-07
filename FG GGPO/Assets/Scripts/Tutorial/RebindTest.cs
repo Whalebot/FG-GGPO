@@ -24,7 +24,7 @@ public class RebindTest : MonoBehaviour
     public TextMeshProUGUI rebindText;
     public Button resetButton;
 
-    void Start()
+    void OnEnable()
     {
         rebindButton.onClick.AddListener(() => DoBind());
         resetButton.onClick.AddListener(() => ResetBinding());

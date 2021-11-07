@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 5565045009352002469}
   - component: {fileID: 4665489170442605573}
   - component: {fileID: 7386696516139709573}
-  - component: {fileID: 4716986141712245764}
   m_Layer: 5
   m_Name: Button Settings
   m_TagString: Untagged
@@ -215,20 +214,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4716986141712245764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4012503288641907118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fa6615235706a94fbaeb7f04207b3f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultButton: {fileID: 0}
-  tanksInputActions: {fileID: -944628639613478452, guid: e78dbfe5f8085a24c9da12a879952d73, type: 3}
 --- !u!1 &5311017786746616680
 GameObject:
   m_ObjectHideFlags: 0
