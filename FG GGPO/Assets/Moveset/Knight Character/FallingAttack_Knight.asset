@@ -108,9 +108,9 @@ MonoBehaviour:
   sfx:
   - startup: 10
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
-  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  hitFX: {fileID: 123764, guid: b155232d1ca66d940af80b4edb150768, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
+  counterhitFX: {fileID: 123764, guid: b155232d1ca66d940af80b4edb150768, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
@@ -170,8 +170,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

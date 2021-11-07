@@ -70,6 +70,7 @@ public class EngineScript : MonoBehaviour
                 }
             }
         }
+        else checkJustFrame = false;
     }
 }
 

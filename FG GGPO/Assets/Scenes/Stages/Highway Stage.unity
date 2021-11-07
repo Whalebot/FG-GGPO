@@ -169,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &158013642
 GameObject:
@@ -2497,7 +2497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8174696485712288842, guid: f625d5d4948fbe14aa3c254139c8f81f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2792,9 +2792,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2795511855603732561, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_BakeLightProbesForTrees
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511855603732561, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_DrawTreesAndFoliage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2795511855603732562, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511855603732563, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511855637589771, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2795511855664191759, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_IsActive
@@ -2808,8 +2824,28 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2795511856270940939, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_DrawTreesAndFoliage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856270940939, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_BakeLightProbesForTrees
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2795511856270940948, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856270940949, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856656906722, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_DrawTreesAndFoliage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856656906722, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_BakeLightProbesForTrees
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795511856656906723, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
@@ -2820,8 +2856,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2795511856656906732, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2795511856882098528, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856882098529, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856882098535, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_BakeLightProbesForTrees
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795511856882098535, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
+      propertyPath: m_DrawTreesAndFoliage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3029461199524454481, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
@@ -2998,7 +3050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4210638688224417175, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4210638688224417175, guid: 930038bb5a1160f48b69d4775b9208a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

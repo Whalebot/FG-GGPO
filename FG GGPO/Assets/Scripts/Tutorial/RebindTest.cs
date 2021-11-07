@@ -20,12 +20,14 @@ public class RebindTest : MonoBehaviour
     public string actionName;
 
     public TextMeshProUGUI actionText;
+    public Button toggleButton;
     public Button rebindButton;
     public TextMeshProUGUI rebindText;
     public Button resetButton;
 
     void OnEnable()
     {
+        toggleButton.onClick.AddListener(() => ToggleButton());
         rebindButton.onClick.AddListener(() => DoBind());
         resetButton.onClick.AddListener(() => ResetBinding());
 
@@ -66,6 +68,16 @@ public class RebindTest : MonoBehaviour
             InputManager.Instance.p2Input.rebindComplete -= UpdateUI;
             InputManager.Instance.p2Input.rebindCancelled -= UpdateUI;
         }
+    }
+
+    private void ToggleButton()
+    {
+        print(selectedBinding);
+        selectedBinding++;
+        if (selectedBinding > inputActionReference.action.bindings.Count)
+            selectedBinding = 0;
+        GetBindingInfo();
+        UpdateUI();
     }
 
     private void DoBind()

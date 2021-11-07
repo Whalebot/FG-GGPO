@@ -31,7 +31,7 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 1fe159ae177850849a190343186fa6b1, type: 3}
-    startupFrame: 17
+    startupFrame: 15
     activeFrames: 2
     gatlingFrames: 2
     attackType: 0
@@ -106,18 +106,18 @@ MonoBehaviour:
       hitID: 0
   vfx: []
   sfx: []
-  hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
+  hitFX: {fileID: 123764, guid: b155232d1ca66d940af80b4edb150768, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
-  counterhitFX: {fileID: 0}
+  counterhitFX: {fileID: 123764, guid: b155232d1ca66d940af80b4edb150768, type: 3}
   hitSFX: {fileID: 3797316729740095628, guid: 38f82d1b0ac85a54cabeb421e64e0dbb, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
   animationID: 63
   hitID: 0
-  firstStartupFrame: 17
-  lastActiveFrame: 18
-  totalMoveDuration: 45
-  firstGatlingFrame: 19
+  firstStartupFrame: 15
+  lastActiveFrame: 16
+  totalMoveDuration: 43
+  firstGatlingFrame: 17
   blockAdvantage: -5
   hitAdvantage: 15
   blockCancelAdvantage: -3
@@ -163,6 +163,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0
