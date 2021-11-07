@@ -104,27 +104,32 @@ MonoBehaviour:
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
-  vfx: []
+  vfx:
+  - startup: 28
+    prefab: {fileID: 123764, guid: ab1d5b74be3b35840b3467265a97b28f, type: 3}
+    position: {x: 0, y: 1, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
   sfx:
-  - startup: 1
-    prefab: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
+  - startup: 25
+    prefab: {fileID: 3797316729740095628, guid: e2a0aeb5d5800f74bb064c8ea949fd60, type: 3}
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 3797316729740095628, guid: 3848677039a1be449953f4dfe8b6a484, type: 3}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  animationID: 300
+  animationID: 1000
   hitID: 0
   firstStartupFrame: 20
   lastActiveFrame: 20
-  totalMoveDuration: 35
+  totalMoveDuration: 50
   firstGatlingFrame: 21
-  blockAdvantage: 0
-  hitAdvantage: 5
-  blockCancelAdvantage: 1
+  blockAdvantage: -15
+  hitAdvantage: -10
+  blockCancelAdvantage: -14
   hitCancelAdvantage: 19
-  recoveryFrames: 15
+  recoveryFrames: 30
   m: []
   hurtboxes: []
   targetComboMoves: []
