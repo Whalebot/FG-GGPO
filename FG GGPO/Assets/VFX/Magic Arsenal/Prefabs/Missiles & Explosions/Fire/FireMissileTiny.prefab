@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 19980130}
   - component: {fileID: 19896464}
   - component: {fileID: 9644576}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TrailFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,8 @@ GameObject:
   - component: {fileID: 490612}
   - component: {fileID: 19811720}
   - component: {fileID: 19942984}
-  m_Layer: 0
+  - component: {fileID: -7525244865600340331}
+  m_Layer: 17
   m_Name: FireMissileTiny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9573,6 +9574,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-7525244865600340331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &155554
 GameObject:
   m_ObjectHideFlags: 0
@@ -9584,7 +9598,7 @@ GameObject:
   - component: {fileID: 421118}
   - component: {fileID: 19842878}
   - component: {fileID: 19962864}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TrailSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14341,7 +14355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404760}
   - component: {fileID: 10890774}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

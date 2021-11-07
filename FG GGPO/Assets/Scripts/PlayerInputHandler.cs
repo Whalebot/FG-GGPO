@@ -355,7 +355,6 @@ public class PlayerInputHandler : MonoBehaviour
             //A Button
             if (input.bufferedInputs[i].id == 1)
             {  //Ground
-               //  print(GameHandler.Instance.gameFrameCount + " A start " + status.currentState + " " + status.groundState);
                 if (mov.ground)
                 {
                     if (input.bufferedInputs[i].crouch)

@@ -621,20 +621,21 @@ public class AttackScript : MonoBehaviour
             if (!activeMove.gatlingMoves.Contains(move)) return false;
             else
             {
-                if (usedMoves.Contains(move))
-                {
-                    int duplicates = 1;
-                    foreach (var item in move.gatlingMoves)
-                    {
-                        if (item == move) duplicates++;
-                    }
-                    foreach (var item in usedMoves)
-                    {
-                        if (item == move) duplicates--;
-                    }
-                    return duplicates > 0;
-                }
-                else return true;
+                return true;
+                //if (usedMoves.Contains(move))
+                //{
+                //    int duplicates = 1;
+                //    foreach (var item in move.gatlingMoves)
+                //    {
+                //        if (item == move) duplicates++;
+                //    }
+                //    foreach (var item in usedMoves)
+                //    {
+                //        if (item == move) duplicates--;
+                //    }
+                //    return duplicates > 0;
+                //}
+                //else return true;
             }
         }
         return false;
@@ -671,6 +672,24 @@ public class AttackScript : MonoBehaviour
         }
         return false;
 
+    }
+
+    public bool HasBeenUsed(Move move)
+    {
+        if (usedMoves.Contains(move))
+        {
+            int duplicates = 1;
+            foreach (var item in move.gatlingMoves)
+            {
+                if (item == move) duplicates++;
+            }
+            foreach (var item in usedMoves)
+            {
+                if (item == move) duplicates--;
+            }
+            return duplicates <= 0;
+        }
+        else return false;
     }
 
     public bool ProjectileLimit(Move move)
@@ -710,6 +729,7 @@ public class AttackScript : MonoBehaviour
 
         if (TargetCombo(move)) return true;
         if (ProjectileLimit(move)) return false;
+        if (HasBeenUsed(move)) { return true; }
         if (!CanUseMove(move)) return false;
         else
         {

@@ -1230,6 +1230,13 @@ public class InputHandler : MonoBehaviour
         temp.bufferedSpecialMotions[3] = qcb;
         temp.bufferedSpecialMotions[4] = mI478;
         temp.bufferedSpecialMotions[5] = mI698;
+
+        if (temp.bufferedSpecialMotions[0]) bf = false;
+        if (temp.bufferedSpecialMotions[1]) dd = false;
+        if (temp.bufferedSpecialMotions[2]) qcf = false;
+        if (temp.bufferedSpecialMotions[3]) qcb = false;
+        if (temp.bufferedSpecialMotions[4]) mI478 = false;
+        if (temp.bufferedSpecialMotions[5]) mI698 = false;
         bufferedInputs.Add(temp);
     }
 }

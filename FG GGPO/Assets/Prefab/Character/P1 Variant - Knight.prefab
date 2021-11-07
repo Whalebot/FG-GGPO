@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7444716409489615161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3023237341766680783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68214d4a331213d4994faa10e2112d74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rend: {fileID: 1833894423890761691}
-  mats: []
-  col: {r: 1, g: 0, b: 0, a: 0}
-  main: {fileID: 9196460269979701998}
 --- !u!1 &3835458711264678147
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +31,42 @@ Transform:
   m_Father: {fileID: 1767834359622588864}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &3920190524097488879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9196460269979702001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6097ef623f4a4a915b8750946caf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireLevel: 0
+  maxFireLevel: 1000
+  justFrameWindow: 6
+  checkJustFrame: 0
+  justFrameCounter: 0
+  justFrameGain: 150
+  input: {fileID: 9196460269979701997}
+  attackScript: {fileID: 9196460269431444474}
+  engineFX: {fileID: 3797316729740095628, guid: e2a0aeb5d5800f74bb064c8ea949fd60, type: 3}
+  engineVFX: {fileID: 123764, guid: b155232d1ca66d940af80b4edb150768, type: 3}
+  fireMoveset: {fileID: 11400000, guid: 6ef9835566a665e489ce9ddf5422d82b, type: 2}
+  fireMoves:
+  - move: {fileID: 11400000, guid: f3e605008ae34174a89e3b2ae4d6114e, type: 2}
+    fireCost: 300
+  - move: {fileID: 11400000, guid: da0dd9a91beeae84aa5513200e2d9456, type: 2}
+    fireCost: 300
+  - move: {fileID: 11400000, guid: 28b2dd8a8dd5aba48805eebf0e210336, type: 2}
+    fireCost: 300
+  - move: {fileID: 11400000, guid: 7840dbfc76687b146a74c995f91f702c, type: 2}
+    fireCost: 300
+  - move: {fileID: 11400000, guid: efc24db199539b4489f253dfded11dab, type: 2}
+    fireCost: 300
+  - move: {fileID: 11400000, guid: 76be411d57638b94da1e501d20f30432, type: 2}
+    fireCost: -400
 --- !u!1 &6180761198609954555
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,42 +148,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3920190524097488879
+--- !u!114 &7444716409489615161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9196460269979702001}
+  m_GameObject: {fileID: 3023237341766680783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc6097ef623f4a4a915b8750946caf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 68214d4a331213d4994faa10e2112d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireLevel: 0
-  maxFireLevel: 1000
-  justFrameWindow: 6
-  checkJustFrame: 0
-  justFrameCounter: 0
-  justFrameGain: 150
-  input: {fileID: 9196460269979701997}
-  attackScript: {fileID: 9196460269431444474}
-  engineFX: {fileID: 3797316729740095628, guid: e2a0aeb5d5800f74bb064c8ea949fd60, type: 3}
-  engineVFX: {fileID: 123764, guid: ab1d5b74be3b35840b3467265a97b28f, type: 3}
-  fireMoveset: {fileID: 11400000, guid: 6ef9835566a665e489ce9ddf5422d82b, type: 2}
-  fireMoves:
-  - move: {fileID: 11400000, guid: f3e605008ae34174a89e3b2ae4d6114e, type: 2}
-    fireCost: 300
-  - move: {fileID: 11400000, guid: da0dd9a91beeae84aa5513200e2d9456, type: 2}
-    fireCost: 300
-  - move: {fileID: 11400000, guid: 28b2dd8a8dd5aba48805eebf0e210336, type: 2}
-    fireCost: 300
-  - move: {fileID: 11400000, guid: 7840dbfc76687b146a74c995f91f702c, type: 2}
-    fireCost: 300
-  - move: {fileID: 11400000, guid: efc24db199539b4489f253dfded11dab, type: 2}
-    fireCost: 300
-  - move: {fileID: 11400000, guid: 76be411d57638b94da1e501d20f30432, type: 2}
-    fireCost: -400
+  rend: {fileID: 1833894423890761691}
+  mats: []
+  col: {r: 1, g: 0, b: 0, a: 0}
+  main: {fileID: 9196460269979701998}
 --- !u!1001 &5555190869038029094
 PrefabInstance:
   m_ObjectHideFlags: 0

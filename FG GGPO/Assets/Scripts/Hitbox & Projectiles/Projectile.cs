@@ -144,7 +144,10 @@ public class Projectile : Hitbox
                 DoDamage(enemyStatus, 1);
             }
         }
-
+        //if (other.tag == "Wall")
+        //{
+        //    DestroyProjectile();
+        //}
     }
 
     public override void DoDamage(Status other, float dmgMod)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 494766}
   - component: {fileID: 19878252}
   - component: {fileID: 19962760}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Rings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4751,7 +4751,7 @@ GameObject:
   - component: {fileID: 437756}
   - component: {fileID: 19842092}
   - component: {fileID: 19978408}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TrailEmber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9490,7 +9490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 488922}
   - component: {fileID: 10846328}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9582,7 +9582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452372}
   - component: {fileID: 9670822}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9720,7 +9720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471764}
   - component: {fileID: 9620300}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9860,7 +9860,8 @@ GameObject:
   - component: {fileID: 19918588}
   - component: {fileID: 19884922}
   - component: {fileID: 8232366}
-  m_Layer: 0
+  - component: {fileID: -468821572466805671}
+  m_Layer: 17
   m_Name: FireMissileMega
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14725,6 +14726,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &-468821572466805671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &199996
 GameObject:
   m_ObjectHideFlags: 0
@@ -14735,7 +14749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403284}
   - component: {fileID: 11488320}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
