@@ -473,6 +473,10 @@ public class InputHandler : MonoBehaviour
     public void ExecuteFrame()
     {
 
+
+        if (GameHandler.Instance != null)
+            if (GameHandler.isPaused) return;
+
         if (!network)
         {
             if (!isBot)
@@ -484,13 +488,11 @@ public class InputHandler : MonoBehaviour
                 if (GameHandler.Instance != null)
                     if (GameHandler.isPaused) return;
 
-                ResolveButtons(heldButtons);
+                PreCheckCrouch(heldButtons);
             }
         }
-        if (GameHandler.Instance != null)
-            if (GameHandler.isPaused) return;
 
-        ResolveInputBuffer();
+
         //TRANSLATE DIRECTIONS TO INPUT INTERGERS
         inputDirection = TranslateInput(netDirectionals);
         if (inputDirection.y <= 0.5F && inputDirection.y >= -0.5F)
@@ -540,6 +542,22 @@ public class InputHandler : MonoBehaviour
         }
         SaveInputLog();
         CheckMotionInputs();
+        if (!network)
+        {
+            if (!isBot)
+            {
+                //for (int i = 0; i < heldDirectionals.Length; i++)
+                //{
+                //    netDirectionals[i] = heldDirectionals[i];
+                //}
+                if (GameHandler.Instance != null)
+                    if (GameHandler.isPaused) return;
+
+                ResolveButtons(heldButtons);
+            }
+        }
+        ResolveInputBuffer();
+
 
 
         //CHECK IF INPUTS HAVE BEEN DUPLICATED
@@ -564,6 +582,22 @@ public class InputHandler : MonoBehaviour
         }
         inputLog.Add(temp);
         if (inputLog.Count > 200) inputLog.RemoveAt(0);
+    }
+
+    void PreCheckCrouch(bool[] temp)
+    {
+        bool foundCrouch = false;
+        for (int i = 0; i < temp.Length; i++)
+        {
+            if (temp[i] && !netButtons[i])
+            {
+                if (i == 5) foundCrouch = true;
+            }
+
+            if (netButtons[5] != temp[5]) updatedButtons = true;
+            netButtons[5] = temp[5];
+        }
+        if (foundCrouch) InputBuffer(6);
     }
 
     public void ResolveButtons(bool[] temp)
@@ -677,19 +711,23 @@ public class InputHandler : MonoBehaviour
             if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
             {
                 foundDown = true;
+                print("d");
             }
 
             if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundF)
             {
 
                 foundDF = true;
+                print("df");
             }
             if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8)
             {
                 foundF = true;
+                print("f");
             }
             if (foundDown)
             {
+                print("BOB");
                 return true;
             }
         }
@@ -1230,14 +1268,16 @@ public class InputHandler : MonoBehaviour
         temp.bufferedSpecialMotions[3] = qcb;
         temp.bufferedSpecialMotions[4] = mI478;
         temp.bufferedSpecialMotions[5] = mI698;
+        print(qcf);
 
-        if (temp.bufferedSpecialMotions[0]) bf = false;
-        if (temp.bufferedSpecialMotions[1]) dd = false;
-        if (temp.bufferedSpecialMotions[2]) qcf = false;
-        if (temp.bufferedSpecialMotions[3]) qcb = false;
-        if (temp.bufferedSpecialMotions[4]) mI478 = false;
-        if (temp.bufferedSpecialMotions[5]) mI698 = false;
         bufferedInputs.Add(temp);
+
+        //if (temp.bufferedSpecialMotions[0]) bf = false;
+        //if (temp.bufferedSpecialMotions[1]) dd = false;
+        //if (temp.bufferedSpecialMotions[2]) qcf = false;
+        //if (temp.bufferedSpecialMotions[3]) qcb = false;
+        //if (temp.bufferedSpecialMotions[4]) mI478 = false;
+        //if (temp.bufferedSpecialMotions[5]) mI698 = false;
     }
 }
 [System.Serializable]
