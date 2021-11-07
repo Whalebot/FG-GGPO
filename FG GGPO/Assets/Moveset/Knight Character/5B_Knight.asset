@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 450
-      stun: 26
+      stun: 28
       hitstop: 10
       proration: 0.95
       meterGain: 2
@@ -62,11 +62,11 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 562
-      stun: 44
+      stun: 38
       hitstop: 15
       proration: 1
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 0, z: 9}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
       hitstop: 10
       proration: 1
       meterGain: 4
-      pushback: {x: 0, y: 0, z: 2}
+      pushback: {x: 0, y: 5, z: 5}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -121,9 +121,9 @@ MonoBehaviour:
   totalMoveDuration: 39
   firstGatlingFrame: 15
   blockAdvantage: -4
-  hitAdvantage: -1
+  hitAdvantage: 1
   blockCancelAdvantage: -1
-  hitCancelAdvantage: 23
+  hitCancelAdvantage: 25
   recoveryFrames: 25
   m:
   - startFrame: 1
@@ -138,7 +138,7 @@ MonoBehaviour:
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - {fileID: 11400000, guid: 345e028da7ced814eb2c61f2d667f42c, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
@@ -175,6 +175,7 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0

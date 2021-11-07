@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130433937859647811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.5, y: 7, z: 1.25}
+  m_LocalPosition: {x: 0, y: 2, z: 1.2}
+  m_LocalScale: {x: 0.5, y: 7, z: 1}
   m_Children:
   - {fileID: 8653709764715951371}
   m_Father: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   destroyOnBlock: 1
   destroyOnHit: 1
   life: 0
-  lifetime: 0
+  lifetime: 120
   velocity: 15
   destroyOnProjectileClash: 0
   destroyOnHitboxClash: 0
@@ -224,15 +224,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9166265368020251112, guid: 8d7792f03acb7e743821811609390056, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 9166265368020251112, guid: 8d7792f03acb7e743821811609390056, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 9166265368020251112, guid: 8d7792f03acb7e743821811609390056, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 9166265368020251112, guid: 8d7792f03acb7e743821811609390056, type: 3}
       propertyPath: m_LocalScale.x

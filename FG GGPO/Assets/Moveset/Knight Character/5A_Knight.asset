@@ -40,7 +40,7 @@ MonoBehaviour:
     homing: 0
     groundHitProperty:
       damage: 300
-      stun: 22
+      stun: 26
       hitstop: 7
       proration: 0.95
       meterGain: 2
@@ -61,12 +61,12 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
-      damage: 300
-      stun: 22
-      hitstop: 7
+      damage: 375
+      stun: 36
+      hitstop: 12
       proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      meterGain: 4
+      pushback: {x: 0, y: 0, z: 5}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -94,12 +94,12 @@ MonoBehaviour:
       minimumStun: 0
       hitID: 0
     airCounterhitProperty:
-      damage: 300
-      stun: 20
-      hitstop: 5
+      damage: 375
+      stun: 40
+      hitstop: 10
       proration: 0.95
-      meterGain: 2
-      pushback: {x: 0, y: 0, z: 2}
+      meterGain: 4
+      pushback: {x: 0, y: 5, z: 2}
       hitState: 0
       minimumDamage: 0
       minimumStun: 0
@@ -121,9 +121,9 @@ MonoBehaviour:
   totalMoveDuration: 30
   firstGatlingFrame: 15
   blockAdvantage: -2
-  hitAdvantage: 1
+  hitAdvantage: 5
   blockCancelAdvantage: 4
-  hitCancelAdvantage: 16
+  hitCancelAdvantage: 20
   recoveryFrames: 20
   m:
   - startFrame: 5
@@ -136,7 +136,7 @@ MonoBehaviour:
   gatlingMoves:
   - {fileID: 11400000, guid: c7745a1b09f7bf8458f6f7dce4565d0f, type: 2}
   - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
-  - {fileID: 11400000, guid: 2aea061051291474eb458b39759f5c86, type: 2}
+  - {fileID: 11400000, guid: 345e028da7ced814eb2c61f2d667f42c, type: 2}
   - {fileID: 11400000, guid: e5da701b396bf4a4497d3a38fdbb09d0, type: 2}
   - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
   - {fileID: 11400000, guid: 6978add1b66a4c54f9676fc49c7657f4, type: 2}
@@ -172,8 +172,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []

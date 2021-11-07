@@ -31,7 +31,7 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 334434759881567290, guid: 1f2857b130736c64eb1699141868b3b8, type: 3}
-    startupFrame: 25
+    startupFrame: 18
     activeFrames: 1
     gatlingFrames: 5
     attackType: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
       proration: 1
       meterGain: 4
       pushback: {x: 0, y: 0, z: 8}
-      hitState: 0
+      hitState: 1
       minimumDamage: 0
       minimumStun: 0
       hitID: 0
@@ -116,10 +116,10 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 22
   hitID: 0
-  firstStartupFrame: 25
-  lastActiveFrame: 25
-  totalMoveDuration: 57
-  firstGatlingFrame: 30
+  firstStartupFrame: 18
+  lastActiveFrame: 18
+  totalMoveDuration: 50
+  firstGatlingFrame: 23
   blockAdvantage: -12
   hitAdvantage: 18
   blockCancelAdvantage: -7
@@ -127,15 +127,15 @@ MonoBehaviour:
   recoveryFrames: 32
   m:
   - startFrame: 5
-    duration: 20
+    duration: 10
     momentum: {x: 0, y: 0, z: 5}
     homing: 0
     resetVelocityDuringRecovery: 1
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
-  - {fileID: 11400000, guid: 974c7b29d2b57d44facd97a54d8ad64b, type: 2}
-  - {fileID: 11400000, guid: d048fe6b82c73ca4396f2b3cb3599233, type: 2}
+  - {fileID: 11400000, guid: 1330912ab7f1ca14ebcba1a1816da285, type: 2}
+  - {fileID: 11400000, guid: 345e028da7ced814eb2c61f2d667f42c, type: 2}
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
   jumpCancelOnBlock: 0
@@ -167,8 +167,10 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
