@@ -186,6 +186,9 @@ public class Hitbox : MonoBehaviour
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
 
+        //int meterVal = (int)(100 * hit.meterGain);
+        //if (other.blockCounter > 0)
+        //    meterVal = (int)(meterVal * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.blockCounter));
         int meterVal = (int)(100 * hit.meterGain * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.blockCounter));
         status.Meter += meterVal;
         other.Meter += meterVal / 2;
@@ -233,7 +236,10 @@ public class Hitbox : MonoBehaviour
 
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
+       // int meterVal = (int)(hit.meterGain * 100);
         int meterVal = (int)(hit.meterGain * 100 * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
+        //if (other.comboCounter > 0)
+        //    meterVal = (int)(meterVal * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
         status.Meter += meterVal;
         other.Meter += meterVal / 2;
 

@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
   m_Name: 6B_Glaive
   m_EditorClassIdentifier: 
+  moveName: 
+  sprite: {fileID: 0}
+  moveDirection: 0
+  moveButton: 0
+  moveInput: 
+  description: 
   attackLevel: 4
   type: 0
   meterCost: 0
@@ -40,6 +46,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -49,6 +57,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 0
@@ -58,6 +68,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 0
@@ -67,6 +79,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -76,6 +90,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 0
@@ -85,6 +101,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   - hitbox: {fileID: 3123878921687778490, guid: cba0f11858d0186458b329cc0a9d9833, type: 3}
     startupFrame: 50
@@ -102,6 +120,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundBlockProperty:
       damage: 0
@@ -111,6 +131,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     groundCounterhitProperty:
       damage: 0
@@ -120,6 +142,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airHitProperty:
       damage: 0
@@ -129,6 +153,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airBlockProperty:
       damage: 0
@@ -138,6 +164,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
     airCounterhitProperty:
       damage: 0
@@ -147,6 +175,8 @@ MonoBehaviour:
       meterGain: 4
       pushback: {x: 0, y: 0, z: 0}
       hitState: 0
+      minimumDamage: 0
+      minimumStun: 0
       hitID: 0
   vfx: []
   sfx: []
@@ -158,8 +188,6 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 61
   hitID: 0
-  moveName: 
-  description: 
   firstStartupFrame: 20
   lastActiveFrame: 51
   totalMoveDuration: 81
@@ -180,6 +208,7 @@ MonoBehaviour:
     momentum: {x: 0, y: 0, z: 8}
     homing: 0
     resetVelocityDuringRecovery: 1
+  hurtboxes: []
   targetComboMoves: []
   gatlingMoves:
   - {fileID: 11400000, guid: 06786fad77e756946bac870e88031931, type: 2}
@@ -214,14 +243,17 @@ MonoBehaviour:
   footInvulStart: 1
   footInvulDuration: 0
   resetGatling: 0
+  extendedBuffer: 0
   noHitstopOnSelf: 0
   crossupState: 0
+  noCounterHit: 0
   forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
   aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
+  recoverOnlyOnLand: 0
   landingRecovery: 0
   overrideVelocity: 1
   runMomentum: 1

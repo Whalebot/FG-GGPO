@@ -26,6 +26,7 @@ public class GameHandler : MonoBehaviour
     public bool isMirror;
     public bool showHitboxes;
     public bool showHurtboxes;
+    public bool showColliders;
     public static bool staticHurtboxes;
     public int playersInGame;
     public Transform p1Transform;

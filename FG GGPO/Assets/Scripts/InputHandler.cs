@@ -711,23 +711,19 @@ public class InputHandler : MonoBehaviour
             if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
             {
                 foundDown = true;
-                print("d");
             }
 
             if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundF)
             {
 
                 foundDF = true;
-                print("df");
             }
             if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8)
             {
                 foundF = true;
-                print("f");
             }
             if (foundDown)
             {
-                print("BOB");
                 return true;
             }
         }

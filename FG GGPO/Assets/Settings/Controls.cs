@@ -1339,6 +1339,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a6323690-f132-499f-a6eb-1f38f5377087"",
+                    ""path"": ""<HID::Core (Plus) Wired Controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick;All"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1ff66d3c-4cc9-40c3-859e-23bd2056ae07"",
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",

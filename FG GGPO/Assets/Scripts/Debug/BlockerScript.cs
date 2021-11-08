@@ -12,9 +12,12 @@ public class BlockerScript : MonoBehaviour
     public Vector3 ownVelocity;
     public Vector3 enemyVelocity;
     public Vector3 pushVelocity;
+
+    public MeshRenderer mr;
     // Start is called before the first frame update
     void Awake()
     {
+        mr = GetComponent<MeshRenderer>();
         foreach (var item in playerColliders)
         {
             Physics.IgnoreCollision(item, playerBlockerCollider, true);
@@ -25,6 +28,11 @@ public class BlockerScript : MonoBehaviour
     private void Start()
     {
         enemyMov = GameHandler.Instance.ReturnPlayer(mov.transform).gameObject.GetComponent<Movement>();
+        GameHandler.Instance.advanceGameState += ExecuteFrame;
+    }
+
+    void ExecuteFrame() {
+        mr.enabled = GameHandler.Instance.showColliders;
     }
 
     private void OnCollisionEnter(Collision collision)

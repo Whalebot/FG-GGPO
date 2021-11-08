@@ -67,6 +67,7 @@ public class InputManager : MonoBehaviour
             if (item is Gamepad || item is Joystick)
                 controllers.Add(item);
         }
+
         if (controllers.Count > 1)
         {
             if (controllers[1] is Gamepad)
@@ -86,10 +87,10 @@ public class InputManager : MonoBehaviour
             else if (controllers[0] is Joystick)
                 p1Input.SetupControls((Joystick)controllers[0]);
 
-            if (GameHandler.gameModeID <= 0)
-            {
-                p2Input.SetupKeyboard();
-            }
+            //if (GameHandler.gameModeID <= 0)
+            //{
+            //    p2Input.SetupKeyboard();
+            //}
         }
 
         InputSystem.onDeviceChange += (device, change) =>

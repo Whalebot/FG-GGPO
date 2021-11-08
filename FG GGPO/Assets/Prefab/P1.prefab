@@ -95,7 +95,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145736429325292288}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -107,7 +107,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   ownVelocity: {x: 0, y: 0, z: 0}
   enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
+  mr: {fileID: 0}
 --- !u!1 &366033417185341652
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,10 +599,10 @@ MonoBehaviour:
   netButtons: 000000000000
   heldButtons: 000000000000
   directionals: 
-  buttons: 
   overlayDirectionals: 
   updatedDirectionals: 0
   updatedButtons: 0
+  inputLog: []
   dash: 0
   bf: 0
   fb: 0
@@ -881,7 +882,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3738484886954546419}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -893,7 +894,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -969,6 +970,7 @@ MonoBehaviour:
   ownVelocity: {x: 0, y: 0, z: 0}
   enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
+  mr: {fileID: 0}
 --- !u!1 &4521657981609401532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1033,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6bcec05440b237442bf7c6207456aaf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1107,6 +1109,7 @@ MonoBehaviour:
   ownVelocity: {x: 0, y: 0, z: 0}
   enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
+  mr: {fileID: 0}
 --- !u!1 &5326138877486991374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025442713406750524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.85, z: 0}
+  m_LocalPosition: {x: -0, y: 1.2, z: 0}
   m_LocalScale: {x: 0.4, y: 0.55, z: 0.4}
   m_Children:
   - {fileID: 114140960168911854}
@@ -1797,6 +1800,7 @@ MonoBehaviour:
   ownVelocity: {x: 0, y: 0, z: 0}
   enemyVelocity: {x: 0, y: 0, z: 0}
   pushVelocity: {x: 0, y: 0, z: 0}
+  mr: {fileID: 0}
 --- !u!1001 &3654780268407351733
 PrefabInstance:
   m_ObjectHideFlags: 0

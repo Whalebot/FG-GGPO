@@ -186,7 +186,7 @@ public class Status : MonoBehaviour
     {
         wakeupEvent?.Invoke();
         health = maxHealth;
-        meter = maxMeter;
+       // meter = maxMeter;
         BurstGauge = 6000;
 
 
@@ -204,7 +204,7 @@ public class Status : MonoBehaviour
                 meter = 0;
                 break;
             case GameMode.TrainingMode:
-                meter = maxMeter;
+                //meter = maxMeter;
                 BurstGauge = 6000;
                 break;
             case GameMode.TrialMode:
