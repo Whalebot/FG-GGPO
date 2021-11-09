@@ -182,7 +182,7 @@ public class Hitbox : MonoBehaviour
             attack.GatlingStart(true);
         else
             attack.GatlingStart(false);
-
+        attack.hit = true;
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
 
@@ -233,13 +233,11 @@ public class Hitbox : MonoBehaviour
             attack.GatlingStart(true);
         else
             attack.GatlingStart(false);
-
+        attack.hit = true;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
        // int meterVal = (int)(hit.meterGain * 100);
         int meterVal = (int)(hit.meterGain * 100 * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
-        //if (other.comboCounter > 0)
-        //    meterVal = (int)(meterVal * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
         status.Meter += meterVal;
         other.Meter += meterVal / 2;
 
@@ -294,8 +292,12 @@ public class Hitbox : MonoBehaviour
         attack.gatling = move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;
-        status.Meter += hit.meterGain;
-        other.Meter += hit.meterGain / 2;
+
+        int meterVal = (int)(hit.meterGain * 100 * Mathf.Pow(ComboSystem.Instance.comboDamageBaseProration, other.comboCounter));
+        status.Meter += meterVal;
+        other.Meter += meterVal / 2;
+
+        attack.hit = true;
         other.burstGauge += hit.meterGain * 60;
         //Enemy Hitstop
         other.newMove = true;

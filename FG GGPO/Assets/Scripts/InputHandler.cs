@@ -21,6 +21,8 @@ public class InputHandler : MonoBehaviour
     [FoldoutGroup("Input Buffer")] public int bufferWindow = 10;
     [FoldoutGroup("Input Buffer")] public int dashInputWindow = 20;
     [FoldoutGroup("Input Buffer")] public int motionInputWindow = 40;
+    [FoldoutGroup("Input Buffer")] public int superInputWindow = 40;
+    [FoldoutGroup("Input Buffer")] public int highJumpWindow = 5;
     [FoldoutGroup("Input Buffer")] public List<BufferedInput> bufferedInputs;
     [HideInInspector] public List<BufferedInput> deletedInputs;
     [HideInInspector] public int motionInputCounter;
@@ -86,9 +88,13 @@ public class InputHandler : MonoBehaviour
     public List<Input> inputLog;
     [FoldoutGroup("Debug")] public bool dash;
     [FoldoutGroup("Debug")] public bool bf;
+    [FoldoutGroup("Debug")] public bool highJump;
+
     [FoldoutGroup("Debug")] public bool fb;
     [FoldoutGroup("Debug")] public bool dd;
+    [FoldoutGroup("Debug")] public bool dp;
     [FoldoutGroup("Debug")] public bool qcf;
+    [FoldoutGroup("Debug")] public bool dQcf;
     [FoldoutGroup("Debug")] public bool qcb;
     [FoldoutGroup("Debug")] public bool mI478;
     [FoldoutGroup("Debug")] public bool mI698;
@@ -628,23 +634,37 @@ public class InputHandler : MonoBehaviour
 
         if (foundC && netButtons[4] || foundD && netButtons[3])
         {
+            //Burst
             InputBuffer(9);
+        }
+        else if (foundB && netButtons[4] || foundD && netButtons[1])
+        {
+            //RC
+            InputBuffer(8);
         }
         else if (foundB && netButtons[3] || foundC && netButtons[1])
         {
+            //Throw
             InputBuffer(7);
         }
         else
         {
             if (foundA) InputBuffer(1);
             if (foundB) InputBuffer(2);
-            if (foundJ) InputBuffer(3);
+            if (foundJ)
+            {
+                if (!highJump)
+                    InputBuffer(3);
+                else
+                    InputBuffer(30);
+
+            }
             if (foundC) InputBuffer(4);
             if (foundD) InputBuffer(5);
             if (foundCrouch) InputBuffer(6);
         }
     }
-
+    #region Motion Input
     void CheckMotionInputs()
     {
         if (motionInputCounter > 0)
@@ -658,6 +678,18 @@ public class InputHandler : MonoBehaviour
 
         if (directionals.Count <= 0 || overlayDirectionals.Count <= 0) return;
 
+        if (DoubleQuarterCircleForward())
+            dQcf = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            dQcf = false;
+        if (DPMotion())
+            dp = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            dp = false;
+        if (HighJump())
+            highJump = true;
+        else if (extraBuffer <= 0 && motionInputCounter <= 0)
+            highJump = false;
         if (CheckDashInput())
             dash = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
@@ -690,6 +722,128 @@ public class InputHandler : MonoBehaviour
         if (MI698()) mI698 = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             mI698 = false;
+    }
+
+    public bool DoubleQuarterCircleForward()
+    {
+        bool result = false;
+
+        bool foundDown = false;
+        bool foundDF = false;
+        bool foundF = false;
+
+        bool foundDown2 = false;
+        bool foundDF2 = false;
+        bool foundF2 = false;
+
+        if (inputLog.Count < 5) return false;
+
+        if (inputLog.Count <= 0) return false;
+
+        for (int i = 1; i < superInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+            if (inputLog.Count <= i) return false;
+
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5)
+            {
+                if (foundDF2 || foundF2)
+                    foundDown2 = true;
+            }
+
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundDown)
+            {
+
+                foundDF2 = true;
+            }
+            if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundDown)
+            {
+                foundF2 = true;
+            }
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
+            {
+                foundDown = true;
+            }
+
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundF)
+            {
+
+                foundDF = true;
+            }
+            if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8)
+            {
+                foundF = true;
+            }
+            if (foundDown2)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+    public bool DPMotion()
+    {
+        bool result = false;
+
+        bool foundDown = false;
+        bool foundDF = false;
+        bool foundF = false;
+
+        if (inputLog.Count < 5) return false;
+
+        if (inputLog.Count <= 0) return false;
+
+        for (int i = 1; i < motionInputWindow; i++)
+        {
+            if (directionals.Count < i) return false;
+            if (inputLog.Count <= i) return false;
+
+            if (!inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8 && foundDown)
+            {
+                foundF = true;
+            }
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
+            {
+                foundDown = true;
+            }
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 8)
+            {
+                foundDF = true;
+            }
+            if (foundF)
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+
+    public bool HighJump()
+    {
+        bool result = false;
+
+        bool foundN = false;
+        bool foundDown = false;
+        if (inputLog.Count <= 0) return false;
+
+        for (int i = 1; i < highJumpWindow; i++)
+        {
+            if (inputLog.Count <= i) return false;
+
+            if (!inputLog[inputLog.Count - i].buttons[5] && foundDown)
+            {
+                foundN = true;
+            }
+            if (inputLog[inputLog.Count - i].buttons[5])
+            {
+                foundDown = true;
+            }
+            if (foundN)
+            {
+                return true;
+            }
+        }
+        return result;
     }
 
     public bool QuarterCircleForward()
@@ -983,36 +1137,9 @@ public class InputHandler : MonoBehaviour
         return result;
     }
 
-    private void OnLeft(InputAction.CallbackContext context)
-    {
-        if (debug) print("Left");
 
-        heldDirectionals[3] = !context.canceled;
-        if (context.performed)
-            leftInput?.Invoke();
-    }
+    #endregion
 
-    private void OnUp(InputAction.CallbackContext context)
-    {
-        if (debug) print("Up");
-        heldDirectionals[0] = !context.canceled;
-        if (context.performed)
-            upInput?.Invoke();
-    }
-    private void OnDown(InputAction.CallbackContext context)
-    {
-        if (debug) print("Down");
-        heldDirectionals[2] = !context.canceled;
-        if (context.performed)
-            downInput?.Invoke();
-    }
-    private void OnRight(InputAction.CallbackContext context)
-    {
-        if (debug) print("Right");
-        heldDirectionals[1] = !context.canceled;
-        if (context.performed)
-            rightInput?.Invoke();
-    }
     void ChangeControlScheme(InputAction.CallbackContext context)
     {
 
@@ -1051,6 +1178,39 @@ public class InputHandler : MonoBehaviour
         //    Cursor.lockState = CursorLockMode.Confined;
         //    Cursor.visible = true;
         //}
+    }
+
+    #region InputSystem Button Setup
+
+    private void OnLeft(InputAction.CallbackContext context)
+    {
+        if (debug) print("Left");
+
+        heldDirectionals[3] = !context.canceled;
+        if (context.performed)
+            leftInput?.Invoke();
+    }
+
+    private void OnUp(InputAction.CallbackContext context)
+    {
+        if (debug) print("Up");
+        heldDirectionals[0] = !context.canceled;
+        if (context.performed)
+            upInput?.Invoke();
+    }
+    private void OnDown(InputAction.CallbackContext context)
+    {
+        if (debug) print("Down");
+        heldDirectionals[2] = !context.canceled;
+        if (context.performed)
+            downInput?.Invoke();
+    }
+    private void OnRight(InputAction.CallbackContext context)
+    {
+        if (debug) print("Right");
+        heldDirectionals[1] = !context.canceled;
+        if (context.performed)
+            rightInput?.Invoke();
     }
     void OnTouchPad()
     {
@@ -1167,6 +1327,10 @@ public class InputHandler : MonoBehaviour
     void OnR2Press()
     {
         if (R2Hold) return;
+
+
+        heldButtons[1] = true;
+        heldButtons[4] = true;
         R2Hold = true;
         R2input?.Invoke();
     }
@@ -1174,6 +1338,9 @@ public class InputHandler : MonoBehaviour
     void OnR2Release()
     {
         if (!R2Hold) return;
+
+        heldButtons[1] = false;
+        heldButtons[4] = false;
         R2Hold = false;
         R2release?.Invoke();
     }
@@ -1221,7 +1388,7 @@ public class InputHandler : MonoBehaviour
         if (GameHandler.isPaused) return;
         InputBuffer(10);
     }
-
+    #endregion
     public int Direction()
     {
 
@@ -1256,24 +1423,27 @@ public class InputHandler : MonoBehaviour
     public void InputBuffer(int inputID)
     {
         BufferedInput temp = new BufferedInput(inputID, Direction(), netButtons[5], bufferWindow + extraBuffer);
-        //SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 }
-        temp.bufferedSpecialMotions = new bool[6];
+        //public enum SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698, DP, DoubleQCF }
+        temp.bufferedSpecialMotions = new bool[(int)SpecialInput.DoubleQCF + 1];
         temp.bufferedSpecialMotions[0] = bf;
         temp.bufferedSpecialMotions[1] = dd;
         temp.bufferedSpecialMotions[2] = qcf;
         temp.bufferedSpecialMotions[3] = qcb;
         temp.bufferedSpecialMotions[4] = mI478;
         temp.bufferedSpecialMotions[5] = mI698;
-        print(qcf);
+        temp.bufferedSpecialMotions[6] = dp;
+        temp.bufferedSpecialMotions[7] = dQcf;
 
         bufferedInputs.Add(temp);
 
-        //if (temp.bufferedSpecialMotions[0]) bf = false;
-        //if (temp.bufferedSpecialMotions[1]) dd = false;
-        //if (temp.bufferedSpecialMotions[2]) qcf = false;
-        //if (temp.bufferedSpecialMotions[3]) qcb = false;
-        //if (temp.bufferedSpecialMotions[4]) mI478 = false;
-        //if (temp.bufferedSpecialMotions[5]) mI698 = false;
+        if (temp.bufferedSpecialMotions[0]) bf = false;
+        if (temp.bufferedSpecialMotions[1]) dd = false;
+        if (temp.bufferedSpecialMotions[2]) qcf = false;
+        if (temp.bufferedSpecialMotions[3]) qcb = false;
+        if (temp.bufferedSpecialMotions[4]) mI478 = false;
+        if (temp.bufferedSpecialMotions[5]) mI698 = false;
+        if (temp.bufferedSpecialMotions[6]) dp = false;
+        if (temp.bufferedSpecialMotions[7]) dQcf = false;
     }
 }
 [System.Serializable]

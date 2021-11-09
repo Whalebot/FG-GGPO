@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GrabHitbox : Hitbox
 {
+    public bool airThrow;
+    public bool groundThrow;
     public Transform grabTransform;
 
     public new void OnTriggerEnter(Collider other)
@@ -13,7 +15,7 @@ public class GrabHitbox : Hitbox
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
         if (!attack.attacking) return;
-       if (enemyStatus != null)
+        if (enemyStatus != null)
         {
             if (status == enemyStatus) return;
 
@@ -36,10 +38,21 @@ public class GrabHitbox : Hitbox
 
     public override void CheckAttack(Status other, Attack attack)
     {
-        if (other.groundState == GroundState.Grounded && other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun)
+        if (airThrow && other.groundState == GroundState.Airborne)
         {
-            ExecuteThrow(attack.groundHitProperty, other);
+        //    if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun)
+            {
+                ExecuteThrow(attack.groundHitProperty, other);
+            }
         }
+        else if (other.groundState == GroundState.Grounded)
+        {
+            if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun)
+            {
+                ExecuteThrow(attack.groundHitProperty, other);
+            }
+        }
+
         //Check for airborne or knockdown state
         else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
         {
@@ -61,6 +74,7 @@ public class GrabHitbox : Hitbox
         attack.newAttack = true;
         attack.Idle();
         status.GoToState(Status.State.LockedAnimation);
+        status.rb.velocity = Vector3.zero;
         attack.ThrowLanded();
         other.TakeThrow(move.hitID);
         //

@@ -586,6 +586,8 @@ MonoBehaviour:
   bufferWindow: 7
   dashInputWindow: 20
   motionInputWindow: 20
+  superInputWindow: 40
+  highJumpWindow: 10
   bufferedInputs: []
   deletedInputs: []
   motionInputCounter: 0
@@ -605,9 +607,12 @@ MonoBehaviour:
   inputLog: []
   dash: 0
   bf: 0
+  highJump: 0
   fb: 0
   dd: 0
+  dp: 0
   qcf: 0
+  dQcf: 0
   qcb: 0
   mI478: 0
   mI698: 0
@@ -649,6 +654,8 @@ MonoBehaviour:
   multiJumps: 1
   airActions: 0
   jumpVelocity: 3
+  airMinimumDistance: 0.8
+  highJumpHeight: 11
   jumpStartFrames: 4
   jumpStartCounter: 0
   performedJumps: 0
@@ -791,6 +798,7 @@ MonoBehaviour:
   mainMoveset: {fileID: 0}
   moveset: {fileID: 11400000, guid: 9a8c96e7c898d574cadabde2acda451e, type: 2}
   activeMove: {fileID: 0}
+  hit: 0
   gatling: 0
   gatlingFrame: 0
   attackID: 0
@@ -1370,8 +1378,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025442713406750524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.2, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.55, z: 0.4}
+  m_LocalPosition: {x: -0, y: 1.3, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.7, z: 0.4}
   m_Children:
   - {fileID: 114140960168911854}
   m_Father: {fileID: 4235912116155906767}

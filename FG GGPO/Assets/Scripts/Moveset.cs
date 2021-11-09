@@ -66,7 +66,9 @@ public class Moveset : ScriptableObject
     [FoldoutGroup("Wakeup Options")] public Move airBTech;
 
     [FoldoutGroup("Universal Options")] public Move burst;
+    [FoldoutGroup("Universal Options")] public Move rc;
     [FoldoutGroup("Universal Options")] public Move throwF;
+    [FoldoutGroup("Universal Options")] public Move airThrowF;
     [FoldoutGroup("Universal Options")] public Move throwBreak;
 
 

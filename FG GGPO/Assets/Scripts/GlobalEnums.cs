@@ -19,7 +19,7 @@ public enum MoveType { Normal, Special, UniversalMechanics, Movement, EX, Super 
 public enum ActionType { Performed, Movement, Hit, Jump }
 
 public enum InputDirection { Neutral, Crouch, Jumping, Forward, Back, Side, JumpCrouch }
-public enum SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 }
+public enum SpecialInput { BackForward, DownDown, QCF, QCB, Input478, Input698 , DP, DoubleQCF}
 
 public enum ButtonInput { A, B, J, C, D }
 public enum StagePosition { RoundStart, Wall1, Wall2, MidScreen }

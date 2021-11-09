@@ -21,8 +21,8 @@ public class BlackOverlayAnimation : MonoBehaviour
 
     void ExecuteFrame()
     {
-        if (!GameHandler.Instance.runNormally) anim.enabled = true;
-        if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());
+        //if (!GameHandler.Instance.runNormally) anim.enabled = true;
+        //if (!GameHandler.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
 
 

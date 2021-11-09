@@ -58,13 +58,18 @@ MonoBehaviour:
   airFTech: {fileID: 0}
   airBTech: {fileID: 0}
   burst: {fileID: 11400000, guid: 832efc469cb973b44b4ac661b4b8271c, type: 2}
+  rc: {fileID: 11400000, guid: 2124c3aef675a9049abbcf4dee82ab4c, type: 2}
   throwF: {fileID: 11400000, guid: 63a2eb58df992c74faa3a804ec3645ab, type: 2}
   throwBreak: {fileID: 11400000, guid: d7e58a7282faebc4284f18dec9403dfc, type: 2}
   specials:
-  - motionInput: 2
-    buttonInput: 4
+  - motionInput: 6
+    buttonInput: 3
     grounded: 1
-    move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}
+    move: {fileID: 11400000, guid: 5e89c786d3439c14fbd1222940df7990, type: 2}
+  - motionInput: 0
+    buttonInput: 3
+    grounded: 0
+    move: {fileID: 11400000, guid: 09c5dfe7540fa76449f327ebee221cc5, type: 2}
   - motionInput: 2
     buttonInput: 1
     grounded: 1
@@ -73,3 +78,7 @@ MonoBehaviour:
     buttonInput: 3
     grounded: 1
     move: {fileID: 11400000, guid: 08da8e6a8d749334cbc9a513a0980b42, type: 2}
+  - motionInput: 7
+    buttonInput: 4
+    grounded: 1
+    move: {fileID: 11400000, guid: d957c7e5940b1c44fa3cf8fe4fb1324d, type: 2}

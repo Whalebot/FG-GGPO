@@ -186,7 +186,7 @@ public class Status : MonoBehaviour
     {
         wakeupEvent?.Invoke();
         health = maxHealth;
-       // meter = maxMeter;
+        // meter = maxMeter;
         BurstGauge = 6000;
 
 
@@ -204,7 +204,7 @@ public class Status : MonoBehaviour
                 meter = 0;
                 break;
             case GameMode.TrainingMode:
-                //meter = maxMeter;
+                meter = maxMeter;
                 BurstGauge = 6000;
                 break;
             case GameMode.TrialMode:
@@ -513,6 +513,7 @@ public class Status : MonoBehaviour
                 }
                 break;
             case State.LockedAnimation:
+
                 throwBreakCounter--;
 
                 break;
@@ -532,12 +533,16 @@ public class Status : MonoBehaviour
             wakeupEvent?.Invoke();
             Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity);
         }
+      
+
+
         //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
         currentState = transitionState;
 
         switch (transitionState)
         {
             case State.Neutral:
+                rb.useGravity = true;
                 invincible = false;
                 linearInvul = false;
                 blockCounter = 0;
@@ -553,6 +558,7 @@ public class Status : MonoBehaviour
                 minusFrames++;
                 break;
             case State.Recovery:
+                rb.useGravity = true;
                 crossupState = false;
                 blocking = false;
                 minusFrames++;
@@ -560,6 +566,7 @@ public class Status : MonoBehaviour
                 EnableHurtboxes();
                 break;
             case State.Hitstun:
+                rb.useGravity = true;
                 inHitStun = true;
                 linearInvul = false;
 
@@ -574,7 +581,7 @@ public class Status : MonoBehaviour
                 minusFrames = -BlockStun;
                 blockstunEvent?.Invoke(); break;
             case State.Knockdown:
-
+                rb.useGravity = true;
                 knockdownValue = HitStun + 50;
                 EnableHurtboxes();
                 inHitStun = true;
@@ -585,10 +592,13 @@ public class Status : MonoBehaviour
 
                 break;
             case State.Wakeup:
+                rb.useGravity = true;
                 wakeupValue = wakeupRecovery;
 
                 break;
             case State.LockedAnimation:
+                if (groundState == GroundState.Airborne)
+                    rb.useGravity = false;
                 blocking = false;
                 //DisableHurtboxes();
                 break;
@@ -727,6 +737,7 @@ public class Status : MonoBehaviour
         {
             punishEvent?.Invoke();
         }
+
         mov.runMomentumCounter = 0;
         mov.storedDirection = Vector3.zero;
         rb.velocity = Vector3.zero;

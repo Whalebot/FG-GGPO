@@ -386,8 +386,9 @@ public class Move : ScriptableObject
     }
 
 
-    void SetValuesBasedOnGroundProperties() { 
-    
+    void SetValuesBasedOnGroundProperties()
+    {
+
     }
     [TabGroup("Attacks"), Button]
     void CopyHitToCounterhit()
@@ -396,6 +397,20 @@ public class Move : ScriptableObject
         {
             CopyProperty(item.groundCounterhitProperty, item.groundHitProperty);
             CopyProperty(item.airCounterhitProperty, item.airHitProperty);
+        }
+    }
+    [TabGroup("Attacks"), Button]
+    void CopyMinimumValues()
+    {
+        foreach (var item in attacks)
+        {
+            item.groundCounterhitProperty.minimumDamage = item.groundHitProperty.minimumDamage;
+            item.airHitProperty.minimumDamage = item.groundHitProperty.minimumDamage;
+            item.airCounterhitProperty.minimumDamage = item.groundHitProperty.minimumDamage;
+
+            item.groundCounterhitProperty.minimumStun = item.groundHitProperty.minimumStun;
+            item.airHitProperty.minimumStun = item.groundHitProperty.minimumStun;
+            item.airCounterhitProperty.minimumStun = item.groundHitProperty.minimumStun;
         }
     }
 

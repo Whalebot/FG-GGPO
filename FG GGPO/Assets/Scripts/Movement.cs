@@ -36,6 +36,8 @@ public class Movement : MonoBehaviour
     [TabGroup("Jump")] [HeaderAttribute("Jump attributes")] public int multiJumps;
     public int airActions;
     [TabGroup("Jump")] public float jumpVelocity;
+    [TabGroup("Jump")] public float airMinimumDistance;
+    [TabGroup("Jump")] public float highJumpHeight;
     [TabGroup("Jump")] public int jumpStartFrames;
     public int jumpStartCounter;
     [TabGroup("Jump")] public int performedJumps;
@@ -49,7 +51,7 @@ public class Movement : MonoBehaviour
     [TabGroup("Jump")] public float fallMultiplier;
     [TabGroup("Jump")] public int minimumJumpTime = 2;
     [TabGroup("Jump")] int jumpCounter;
-
+    bool hj;
 
 
     public delegate void MovementEvent();
@@ -224,10 +226,13 @@ public class Movement : MonoBehaviour
             if (status.groundState == GroundState.Airborne) jumpStartCounter = 0;
             if (jumpStartCounter <= 0)
             {
-                Jump();
+                if (hj) HighJump();
+                else
+                    Jump();
             }
         }
     }
+
     public void JumpStartup()
     {
         if (performedJumps >= multiJumps) return;
@@ -239,6 +244,21 @@ public class Movement : MonoBehaviour
         jumpStartEvent?.Invoke();
         jumpStartCounter = jumpStartFrames;
         storedDirection = direction.normalized * jumpVelocity;
+        hj = false;
+    }
+
+    public void HighJumpStartup()
+    {
+        if (performedJumps >= multiJumps) return;
+        if (!ground) performedJumps++;
+
+        status.GoToState(Status.State.Startup);
+        status.minusFrames = -jumpStartFrames;
+        status.frameDataEvent?.Invoke();
+        jumpStartEvent?.Invoke();
+        jumpStartCounter = jumpStartFrames;
+        storedDirection = direction.normalized * jumpVelocity;
+        hj = true;
     }
 
     public void Hit()
@@ -264,6 +284,25 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[0 + performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
 
     }
+
+    public void HighJump()
+    {
+        if (ground)
+        {
+            LookAtOpponent();
+        }
+        airActions--;
+        sprinting = false;
+        ground = false;
+        status.GoToGroundState(GroundState.Airborne);
+        jumpCounter = minimumJumpTime;
+        jumpEvent?.Invoke();
+        Vector3 temp = storedDirection.normalized;
+
+        rb.velocity = new Vector3(temp.x * Speed(), highJumpHeight, temp.z * Speed()) + runDirection * walkSpeed;
+
+    }
+
 
     public void LookAtOpponent()
     {
@@ -306,7 +345,7 @@ public class Movement : MonoBehaviour
             //    status.EnableCollider();
             //} 
             //if (transform.position.y >= 1 && playerDist <= 0.3F)
-            if (transform.position.y >= 1 && Mathf.Abs(v1.y - v2.y) <= 0.4F)
+            if (transform.position.y >= 1 && Mathf.Abs(v1.y - v2.y) <= airMinimumDistance)
             {
                 status.EnableCollider();
             }

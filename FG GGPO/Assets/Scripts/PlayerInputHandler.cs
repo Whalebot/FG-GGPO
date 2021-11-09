@@ -192,14 +192,7 @@ public class PlayerInputHandler : MonoBehaviour
             //    }
             //}
 
-            ////RC
-            //if (input.bufferedInputs[i].id == 8)
-            //{
-            //    if (status.groundState == GroundState.Grounded)
-            //    {
-            //        attack.Attack(attack.moveset.grabF);
-            //    }
-            //}
+
 
             //Jump Button
             if (input.bufferedInputs[i].id == 3)
@@ -215,13 +208,54 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 continue;
             }
+            else if (input.bufferedInputs[i].id == 30)
+            {
+                bool canJump = status.currentState == Status.State.Neutral || attack.attackString && attack.jumpCancel;
+                if (canJump)
+                {
+                    if (mov.ground)
+                        mov.HighJumpStartup();
+                    else
+                        mov.JumpStartup();
+                    bufferID = i;
+
+                    break;
+                }
+                continue;
+            }
 
             foreach (var item in attack.moveset.specials)
             {
                 bool ground = (status.groundState == GroundState.Grounded);
                 if (item.grounded == ground)
                 {
-                    if (item.motionInput == SpecialInput.QCF)
+                    if (item.motionInput == SpecialInput.DoubleQCF)
+                    {
+                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput && input.bufferedInputs[i].bufferedSpecialMotions[(int)SpecialInput.DoubleQCF])
+                        {
+                            if (attack.Attack(item.move))
+                            {
+                                doSpecial = true;
+                                bufferID = i;
+                                break;
+
+                            }
+                        }
+                    }
+                    else if (item.motionInput == SpecialInput.DP)
+                    {
+                        if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput && input.bufferedInputs[i].bufferedSpecialMotions[(int)SpecialInput.DP])
+                        {
+                            if (attack.Attack(item.move))
+                            {
+                                doSpecial = true;
+                                bufferID = i;
+                                break;
+
+                            }
+                        }
+                    }
+                    else if (item.motionInput == SpecialInput.QCF)
                     {
                         if (input.bufferedInputs[i].id - 1 == (int)item.buttonInput && input.bufferedInputs[i].bufferedSpecialMotions[(int)SpecialInput.QCF])
                         {
@@ -233,7 +267,6 @@ public class PlayerInputHandler : MonoBehaviour
 
                             }
                         }
-
                     }
                     else if (item.motionInput == SpecialInput.QCB)
                     {
@@ -351,6 +384,12 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     attack.Attack(attack.moveset.throwF);
                 }
+                else
+                {
+                    attack.Attack(attack.moveset.airThrowF);
+                }
+                bufferID = i;
+                break;
             }
             //A Button
             if (input.bufferedInputs[i].id == 1)
@@ -644,8 +683,29 @@ public class PlayerInputHandler : MonoBehaviour
     void InAnimationInput()
     {
         status.blocking = false;
+        int bufferID = -1;
+        if (attack.hit)
+        {
+            for (int i = 0; i < input.bufferedInputs.Count; i++)
+            {
 
-        if (attack.attackString || attack.canTargetCombo)
+
+                //RC
+                if (input.bufferedInputs[i].id == 8)
+                {
+                    //if (status.groundState == GroundState.Grounded)
+
+                    attack.AttackProperties(attack.moveset.rc);
+                    {
+                        bufferID = i;
+                        DeleteInputs(bufferID);
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (attack.gatling || attack.canTargetCombo)
         {
             ProcessBuffer();
         }

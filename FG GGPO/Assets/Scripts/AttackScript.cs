@@ -30,6 +30,7 @@ public class AttackScript : MonoBehaviour
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
     [FoldoutGroup("Debug")] public Move activeMove;
+    [FoldoutGroup("Debug")] public bool hit;
     [FoldoutGroup("Debug")] public bool gatling;
     [FoldoutGroup("Debug")] public int gatlingFrame;
     [FoldoutGroup("Debug")] public int attackID;
@@ -106,6 +107,7 @@ public class AttackScript : MonoBehaviour
 
     public void GatlingStart(bool g)
     {
+        canTargetCombo = true;
         gatling = g;
         gatlingFrame = attackFrames;
     }
@@ -518,7 +520,11 @@ public class AttackScript : MonoBehaviour
 
     public void AttackProperties(Move move)
     {
-        // print(move);
+        if (move == null)
+        {
+            print(move);
+            return;
+        }
         usedMoves.Add(move);
         FrameDataManager.Instance.UpdateFrameData();
         if (move != null)
@@ -555,6 +561,7 @@ public class AttackScript : MonoBehaviour
         attackID = move.animationID;
         attackString = false;
         canTargetCombo = false;
+        hit = false;
         gatling = false;
         jumpCancel = false;
         specialCancel = false;
@@ -836,7 +843,7 @@ public class AttackScript : MonoBehaviour
         gatling = false;
         canTargetCombo = false;
         landCancel = false;
-
+        hit = false;
         status.counterhitState = false;
         status.projectileInvul = false;
         status.invincible = false;

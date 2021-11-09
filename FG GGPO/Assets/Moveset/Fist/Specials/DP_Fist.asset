@@ -46,8 +46,8 @@ MonoBehaviour:
       meterGain: 2
       pushback: {x: 0, y: 10, z: 5}
       hitState: 2
-      minimumDamage: 0
-      minimumStun: 0
+      minimumDamage: 500
+      minimumStun: 30
       hitID: 0
     groundBlockProperty:
       damage: 100
