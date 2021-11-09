@@ -31,8 +31,8 @@ MonoBehaviour:
   throwFollowup: {fileID: 11400000, guid: ecb3a8c2555811f45b7b8bd1521587e4, type: 2}
   attacks:
   - hitbox: {fileID: 3177392228787048669, guid: 3c79ed55088bca5498a35da638796a5c, type: 3}
-    startupFrame: 8
-    activeFrames: 1
+    startupFrame: 6
+    activeFrames: 3
     gatlingFrames: 5
     attackType: 2
     attackHeight: 1
@@ -114,13 +114,13 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 200
   hitID: 1
-  firstStartupFrame: 8
+  firstStartupFrame: 6
   lastActiveFrame: 8
   totalMoveDuration: 48
-  firstGatlingFrame: 13
-  blockAdvantage: 160
-  hitAdvantage: 160
-  blockCancelAdvantage: 165
+  firstGatlingFrame: 11
+  blockAdvantage: 158
+  hitAdvantage: 158
+  blockCancelAdvantage: 163
   hitCancelAdvantage: 195
   recoveryFrames: 40
   m: []
@@ -170,6 +170,6 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   landingRecovery: 0
-  overrideVelocity: 1
-  runMomentum: 1
-  resetVelocityDuringRecovery: 1
+  overrideVelocity: 0
+  runMomentum: 0
+  resetVelocityDuringRecovery: 0
