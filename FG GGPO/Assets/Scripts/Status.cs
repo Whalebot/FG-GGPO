@@ -730,7 +730,7 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void TakeThrow(int animationID)
+    public void TakeThrow(bool canBreak, int animationID)
     {
         ResetInvincibilities();
         if (currentState == State.Recovery)
@@ -744,6 +744,7 @@ public class Status : MonoBehaviour
 
         throwEvent?.Invoke();
         takeAnimationEvent?.Invoke(animationID);
+        if(canBreak)
         throwBreakCounter = throwBreakWindow;
         GoToState(State.LockedAnimation);
     }

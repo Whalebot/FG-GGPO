@@ -88,10 +88,17 @@ public class AttackScript : MonoBehaviour
     {
 
     }
-    public void ThrowLanded()
+    public void ThrowLanded(bool canBreak)
     {
         //Wait for throw break
-        throwBreakCounter = status.throwBreakWindow;
+        if (canBreak)
+            throwBreakCounter = status.throwBreakWindow;
+        else
+        {
+            throwBreakCounter = 1;
+            ProcessThrow();
+        }
+
     }
     public void ProcessThrow()
     {

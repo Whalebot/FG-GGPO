@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabHitbox : Hitbox
 {
     public bool airThrow;
-    public bool groundThrow;
+    public bool canBreak;
     public Transform grabTransform;
 
     public new void OnTriggerEnter(Collider other)
@@ -75,8 +75,8 @@ public class GrabHitbox : Hitbox
         attack.Idle();
         status.GoToState(Status.State.LockedAnimation);
         status.rb.velocity = Vector3.zero;
-        attack.ThrowLanded();
-        other.TakeThrow(move.hitID);
+        attack.ThrowLanded(canBreak);
+        other.TakeThrow(canBreak, move.hitID);
         //
         //attack.AttackProperties(move.throwFollowup);
 

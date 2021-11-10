@@ -10,50 +10,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Air Throw
+  m_Name: Throw Followup 1
   m_EditorClassIdentifier: 
-  moveName: Throw
+  moveName: 
   sprite: {fileID: 0}
   moveDirection: 0
   moveButton: 0
   moveInput: 
   description: 
   attackLevel: 0
-  type: 2
+  type: 0
   meterCost: 0
   superFlash:
     superPrefab: {fileID: 0}
     startFrame: 1
     duration: 0
   collissionState: 0
-  groundState: 1
+  groundState: 0
   stance: {fileID: 0}
-  throwFollowup: {fileID: 11400000, guid: ecb3a8c2555811f45b7b8bd1521587e4, type: 2}
+  throwFollowup: {fileID: 0}
   attacks:
-  - hitbox: {fileID: 3177392228787048669, guid: 3c79ed55088bca5498a35da638796a5c, type: 3}
-    startupFrame: 6
-    activeFrames: 3
+  - hitbox: {fileID: 3123878921687778490, guid: 04943563ebb6fca47894c7385c69af63, type: 3}
+    startupFrame: 68
+    activeFrames: 1
     gatlingFrames: 5
-    attackType: 2
+    attackType: 0
     attackHeight: 1
     bodyProperty: 1
     homing: 0
     groundHitProperty:
       damage: 1000
-      stun: 200
-      hitstop: 10
-      proration: 1
+      stun: 70
+      hitstop: 20
+      proration: 0.95
       meterGain: 0
-      pushback: {x: 0, y: 0, z: 5}
-      hitState: 0
+      pushback: {x: 0, y: 0, z: -5}
+      hitState: 1
       minimumDamage: 0
       minimumStun: 0
-      hitID: 0
+      hitID: 2
     groundBlockProperty:
       damage: 0
-      stun: 200
+      stun: 23
       hitstop: 10
-      proration: 1
+      proration: 0.95
       meterGain: 0
       pushback: {x: 0, y: 0, z: 2}
       hitState: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
       hitID: 0
     groundCounterhitProperty:
       damage: 1250
-      stun: 210
-      hitstop: 15
+      stun: 80
+      hitstop: 25
       proration: 1
       meterGain: 0
       pushback: {x: 0, y: 0, z: 5}
@@ -112,18 +112,23 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 3797316729740095628, guid: cf6c2ea84f89dc34ea69b8c974045e4d, type: 3}
   counterhitSFX: {fileID: 0}
-  animationID: 200
-  hitID: 1
-  firstStartupFrame: 6
-  lastActiveFrame: 8
-  totalMoveDuration: 48
-  firstGatlingFrame: 11
-  blockAdvantage: 158
-  hitAdvantage: 158
-  blockCancelAdvantage: 163
-  hitCancelAdvantage: 195
+  animationID: 201
+  hitID: 0
+  firstStartupFrame: 68
+  lastActiveFrame: 68
+  totalMoveDuration: 108
+  firstGatlingFrame: 73
+  blockAdvantage: -17
+  hitAdvantage: 30
+  blockCancelAdvantage: -12
+  hitCancelAdvantage: 65
   recoveryFrames: 40
-  m: []
+  m:
+  - startFrame: 2
+    duration: 5
+    momentum: {x: 0, y: 0, z: 5}
+    homing: 0
+    resetVelocityDuringRecovery: 0
   hurtboxes: []
   targetComboMoves: []
   gatlingMoves: []
@@ -162,7 +167,7 @@ MonoBehaviour:
   noHitstopOnSelf: 0
   crossupState: 0
   noCounterHit: 0
-  forcedCounterHit: 1
+  forcedCounterHit: 0
   projectileLimit: 0
   sharedLimitProjectiles: []
   aimOnStartup: 0
@@ -170,6 +175,6 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   landingRecovery: 0
-  overrideVelocity: 0
-  runMomentum: 0
-  resetVelocityDuringRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 1

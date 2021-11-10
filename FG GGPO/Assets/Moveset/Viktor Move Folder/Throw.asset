@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81997174d0cb7c94ca60dc2a07293a54, type: 3}
-  m_Name: Air Throw
+  m_Name: Throw
   m_EditorClassIdentifier: 
   moveName: Throw
   sprite: {fileID: 0}
@@ -26,13 +26,13 @@ MonoBehaviour:
     startFrame: 1
     duration: 0
   collissionState: 0
-  groundState: 1
+  groundState: 0
   stance: {fileID: 0}
   throwFollowup: {fileID: 11400000, guid: ecb3a8c2555811f45b7b8bd1521587e4, type: 2}
   attacks:
-  - hitbox: {fileID: 3177392228787048669, guid: 3c79ed55088bca5498a35da638796a5c, type: 3}
-    startupFrame: 6
-    activeFrames: 3
+  - hitbox: {fileID: 3177392228787048669, guid: ceab05a1e1fcac245ba2b3d66185ccaa, type: 3}
+    startupFrame: 8
+    activeFrames: 1
     gatlingFrames: 5
     attackType: 2
     attackHeight: 1
@@ -114,13 +114,13 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 200
   hitID: 1
-  firstStartupFrame: 6
+  firstStartupFrame: 8
   lastActiveFrame: 8
   totalMoveDuration: 48
-  firstGatlingFrame: 11
-  blockAdvantage: 158
-  hitAdvantage: 158
-  blockCancelAdvantage: 163
+  firstGatlingFrame: 13
+  blockAdvantage: 160
+  hitAdvantage: 160
+  blockCancelAdvantage: 165
   hitCancelAdvantage: 195
   recoveryFrames: 40
   m: []
@@ -170,6 +170,6 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   landingRecovery: 0
-  overrideVelocity: 0
-  runMomentum: 0
-  resetVelocityDuringRecovery: 0
+  overrideVelocity: 1
+  runMomentum: 1
+  resetVelocityDuringRecovery: 1
