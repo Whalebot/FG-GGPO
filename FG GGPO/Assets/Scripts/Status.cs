@@ -184,9 +184,9 @@ public class Status : MonoBehaviour
 
     public void TrainingModeReset()
     {
-        wakeupEvent?.Invoke();
+        //wakeupEvent?.Invoke();
         health = maxHealth;
-        // meter = maxMeter;
+        meter = maxMeter;
         BurstGauge = 6000;
 
 
@@ -196,7 +196,7 @@ public class Status : MonoBehaviour
     [Button]
     public void ResetStatus()
     {
-        wakeupEvent?.Invoke();
+
         health = maxHealth;
         switch (GameHandler.Instance.gameMode)
         {
@@ -226,6 +226,7 @@ public class Status : MonoBehaviour
 
         groundState = GroundState.Grounded;
         currentState = State.Neutral;
+        wakeupEvent?.Invoke();
     }
 
     public void ResetInvincibilities()
@@ -264,7 +265,11 @@ public class Status : MonoBehaviour
         switch (groundState)
         {
             case GroundState.Grounded:
-                if (currentState == State.Wakeup) crouchingCollider.SetActive(true);
+                if (currentState == State.Wakeup)
+                {
+                    crouchingCollider.SetActive(true);
+                    groundedHurtbox.SetActive(true);
+                }
                 else
                 {
                     if (blockState == BlockState.Standing)
@@ -435,8 +440,9 @@ public class Status : MonoBehaviour
     {
         // print("kd recovery");
         // Instantiate(VFXManager.Instance.recoveryFX, transform.position + VFXManager.Instance.recoveryFX.transform.localPosition, Quaternion.identity);
-        GoToGroundState(GroundState.Grounded);
         GoToState(State.Wakeup);
+        GoToGroundState(GroundState.Grounded);
+  
         hitstunValue = 0;
         comboCounter = 0;
         inHitStun = false;
@@ -481,13 +487,11 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 counterhitState = forcedCounterhit;
                 if (autoBlock) blocking = true;
-                // PushVelocity();
                 break;
             case State.Hitstun:
                 blocking = false;
 
                 ResolveHitstun();
-                //  PushVelocity();
                 minusFrames = -HitStun;
                 break;
             case State.Blockstun:
@@ -497,7 +501,6 @@ public class Status : MonoBehaviour
                 break;
             case State.Knockdown:
                 blocking = false;
-                // ResolveKnockdown();
                 ResolveHitstun();
                 //   PushVelocity();
                 minusFrames = -HitStun;
@@ -507,8 +510,8 @@ public class Status : MonoBehaviour
                 //invincible = true;
                 if (wakeupValue <= 0)
                 {
-                    wakeupEvent?.Invoke();
-                    GoToState(State.Neutral);
+                    // wakeupEvent?.Invoke();
+                    //GoToState(State.Neutral);
 
                 }
                 break;
@@ -533,7 +536,7 @@ public class Status : MonoBehaviour
             wakeupEvent?.Invoke();
             Instantiate(VFXManager.Instance.wakeupFX, transform.position + VFXManager.Instance.wakeupFX.transform.localPosition, Quaternion.identity);
         }
-      
+
 
 
         //   if (currentState == State.LockedAnimation && transitionState == State.Neutral) return;
@@ -546,10 +549,11 @@ public class Status : MonoBehaviour
                 invincible = false;
                 linearInvul = false;
                 blockCounter = 0;
-                wakeupEvent?.Invoke();
+                //wakeupEvent?.Invoke();
                 EnableHurtboxes();
                 neutralEvent?.Invoke(); break;
             case State.Startup:
+                ActivateCollider();
                 blocking = false;
                 minusFrames++;
                 break;
@@ -621,18 +625,22 @@ public class Status : MonoBehaviour
 
         if (hitState == HitState.Launch || push.y > 1)
         {
+
             GoToGroundState(GroundState.Airborne);
             SetBlockState(BlockState.Airborne);
+            knockdownEvent?.Invoke();
         }
         else if (hitState == HitState.Knockdown)
         {
             GoToGroundState(GroundState.Knockdown);
+            knockdownEvent?.Invoke();
         }
         else
         {
             if (groundState != GroundState.Grounded || currentState == State.Knockdown || currentState == State.Wakeup)
             {
                 GoToGroundState(GroundState.Airborne);
+                knockdownEvent?.Invoke();
             }
             else GoToGroundState(GroundState.Grounded);
         }
@@ -744,8 +752,8 @@ public class Status : MonoBehaviour
 
         throwEvent?.Invoke();
         takeAnimationEvent?.Invoke(animationID);
-        if(canBreak)
-        throwBreakCounter = throwBreakWindow;
+        if (canBreak)
+            throwBreakCounter = throwBreakWindow;
         GoToState(State.LockedAnimation);
     }
 

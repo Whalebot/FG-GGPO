@@ -17,7 +17,7 @@ public class Move : ScriptableObject
     [TabGroup("Attacks")] public AttackLevel attackLevel;
     [TabGroup("Attacks")] public MoveType type;
     [TabGroup("Attacks")]
-    [ShowIf("@type == MoveType.EX || type == MoveType.Super")]
+    [ShowIf("@type == MoveType.EX || type == MoveType.Super || type == MoveType.UniversalMechanics")]
     public int meterCost;
     [TabGroup("Attacks")] [ShowIf("@type == MoveType.Super")] [HideLabel] public SuperFlash superFlash;
     [TabGroup("Attacks")] public BlockState collissionState;

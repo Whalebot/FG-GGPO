@@ -71,7 +71,6 @@ public class PlayerInputHandler : MonoBehaviour
         float angle = Vector3.SignedAngle(transform.forward, (transform.position - GameHandler.Instance.ReturnPlayer(transform).position).normalized, Vector3.up);
         frontTurned = Mathf.Abs(angle) > 90;
 
-        //UpdateDirection();
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun)
         {
             if (!status.autoBlock)
@@ -141,7 +140,7 @@ public class PlayerInputHandler : MonoBehaviour
     void NeutralInput()
     {
 
-        if (input.dash) mov.sprinting = true;
+        if (input.dash && mov.canRun) mov.sprinting = true;
         if (input.directionals.Count > 0)
             if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
 
@@ -684,7 +683,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         status.blocking = false;
         int bufferID = -1;
-        if (attack.hit)
+        if (attack.hit && status.Meter > attack.moveset.rc.meterCost * 100)
         {
             for (int i = 0; i < input.bufferedInputs.Count; i++)
             {
@@ -694,7 +693,7 @@ public class PlayerInputHandler : MonoBehaviour
                 if (input.bufferedInputs[i].id == 8)
                 {
                     //if (status.groundState == GroundState.Grounded)
-
+                    status.hitstopCounter = 0;
                     attack.AttackProperties(attack.moveset.rc);
                     {
                         bufferID = i;

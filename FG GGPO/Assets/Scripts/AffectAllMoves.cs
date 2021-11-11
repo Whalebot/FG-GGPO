@@ -17,15 +17,15 @@ public class AffectAllMoves : MonoBehaviour
     [Button]
     void LoadItemSO()
     {
-        string[] assetNames = AssetDatabase.FindAssets("t:Move", new[] { "Assets/Moveset" });
+        //string[] assetNames = AssetDatabase.FindAssets("t:Move", new[] { "Assets/Moveset" });
 
 
-        foreach (string SOName in assetNames)
-        {
-            var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
-            var item = AssetDatabase.LoadAssetAtPath<Move>(SOpath);
-            allMoves.Add(item);
-        }
+        //foreach (string SOName in assetNames)
+        //{
+        //    var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
+        //    var item = AssetDatabase.LoadAssetAtPath<Move>(SOpath);
+        //    allMoves.Add(item);
+        //}
     }
 
     [Button]
@@ -44,7 +44,7 @@ public class AffectAllMoves : MonoBehaviour
 
             //}
 
-            EditorUtility.SetDirty(item);
+            //EditorUtility.SetDirty(item);
         }
     }
 }

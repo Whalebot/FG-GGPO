@@ -77,6 +77,7 @@ public class AttackScript : MonoBehaviour
 
         if (mainMoveset != null) moveset = mainMoveset;
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.resetEvent += ResetAttack;
     }
 
     private void Awake()
@@ -84,10 +85,10 @@ public class AttackScript : MonoBehaviour
         usedMoves = new List<Move>();
     }
 
-    public void ProcessSuperFlash()
-    {
-
+    void ResetAttack() {
+        ResetAllValues();
     }
+
     public void ThrowLanded(bool canBreak)
     {
         //Wait for throw break
@@ -271,7 +272,6 @@ public class AttackScript : MonoBehaviour
                 {
                     ActiveFrames();
                     if (recoverOnlyOnLand) attackFrames--;
-
                 }
 
                 else if (attackFrames <= totalMoveDuration)
@@ -880,7 +880,7 @@ public class AttackScript : MonoBehaviour
 
     public void Idle()
     {
-        if (!newAttack)
+        //   if (!newAttack)
         {
             ResetAllValues();
             status.GoToState(Status.State.Neutral);

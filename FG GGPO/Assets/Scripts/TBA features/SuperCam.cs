@@ -14,6 +14,7 @@ public class SuperCam : MonoBehaviour
         GameHandler.Instance.advanceGameState += ExecuteFrame;
         anim = GetComponent<Animator>();
         attack = GetComponentInParent<AttackScript>();
+        GameHandler.Instance.resetEvent += DestroyMe;
         attack.superFlashEndEvent += DestroyMe;
     }
 
@@ -35,6 +36,7 @@ public class SuperCam : MonoBehaviour
     void DestroyMe()
     {
         attack.superFlashEndEvent -= DestroyMe;
+        GameHandler.Instance.resetEvent -= DestroyMe;
         GameHandler.Instance.advanceGameState -= ExecuteFrame;
         Destroy(gameObject);
 

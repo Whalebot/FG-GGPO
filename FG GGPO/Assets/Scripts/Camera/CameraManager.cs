@@ -97,8 +97,8 @@ public class CameraManager : MonoBehaviour
     {
         if (duration > minimumCounterhitDuration)
         {
-            toggleCounter = -30;
-            rightCounter = 0;
+            //toggleCounter = -30;
+            rightCounter = -30;
             counterhitCounter = duration;
             counterhitCamera.gameObject.SetActive(true);
         }
@@ -135,26 +135,32 @@ public class CameraManager : MonoBehaviour
             if (dist1 > dist2) { cameraAngle = Vector3.Angle(mainCamera.transform.forward, v1 - v2); }
             else cameraAngle = Vector3.Angle(mainCamera.transform.forward, v2 - v1);
         }
-        if (GameHandler.Instance.superFlash) return;
+        if (GameHandler.Instance.superFlash || counterhitCamera.gameObject.activeInHierarchy)
+        {
+            //toggleCounter = -30;
+            //rightCounter = -30;
+            return;
+        }
         toggleCounter++;
         rightCounter++;
-        if (canSwitchRight && rightCounter > rightTimer)
-        {
-            if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x + deadZone && !isRightCamera)
+        if (updateCameras)
+            if (canSwitchRight && rightCounter > rightTimer)
             {
-                rightCounter = 0;
-                isRightCamera = true;
-                leftCamera.Priority = 9;
-                rightCamera.Priority = 10;
+                if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x + deadZone && !isRightCamera)
+                {
+                    rightCounter = 0;
+                    isRightCamera = true;
+                    leftCamera.Priority = 9;
+                    rightCamera.Priority = 10;
+                }
+                else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x - deadZone && isRightCamera)
+                {
+                    rightCounter = 0;
+                    isRightCamera = false;
+                    leftCamera.Priority = 10;
+                    rightCamera.Priority = 9;
+                }
             }
-            else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x - deadZone && isRightCamera)
-            {
-                rightCounter = 0;
-                isRightCamera = false;
-                leftCamera.Priority = 10;
-                rightCamera.Priority = 9;
-            }
-        }
 
 
         if (toggleCounter < toggleTimer || !canCrossUp) return;

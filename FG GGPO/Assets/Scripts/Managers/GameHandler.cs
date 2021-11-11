@@ -401,7 +401,7 @@ public class GameHandler : MonoBehaviour
     [Button]
     public void ResetRound()
     {
-
+        EndSuperFlash();
         p1Status.ResetStatus();
         p2Status.ResetStatus();
         counter = 0;

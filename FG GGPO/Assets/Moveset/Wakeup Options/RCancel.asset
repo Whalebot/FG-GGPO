@@ -19,8 +19,8 @@ MonoBehaviour:
   moveInput: 
   description: 
   attackLevel: 0
-  type: 1
-  meterCost: 0
+  type: 2
+  meterCost: 50
   superFlash:
     superPrefab: {fileID: 0}
     startFrame: 1
@@ -121,13 +121,13 @@ MonoBehaviour:
   hitID: 0
   firstStartupFrame: 1
   lastActiveFrame: 0
-  totalMoveDuration: 1
+  totalMoveDuration: 0
   firstGatlingFrame: 1
-  blockAdvantage: 20
-  hitAdvantage: 50
-  blockCancelAdvantage: 20
+  blockAdvantage: 21
+  hitAdvantage: 51
+  blockCancelAdvantage: 21
   hitCancelAdvantage: 50
-  recoveryFrames: 1
+  recoveryFrames: 0
   m: []
   hurtboxes: []
   targetComboMoves: []

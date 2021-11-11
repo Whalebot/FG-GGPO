@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GrabHitbox : Hitbox
 {
+    public bool comboThrow;
     public bool airThrow;
     public bool canBreak;
     public Transform grabTransform;
@@ -40,14 +41,14 @@ public class GrabHitbox : Hitbox
     {
         if (airThrow && other.groundState == GroundState.Airborne)
         {
-        //    if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun)
+            if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun || other.currentState != Status.State.Hitstun && comboThrow)
             {
                 ExecuteThrow(attack.groundHitProperty, other);
             }
         }
         else if (other.groundState == GroundState.Grounded)
         {
-            if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun)
+            if (other.currentState != Status.State.Hitstun && other.currentState != Status.State.Blockstun || other.currentState != Status.State.Hitstun && comboThrow)
             {
                 ExecuteThrow(attack.groundHitProperty, other);
             }

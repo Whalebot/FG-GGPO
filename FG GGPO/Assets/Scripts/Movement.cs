@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     [TabGroup("Movement")]
     [HeaderAttribute("Sprint attributes")]
     public bool sprinting;
+    [TabGroup("Movement")] public bool canRun = true;
     [TabGroup("Movement")] public float sprintSpeed = 8;
     [TabGroup("Movement")] public int runMomentumDuration;
     [TabGroup("Movement")] public int runMomentumCounter;
@@ -235,9 +236,13 @@ public class Movement : MonoBehaviour
 
     public void JumpStartup()
     {
-        if (performedJumps >= multiJumps) return;
-        if (!ground) performedJumps++;
 
+        if (!ground)
+        {
+            if (performedJumps >= multiJumps) return;
+            performedJumps++;
+        }
+        jumpEvent?.Invoke();
         status.GoToState(Status.State.Startup);
         status.minusFrames = -jumpStartFrames;
         status.frameDataEvent?.Invoke();
@@ -249,13 +254,13 @@ public class Movement : MonoBehaviour
 
     public void HighJumpStartup()
     {
-        if (performedJumps >= multiJumps) return;
         if (!ground) performedJumps++;
 
         status.GoToState(Status.State.Startup);
         status.minusFrames = -jumpStartFrames;
         status.frameDataEvent?.Invoke();
         jumpStartEvent?.Invoke();
+        jumpEvent?.Invoke();
         jumpStartCounter = jumpStartFrames;
         storedDirection = direction.normalized * jumpVelocity;
         hj = true;
@@ -278,7 +283,7 @@ public class Movement : MonoBehaviour
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
-        jumpEvent?.Invoke();
+      
         Vector3 temp = storedDirection.normalized;
 
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[0 + performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
@@ -296,7 +301,7 @@ public class Movement : MonoBehaviour
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
-        jumpEvent?.Invoke();
+     
         Vector3 temp = storedDirection.normalized;
 
         rb.velocity = new Vector3(temp.x * Speed(), highJumpHeight, temp.z * Speed()) + runDirection * walkSpeed;
@@ -381,7 +386,7 @@ public class Movement : MonoBehaviour
         {
             if (ground)
             {
-                if (crouching) sprinting = false;
+                if (crouching && runMomentumCounter <= 0) sprinting = false;
                 if (runMomentumCounter > 0 && !sprinting)
                 {
                     //Run momentum + normal momentum

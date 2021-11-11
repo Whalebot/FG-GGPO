@@ -129,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: sideWalkSpeed
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: backWalkSpeed
@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: jumpHeight.Array.data[0]
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: jumpHeight.Array.data[1]
@@ -157,7 +157,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: fallMultiplier
-      value: 0.01
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: canRun
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: multiJumps
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654780268560206794, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
+      propertyPath: jumpStartFrames
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3654780268560206807, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Name
@@ -186,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 5542712886153031611, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 4a19a00a61bfc734ebcbce21a4f1f9fd, type: 2}
+      objectReference: {fileID: 22100000, guid: c97e8f25bfb86ae438476fdac817d446, type: 2}
     - target: {fileID: 5662932312879541982, guid: 6cfce7ca81ce8b04089cffe1508a16e8, type: 3}
       propertyPath: m_Enabled
       value: 0

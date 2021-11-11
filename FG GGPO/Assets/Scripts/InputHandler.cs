@@ -793,7 +793,7 @@ public class InputHandler : MonoBehaviour
 
         if (inputLog.Count <= 0) return false;
 
-        for (int i = 1; i < motionInputWindow; i++)
+        for (int i = 1; i < motionInputWindow +5 ; i++)
         {
             if (directionals.Count < i) return false;
             if (inputLog.Count <= i) return false;
@@ -802,7 +802,7 @@ public class InputHandler : MonoBehaviour
             {
                 foundF = true;
             }
-            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] == 5 && foundDF)
+            if (inputLog[inputLog.Count - i].buttons[5] && directionals[directionals.Count - i] != 8 && foundDF)
             {
                 foundDown = true;
             }
@@ -1436,14 +1436,14 @@ public class InputHandler : MonoBehaviour
 
         bufferedInputs.Add(temp);
 
-        if (temp.bufferedSpecialMotions[0]) bf = false;
-        if (temp.bufferedSpecialMotions[1]) dd = false;
-        if (temp.bufferedSpecialMotions[2]) qcf = false;
-        if (temp.bufferedSpecialMotions[3]) qcb = false;
-        if (temp.bufferedSpecialMotions[4]) mI478 = false;
-        if (temp.bufferedSpecialMotions[5]) mI698 = false;
-        if (temp.bufferedSpecialMotions[6]) dp = false;
-        if (temp.bufferedSpecialMotions[7]) dQcf = false;
+        //if (temp.bufferedSpecialMotions[0]) bf = false;
+        //if (temp.bufferedSpecialMotions[1]) dd = false;
+        //if (temp.bufferedSpecialMotions[2]) qcf = false;
+        //if (temp.bufferedSpecialMotions[3]) qcb = false;
+        //if (temp.bufferedSpecialMotions[4]) mI478 = false;
+        //if (temp.bufferedSpecialMotions[5]) mI698 = false;
+        //if (temp.bufferedSpecialMotions[6]) dp = false;
+        //if (temp.bufferedSpecialMotions[7]) dQcf = false;
     }
 }
 [System.Serializable]

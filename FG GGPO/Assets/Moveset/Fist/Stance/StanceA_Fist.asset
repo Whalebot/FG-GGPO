@@ -32,7 +32,7 @@ MonoBehaviour:
   attacks:
   - hitbox: {fileID: 3123878921687778490, guid: baf0c830af94ea74ea4c081b524b0a3b, type: 3}
     startupFrame: 10
-    activeFrames: 5
+    activeFrames: 3
     gatlingFrames: 3
     attackType: 0
     attackHeight: 1
@@ -124,12 +124,12 @@ MonoBehaviour:
   animationID: 1003
   hitID: 0
   firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 24
+  lastActiveFrame: 12
+  totalMoveDuration: 22
   firstGatlingFrame: 13
-  blockAdvantage: -2
-  hitAdvantage: 6
-  blockCancelAdvantage: 1
+  blockAdvantage: 0
+  hitAdvantage: 8
+  blockCancelAdvantage: 3
   hitCancelAdvantage: 17
   recoveryFrames: 10
   m:

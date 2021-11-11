@@ -51,7 +51,7 @@ MonoBehaviour:
       hitID: 0
     groundBlockProperty:
       damage: 0
-      stun: 24
+      stun: 20
       hitstop: 12
       proration: 0.95
       meterGain: 2
@@ -120,9 +120,9 @@ MonoBehaviour:
   lastActiveFrame: 14
   totalMoveDuration: 34
   firstGatlingFrame: 11
-  blockAdvantage: 0
+  blockAdvantage: -4
   hitAdvantage: 2
-  blockCancelAdvantage: 1
+  blockCancelAdvantage: -3
   hitCancelAdvantage: 25
   recoveryFrames: 20
   m:
