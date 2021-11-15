@@ -15,10 +15,12 @@ public class Movement : MonoBehaviour
     [TabGroup("Movement")] public float sideWalkSpeed = 3;
     [TabGroup("Movement")] public float backWalkSpeed = 2;
     [TabGroup("Movement")]
-    [HeaderAttribute("Sprint attributes")]
-    public bool sprinting;
+    [HeaderAttribute("Run attributes")]
+    public bool run;
     [TabGroup("Movement")] public bool canRun = true;
-    [TabGroup("Movement")] public float sprintSpeed = 8;
+    [TabGroup("Movement")] public int runCounter = 0;
+    [TabGroup("Movement")] public int runFxThreshold = 0;
+    [TabGroup("Movement")] public float runVelocity = 8;
     [TabGroup("Movement")] public int runMomentumDuration;
     [TabGroup("Movement")] public int runMomentumCounter;
     [TabGroup("Movement")] public Vector3 runDirection;
@@ -56,6 +58,7 @@ public class Movement : MonoBehaviour
 
 
     public delegate void MovementEvent();
+    public MovementEvent runEvent;
     public MovementEvent jumpEvent;
     public MovementEvent jumpStartEvent;
     public MovementEvent landEvent;
@@ -102,7 +105,7 @@ public class Movement : MonoBehaviour
     public void ExecuteFrame()
     {
 
-        if (ground && runMomentumCounter == 0 || ground && sprinting)
+        if (ground && runMomentumCounter == 0 || ground && run)
         {
             if (jumpStartCounter <= 0)
                 storedDirection = direction;
@@ -171,7 +174,27 @@ public class Movement : MonoBehaviour
     public void ResetRun()
     {
         runMomentumCounter = 0;
-        sprinting = false;
+        run = false;
+    }
+
+    public void StartRun()
+    {
+        run = true;
+        runCounter = 0;
+        runEvent?.Invoke();
+    }
+
+    void RunProperties()
+    {
+        runCounter++;
+        if (runCounter >= runFxThreshold)
+        {
+            runEvent?.Invoke();
+            runCounter = 0;
+        }
+        runMomentumCounter = runMomentumDuration;
+        runDirection = direction.normalized;
+        currentVel = runVelocity;
     }
 
     public virtual void MovementProperties()
@@ -187,11 +210,9 @@ public class Movement : MonoBehaviour
             }
             else if (isMoving)
             {
-                if (sprinting)
+                if (run)
                 {
-                    runMomentumCounter = runMomentumDuration;
-                    runDirection = direction.normalized;
-                    currentVel = sprintSpeed;
+                    RunProperties();
                 }
                 else if (95 < Vector3.Angle(strafeTarget.position - transform.position, direction))
                 {
@@ -279,11 +300,11 @@ public class Movement : MonoBehaviour
             LookAtOpponent();
         }
 
-        sprinting = false;
+        run = false;
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
-      
+
         Vector3 temp = storedDirection.normalized;
 
         rb.velocity = new Vector3(temp.x * Speed(), jumpHeight[0 + performedJumps], temp.z * Speed()) + runDirection * walkSpeed;
@@ -297,11 +318,11 @@ public class Movement : MonoBehaviour
             LookAtOpponent();
         }
         airActions--;
-        sprinting = false;
+        run = false;
         ground = false;
         status.GoToGroundState(GroundState.Airborne);
         jumpCounter = minimumJumpTime;
-     
+
         Vector3 temp = storedDirection.normalized;
 
         rb.velocity = new Vector3(temp.x * Speed(), highJumpHeight, temp.z * Speed()) + runDirection * walkSpeed;
@@ -386,8 +407,8 @@ public class Movement : MonoBehaviour
         {
             if (ground)
             {
-                if (crouching && runMomentumCounter <= 0) sprinting = false;
-                if (runMomentumCounter > 0 && !sprinting)
+                if (crouching && runMomentumCounter <= 0) run = false;
+                if (runMomentumCounter > 0 && !run)
                 {
                     //Run momentum + normal momentum
                     rb.velocity = new Vector3((storedDirection.normalized * actualVelocity).x, rb.velocity.y, (storedDirection.normalized * actualVelocity).z) + runDirection * walkSpeed / (runMomentumDuration / runMomentumCounter);

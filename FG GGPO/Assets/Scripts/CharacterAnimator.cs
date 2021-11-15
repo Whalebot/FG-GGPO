@@ -327,7 +327,7 @@ public class CharacterAnimator : MonoBehaviour
 
         anim.SetBool("Walking", movement.isMoving);
         anim.SetBool("Crouch", status.blockState == BlockState.Crouching);
-        anim.SetBool("Run", movement.sprinting);
+        anim.SetBool("Run", movement.run);
         x = Mathf.Lerp(x, movement.RelativeToForward().normalized.x, strafeSmooth);
         y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, strafeSmooth);
 
@@ -375,7 +375,7 @@ public class CharacterAnimator : MonoBehaviour
     private void RunSpeed()
     {
         if (!movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0, deaccelerateSpeed);
-        else if (movement.sprinting) runSpeed = Mathf.Lerp(runSpeed, 1, deaccelerateSpeed);
+        else if (movement.run) runSpeed = Mathf.Lerp(runSpeed, 1, deaccelerateSpeed);
         else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
     }
 

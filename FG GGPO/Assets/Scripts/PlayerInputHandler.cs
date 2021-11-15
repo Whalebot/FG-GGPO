@@ -140,9 +140,9 @@ public class PlayerInputHandler : MonoBehaviour
     void NeutralInput()
     {
 
-        if (input.dash && mov.canRun) mov.sprinting = true;
+        if (input.dash && mov.canRun) mov.StartRun();
         if (input.directionals.Count > 0)
-            if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.sprinting = false;
+            if (input.directionals[input.directionals.Count - 1] < 4 && mov.ground || input.directionals[input.directionals.Count - 1] == 5 && mov.ground) mov.run = false;
 
         ProcessBuffer();
     }
