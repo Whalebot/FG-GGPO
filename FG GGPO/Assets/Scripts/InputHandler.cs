@@ -678,6 +678,10 @@ public class InputHandler : MonoBehaviour
 
         if (directionals.Count <= 0 || overlayDirectionals.Count <= 0) return;
 
+
+
+        highJump = HighJump();
+
         if (DoubleQuarterCircleForward())
             dQcf = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
@@ -686,10 +690,6 @@ public class InputHandler : MonoBehaviour
             dp = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
             dp = false;
-        if (HighJump())
-            highJump = true;
-        else if (extraBuffer <= 0 && motionInputCounter <= 0)
-            highJump = false;
         if (CheckDashInput())
             dash = true;
         else if (extraBuffer <= 0 && motionInputCounter <= 0)
@@ -793,7 +793,7 @@ public class InputHandler : MonoBehaviour
 
         if (inputLog.Count <= 0) return false;
 
-        for (int i = 1; i < motionInputWindow +5 ; i++)
+        for (int i = 1; i < motionInputWindow + 5; i++)
         {
             if (directionals.Count < i) return false;
             if (inputLog.Count <= i) return false;
