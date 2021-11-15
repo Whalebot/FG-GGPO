@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3923390765766141689}
   - component: {fileID: 4544823888896176508}
   - component: {fileID: 8896006938635626644}
+  - component: {fileID: 60037780205487169}
   m_Layer: 17
   m_Name: Dash particle
   m_TagString: Untagged
@@ -4870,6 +4871,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &60037780205487169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143109401294580698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &3988172135179324937
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,6 +4895,7 @@ GameObject:
   - component: {fileID: 7848701523284489928}
   - component: {fileID: 8282727151993354727}
   - component: {fileID: 1146516289136615294}
+  - component: {fileID: 6767528844733260304}
   m_Layer: 17
   m_Name: Dash particle (2)
   m_TagString: Untagged
@@ -9740,6 +9755,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6767528844733260304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988172135179324937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &4666921930445825336
 GameObject:
   m_ObjectHideFlags: 0
@@ -9751,6 +9779,7 @@ GameObject:
   - component: {fileID: 131073390990300202}
   - component: {fileID: 2069603441146514967}
   - component: {fileID: 4863747645556164151}
+  - component: {fileID: 4674874945098266689}
   m_Layer: 17
   m_Name: Dash particle (1)
   m_TagString: Untagged
@@ -14610,6 +14639,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &4674874945098266689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666921930445825336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2921552a28bc1a14899a21fafb7406a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
 --- !u!1 &7993090912616806084
 GameObject:
   m_ObjectHideFlags: 0
