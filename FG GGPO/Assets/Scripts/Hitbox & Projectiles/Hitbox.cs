@@ -283,7 +283,13 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        // other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
+        //Screen shake on hit
+        for (int i = 0; i < move.screenShake.Length; i++)
+        {
+            if (move.screenShake[i].type == ScreenShakeType.OnHit)
+                CameraManager.Instance.ShakeCamera(move.screenShake[i].amplitude, move.screenShake[i].duration);
+        }
+
         other.TakeHit(hit, knockbackDirection, hit.hitState, returnWallPushback);
     }
 
@@ -337,7 +343,13 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.z + Vector3.Cross(Vector3.up, knockbackDirection) * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        //other.TakeHit(hit.damage, aVector, hit.stun + hit.hitstop, hit.proration, knockbackDirection, hit.hitState, hit.hitID, returnWallPushback);
+        //Screen shake on hit
+        for (int i = 0; i < move.screenShake.Length; i++)
+        {
+            if (move.screenShake[i].type == ScreenShakeType.OnHit)
+                CameraManager.Instance.ShakeCamera(move.screenShake[i].amplitude, move.screenShake[i].duration);
+        }
+
         other.TakeHit(hit, knockbackDirection, hit.hitState, returnWallPushback);
         status.counterhitEvent?.Invoke();
     }
