@@ -16,8 +16,8 @@ public class CameraManager : MonoBehaviour
     public int counterhitCounter;
 
     CinemachineBasicMultiChannelPerlin[] noises;
-    [SerializeField] private float shakeTimer;
-    private float startTimer;
+    [SerializeField] private int shakeTimer;
+    private int startTimer;
     private float startIntensity;
     [TabGroup("Right Cam")] public bool canSwitchRight;
     [TabGroup("Right Cam")] public bool isRightCamera;
@@ -86,6 +86,13 @@ public class CameraManager : MonoBehaviour
         cc2.target = p2;
         cc2.lookTarget = p1;
 
+        noises = new CinemachineBasicMultiChannelPerlin[cameras.Length];
+        for (int i = 0; i < noises.Length; i++)
+        {
+            noises[i] = cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        }
+
+
         camTransposer = leftCamera.GetCinemachineComponent<CinemachineTransposer>();
         camTransposer2 = rightCamera.GetCinemachineComponent<CinemachineTransposer>();
         startZOffset = leftCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
@@ -104,6 +111,14 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    [Button]
+    public void ShakeCamera(float intensity, int time)
+    {
+        startIntensity = intensity;
+        shakeTimer = time;
+        startTimer = time;
+    }
+
     void ExecuteFrame()
     {
         if (counterhitCounter > 0)
@@ -111,6 +126,18 @@ public class CameraManager : MonoBehaviour
             counterhitCounter--;
             if (counterhitCounter <= 0) counterhitCamera.gameObject.SetActive(false);
         }
+
+        if (shakeTimer > 0)
+        {
+            shakeTimer--;
+            {
+                for (int i = 0; i < noises.Length; i++)
+                {
+                    noises[i].m_AmplitudeGain = Mathf.Lerp(startIntensity, 0f, (1 - ((float)shakeTimer / (float)startTimer)));
+                }
+            }
+        }
+
 
         groundCrossup = canCrossUp && GameHandler.Instance.p1Status.groundState == GroundState.Grounded && GameHandler.Instance.p2Status.groundState == GroundState.Grounded;
         p1Y = GameHandler.Instance.p1Transform.position.y;

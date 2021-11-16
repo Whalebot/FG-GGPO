@@ -113,6 +113,11 @@ MonoBehaviour:
   sfx:
   - startup: 8
     prefab: {fileID: 3797316729740095628, guid: ce677a0bea8dcfc4ab232696c87ae13e, type: 3}
+  screenShake:
+  - type: 0
+    startup: 14
+    amplitude: 0.5
+    duration: 10
   hitFX: {fileID: 2135222606322628325, guid: b56af3462e8f1ab4bad3e6732af6483e, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 2135222606322628325, guid: b56af3462e8f1ab4bad3e6732af6483e, type: 3}

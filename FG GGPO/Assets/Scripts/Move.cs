@@ -29,6 +29,7 @@ public class Move : ScriptableObject
 
     [TabGroup("FX")] public VFX[] vfx;
     [TabGroup("FX")] public SFX[] sfx;
+    [TabGroup("FX")] public ScreenShake[] screenShake;
     [TabGroup("FX")] public GameObject hitFX;
     [TabGroup("FX")] public GameObject blockFX;
     [TabGroup("FX")] public GameObject counterhitFX;
@@ -485,9 +486,21 @@ public class Move : ScriptableObject
 [System.Serializable]
 public class SFX
 {
+  
     public int startup = 1;
     public GameObject prefab;
 }
+
+[System.Serializable]
+public class ScreenShake
+{
+    public ScreenShakeType type;
+    [HideIf("@type != ScreenShakeType.OnStartup")]public int startup = 1;
+    public float amplitude =2;
+    public int duration = 10;
+
+}
+
 [System.Serializable]
 public class VFX
 {
@@ -560,3 +573,5 @@ public class SuperFlash
     public int startFrame = 1;
     public int duration;
 }
+
+public enum ScreenShakeType { OnStartup, OnHit, OnLand }

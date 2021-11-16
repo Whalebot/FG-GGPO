@@ -85,7 +85,8 @@ public class AttackScript : MonoBehaviour
         usedMoves = new List<Move>();
     }
 
-    void ResetAttack() {
+    void ResetAttack()
+    {
         ResetAllValues();
     }
 
@@ -214,7 +215,7 @@ public class AttackScript : MonoBehaviour
 
                 //Execute properties
                 ProcessInvul();
-
+                ApplyScreenShake();
                 SpawnFX();
 
                 //Execute momentum
@@ -353,6 +354,14 @@ public class AttackScript : MonoBehaviour
             }
         }
         hurtboxes.Clear();
+    }
+    void ApplyScreenShake()
+    {
+        for (int i = 0; i < activeMove.screenShake.Length; i++)
+        {
+            if (attackFrames == activeMove.screenShake[i].startup && activeMove.screenShake[i].type == ScreenShakeType.OnStartup)
+                CameraManager.Instance.ShakeCamera(activeMove.screenShake[i].amplitude, activeMove.screenShake[i].duration);
+        }
     }
     public void StartupFrames()
     {
@@ -762,6 +771,13 @@ public class AttackScript : MonoBehaviour
     void Land()
     {
         recoverOnlyOnLand = false;
+        if (activeMove != null)
+            for (int i = 0; i < activeMove.screenShake.Length; i++)
+            {
+                if (activeMove.screenShake[i].type == ScreenShakeType.OnLand)
+                    CameraManager.Instance.ShakeCamera(activeMove.screenShake[i].amplitude, activeMove.screenShake[i].duration);
+            }
+
         if (landCancel)
         {
             newAttack = false;
@@ -858,10 +874,6 @@ public class AttackScript : MonoBehaviour
 
         recoveryEvent?.Invoke();
         usedMoves.Clear();
-        //Cucks airdash
-        //movement.storedDirection = Vector3.zero;
-
-
     }
 
     public void ThrowBreak()
