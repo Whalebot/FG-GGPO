@@ -31,7 +31,7 @@ MonoBehaviour:
   throwFollowup: {fileID: 0}
   attacks:
   - hitbox: {fileID: 6130433937859647811, guid: 985835994f704634eb2ff9c023ac0ba1, type: 3}
-    startupFrame: 20
+    startupFrame: 14
     activeFrames: 1
     gatlingFrames: 0
     attackType: 1
@@ -110,6 +110,7 @@ MonoBehaviour:
     prefab: {fileID: 3797316729740095628, guid: 5e4e69e7ea962cf42a29c75897565fde, type: 3}
   - startup: 1
     prefab: {fileID: 3797316729740095628, guid: f13e02cf676801f4aa6c090f1f89d30a, type: 3}
+  screenShake: []
   hitFX: {fileID: 1446198854985960, guid: 0631603e35a3ef149839c941187be859, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}
@@ -118,10 +119,10 @@ MonoBehaviour:
   counterhitSFX: {fileID: 0}
   animationID: 83
   hitID: 0
-  firstStartupFrame: 20
-  lastActiveFrame: 20
-  totalMoveDuration: 40
-  firstGatlingFrame: 20
+  firstStartupFrame: 14
+  lastActiveFrame: 14
+  totalMoveDuration: 34
+  firstGatlingFrame: 14
   blockAdvantage: 5
   hitAdvantage: 10
   blockCancelAdvantage: 5
