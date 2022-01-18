@@ -37,6 +37,7 @@ public class InputOverlay : MonoBehaviour
         else inputHandler = GameHandler.Instance.p2Transform.GetComponent<InputHandler>();
 
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        GameHandler.Instance.resetEvent += ClearButtonHistory;
     }
 
     // Update is called once per frame
@@ -78,12 +79,21 @@ public class InputOverlay : MonoBehaviour
 
     void ClearButtonHistory()
     {
+        currentObjects = 0;
         foreach (Transform child in panel.transform)
         {
             Destroy(child.gameObject);
         }
 
         foreach (Transform child in panel2.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in panel3.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in panel4.transform)
         {
             Destroy(child.gameObject);
         }
@@ -121,8 +131,8 @@ public class InputOverlay : MonoBehaviour
             if (inputHandler.netButtons[1]) temp.transform.GetChild(1).gameObject.SetActive(true);
             if (inputHandler.netButtons[2]) temp.transform.GetChild(2).gameObject.SetActive(true);
             if (inputHandler.netButtons[3]) temp.transform.GetChild(3).gameObject.SetActive(true);
-            if (inputHandler.netButtons[4]) temp.transform.GetChild(6).gameObject.SetActive(true);
-            if (inputHandler.netButtons[5]) temp.transform.GetChild(4).gameObject.SetActive(true);
+            if (inputHandler.netButtons[4]) temp.transform.GetChild(4).gameObject.SetActive(true);
+            if (inputHandler.netButtons[5]) temp.transform.GetChild(6).gameObject.SetActive(true);
             //if (inputHandler.netButtons[6]) temp.transform.GetChild(7).gameObject.SetActive(true);
             //if (inputHandler.netButtons[7]) temp.transform.GetChild(5).gameObject.SetActive(true);
         }

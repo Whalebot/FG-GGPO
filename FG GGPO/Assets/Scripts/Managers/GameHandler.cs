@@ -16,6 +16,7 @@ public class GameHandler : MonoBehaviour
     public static int p1WinStreak;
     public static int p2WinStreak;
     public GameMode gameMode;
+    public bool mode2D;
     public bool network;
     public static bool isPaused;
     public static bool cutscene;
@@ -630,6 +631,36 @@ public class GameHandler : MonoBehaviour
             NormalGameState();
         }
 
+
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.canvasses[0].enabled = !UIManager.Instance.canvasses[0].enabled;
+        }
+
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.canvasses[1].enabled = !UIManager.Instance.canvasses[1].enabled;
+        }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.canvasses[2].enabled = !UIManager.Instance.canvasses[2].enabled;
+        }
+        if (Keyboard.current.digit4Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.toggleObjects[0].gameObject.SetActive(!UIManager.Instance.toggleObjects[0].gameObject.activeSelf);
+        }
+        if (Keyboard.current.digit5Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.toggleObjects[1].gameObject.SetActive(!UIManager.Instance.toggleObjects[1].gameObject.activeSelf);
+        }
+        if (Keyboard.current.digit6Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.toggleObjects[2].gameObject.SetActive(!UIManager.Instance.toggleObjects[2].gameObject.activeSelf);
+        }
+        if (Keyboard.current.digit7Key.wasPressedThisFrame)
+        {
+            UIManager.Instance.toggleObjects[3].gameObject.SetActive(!UIManager.Instance.toggleObjects[3].gameObject.activeSelf);
+        }
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             ChangeGameMode(GameMode.VersusMode);
@@ -641,6 +672,10 @@ public class GameHandler : MonoBehaviour
         else if (Keyboard.current.f3Key.wasPressedThisFrame)
         {
             ChangeGameMode(GameMode.TrialMode);
+        }
+        else if (Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            mode2D = !mode2D;
         }
     }
     public void ChangeGameMode(GameMode mode)

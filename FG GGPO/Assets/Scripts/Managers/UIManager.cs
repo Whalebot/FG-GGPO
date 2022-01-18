@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Sirenix.OdinInspector;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
@@ -15,33 +16,34 @@ public class UIManager : MonoBehaviour
     float p1InitialHealth;
     float p2InitialHealth;
 
-    public TextMeshProUGUI timerText;
+    [FoldoutGroup("Components")] public TextMeshProUGUI timerText;
 
 
-    public Image p1Portrait;
-    public Image p2Portrait;
-    public TextMeshProUGUI p1Name;
-    public TextMeshProUGUI p2Name;
-    public Slider p1Health;
-    public Slider p2Health;
-    public TextMeshProUGUI p1HealthText;
+
+    [FoldoutGroup("Components")] public Image p1Portrait;
+    [FoldoutGroup("Components")] public Image p2Portrait;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p1Name;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p2Name;
+    [FoldoutGroup("Components")] public Slider p1Health;
+    [FoldoutGroup("Components")] public Slider p2Health;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p1HealthText;
     public TextMeshProUGUI p2HealthText;
 
 
     public Gradient meterColorOverTime;
-    public Slider p1Meter;
-    public Slider p2Meter;
-    public TextMeshProUGUI p1MeterText;
-    public TextMeshProUGUI p2MeterText;
+    [FoldoutGroup("Components")] public Slider p1Meter;
+    [FoldoutGroup("Components")] public Slider p2Meter;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p1MeterText;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p2MeterText;
 
-    public Image[] p1BurstImages;
-    public Image[] p2BurstImages;
+    [FoldoutGroup("Components")] public Image[] p1BurstImages;
+    [FoldoutGroup("Components")] public Image[] p2BurstImages;
 
-    public Image[] p1RoundWinImages;
-    public Image[] p2RoundWinImages;
+    [FoldoutGroup("Components")] public Image[] p1RoundWinImages;
+    [FoldoutGroup("Components")] public Image[] p2RoundWinImages;
 
-    public TextMeshProUGUI p1WinCounter;
-    public TextMeshProUGUI p2WinCounter;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p1WinCounter;
+    [FoldoutGroup("Components")] public TextMeshProUGUI p2WinCounter;
 
     public GameObject[] allUI;
     public GameObject[] versusModeObjects;
@@ -49,6 +51,9 @@ public class UIManager : MonoBehaviour
     public GameObject[] trialModeObjects;    
     public GameObject[] tutorialModeObjects;
 
+    public Canvas[] canvasses;
+    public GameObject[] toggleObjects;
+        
     public GameObject rematchScreen;
     public EventSystem eventSystem;
 

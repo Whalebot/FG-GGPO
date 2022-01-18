@@ -29,7 +29,7 @@ public class Move : ScriptableObject
 
     [TabGroup("FX")] public VFX[] vfx;
     [TabGroup("FX")] public SFX[] sfx;
-    [TabGroup("FX")] public ScreenShake[] screenShake;
+  public ScreenShake[] screenShake;
     [TabGroup("FX")] public GameObject hitFX;
     [TabGroup("FX")] public GameObject blockFX;
     [TabGroup("FX")] public GameObject counterhitFX;

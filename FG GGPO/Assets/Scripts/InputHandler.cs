@@ -489,7 +489,9 @@ public class InputHandler : MonoBehaviour
             {
                 for (int i = 0; i < heldDirectionals.Length; i++)
                 {
-                    netDirectionals[i] = heldDirectionals[i];
+                    if (GameHandler.Instance.mode2D) netDirectionals[i] = heldDirectionals[(i + 1) % 4];
+                    else
+                        netDirectionals[i] = heldDirectionals[i];
                 }
                 if (GameHandler.Instance != null)
                     if (GameHandler.isPaused) return;

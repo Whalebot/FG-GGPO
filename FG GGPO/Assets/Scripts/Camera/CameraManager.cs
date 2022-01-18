@@ -11,7 +11,9 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera[] cameras;
     public CinemachineVirtualCamera leftCamera;
     public CinemachineVirtualCamera rightCamera;
+
     public CinemachineVirtualCamera counterhitCamera;
+    public CinemachineVirtualCamera cam2D;
     public int minimumCounterhitDuration;
     public int counterhitCounter;
 
@@ -57,12 +59,15 @@ public class CameraManager : MonoBehaviour
     public Camera mainCamera;
 
 
+    public float p1X, p2X;
     public float p1Y;
     public float p2Y;
     public float heightMod = 1f;
     public float modSmooth = 1f;
     float startZOffset;
+    float startZ2DOffset;
     float refVelocity;
+    CinemachineTransposer camTransposer3;
     CinemachineTransposer camTransposer;
     CinemachineTransposer camTransposer2;
 
@@ -87,6 +92,7 @@ public class CameraManager : MonoBehaviour
         cc2.lookTarget = p1;
 
         noises = new CinemachineBasicMultiChannelPerlin[cameras.Length];
+
         for (int i = 0; i < noises.Length; i++)
         {
             noises[i] = cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -95,6 +101,7 @@ public class CameraManager : MonoBehaviour
 
         camTransposer = leftCamera.GetCinemachineComponent<CinemachineTransposer>();
         camTransposer2 = rightCamera.GetCinemachineComponent<CinemachineTransposer>();
+        camTransposer3 = cam2D.GetCinemachineComponent<CinemachineTransposer>();
         startZOffset = leftCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z;
 
         GameHandler.Instance.advanceGameState += ExecuteFrame;
@@ -142,10 +149,13 @@ public class CameraManager : MonoBehaviour
         groundCrossup = canCrossUp && GameHandler.Instance.p1Status.groundState == GroundState.Grounded && GameHandler.Instance.p2Status.groundState == GroundState.Grounded;
         p1Y = GameHandler.Instance.p1Transform.position.y;
         p2Y = GameHandler.Instance.p2Transform.position.y;
+        p2X = mainCamera.WorldToViewportPoint(cc2.target.position).x;
+        p1X = mainCamera.WorldToViewportPoint(cc1.target.position).x;
 
         float modLerp = Mathf.SmoothDamp(camTransposer.m_FollowOffset.z, startZOffset - p1Y * heightMod, ref refVelocity, modSmooth);
         camTransposer.m_FollowOffset.z = modLerp;
         camTransposer2.m_FollowOffset.z = modLerp;
+        //camTransposer3.m_FollowOffset.z = modLerp;
 
 
         Vector3 v1 = new Vector3(p1.position.x, mainCamera.gameObject.transform.position.y, p1.position.z);
@@ -170,22 +180,29 @@ public class CameraManager : MonoBehaviour
         }
         toggleCounter++;
         rightCounter++;
+
+        if (GameHandler.Instance.mode2D)
+        {
+            Mode2DCam();
+        }
+        else
+        {
+            NormalCam();
+        }
+    }
+
+    void NormalCam()
+    {
         if (updateCameras)
             if (canSwitchRight && rightCounter > rightTimer)
             {
                 if (mainCamera.WorldToViewportPoint(cc1.target.position).x > mainCamera.WorldToViewportPoint(cc2.target.position).x + deadZone && !isRightCamera)
                 {
-                    rightCounter = 0;
-                    isRightCamera = true;
-                    leftCamera.Priority = 9;
-                    rightCamera.Priority = 10;
+                    RightCamera();
                 }
                 else if (mainCamera.WorldToViewportPoint(cc1.target.position).x < mainCamera.WorldToViewportPoint(cc2.target.position).x - deadZone && isRightCamera)
                 {
-                    rightCounter = 0;
-                    isRightCamera = false;
-                    leftCamera.Priority = 10;
-                    rightCamera.Priority = 9;
+                    LeftCamera();
                 }
             }
 
@@ -201,12 +218,44 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void Mode2DCam()
     {
+        if (isRightCamera) LeftCamera();
+
+        if (toggleCounter < toggleTimer || !canCrossUp) return;
+
+        if (GameHandler.Instance.mode2D)
+        {
 
 
+            if (p1X > p2X - deadZone && !toggle)
+                FlipCamera();
+            else if (p1X > p2X - deadZone && toggle)
+                FlipCamera();
+
+        }
     }
 
+
+    private void FixedUpdate()
+    {
+        cam2D.gameObject.SetActive(GameHandler.Instance.mode2D);
+    }
+
+    void RightCamera()
+    {
+        rightCounter = 0;
+        isRightCamera = true;
+        leftCamera.Priority = 9;
+        rightCamera.Priority = 10;
+    }
+    void LeftCamera()
+    {
+        rightCounter = 0;
+        isRightCamera = false;
+        leftCamera.Priority = 10;
+        rightCamera.Priority = 9;
+    }
     public void ResetCamera()
     {
         toggleCounter = -60;

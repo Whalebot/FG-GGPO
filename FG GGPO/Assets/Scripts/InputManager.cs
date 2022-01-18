@@ -20,7 +20,8 @@ public class InputManager : MonoBehaviour
     public static bool isServer;
     public int controllersConnected;
     public List<InputDevice> controllers;
-
+    public float switchDelay;
+    public float switchCounter;
 
     private void Awake()
     {
@@ -123,17 +124,20 @@ public class InputManager : MonoBehaviour
 
     public void SwitchControls()
     {
-        if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
-        {
-            if (p1Input.deviceIsAssigned)
+        if (switchCounter <= 0) {
+            switchCounter = switchDelay;
+            if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
             {
-                p1Input.DisableControls();
-                p2Input.SetupControls(Gamepad.all[0]);
-            }
-            else if (p2Input.deviceIsAssigned)
-            {
-                p2Input.DisableControls();
-                p1Input.SetupControls(Gamepad.all[0]);
+                if (p1Input.deviceIsAssigned)
+                {
+                    p1Input.DisableControls();
+                    p2Input.SetupControls(Gamepad.all[0]);
+                }
+                else if (p2Input.deviceIsAssigned)
+                {
+                    p2Input.DisableControls();
+                    p1Input.SetupControls(Gamepad.all[0]);
+                }
             }
         }
     }
@@ -168,6 +172,7 @@ public class InputManager : MonoBehaviour
 
         //p1Input.network = !isServer;
         //p2Input.network = isServer;
+        if (switchCounter > 0) switchCounter -= Time.unscaledDeltaTime;
     }
 
     public static void SaveBindingOverrideP1(InputAction action)
