@@ -29,6 +29,7 @@ public class BlockerScript : MonoBehaviour
     {
         enemyMov = GameHandler.Instance.ReturnPlayer(mov.transform).gameObject.GetComponent<Movement>();
         GameHandler.Instance.advanceGameState += ExecuteFrame;
+        mr.enabled = GameHandler.Instance.showColliders;
     }
 
     void ExecuteFrame() {

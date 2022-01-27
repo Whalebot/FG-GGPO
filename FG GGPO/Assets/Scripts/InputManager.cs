@@ -81,17 +81,22 @@ public class InputManager : MonoBehaviour
             else if (controllers[0] is Joystick)
                 p1Input.SetupControls((Joystick)controllers[0]);
         }
-        else
+        else if (controllers.Count == 1)
         {
             if (controllers[0] is Gamepad)
                 p1Input.SetupControls((Gamepad)controllers[0]);
             else if (controllers[0] is Joystick)
                 p1Input.SetupControls((Joystick)controllers[0]);
 
-            //if (GameHandler.gameModeID <= 0)
-            //{
-            //    p2Input.SetupKeyboard();
-            //}
+            if (GameHandler.gameModeID <= 0)
+            {
+                p2Input.SetupKeyboard();
+            }
+        }
+        else
+        {
+
+            p1Input.SetupKeyboard();
         }
 
         InputSystem.onDeviceChange += (device, change) =>
@@ -124,7 +129,8 @@ public class InputManager : MonoBehaviour
 
     public void SwitchControls()
     {
-        if (switchCounter <= 0) {
+        if (switchCounter <= 0)
+        {
             switchCounter = switchDelay;
             if (GameHandler.Instance.gameMode == GameMode.TrainingMode)
             {

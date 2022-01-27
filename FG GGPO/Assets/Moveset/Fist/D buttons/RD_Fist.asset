@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Right Dynamic
   sprite: {fileID: 0}
-  moveDirection: 5
+  moveDirection: 7
   moveButton: 4
   moveInput: r.D
   description: 
@@ -116,6 +116,7 @@ MonoBehaviour:
     rotation: {x: 0, y: -90, z: 0}
     scale: {x: 2, y: 2, z: 2}
   sfx: []
+  screenShake: []
   hitFX: {fileID: 2648046891202104306, guid: 0b59c8822a0c94e49bedbdf05df4993a, type: 3}
   blockFX: {fileID: 2648046891202104306, guid: 7425976dcf2306249848af0e37b6cb2d, type: 3}
   counterhitFX: {fileID: 0}

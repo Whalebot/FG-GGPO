@@ -46,7 +46,8 @@ public class MovelistDisplay : MonoBehaviour
         meterCost.text = "Meter cost: " + move.meterCost;
         if (m.type != MoveType.Movement && m.type != MoveType.UniversalMechanics)
             attackHeightText.text = "" + m.attacks[0].attackHeight;
-        else {
+        else
+        {
             attackHeightGO.SetActive(false);
         }
         switch (move.moveDirection)
@@ -77,6 +78,12 @@ public class MovelistDisplay : MonoBehaviour
                 crouchImage.gameObject.SetActive(true);
                 jumping.SetActive(true);
                 break;
+            case InputDirection.Right:
+                directionImage.sprite = rSprites[0];
+                break;
+            case InputDirection.Left:
+                directionImage.sprite = lSprites[0];
+                break;
             default:
                 break;
         }
@@ -103,6 +110,78 @@ public class MovelistDisplay : MonoBehaviour
 
         //inputImage.sprite =
     }
+    [Button]
+    public void SetupSpecialMove(Move m, SpecialInput input)
+    {
+        move = m;
+        moveName.text = move.moveName;
+        jumping.SetActive(false);
+        directionImage.gameObject.SetActive(true);
+        crouchImage.gameObject.SetActive(false);
+        plus.SetActive(true);
+        meterCost.gameObject.SetActive(move.meterCost > 0);
+        meterCost.text = "Meter cost: " + move.meterCost;
+        if (m.type != MoveType.Movement && m.type != MoveType.UniversalMechanics)
+            attackHeightText.text = "" + m.attacks[0].attackHeight;
+        else
+        {
+            attackHeightGO.SetActive(false);
+        }
+
+        switch (input)
+        {
+            case SpecialInput.BackForward:
+                directionImage.sprite = bSprites[0];
+                directionImage.sprite = fSprites[0];
+                break;
+            case SpecialInput.ForwardBack:
+                directionImage.sprite = fSprites[0];
+                directionImage.sprite = bSprites[0];
+                break;
+            case SpecialInput.DownDown:
+
+                break;
+            case SpecialInput.QCF:
+                crouchImage.gameObject.SetActive(true);
+
+                break;
+            case SpecialInput.QCB:
+                break;
+            case SpecialInput.Input478:
+                break;
+            case SpecialInput.Input698:
+                break;
+            case SpecialInput.DP:
+                break;
+            case SpecialInput.DoubleQCF:
+                break;
+            default:
+                break;
+        }
+        switch (move.moveButton)
+        {
+            case ButtonInput.A:
+                buttonImage.sprite = westSprites[0];
+                break;
+            case ButtonInput.B:
+                buttonImage.sprite = northSprites[0];
+                break;
+            case ButtonInput.J:
+                break;
+            case ButtonInput.C:
+                buttonImage.sprite = eastSprites[0];
+                break;
+            case ButtonInput.D:
+                buttonImage.sprite = r1Sprites[0];
+                break;
+            default:
+                break;
+        }
+
+
+        //inputImage.sprite =
+    }
+
 
     public void Selected()
     {

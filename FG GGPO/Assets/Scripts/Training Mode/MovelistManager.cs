@@ -142,18 +142,37 @@ public class MovelistManager : MonoBehaviour
                         GO.transform.SetSiblingIndex(normalDivider.GetSiblingIndex() + 1);
                         break;
                     case MoveType.Special:
-                        GO = Instantiate(movelistPrefab, specialDivider.parent);
+                        GO = Instantiate(movelistPrefab, normalDivider.parent);
                         GO.GetComponent<MovelistDisplay>().SetupMove(item);
+                        GO.transform.SetSiblingIndex(normalDivider.GetSiblingIndex() + 1);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        foreach (var item in moveset.specials)
+        {
+            if (item.move.type != MoveType.Movement && item.move.type != MoveType.UniversalMechanics)
+            {
+                GameObject GO;
+                switch (item.move.type)
+                {
+                    case MoveType.Special:
+                        GO = Instantiate(movelistPrefab, specialDivider.parent);
+                        GO.GetComponent<MovelistDisplay>().SetupSpecialMove(item.move, item.motionInput);
                         GO.transform.SetSiblingIndex(specialDivider.GetSiblingIndex() + 1);
                         break;
                     case MoveType.EX:
                         GO = Instantiate(movelistPrefab, specialDivider.parent);
-                        GO.GetComponent<MovelistDisplay>().SetupMove(item);
+                        GO.GetComponent<MovelistDisplay>().SetupSpecialMove(item.move, item.motionInput);
                         GO.transform.SetSiblingIndex(specialDivider.GetSiblingIndex() + 1);
                         break;
                     case MoveType.Super:
                         GO = Instantiate(movelistPrefab, superDivider.parent);
-                        GO.GetComponent<MovelistDisplay>().SetupMove(item);
+                        GO.GetComponent<MovelistDisplay>().SetupSpecialMove(item.move, item.motionInput);
                         GO.transform.SetSiblingIndex(superDivider.GetSiblingIndex() + 1);
                         break;
                     default:
